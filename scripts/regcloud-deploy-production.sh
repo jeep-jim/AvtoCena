@@ -103,8 +103,8 @@ for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?mark
 # unsupported-filter contract; loopback has no real visitor IP and must not query
 # the supplier with a substituted address. Existing market/HTML gates stay above.
 try:
- urllib.request.urlopen(base+'/api/catalog/search?market=japan&pageSize=24&sort=totalRub',timeout=30)
- raise AssertionError('unsupported Japan delivered-price sort accepted')
+ urllib.request.urlopen(base+'/api/catalog/search?market=japan&pageSize=24&budgetTo=3000000',timeout=30)
+ raise AssertionError('unsupported Japan delivered-price filter accepted')
 except urllib.error.HTTPError as e:
  assert e.code==400
  value=json.load(e)

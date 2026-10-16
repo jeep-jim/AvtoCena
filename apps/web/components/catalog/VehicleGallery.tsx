@@ -1,5 +1,6 @@
 "use client";
 
+import {ajesImageUrl} from '@/lib/catalog/ajes-query';
 import {offerImages} from '@/lib/catalog/offer-images';
 import { PhotoBrowser } from "./PhotoBrowser";
 import type { FavoriteSnapshot } from "./FavoriteToggle";
@@ -17,6 +18,7 @@ function dominantWheelDelta(event: WheelEvent) {
 export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, snapshot, editor }: { editor?: ReactNode; images: string[]; title: string; auctionSheetUrls?: string[]; offerId?: string; snapshot?: FavoriteSnapshot }) {
   const cleanImages = offerImages(images);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [photoRequested,setPhotoRequested]=useState(false);
   const [browserOpen, setBrowserOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
@@ -123,10 +125,12 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
   }
 
   function previous() {
+    setPhotoRequested(true);
     setActiveIndex((current) => (current === 0 ? cleanImages.length - 1 : current - 1));
   }
 
   function next() {
+    setPhotoRequested(true);
     setActiveIndex((current) => (current + 1) % cleanImages.length);
   }
 
@@ -157,7 +161,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
   const image = (
     <img onError={retryProtectedPhoto}
       key={cleanImages[activeIndex]}
-      src={cleanImages[activeIndex]}
+      src={photoRequested?(ajesImageUrl(cleanImages[activeIndex],'original')||cleanImages[activeIndex]):cleanImages[activeIndex]}
       alt={`${title}, фото ${activeIndex + 1}`}
       className={`block h-full w-full max-w-full select-none ${isSheet ? "object-contain" : "object-cover"}`}
       loading="eager"
@@ -172,7 +176,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
       key={`${mode}-${thumbnail}-${index}`}
       ref={(mode === "side" || mode === "desktop") && index === activeIndex ? activeSideThumb : undefined}
       type="button"
-      onClick={() => setActiveIndex(index)}
+      onClick={() => {setPhotoRequested(true);setActiveIndex(index);}}
       className={`relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl transition-opacity duration-200 ${
         mode === "side" ? "h-[82px]" : mode === "desktop" ? "h-16" : "h-14 sm:h-16 md:h-24"
       } ${index === activeIndex ? (mode === "desktop" ? "opacity-100" : "opacity-100 ring-2 ring-red-500 ring-offset-2 ring-offset-transparent") : "opacity-55 hover:opacity-90"}`}
@@ -217,7 +221,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
           <img onError={retryProtectedPhoto}
             data-fullscreen-image
             key={`fullscreen-${cleanImages[activeIndex]}`}
-            src={cleanImages[activeIndex]}
+            src={ajesImageUrl(cleanImages[activeIndex],'original')||cleanImages[activeIndex]}
             alt={`${title}, фото ${activeIndex + 1}`}
             className="max-h-[68dvh] max-w-full select-none rounded-2xl object-contain"
             loading="eager"
@@ -233,7 +237,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
               <button
                 key={`fullscreen-${thumbnail}-${index}`}
                 type="button"
-                onClick={() => setActiveIndex(index)}
+                onClick={() => {setPhotoRequested(true);setActiveIndex(index);}}
                 className={`h-14 w-20 shrink-0 overflow-hidden rounded-xl transition ${index === activeIndex ? "opacity-100 ring-2 ring-red-500" : "opacity-45 hover:opacity-80"}`}
                 aria-label={`Открыть фото ${index + 1}`}
                 aria-pressed={index === activeIndex}

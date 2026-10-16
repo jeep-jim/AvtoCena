@@ -1,3 +1,5 @@
+import {readAjesPublic} from '@/lib/catalog/ajes-public';
+import {readAjesCount} from '@/lib/catalog/ajes-catalog';
 import {getOfferFromCurrentShard as getEditorialSourceOffer} from "@/lib/catalog/storage";
 import {CatalogEditorialEditor} from "@/components/catalog/CatalogEditorialEditor";
 import {canEditCatalog} from "@/lib/catalog/editorial-access";
@@ -120,7 +122,9 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
   const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
   const otherMarkets = PUBLIC_CATALOG_MARKETS.filter(market => market !== current.market);
   // Bounded model queries stream behind the primary offer; failures stay isolated by market.
-  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => searchOffers(params).catch(error => {
+  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'
+    ? readAjesPublic({table:'stats',make:params.make,model:params.model?(String(current.id).startsWith('ajes-stats-')?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
+    : searchOffers(params)).catch(error => {
     console.error("offer_similar_search_failed", error); return {items:[],total:0};
   });
   const [modelResult, marketResult, crossResults, green] = await Promise.all([
@@ -135,7 +139,8 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
     greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
     price:applyActiveBusinessPricingBatch,renderable:isRenderableRelatedOffer,
   });
-  const marketTotal = Math.max(0,Number(marketResult.total||0)) + (current.market==='japan' ? green?.items.length||0 : 0);
+  const japanTotal=current.market==='japan'?await readAjesCount().catch(()=>null):null;
+  const marketTotal=current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0)):Math.max(0,Number(marketResult.total||0));
   const modelParams = new URLSearchParams({market:String(current.market||""),make,model:familyModel});
   const marketParams = new URLSearchParams({market:String(current.market||"")});
   if(current.market==='japan')marketParams.set('stock','all');
@@ -145,7 +150,7 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
     {stockModels.length && (!markets||markets.includes("japan")) ? <section data-related-section="stock-model"><div className="flex items-end justify-between gap-3"><h2 className="ac-green-heading text-[26px] font-black md:text-4xl">{modelTitle} · В наличии</h2><Link href={`/cars/green?${modelParams}`} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>{rail(stockModels)}</section> : null}
     {sameModel.length ? <section data-related-section="market-model"><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle} · {marketLabel}</h2><Link href={`/cars?${modelParams}${current.market==='japan'?'&stock='+ (greenCurrent?'auction':'all'):''}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(sameModel)}</section> : null}
     {crossMarketGroups.length ? <section data-related-section="other-markets"><h2 className="text-[26px] font-black md:text-4xl">{modelTitle} на других рынках</h2><div className="space-y-8">{crossMarketGroups.filter(group=>!markets||markets.includes(group.market)).map(group=><section key={group.market}><div className="mt-5 flex items-center justify-between gap-3"><h3 className="flex items-center gap-2 text-xl font-black"><CatalogMarketFlag market={group.market} className="h-5 w-7" />{CATALOG_MARKET_LABELS[group.market as keyof typeof CATALOG_MARKET_LABELS]}</h3><Link href={`/cars?${new URLSearchParams({make,model:familyModel,market:group.market,...(group.market==='japan'?{stock:'all'}:{})})}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(group.items)}</section>)}</div></section> : null}
-    <section data-related-section="market"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{marketRows.length?rail(marketRows):<p className="text-[var(--ac-muted)]">Другие предложения появятся после обновления каталога.</p>}</section>
+    <section data-related-section="market"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal===null?"—":marketTotal.toLocaleString("ru-RU")}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{marketRows.length?rail(marketRows):<p className="text-[var(--ac-muted)]">Другие предложения появятся после обновления каталога.</p>}</section>
   </div>;
 }
 

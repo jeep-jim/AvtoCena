@@ -8,7 +8,7 @@ import { retryProtectedPhoto } from './protected-photo-retry';
 import styles from './PhotoBrowser.module.css';
 export function PhotoBrowser({images,title,initialIndex=0,offerId,snapshot,onClose}:{images:string[];title:string;initialIndex?:number;offerId?:string;snapshot?:FavoriteSnapshot;onClose:()=>void}) {
  const dialog=useRef<HTMLDialogElement>(null),viewport=useRef<HTMLDivElement>(null),tiles=useRef<HTMLDivElement>(null);
- const [selected,setSelected]=useState<number|null>(null),[scale,setScale]=useState(1),[pan,setPan]=useState({x:0,y:0});
+ const [selected,setSelected]=useState<number|null>(()=>ajesImageUrl(images[initialIndex])?initialIndex:null),[scale,setScale]=useState(1),[pan,setPan]=useState({x:0,y:0});
  const gesture=useRef({scale:1,pan:{x:0,y:0}}),pointers=useRef(new Map<number,{x:number;y:number}>());
  const swiped=useRef(false);
  const start=useRef({distance:0,scale:1,x:0,y:0,pan:{x:0,y:0}});

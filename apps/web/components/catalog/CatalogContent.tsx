@@ -190,13 +190,12 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
             {index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <Link href={item.href} className="transition hover:text-red-500">{item.label}</Link>}
           </span>)}
         </nav>
-        {!selectedMarket&&(!dealer||dealer.markets.includes('japan'))&&<p className="mb-4"><Link href="/cars?market=japan" className="text-sm underline">Аукционы Японии · результаты торгов →</Link></p>}
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
       </div>
       <p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={countIncomplete?undefined:total}>
         <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span>
-        <span>{countIncomplete?"Количество уточняется":<>Найдено: <span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></>}</span>
+        <span>{<>Найдено: {countIncomplete?"не менее ":""}<span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></>}</span>
       </p>
       <CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />
       <div className="hidden lg:block"><BrandLogoRail brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>

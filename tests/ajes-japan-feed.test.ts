@@ -157,7 +157,7 @@ test('count and model directory use the same bounded selection as pages; no raw 
  const filter={make:'HONDA,TOYOTA',model:'N BOX|FIT',chassis:'JF2',lotNumber:'001234',yearFrom:2012,fuel:'petrol',drive:'awd',auctionGrade:'4|4.5'};
  const page=ajesQuery(filter),count=ajesQuery({...filter,aggregate:'count'}),models=ajesQuery({...filter,aggregate:'models'});
  const where=page.sql.split(' where ')[1].split(' order by ')[0];
- assert.equal(count.sql,'select count(*) as total from stats where '+where);
+ assert.equal(count.sql,'select count(*) from stats where '+where);
  assert.ok(models.sql.includes(where+' group by marka_name, model_name'));
  assert.match(page.sql,/kuzov='JF2'/);assert.match(page.sql,/lot='001234'/);
  assert.match(page.sql,/marka_name in \('HONDA','TOYOTA'\)/);
@@ -192,4 +192,32 @@ test('shared Japan query keeps chassis and leading-zero lot through a page reque
  assert.equal(q.chassis,'JF2');assert.equal(q.lotNumber,'001234');assert.equal(q.page,2);assert.equal(q.engineFrom,660);
  const sql=ajesQuery(q).sql;assert.ok(sql.includes("kuzov='JF2'"));assert.ok(sql.includes("lot='001234'"));assert.ok(sql.endsWith('limit 24,24'));
  assert.throws(()=>ajesCatalogQuery({...input,budget:'2000000'}),AjesFilterUnavailable);
+});
+
+
+test('supplier count expression is case-insensitive and never chosen from unrelated numeric fields',async()=>{
+ for(const key of ['COUNT(*)','count(*)','TOTAL','total']){
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify([{[key]:'24681'}]))});
+ assert.equal((await client.read({aggregate:'count'},'1.2.3.4')).total,24681);
+ }
+ const bad=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify([{YEAR:2026}]))});
+ await assert.rejects(()=>bad.read({aggregate:'count'},'1.2.3.4'));
+});
+
+
+test('verified sold AJES results remain eligible for related cars without reviving withdrawn sources',async()=>{
+ const {isRenderableRelatedOffer}=await import('../apps/web/lib/catalog/related-offer-selection');
+ const {ajesOffer}=await import('../apps/web/lib/catalog/ajes-offer');
+ const lot=ajesLot({ID:'related123',MARKA_NAME:'NISSAN',MODEL_NAME:'X-TRAIL',YEAR:'2016',STATUS:'Sold',FINISH:'465000',ENG_V:'2000',IMAGES:'https://7.ajes.com/img/related123'},'stats',false)!;
+ const offer=ajesOffer(lot,{currency:'JPY',sourcePrice:465000,effectiveRate:0.5,rateSource:'cbr',fetchedAt:new Date().toISOString()} as any,new Date().toISOString());
+ assert.equal(Boolean(isRenderableRelatedOffer(offer)),true);
+ assert.equal(Boolean(isRenderableRelatedOffer({...offer,operational:{}})),false);
+ assert.equal(Boolean(isRenderableRelatedOffer({...offer,year:2009})),false);
+ assert.equal(Boolean(isRenderableRelatedOffer({...offer,sourceId:'pro_auctions'})),false);
+});
+
+
+test('Japan price buttons sort the displayed auction price without pretending it is a delivered quote',()=>{
+ assert.match(ajesQuery({sort:'totalRub'}).sql,/order by finish asc/);
+ assert.match(ajesQuery({sort:'totalRubDesc'}).sql,/order by finish desc/);
 });

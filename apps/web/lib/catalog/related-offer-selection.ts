@@ -1,3 +1,7 @@
+import {ajesOfferId} from './ajes-offer';
+import {ajesImageUrl} from './ajes-query';
+import {japanAuctionSoldPriceVerified} from './public-priority';
+import {catalogHeavyVehicleExcluded} from './inventory-admission';
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { isRenderablePublicCatalogOffer } from "./offer-quality";
 import { isGreenCornerOffer } from "./green-corner-contract";
@@ -53,6 +57,7 @@ export async function selectRelatedOfferGroups({current,modelRows,marketRows,cro
 
 /** Stock rows come from the independently validated Green Corner snapshot, not auction projections. */
 export function isRenderableRelatedOffer(offer:any) {
+  if(offer?.sourceId==='ajes_japan_feed'&&ajesOfferId(String(offer.id))&&offer.market==='japan')return offer.status==='sold'&&japanAuctionSoldPriceVerified(offer)&&isSellerPricedOffer(offer)&&!catalogHeavyVehicleExcluded(offer)&&Number(offer.year)>=2010&&Number(offer.year)<=new Date().getUTCFullYear()+1&&offer.images?.some((image:any)=>image.role!=='auction_sheet'&&ajesImageUrl(image.url));
   if(isGreenCornerOffer(offer)) return isSellerPricedOffer(offer)
     && Boolean(String(offer.make||'').trim() && String(offer.model||'').trim())
     && Array.isArray(offer.images) && offer.images.length>0;

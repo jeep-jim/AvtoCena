@@ -2,7 +2,7 @@ import {parseEngineCc} from './engine-input';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
-export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'; sort?: 'updatedAt'|'year'|'yearAsc'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; lotNumber?:string; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; lotNumber?:string; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
 const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','lotNumber','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
@@ -48,11 +48,11 @@ export function ajesQuery(input: unknown) {
     if(q[to]!==undefined)where.push(`${column}<=${high}`);
   }
   if(q.aggregate!==undefined&&!['count','models'].includes(q.aggregate))throw new AjesInputError();
-  if(q.aggregate==='count')return {table,kind:'count' as const,sql:`select count(*) as total from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
-  if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) as total from ${table} where ${where.join(' and ')} group by marka_name, model_name limit 5000`,page:1,pageSize:5000};
+  if(q.aggregate==='count')return {table,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
+  if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name limit 5000`,page:1,pageSize:5000};
   const sort=q.sort??'updatedAt';
-  if(!['updatedAt','year','yearAsc'].includes(sort))throw new AjesInputError();
-  const order=sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':'auction_date desc';
+  if(!['updatedAt','year','yearAsc','totalRub','totalRubDesc'].includes(sort))throw new AjesInputError();
+  const order=sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':'auction_date desc';
   return {table,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
 }
 
@@ -101,7 +101,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
 export class AjesFilterUnavailable extends Error {constructor(){super('ajes_filter_unavailable');}}
 const first=(v:unknown)=>Array.isArray(v)?String(v[0]??''):v==null?'':String(v);
 export function ajesCatalogQuery(params:Record<string,unknown>):AjesQuery {
- if(['budget','budgetFrom','budgetTo','powerFrom','powerTo','bodyType','hasPrice'].some(k=>Boolean(first(params[k])))||/^totalRub/.test(first(params.sort)))throw new AjesFilterUnavailable();
+ if(['budget','budgetFrom','budgetTo','powerFrom','powerTo','bodyType','hasPrice'].some(k=>Boolean(first(params[k]))))throw new AjesFilterUnavailable();
  const q:AjesQuery={table:'stats',page:1,pageSize:24};
  for(const k of ['make','model','fuel','transmission','drive','auctionGrade','chassis','lotNumber'] as const){const v=first(params[k]);if(v)q[k]=v;}
  if(!q.make&&first(params.brand))q.make=first(params.brand);

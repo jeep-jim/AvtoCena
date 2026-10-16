@@ -4,7 +4,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:16*1024*1024,ttlMs:30*60*1000,concurrency:2});
   return {
@@ -49,10 +49,14 @@ export function createAjesClient(deps:Dependencies) {
             if(decoded.length<=256&&/^bot\d*\s/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
             rows=JSON.parse(decoded.toString('utf8'));
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
+          if(query.kind==='count'||query.kind==='models'){
+            const first=Array.isArray(rows)?rows[0]:rows;
+            try{await deps.saveAggregateEvidence?.(query.kind,{observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?)$/i.test(k)&&/^\d+$/.test(String(v)))):{}});}catch{}
+          }
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           if(query.kind==='count'||query.kind==='models'){
-            const totalOf=(r:any)=>{const value=r.total??r.TOTAL??r['count(*)'];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
+            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
             if(query.kind==='count'&&rows.length!==1)throw new AjesUnavailable('invalid_response');
             if(query.kind==='models'&&rows.length===query.pageSize)throw new AjesUnavailable('directory_too_large');
             const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})).filter(r=>r.make&&r.model):undefined;
