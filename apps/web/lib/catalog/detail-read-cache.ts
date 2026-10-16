@@ -11,6 +11,7 @@ export class DetailReadCache<T> {
     maxEntries: number; maxBytes: number; ttlMs: number; concurrency: number;
     now?: () => number;
     sizeOf?: (value: T) => number | undefined;
+    shouldCache?: (value: T) => boolean;
   }) {}
 
   clear() {
@@ -26,7 +27,7 @@ export class DetailReadCache<T> {
     this.entries.delete(key);
   }
 
-  get(key: string, load: () => Promise<T>): Promise<T> {
+  get(key: string, load: () => Promise<T>, pendingKey = key): Promise<T> {
     const now = this.options.now || Date.now;
     for (const [id, entry] of this.entries) {
       if (entry.expiresAt <= now()) this.remove(id);
@@ -37,7 +38,7 @@ export class DetailReadCache<T> {
       this.entries.set(key, cached);
       return Promise.resolve(cached.value);
     }
-    const pending = this.pending.get(key);
+    const pending = this.pending.get(pendingKey);
     if (pending) return pending;
     const epoch = this.epoch;
     const promise = (async () => {
@@ -50,7 +51,7 @@ export class DetailReadCache<T> {
       }
       try {
         const value = await load();
-        if (epoch !== this.epoch) return value;
+        if (epoch !== this.epoch || this.options.shouldCache?.(value) === false) return value;
         // Serialized bytes are a storage budget, not an exact JS heap measure.
         // Leave substantial heap headroom for parsed objects and request work.
         let bytes: number;
@@ -81,11 +82,11 @@ export class DetailReadCache<T> {
         else this.active--;
       }
     })();
-    this.pending.set(key, promise);
+    this.pending.set(pendingKey, promise);
     void promise.then(() => {
-      if (this.pending.get(key) === promise) this.pending.delete(key);
+      if (this.pending.get(pendingKey) === promise) this.pending.delete(pendingKey);
     }, () => {
-      if (this.pending.get(key) === promise) this.pending.delete(key);
+      if (this.pending.get(pendingKey) === promise) this.pending.delete(pendingKey);
     });
     return promise;
   }

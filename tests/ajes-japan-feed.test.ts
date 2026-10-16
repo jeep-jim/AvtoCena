@@ -364,3 +364,29 @@ test('list diagnostics preserve exact empty and numeric source parameters per ac
  await client.read({table:'stats'},'127.0.0.1');
  assert.equal(saved.sourceEvidenceById[row.ID].values.TIME,'');assert.equal(saved.sourceEvidenceById.other.values.PW,200);
 });
+
+
+test('a refused visitor cannot pin missing parameters for a different allowed visitor',async()=>{
+ const old={schemaVersion:2,items:[ajesLot({...row,TIME:'',PW:''},'stats',true)],page:1,pageSize:1,observedAt:new Date(Date.now()-3600000).toISOString()};
+ let saved:any=old,calls=0;
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>saved,saveDetail:async(_t,_id,v)=>{saved=v;},fetcher:async input=>{
+  calls++;const ip=new URL(String(input)).searchParams.get('ip');
+  return ip==='203.0.113.1'?new Response('bot2 test'):new Response(JSON.stringify([{...row,TIME:'D',PW:'200'}]));
+ }});
+ const refused=await client.read({table:'stats',id:row.ID},'203.0.113.1');assert.equal(refused.stale,true);assert.equal(refused.items[0].sourceFuel,'');
+ await client.read({table:'stats',id:row.ID},'203.0.113.1');assert.equal(calls,1,'same refused visitor is bounded by its private cache');
+ const allowed=await client.read({table:'stats',id:row.ID},'203.0.113.2');assert.equal(calls,2);assert.equal(allowed.stale,false);assert.equal(allowed.items[0].sourceFuel,'D');assert.equal(allowed.items[0].sourcePower,'200');
+ const shared=await client.read({table:'stats',id:row.ID},'203.0.113.1');assert.equal(shared.stale,false);assert.equal(shared.items[0].sourceFuel,'D');assert.equal(calls,2,'fresh successful content is shared without extra source requests');
+});
+
+test('simultaneous requests from different visitors do not share a supplier refusal',async()=>{
+ let release!:()=>void;const wait=new Promise<void>(resolve=>{release=resolve;});let calls=0;
+ const old={schemaVersion:2,items:[ajesLot({...row,TIME:'',PW:''},'stats',true)],page:1,pageSize:1,observedAt:new Date(Date.now()-3600000).toISOString()};
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>old,fetcher:async input=>{
+  calls++;const ip=new URL(String(input)).searchParams.get('ip');
+  if(ip==='203.0.113.1'){await wait;return new Response('bot2 test');}
+  release();return new Response(JSON.stringify([{...row,TIME:'D',PW:'200'}]));
+ }});
+ const result=await Promise.all([client.read({table:'stats',id:row.ID},'203.0.113.1'),client.read({table:'stats',id:row.ID},'203.0.113.2')]);
+ assert.equal(calls,2);assert.equal(result[0].stale,true);assert.equal(result[1].stale,false);assert.equal(result[1].items[0].sourceFuel,'D');
+});

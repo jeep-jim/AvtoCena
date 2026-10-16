@@ -6,7 +6,10 @@ import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
 type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:16*1024*1024,ttlMs:30*60*1000,concurrency:2});
+  // Only fresh successful results can be reused across visitor addresses.
+  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
+  // Refusals may retain an old card for this visitor, but must not poison others.
+  const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2});
   return {
     async read(input:unknown,clientIp:string) {
       const query=ajesQuery(input);
@@ -14,7 +17,8 @@ export function createAjesClient(deps:Dependencies) {
       await deps.assertEnabled(); // Also applies to cache hits after an owner disables the source.
       const password=await deps.password();
       if(!password)throw new AjesUnavailable('not_configured');
-      return cache.get(query.sql,async()=>{
+      const visitorKey=clientIp+"\0"+query.sql;
+      return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{
         await deps.assertEnabled(); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=null;
@@ -97,7 +101,7 @@ export function createAjesClient(deps:Dependencies) {
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';
           throw new AjesUnavailable(reason);
         }finally{clearTimeout(timer);}
-      });
+      }),visitorKey);
     },
   };
 }
