@@ -263,3 +263,37 @@ test('Japan price buttons sort the displayed auction price without pretending it
  assert.match(ajesQuery({sort:'totalRub'}).sql,/order by finish asc/);
  assert.match(ajesQuery({sort:'totalRubDesc'}).sql,/order by finish desc/);
 });
+
+test('supplier TIME fuel reaches the card and calculator; ambiguous values stay unknown',()=>{
+ for(const [code,fuel] of [['P','petrol'],['D','diesel'],['E','electric'],['H','hybrid'],['HE','hybrid'],['L','lpg'],['C','cng']]){
+  const lot=ajesLot({...row,TIME:code,FUEL:'P',ENG_V:'2180'},'stats',true)!;
+  const offer=ajesOffer(lot,rate,new Date().toISOString());
+  const safe=safePublicPricing(offer);
+  assert.equal(safe.fuel,fuel);assert.equal(offerParameterDraft(safe).fuel,fuel);
+  assert.equal(offer.operational?.semanticEvidence?.fuel?.source,`ajes:stats:${row.ID}:TIME`);
+  assert.equal(offer.powerHp,undefined);assert.equal(offer.totalRub,null);
+ }
+ for(const TIME of ['P,D','unknown','12:30']){
+  const offer=ajesOffer(ajesLot({...row,TIME},'stats',true)!,rate,new Date().toISOString());
+  assert.equal(offer.fuel,undefined);assert.equal(offer.operational?.semanticEvidence?.fuel,undefined);
+ }
+ for(const aggregate of [undefined,'count','models']){
+  const sql=ajesQuery({fuel:'diesel',aggregate}).sql;
+  assert.ok(sql.includes("time in ('D')"));assert.ok(!sql.includes('fuel in'));
+ }
+});
+
+test('old normalized cache refreshes TIME on demand and remains available on supplier refusal',async()=>{
+ for(const detail of [false,true]){
+  const input=detail?{id:row.ID}:{};
+  let saved:any={items:[ajesLot(row,'stats',detail)],page:1,pageSize:detail?1:24,observedAt:new Date().toISOString()},calls=0;
+  const deps={password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>saved,readQuery:async()=>saved,saveDetail:async(_t:any,_id:any,v:any)=>{saved=v;},saveQuery:async(_sql:string,v:any)=>{saved=v;},fetcher:async()=>{calls++;return new Response(JSON.stringify([{...row,TIME:'D'}]));}};
+  const old=structuredClone(saved);
+  const fresh=await createAjesClient(deps).read(input,'127.0.0.1');
+  assert.equal(fresh.items[0].sourceFuel,'D');assert.equal(saved.schemaVersion,2);assert.equal(calls,1);
+  await createAjesClient(deps).read(input,'127.0.0.1');assert.equal(calls,1);
+  saved=old;
+  const fallback=await createAjesClient({...deps,fetcher:async()=>new Response('bot2 secret')}).read(input,'127.0.0.1');
+  assert.equal(fallback.stale,true);assert.equal(fallback.items[0].sourceFuel,'');
+ }
+});

@@ -24,7 +24,8 @@ export function createAjesClient(deps:Dependencies) {
           &&saved.page===query.page&&saved.pageSize===query.pageSize
           &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
-        if(usable&&age<30*60*1000)return {...saved,stale:false};
+        const currentSchema=query.kind==='count'||query.kind==='models'||saved?.schemaVersion===2;
+        if(usable&&currentSchema&&age<30*60*1000)return {...saved,stale:false};
         const url=new URL('http://87.242.72.57/gzip/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
@@ -64,11 +65,11 @@ export function createAjesClient(deps:Dependencies) {
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
-          const result={stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
+          const result={schemaVersion:2,stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
           if(query.kind==='detail'&&items.length===1&&deps.saveEvidence){
             const row=rows[0];
-            const evidence={id:query.id,observedAt:result.observedAt,fields:Object.keys(row),values:Object.fromEntries(['ENG_V','PW','FUEL','PRIV','KPP','INFO'].map(key=>[key,row[key]??null]))};
+            const evidence={id:query.id,observedAt:result.observedAt,fields:Object.keys(row),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL','PRIV','KPP','INFO'].map(key=>[key,row[key]??null]))};
             try{if(Buffer.byteLength(JSON.stringify(evidence))<=64*1024)await deps.saveEvidence(query.table,evidence);}catch{}
           }
           // A cache storage outage must not discard a successful provider response.

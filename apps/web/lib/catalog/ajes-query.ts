@@ -36,7 +36,7 @@ export function ajesQuery(input: unknown) {
   where.push(heavyVehicleSqlExclusion());
   for(const [column,parts] of [['marka_name',makes],['model_name',models]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const codes=map[value];if(!codes)throw new AjesInputError();where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
-  coded(q.fuel,'fuel',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
+  coded(q.fuel,'time',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
   coded(q.drive,'priv',{fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']});
   if(q.auctionGrade){const grades=values(q.auctionGrade,'|');if(grades.some(v=>! /^(?:[0-6](?:\.5)?|S|R|RA|A|B|C)$/.test(v)))throw new AjesInputError();where.push(`rate in (${grades.map(v=>`'${v}'`).join(',')})`);}
@@ -94,8 +94,9 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
     trim:text('GRADE'),chassisCode:text('KUZOV'),frameNumber:detail?text('SERIAL'):undefined,
     mileageKm:number('MILEAGE'),engineCc:number('ENG_V'),auction:text('AUCTION'),lot:text('LOT'),auctionDate:text('AUCTION_DATE'),grade:text('RATE'),
     status:text('STATUS'),currency:'JPY',finalPriceJpy:sold?finish:null,startPriceJpy:table==='main'?(number('START')||null):null,
-    // PW/PRIV/FUEL need a documented interpretation; preserve evidence, not invented specs.
-    sourcePower:text('PW'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('FUEL'),
+    // Supplier confirmed 2026-10-16: TIME is the fuel field; FUEL is a legacy alias.
+    // Ambiguous PW/PRIV remain source evidence, not invented specifications.
+    sourcePower:text('PW'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('TIME')||text('FUEL'),sourceFuelField:text('TIME')?'TIME':text('FUEL')?'FUEL':undefined,
     info:detail?text('INFO'):undefined,
     images:urls.map((url,i)=>({url:ajesImageUrl(url,'medium')!,thumbnailUrl:ajesImageUrl(url,'small')!,originalUrl:url,role:detail&&i===0?'auction_sheet':'vehicle'})),
   };

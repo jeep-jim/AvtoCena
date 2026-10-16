@@ -12,9 +12,9 @@ async function main(){
  console.log('AJES_MATCHES',found.size);
  const raw:any=await store.readJson('catalog/partner-cache/ajes/evidence/stats-last-detail.json',null);
  console.log('AJES_RAW_MATCH',JSON.stringify({present:!!raw,matchesOwnerLot:!!raw&&found.has(raw.id),observedAt:raw?.observedAt}));
- if(raw&&found.has(raw.id)){
-  const fields=Object.fromEntries(['ENG_V','PW','FUEL','PRIV','KPP'].map(k=>[k,{present:Array.isArray(raw.fields)&&raw.fields.includes(k),type:typeof raw.values?.[k],value:raw.values?.[k]}]));
-  console.log('AJES_OWNER_RAW',JSON.stringify({fields,infoLength:String(raw.values?.INFO||'').length}));
+ if(raw){
+  const fields=Object.fromEntries(['ENG_V','PW','TIME','FUEL','PRIV','KPP'].map(k=>[k,{present:Array.isArray(raw.fields)&&raw.fields.includes(k),type:typeof raw.values?.[k],value:raw.values?.[k]}]));
+  console.log('AJES_LAST_RAW',JSON.stringify({matchesOwnerLot:found.has(raw.id),observedAt:raw.observedAt,fields,infoLength:String(raw.values?.INFO||'').length}));
  }
  for(const [id] of [...found].slice(0,3)){
   const v:any=await store.readJson('catalog/partner-cache/ajes/stats/'+id+'.json',null),l=v?.items?.[0];
