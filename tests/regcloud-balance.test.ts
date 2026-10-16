@@ -35,3 +35,24 @@ test('balance API is owner-only and changing its credential requires a trusted o
   assert.equal((await m.exports.GET()).status,200);
  }finally{delete (globalThis as any).__regBalance;}
 });
+test('low balance targets active Top Avto owners, deduplicates and rearms after recovery',async()=>{
+ const state={stored:null as any,notices:new Map<string,any>(),fail:false,users:[{id:'owner',companyId:'dealer_topavto',role:'owner'},{id:'disabled',companyId:'dealer_topavto',role:'owner',status:'disabled'},{id:'admin',companyId:'dealer_topavto',role:'admin'},{id:'other',companyId:'other',role:'owner'}]};
+ (globalThis as any).__regAlert=state;
+ const mocks:Record<string,string>={
+ './data':'export const readDataJson=async(p,f)=>globalThis.__regAlert.stored||f;export const mutateDataJson=async(p,f,fn)=>globalThis.__regAlert.stored=await fn(globalThis.__regAlert.stored||f);',
+ './crm-users':'export const readCrmUsers=async()=>globalThis.__regAlert.users;',
+ './crm-notification-store':'export const notifyTeam=async(n)=>{if(globalThis.__regAlert.fail)throw Error();globalThis.__regAlert.notices.set(n.id,n)};'
+ };
+ const result=await build({entryPoints:['apps/web/lib/regcloud-balance-alert.ts'],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'mocks',setup(b){b.onResolve({filter:/.*/},a=>mocks[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path],loader:'ts'}));}}]});
+ const m={exports:{} as any};new Function('require','module','exports',result.outputFiles[0].text)(require,m,m.exports);
+ const sample=(balance:number,sampledAt:number)=>m.exports.notifyLowRegcloudBalance({balance,sampledAt});
+ try{
+  await sample(600,1);assert.equal(state.notices.size,0);
+  await sample(599.99,2);assert.equal(state.notices.size,1);assert.deepEqual([...state.notices.values()][0].recipientIds,['owner']);
+  await sample(0,3);await sample(-12,4);assert.equal(state.notices.size,1);
+  await sample(600,5);await sample(599,6);assert.equal(state.notices.size,2);
+  await sample(900,4);assert.ok(state.stored.episode); // stale recovery ignored
+  await sample(900,7);state.fail=true;await assert.rejects(sample(1,8));state.fail=false;await sample(1,8);assert.equal(state.notices.size,3);
+  await sample(NaN,9);assert.equal(state.notices.size,3);
+ }finally{delete (globalThis as any).__regAlert;}
+});

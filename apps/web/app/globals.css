@@ -481,3 +481,9 @@ textarea::placeholder {
 
 @keyframes ac-browser-sheet-enter { from { transform: translateY(100%); } to { transform: translateY(0); } }
 @media (prefers-reduced-motion: no-preference) { .ac-browser-sheet { animation: ac-browser-sheet-enter 220ms ease-out; } }
+
+/* Cloud balance: theme-specific normal state and explicit low-balance warning. */
+html body .ac-regcloud-balance[data-balance-state="normal"] { color: #facc15 !important; }
+html[data-theme="light"] body .ac-regcloud-balance[data-balance-state="normal"] { color: #15803d !important; }
+html body .ac-regcloud-balance[data-balance-state="low"] { color: #f87171 !important; }
+html[data-theme="light"] body .ac-regcloud-balance[data-balance-state="low"] { color: #dc2626 !important; }

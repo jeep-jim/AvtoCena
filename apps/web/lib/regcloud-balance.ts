@@ -1,5 +1,6 @@
 import 'server-only';
 import crypto from 'node:crypto';
+import {notifyLowRegcloudBalance} from './regcloud-balance-alert';
 import {readDataJson,writeDataJson} from './data';
 import {fetchRegcloudBalance,type RegcloudBalance} from './regcloud-balance-client';
 const path='integrations/regcloud/balance.json';
@@ -17,9 +18,11 @@ export async function readRegcloudBalance(){
  const fingerprint=crypto.createHash('sha256').update(credential).digest('hex');
  if(cache?.fingerprint!==fingerprint)cache={fingerprint,value:null,expires:0,pending:null};
  const current=cache;
- if(Date.now()<current.expires){if(!current.value)throw Error('balance_unavailable');return {configured:true as const,...current.value};}
+ if(Date.now()<current.expires){if(!current.value)throw Error('balance_unavailable');await notifyLowRegcloudBalance(current.value).catch(()=>{});return {configured:true as const,...current.value};}
  if(!current.pending)current.pending=fetchRegcloudBalance(credential).then(value=>{current.value=value;current.expires=Date.now()+60000;return value;},()=>{current.value=null;current.expires=Date.now()+60000;throw Error('balance_unavailable');}).finally(()=>{current.pending=null;});
- return {configured:true as const,...await current.pending};
+ const value=await current.pending;
+ await notifyLowRegcloudBalance(value).catch(()=>{});
+ return {configured:true as const,...value};
 }
 export async function connectRegcloudBalance(credential:string){
  if(!validRegcloudToken(credential))throw Error('invalid_token');
@@ -28,5 +31,6 @@ export async function connectRegcloudBalance(credential:string){
  const body=Buffer.concat([cipher.update(credential,'utf8'),cipher.final()]);
  await writeDataJson(path,{encryptedToken:[iv,cipher.getAuthTag(),body].map(x=>x.toString('base64')).join('.'),updatedAt:new Date().toISOString()});
  cache=null; // In-flight reads can only update their detached cache.
+ await notifyLowRegcloudBalance(value).catch(()=>{});
  return {configured:true as const,...value};
 }
