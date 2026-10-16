@@ -6,7 +6,7 @@ async function main(){
  for(let start=0;start<128;start+=8){
   const slots=await Promise.all(Array.from({length:8},(_,n)=>store.readJson('catalog/partner-cache/ajes/queries/'+(start+n)+'.json',null).catch(()=>null)));
   for(const slot of slots as any[])for(const lot of slot?.value?.items||[]){
-   if(/^MAZDA$/i.test(lot.make||'')&&/^CX[- ]?8$/i.test(lot.model||'')&&lot.year===2021&&lot.finalPriceJpy===1305000)found.set(lot.id,lot);
+   if(/^MAZDA$/i.test(lot.make||'')&&/^CX[- ]?8$/i.test(lot.model||'')&&lot.year===2021&&lot.finalPriceJpy===1305000)found.set(lot.id,{...lot,savedAt:slot.value.observedAt,schemaVersion:slot.value.schemaVersion});
   }
  }
  console.log('AJES_MATCHES',found.size);
@@ -16,9 +16,10 @@ async function main(){
   const fields=Object.fromEntries(['ENG_V','PW','TIME','FUEL','PRIV','KPP'].map(k=>[k,{present:Array.isArray(raw.fields)&&raw.fields.includes(k),type:typeof raw.values?.[k],value:raw.values?.[k]}]));
   console.log('AJES_LAST_RAW',JSON.stringify({matchesOwnerLot:found.has(raw.id),observedAt:raw.observedAt,fields,infoLength:String(raw.values?.INFO||'').length}));
  }
- for(const [id] of [...found].slice(0,3)){
+ for(const [id,list] of [...found].slice(0,3)){
+  console.log('AJES_OWNER_LIST',JSON.stringify({observedAt:list.savedAt,schemaVersion:list.schemaVersion,engineCc:list.engineCc,power:list.sourcePower,fuel:list.sourceFuel,fuelField:list.sourceFuelField,drive:list.sourceDrive,chassisCode:list.chassisCode}));
   const v:any=await store.readJson('catalog/partner-cache/ajes/stats/'+id+'.json',null),l=v?.items?.[0];
-  console.log('AJES_OWNER_LOT',JSON.stringify({found:!!l,engineCc:l?.engineCc,power:l?.sourcePower,fuel:l?.sourceFuel,drive:l?.sourceDrive,transmission:l?.sourceTransmission,photos:l?.images?.length,infoLength:String(l?.info||'').length}));
+  console.log('AJES_OWNER_LOT',JSON.stringify({found:!!l,observedAt:v?.observedAt,schemaVersion:v?.schemaVersion,chassisCode:l?.chassisCode,framePresent:!!l?.frameNumber,engineCc:l?.engineCc,power:l?.sourcePower,fuel:l?.sourceFuel,drive:l?.sourceDrive,transmission:l?.sourceTransmission,photos:l?.images?.length,infoLength:String(l?.info||'').length}));
  }
  for(const kind of ['count','models']){
  const v:any=await store.readJson('catalog/partner-cache/ajes/evidence/'+kind+'-last.json',null);
