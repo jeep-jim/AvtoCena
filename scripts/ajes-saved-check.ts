@@ -19,6 +19,9 @@ async function main(){
  for(const [id,list] of [...found].slice(0,3)){
   console.log('AJES_OWNER_LIST',JSON.stringify({observedAt:list.savedAt,schemaVersion:list.schemaVersion,engineCc:list.engineCc,power:list.sourcePower,fuel:list.sourceFuel,fuelField:list.sourceFuelField,drive:list.sourceDrive,chassisCode:list.chassisCode}));
   const v:any=await store.readJson('catalog/partner-cache/ajes/stats/'+id+'.json',null),l=v?.items?.[0];
+  const info=String(l?.info||'');let infoUrl:any=null;try{const u=new URL(info);infoUrl={host:u.hostname,queryKeys:[...u.searchParams.keys()],pathParts:u.pathname.split('/').filter(Boolean).length};}catch{}
+  let infoKeys:string[]=[];try{const x=JSON.parse(info);if(x&&typeof x==='object')infoKeys=Object.keys(x).slice(0,30);}catch{}
+  console.log('AJES_INFO_SHAPE',JSON.stringify({length:info.length,url:infoUrl,jsonKeys:infoKeys,tags:[...info.matchAll(/<\/?([a-z][a-z0-9]*)/gi)].map(m=>m[1]).slice(0,20),technicalWords:info.match(/diesel|petrol|gasoline|power|fuel|horsepower|дизель|бензин|мощность|топливо|軽油|ガソリン|馬力|燃料|error|access|denied|bot|http|iframe|javascript/gi)}));
   console.log('AJES_OWNER_LOT',JSON.stringify({found:!!l,observedAt:v?.observedAt,schemaVersion:v?.schemaVersion,chassisCode:l?.chassisCode,framePresent:!!l?.frameNumber,engineCc:l?.engineCc,power:l?.sourcePower,fuel:l?.sourceFuel,drive:l?.sourceDrive,transmission:l?.sourceTransmission,photos:l?.images?.length,infoLength:String(l?.info||'').length}));
  }
  for(const kind of ['count','models']){
