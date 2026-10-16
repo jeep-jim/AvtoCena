@@ -1,4 +1,5 @@
 import {parseEngineCc} from './engine-input';
+import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
@@ -32,6 +33,7 @@ export function ajesQuery(input: unknown) {
   const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+1)}`,'auction_type!=1'];
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
+  where.push(heavyVehicleSqlExclusion());
   for(const [column,parts] of [['marka_name',makes],['model_name',models]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const codes=map[value];if(!codes)throw new AjesInputError();where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
   coded(q.fuel,'fuel',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
@@ -83,6 +85,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const id=text('ID'), year=number('YEAR');
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<2010 || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
+  if(knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME')))return null;
   const finish=number('FINISH');
   if (table==='stats' && (!sold || !finish)) return null;
   const urls=[...new Set(text('IMAGES').split('#').map(u=>ajesImageUrl(u,'original')).filter((u):u is string=>Boolean(u)))];

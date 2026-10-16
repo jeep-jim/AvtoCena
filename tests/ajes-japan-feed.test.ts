@@ -7,7 +7,30 @@ import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {StorageConflictError,type JsonStorage} from '../apps/web/lib/data';
 import {defaultCollectionControls,collectionEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
 import {validateCollectionControls} from '../apps/web/lib/catalog/collection-controls';
+import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission';
+import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
+
+test('confirmed heavy families are excluded without fabricating a listing mass',()=>{
+ for(const [make,model] of [['HINO','RANGER'],['HINO','SEREGA'],['HINO','SELEGA HYBRID'],['ISUZU','GIGA'],['ISUZU','FORWARD'],['ISUZU','ERGA']]){
+  const offer={make,model};
+  assert.equal(catalogHeavyVehicleExcluded(offer),true);
+  for(const detail of [false,true])assert.equal(ajesLot({...row,MARKA_NAME:make,MODEL_NAME:model},'stats',detail),null);
+ }
+ // Same model word from another make, passenger cars, kei and mixed-weight trucks survive.
+ for(const [make,model] of [['FORD','RANGER'],['LAND ROVER','RANGE ROVER'],['TOYOTA','HIACE'],['SUZUKI','CARRY'],['HINO','DUTRO'],['ISUZU','ELF'],['ISUZU','GALAXY']]){
+  assert.equal(catalogHeavyVehicleExcluded({make,model}),false);
+  assert.ok(ajesLot({...row,MARKA_NAME:make,MODEL_NAME:model},'stats',false));
+ }
+ assert.equal(catalogHeavyVehicleExcluded({make:'ISUZU',model:'ELF',grossVehicleWeightKg:3500}),false);
+ assert.equal(catalogHeavyVehicleExcluded({make:'ISUZU',model:'ELF',grossVehicleWeightKg:3501}),true);
+});
+test('lists, counts and model directories apply identical heavy-family SQL before pagination',()=>{
+ for(const aggregate of [undefined,'count','models'] as const){
+  const query=ajesQuery({aggregate});
+  assert.ok(query.sql.includes(heavyVehicleSqlExclusion()));
+ }
+});
 
 test('query grammar rejects SQL/unknown fields and bounds pages, ages and table',()=>{
   for(const input of [{sql:'select * from stats'},{table:'stats;drop'},{id:"x' or 1=1"},{make:"TOYOTA'"},{model:'x\\y'},{page:-1},{pageSize:10000},{yearFrom:2009},{yearFrom:2025,yearTo:2020},{id:'ok',make:'TOYOTA'},{budgetTo:2000000}])assert.throws(()=>ajesQuery(input));

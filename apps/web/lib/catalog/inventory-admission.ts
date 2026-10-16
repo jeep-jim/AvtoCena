@@ -1,3 +1,4 @@
+import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Inventory policy approved 06.10.2026. Dates retain the source's precision. */
 export function catalogInventoryDate(offer: any): string | undefined {
  const op=offer.operational||{},raw=op.raw||{},e=op.semanticEvidence?.productionDate;
@@ -40,6 +41,7 @@ export function catalogGrossVehicleWeightKg(offer:any):number|undefined {
 }
 /** GVWR is the permitted loaded mass; curb weight is never a substitute. */
 export function catalogHeavyVehicleExcluded(offer:any){
+ if(knownHeavyVehicleFamily(offer.make,offer.model))return true;
  const snapshot=offer.operational?.sourceSpecifications;
  // Legacy paid replay rows may predate body normalization. Only use named,
  // listing-bound body/class fields, never menus or unrelated raw prose.
