@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
 import {ajesQuery,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
-import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
+import {createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {StorageConflictError,type JsonStorage} from '../apps/web/lib/data';
 import {defaultCollectionControls,collectionEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
@@ -10,6 +10,25 @@ import {validateCollectionControls} from '../apps/web/lib/catalog/collection-con
 import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission';
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
+
+test('actual supplier TAG aggregates are positional and strictly numeric',async()=>{
+ const read=async(body:unknown,aggregate:'count'|'models')=>createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(body))}).read({aggregate},'127.0.0.1');
+ assert.equal((await read([{TAG0:'123456'}],'count')).total,123456);
+ assert.deepEqual((await read([{MARKA_NAME:'TOYOTA',MODEL_NAME:'PRIUS',TAG2:'42'}],'models')).models,[{make:'TOYOTA',model:'PRIUS',total:42}]);
+ for(const body of [[{TAG2:42}],[{TAG0:'oops'}],[{TAG0:-1}],[{TAG0:1.5}]])await assert.rejects(()=>read(body,'count'),/invalid_response/);
+});
+test('model directory reads beyond the supplier 500-row cap and detects repeated pages',async()=>{
+ const queries:string[]=[];
+ const first=Array.from({length:500},(_,i)=>({MARKA_NAME:'TOYOTA',MODEL_NAME:'MODEL '+i,TAG2:'1'}));
+ const client=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{
+  const sql=new URL(String(url)).searchParams.get('sql')!;queries.push(sql);
+  return new Response(JSON.stringify(sql.endsWith('limit 0,500')?first:[{MARKA_NAME:'TOYOTA',MODEL_NAME:'MODEL 500',TAG2:'2'}]));
+ }});
+ const result=await readAjesModelDirectory(client,{},'127.0.0.1');
+ assert.equal(result.models.length,501);assert.equal(queries.length,2);assert.ok(queries[1].endsWith('limit 500,500'));
+ const broken=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(first))});
+ await assert.rejects(()=>readAjesModelDirectory(broken,{},'127.0.0.1'),/directory_page_repeated/);
+});
 
 test('confirmed heavy families are excluded without fabricating a listing mass',()=>{
  for(const [make,model] of [['HINO','RANGER'],['HINO','SEREGA'],['HINO','SELEGA HYBRID'],['ISUZU','GIGA'],['ISUZU','FORWARD'],['ISUZU','ERGA']]){

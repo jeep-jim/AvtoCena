@@ -51,7 +51,7 @@ export function ajesQuery(input: unknown) {
   }
   if(q.aggregate!==undefined&&!['count','models'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
-  if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name limit 5000`,page:1,pageSize:5000};
+  if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
   const sort=q.sort??'updatedAt';
   if(!['updatedAt','year','yearAsc','totalRub','totalRubDesc'].includes(sort))throw new AjesInputError();
   const order=sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':'auction_date desc';

@@ -51,16 +51,15 @@ export function createAjesClient(deps:Dependencies) {
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(query.kind==='count'||query.kind==='models'){
             const first=Array.isArray(rows)?rows[0]:rows;
-            try{await deps.saveAggregateEvidence?.(query.kind,{observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?)$/i.test(k)&&/^\d+$/.test(String(v)))):{}});}catch{}
+            try{await deps.saveAggregateEvidence?.(query.kind,{observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[02])$/i.test(k)&&/^\d+$/.test(String(v)))):{}});}catch{}
           }
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           if(query.kind==='count'||query.kind==='models'){
-            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
+            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
             if(query.kind==='count'&&rows.length!==1)throw new AjesUnavailable('invalid_response');
-            if(query.kind==='models'&&rows.length===query.pageSize)throw new AjesUnavailable('directory_too_large');
             const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})).filter(r=>r.make&&r.model):undefined;
-            const result={items:[],models,total:query.kind==='count'?totalOf(rows[0]):undefined,page:1,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
+            const result={items:[],models,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
             try{await deps.saveQuery?.(query.sql,result);}catch{}
             return result;
           }
@@ -93,3 +92,21 @@ export function createAjesClient(deps:Dependencies) {
   };
 }
 function quotaNumber(value:string|null){return value!==null&&/^\d+$/.test(value)?Number(value):null;}
+
+/** Supplier responses are capped at 500 rows. Never treat a full page as a complete directory. */
+export async function readAjesModelDirectory(client:ReturnType<typeof createAjesClient>,input:Record<string,unknown>,ip:string){
+ const models:Array<{make:string;model:string;total:number}>=[];
+ let observedAt='';
+ const identities=new Set<string>();
+ for(let page=1;page<=10;page++){
+  const result=await client.read({...input,aggregate:'models',page},ip);
+  observedAt=observedAt||result.observedAt;
+  for(const model of result.models||[]){
+   const key=JSON.stringify([model.make,model.model]);
+   if(identities.has(key))throw new AjesUnavailable('directory_page_repeated');
+   identities.add(key);models.push(model);
+  }
+  if(result.received<500)return {models,observedAt};
+ }
+ throw new AjesUnavailable('directory_too_large');
+}

@@ -3,6 +3,7 @@ import {assertCollectionEnabled} from './collection-controls';
 import {headers} from 'next/headers';
 import {cache} from 'react';
 import {ajesClient} from './ajes-runtime';
+import {readAjesModelDirectory} from './ajes-client';
 import {readAjesPublic} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
@@ -15,8 +16,7 @@ export const readAjesCount=cache(async(key='{}'):Promise<number>=>{
 });
 export async function readAjesDirectory(params:Record<string,unknown>={}){
  const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
- const result=await ajesClient.read({...q,aggregate:'models'},(await headers()).get('x-real-ip')||'');
- return {models:result.models as Array<{make:string;model:string;total:number}>,observedAt:result.observedAt};
+ return readAjesModelDirectory(ajesClient,q,(await headers()).get('x-real-ip')||'');
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const query=ajesCatalogQuery(params);
