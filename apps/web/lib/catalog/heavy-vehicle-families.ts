@@ -5,9 +5,18 @@
  * SEREGA is the supplier's spelling of SELEGA, observed in the owner's lot.
  * Do not add mixed-weight light trucks (Elf, Canter, Dutro) or blanket makes.
  */
+const fusoModels=['FIGHTER','SUPER GREAT','SUPERGREAT','AERO QUEEN','AERO ACE','ROSA'] as const;
+// Fuso: mitsubishi-fuso.com/en/product/fighter/ and fuso.com.au/range/bus/standard/25-seat/
+// UD: udtrucks.com/china/about-us/innovation/product-history/1975
 export const heavyVehicleFamilies = [
   {make:'HINO',models:['RANGER','PROFIA','SELEGA','SEREGA']},
   {make:'ISUZU',models:['FORWARD','GIGA','GALA','ERGA']},
+  {make:'MITSUBISHI',models:fusoModels},
+  {make:'MITSUBISHI FUSO',models:fusoModels},
+  {make:'FUSO',models:fusoModels},
+  {make:'UD',models:['CONDOR','QUON']},
+  {make:'UD TRUCKS',models:['CONDOR','QUON']},
+  {make:'NISSAN DIESEL',models:['CONDOR','QUON']},
 ] as const;
 export function knownHeavyVehicleFamily(make:unknown,model:unknown){
  const brand=String(make||'').normalize('NFKC').trim().toUpperCase();

@@ -31,7 +31,7 @@ test('model directory reads beyond the supplier 500-row cap and detects repeated
 });
 
 test('confirmed heavy families are excluded without fabricating a listing mass',()=>{
- for(const [make,model] of [['HINO','RANGER'],['HINO','SEREGA'],['HINO','SELEGA HYBRID'],['ISUZU','GIGA'],['ISUZU','FORWARD'],['ISUZU','ERGA']]){
+ for(const [make,model] of [['HINO','RANGER'],['HINO','SEREGA'],['HINO','SELEGA HYBRID'],['ISUZU','GIGA'],['ISUZU','FORWARD'],['ISUZU','ERGA'],['MITSUBISHI','ROSA'],['FUSO','FIGHTER'],['UD TRUCKS','QUON'],['NISSAN DIESEL','CONDOR']]){
   const offer={make,model};
   assert.equal(catalogHeavyVehicleExcluded(offer),true);
   for(const detail of [false,true])assert.equal(ajesLot({...row,MARKA_NAME:make,MODEL_NAME:model},'stats',detail),null);
