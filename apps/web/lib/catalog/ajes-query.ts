@@ -91,7 +91,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const urls=[...new Set(text('IMAGES').split('#').map(u=>ajesImageUrl(u,'original')).filter((u):u is string=>Boolean(u)))];
   return {
     id,table,kind:table==='stats'?'auction_result':'auction',make:text('MARKA_NAME'),model:text('MODEL_NAME'),year,
-    trim:text('GRADE'),chassisCode:text('KUZOV'),frameNumber:detail?text('SERIAL'):undefined,
+    trim:text('GRADE'),color:text('COLOR'),equipment:text('EQUIP'),transmissionCode:text('KPP_TYPE'),auctionTown:text('TOWN'),chassisCode:text('KUZOV'),frameNumber:detail?text('SERIAL'):undefined,
     mileageKm:number('MILEAGE'),engineCc:number('ENG_V'),auction:text('AUCTION'),lot:text('LOT'),auctionDate:text('AUCTION_DATE'),grade:text('RATE'),
     status:text('STATUS'),currency:'JPY',finalPriceJpy:sold?finish:null,startPriceJpy:table==='main'?(number('START')||null):null,
     // Supplier confirmed 2026-10-16: TIME is the fuel field; FUEL is a legacy alias.

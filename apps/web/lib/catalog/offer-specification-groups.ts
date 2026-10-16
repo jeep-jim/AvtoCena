@@ -37,6 +37,16 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
     add(auction, "Оценка аукциона", auctionGradeLabel(offer.auctionGrade));
     add(auction, "Аукцион", offer.auctionName); add(auction, "Дата аукциона", offer.auctionDate); add(auction, "Лот", offer.lotNumber);
     add(auction, "Код кузова", offer.operational?.modelCode || offer.operational?.chassisCode);
+    if(offer.sourceId==='ajes_japan_feed'){
+      add(auction,"Номер кузова",offer.frameNumber);
+      add(auction,"Место проведения",offer.operational?.auctionTown);
+      const source=offer.operational?.raw as Record<string,unknown>|undefined;
+      add(auction,"Мощность: варианты поставщика",source?.sourcePower);
+      add(auction,"Привод: обозначение поставщика",source?.sourceDrive);
+      add(auction,"КПП: обозначение поставщика",source?.sourceTransmission);
+      add(auction,"Тип КПП: обозначение поставщика",offer.operational?.sourceTransmissionCode);
+      add(auction,"Оснащение",offer.operational?.sourceEquipment);
+    }
     const restriction = assessJapanExportRestriction(offer);
     if (restriction) add(auction, "Экспорт из Японии", japanRestrictionDescription(restriction));
     if (auction.length) groups.push({ name: "Аукцион и экспорт", items: auction });

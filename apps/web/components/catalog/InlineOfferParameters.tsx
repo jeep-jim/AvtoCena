@@ -116,7 +116,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{estimatedPowerHp?:number;initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || initial);
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
@@ -184,6 +184,7 @@ export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScen
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId,autoCalculate,rateRevision]);
+ const estimatedPowerActive=Boolean(estimatedPowerHp && !savedCalculation && !initialScenario && Number(draft.powerHp)===estimatedPowerHp);
  const deliveryQuote=quoteCityDelivery(draft.deliveryCity,deliveryMarket);
  const showCalculation=dirty || Boolean(result);
  // A seller price is not a stale delivered estimate: keep its explicit label while missing data blocks calculation.
@@ -200,9 +201,9 @@ export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScen
  const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric" ? "Алиса покажи 30-минутную мощность" : "Алиса покажи тип гибрида и мощность"} compact />;
  const currentYear = new Date().getFullYear();
  const yearOptions = publicProductionYears();
- return <div data-share-error={error || undefined} data-share-estimate={result && (dirty || initialScenario) ? encodeShareDraft(draft) : undefined} data-share-year={draft.year} data-share-engine-cc={draft.engineCc} data-share-fuel={draft.fuel} data-share-pending={pending || undefined} className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
+ return <div data-share-error={error || undefined} data-share-estimate={result && (dirty || initialScenario || estimatedPowerActive) ? encodeShareDraft(draft) : undefined} data-share-year={draft.year} data-share-engine-cc={draft.engineCc} data-share-fuel={draft.fuel} data-share-pending={pending || undefined} className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {result ? <div aria-live="polite" aria-busy={pending}>
-   <PriceTrend hideAuctionGrade panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label={draft.deliveryCity ? "Стоимость под ключ" : "Ориентир без доставки"} priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
+   <PriceTrend hideAuctionGrade panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label={draft.deliveryCity ? (estimatedPowerActive ? "Предварительно под ключ" : "Стоимость под ключ") : "Ориентир без доставки"} priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
    {priceBadges ? <div className="mt-3 flex justify-end">{priceBadges}</div> : null}
   </div> : !showCalculation || keepSellerPrice ? price : <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4" role="status">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</div>}
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
@@ -225,6 +226,7 @@ export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScen
    </div>
   </details> : null}
   {!showCalculation ? originalBreakdown : null}
+  {estimatedPowerActive ? <p className="mt-3 text-xs text-[var(--ac-muted)]" data-power-estimate-note>Для предварительного расчёта выбрано первое значение мощности: {estimatedPowerHp} л.с. Проверьте его по документам или измените вручную.</p> : null}
   <OfferParameterEditors draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
   {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
   {copyOffer ? <OfferCopyButton offerId={offerId} title={copyOffer.title} mileageKm={copyOffer.mileageKm} draft={draft} pending={pending || saving}/> : null}

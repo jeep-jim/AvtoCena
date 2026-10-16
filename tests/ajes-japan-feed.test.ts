@@ -297,3 +297,48 @@ test('old normalized cache refreshes TIME on demand and remains available on sup
   assert.equal(fallback.stale,true);assert.equal(fallback.items[0].sourceFuel,'');
  }
 });
+
+import {mock} from 'node:test';
+import {LocalJsonStorage} from '../apps/web/lib/data';
+import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
+import {calculateOfferWithCustomerParametersDetailed} from '../apps/web/lib/catalog/customs-pricing';
+import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
+import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
+import {offerSpecificationGroups} from '../apps/web/lib/catalog/offer-specification-groups';
+
+test('AJES detail retains chassis identity and source specifications; first PW only seeds editable estimate',()=>{
+ const lot=ajesLot({...row,TIME:'P',PW:'79,98',ENG_V:'1500',KUZOV:'TEST10',SERIAL:'TEST10-1234567',COLOR:'WHITE',EQUIP:'AC',KPP:'FA'},'stats',true)!;
+ const offer=ajesOffer(lot,rate,new Date().toISOString());
+ const publicRaw={...offer,operational:undefined} as any;
+ const draft=offerParameterDraft(offer,publicRaw);
+ assert.equal(draft.powerHp,'79');assert.equal(offer.powerHp,undefined);
+ assert.equal(draft.power30MinKw,'');assert.equal(offer.totalRub,null);
+ const groups=offerSpecificationGroups(offer);
+ assert.ok(groups.some(g=>g.items.some(i=>i.name==='Код кузова'&&i.value==='TEST10')));
+ assert.ok(groups.some(g=>g.items.some(i=>i.name==='Номер кузова'&&i.value==='TEST10-1234567')));
+ assert.ok(groups.some(g=>g.items.some(i=>i.value==='79,98')));
+ assert.equal(offer.color,'WHITE');
+ assert.equal(ajesLot({...row,SERIAL:'TEST10-1234567'},'stats',false)?.frameNumber,undefined);
+ assert.equal(ajesPowerEstimateHp({...offer,sourceId:'encar'}),undefined);
+ for(const PW of ['', 'bad79', '0,98','79,bad','2501,98'])assert.equal(ajesPowerEstimateHp(ajesOffer(ajesLot({...row,PW},'stats',true)!,rate,new Date().toISOString())),undefined);
+ const electric=ajesOffer(ajesLot({...row,TIME:'E',PW:'150,200'},'stats',true)!,rate,new Date().toISOString());
+ const electricDraft=offerParameterDraft(electric);
+ assert.equal(electricDraft.powerHp,'150');assert.equal(electricDraft.power30MinKw,'');
+ assert.throws(()=>validateCustomerParameters(electricDraft));
+});
+
+test('Japan first-PW draft computes a delivered estimate through the real customer calculator',async()=>{
+ const offer=ajesOffer(ajesLot({...row,YEAR:'2018',TIME:'P',PW:'79,98',ENG_V:'1500'},'stats',true)!,rate,new Date().toISOString());
+ const draft={...offerParameterDraft(offer),deliveryCity:'Новокузнецк'};
+ const today=new Date().toISOString(),original=LocalJsonStorage.prototype.readJsonWithMeta;
+ const patch=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async function(this:LocalJsonStorage,key:string,fallback:any){
+  if(key==='fees/exchange-rates.json')return {found:true,value:{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today},JPY:{cbrRate:53,nominal:100,rateDate:today},USD:{cbrRate:90,nominal:1,rateDate:today}}};
+  return original.call(this,key,fallback);
+ });
+ resetCatalogRateCache();
+ try{
+  const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
+  assert.equal(result.ok,true,JSON.stringify(result));
+  if(result.ok){assert.ok(result.calculation.totalRub>offer.sellerPriceRub!);assert.ok(result.calculation.breakdown.length>1);}
+ }finally{patch.mock.restore();resetCatalogRateCache();}
+});
