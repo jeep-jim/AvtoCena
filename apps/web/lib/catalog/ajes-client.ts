@@ -4,7 +4,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:16*1024*1024,ttlMs:30*60*1000,concurrency:2});
   return {
@@ -16,16 +16,20 @@ export function createAjesClient(deps:Dependencies) {
       if(!password)throw new AjesUnavailable('not_configured');
       return cache.get(query.sql,async()=>{
         await deps.assertEnabled(); // Recheck after waiting for concurrency slot.
-        if(query.kind==='detail'&&deps.readDetail){
-          const saved=await deps.readDetail(query.table,query.id!);
-          const age=Date.now()-Date.parse(saved?.observedAt||'');
-          if(age>=0&&age<30*60*1000&&saved?.items?.length===1&&saved.items[0].id===query.id&&saved.items[0].table===query.table)return saved;
-        }
-        await deps.reserve(query.table);
+        // Only successful, user-requested responses are retained; never crawl the database.
+        let saved:any=null;
+        try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}
+        const age=Date.now()-Date.parse(saved?.observedAt||'');
+        const usable=age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
+          &&saved.page===query.page&&saved.pageSize===query.pageSize
+          &&saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string')
+          &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
+        if(usable&&age<30*60*1000)return {...saved,stale:false};
         const url=new URL('http://87.242.72.57/gzip/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
         try {
+          await deps.reserve(query.table);
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
           if(!response.ok)throw new AjesUnavailable(`http_${response.status}`);
           if(Number(response.headers.get('content-length'))>2*1024*1024)throw new AjesUnavailable('response_too_large');
@@ -48,13 +52,19 @@ export function createAjesClient(deps:Dependencies) {
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
-          const result={items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
+          const result={stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
-          // Only explicitly opened, accepted details; list responses never populate a database.
-          if(query.kind==='detail'&&items.length===1&&deps.saveDetail)await deps.saveDetail(query.table,query.id!,result);
+          // A cache storage outage must not discard a successful provider response.
+          try {
+            if(query.kind==='detail'&&items.length===1)await deps.saveDetail?.(query.table,query.id!,result);
+            if(query.kind==='list')await deps.saveQuery?.(query.sql,result);
+          }catch{}
+
           return result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
+          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
+          if(usable&&saved.items.length>0&&recoverable){await deps.assertEnabled();return {...saved,stale:true};}
           if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';

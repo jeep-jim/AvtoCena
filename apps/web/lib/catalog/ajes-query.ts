@@ -53,9 +53,19 @@ export function ajesImageUrl(value: unknown, size: 'small'|'medium'|'original'='
   } catch {return null;}
 }
 
+/** Decode supplier text as text only, including old saved responses. Never render HTML. */
+export function ajesText(value: unknown): string {
+  if(typeof value!=='string'&&typeof value!=='number')return '';
+  const named:Record<string,string>={amp:'&',quot:'"',apos:"'",lt:'<',gt:'>',nbsp:' '};
+  return String(value).replace(/&(#x[0-9a-f]+|#\d+|amp|quot|apos|lt|gt|nbsp);/gi,(original,key:string)=>{
+    if(key[0]!=='#')return named[key.toLowerCase()]??original;
+    const n=key[1].toLowerCase()==='x'?parseInt(key.slice(2),16):Number(key.slice(1));
+    return n>0&&n<=0x10ffff&&!(n>=0xd800&&n<=0xdfff)?String.fromCodePoint(n):original;
+  }).normalize('NFKC').trim();
+}
 export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: boolean) {
-  const text=(key:string)=>typeof row[key]==='string'?String(row[key]).trim():'';
-  const number=(key:string)=>/^\d+(?:\.\d+)?$/.test(String(row[key]??''))?Number(row[key]):null;
+  const text=(key:string)=>ajesText(row[key]);
+  const number=(key:string)=>/^\d+(?:\.\d+)?$/.test(text(key))?Number(text(key)):null;
   const id=text('ID'), year=number('YEAR');
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<2010 || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));

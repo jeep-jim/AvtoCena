@@ -457,6 +457,7 @@ export function catalogMarketName(value: unknown) {
 }
 
 function inferBodyFromOffer(offer: any) {
+  if(String(offer?.id||" ").startsWith("ajes-stats-"))return "";
   const text = translateCatalogText([
     offer?.make,
     offer?.model,

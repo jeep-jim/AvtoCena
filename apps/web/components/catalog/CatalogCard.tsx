@@ -97,7 +97,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   };
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
   const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";
-  const priceLabel = o.year ? `${o.year} г.` : "Год уточняется";
+  const priceLabel = String(o.id).startsWith("ajes-stats-") ? `${o.year} г. · Торги, без доставки` : o.year ? `${o.year} г.` : "Год уточняется";
   const previewEngineCc = o.engineCc || offer.japanDeliveredPreview?.engineCc;
   const engineLabel = previewEngineCc ? `${previewEngineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
 

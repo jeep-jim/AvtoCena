@@ -116,3 +116,38 @@ test('encrypted runtime credentials can be read asynchronously without leaking i
  const client=createAjesClient({password:async()=> 'private-test-value',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{assert.equal(new URL(String(url)).searchParams.get('code'),'private-test-value');return new Response(JSON.stringify([row]));}});
  const result=await client.read({},'127.0.0.1');assert.equal(result.items.length,1);assert.ok(!JSON.stringify(result).includes('private-test-value'));
 });
+
+import {safePublicPricing} from '../apps/web/lib/catalog/safe-public-pricing';
+import {offerParameterDraft} from '../apps/web/lib/catalog/offer-parameter-draft';
+import {catalogBodyName} from '../apps/web/lib/catalog/presentation';
+const rate={currency:'JPY',cbrRate:53,nominal:100,effectiveRate:.53,rateDate:'2026-10-16',rateSource:'cbr',sourcePrice:935000,sourcePriceRub:495550} as const;
+test('supplier entities and confirmed displacement survive the actual detail safety path',()=>{
+ const lot=ajesLot({...row,MARKA_NAME:'HONDA',MODEL_NAME:'STEP WAGON',GRADE:'&#65405;&#65411;&#65391;&#65420;&#65439; WAGON SPADA',ENG_V:' 2000 ',FUEL:'P',KPP:'CVT',PRIV:'FF'},'stats',true)!;
+ const offer=ajesOffer(lot,rate,new Date().toISOString());
+ assert.equal(offer.trim,'ステップ WAGON SPADA');
+ const safe=safePublicPricing(offer);
+ assert.equal(safe.engineCc,2000);assert.equal(offerParameterDraft(safe).engineCc,'2000');
+ assert.equal(safe.fuel,'petrol');assert.equal(safe.transmission,'cvt');assert.equal(safe.drive,'fwd');
+ assert.equal(catalogBodyName(undefined,safe),'уточняется');
+ assert.equal(safe.totalRub,null);
+ const missing=ajesOffer(ajesLot({...row,ENG_V:'2000',FUEL:'',PW:'',PRIV:'FF,FULLTIME4WD'},'stats',true)!,rate,new Date().toISOString());
+ assert.equal(safePublicPricing(missing).engineCc,2000);assert.equal(missing.fuel,undefined);assert.equal(missing.powerHp,undefined);assert.equal(missing.drive,undefined);
+});
+test('persisted search works after restart for another visitor; stale fallback keeps timestamp and source controls',async()=>{
+ let saved:any=null,calls=0,enabled=true;
+ const deps={password:()=> 'test',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{},readQuery:async()=>saved,saveQuery:async(_sql:string,v:any)=>{saved=structuredClone(v);},fetcher:async()=>{calls++;return new Response(JSON.stringify([row]));}};
+ await createAjesClient(deps).read({},'203.0.113.1');
+ assert.equal((await createAjesClient(deps).read({},'203.0.113.2')).items.length,1);assert.equal(calls,1);
+ saved.observedAt=new Date(Date.now()-3600000).toISOString();const observedAt=saved.observedAt;
+ const blocked={...deps,fetcher:async(url:any)=>{assert.equal(new URL(String(url)).searchParams.get('ip'),'203.0.113.2');return new Response('bot2 secret');}};
+ const r=await createAjesClient(blocked).read({},'203.0.113.2');assert.equal(r.stale,true);assert.equal(r.observedAt,observedAt);
+ enabled=false;await assert.rejects(createAjesClient(blocked).read({},'203.0.113.2'),/disabled/);enabled=true;
+ saved.observedAt=new Date(Date.now()-8*86400000).toISOString();await assert.rejects(createAjesClient(blocked).read({},'203.0.113.2'),/visitor_restricted/);
+});
+test('storage write failure preserves successful response; wrong saved detail cannot satisfy request',async()=>{
+ const deps={password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},saveQuery:async()=>{throw Error('storage');},fetcher:async()=>new Response(JSON.stringify([row]))};
+ assert.equal((await createAjesClient(deps).read({},'127.0.0.1')).items.length,1);
+ const wrong={items:[{id:'wrong',table:'stats'}],page:1,pageSize:1,observedAt:new Date().toISOString()};
+ const client=createAjesClient({...deps,readDetail:async()=>wrong,fetcher:async()=>new Response('bot2 secret')});
+ await assert.rejects(client.read({id:'test123'},'127.0.0.1'),/visitor_restricted/);
+});
