@@ -27,7 +27,6 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <JapanSectionTabs active="auction" params={initial}/>
 
  <h1 className="flex items-center gap-3 text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl"><CatalogMarketFlag market="japan" className="h-6 w-9"/>Япония <span className="text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={result?.total??undefined}>· {formatCatalogCount(result?.total??NaN)}</span></h1>
- <p className="mt-4 text-sm text-[var(--ac-muted)]">Цены завершённых торгов — ориентир для покупки похожего автомобиля. Доставка и оформление рассчитываются в карточке.</p>
  <p role="status" className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" data-catalog-result-count={result?.total??undefined}><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{result?.total!=null?`Найдено: ${formatCatalogCount(result.total)}`:'Количество уточняется'}</p>
  <CatalogFilters initial={initial} facets={facets} resultCount={result?.total??undefined} auctionResults/>
  {makes.length>0&&<BrandLogoRail brands={makes} resultCount={result?.total??undefined}/>}
