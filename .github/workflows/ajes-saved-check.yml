@@ -41,5 +41,6 @@ jobs:
           value=subprocess.run(['docker','logs','--since','15m','--tail','400','avtocena-production'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=15).stdout.decode('utf-8','replace')
           reasons=collections.Counter(re.findall(r'\bajes_(?:visitor_restricted|invalid_response|request_failed|request_timeout|connect_timeout|quota_exhausted|invalid_query|currency_unavailable|invalid_offer)\b',value))
           classes=collections.Counter(re.findall(r'\b(TypeError|ReferenceError|SyntaxError):',value))
-          print('AJES_RUNTIME_ERRORS',json.dumps({'reasons':dict(reasons),'classes':dict(classes)}))
+          safe_types=re.findall(r"TypeError: (Cannot read properties of (?:undefined|null) \(reading '[A-Za-z_]+'\)|Cannot convert undefined or null to object|[A-Za-z_$][A-Za-z0-9_.$]* is not a function|[A-Za-z_$][A-Za-z0-9_.$]* is not iterable|fetch failed)",value)
+          print('AJES_RUNTIME_ERRORS',json.dumps({'reasons':dict(reasons),'classes':dict(classes),'safeTypeMessages':dict(collections.Counter(safe_types))}))
           PYLOG
