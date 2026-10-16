@@ -184,7 +184,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId,autoCalculate,rateRevision]);
- const estimatedPowerActive=Boolean(estimatedPowerHp && !savedCalculation && !initialScenario && Number(draft.powerHp)===estimatedPowerHp);
+ const estimatedPowerActive=Boolean(estimatedPowerHp && !savedCalculation && Number(draft.powerHp)===estimatedPowerHp);
  const deliveryQuote=quoteCityDelivery(draft.deliveryCity,deliveryMarket);
  const showCalculation=dirty || Boolean(result);
  // A seller price is not a stale delivered estimate: keep its explicit label while missing data blocks calculation.
