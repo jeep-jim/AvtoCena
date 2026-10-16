@@ -1,3 +1,4 @@
+import {AjesFilterUnavailable,AjesInputError} from '@/lib/catalog/ajes-query';
 import {readAjesCatalogPage,readAjesCount,withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { readCatalogMarketPage } from "@/lib/catalog/market-page";
 import { PUBLIC_CATALOG_MARKET_SET } from "@/lib/catalog/runtime-config";
@@ -25,7 +26,7 @@ export async function GET(request: Request) {
       const params=Object.fromEntries(p);
       const result=p.get('countOnly')==='1'?{total:await readAjesCount(JSON.stringify(params)),items:[]}:await readAjesCatalogPage(params);
       return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, no-store'}});
-    }catch{return NextResponse.json({ok:false,error:'japan_search_unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}
+    }catch(e){const invalid=e instanceof AjesInputError||e instanceof AjesFilterUnavailable;return NextResponse.json({ok:false,error:e instanceof AjesFilterUnavailable?'japan_filters_unavailable':invalid?'invalid_japan_query':'japan_search_unavailable'},{status:invalid?400:503,headers:{'Cache-Control':'no-store'}});}
   }
   const query: Parameters<typeof searchOffers>[0] = {
     city: p.get("city") || undefined,

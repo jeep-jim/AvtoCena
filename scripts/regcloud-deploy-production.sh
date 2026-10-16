@@ -91,15 +91,25 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
-for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=japan&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
+for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
   value=json.loads(b)
-  if 'market=japan' in path:assert value.get('total')==0 and value.get('items')==[]
-  else:assert value.get('total',0)>0 and len(value.get('items',[]))>0
+  assert value.get('total',0)>0 and len(value.get('items',[]))>0
  else:assert b'</html>' in b and b'$RX(' not in b and len(b)>50000
  print(json.dumps({'prepared':path,'seconds':round(time.monotonic()-t,3),'bytes':len(b)}),flush=True)
+# AJES no longer returns a fabricated empty local inventory. Verify its explicit
+# unsupported-filter contract; loopback has no real visitor IP and must not query
+# the supplier with a substituted address. Existing market/HTML gates stay above.
+try:
+ urllib.request.urlopen(base+'/api/catalog/search?market=japan&pageSize=24&sort=totalRub',timeout=30)
+ raise AssertionError('unsupported Japan delivered-price sort accepted')
+except urllib.error.HTTPError as e:
+ assert e.code==400
+ value=json.load(e)
+ assert value.get('ok') is False and value.get('error')=='japan_filters_unavailable' and 'total' not in value
+print(json.dumps({'japanUnsupportedFilter':'rejected_without_false_zero'}),flush=True)
 # Admin resource data must never leak anonymously.
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
 except urllib.error.HTTPError as e:assert e.code in [401,403]
