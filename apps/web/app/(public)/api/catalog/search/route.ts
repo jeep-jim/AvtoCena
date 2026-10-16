@@ -1,3 +1,4 @@
+import {readAjesCatalogPage,readAjesCount,withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { readCatalogMarketPage } from "@/lib/catalog/market-page";
 import { PUBLIC_CATALOG_MARKET_SET } from "@/lib/catalog/runtime-config";
 import type { CatalogMarket } from "@/lib/catalog/types";
@@ -19,6 +20,13 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
+  if(p.get('market')==='japan'&&p.get('stock')!=='green'){
+    try{
+      const params=Object.fromEntries(p);
+      const result=p.get('countOnly')==='1'?{total:await readAjesCount(JSON.stringify(params)),items:[]}:await readAjesCatalogPage(params);
+      return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, no-store'}});
+    }catch{return NextResponse.json({ok:false,error:'japan_search_unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}
+  }
   const query: Parameters<typeof searchOffers>[0] = {
     city: p.get("city") || undefined,
     market: p.get("market") || undefined,
@@ -52,7 +60,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ok:true,...result}, {headers:{"Cache-Control":"public, max-age=30, s-maxage=30", "Server-Timing":`catalog-page;dur=${(performance.now()-started).toFixed(1)}`}});
   }
   if (p.get("countOnly") === "1") {
-    const result = await countCatalogOffers(query);
+    const result = await withAjesCount(await countCatalogOffers(query),query);
     return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
   }
   const [result, facets, rateExtras] = await Promise.all([

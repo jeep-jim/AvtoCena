@@ -8,6 +8,7 @@ import {reserveAjesRequest} from './ajes-quota';
 
 export const ajesClient=createAjesClient({
   password:ajesPassword,
+  saveEvidence:(table,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${table}-last-detail.json`,value),
   // Fixed-size cache: 128 slots, at most 256 KiB each. Collisions are misses.
   readQuery:async sql=>{
     const hash=createHash('sha256').update(sql).digest('hex');

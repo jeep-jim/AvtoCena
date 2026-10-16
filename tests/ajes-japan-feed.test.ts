@@ -151,3 +151,45 @@ test('storage write failure preserves successful response; wrong saved detail ca
  const client=createAjesClient({...deps,readDetail:async()=>wrong,fetcher:async()=>new Response('bot2 secret')});
  await assert.rejects(client.read({id:'test123'},'127.0.0.1'),/visitor_restricted/);
 });
+
+
+test('count and model directory use the same bounded selection as pages; no raw SQL input',()=>{
+ const filter={make:'HONDA,TOYOTA',model:'N BOX|FIT',chassis:'JF2',lotNumber:'001234',yearFrom:2012,fuel:'petrol',drive:'awd',auctionGrade:'4|4.5'};
+ const page=ajesQuery(filter),count=ajesQuery({...filter,aggregate:'count'}),models=ajesQuery({...filter,aggregate:'models'});
+ const where=page.sql.split(' where ')[1].split(' order by ')[0];
+ assert.equal(count.sql,'select count(*) as total from stats where '+where);
+ assert.ok(models.sql.includes(where+' group by marka_name, model_name'));
+ assert.match(page.sql,/kuzov='JF2'/);assert.match(page.sql,/lot='001234'/);
+ assert.match(page.sql,/marka_name in \('HONDA','TOYOTA'\)/);
+ assert.match(ajesQuery({sort:'year'}).sql,/order by year desc/);assert.match(ajesQuery({sort:'yearAsc'}).sql,/order by year asc/);
+ for(const q of [{aggregate:'sql'},{make:"HONDA,TOYOTA'"},{fuel:"P'"},{chassis:"JF2'"},{sort:'year;drop'},{auctionGrade:"4')"}])assert.throws(()=>ajesQuery(q));
+});
+test('aggregate totals are independent of page length, survive restart and never turn a refusal into zero',async()=>{
+ let saved:any=null,calls=0;
+ const deps={password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>saved,saveQuery:async(_s:string,v:any)=>{saved=structuredClone(v);},fetcher:async()=>{calls++;return new Response(JSON.stringify([{total:'123456'}]));}};
+ const result=await createAjesClient(deps).read({aggregate:'count'},'127.0.0.1');assert.equal(result.total,123456);assert.equal(result.items.length,0);
+ assert.equal((await createAjesClient(deps).read({aggregate:'count'},'203.0.113.1')).total,123456);assert.equal(calls,1);
+ saved.observedAt=new Date(Date.now()-3600000).toISOString();
+ const stale=await createAjesClient({...deps,fetcher:async()=>new Response('bot2 secret')}).read({aggregate:'count'},'203.0.113.1');assert.equal(stale.total,123456);assert.equal(stale.stale,true);
+ saved=null;await assert.rejects(createAjesClient({...deps,fetcher:async()=>new Response('bot2 secret')}).read({aggregate:'count'},'203.0.113.1'),/visitor_restricted/);
+ for(const total of [-1,'bad',null,1.5])await assert.rejects(createAjesClient({...deps,fetcher:async()=>new Response(JSON.stringify([{total}]))}).read({aggregate:'count'},'127.0.0.1'),/invalid_response/);
+});
+test('directory preserves provider model spelling and count, not arbitrary raw rows',async()=>{
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify([{MARKA_NAME:'HONDA',MODEL_NAME:'N BOX',total:'123'}]))});
+ const result=await client.read({aggregate:'models'},'127.0.0.1');assert.deepEqual(result.models,[{make:'HONDA',model:'N BOX',total:123}]);
+});
+test('numeric supplier fields are preserved in full-detail evidence without password',async()=>{
+ let evidence:any;
+ const client=createAjesClient({password:()=> 'secret-not-in-evidence',assertEnabled:async()=>{},reserve:async()=>{},saveEvidence:async(_t,v)=>{evidence=v;},fetcher:async()=>new Response(JSON.stringify([{...row,ENG_V:660,PW:64,FUEL:'P',INFO:'PS PW'}]))});
+ const r=await client.read({id:row.ID},'127.0.0.1');assert.equal(r.items[0].sourcePower,'64');assert.equal(evidence.values.PW,64);assert.ok(!JSON.stringify(evidence).includes('secret-not-in-evidence'));
+});
+
+
+test('shared Japan query keeps chassis and leading-zero lot through a page request',async()=>{
+ const {ajesCatalogQuery,AjesFilterUnavailable}=await import('../apps/web/lib/catalog/ajes-query');
+ const input={market:'japan',chassis:'JF2',lotNumber:'001234',page:'2',engineFrom:'0.66',make:'HONDA',marketPage:'1'};
+ const q=ajesCatalogQuery(input);
+ assert.equal(q.chassis,'JF2');assert.equal(q.lotNumber,'001234');assert.equal(q.page,2);assert.equal(q.engineFrom,660);
+ const sql=ajesQuery(q).sql;assert.ok(sql.includes("kuzov='JF2'"));assert.ok(sql.includes("lot='001234'"));assert.ok(sql.endsWith('limit 24,24'));
+ assert.throws(()=>ajesCatalogQuery({...input,budget:'2000000'}),AjesFilterUnavailable);
+});

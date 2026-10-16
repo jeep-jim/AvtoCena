@@ -1,3 +1,4 @@
+import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { NextResponse } from "next/server";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { readHomeCatalogSnapshot, searchOffers } from "@/lib/catalog/storage";
@@ -34,7 +35,7 @@ export async function GET() {
     const readMs = performance.now() - started;
     const items = await applyActiveBusinessPricingBatch(rows);
     const pricingMs = performance.now() - started - readMs;
-    return NextResponse.json({ ...result, items }, {
+    return NextResponse.json({ ...await withAjesCount(result), items }, {
       headers: { "Cache-Control": "no-store, max-age=0", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` },
     });
   } catch (error) {

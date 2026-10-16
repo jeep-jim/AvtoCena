@@ -35,6 +35,7 @@ type Props = {
   initialOffers?: any[];
   initialMarketCounts?: Record<string, number>;
   initialCount?: number;
+  initialCountIncomplete?:boolean;
 };
 
 const budgets: Option[] = [
@@ -221,7 +222,7 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
+export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false }: Props) {
   const router = useRouter();
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
@@ -244,6 +245,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
         const unique = new Map<string, Item>();
         (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });
         const incomingItems = [...unique.values()];
+        setCountIncomplete(Boolean(catalogPayload?.countIncomplete));
         const incomingCounts = catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts as Record<string, number> : {};
         // A current-read-model shard can briefly lag the immutable public manifest
         // during publication. Never replace a visible market with an empty/partial
@@ -293,6 +295,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
   const marketOptions = useMemo<Option[]>(() => { if (!electricOnly) return markets; const available = new Set(availableItems.map((item) => item.market)); return [markets[0], ...markets.slice(1).filter((option) => available.has(option.value))]; }, [availableItems, electricOnly]);
   const selectedBudget = budgets.find((option) => option.value === budget) || budgets[0];
 
+  const [countIncomplete,setCountIncomplete]=useState(initialCountIncomplete);
   const countParams = new URLSearchParams();
   // Delivery changes prices, never the number of cars without a price filter.
   if (city && (selectedBudget.min || selectedBudget.max)) countParams.set("city", city);
@@ -318,7 +321,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
       <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
         <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
         <div id="form" className="ac-filter-panel relative flex min-h-0 flex-col overflow-hidden rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px] lg:overflow-visible">
-          <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{countError ? "Количество уточняется" : count === null ? "Считаем варианты" : `Нашли ${formatCatalogCount(count)} 🚗`}</span></div>
+          <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{countError || (!countParams.size&&countIncomplete) ? "Количество уточняется" : count === null ? "Считаем варианты" : `Нашли ${formatCatalogCount(count)} 🚗`}</span></div>
           <div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
           <div className="mt-2 flex flex-1 flex-col lg:mt-5">
             <h3 className="hidden text-lg font-black leading-tight md:text-xl lg:block">АвтоЦена — подбор автомобиля под ваш бюджет</h3>

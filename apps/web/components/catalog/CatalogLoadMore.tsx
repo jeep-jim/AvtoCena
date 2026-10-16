@@ -10,14 +10,14 @@ import { loadMoreCatalog } from "./catalog-load-more-action";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
 type Batch = {page: number; cards: ReactNode; count: number};
-type Saved = {batches: Batch[]; total: number; scrollY: number; savedAt: number};
+type Saved = {batches: Batch[]; total: number|null; scrollY: number; savedAt: number};
 // React nodes remain in this tab, never serialized into cookies or sent back to
 // the server. Returning from a detail page restores already fetched batches.
 const visits = new Map<string, Saved>();
 const TTL = 30 * 60_000;
 
-export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery}: {
-  greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number; initialCount: number; initialCards: ReactNode;
+export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery, initialHasMore}: {
+  initialHasMore?:boolean; greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number|null; initialCount: number; initialCards: ReactNode;
 }) {
   const dealer=useDealerBrowsing();
   const green = greenQuery !== undefined;
@@ -70,7 +70,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   const count = batches.reduce((sum, batch) => sum + batch.count, 0);
   const page = batches[batches.length - 1].page;
   fallbackQuery.set("page", String(page + 1));
-  const pageCount = Math.ceil(total / 24);
+  const pageCount = total===null ? page+(batches.length===1 ? (initialHasMore?1:0) : (batches.at(-1)!.count===24?1:0)) : Math.ceil(total / 24);
   const windowStart = Math.max(1, Math.min(page - 3, pageCount - 7));
   const numberedPages = [...new Set([1, ...Array.from({length:8},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
   function pageHref(target: number) {
@@ -78,7 +78,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     params.set("page", String(target));
     return dealerBrowsingHref(`${basePath}?${params}`,dealer);
   }
-  const more = page * 24 < total && batches[batches.length - 1].count > 0;
+  const more = total===null ? page<pageCount : page * 24 < total && batches[batches.length - 1].count > 0;
   function prepareNext() {
     if (prepared.current?.key === key && prepared.current.page === page + 1 && Date.now()-prepared.current.at<60_000) return prepared.current.promise;
     const promise = green ? loadMoreGreenCorner(greenQuery, page + 1) : loadMoreCatalog(query, page + 1);
@@ -88,7 +88,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     return promise;
   }
   useEffect(()=>{
-    if(!more)return;
+    if(!more||query.market==='japan')return;
     // Prepare one batch while the visitor reads the visible cars. Do not
     // recursively prefetch the catalogue, or append until explicitly asked.
     const connection=(navigator as Navigator & {connection?:{saveData?:boolean;effectiveType?:string}}).connection;
@@ -111,7 +111,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   return <div ref={list}>
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3 md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)]">
-      <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} из {total.toLocaleString("ru-RU")}</p>
+      <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {total!==null?`из ${total.toLocaleString("ru-RU")}`:""}</p>
       {pageCount > 1 ? <nav aria-label="Страницы каталога" className="ac-pagination">
         {page > 1 ? <a href={pageHref(page-1)} aria-label="Предыдущая страница"><ChevronLeft size={20}/></a> : <span aria-disabled="true"><ChevronLeft size={20}/></span>}
         {numberedPages.map((number,index)=><Fragment key={number}>
@@ -120,7 +120,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
         </Fragment>)}
         {page < pageCount ? <a href={pageHref(page+1)} aria-label="Следующая страница"><ChevronRight size={20}/></a> : <span aria-disabled="true"><ChevronRight size={20}/></span>}
       </nav> : null}
-      {more ? <a href={dealerBrowsingHref(`${basePath}?${fallbackQuery}`,dealer)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label" role="status">Загружаем варианты</span></> : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
+      {more ? <a href={dealerBrowsingHref(`${basePath}?${fallbackQuery}`,dealer)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label" role="status">Загружаем варианты</span></> : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">{total===null?"На этой странице больше предложений нет":"Вы посмотрели все предложения"}</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
   </div>;

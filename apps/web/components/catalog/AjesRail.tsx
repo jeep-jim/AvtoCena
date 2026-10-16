@@ -1,4 +1,6 @@
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
+import {readAjesCount} from '@/lib/catalog/ajes-catalog';
+import {formatCatalogCount} from '@/lib/catalog/count-format';
 import {readAjesPublic} from '@/lib/catalog/ajes-public';
 import {assertCollectionEnabled} from '@/lib/catalog/collection-controls';
 import {publicOffer} from '@/lib/catalog/storage';
@@ -7,11 +9,13 @@ import {CatalogMarketFlag} from './CatalogMarketFlag';
 
 export async function AjesRail(){
  try{await assertCollectionEnabled('ajes_japan_feed');}catch{return null;}
+ const totalPromise=readAjesCount().catch(()=>null);
  let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false;
  try{items=(await readAjesPublic({table:'stats',pageSize:24})).items.slice(0,10);}catch{unavailable=true;}
+ const total=await totalPromise;
  return <section aria-label="Аукционы Японии" className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
-   <h2 className="flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market="japan" className="h-5 w-7 md:h-6 md:w-9"/><span>Япония · Аукционы</span></h2>
+   <h2 className="flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market="japan" className="h-5 w-7 md:h-6 md:w-9"/><span>Япония</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={total??undefined}>· {formatCatalogCount(total??NaN)}</span></h2>
    <Link href="/cars?market=japan" className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
   <p className="mb-4 text-sm text-[var(--ac-muted)]">Результаты завершённых торгов. Автомобили уже проданы; цены помогут оценить похожую покупку. Доставка и оформление рассчитываются отдельно.</p>

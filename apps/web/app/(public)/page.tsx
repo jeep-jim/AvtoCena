@@ -1,3 +1,4 @@
+import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import {Suspense} from 'react';
 import {AjesRail} from '@/components/catalog/AjesRail';
 import {WEBSITE_SCHEMA} from '@/lib/catalog/search-metadata';
@@ -50,9 +51,9 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
   const [catalog, green, dealerData] = await Promise.all([
-    readHomeCatalogSnapshot(10).catch((error) => {
+    readHomeCatalogSnapshot(10).then(value=>withAjesCount(value)).catch((error) => {
       console.error("home_initial_catalog_failed", error);
-      return { items: [], marketCounts: {}, total: 0 };
+      return { items: [], marketCounts: {}, total: 0, countIncomplete:true };
     }),
     readGreenCorner().catch(() => null),
     readShowcase("dealer_topavto").then(async dealer => ({
@@ -82,6 +83,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
         initialOffers={pricedItems}
         initialMarketCounts={catalog.marketCounts}
         initialCount={catalog.total}
+        initialCountIncomplete={catalog.countIncomplete}
       />
     </div>
     <style dangerouslySetInnerHTML={{ __html: "@media (min-width:1024px){.ac-budget-help{display:none!important}}" }} />

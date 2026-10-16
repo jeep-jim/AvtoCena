@@ -1,3 +1,4 @@
+import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import {AjesCatalog} from './AjesCatalog';
 import {AjesRail} from './AjesRail';
 import {Suspense} from 'react';
@@ -145,7 +146,9 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     facets.models=[...models.values()];
   }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || (market.id === "japan" && overviewEligible));
-  const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0) + (japanAll ? greenMatched.length : 0);
+  const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + (japanAll ? greenMatched.length : 0);
+  const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?await withAjesCount({total:localTotal}):{total:localTotal,countIncomplete:false};
+  const {total,countIncomplete}=countSummary;
 
   const initialKeys = ["stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
@@ -189,14 +192,14 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
         </nav>
         {!selectedMarket&&(!dealer||dealer.markets.includes('japan'))&&<p className="mb-4"><Link href="/cars?market=japan" className="text-sm underline">Аукционы Японии · результаты торгов →</Link></p>}
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
-        <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
+        <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
       </div>
-      <p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={total}>
+      <p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={countIncomplete?undefined:total}>
         <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span>
-        <span>Найдено: <span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></span>
+        <span>{countIncomplete?"Количество уточняется":<>Найдено: <span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></>}</span>
       </p>
-      <CatalogFilters initial={initial} facets={facets} resultCount={total} />
-      <div className="hidden lg:block"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
+      <CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />
+      <div className="hidden lg:block"><BrandLogoRail brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
       <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => market.id === "japan" ? (overviewEligible ? <div key="japan" className="min-w-0"><Suspense fallback={null}><AjesRail /></Suspense><GreenCornerRail items={greenItems} total={greenMatched.length} /></div> : null) : <div key={market.id} className="min-w-0"><section><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-5 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Подходящих предложений сейчас нет.</div>}</section></div>)}</div>
       <CurrencyRatesStrip variant="mobile" className="mt-8 lg:hidden" />
     </section>

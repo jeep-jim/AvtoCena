@@ -152,6 +152,7 @@ export function VehicleModelSearch({
   required = false,
   multiple = false,
   contextQuery,
+  sourceItems,
 }: {
   value: string;
   make: string;
@@ -165,6 +166,7 @@ export function VehicleModelSearch({
   required?: boolean;
   multiple?: boolean;
   contextQuery?: string;
+  sourceItems?:ModelSuggestion[];
 }) {
   const [query, setQuery] = useState(multiple ? value.split("|").filter(Boolean).join(", ") : value || "");
   const [remoteItems, setItems] = useState<ModelSuggestion[]>([]);
@@ -174,7 +176,7 @@ export function VehicleModelSearch({
   const [inventoryLoading,setInventoryLoading]=useState(false);
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
-  const items=useMemo(()=>contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[contextual,inventory,directory,searchQuery,make,remoteItems]);
+  const items=useMemo(()=>sourceItems?sourceItems.filter(v=>(!make||make.split(',').some(m=>compact(m)===compact(v.make)))&&(!searchQuery||compact(v.model).includes(compact(searchQuery)))).slice(0,50):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[sourceItems,contextual,inventory,directory,searchQuery,make,remoteItems]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -206,27 +208,27 @@ export function VehicleModelSearch({
   }, [open]);
 
   useEffect(()=>{
-    if(!contextual||!open||directory)return;
+    if(sourceItems||!contextual||!open||directory)return;
     let cancelled=false;setLoading(true);setDirectoryError(false);
     loadModelSuggestions().then(search=>{if(!cancelled){setLoading(false);setDirectory(()=>search);}}).catch(()=>{if(!cancelled)setDirectoryError(true);}).finally(()=>{if(!cancelled)setLoading(false);});
     return()=>{cancelled=true;};
-  },[contextual,open,directory,retry]);
+  },[sourceItems,contextual,open,directory,retry]);
 
   useEffect(()=>{
-    if(!contextual||!open)return;
+    if(sourceItems||!contextual||!open)return;
     let cancelled=false;setInventoryLoading(true);setInventoryError(false);
     loadModelSuggestions(true).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
       .catch(()=>{if(!cancelled)setInventoryError(true);})
       .finally(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
-  },[contextual,open,retry]);
+  },[sourceItems,contextual,open,retry]);
   const searching = loading || (contextual && inventoryLoading);
   const suggestionError = directoryError || inventoryError;
 
   const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
   const canSearch = Boolean(clean(make) || compact(searchQuery).length >= 2);
   useEffect(() => {
-    if(contextual)return;
+    if(sourceItems||contextual)return;
     if (!open || !canSearch) {
       setItems([]);
       setLoading(false);
@@ -251,7 +253,7 @@ export function VehicleModelSearch({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [canSearch, make, open, searchQuery, contextual]);
+  }, [sourceItems, canSearch, make, open, searchQuery, contextual]);
 
   const exact = useMemo(() => {
     const requested = compact(searchQuery);

@@ -4,7 +4,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:16*1024*1024,ttlMs:30*60*1000,concurrency:2});
   return {
@@ -22,7 +22,7 @@ export function createAjesClient(deps:Dependencies) {
         const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
           &&saved.page===query.page&&saved.pageSize===query.pageSize
-          &&saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string')
+          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
         if(usable&&age<30*60*1000)return {...saved,stale:false};
         const url=new URL('http://87.242.72.57/gzip/');
@@ -51,9 +51,23 @@ export function createAjesClient(deps:Dependencies) {
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
+          if(query.kind==='count'||query.kind==='models'){
+            const totalOf=(r:any)=>{const value=r.total??r.TOTAL??r['count(*)'];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
+            if(query.kind==='count'&&rows.length!==1)throw new AjesUnavailable('invalid_response');
+            if(query.kind==='models'&&rows.length===query.pageSize)throw new AjesUnavailable('directory_too_large');
+            const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})).filter(r=>r.make&&r.model):undefined;
+            const result={items:[],models,total:query.kind==='count'?totalOf(rows[0]):undefined,page:1,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
+            try{await deps.saveQuery?.(query.sql,result);}catch{}
+            return result;
+          }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
           const result={stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
+          if(query.kind==='detail'&&items.length===1&&deps.saveEvidence){
+            const row=rows[0];
+            const evidence={id:query.id,observedAt:result.observedAt,fields:Object.keys(row),values:Object.fromEntries(['ENG_V','PW','FUEL','PRIV','KPP','INFO'].map(key=>[key,row[key]??null]))};
+            try{if(Buffer.byteLength(JSON.stringify(evidence))<=64*1024)await deps.saveEvidence(query.table,evidence);}catch{}
+          }
           // A cache storage outage must not discard a successful provider response.
           try {
             if(query.kind==='detail'&&items.length===1)await deps.saveDetail?.(query.table,query.id!,result);
@@ -64,7 +78,7 @@ export function createAjesClient(deps:Dependencies) {
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
           const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
-          if(usable&&saved.items.length>0&&recoverable){await deps.assertEnabled();return {...saved,stale:true};}
+          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models')&&recoverable){await deps.assertEnabled();return {...saved,stale:true};}
           if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';

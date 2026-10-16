@@ -24,7 +24,7 @@ export function useHomeCatalogCount(query: string, catalogTotal: number | null) 
         const response = await fetch(`/api/catalog/search?countOnly=1&${query}`, {signal: controller.signal});
         if (!response.ok) throw new Error("catalog_count_failed");
         const data = await response.json();
-        if (data?.ok === false || typeof data?.total !== "number" || !Number.isSafeInteger(data.total) || data.total < 0) throw new Error("catalog_count_invalid");
+        if (data?.countIncomplete || data?.ok === false || typeof data?.total !== "number" || !Number.isSafeInteger(data.total) || data.total < 0) throw new Error("catalog_count_invalid");
         if (active && !controller.signal.aborted) setResult({query, count: data.total, error: false});
       } catch {
         if (active && !controller.signal.aborted) setResult({query, count: null, error: true});

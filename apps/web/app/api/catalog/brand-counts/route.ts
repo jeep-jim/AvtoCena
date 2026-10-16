@@ -1,3 +1,4 @@
+import {readAjesDirectory} from '@/lib/catalog/ajes-catalog';
 import { cookies } from "next/headers";
 import { currentGreenCornerPrices, readGreenCorner } from "@/lib/catalog/green-corner";
 import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
@@ -26,6 +27,14 @@ export async function GET(request: Request) {
     const counts:Record<string,number>={},models=new Map<string,Set<string>>();
     for(const row of rows){counts[row.make]=(counts[row.make]||0)+1;const set=models.get(row.make)||new Set<string>();set.add(row.model);models.set(row.make,set);}
     return NextResponse.json({generationId:snapshot.updatedAt,counts,modelCounts:Object.fromEntries([...models].map(([make,set])=>[make,set.size]))});
+  }
+  if(url.searchParams.get('market')==='japan'){
+    try{
+      const params={...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
+      const result=await readAjesDirectory(params),counts:Record<string,number>={},modelCounts:Record<string,number>={};
+      for(const row of result.models){counts[row.make]=(counts[row.make]||0)+row.total;modelCounts[row.make]=(modelCounts[row.make]||0)+1;}
+      return NextResponse.json({generationId:result.observedAt,counts,modelCounts},{headers:{'Cache-Control':'private, no-store'}});
+    }catch{return NextResponse.json({error:'japan_counts_unavailable'},{status:503});}
   }
   const params: CatalogSearchParams = {
     market: text(url, "market"), city: text(url,"city"),
