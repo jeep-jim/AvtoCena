@@ -6,7 +6,7 @@ async function main(){
  for(let start=0;start<128;start+=8){
   const slots=await Promise.all(Array.from({length:8},(_,n)=>store.readJson('catalog/partner-cache/ajes/queries/'+(start+n)+'.json',null).catch(()=>null)));
   for(const slot of slots as any[])for(const lot of slot?.value?.items||[]){
-   if(/^MAZDA$/i.test(lot.make||'')&&/^CX[- ]?8$/i.test(lot.model||'')&&lot.year===2021&&lot.finalPriceJpy===1305000)found.set(lot.id,{...lot,savedAt:slot.value.observedAt,schemaVersion:slot.value.schemaVersion,sourceEvidence:slot.value.sourceEvidenceById?.[lot.id]});
+   if(/^MAZDA$/i.test(lot.make||'')&&/^CX[- ]?8$/i.test(lot.model||'')&&lot.year===2021&&lot.finalPriceJpy===1305000&&(!found.has(lot.id)||Date.parse(slot.value.observedAt)>=Date.parse(found.get(lot.id).savedAt)))found.set(lot.id,{...lot,savedAt:slot.value.observedAt,schemaVersion:slot.value.schemaVersion,sourceEvidence:slot.value.sourceEvidenceById?.[lot.id]});
   }
  }
  console.log('AJES_MATCHES',found.size);
