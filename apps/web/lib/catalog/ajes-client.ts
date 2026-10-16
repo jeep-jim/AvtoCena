@@ -67,10 +67,19 @@ export function createAjesClient(deps:Dependencies) {
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
           const result={schemaVersion:2,stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
-          if(query.kind==='detail'&&items.length===1&&deps.saveEvidence){
+          if(query.kind==='detail'&&items.length===1){
             const row=rows[0];
             const evidence={id:query.id,observedAt:result.observedAt,fields:Object.keys(row),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL','PRIV','KPP','INFO'].map(key=>[key,row[key]??null]))};
-            try{if(Buffer.byteLength(JSON.stringify(evidence))<=64*1024)await deps.saveEvidence(query.table,evidence);}catch{}
+            // Retain a bounded, identity-bound diagnostic alongside this exact detail.
+            // No visitor IP, request URL, password, INFO or frame number is copied.
+            const sourceEvidence={id:query.id,observedAt:result.observedAt,fields:['ENG_V','PW','TIME','FUEL'].filter(key=>Object.prototype.hasOwnProperty.call(row,key)),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL'].map(key=>[key,row[key]??null]))};
+            if(Buffer.byteLength(JSON.stringify(sourceEvidence))<=4096)(result as any).sourceEvidence=sourceEvidence;
+            try{if(Buffer.byteLength(JSON.stringify(evidence))<=64*1024)await deps.saveEvidence?.(query.table,evidence);}catch{}
+          }
+          if(query.kind==='list'){
+            const accepted=new Set(items.map((lot:any)=>lot.id));
+            const sourceEvidenceById=Object.fromEntries(rows.filter(row=>accepted.has(row.ID)).map(row=>[row.ID,{id:row.ID,observedAt:result.observedAt,fields:['ENG_V','PW','TIME','FUEL'].filter(key=>Object.prototype.hasOwnProperty.call(row,key)),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL'].map(key=>[key,row[key]??null]))}]));
+            if(Buffer.byteLength(JSON.stringify(sourceEvidenceById))<=32*1024)(result as any).sourceEvidenceById=sourceEvidenceById;
           }
           // A cache storage outage must not discard a successful provider response.
           try {

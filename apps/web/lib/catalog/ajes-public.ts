@@ -23,6 +23,7 @@ export async function readAjesPublic(query:AjesQuery){
   const offer=ajesOffer(lot,rate,result.observedAt);
   return editorialHidden(offer,index)?null:applyCatalogEditorial(offer,index);
  }));
- return {...result,items:items.filter(offer=>offer&&!catalogHeavyVehicleExcluded(offer))};
+ const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;
+ return {...publicResult,items:items.filter(offer=>offer&&!catalogHeavyVehicleExcluded(offer))};
 }
 export async function getAjesOffer(id:string){if(!ajesOfferId(id))return null;const result=await readAjesPublic({table:'stats',id:id.slice('ajes-stats-'.length)});return result.items[0]||null;}

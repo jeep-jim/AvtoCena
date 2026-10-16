@@ -342,3 +342,25 @@ test('Japan first-PW draft computes a delivered estimate through the real custom
   if(result.ok){assert.ok(result.calculation.totalRub>offer.sellerPriceRub!);assert.ok(result.calculation.breakdown.length>1);}
  }finally{patch.mock.restore();resetCatalogRateCache();}
 });
+
+
+test('exact detail retains its own original specifications after another lot overwrites the last snapshot',async()=>{
+ const saved=new Map<string,any>();let last:any;
+ const client=createAjesClient({password:()=> 'never-store-this-password',assertEnabled:async()=>{},reserve:async()=>{},saveDetail:async(_t,id,v)=>{saved.set(id,structuredClone(v));},saveEvidence:async(_t,v)=>{last=v;},fetcher:async input=>{
+  const id=new URL(String(input)).searchParams.get('sql')!.includes("'second'")?'second':row.ID;
+  return new Response(JSON.stringify([{...row,ID:id,TIME:id==='second'?'P':'',PW:id==='second'?'91':'',SERIAL:'private-frame',INFO:'private-info'}]));
+ }});
+ await client.read({table:'stats',id:row.ID},'127.0.0.1');await client.read({table:'stats',id:'second'},'127.0.0.1');
+ assert.equal(last.id,'second');
+ const evidence=saved.get(row.ID).sourceEvidence;
+ assert.equal(evidence.id,row.ID);assert.equal(evidence.values.TIME,'');assert.equal(evidence.values.PW,'');assert.ok(evidence.fields.includes('TIME'));assert.ok(!evidence.fields.includes('FUEL'));
+ for(const secret of ['never-store-this-password','127.0.0.1','private-frame','private-info'])assert.ok(!JSON.stringify(evidence).includes(secret));
+ assert.equal(saved.get('second').sourceEvidence.values.PW,'91');
+});
+
+test('list diagnostics preserve exact empty and numeric source parameters per accepted id',async()=>{
+ let saved:any;
+ const client=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},saveQuery:async(_s,v)=>{saved=v;},fetcher:async()=>new Response(JSON.stringify([{...row,TIME:'',PW:''},{...row,ID:'other',TIME:'D',PW:200}]))});
+ await client.read({table:'stats'},'127.0.0.1');
+ assert.equal(saved.sourceEvidenceById[row.ID].values.TIME,'');assert.equal(saved.sourceEvidenceById.other.values.PW,200);
+});
