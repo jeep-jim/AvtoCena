@@ -16,11 +16,11 @@ jobs:
           script: |
             const repo = {owner: context.repo.owner, repo: context.repo.repo};
             const target = '8c4a9609a52743545a7a149c7a03b11481b13233';
-            for (let pass=0; pass<3; pass++) {
+            for (let pass=0; pass<1; pass++) {
               const runs = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {...repo, head_sha: target, per_page: 100});
               for (const run of runs) {
                 if (run.head_sha !== target || run.status === 'completed') continue;
-                try { await github.rest.actions.cancelWorkflowRun({...repo, run_id: run.id}); core.info('Cancelled '+run.id+' '+run.name); }
+                try { await github.rest.actions.forceCancelWorkflowRun({...repo, run_id: run.id}); core.info('Cancelled '+run.id+' '+run.name); }
                 catch (error) { if (![409,422].includes(error.status)) throw error; }
               }
               if (pass<2) await new Promise(resolve=>setTimeout(resolve,10000));
