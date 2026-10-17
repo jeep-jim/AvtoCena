@@ -60,6 +60,8 @@ try {
    assert.equal(await button.getAttribute('aria-pressed'),'true');
    assert.equal(await button.evaluate(el=>el.scrollWidth<=el.clientWidth),true,'sort label fits its button');
    assert.equal(await scope.locator('input[name="sort"]').inputValue(),value);
+   // The active background transitions for 160 ms; assert the settled style.
+   await page.waitForFunction(()=>[...document.querySelectorAll('.ac-sort-control button[aria-pressed="true"]')].every(el=>getComputedStyle(el).backgroundColor==='rgb(255, 53, 61)'),null,{timeout:5000});
    assert.equal(await button.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
    assert.equal(await scope.locator('.ac-sort-control button[aria-pressed="true"]').count(),1);
   }

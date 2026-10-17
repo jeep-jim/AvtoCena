@@ -1,1 +1,0 @@
-export const MAX_MANUAL_OFFER_PHOTOS = 50;
