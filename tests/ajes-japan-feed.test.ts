@@ -587,3 +587,19 @@ test('standalone and whitespace-prefixed provider bot refusals activate visitor 
   assert.equal(calls,1);
  }
 });
+
+test('2008 expansion retains older SQL rows as partial without copying an old total',async()=>{
+ const {readExpandedJapanRows}=await import('../apps/web/lib/catalog/ajes-query-cache');
+ const current='select * from stats where year>=2008 order by auction_date desc, id asc';
+ const previous='select * from stats where year>=2008 order by auction_date desc';
+ const old=previous.replace('2008','2010');
+ const reads:string[]=[];
+ const saved={items:[{id:'known-2012',year:2012}],observedAt:new Date().toISOString()};
+ const read=async(sql:string)=>{reads.push(sql);return sql===old?saved:null;};
+ const result=await readExpandedJapanRows(current,previous,read);
+ assert.deepEqual(result,{...saved,partial:true});
+ assert.equal(reads.length,2);
+ reads.length=0;
+ assert.equal(await readExpandedJapanRows('select count(*) from stats where year>=2008','select count(*) from stats where year>=2008',read),null);
+ assert.equal(reads.length,0);
+});

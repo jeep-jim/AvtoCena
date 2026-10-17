@@ -25,3 +25,11 @@ export async function saveAjesQueryCache(storage:Store,sql:string,value:unknown)
  const {hash,key}=ajesQueryCacheLocation(sql),saved={hash,value};
  if(Buffer.byteLength(JSON.stringify(saved))<=256*1024)await storage.writeJson(key,saved);
 }
+
+/** Carry old row selections through both age expansion and prior SQL compatibility. Counts never qualify. */
+export async function readExpandedJapanRows(sql:string,previous:string,read:(sql:string)=>Promise<any|null>){
+ if(!sql.startsWith('select * from')||!sql.includes('year>=2008'))return null;
+ const candidates=[sql,previous].map(s=>s.replace('year>=2008','year>=2010'));
+ for(const key of new Set(candidates)){const value=await read(key);if(value)return {...value,partial:true};}
+ return null;
+}

@@ -1,5 +1,5 @@
 import 'server-only';
-import {readAjesQueryCache,saveAjesQueryCache} from './ajes-query-cache';
+import {readAjesQueryCache,readExpandedJapanRows,saveAjesQueryCache} from './ajes-query-cache';
 import {ajesPassword} from './ajes-settings';
 import {getJsonStorage} from '../data';
 import {assertCollectionEnabled} from './collection-controls';
@@ -46,10 +46,7 @@ export const ajesClient=createAjesClient({
     let saved=previous!==sql?await read(previous):null;
     // Older lists remain useful as partial results when broadening Japan to 2008.
     // Never carry their narrower count/model aggregates into the expanded query.
-    if(!saved&&sql.includes('year>=2008')){
-      const narrower=await read(sql.replace('year>=2008','year>=2010'));
-      if(narrower)saved={...narrower,partial:true};
-    }
+    if(!saved)saved=await readExpandedJapanRows(sql,previous,read);
     return saved?{...saved,schemaVersion:0}:null;
   },
   saveQuery:(sql,value)=>saveAjesQueryCache(getJsonStorage(),sql,value),
