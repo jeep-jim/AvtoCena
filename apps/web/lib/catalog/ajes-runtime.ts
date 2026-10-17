@@ -43,7 +43,13 @@ export const ajesClient=createAjesClient({
     // Carry only rows across this selection fix, never an inaccurate old count.
     if(!sql.startsWith('select * from'))return null;
     const previous=sql.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(true)).replace("auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc",'auction_date desc');
-    const saved=previous!==sql?await read(previous):null;
+    let saved=previous!==sql?await read(previous):null;
+    // Older lists remain useful as partial results when broadening Japan to 2008.
+    // Never carry their narrower count/model aggregates into the expanded query.
+    if(!saved&&sql.includes('year>=2008')){
+      const narrower=await read(sql.replace('year>=2008','year>=2010'));
+      if(narrower)saved={...narrower,partial:true};
+    }
     return saved?{...saved,schemaVersion:0}:null;
   },
   saveQuery:(sql,value)=>saveAjesQueryCache(getJsonStorage(),sql,value),

@@ -1,5 +1,6 @@
 'use client';
 import {AjesConnectionSettings} from './AjesConnectionSettings';
+import {AjesMarketConnectionSettings} from './AjesMarketConnectionSettings';
 import {useEffect,useState} from 'react';
 import {COLLECTION_MARKETS,COLLECTION_SOURCES,COLLECTION_WORKFLOWS,collectionEnabled,type CollectionControls as Controls,type CollectionSwitch} from '@/lib/catalog/collection-controls-schema';
 const date=(value:string|null)=>value?new Date(value).toLocaleString('ru-RU',{timeZone:'Asia/Krasnoyarsk'}):'Переключений ещё не было';
@@ -26,10 +27,11 @@ export function CollectionControls(){
         {!data.markets[m.id].enabled&&<p className="mt-2 text-sm">Сбор всего рынка остановлен. Выбор отдельных источников сохранён.</p>}{dates(data.markets[m.id])}
         <p className="mt-2 text-xs"><a className="underline" href={`https://github.com/jeep-jim/AvtoCena/actions/workflows/${COLLECTION_WORKFLOWS[m.id]}`} target="_blank" rel="noreferrer">Открыть ручной запуск в GitHub</a>{m.id==='japan'&&<> · <a className="underline" href="https://github.com/jeep-jim/AvtoCena/actions/workflows/catalog-refresh-green.yml" target="_blank" rel="noreferrer">Зелёный угол</a></>}</p>
         {m.id==='japan'&&<AjesConnectionSettings/>}
+        {(m.id==='china'||m.id==='korea')&&<AjesMarketConnectionSettings market={m.id}/>}
         <div className="mt-3 divide-y divide-[var(--ac-border)]">{COLLECTION_SOURCES.filter(s=>s.market===m.id).map(s=><div key={s.id} className="py-3">
           <div className="flex items-start justify-between gap-2"><strong className="text-sm">{s.label}</strong>{button('source',s.id,data.sources[s.id],s.label)}</div>
-          <p className="mt-1 text-xs">{collectionEnabled(data,s.id)?'Сбор разрешён':data.sources[s.id].enabled?'Остановлен выключателем рынка':'Сбор выключен'}</p>
-          {s.id!=='ajes_japan_feed'&&!s.defaultEnabled&&!data.sources[s.id].disabledAt&&!data.sources[s.id].enabledAt&&<p className="mt-1 text-xs">Выключен по решению владельца от 10.10.2026.</p>}
+          <p className="mt-1 text-xs">{collectionEnabled(data,s.id)?['ajes_china_feed','ajes_korea_feed'].includes(s.id)?'Проверка данных разрешена · публикация не подключена':'Сбор разрешён':data.sources[s.id].enabled?'Остановлен выключателем рынка':'Сбор выключен'}</p>
+          {!s.id.startsWith('ajes_')&&!s.defaultEnabled&&!data.sources[s.id].disabledAt&&!data.sources[s.id].enabledAt&&<p className="mt-1 text-xs">Выключен по решению владельца от 10.10.2026.</p>}
           <details className="mt-2 text-sm"><summary className="cursor-pointer underline">Источник, частота и настройки</summary><div className="mt-2 space-y-2"><p>{s.description}</p><a className="break-all underline" href={s.url} target="_blank" rel="noreferrer">{s.url}</a><p>{s.frequency}. Плановое время может сдвигаться.</p><p>{s.settings}</p>{dates(data.sources[s.id])}<p className="text-xs text-[var(--ac-muted)]">Ограничения безопасности, проверки цены и сроки актуальности сохраняются при включении.</p></div></details>
         </div>)}</div>
       </section>)}</div>}

@@ -29,5 +29,5 @@ test('model-only and Cyrillic Vito resolve the specific model instead of a gener
  const models=[{id:'generic',make:'Mercedes-Benz',model:'Mercedes'},{id:'vito',make:'Mercedes-Benz',model:'Vito'},{id:'sprinter',make:'Mercedes-Benz',model:'Sprinter'}];
  for(const query of ['Vito','Вито','Mercedes Vito','Mercedes-Benz Vito'])assert.deepEqual(matchingKnowledgeModels(models,query).map(m=>m.id),['vito']);
  assert.deepEqual(matchingKnowledgeModels(models,'Vito','Mercedes-Benz').map(m=>m.id),['vito']);
- assert.equal(knowledgeDraft({year:2009}).year,undefined);
+ assert.equal(knowledgeDraft({year:2007}).year,undefined);
 });

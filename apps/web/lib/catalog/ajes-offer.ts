@@ -1,10 +1,11 @@
+import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import type {VehicleOffer} from './types';
 import type {CurrencyRateSnapshot} from './rates';
 import type {ajesLot} from './ajes-query';
 import {ajesText} from './ajes-query';
 export const ajesOfferId=(id:string)=>/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id);
 export function ajesOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:CurrencyRateSnapshot,observedAt:string):VehicleOffer {
- if(lot.table!=='stats'||!lot.finalPriceJpy||lot.year<2010||!['cbr','cbr_live'].includes(rate.rateSource)||rate.currency!=='JPY'||rate.sourcePrice!==lot.finalPriceJpy||!(rate.effectiveRate>0))throw Error('ajes_invalid_offer');
+ if(lot.table!=='stats'||!lot.finalPriceJpy||lot.year<JAPAN_MIN_MODEL_YEAR||!['cbr','cbr_live'].includes(rate.rateSource)||rate.currency!=='JPY'||rate.sourcePrice!==lot.finalPriceJpy||!(rate.effectiveRate>0))throw Error('ajes_invalid_offer');
  const fuel=({P:'petrol',D:'diesel',E:'electric',H:'hybrid',HE:'hybrid',L:'lpg',C:'cng'} as Record<string,string>)[ajesText(lot.sourceFuel).toUpperCase()];
  const sellerPriceRub=Math.round(lot.finalPriceJpy*rate.effectiveRate);
  return {id:`ajes-stats-${lot.id}`,sourceId:'ajes_japan_feed',sourceOfferId:lot.id,market:'japan',offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'published_result',

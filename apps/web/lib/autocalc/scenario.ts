@@ -11,7 +11,7 @@ export function autocalcScenario(body:any) {
   const title=String(body.title||'').trim().slice(0,180);if(!title)throw Error('Укажите название автомобиля');
   const draft={...body.draft,deliveryCity:String(body.city||'').trim()};if(!draft.deliveryCity)throw Error('Выберите город доставки');
   if (!["M1","N1"].includes(draft.vehicleCategory)) throw Error("Выберите категорию автомобиля по документам: M1 или N1");
-  if(Number(draft.year)<PUBLIC_MIN_VEHICLE_YEAR)throw Error("АвтоРасчёт доступен для автомобилей от 2010 года");
+  if(Number(draft.year)<PUBLIC_MIN_VEHICLE_YEAR)throw Error("АвтоРасчёт доступен для автомобилей от 2008 года");
   const parameters=validateCustomerParameters(draft);
   const identity=splitAutoCalcIdentity(title);
   const now=new Date().toISOString();

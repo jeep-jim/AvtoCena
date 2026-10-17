@@ -17,8 +17,8 @@ test('all non-Japan markets expire by exact day, source month or year without in
  assert.equal(age(row,now).eligible,true);
  assert.equal(age(row,new Date('2026-12-31T17:00:00Z')).eligible,false);
  }
- assert.equal(age({market:'japan',year:2010},now).eligible,true);
- assert.equal(age({market:'japan',year:2009},now).eligible,false);
+ assert.equal(age({market:'japan',year:2008},now).eligible,true);
+ assert.equal(age({market:'japan',year:2007},now).eligible,false);
 });
 test('heavy commercial scope uses gross mass, keeps light trucks and missing editable mass',()=>{
  assert.equal(heavy({bodyType:'truck',grossVehicleWeightKg:3500}),false);

@@ -17,7 +17,7 @@ const rate=await convertToRub(1,'JPY');
 const now=new Date().toISOString();
 const previousById=new Map((baseline.value?.items||[]).map(row=>[row.id,row]));
 const normalized=source.items.map(row=>{const offer=normalizeGreenCorner({...row,...terms},rate,now);return {...offer,firstSeenAt:previousById.get(offer.id)?.firstSeenAt||now};});
-// Price affects presentation only; Japan inventory starts at 2010.
+// Price affects presentation only; Japan inventory starts at 2008 (owner update 17.10.2026).
 const items=normalized.filter(row=>catalogInventoryAgeDecision(row).eligible&&!catalogHeavyVehicleExcluded(row)).sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
 assertGreenPublication(baseline.value?.items?.length||0,items.length,source.total);
 const snapshot={version:1,updatedAt:now,sourceCount:source.total,invoiceTerms:terms,items};

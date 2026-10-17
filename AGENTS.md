@@ -44,3 +44,6 @@
 - When implementing an identified CRM idea at the owner's request, include `ideaReports: [{number, text}]` in that release's `.github/market-runs/regcloud-deploy.json`. Keep the Russian comment brief: what was wrong, what changed, any remaining limitation. No credentials or customer data in this public marker.
 - The production deployment publishes these comments only after its successful activation checks, using the display-only GPT service profile. It does not grant login credentials or CRM permissions. Do not impersonate an employee.
 - Report only verified scope; never mark the whole idea complete when part remains unimplemented. Do not automatically start work on other ideas. Do not reuse a prior release's reports in a new marker.
+
+# Owner Japan age update — 17.10.2026
+- The owner explicitly lowered all active Japanese inventory and filter/calculator year bounds to 2008 inclusive. This supersedes earlier 2010+ rules. Non-Japan six-year age policy is unchanged. Purchased AJ System China/Korea are separate sources; do not disable the existing China supplier before acceptance of its replacement.

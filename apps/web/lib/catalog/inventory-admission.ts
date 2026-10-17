@@ -1,3 +1,4 @@
+import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Inventory policy approved 06.10.2026. Dates retain the source's precision. */
 export function catalogInventoryDate(offer: any): string | undefined {
@@ -15,7 +16,7 @@ export function catalogInventoryDate(offer: any): string | undefined {
 export function catalogInventoryAgeDecision(offer:any,now=new Date()){
  const today=new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
  const year=Number(offer.year),current=Number(today.slice(0,4));
- if(offer.market==='japan')return {eligible:Number.isInteger(year)&&year>=2010&&year<=current+1,basis:'japan_2010'};
+ if(offer.market==='japan')return {eligible:Number.isInteger(year)&&year>=JAPAN_MIN_MODEL_YEAR&&year<=current+1,basis:'japan_2008'};
  const date=catalogInventoryDate(offer);
  if(date){
   // A year/month is not a fabricated exact day: expire when that month ends.

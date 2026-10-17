@@ -5,6 +5,7 @@ export const COLLECTION_MARKETS = [
 ] as const;
 export type CollectionMarket = typeof COLLECTION_MARKETS[number]['id'];
 export const COLLECTION_SOURCES = [
+  ...(['china','korea'] as const).map(market=>({id:`ajes_${market}_feed`,market,label:`AJ System · платный фид ${market==='china'?'Китая':'Кореи'}`,url:'https://avto.jp/',kind:'feed',defaultEnabled:false,frequency:'Проверка по запросу владельца',description:'Новый приобретённый источник. Проверка образца доступна в настройках; публикация каталога ещё не подключена.',settings:'Общий доступ AJ System. До 5 записей для проверки, без автоматической замены действующего поставщика.'})),
   {id:'ajes_japan_feed',market:'japan',label:'AJ System · платный фид Японии',url:'https://avto.jp/',kind:'feed',defaultEnabled:false,frequency:'По запросу пользователя',description:'Аукционы и результаты торгов. Подключение проверяется владельцем до публикации.',settings:'До 48 лотов за запрос; карточка запрашивается по ID; фотографии загружаются по прямым ссылкам.'},
   {id:'che168_feed',market:'china',label:'Che168 · платный фид',url:'https://auto-api.com/',kind:'feed',defaultEnabled:true,frequency:'Ежедневно, 01:11 по Красноярску',description:'Полный исходный файл и последующие изменения поставщика. Ошибка обновления не включает парсеры.',settings:'Только завершённое обновление; курсор сохраняется после проверенной публикации.'},
   {id:'autohome_used_china_open',market:'china',label:'Che168 · резервный парсер',url:'https://global.che168.com/',kind:'parser',defaultEnabled:false,frequency:'После явного включения: ежедневное окно Китая, 01:11 по Красноярску',description:'Прямой сбор подержанных автомобилей. Крайний резерв по решению владельца. Для включения сначала выключите платный фид.',settings:'До 100 000 наблюдений на источник за запуск, до 2 000 страниц; до 4 карточек одновременно, до 30 фото.'},
@@ -44,5 +45,5 @@ export function collectionMarketEnabled(controls:CollectionControls,market:strin
 export const COLLECTION_WORKFLOWS:Record<string,string>={china:'catalog-refresh-china.yml',korea:'catalog-refresh-korea.yml',uae:'catalog-refresh-uae.yml',europe:'catalog-refresh-europe.yml',georgia:'catalog-refresh-georgia.yml',japan:'catalog-refresh-green.yml'};
 
 export function collectionWorkflowEnabled(controls:CollectionControls,market:string){
-  return market==='green'?collectionEnabled(controls,'akebono_green'):market==='japan'?false:collectionMarketEnabled(controls,market);
+  return market==='green'?collectionEnabled(controls,'akebono_green'):market==='japan'?false:COLLECTION_SOURCES.some(s=>s.market===market&&!['ajes_china_feed','ajes_korea_feed'].includes(s.id)&&collectionEnabled(controls,s.id));
 }

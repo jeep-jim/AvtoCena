@@ -1,3 +1,4 @@
+import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {parseEngineCc} from './engine-input';
 import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
@@ -27,7 +28,7 @@ export function ajesQuery(input: unknown) {
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
   const makes=values(q.make,','),models=values(q.model,'|');
-  const yearFrom=integer(q.yearFrom,2010,2010,2100), yearTo=integer(q.yearTo,2100,2010,2100);
+  const yearFrom=integer(q.yearFrom,JAPAN_MIN_MODEL_YEAR,JAPAN_MIN_MODEL_YEAR,2100), yearTo=integer(q.yearTo,2100,JAPAN_MIN_MODEL_YEAR,2100);
   if (yearFrom>yearTo) throw new AjesInputError();
   const page=integer(q.page,1,1,1000000), pageSize=integer(q.pageSize,24,1,48);
   const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+1)}`,'auction_type!=1'];
@@ -85,7 +86,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const text=(key:string)=>ajesText(row[key]);
   const number=(key:string)=>/^\d+(?:\.\d+)?$/.test(text(key))?Number(text(key)):null;
   const id=text('ID'), year=number('YEAR');
-  if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<2010 || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
+  if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<JAPAN_MIN_MODEL_YEAR || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
   if(knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME')))return null;
   const finish=number('FINISH');

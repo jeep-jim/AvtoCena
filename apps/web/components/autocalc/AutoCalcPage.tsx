@@ -38,7 +38,7 @@ export function AutoCalcPage({initialUrl,initialTitle=""}:{initialUrl:string;ini
   setKnowledgeNote('');setReferenceImage('');setReferenceLabel('');setMake('');setModel('');setMarket('');setPrice('');setCurrency('');setImages([]);setDraft({});setNotes([]);setFacts([]);
   try{const r=await fetch('/api/autocalc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'extract',url:link}),signal:c.signal});const data=await r.json();if(!r.ok)throw Error(data.error);if(c.signal.aborted)return;
    const identity=splitAutoCalcIdentity(data.title||'');setMake(autoCalcMake(data.make||identity.make));setModel(data.model||identity.model);
-   if(data.draft?.year && Number(data.draft.year)<PUBLIC_MIN_VEHICLE_YEAR){data.draft={...data.draft,year:''};data.notes=[...(data.notes||[]),'АвтоРасчёт доступен для автомобилей от 2010 года. Проверьте год выпуска.'];}
+   if(data.draft?.year && Number(data.draft.year)<PUBLIC_MIN_VEHICLE_YEAR){data.draft={...data.draft,year:''};data.notes=[...(data.notes||[]),'АвтоРасчёт доступен для автомобилей от 2008 года. Проверьте год выпуска.'];}
    setMarket(data.market||'');setPrice(data.price||'');setCurrency(currencies.includes(data.currency)?data.currency:'');setImages(data.images||[]);setDraft(completePowerUnitDraft(data.draft||{}));setNotes(data.notes||[]);setFacts(data.facts||[]);setMessage(data.message);
   }catch(e){if(!c.signal.aborted){setError(e instanceof Error?e.message:'Не удалось загрузить');setMessage('Заполните данные самостоятельно — расчёт доступен без загрузки объявления.');}}
   finally{if(!c.signal.aborted)setLoading(false);}

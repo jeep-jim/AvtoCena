@@ -1,3 +1,4 @@
+import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {publicationWithdrawn} from "./publication-policy";
 import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
 import { isSellerPricedOffer } from "./seller-price-contract";
@@ -20,7 +21,7 @@ const CARUSED_IMAGE_HOST = "d1og64tg0ubvon.cloudfront.net";
 const GOONET_CATALOG_IMAGE_HOST = "catalogphoto.goo-net.com";
 const GOONET_PICTURE_HOST_RE = /(?:^|\.)picture\d*\.goo-net\.com$/i;
 export const CATALOG_NON_JAPAN_MIN_YEAR = new Date().getUTCFullYear()-6;
-export const CATALOG_JAPAN_MIN_YEAR = 2010;
+export const CATALOG_JAPAN_MIN_YEAR = JAPAN_MIN_MODEL_YEAR;
 
 export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {
   return isAllowedCatalogSourceId(offer.market, offer.sourceId);
