@@ -34,11 +34,11 @@ function rangeIconMarkup(title: string) {
 
 type RangeChoice = { value: string; label: string };
 
-function rangeChoices(title: string): RangeChoice[] {
+function rangeChoices(title: string, minimumYear: number): RangeChoice[] {
   const normalized = title === "Объём" ? "Объём двигателя" : title;
   if (normalized === "Год") {
     const current = new Date().getFullYear();
-    return Array.from({ length: Math.max(1, current - 2019) }, (_, index) => {
+    return Array.from({ length: Math.max(1, current - minimumYear + 1) }, (_, index) => {
       const year = current - index;
       return { value: String(year), label: String(year) };
     });
@@ -119,6 +119,9 @@ function ensureRangeFieldMenu(box: HTMLElement, title: string) {
   const input = box.querySelector<HTMLInputElement>(":scope > input");
   if (!input) return;
   box.classList.add("ac-range-input-box--menu");
+  const minimumYear = Number(box.closest<HTMLElement>(".ac-range-card")?.dataset.yearMin) || new Date().getFullYear() - 6;
+  const choices = rangeChoices(title, minimumYear);
+  const choicesKey = JSON.stringify(choices);
 
   let toggle = box.querySelector<HTMLButtonElement>(":scope > .ac-range-value-toggle");
   let menu = box.querySelector<HTMLElement>(":scope > .ac-range-value-menu");
@@ -135,6 +138,11 @@ function ensureRangeFieldMenu(box: HTMLElement, title: string) {
     menu = document.createElement("div");
     menu.className = "ac-range-value-menu";
     menu.setAttribute("role", "listbox");
+    box.appendChild(menu);
+  }
+  if (menu.dataset.choicesKey !== choicesKey) {
+    menu.dataset.choicesKey = choicesKey;
+    menu.replaceChildren();
     const any = document.createElement("button");
     any.type = "button";
     any.className = "ac-range-value-option";
@@ -146,7 +154,7 @@ function ensureRangeFieldMenu(box: HTMLElement, title: string) {
       closeRangeMenus();
     });
     menu.appendChild(any);
-    rangeChoices(title).forEach((choice) => {
+    choices.forEach((choice) => {
       const option = document.createElement("button");
       option.type = "button";
       option.className = "ac-range-value-option";
@@ -160,7 +168,6 @@ function ensureRangeFieldMenu(box: HTMLElement, title: string) {
       });
       menu?.appendChild(option);
     });
-    box.appendChild(menu);
   }
 
   if (toggle.dataset.acBound !== "1") {
@@ -378,7 +385,7 @@ export function CatalogFilterUiEnhancer() {
         return Array.from(record.addedNodes).some(node => node instanceof Element && (node.matches(".ac-catalog-filter-panel, .ac-mobile-filter-sheet") || node.querySelector(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")));
       })) requestRefresh();
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["data-year-min"] });
     document.addEventListener("input", requestRefresh, true);
     document.addEventListener("change", requestRefresh, true);
     document.addEventListener("pointerdown", closeMenus, true);

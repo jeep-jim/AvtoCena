@@ -494,6 +494,19 @@ test('exact saved identity search never substitutes unrelated, old or heavy lots
  assert.equal(findSavedAjesSearch(query,{one:{...saved,items:[{...lot,make:'TOYOTA',model:'COASTER'}]}}),null);
  assert.equal(findSavedAjesSearch(query,{one:{...saved,items:[{...lot,year:2009}]}}),null);
 });
+test('Japan lot and chassis search includes 2010-2019 and applies explicit year bounds to saved matches',async()=>{
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const query={make:'DAIHATSU',model:'HIJET VAN',chassis:'S321V',lotNumber:'00123'};
+ const observedAt=new Date().toISOString();
+ const index=Object.fromEntries([2009,2010,2013,2019,2020].map(year=>[String(year),{observedAt,items:[ajesLot({...row,ID:`year${year}`,MARKA_NAME:'DAIHATSU',MODEL_NAME:'HIJET VAN',YEAR:String(year),KUZOV:'S321V',LOT:'00123'},'stats',false)]}]));
+ assert.match(ajesQuery(query).sql,/year>=2010/);
+ assert.match(ajesQuery(query).sql,/lot='00123'/);
+ assert.deepEqual(findSavedAjesSearch(query,index)!.items.map(l=>l.year).sort(),[2010,2013,2019,2020]);
+ assert.deepEqual(findSavedAjesSearch({...query,yearFrom:2010,yearTo:2019},index)!.items.map(l=>l.year).sort(),[2010,2013,2019]);
+ assert.deepEqual(findSavedAjesSearch({...query,yearFrom:2013,yearTo:2013},index)!.items.map(l=>l.year),[2013]);
+ assert.equal(findSavedAjesSearch({...query,yearFrom:2014,yearTo:2018},index),null);
+ assert.equal(findSavedAjesSearch({...query,lotNumber:'123'},index),null);
+});
 test('quota failure can return saved exact search but never a successful empty answer',async()=>{
  const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
  const lot=ajesLot({...row,KUZOV:'LA350A',LOT:'2910'},'stats',false)!;

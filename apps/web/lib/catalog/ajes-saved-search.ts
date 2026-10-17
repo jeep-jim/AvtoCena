@@ -5,7 +5,7 @@ import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now()){
  const query=ajesQuery(input);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1||!(input.chassis||input.frameNumber||input.lotNumber||input.make||input.model))return null;
- const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','sort']);
+ const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','sort','yearFrom','yearTo']);
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&input.sort!=='updatedAt')return null;
  const normalized=(v:unknown)=>String(v??'').trim().toUpperCase();
  const makes=input.make?.split(',').map(normalized),models=input.model?.split('|').map(normalized);
@@ -14,6 +14,7 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=2010&&lot.year<=new Date(now).getUTCFullYear()+1
    &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!knownHeavyVehicleFamily(lot.make,lot.model)
    &&(!makes||makes.includes(normalized(lot.make)))&&(!models||models.includes(normalized(lot.model)))
+   &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
    &&(!input.chassis||normalized(lot.chassisCode)===normalized(input.chassis))
    &&(!input.frameNumber||normalized(lot.frameNumber)===normalized(input.frameNumber))
    &&(!input.lotNumber||String(lot.lot).trim()===input.lotNumber.trim());

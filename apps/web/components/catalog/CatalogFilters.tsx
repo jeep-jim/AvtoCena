@@ -256,7 +256,7 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
     ? `${fromValue ? `от ${format(Number(fromValue))}${unit}` : "без минимума"} · ${toValue ? `до ${format(Number(toValue))}${unit}` : "без максимума"}`
     : "Без ограничений";
   const presets = title === "Год"
-    ? [{ label: "2020+", from: "2020", to: "" }, { label: "2023+", from: "2023", to: "" }, { label: "2025+", from: "2025", to: "" }]
+    ? [{ label: `${min}+`, from: String(min), to: "" }, { label: "2023+", from: "2023", to: "" }, { label: "2025+", from: "2025", to: "" }]
     : title === "Цена"
       ? [{ label: "до 2 млн", from: "", to: "2000000" }, { label: "до 3 млн", from: "", to: "3000000" }, { label: "до 5 млн", from: "", to: "5000000" }]
       : title === "Пробег"
@@ -271,7 +271,7 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
     }
   };
 
-  return <div className="ac-range-card rounded-[17px] p-3.5">
+  return <div className="ac-range-card rounded-[17px] p-3.5" data-year-min={title === "Год" ? min : undefined}>
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0"><div className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]">{title}</div><div className="mt-1 truncate text-[11px] font-bold text-[var(--ac-muted)]">{summary}</div></div>
       {fromValue || toValue ? <button type="button" onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
@@ -297,7 +297,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     {auctionResults&&<div className="mt-2.5 grid gap-2.5 md:grid-cols-3"><label className="text-xs font-bold text-[var(--ac-muted)]">Код кузова<input name="chassis" value={draft.chassis} onChange={e=>setField('chassis',e.target.value.toUpperCase())} placeholder="Например, RK5" maxLength={80} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><label className="text-xs font-bold text-[var(--ac-muted)]">Номер лота<input name="lotNumber" value={draft.lotNumber} onChange={e=>setField('lotNumber',e.target.value.replace(/[^0-9]/g,''))} inputMode="numeric" maxLength={10} placeholder="Номер с торгов" className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><div className="self-end"><AuctionGradeSelect value={draft.auctionGrade} onChange={v=>setField('auctionGrade',v)}/></div></div>}
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 ${auctionResults?"xl:grid-cols-3":"xl:grid-cols-4"}`}>
-        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={auctionResults?2010:1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
+        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "japan" || auctionResults ? 2010 : new Date().getFullYear() - 6} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
         {!auctionResults&&<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
