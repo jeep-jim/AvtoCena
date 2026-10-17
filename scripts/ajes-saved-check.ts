@@ -1,3 +1,4 @@
+import {ajesClient} from '../apps/web/lib/catalog/ajes-runtime';
 import {getJsonStorage} from '../apps/web/lib/data';
 async function main(){
  const store=getJsonStorage(),found=new Map<string,any>();
@@ -10,6 +11,11 @@ async function main(){
   }
  }
  console.log('AJES_MATCHES',found.size);
+ for(const query of [{table:'stats',make:'SUBARU',model:'FORESTER',chassis:'SKE',lotNumber:'30132'},{table:'stats',id:'0j4oBEkgoLQPes'}]){
+  try{const v=await ajesClient.read(query,process.env.AJES_DIAG_IP||'');console.log('AJES_TARGET',JSON.stringify({query,observedAt:v.observedAt,stale:v.stale,items:v.items.map((l:any)=>({id:l.id,make:l.make,model:l.model,lot:l.lot,chassis:l.chassisCode,date:l.auctionDate,fuel:l.sourceFuel,power:l.sourcePower,engine:l.engineCc,images:l.images?.length}))}));}
+  catch(e){console.log('AJES_TARGET_FAILURE',JSON.stringify({query,reason:(e as any)?.reason||'failed'}));if((e as any)?.reason==='visitor_restricted')break;}
+ }
+
  const raw:any=await store.readJson('catalog/partner-cache/ajes/evidence/stats-last-detail.json',null);
  console.log('AJES_RAW_MATCH',JSON.stringify({present:!!raw,matchesOwnerLot:!!raw&&found.has(raw.id),observedAt:raw?.observedAt}));
  if(raw){
