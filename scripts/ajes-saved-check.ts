@@ -16,6 +16,8 @@ async function main(){
  const rows=[...sample.values()],dates=rows.map(l=>l.auctionDate).filter(Boolean).sort(),fuels=rows.reduce((a,l)=>{const k=String(l.sourceFuel||'(empty)');a[k]=(a[k]||0)+1;return a;},{} as Record<string,number>);
  console.log('AJES_CACHE_SAMPLE',JSON.stringify({uniqueLots:rows.length,dateMin:dates[0],dateMax:dates.at(-1),fuelValues:fuels,rawTimeEvidence:rows.filter(l=>l.evidence?.fields?.includes('TIME')).length,rawTimeEmpty:rows.filter(l=>l.evidence?.fields?.includes('TIME')&&!String(l.evidence.values?.TIME||'').trim()).length}));
  console.log('AJES_MATCHES',found.size);
+ const makeDirectory=await readAjesQueryCache(store,ajesQuery({aggregate:'makes'}).sql);
+ console.log('AJES_CACHED_MAKES',JSON.stringify({found:!!makeDirectory,observedAt:makeDirectory?.observedAt,received:makeDirectory?.received,makes:makeDirectory?.makes}));
  console.log('AJES_SAVED_BRANDS',JSON.stringify([...new Set(rows.map(l=>l.make))].sort()));
  console.log('AJES_SAVED_SYLPHY',JSON.stringify(rows.filter(l=>/^NISSAN$/i.test(l.make)&&/^SYLPHY$/i.test(l.model)).map(l=>({id:l.id,observedAt:l.savedAt,year:l.year}))));
  for(const [label,params] of [['all',{}],['KG11',{chassis:'KG11'}]] as const){
