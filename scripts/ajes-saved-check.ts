@@ -13,6 +13,8 @@ async function main(){
  const rows=[...sample.values()],dates=rows.map(l=>l.auctionDate).filter(Boolean).sort(),fuels=rows.reduce((a,l)=>{const k=String(l.sourceFuel||'(empty)');a[k]=(a[k]||0)+1;return a;},{} as Record<string,number>);
  console.log('AJES_CACHE_SAMPLE',JSON.stringify({uniqueLots:rows.length,dateMin:dates[0],dateMax:dates.at(-1),fuelValues:fuels,rawTimeEvidence:rows.filter(l=>l.evidence?.fields?.includes('TIME')).length,rawTimeEmpty:rows.filter(l=>l.evidence?.fields?.includes('TIME')&&!String(l.evidence.values?.TIME||'').trim()).length}));
  console.log('AJES_MATCHES',found.size);
+ const searchMatches=rows.filter(l=>String(l.chassisCode||'').toUpperCase()==='LA350A'&&String(l.lot)==='2910');
+ console.log('AJES_SEARCH_SAVED',JSON.stringify({chassis:'LA350A',lot:'2910',matches:searchMatches.map(l=>({id:l.id,make:l.make,model:l.model,year:l.year,observedAt:l.savedAt,fuel:l.sourceFuel,rawTime:l.evidence?.values?.TIME}))}));
  for(const table of ['main','stats']){const q:any=await store.readJson('catalog/operations/ajes-quota-'+table+'.json',null);console.log('AJES_QUOTA_STATE',JSON.stringify({table,buckets:q?.buckets}));}
  const raw:any=await store.readJson('catalog/partner-cache/ajes/evidence/stats-last-detail.json',null);
  console.log('AJES_RAW_MATCH',JSON.stringify({present:!!raw,matchesOwnerLot:!!raw&&found.has(raw.id),observedAt:raw?.observedAt}));
