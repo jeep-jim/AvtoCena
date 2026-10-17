@@ -47,7 +47,7 @@ export const ajesClient=createAjesClient({
   },
   saveQuery:(sql,value)=>saveAjesQueryCache(getJsonStorage(),sql,value),
   assertEnabled:()=>assertCollectionEnabled('ajes_japan_feed'),
-  reserve:table=>reserveAjesRequest(getJsonStorage(),table),
+  reserve:(table,kind)=>reserveAjesRequest(getJsonStorage(),table,Date.now(),19000,kind==='count'),
   readDetail:(table,id)=>getJsonStorage().readJson(`catalog/partner-cache/ajes/${table}/${id}.json`,null),
   saveDetail:(table,id,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/${table}/${id}.json`,value),
 });

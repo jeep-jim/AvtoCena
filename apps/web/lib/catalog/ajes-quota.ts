@@ -3,7 +3,10 @@ import {AjesUnavailable} from './ajes-client';
 import type {AjesTable} from './ajes-query';
 
 /** Shared across processes/restarts. Conservative rolling 25-hour limit, separate API pools. */
-export async function reserveAjesRequest(storage:JsonStorage,table:AjesTable,now=Date.now(),limit=19000) {
+export async function reserveAjesRequest(storage:JsonStorage,table:AjesTable,now=Date.now(),limit=19000,countPriority=false) {
+  // Reserve at most 20 of the existing 1000-request safety margin for counters.
+  // Lists/details/models keep their 19000 ceiling; all reservations remain shared.
+  const ceiling=Math.min(limit+(countPriority?20:0),19020);
   const hour=Math.floor(now/3600000),key=`catalog/operations/ajes-quota-${table}.json`;
   for(let attempt=0;attempt<8;attempt++) {
     const meta=await storage.readJsonWithMeta<{buckets:Record<string,number>}|null>(key,null);
@@ -13,7 +16,7 @@ export async function reserveAjesRequest(storage:JsonStorage,table:AjesTable,now
       if(!/^\d+$/.test(h)||!Number.isSafeInteger(count)||count<0||Number(h)>hour)throw new AjesUnavailable('quota_invalid');
       if(Number(h)>=hour-24)buckets[h]=count;
     }
-    if(Object.values(buckets).reduce((a,b)=>a+b,0)>=limit)throw new AjesUnavailable('quota_exhausted');
+    if(Object.values(buckets).reduce((a,b)=>a+b,0)>=ceiling)throw new AjesUnavailable('quota_exhausted');
     buckets[hour]=(buckets[hour]??0)+1;
     try {await storage.writeJson(key,{buckets},meta.found?{ifMatch:meta.etag!}:{ifNoneMatch:'*'});return;}
     catch(error){if(!(error instanceof StorageConflictError))throw error;}

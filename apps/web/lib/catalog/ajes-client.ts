@@ -4,7 +4,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
@@ -31,6 +31,7 @@ export function createAjesClient(deps:Dependencies) {
       const password=await deps.password();
       if(!password)throw new AjesUnavailable('not_configured');
       const visitorKey=clientIp+"\0"+query.sql;
+      const quotaKey='quota:'+query.table+(query.kind==='count'?':count':'');
       return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{
         await deps.assertEnabled(); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
@@ -47,9 +48,9 @@ export function createAjesClient(deps:Dependencies) {
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
         try {
-          const cooldown=cooling('quota:'+query.table)||cooling('visitor:'+clientIp)||cooling(visitorKey);
+          const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
-          await deps.reserve(query.table);
+          await deps.reserve(query.table,query.kind);
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
           if(!response.ok)throw new AjesUnavailable(`http_${response.status}`);
           if(Number(response.headers.get('content-length'))>2*1024*1024)throw new AjesUnavailable('response_too_large');
@@ -111,7 +112,7 @@ export function createAjesClient(deps:Dependencies) {
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
           const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
           if(error instanceof AjesUnavailable&&recoverable){
-            const key=error.reason==='quota_exhausted'?'quota:'+query.table:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+            const key=error.reason==='quota_exhausted'?quotaKey:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
             // Do not extend an existing cooldown when merely reading the cached failure.
             if(!cooling(key))failures.set(key,{reason:error.reason,until:Date.now()+(error.reason==='visitor_restricted'?300000:30000)});
             while(failures.size>500)failures.delete(failures.keys().next().value!);

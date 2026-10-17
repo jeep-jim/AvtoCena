@@ -502,3 +502,24 @@ test('quota failure can return saved exact search but never a successful empty a
  assert.equal(result.items.length,1);assert.equal(result.partial,true);
  await assert.rejects(()=>client.read({chassis:'LA350A',lotNumber:'9999'},'127.0.0.1'),/quota_exhausted/);
 });
+
+test('counter reserve uses only twenty safety-margin attempts without reopening list quota',async()=>{
+ const s=storage(),now=Date.now(),hour=Math.floor(now/3600000);
+ await s.writeJson('catalog/operations/ajes-quota-stats.json',{buckets:{[hour]:19000}},{ifNoneMatch:'*'});
+ await assert.rejects(reserveAjesRequest(s,'stats',now),/quota_exhausted/);
+ for(let n=0;n<20;n++)await reserveAjesRequest(s,'stats',now,19000,true);
+ await assert.rejects(reserveAjesRequest(s,'stats',now,19000,true),/quota_exhausted/);
+ await assert.rejects(reserveAjesRequest(s,'stats',now),/quota_exhausted/);
+ const state:any=await s.readJsonWithMeta('catalog/operations/ajes-quota-stats.json',null);
+ assert.equal(state.value.buckets[hour],19020);
+});
+test('list quota cooldown does not consume or block the separate counter reserve',async()=>{
+ const s=storage(),now=Date.now(),hour=Math.floor(now/3600000);let calls=0;
+ await s.writeJson('catalog/operations/ajes-quota-stats.json',{buckets:{[hour]:19000}},{ifNoneMatch:'*'});
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:(t,k)=>reserveAjesRequest(s,t,now,19000,k==='count'),fetcher:async()=>{calls++;return new Response(JSON.stringify([{TAG0:'123'}]));}});
+ await assert.rejects(client.read({},'127.0.0.1'),/quota_exhausted/);
+ assert.equal((await client.read({aggregate:'count'},'127.0.0.1')).total,123);
+ assert.equal((await client.read({aggregate:'count'},'127.0.0.1')).total,123);
+ await assert.rejects(client.read({chassis:'KG11'},'127.0.0.1'),/quota_exhausted/);
+ assert.equal(calls,1);
+});
