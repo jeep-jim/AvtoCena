@@ -1,10 +1,10 @@
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
-import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
+import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
@@ -123,6 +123,11 @@ export function createAjesClient(deps:Dependencies) {
             if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled();return {...fallback,partial:true,stale:true};}
           }
           if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models')&&recoverable){await deps.assertEnabled();return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
+          if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch&&((input as AjesQuery).chassis||(input as AjesQuery).frameNumber||(input as AjesQuery).lotNumber)){
+            let fallback:any=null;
+            try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
+            if(fallback?.partial&&fallback.items?.length){await deps.assertEnabled();return remember({...fallback,stale:true});}
+          }
           if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';

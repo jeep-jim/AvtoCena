@@ -43,7 +43,7 @@ export function ajesQuery(input: unknown) {
 
   if(q.chassis!==undefined)where.push(`kuzov='${name(q.chassis)}'`);
   if(q.frameNumber!==undefined)where.push(`serial='${name(q.frameNumber)}'`);
-  if(q.lotNumber!==undefined){if(typeof q.lotNumber!=='string'||!/^\d{1,10}$/.test(q.lotNumber))throw new AjesInputError();where.push(`lot='${q.lotNumber}'`);}
+  if(q.lotNumber!==undefined){if(typeof q.lotNumber!=='string'||!/^\d{1,10}$/.test(q.lotNumber.trim()))throw new AjesInputError();where.push(`lot='${q.lotNumber.trim()}'`);}
   for(const [from,to,column,max] of [['mileageFrom','mileageTo','mileage',2000000],['engineFrom','engineTo','eng_v',20000]] as const){
     const low=integer(q[from],0,0,max),high=integer(q[to],max,0,max);
     if(low>high)throw new AjesInputError();

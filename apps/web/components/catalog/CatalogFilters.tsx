@@ -364,7 +364,8 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       const href=dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer);
       rememberFilterScroll(href);
       startTransition(()=>router.push(href, { scroll: false }));
-    }, 180);
+    // Let a chassis/lot/frame number be typed before spending supplier requests.
+    }, auctionResults && (draft.chassis !== (initial.chassis || "") || draft.lotNumber !== (initial.lotNumber || "") || draft.frameNumber !== (initial.frameNumber || "")) ? 650 : 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
 

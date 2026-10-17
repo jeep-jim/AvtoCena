@@ -34,7 +34,8 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href="/cars?market=japan">Сбросить условия</Link></p>}
  {result&&<div className="mt-8">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market="japan" className="h-5 w-7 md:h-6 md:w-9"/><span>Япония</span>{result.total!=null&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={result.total}>· {formatCatalogCount(result.total)}</span>}</h2>
- <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market:'japan'} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.received===result.pageSize}/>
+ {result.partial&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показаны доступные совпадения. Полный поиск временно недоступен.</p>}
+ <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market:'japan'} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={!result.partial&&result.received===result.pageSize}/>
  </div>}
  </section>
  <style dangerouslySetInnerHTML={{__html:'html body .ac-catalog-page.ac-ajes-catalog{background:var(--ac-page-bg)!important;background-image:none!important}'}}/>

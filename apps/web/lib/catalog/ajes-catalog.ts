@@ -25,7 +25,7 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const query=ajesCatalogQuery(params);
  const [page,total]=await Promise.all([readAjesPublic(query),readAjesCount(JSON.stringify(params)).catch(()=>null)]);
- return {...page,total,items:page.items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
+ return {...page,total:page.partial?null:total,items:page.items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean}>{

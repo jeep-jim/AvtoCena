@@ -452,3 +452,53 @@ test('partial card retries after the short cooldown instead of pinning missing f
   assert.equal(fresh.stale,false);assert.equal(fresh.items[0].sourceFuel,'D');assert.equal(reserved,2);
  }finally{clock.mock.restore();}
 });
+
+test('owner LA350A / 2910 search keeps both exact predicates in lists, counts and pages',async()=>{
+ const {ajesCatalogQuery}=await import('../apps/web/lib/catalog/ajes-query');
+ const input=ajesCatalogQuery({market:'japan',chassis:' la350a ',lotNumber:' 002910 ',page:'2'});
+ for(const aggregate of [undefined,'count','models'] as const){
+  const sql=ajesQuery({...input,aggregate}).sql;
+  assert.match(sql,/kuzov='LA350A' and lot='002910'/);
+  assert.doesNotMatch(sql,/(?:kuzov|lot) like/i);
+ }
+ assert.match(ajesQuery(input).sql,/limit 24,24$/);
+});
+test('list hash collisions cannot evict saved counts; legacy counts require identical query',async()=>{
+ const {ajesQueryCacheLocation,readAjesQueryCache,saveAjesQueryCache}=await import('../apps/web/lib/catalog/ajes-query-cache');
+ const files=new Map<string,any>();
+ const storage={readJson:async(key:string)=>files.get(key)||null,writeJson:async(key:string,value:any)=>{files.set(key,value);}};
+ const count=ajesQuery({aggregate:'count'}).sql,where=ajesQueryCacheLocation(count);
+ const snapshot={total:578,items:[],observedAt:new Date().toISOString()};
+ // Existing exact-SQL counts migrate on read without accepting old selection rules.
+ files.set(where.legacy,{hash:where.hash,value:snapshot});
+ assert.deepEqual(await readAjesQueryCache(storage,count),snapshot);
+ await saveAjesQueryCache(storage,count,snapshot);
+ const collision=Array.from({length:2000},(_,i)=>ajesQuery({lotNumber:String(i)}).sql).find(sql=>ajesQueryCacheLocation(sql).legacy===where.legacy)!;
+ assert.ok(collision);
+ await saveAjesQueryCache(storage,collision,{items:[]});
+ assert.deepEqual(await readAjesQueryCache(storage,count),snapshot);
+ assert.equal(await readAjesQueryCache(storage,count+" and kuzov='OTHER'"),null);
+ assert.notEqual(ajesQueryCacheLocation(ajesQuery({aggregate:'count',chassis:'LA350A'}).sql).key,where.key);
+});
+
+test('exact saved identity search never substitutes unrelated, old or heavy lots or claims completeness',async()=>{
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const lot=ajesLot({...row,KUZOV:'LA350A',LOT:'2910'},'stats',false)!;
+ const saved={items:[lot],observedAt:new Date().toISOString()};
+ const index={one:saved};
+ const query={chassis:'LA350A',lotNumber:'2910'};
+ const result=findSavedAjesSearch(query,index)!;
+ assert.equal(result.items[0].id,row.ID);assert.equal(result.partial,true);assert.equal(result.stale,true);assert.equal((result as any).total,undefined);
+ for(const q of [{chassis:'OTHER',lotNumber:'2910'},{chassis:'LA350A',lotNumber:'02910'},{...query,drive:'awd'},{...query,page:2},{...query,frameNumber:'LA350A-123'},{...query,make:'OTHER'}])assert.equal(findSavedAjesSearch(q,index),null);
+ assert.equal(findSavedAjesSearch(query,{one:{...saved,observedAt:'2020-01-01T00:00:00Z'}}),null);
+ assert.equal(findSavedAjesSearch(query,{one:{...saved,items:[{...lot,make:'TOYOTA',model:'COASTER'}]}}),null);
+ assert.equal(findSavedAjesSearch(query,{one:{...saved,items:[{...lot,year:2009}]}}),null);
+});
+test('quota failure can return saved exact search but never a successful empty answer',async()=>{
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const lot=ajesLot({...row,KUZOV:'LA350A',LOT:'2910'},'stats',false)!;
+ const client=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{throw new (await import('../apps/web/lib/catalog/ajes-client')).AjesUnavailable('quota_exhausted');},fetcher:async()=>{throw Error('must not fetch');},readSavedSearch:async q=>findSavedAjesSearch(q,{one:{items:[lot],observedAt:new Date().toISOString()}})});
+ const result=await client.read({chassis:'LA350A',lotNumber:'2910'},'127.0.0.1');
+ assert.equal(result.items.length,1);assert.equal(result.partial,true);
+ await assert.rejects(()=>client.read({chassis:'LA350A',lotNumber:'9999'},'127.0.0.1'),/quota_exhausted/);
+});
