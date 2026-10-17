@@ -11,6 +11,13 @@ async function main(){
   }
  }
  console.log('AJES_MATCHES',found.size);
+ try{
+  const list=await ajesClient.read({table:'stats',make:'SUBARU',model:'FORESTER',chassis:'SKE',lotNumber:'30132'},process.env.AJES_DIAG_IP||'');
+  console.log('AJES_FORESTER_SEARCH',JSON.stringify({observedAt:list.observedAt,stale:list.stale,items:list.items.map((l:any)=>({id:l.id,lot:l.lot,chassis:l.chassisCode,date:l.auctionDate,fuel:l.sourceFuel,power:l.sourcePower,engine:l.engineCc}))}));
+  const match=list.items.find((l:any)=>l.year===2022&&String(l.auctionDate).startsWith('2026-08-19'));
+  if(match){const detail=await ajesClient.read({table:'stats',id:match.id},process.env.AJES_DIAG_IP||'');console.log('AJES_FORESTER_DETAIL',JSON.stringify({id:match.id,stale:detail.stale,sourceEvidence:detail.sourceEvidence,items:detail.items.map((l:any)=>({fuel:l.sourceFuel,power:l.sourcePower,chassis:l.chassisCode,drive:l.sourceDrive,engine:l.engineCc}))}));}
+ }catch(e){console.log('AJES_FORESTER_FAILURE',JSON.stringify({reason:(e as any)?.reason||'failed'}));}
+
  for(const table of ['main','stats']){const q:any=await store.readJson('catalog/operations/ajes-quota-'+table+'.json',null);console.log('AJES_QUOTA_STATE',JSON.stringify({table,buckets:q?.buckets}));}
  const raw:any=await store.readJson('catalog/partner-cache/ajes/evidence/stats-last-detail.json',null);
  console.log('AJES_RAW_MATCH',JSON.stringify({present:!!raw,matchesOwnerLot:!!raw&&found.has(raw.id),observedAt:raw?.observedAt}));
