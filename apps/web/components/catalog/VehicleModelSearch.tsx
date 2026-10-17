@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import {createModelSuggestionSearch, mergeModelSuggestions} from "@/lib/catalog/model-suggestion-search";
+import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection} from "@/lib/catalog/model-suggestion-search";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 
 type ModelSuggestion = {
@@ -176,7 +176,8 @@ export function VehicleModelSearch({
   const [inventoryLoading,setInventoryLoading]=useState(false);
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
-  const items=useMemo(()=>sourceItems?sourceItems.filter(v=>(!make||make.split(',').some(m=>compact(m)===compact(v.make)))&&(!searchQuery||compact(v.model).includes(compact(searchQuery)))).slice(0,50):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[sourceItems,contextual,inventory,directory,searchQuery,make,remoteItems]);
+  const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
+  const items=useMemo(()=>sourceSearch?sourceSearch(searchQuery,make):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -297,6 +298,14 @@ export function VehicleModelSearch({
     });
   };
 
+  const applyTypedModel = () => {
+    const next = typedModelSelection(query, items, multiple);
+    onValueChange?.(next);
+    setQuery(multiple ? next.split("|").join(", ") : next);
+    setOpen(false);
+    input.current?.blur();
+  };
+
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[235]" : "z-0"} ${className}`}>
     {multiple && <input type="hidden" name="model" value={value} />}
     <input
@@ -308,6 +317,9 @@ export function VehicleModelSearch({
       autoComplete="off"
       spellCheck={false}
       onFocus={() => setOpen(true)}
+      onBlur={(event) => {
+        if (multiple && !root.current?.contains(event.relatedTarget as Node)) applyTypedModel();
+      }}
       onChange={(event) => {
         setQuery(event.target.value);
         if (!multiple) onValueChange?.(event.target.value);
@@ -315,10 +327,10 @@ export function VehicleModelSearch({
       }}
       onKeyDown={(event) => {
         if (event.key !== "Enter") return;
-        const candidate = exact || items[0];
-        if (!candidate) return;
         event.preventDefault();
-        choose(candidate, !multiple);
+        if (multiple) { applyTypedModel(); return; }
+        if (exact) choose(exact, true);
+        else { setOpen(false); input.current?.blur(); submitRef.current?.({make, model:clean(query)}); }
       }}
       className={inputClassName}
       required={required}
@@ -327,8 +339,12 @@ export function VehicleModelSearch({
       aria-autocomplete="list"
     />
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
-      {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Добавляйте модели через запятую. Выбранные остаются в чипсах</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
-      <div className="ac-hide-scrollbar max-h-72 overflow-y-auto">
+      <div className="flex items-center justify-between gap-2 px-2 pb-2">
+        <span className="text-sm font-bold">Модель автомобиля</span>
+        <button type="button" aria-label="Закрыть список моделей" className="min-h-11 rounded-xl px-3 text-sm font-bold" onClick={applyTypedModel}>Скрыть ×</button>
+      </div>
+      {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Выберите модели или введите название и нажмите «Применить»</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
+      <div className="ac-hide-scrollbar max-h-[min(18rem,35dvh)] overflow-y-auto overscroll-contain">
         {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
         {canSearch && searching && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
         {canSearch && items.length ? items.map((item) => <button
@@ -345,6 +361,7 @@ export function VehicleModelSearch({
         {contextual&&suggestionError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить все модели. Повторить</button>:null}
         {canSearch && !searching && !suggestionError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
       </div>
+      <button type="button" onClick={applyTypedModel} className="mt-2 min-h-11 w-full rounded-xl bg-red-500 px-4 text-sm font-bold text-white">Применить</button>
     </div> : null}
   </div>;
 }

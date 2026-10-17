@@ -29,3 +29,16 @@ test('current feed identities extend the dictionary without duplicates or cross-
  assert.equal(mergeModelSuggestions([item],[{...item,aliases:['М6']}],'M6').length,1);
  assert.deepEqual(mergeModelSuggestions([item],[{...item,aliases:['М6']}],'M6')[0].aliases,['М6']);
 });
+
+test('substring suggestions recall names when a prefix is missing',()=>{
+ assert.equal(search('rolla')[0].model,'Corolla');
+ assert.equal(search('rolla','BMW').length,0);
+});
+test('typed selections preserve the request instead of picking an unrelated first result',async()=>{
+ const {typedModelSelection}=await import('../apps/web/lib/catalog/model-suggestion-search');
+ assert.equal(typedModelSelection('Королла',search('Королла'),true),'Corolla');
+ assert.equal(typedModelSelection('Corolla Z',search('Corolla Z'),true),'Corolla Z');
+ assert.equal(typedModelSelection('Camry, Corolla, Camry, ',search('','Toyota'),true),'Camry|Corolla');
+ assert.equal(typedModelSelection('Unknown model',[],true),'Unknown model');
+ assert.equal(typedModelSelection('',search('','Toyota'),true),'');
+});

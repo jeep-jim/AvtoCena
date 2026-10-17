@@ -29,7 +29,7 @@ function* compileSearch(data:ModelSearchData){
   if(q.length<2&&q)return [];
   const tokens=q.split(' ').filter(Boolean),significant=tokens.filter(t=>t.length>=4);
   const results:{row:typeof rows[number];score:number;related:boolean}[]=[];
-  const candidates=q?(prefixRows.get(tokens[0].slice(0,24))||[]):[...brands].flatMap(brand=>makeRows.get(brand)||[]);
+  const candidates=q?(prefixRows.get(tokens[0].slice(0,24))||rows.flatMap((row,index)=>row.names.some(name=>name.includes(tokens[0]))?[index]:[])):[...brands].flatMap(brand=>makeRows.get(brand)||[]);
   for(const index of candidates){const row=rows[index];
    if(brands.size&&!brands.has(row.brand))continue;
    let score=q?0:100,related=false;
@@ -65,4 +65,10 @@ export function mergeModelSuggestions(inventory:ModelSuggestion[], directory:Mod
  const q=suggestionKey(query);
  const rank=(row:ModelSuggestion)=>[row.model,...row.aliases].some(name=>suggestionKey(name)===q)?0:row.related?2:1;
  return [...merged.values()].sort((a,b)=>rank(a)-rank(b)||a.model.length-b.model.length||a.model.localeCompare(b.model,'ru')).slice(0,50);
+}
+
+/** Commit only the names entered by the user; never substitute the first fuzzy result. */
+export function typedModelSelection(query:string, items:{model:string;aliases?:string[]}[], multiple:boolean){
+ const names=(multiple?query.split(","):[query]).map(value=>value.replace(/\s+/g," ").trim()).filter(Boolean);
+ return [...new Set(names.map(name=>items.find(item=>[item.model,...(item.aliases||[])].some(alias=>suggestionKey(alias)===suggestionKey(name)))?.model||name))].join(multiple?"|":"");
 }

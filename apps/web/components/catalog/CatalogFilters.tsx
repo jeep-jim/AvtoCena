@@ -523,6 +523,9 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} />{!auctionResults&&<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields sourceModels={sourceModels} auctionResults={auctionResults} draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
       </div>
+      <div className="shrink-0 border-t border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+        <button type="button" data-ac-react-close="1" onClick={() => setMobileOpen(false)} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 text-sm font-black text-white">Показать автомобили</button>
+      </div>
     </form></div>, document.body) : null}
 
     <style jsx global>{`
