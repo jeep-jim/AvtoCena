@@ -4,7 +4,7 @@ import type {AjesTable} from './ajes-query';
 
 /** Shared across processes/restarts. Conservative rolling 25-hour limit, separate API pools. */
 export async function reserveAjesRequest(storage:JsonStorage,table:AjesTable,now=Date.now(),limit=19000,countPriority=false) {
-  // Reserve at most 20 of the existing 1000-request safety margin for counters.
+  // Reserve at most 20 of the existing 1000-request safety margin for count/brand aggregates.
   // Lists/details/models keep their 19000 ceiling; all reservations remain shared.
   const ceiling=Math.min(limit+(countPriority?20:0),19020);
   const hour=Math.floor(now/3600000),key=`catalog/operations/ajes-quota-${table}.json`;

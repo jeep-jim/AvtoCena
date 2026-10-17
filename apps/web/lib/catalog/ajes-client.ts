@@ -31,7 +31,7 @@ export function createAjesClient(deps:Dependencies) {
       const password=await deps.password();
       if(!password)throw new AjesUnavailable('not_configured');
       const visitorKey=clientIp+"\0"+query.sql;
-      const quotaKey='quota:'+query.table+(query.kind==='count'?':count':'');
+      const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes')?':count':'');
       return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{
         await deps.assertEnabled(); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
@@ -40,9 +40,9 @@ export function createAjesClient(deps:Dependencies) {
         const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
           &&saved.page===query.page&&saved.pageSize===query.pageSize
-          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
+          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
-        const currentSchema=query.kind==='count'||query.kind==='models'||saved?.schemaVersion===2;
+        const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||saved?.schemaVersion===2;
         if(usable&&currentSchema&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL('http://87.242.72.57/gzip/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
@@ -70,17 +70,19 @@ export function createAjesClient(deps:Dependencies) {
             if(decoded.length<=256&&/^bot\d*\s/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
             rows=JSON.parse(decoded.toString('utf8'));
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
-          if(query.kind==='count'||query.kind==='models'){
+          if(query.kind==='count'||query.kind==='models'||query.kind==='makes'){
             const first=Array.isArray(rows)?rows[0]:rows;
-            try{await deps.saveAggregateEvidence?.(query.kind,{observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[02])$/i.test(k)&&/^\d+$/.test(String(v)))):{}});}catch{}
+            try{await deps.saveAggregateEvidence?.(query.kind,{observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[012])$/i.test(k)&&/^\d+$/.test(String(v)))):{}});}catch{}
           }
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
-          if(query.kind==='count'||query.kind==='models'){
-            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
+          if(query.kind==='count'||query.kind==='models'||query.kind==='makes'){
+            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':query.kind==='makes'?'tag1':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
             if(query.kind==='count'&&rows.length!==1)throw new AjesUnavailable('invalid_response');
             const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})).filter(r=>r.make&&r.model):undefined;
-            const result={items:[],models,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
+            const makes=query.kind==='makes'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),total:totalOf(r)})):undefined;
+            if(makes?.some(m=>!m.make))throw new AjesUnavailable('invalid_response');
+            const result={items:[],models,makes,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
             try{await deps.saveQuery?.(query.sql,result);}catch{}
             return result;
           }
@@ -123,8 +125,8 @@ export function createAjesClient(deps:Dependencies) {
             const fallbackAge=Date.now()-Date.parse(fallback?.observedAt||'');
             if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled();return {...fallback,partial:true,stale:true};}
           }
-          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models')&&recoverable){await deps.assertEnabled();return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
-          if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch&&((input as AjesQuery).chassis||(input as AjesQuery).frameNumber||(input as AjesQuery).lotNumber)){
+          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes')&&recoverable){await deps.assertEnabled();return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
+          if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch&&((input as AjesQuery).chassis||(input as AjesQuery).frameNumber||(input as AjesQuery).lotNumber||(input as AjesQuery).make||(input as AjesQuery).model)){
             let fallback:any=null;
             try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
             if(fallback?.partial&&fallback.items?.length){await deps.assertEnabled();return remember({...fallback,stale:true});}
@@ -154,6 +156,18 @@ export async function readAjesModelDirectory(client:ReturnType<typeof createAjes
    identities.add(key);models.push(model);
   }
   if(result.received<500)return {models,observedAt,stale};
+ }
+ throw new AjesUnavailable('directory_too_large');
+}
+
+/** A brand directory is independent of the visible list and model pagination. */
+export async function readAjesMakeDirectory(client:ReturnType<typeof createAjesClient>,input:Record<string,unknown>,ip:string){
+ const makes:Array<{make:string;total:number}>=[],seen=new Set<string>();let observedAt='',stale=false;
+ for(let page=1;page<=10;page++){
+  const result=await client.read({...input,aggregate:'makes',page},ip);
+  observedAt=observedAt||result.observedAt;stale=stale||Boolean(result.stale);
+  for(const row of result.makes||[]){const key=row.make.toUpperCase();if(seen.has(key))throw new AjesUnavailable('directory_page_repeated');seen.add(key);makes.push(row);}
+  if(result.received<500)return {makes,observedAt,stale};
  }
  throw new AjesUnavailable('directory_too_large');
 }

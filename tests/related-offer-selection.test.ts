@@ -41,3 +41,14 @@ test('published stock DTOs without private provenance remain eligible in recomme
  const groups=await select({current:{...full,id:'green-713392'},greenModels:[published],renderable:isRenderableRelatedOffer});
  assert.deepEqual(groups.stockModels.map(row=>row.id),['green-713390']);
 });
+
+
+test('Japanese sold lots with missing fuel still appear as same-model recommendations',async()=>{
+ const {ajesLot}=await import('../apps/web/lib/catalog/ajes-query');
+ const {ajesOffer}=await import('../apps/web/lib/catalog/ajes-offer');
+ const make=(id:string)=>ajesOffer(ajesLot({ID:id,MARKA_NAME:'NISSAN',MODEL_NAME:'SYLPHY',YEAR:'2011',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'120000',TIME:'',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'},'stats',false)!,{currency:'JPY',rateSource:'cbr',sourcePrice:120000,effectiveRate:0.5} as any,new Date().toISOString());
+ const current=make('current'),other=make('other');
+ assert.equal(other.fuel,undefined);assert.equal(isRenderableRelatedOffer(other),true);
+ const groups=await select({current,modelRows:[current,other],renderable:isRenderableRelatedOffer});
+ assert.deepEqual(groups.sameModel.map(r=>r.id),['ajes-stats-other']);
+});

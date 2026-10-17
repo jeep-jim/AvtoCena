@@ -523,3 +523,35 @@ test('list quota cooldown does not consume or block the separate counter reserve
  await assert.rejects(client.read({chassis:'KG11'},'127.0.0.1'),/quota_exhausted/);
  assert.equal(calls,1);
 });
+
+
+test('brand directory is complete independently of a 24-car page and protects its cache',async()=>{
+ const {readAjesMakeDirectory}=await import('../apps/web/lib/catalog/ajes-client');
+ const {ajesQueryCacheLocation,saveAjesQueryCache,readAjesQueryCache}=await import('../apps/web/lib/catalog/ajes-query-cache');
+ let calls=0;
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{calls++;assert.match(new URL(String(url)).searchParams.get('sql')!,/group by marka_name order by marka_name limit 0,500$/);return new Response(JSON.stringify(['TOYOTA','NISSAN','HONDA','DAIHATSU','BMW','SUBARU','SUZUKI'].map(make=>({MARKA_NAME:make,TAG1:'12'}))));}});
+ const directory=await readAjesMakeDirectory(client,{},'127.0.0.1');
+ assert.equal(directory.makes.length,7);assert.equal(calls,1);assert.equal(directory.makes[6].total,12);
+ const files=new Map<string,any>(),store={readJson:async(k:string)=>files.get(k)||null,writeJson:async(k:string,v:any)=>{files.set(k,v);}};
+ const sql=ajesQuery({aggregate:'makes'}).sql;
+ await saveAjesQueryCache(store,sql,{items:[],makes:directory.makes});
+ for(let i=0;i<256;i++)await saveAjesQueryCache(store,ajesQuery({lotNumber:String(i)}).sql,{items:[]});
+ assert.equal((await readAjesQueryCache(store,sql)).makes.length,7);
+ assert.match(ajesQueryCacheLocation(sql).key,/makes-overall/);
+ assert.notEqual(ajesQueryCacheLocation(ajesQuery({aggregate:'makes',yearFrom:2020}).sql).key,ajesQueryCacheLocation(sql).key);
+});
+test('brand directory rejects missing names and repeated capped pages',async()=>{
+ const {readAjesMakeDirectory}=await import('../apps/web/lib/catalog/ajes-client');
+ const client=(rows:any[])=>createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(rows))});
+ await assert.rejects(readAjesMakeDirectory(client([{TAG1:'3'}]),{},'127.0.0.1'),/invalid_response/);
+ await assert.rejects(readAjesMakeDirectory(client(Array.from({length:500},(_,i)=>({MARKA_NAME:'BRAND '+i,TAG1:'1'}))),{},'127.0.0.1'),/directory_page_repeated/);
+});
+test('failed live model query recovers only the exact saved make and model',async()=>{
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const snapshots=Object.fromEntries([['n1','NISSAN','SYLPHY'],['n2','NISSAN','SYLPHY'],['n3','NISSAN','NOTE'],['t1','TOYOTA','SYLPHY']].map(([id,make,model])=>[id,{items:[ajesLot({...row,ID:id,MARKA_NAME:make,MODEL_NAME:model},'stats',false)],observedAt:new Date().toISOString()}]));
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{throw new (await import('../apps/web/lib/catalog/ajes-client')).AjesUnavailable('quota_exhausted');},readSavedSearch:async q=>findSavedAjesSearch(q,snapshots)});
+ const result=await client.read({make:'Nissan',model:'Sylphy',pageSize:24},'127.0.0.1');
+ assert.deepEqual(result.items.map((r:any)=>r.id),['n1','n2']);assert.equal(result.partial,true);assert.equal(result.total,undefined);
+ assert.equal(findSavedAjesSearch({make:'Nissan',model:'Sylphy',fuel:'petrol'},snapshots),null);
+ assert.equal(findSavedAjesSearch({make:'Nissan',model:'Sylphy',page:2},snapshots),null);
+});

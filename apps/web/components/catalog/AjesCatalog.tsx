@@ -6,7 +6,7 @@ import {CatalogLoadMore} from './CatalogLoadMore';
 import {BrandLogoRail} from './BrandLogoRail';
 import {JapanSectionTabs} from './JapanSectionTabs';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
-import {readAjesCatalogPage,readAjesCount,readAjesDirectory,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
+import {readAjesCatalogPage,readAjesCount,readAjesMakes,readAjesDirectory,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {formatCatalogCount} from '@/lib/catalog/count-format';
@@ -15,13 +15,15 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));initial.market='japan';if(!initial.make&&initial.brand)initial.make=initial.brand;
  let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
  const countPromise=readAjesCount(JSON.stringify(initial)).catch(()=>null);
- const directoryPromise=readAjesDirectory().catch(()=>null);
+ const makesPromise=readAjesMakes().catch(()=>null);
+ const directoryPromise=initial.make?readAjesDirectory({make:initial.make}).catch(()=>null):Promise.resolve(null);
  try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Для этих результатов пока нельзя точно отобрать автомобили по цене с доставкой, мощности или типу кузова. Снимите эти условия; расчёт доступен в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  const directory=await directoryPromise;
  // Count is independently verified; a partial or failed list must not erase it.
  const displayTotal=await countPromise;
  const models=directory?.models||[...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
- const makes=[...new Set([...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
+ const makeDirectory=await makesPromise;
+ const makes=[...new Set([...(makeDirectory?.makes.map(m=>m.make)||[]),...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
  const facets={makes,models,markets:['japan'],bodyTypes:[],fuels:['petrol','diesel','hybrid','electric','lpg'],transmissions:['automatic','manual','cvt','dct'],drives:['fwd','rwd','awd']};
  const Container=embedded?'div':'main';
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>

@@ -3,13 +3,14 @@ import {ajesQuery} from './ajes-query';
 
 type Store={readJson:(key:string,fallback:null)=>Promise<any>;writeJson:(key:string,value:any)=>Promise<unknown>};
 const root='catalog/partner-cache/ajes/queries';
-const overallCount=ajesQuery({aggregate:'count'}).sql;
+const overallCount=ajesQuery({aggregate:'count'}).sql,overallMakes=ajesQuery({aggregate:'makes'}).sql;
 /** Keep counters out of the list collision pool; always verify the complete SQL hash. */
 export function ajesQueryCacheLocation(sql:string){
  const hash=createHash('sha256').update(sql).digest('hex'),slot=parseInt(hash.slice(0,8),16)%128;
  const legacy=`${root}/${slot}.json`;
  const key=sql.startsWith('select count(*) from')
-  ?`${root}/counts/${sql===overallCount?'overall':slot}.json`:legacy;
+  ?`${root}/counts/${sql===overallCount?'overall':slot}.json`
+  :sql.startsWith('select marka_name,')?`${root}/directories/${sql===overallMakes?'makes-overall':(sql.includes('model_name, count(*)')?'models':'makes')+'-'+slot}.json`:legacy;
  return {hash,key,legacy};
 }
 export async function readAjesQueryCache(storage:Store,sql:string){

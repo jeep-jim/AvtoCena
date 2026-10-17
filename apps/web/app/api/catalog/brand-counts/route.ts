@@ -1,4 +1,4 @@
-import {readAjesDirectory} from '@/lib/catalog/ajes-catalog';
+import {readAjesMakes} from '@/lib/catalog/ajes-catalog';
 import { cookies } from "next/headers";
 import { currentGreenCornerPrices, readGreenCorner } from "@/lib/catalog/green-corner";
 import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
@@ -31,8 +31,8 @@ export async function GET(request: Request) {
   if(url.searchParams.get('market')==='japan'){
     try{
       const params={...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
-      const result=await readAjesDirectory(params),counts:Record<string,number>={},modelCounts:Record<string,number>={};
-      for(const row of result.models){counts[row.make]=(counts[row.make]||0)+row.total;modelCounts[row.make]=(modelCounts[row.make]||0)+1;}
+      const result=await readAjesMakes(JSON.stringify(params)),counts:Record<string,number>={},modelCounts:Record<string,number>={};
+      for(const row of result.makes)counts[row.make]=row.total;
       return NextResponse.json({generationId:result.observedAt,counts,modelCounts},{headers:{'Cache-Control':'private, max-age=30, stale-while-revalidate=60'}});
     }catch{return NextResponse.json({error:'japan_counts_unavailable'},{status:503});}
   }

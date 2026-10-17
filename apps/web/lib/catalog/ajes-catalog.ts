@@ -4,7 +4,7 @@ import {headers} from 'next/headers';
 import {cache} from 'react';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
-import {readAjesModelDirectory} from './ajes-client';
+import {readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
 import {readAjesPublic} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
@@ -16,6 +16,10 @@ export const readAjesCount=cache(async(key='{}'):Promise<number>=>{
  return result.total;
 });
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
+export const readAjesMakes=cache(async(key='{}')=>{
+ const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
+ return readAjesMakeDirectory(ajesClient,q,(await headers()).get('x-real-ip')||'');
+});
 export async function readAjesDirectory(params:Record<string,unknown>={}){
  const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
  await assertCollectionEnabled('ajes_japan_feed');
