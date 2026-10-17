@@ -12,6 +12,7 @@ on:
       - 'apps/web/app/(public)/layout.tsx'
       - 'apps/web/components/catalog/MobileCatalogDropdowns.css'
       - 'tests/browser/mobile-filter-*'
+      - 'tests/browser/catalog-multi-photo*'
       - '.github/workflows/verify-mobile-filter-overlays.yml'
 concurrency:
   group: mobile-filters-${{ github.ref }}
