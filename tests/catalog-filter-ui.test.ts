@@ -23,7 +23,8 @@ test("catalog filters apply automatically and show the active query", () => {
   const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
   assert.match(source, /router\.push/);
   assert.match(source, /catalogQuery/);
-  assert.doesNotMatch(source, /Показать автомобили/);
+  // Explicit close action complements automatic application; it is not a second submit gate.
+  assert.match(source, /type="button" data-ac-react-close="1" onClick=\{\(\) => setMobileOpen\(false\)\}[^>]*>Показать автомобили/);
   assert.doesNotMatch(source, /type="submit"/);
   assert.match(source, /aria-label="Выбранные параметры"/);
   assert.doesNotMatch(source, /key=\{`desktop-\$\{formKey\}`\}/, "a completed response must not remount the active input");
