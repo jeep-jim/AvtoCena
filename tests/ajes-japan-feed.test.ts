@@ -439,3 +439,16 @@ test('default order does not promote known electric or hybrid lots, explicit pri
  assert.match(ajesQuery({}).sql,/case when time in \('E','H','HE'\) then 1 else 0 end asc/);
  assert.match(ajesQuery({sort:'totalRub'}).sql,/order by finish asc, auction_date desc, id asc/);
 });
+
+test('partial card retries after the short cooldown instead of pinning missing fields for thirty minutes',async()=>{
+ const {AjesUnavailable}=await import('../apps/web/lib/catalog/ajes-client');
+ let now=Date.now(),reserved=0;const clock=mock.method(Date,'now',()=>now);
+ const saved={items:[ajesLot({...row,TIME:''},'stats',false)],page:1,pageSize:1,observedAt:new Date(now).toISOString()};
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},readListedDetail:async()=>saved,reserve:async()=>{if(++reserved===1)throw new AjesUnavailable('quota_exhausted');},fetcher:async()=>new Response(JSON.stringify([{...row,TIME:'D'}]))});
+ try{
+  assert.equal((await client.read({id:row.ID},'127.0.0.1')).partial,true);
+  now+=31000;
+  const fresh=await client.read({id:row.ID},'127.0.0.1');
+  assert.equal(fresh.stale,false);assert.equal(fresh.items[0].sourceFuel,'D');assert.equal(reserved,2);
+ }finally{clock.mock.restore();}
+});

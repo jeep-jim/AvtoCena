@@ -9,7 +9,7 @@ export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
   // Refusals may retain an old card for this visitor, but must not poison others.
-  const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2});
+  const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*1000,concurrency:2});
   // Bounded snapshots of rows the visitor already saw, not fabricated full details.
   const listed=new Map<string,{value:any;bytes:number}>();let listedBytes=0;
   const failures=new Map<string,{reason:string;until:number}>();
