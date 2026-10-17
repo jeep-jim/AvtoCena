@@ -1,3 +1,5 @@
+import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {readAjesQueryCache,ajesQueryCacheLocation} from '../apps/web/lib/catalog/ajes-query-cache';
 import {getJsonStorage} from '../apps/web/lib/data';
 async function main(){
  const store=getJsonStorage(),found=new Map<string,any>(),sample=new Map<string,any>();
@@ -13,6 +15,17 @@ async function main(){
  const rows=[...sample.values()],dates=rows.map(l=>l.auctionDate).filter(Boolean).sort(),fuels=rows.reduce((a,l)=>{const k=String(l.sourceFuel||'(empty)');a[k]=(a[k]||0)+1;return a;},{} as Record<string,number>);
  console.log('AJES_CACHE_SAMPLE',JSON.stringify({uniqueLots:rows.length,dateMin:dates[0],dateMax:dates.at(-1),fuelValues:fuels,rawTimeEvidence:rows.filter(l=>l.evidence?.fields?.includes('TIME')).length,rawTimeEmpty:rows.filter(l=>l.evidence?.fields?.includes('TIME')&&!String(l.evidence.values?.TIME||'').trim()).length}));
  console.log('AJES_MATCHES',found.size);
+ for(const [label,params] of [['all',{}],['KG11',{chassis:'KG11'}]] as const){
+  const sql=ajesQuery({...params,aggregate:'count'}).sql;
+  const count=await readAjesQueryCache(store,sql);
+  console.log('AJES_EXACT_COUNT',JSON.stringify({label,found:!!count,total:count?.total,observedAt:count?.observedAt}));
+ }
+ for(let page=1;page<=4;page++){
+  const sql=ajesQuery({aggregate:'models',page}).sql;
+  const directory=await readAjesQueryCache(store,sql);
+  console.log('AJES_EXACT_DIRECTORY',JSON.stringify({page,found:!!directory,received:directory?.received,observedAt:directory?.observedAt,total:directory?.models?.reduce((n:number,m:any)=>n+m.total,0)}));
+  if(!directory||directory.received<500)break;
+ }
  const searchMatches=rows.filter(l=>String(l.chassisCode||'').toUpperCase()==='LA350A'&&String(l.lot)==='2910');
  console.log('AJES_SEARCH_SAVED',JSON.stringify({chassis:'LA350A',lot:'2910',matches:searchMatches.map(l=>({id:l.id,make:l.make,model:l.model,year:l.year,observedAt:l.savedAt,fuel:l.sourceFuel,rawTime:l.evidence?.values?.TIME}))}));
  for(const table of ['main','stats']){const q:any=await store.readJson('catalog/operations/ajes-quota-'+table+'.json',null);console.log('AJES_QUOTA_STATE',JSON.stringify({table,buckets:q?.buckets}));}
