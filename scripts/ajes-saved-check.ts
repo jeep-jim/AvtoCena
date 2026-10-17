@@ -1,14 +1,17 @@
 import {getJsonStorage} from '../apps/web/lib/data';
 async function main(){
- const store=getJsonStorage(),found=new Map<string,any>();
+ const store=getJsonStorage(),found=new Map<string,any>(),sample=new Map<string,any>();
  const lock:any=await store.readJson('catalog/import-lock.json',null);
  console.log('CATALOG_PREPARE_LOCK',JSON.stringify({present:!!lock,operationType:lock?.operationType,lockedUntil:lock?.lockedUntil}));
  for(let start=0;start<128;start+=8){
   const slots=await Promise.all(Array.from({length:8},(_,n)=>store.readJson('catalog/partner-cache/ajes/queries/'+(start+n)+'.json',null).catch(()=>null)));
   for(const slot of slots as any[])for(const lot of slot?.value?.items||[]){
+   if(lot.table==='stats'&&(!sample.has(lot.id)||Date.parse(slot.value.observedAt)>=Date.parse(sample.get(lot.id).savedAt)))sample.set(lot.id,{...lot,savedAt:slot.value.observedAt,evidence:slot.value.sourceEvidenceById?.[lot.id]});
    if(/^TOYOTA$/i.test(lot.make||'')&&/^COROLLA[ -]CROSS$/i.test(lot.model||'')&&lot.year===2023&&lot.finalPriceJpy===3302000&&(!found.has(lot.id)||Date.parse(slot.value.observedAt)>=Date.parse(found.get(lot.id).savedAt)))found.set(lot.id,{...lot,savedAt:slot.value.observedAt,schemaVersion:slot.value.schemaVersion,sourceEvidence:slot.value.sourceEvidenceById?.[lot.id]});
   }
  }
+ const rows=[...sample.values()],dates=rows.map(l=>l.auctionDate).filter(Boolean).sort(),fuels=rows.reduce((a,l)=>{const k=String(l.sourceFuel||'(empty)');a[k]=(a[k]||0)+1;return a;},{} as Record<string,number>);
+ console.log('AJES_CACHE_SAMPLE',JSON.stringify({uniqueLots:rows.length,dateMin:dates[0],dateMax:dates.at(-1),fuelValues:fuels,rawTimeEvidence:rows.filter(l=>l.evidence?.fields?.includes('TIME')).length,rawTimeEmpty:rows.filter(l=>l.evidence?.fields?.includes('TIME')&&!String(l.evidence.values?.TIME||'').trim()).length}));
  console.log('AJES_MATCHES',found.size);
  for(const table of ['main','stats']){const q:any=await store.readJson('catalog/operations/ajes-quota-'+table+'.json',null);console.log('AJES_QUOTA_STATE',JSON.stringify({table,buckets:q?.buckets}));}
  const raw:any=await store.readJson('catalog/partner-cache/ajes/evidence/stats-last-detail.json',null);
