@@ -19,7 +19,7 @@ test('new paid source switches migrate off without changing old China or enablin
 
 test('preview uses fixed table and real caller address, strips unrelated fields, caches only safe rows',async()=>{
  let saved:AjesMarketPreview|null=null,calls=0,reservations=0,enabled=true;
- const preview=createAjesMarketPreview({password:async()=> 'fixture-secret',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{reservations++;},read:async()=>saved,save:async(_m,v)=>{saved=v;},fetcher:async input=>{
+ const preview=createAjesMarketPreview({password:async()=> 'fixture-secret',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async market=>{assert.equal(market,'china');reservations++;},read:async()=>saved,save:async(_m,v)=>{saved=v;},fetcher:async input=>{
   calls++;const url=new URL(String(input));assert.equal(url.searchParams.get('ip'),'127.0.0.1');assert.equal(url.searchParams.get('sql'),'select * from china limit 5');
   return new Response(JSON.stringify([{ID:'sample',YEAR:'2024',PRICE:'123',SELLER_PHONE:'must-not-retain',IMAGES:'https://example.com/private?token=secret'}]));
  }});

@@ -122,12 +122,14 @@ function storage(){
  const objects=new Map<string,{value:any;etag:number}>();
  return {readJsonWithMeta:async(key:string)=>{const v=objects.get(key);return{found:!!v,value:v?structuredClone(v.value):null,etag:v?String(v.etag):undefined};},writeJson:async(key:string,value:any,condition:any)=>{const old=objects.get(key);if((condition.ifNoneMatch&&old)||(condition.ifMatch&&condition.ifMatch!==String(old?.etag)))throw new StorageConflictError();objects.set(key,{value:structuredClone(value),etag:(old?.etag??0)+1});}} as unknown as JsonStorage;
 }
-test('durable quota uses conditional reservations and independent pools, including failures',async()=>{
-  const s=storage(),now=Date.now();
-  const attempts=await Promise.allSettled(Array.from({length:5},()=>reserveAjesRequest(s,'stats',now,3)));
-  assert.equal(attempts.filter(r=>r.status==='fulfilled').length,3);
-  await assert.rejects(reserveAjesRequest(s,'stats',now+24*3600000,3),/quota_exhausted/);
-  await reserveAjesRequest(s,'main',now,3);await reserveAjesRequest(s,'stats',now+25*3600000,3);
+test('usage accounting retains concurrent attempts and independent tables without a local daily cutoff',async()=>{
+ const s=storage(),now=Date.now(),hour=Math.floor(now/3600000);
+ await s.writeJson('catalog/operations/ajes-quota-stats.json',{buckets:{[hour]:19020}},{ifNoneMatch:'*'});
+ await Promise.all(Array.from({length:5},()=>reserveAjesRequest(s,'stats',now)));
+ assert.equal((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-stats.json',null)).value.buckets[hour],19025);
+ for(const table of ['china','korea'] as const){await reserveAjesRequest(s,table,now);assert.equal((await s.readJsonWithMeta<any>(`catalog/operations/ajes-quota-${table}.json`,null)).value.buckets[hour],1);}
+ await reserveAjesRequest(s,'stats',now+25*3600000);
+ assert.deepEqual((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-stats.json',null)).value.buckets,{[hour+25]:1});
 });
 test('legacy controls gain only new disabled feed; corruption and old source revival remain blocked',()=>{
   const legacy=defaultCollectionControls();delete legacy.sources.ajes_japan_feed;
@@ -516,27 +518,13 @@ test('quota failure can return saved exact search but never a successful empty a
  await assert.rejects(()=>client.read({chassis:'LA350A',lotNumber:'9999'},'127.0.0.1'),/quota_exhausted/);
 });
 
-test('counter reserve uses only twenty safety-margin attempts without reopening list quota',async()=>{
- const s=storage(),now=Date.now(),hour=Math.floor(now/3600000);
- await s.writeJson('catalog/operations/ajes-quota-stats.json',{buckets:{[hour]:19000}},{ifNoneMatch:'*'});
- await assert.rejects(reserveAjesRequest(s,'stats',now),/quota_exhausted/);
- for(let n=0;n<20;n++)await reserveAjesRequest(s,'stats',now,19000,true);
- await assert.rejects(reserveAjesRequest(s,'stats',now,19000,true),/quota_exhausted/);
- await assert.rejects(reserveAjesRequest(s,'stats',now),/quota_exhausted/);
- const state:any=await s.readJsonWithMeta('catalog/operations/ajes-quota-stats.json',null);
- assert.equal(state.value.buckets[hour],19020);
-});
-test('list quota cooldown does not consume or block the separate counter reserve',async()=>{
- const s=storage(),now=Date.now(),hour=Math.floor(now/3600000);let calls=0;
- await s.writeJson('catalog/operations/ajes-quota-stats.json',{buckets:{[hour]:19000}},{ifNoneMatch:'*'});
- const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:(t,k)=>reserveAjesRequest(s,t,now,19000,k==='count'),fetcher:async()=>{calls++;return new Response(JSON.stringify([{TAG0:'123'}]));}});
- await assert.rejects(client.read({},'127.0.0.1'),/quota_exhausted/);
- assert.equal((await client.read({aggregate:'count'},'127.0.0.1')).total,123);
- assert.equal((await client.read({aggregate:'count'},'127.0.0.1')).total,123);
- await assert.rejects(client.read({chassis:'KG11'},'127.0.0.1'),/quota_exhausted/);
+test('supplier rate refusal still stops a repeated request after local daily cutoff removal',async()=>{
+ let calls=0;
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{calls++;return new Response('',{status:429});}});
+ await assert.rejects(client.read({},'127.0.0.1'),/http_429/);
+ await assert.rejects(client.read({},'127.0.0.1'),/http_429/);
  assert.equal(calls,1);
 });
-
 
 test('brand directory is complete independently of a 24-car page and protects its cache',async()=>{
  const {readAjesMakeDirectory}=await import('../apps/web/lib/catalog/ajes-client');

@@ -47,3 +47,6 @@
 
 # Owner Japan age update — 17.10.2026
 - The owner explicitly lowered all active Japanese inventory and filter/calculator year bounds to 2008 inclusive. This supersedes earlier 2010+ rules. Non-Japan six-year age policy is unchanged. Purchased AJ System China/Korea are separate sources; do not disable the existing China supplier before acceptance of its replacement.
+
+# Owner AJES local-limit update — 17.10.2026
+- The owner explicitly removed the application daily request ceiling (19000/19020). Retain separate usage telemetry for main/stats/china/korea without resetting history. This does not override supplier quotas/refusals, IP provenance, cache/concurrency bounds, collection switches or the prohibition on bulk copying. Do not report the local usage counter as a supplier-enforced quota.

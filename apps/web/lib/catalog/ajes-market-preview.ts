@@ -7,7 +7,7 @@ export function ajesPreviewMarket(value:unknown):AjesPreviewMarket {
 }
 const fields=['ID','MARKA_NAME','MODEL_NAME','YEAR','ENG_V','PW','TIME','FUEL','FINISH','PRICE','CURRENCY','KUZOV','MILEAGE','KPP','PRIV','STATUS'];
 export type AjesMarketPreview={market:AjesPreviewMarket;observedAt:string;received:number;fields:string[];rows:Record<string,string|number|null>[]};
-type Dependencies={password:()=>Promise<string|undefined>;assertEnabled:(market:AjesPreviewMarket)=>Promise<void>;reserve:()=>Promise<void>;read:(market:AjesPreviewMarket)=>Promise<AjesMarketPreview|null>;save:(market:AjesPreviewMarket,value:AjesMarketPreview)=>Promise<unknown>;fetcher?:typeof fetch};
+type Dependencies={password:()=>Promise<string|undefined>;assertEnabled:(market:AjesPreviewMarket)=>Promise<void>;reserve:(market:AjesPreviewMarket)=>Promise<void>;read:(market:AjesPreviewMarket)=>Promise<AjesMarketPreview|null>;save:(market:AjesPreviewMarket,value:AjesMarketPreview)=>Promise<unknown>;fetcher?:typeof fetch};
 /** Owner-only schema inspection; no publication, price conversion or invented units. */
 export function createAjesMarketPreview(deps:Dependencies){
  const failures=new Map<string,number>();
@@ -25,7 +25,7 @@ export function createAjesMarketPreview(deps:Dependencies){
   const existing=pending.get(key);if(existing)return existing;
   const task=(async()=>{
    try{
-    await deps.assertEnabled(market);await deps.reserve();
+    await deps.assertEnabled(market);await deps.reserve(market);
     const url=new URL('http://87.242.72.57/gzip/');
     url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:`select * from ${market} limit 5`}).toString();
     const response=await (deps.fetcher||fetch)(url,{redirect:'error',cache:'no-store',signal:AbortSignal.timeout(20000)});

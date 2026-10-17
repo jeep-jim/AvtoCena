@@ -7,8 +7,8 @@ import {createAjesMarketPreview,type AjesMarketPreview} from './ajes-market-prev
 export const previewAjesMarket=createAjesMarketPreview({
  password:ajesPassword,
  assertEnabled:market=>assertCollectionEnabled(`ajes_${market}_feed`),
- // Same existing budget as Japan stats; no new quota pool or reset for new tables.
- reserve:()=>reserveAjesRequest(getJsonStorage(),'stats'),
+ // Separate usage telemetry by actual table; supplier limits remain authoritative.
+ reserve:market=>reserveAjesRequest(getJsonStorage(),market),
  read:market=>getJsonStorage().readJson<AjesMarketPreview|null>(`integrations/ajes/preview-${market}.json`,null),
  save:(market,value)=>getJsonStorage().writeJson(`integrations/ajes/preview-${market}.json`,value),
 });
