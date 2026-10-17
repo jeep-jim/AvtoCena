@@ -40,3 +40,37 @@ test('quota failure never calls supplier and source refusal stops both preview m
  await assert.rejects(rejected('china','127.0.0.1'),/^Error: visitor_restricted$/);
  await assert.rejects(rejected('korea','127.0.0.1'),/^Error: preview_cooldown$/);assert.equal(calls,1);
 });
+
+test('diagnostics retain exact refusal and caller IP without credential or response body',async()=>{
+ let diagnostic:any;let calls=0;
+ const preview=createAjesMarketPreview({password:async()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},read:async()=>null,save:async()=>{},saveDiagnostic:async(_market,value)=>{diagnostic=value;},fetcher:async()=>{calls++;return new Response('bot2 fixture-secret private-body');}});
+ await assert.rejects(preview('korea','192.0.2.11'),(error:any)=>{
+  assert.equal(error.message,'visitor_restricted');assert.deepEqual(error.diagnostic,diagnostic);return true;
+ });
+ assert.equal(diagnostic.market,'korea');assert.equal(diagnostic.clientIp,'192.0.2.11');
+ assert.equal(diagnostic.sql,'select * from korea limit 5');assert.equal(diagnostic.requestStarted,true);
+ assert.equal(diagnostic.httpStatus,200);assert.equal(diagnostic.providerCode,'bot2');
+ assert.ok(Number.isFinite(Date.parse(diagnostic.startedAt)));assert.ok(Number.isFinite(Date.parse(diagnostic.finishedAt)));
+ assert.equal(/fixture-secret|private-body|code=/.test(JSON.stringify(diagnostic)),false);
+ await assert.rejects(preview('china','192.0.2.11'),/preview_cooldown/);assert.equal(calls,1);
+});
+
+test('diagnostics distinguish local accounting failure from an upstream HTTP refusal',async()=>{
+ let diagnostic:any;let calls=0;
+ const deps={password:async()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},read:async()=>null,save:async()=>{},saveDiagnostic:async(_market:any,value:any)=>{diagnostic=value;},fetcher:async()=>{calls++;return new Response('private response',{status:429});}};
+ const local=createAjesMarketPreview({...deps,reserve:async()=>{throw Error('quota_busy');}});
+ await assert.rejects(local('korea','192.0.2.11'),/quota_busy/);
+ assert.equal(calls,0);assert.equal(diagnostic.requestStarted,false);assert.equal(diagnostic.httpStatus,null);
+ const remote=createAjesMarketPreview(deps);
+ await assert.rejects(remote('korea','192.0.2.11'),/http_429/);
+ assert.equal(calls,1);assert.equal(diagnostic.httpStatus,429);assert.equal(diagnostic.providerCode,null);
+ assert.equal(JSON.stringify(diagnostic).includes('private response'),false);
+ await assert.rejects(remote('korea','192.0.2.11'),/preview_cooldown/);assert.equal(calls,1);
+});
+
+test('diagnostic storage failure does not hide original refusal or initiate another request',async()=>{
+ let calls=0;
+ const preview=createAjesMarketPreview({password:async()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},read:async()=>null,save:async()=>{},saveDiagnostic:async()=>{throw Error('storage-secret');},fetcher:async()=>{calls++;return new Response('bot7');}});
+ await assert.rejects(preview('korea','192.0.2.11'),(error:any)=>{assert.equal(error.message,'visitor_restricted');assert.equal(error.diagnostic.providerCode,'bot7');return true;});
+ assert.equal(calls,1);
+});
