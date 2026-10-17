@@ -1,16 +1,13 @@
-name: Actions artifact cleanup
+name: Actions artifact cleanup audit
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/actions-artifact-cleanup.yml']
 permissions:
   contents: read
-  actions: write
+  actions: read
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 15
     steps:
       - uses: actions/github-script@v7
         with:
@@ -35,25 +32,3 @@ jobs:
             }
             console.log('AUDIT_TOTAL '+JSON.stringify({records:artifacts.length,live:live.length,bytes:live.reduce((n,a)=>n+a.size_in_bytes,0)}));
             for(const g of [...groups.values()].sort((a,b)=>b.bytes-a.bytes)) {delete g.ids;console.log('AUDIT_GROUP '+JSON.stringify(g));}
-            // Explicit owner request: remove at most 80% of existing entries, only audited report names.
-            const allowed = new Set(["crm-mobile-layout","green-budget-browser","crm-security-live-offers","dealer-map-preview","site-chat-screenshots","owner-polish","offer-header-preview","qr-gallery-browser-qa","dealer-offer-services","autocalc-preview","catalog-quality-rebuild-reports-china","dealer-profile-production-preview","attached-parameter-dropdowns","buyer-pdf-preview","delivery-discussion-preview","mobile-filter-overlays","catalog-publication-diagnosis","city-picker","catalog-final-performance-journey","catalog-quality-rebuild-reports-europe","editorial-specifications","production-build-log","currency-consistency","catalog-live-journey","catalog-quality-rebuild-reports-korea","registry-cleanup-report","catalog-footer-stop","catalog-quality-rebuild-reports-georgia","sticky-catalog","dealer-selection-screenshots","catalog-storage-cleanup-report","catalog-operations-health","metrika-lead-attribution","security-photo-audit","desktop-action-icons","web-typecheck-log","model-suggestions","catalog-quality-rebuild-reports-uae","catalog-budget-shared-report","catalog-autonomy-watchdog","yandex-direct-feed-report","catalog-quality-rebuild-reports","candidate-smoke-china","vehicle-knowledge-validation","candidate-smoke-japan","candidate-smoke-georgia","budget-index-storage-preflight","buyer-gallery-originals-report","live-probe-china-0","live-probe-japan-3","live-probe-japan-2","live-probe-japan-0","live-probe-china-3","live-probe-japan-1","live-probe-china-1","live-probe-china-2","live-probe-georgia-2","live-probe-georgia-3","live-probe-georgia-1","live-probe-georgia-0","catalog-translation-report","catalog-green-report"]);
-            const cutoff=Date.now()-24*3600*1000;
-            const keep=new Set();
-            for(const name of allowed){
-              const same=live.filter(a=>a.name===name).sort((a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at)||b.id-a.id);
-              same.slice(0,2).forEach(a=>keep.add(a.id));
-            }
-            const rate = (await github.rest.rateLimit.get()).data.resources.core;
-            const budget=Math.max(0,rate.remaining-180);
-            const candidates=live.filter(a=>allowed.has(a.name)&&!keep.has(a.id)&&Date.parse(a.created_at)<cutoff)
-              .sort((a,b)=>b.size_in_bytes-a.size_in_bytes||Date.parse(a.created_at)-Date.parse(b.created_at))
-              .slice(0,Math.min(700,budget,Math.floor(live.length*0.8)));
-            console.log('CLEANUP_PLAN '+JSON.stringify({count:candidates.length,bytes:candidates.reduce((n,a)=>n+a.size_in_bytes,0),preserved:live.length-candidates.length}));
-            let deleted=0,bytes=0;
-            for(const artifact of candidates){
-              await github.rest.actions.deleteArtifact({...context.repo,artifact_id:artifact.id});
-              deleted++;bytes+=artifact.size_in_bytes;
-              if(deleted%100===0)console.log('CLEANUP_PROGRESS '+JSON.stringify({deleted,bytes}));
-              await new Promise(r=>setTimeout(r,1100));
-            }
-            console.log('CLEANUP_RESULT '+JSON.stringify({deleted,bytes,keptAtLeast:live.length-deleted}));
