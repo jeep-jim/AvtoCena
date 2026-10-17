@@ -2,6 +2,7 @@ import 'server-only';
 import {assertCollectionEnabled} from './collection-controls';
 import {headers} from 'next/headers';
 import {cache} from 'react';
+import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
 import {readAjesModelDirectory} from './ajes-client';
 import {readAjesPublic} from './ajes-public';
@@ -14,9 +15,12 @@ export const readAjesCount=cache(async(key='{}'):Promise<number>=>{
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
  return result.total;
 });
+const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
 export async function readAjesDirectory(params:Record<string,unknown>={}){
  const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
- return readAjesModelDirectory(ajesClient,q,(await headers()).get('x-real-ip')||'');
+ await assertCollectionEnabled('ajes_japan_feed');
+ const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
+ return directories.get(key,()=>readAjesModelDirectory(ajesClient,q,ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const query=ajesCatalogQuery(params);

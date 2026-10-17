@@ -13,7 +13,7 @@ export default function PublicError({ reset }: { error: Error & { digest?: strin
       <h1 className="mt-3 text-3xl font-black md:text-4xl">Страница временно недоступна</h1>
       <p className="mt-4 font-semibold leading-7 text-white/55">Попробуйте обновить страницу. Ваши выбранные параметры не потеряются.</p>
       <div className="mt-7 grid gap-3 sm:grid-cols-2">
-        <button type="button" onClick={reset} className="avto-button min-h-14 rounded-2xl px-5 font-black">Повторить</button>
+        <button type="button" onClick={()=>window.location.reload()} className="avto-button min-h-14 rounded-2xl px-5 font-black">Повторить</button>
         <a href="/" className="flex min-h-14 items-center justify-center rounded-2xl bg-white/[.07] px-5 font-black">На главную</a>
       </div>
     </section>

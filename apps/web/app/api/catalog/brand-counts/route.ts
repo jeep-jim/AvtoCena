@@ -33,7 +33,7 @@ export async function GET(request: Request) {
       const params={...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
       const result=await readAjesDirectory(params),counts:Record<string,number>={},modelCounts:Record<string,number>={};
       for(const row of result.models){counts[row.make]=(counts[row.make]||0)+row.total;modelCounts[row.make]=(modelCounts[row.make]||0)+1;}
-      return NextResponse.json({generationId:result.observedAt,counts,modelCounts},{headers:{'Cache-Control':'private, no-store'}});
+      return NextResponse.json({generationId:result.observedAt,counts,modelCounts},{headers:{'Cache-Control':'private, max-age=30, stale-while-revalidate=60'}});
     }catch{return NextResponse.json({error:'japan_counts_unavailable'},{status:503});}
   }
   const params: CatalogSearchParams = {

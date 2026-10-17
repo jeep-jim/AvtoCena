@@ -51,6 +51,7 @@ type FilterDraft = {
   powerTo: string;
   auctionGrade: string;
   chassis:string;
+  frameNumber:string;
   lotNumber:string;
 };
 type FilterChip = { key: string; label: string; grade?: string };
@@ -136,7 +137,7 @@ function formatNumber(value: number) { return new Intl.NumberFormat("ru-RU").for
 function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
     stock: initial.stock || "",
-    chassis:initial.chassis||"",lotNumber:initial.lotNumber||"",
+    chassis:initial.chassis||"",frameNumber:initial.frameNumber||"",lotNumber:initial.lotNumber||"",
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
     yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: (initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
@@ -154,7 +155,7 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
 function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
-  if (draft.market === "japan") { add("chassis",draft.chassis);add("lotNumber",draft.lotNumber);add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
+  if (draft.market === "japan") { add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
   add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
@@ -293,7 +294,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
   return <>
     {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch multiple sourceItems={sourceModels} contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market==="japan"&&draft.stock==="green"?"green":draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
     <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 ${auctionResults?"lg:grid-cols-3":"lg:grid-cols-4"} ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
-    {auctionResults&&<div className="mt-2.5 grid gap-2.5 md:grid-cols-3"><label className="text-xs font-bold text-[var(--ac-muted)]">Код кузова<input name="chassis" value={draft.chassis} onChange={e=>setField('chassis',e.target.value.toUpperCase())} placeholder="Например, RK5" maxLength={80} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><label className="text-xs font-bold text-[var(--ac-muted)]">Номер лота<input name="lotNumber" value={draft.lotNumber} onChange={e=>setField('lotNumber',e.target.value.replace(/[^0-9]/g,''))} inputMode="numeric" maxLength={10} placeholder="Номер с торгов" className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><div className="self-end"><AuctionGradeSelect value={draft.auctionGrade} onChange={v=>setField('auctionGrade',v)}/></div><p className="text-xs text-[var(--ac-muted)] md:col-span-3">Код кузова ищется точно. Если привод в объявлении не указан, снимите условие по приводу и задайте код нужной модификации.</p></div>}
+    {auctionResults&&<div className="mt-2.5 grid gap-2.5 md:grid-cols-3"><label className="text-xs font-bold text-[var(--ac-muted)]">Код кузова<input name="chassis" value={draft.chassis} onChange={e=>setField('chassis',e.target.value.toUpperCase())} placeholder="Например, RK5" maxLength={80} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><label className="text-xs font-bold text-[var(--ac-muted)]">Номер лота<input name="lotNumber" value={draft.lotNumber} onChange={e=>setField('lotNumber',e.target.value.replace(/[^0-9]/g,''))} inputMode="numeric" maxLength={10} placeholder="Номер с торгов" className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><div className="self-end"><AuctionGradeSelect value={draft.auctionGrade} onChange={v=>setField('auctionGrade',v)}/></div><label className="text-xs font-bold text-[var(--ac-muted)]">Номер кузова<input name="frameNumber" value={draft.frameNumber} onChange={e=>setField('frameNumber',e.target.value.toUpperCase())} placeholder="Например, SKE-012345" maxLength={80} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><p className="self-end text-xs text-[var(--ac-muted)] md:col-span-2">Код и номер кузова ищутся точно. Если привод в объявлении не указан, снимите условие по приводу и задайте код нужной модификации.</p></div>}
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 ${auctionResults?"xl:grid-cols-3":"xl:grid-cols-4"}`}>
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={auctionResults?2010:1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
@@ -319,7 +320,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const [sortKey, setSortKey] = useState<SortKey>(initialSortState.key);
   const [sortDirection, setSortDirection] = useState<SortDir>(initialSortState.direction);
   const [electricFacets, setElectricFacets] = useState<Facets | null>(null);
-  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.chassis || initial.lotNumber || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
+  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.frameNumber || initial.chassis || initial.lotNumber || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
   const acknowledgedQuery = useRef(catalogQuery(draftFromInitial(initial), initialSortState.key, initialSortState.direction));
@@ -433,6 +434,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
+    if(draft.market==='japan'&&draft.frameNumber)rows.push({key:'frameNumber',label:`Номер кузова ${draft.frameNumber}`});
     if(draft.market==='japan'&&draft.chassis)rows.push({key:'chassis',label:`Кузов ${draft.chassis}`});
     if(draft.market==='japan'&&draft.lotNumber)rows.push({key:'lotNumber',label:`Лот ${draft.lotNumber}`});
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));

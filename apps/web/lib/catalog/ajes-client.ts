@@ -4,12 +4,25 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
   // Refusals may retain an old card for this visitor, but must not poison others.
   const visitorCache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2});
+  // Bounded snapshots of rows the visitor already saw, not fabricated full details.
+  const listed=new Map<string,{value:any;bytes:number}>();let listedBytes=0;
+  const failures=new Map<string,{reason:string;until:number}>();
+  const remember=(value:any)=>{
+    for(const lot of value.items||[]){
+      const key=lot.table+':'+lot.id,snapshot={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:value.observedAt,partial:true};
+      const bytes=Buffer.byteLength(JSON.stringify(snapshot));if(bytes>64*1024)continue;
+      listedBytes-=listed.get(key)?.bytes||0;listed.delete(key);listed.set(key,{value:snapshot,bytes});listedBytes+=bytes;
+      while(listed.size>600||listedBytes>4*1024*1024){const oldest=listed.keys().next().value!;listedBytes-=listed.get(oldest)!.bytes;listed.delete(oldest);}
+    }
+    return value;
+  };
+  const cooling=(key:string)=>{const value=failures.get(key);if(value&&value.until>Date.now())return value.reason;failures.delete(key);return null;};
   return {
     async read(input:unknown,clientIp:string) {
       const query=ajesQuery(input);
@@ -29,11 +42,13 @@ export function createAjesClient(deps:Dependencies) {
           &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
         const currentSchema=query.kind==='count'||query.kind==='models'||saved?.schemaVersion===2;
-        if(usable&&currentSchema&&age<30*60*1000)return {...saved,stale:false};
+        if(usable&&currentSchema&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL('http://87.242.72.57/gzip/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
         try {
+          const cooldown=cooling('quota:'+query.table)||cooling('visitor:'+clientIp)||cooling(visitorKey);
+          if(cooldown)throw new AjesUnavailable(cooldown);
           await deps.reserve(query.table);
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
           if(!response.ok)throw new AjesUnavailable(`http_${response.status}`);
@@ -91,11 +106,23 @@ export function createAjesClient(deps:Dependencies) {
             if(query.kind==='list')await deps.saveQuery?.(query.sql,result);
           }catch{}
 
-          return result;
+          return query.kind==='list'?remember(result):result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
-          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
-          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models')&&recoverable){await deps.assertEnabled();return {...saved,stale:true};}
+          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
+          if(error instanceof AjesUnavailable&&recoverable){
+            const key=error.reason==='quota_exhausted'?'quota:'+query.table:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+            // Do not extend an existing cooldown when merely reading the cached failure.
+            if(!cooling(key))failures.set(key,{reason:error.reason,until:Date.now()+(error.reason==='visitor_restricted'?300000:30000)});
+            while(failures.size>500)failures.delete(failures.keys().next().value!);
+          }
+          if(query.kind==='detail'&&!usable&&recoverable){
+            let fallback=listed.get(query.table+':'+query.id)?.value;
+            if(!fallback)try{fallback=await deps.readListedDetail?.(query.table,query.id!);}catch{}
+            const fallbackAge=Date.now()-Date.parse(fallback?.observedAt||'');
+            if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled();return {...fallback,partial:true,stale:true};}
+          }
+          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models')&&recoverable){await deps.assertEnabled();return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
           if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;
           const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';
@@ -110,17 +137,17 @@ function quotaNumber(value:string|null){return value!==null&&/^\d+$/.test(value)
 /** Supplier responses are capped at 500 rows. Never treat a full page as a complete directory. */
 export async function readAjesModelDirectory(client:ReturnType<typeof createAjesClient>,input:Record<string,unknown>,ip:string){
  const models:Array<{make:string;model:string;total:number}>=[];
- let observedAt='';
+ let observedAt='',stale=false;
  const identities=new Set<string>();
  for(let page=1;page<=10;page++){
   const result=await client.read({...input,aggregate:'models',page},ip);
-  observedAt=observedAt||result.observedAt;
+  observedAt=observedAt||result.observedAt;stale=stale||Boolean(result.stale);
   for(const model of result.models||[]){
    const key=JSON.stringify([model.make,model.model]);
    if(identities.has(key))throw new AjesUnavailable('directory_page_repeated');
    identities.add(key);models.push(model);
   }
-  if(result.received<500)return {models,observedAt};
+  if(result.received<500)return {models,observedAt,stale};
  }
  throw new AjesUnavailable('directory_too_large');
 }

@@ -390,3 +390,52 @@ test('simultaneous requests from different visitors do not share a supplier refu
  const result=await Promise.all([client.read({table:'stats',id:row.ID},'203.0.113.1'),client.read({table:'stats',id:row.ID},'203.0.113.2')]);
  assert.equal(calls,2);assert.equal(result[0].stale,true);assert.equal(result[1].stale,false);assert.equal(result[1].items[0].sourceFuel,'D');
 });
+
+test('Coaster bus is excluded in pages, counts, and cached offer admission',()=>{
+ for(const model of ['COASTER','COASTER LX','COASTER-BIG VAN']){
+  assert.equal(ajesLot({...row,MODEL_NAME:model},'stats',false),null);
+  assert.equal(catalogHeavyVehicleExcluded({make:'TOYOTA',model}),true);
+ }
+ for(const aggregate of [undefined,'count','models'] as const)assert.match(ajesQuery({aggregate}).sql,/marka_name='TOYOTA' and \(model_name='COASTER'/);
+ assert.ok(!heavyVehicleSqlExclusion(true).includes("model_name='COASTER'"));
+ assert.ok(ajesLot({...row,MODEL_NAME:'HIACE'},'stats',false));
+});
+test('chassis, full frame and leading-zero lot survive catalog parsing and SQL without broad matching',async()=>{
+ const {ajesCatalogQuery}=await import('../apps/web/lib/catalog/ajes-query');
+ const q=ajesCatalogQuery({market:'japan',chassis:'SKE',frameNumber:'SKE-012345',lotNumber:'030132',page:'2'});
+ for(const aggregate of [undefined,'count','models'] as const){
+  const sql=ajesQuery({...q,aggregate}).sql;
+  assert.ok(sql.includes("kuzov='SKE'"));assert.ok(sql.includes("serial='SKE-012345'"));assert.ok(sql.includes("lot='030132'"));
+ }
+ for(const frameNumber of ["SKE' OR 1=1",'SKE%', 'SKE_'])assert.throws(()=>ajesQuery({frameNumber}));
+});
+test('quota exhaustion opens the exact previously listed car without a full-detail fetch',async()=>{
+ let calls=0,reserves=0,enabled=true;
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{if(++reserves>1)throw new (await import('../apps/web/lib/catalog/ajes-client')).AjesUnavailable('quota_exhausted');},fetcher:async()=>{calls++;return new Response(JSON.stringify([{...row,TIME:'D'}]));}});
+ await client.read({},'203.0.113.1');
+ const detail=await client.read({id:row.ID},'203.0.113.1');
+ assert.equal(detail.items[0].id,row.ID);assert.equal(detail.items[0].sourceFuel,'D');assert.equal(detail.partial,true);assert.equal(detail.stale,true);assert.equal(detail.items[0].images[0].role,'vehicle');assert.equal(calls,1);
+ await assert.rejects(()=>client.read({id:'unseen'},'203.0.113.1'),/quota_exhausted/);
+ assert.equal(reserves,2,'cooldown must not repeat quota storage reservations');
+ enabled=false;await assert.rejects(()=>client.read({id:row.ID},'203.0.113.1'),/disabled/);
+});
+test('supplier refusal is cooled per real visitor across queries, not across visitors',async()=>{
+ let calls=0;
+ const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async input=>{calls++;return new URL(String(input)).searchParams.get('ip')==='203.0.113.1'?new Response('bot2 test'):new Response(JSON.stringify([row]));}});
+ await assert.rejects(()=>client.read({make:'TOYOTA'},'203.0.113.1'),/visitor_restricted/);
+ await assert.rejects(()=>client.read({make:'SUBARU'},'203.0.113.1'),/visitor_restricted/);
+ assert.equal(calls,1);
+ assert.equal((await client.read({make:'SUBARU'},'203.0.113.2')).items.length,1);assert.equal(calls,2);
+});
+test('cold detail recovery checks saved list identity and age and never masks identity mismatch',async()=>{
+ const {AjesUnavailable}=await import('../apps/web/lib/catalog/ajes-client');
+ const saved={items:[ajesLot(row,'stats',false)],page:1,pageSize:1,observedAt:new Date().toISOString()};
+ const deps={password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{throw new AjesUnavailable('quota_exhausted');},readListedDetail:async()=>saved};
+ assert.equal((await createAjesClient(deps).read({id:row.ID},'127.0.0.1')).partial,true);
+ for(const bad of [{...saved,items:[{...saved.items[0],id:'wrong'}]},{...saved,observedAt:new Date(Date.now()-8*86400000).toISOString()}])await assert.rejects(()=>createAjesClient({...deps,readListedDetail:async()=>bad}).read({id:row.ID},'127.0.0.1'),/quota_exhausted/);
+ await assert.rejects(()=>createAjesClient({...deps,reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify([{...row,ID:'wrong'}]))}).read({id:row.ID},'127.0.0.1'),/identity_mismatch/);
+});
+test('default order does not promote known electric or hybrid lots, explicit price sort is unchanged',()=>{
+ assert.match(ajesQuery({}).sql,/case when time in \('E','H','HE'\) then 1 else 0 end asc/);
+ assert.match(ajesQuery({sort:'totalRub'}).sql,/order by finish asc, auction_date desc, id asc/);
+});

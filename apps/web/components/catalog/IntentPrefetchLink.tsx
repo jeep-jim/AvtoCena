@@ -22,7 +22,7 @@ export function IntentPrefetchLink({ href, className, children, eager = false }:
   useEffect(() => cancel, [href, cancel]);
   const prefetch = useCallback(() => {
     cancel();
-    if (prefetched.current === href) return;
+    if (href.includes('--ajes-stats-') || href.includes('/ajes-stats-') || prefetched.current === href) return;
     prefetched.current = href;
     router.prefetch(href);
   }, [href, router, cancel]);

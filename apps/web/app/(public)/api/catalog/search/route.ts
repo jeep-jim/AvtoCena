@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     try{
       const params=Object.fromEntries(p);
       const result=p.get('countOnly')==='1'?{total:await readAjesCount(JSON.stringify(params)),items:[]}:await readAjesCatalogPage(params);
-      return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, no-store'}});
+      return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30'}});
     }catch(e){const invalid=e instanceof AjesInputError||e instanceof AjesFilterUnavailable;return NextResponse.json({ok:false,error:e instanceof AjesFilterUnavailable?'japan_filters_unavailable':invalid?'invalid_japan_query':'japan_search_unavailable'},{status:invalid?400:503,headers:{'Cache-Control':'no-store'}});}
   }
   const query: Parameters<typeof searchOffers>[0] = {

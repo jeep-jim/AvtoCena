@@ -40,7 +40,7 @@ export function useSavedCalculationPreview(offer:any):SavedCalculationPreview|un
   if(!listeners.size){stopRates=subscribePublicRates(rates=>{const key=JSON.stringify(rates.map(r=>[r.currency,r.effectiveRate,r.rateDate]));if(rateKey&&key!==rateKey)refresh();rateKey=key;});window.addEventListener("focus",refresh);window.addEventListener("avtocena:calculation-saved",refresh);}
   const set=listeners.get(offer.id)||new Set();set.add(receive);listeners.set(offer.id,set);
   const cached=known.get(offer.id);
-  if(cached && Date.now()-cached.at<1000)receive(cached.value);else queue(offer.id);
+  if(cached && Date.now()-cached.at<30000)receive(cached.value);else queue(offer.id);
   return()=>{set.delete(receive);if(!set.size)listeners.delete(offer.id);
    if(!listeners.size){stopRates?.();stopRates=undefined;window.removeEventListener("focus",refresh);window.removeEventListener("avtocena:calculation-saved",refresh);}
   };

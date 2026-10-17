@@ -78,7 +78,7 @@ function safeJsonLd(value: unknown) {
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
   const id = offerRouteId((await params).id);
   if (parseSpecialId(id)) return <>{children}</>;
-  const storedOffer = await getOfferForPage(id);
+  const storedOffer = await getOfferForPage(id).catch(error=>{if(id.startsWith('ajes-stats-'))return null;throw error;});
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   const saved = storedOffer ? await getSavedOfferCalculation(storedOffer) : null;
   const structuredData = offer ? offerStructuredData(id, offer) : null;

@@ -9,6 +9,9 @@ const fusoModels=['FIGHTER','SUPER GREAT','SUPERGREAT','AERO QUEEN','AERO ACE','
 // Fuso: mitsubishi-fuso.com/en/product/fighter/ and fuso.com.au/range/bus/standard/25-seat/
 // UD: udtrucks.com/china/about-us/innovation/product-history/1975
 export const heavyVehicleFamilies = [
+  // Toyota official Coaster bus/Big Van specification: GVW exceeds 3500 kg.
+  // https://toyota.jp/pages/contents/coaster/004_b_022/pdf/spec/coaster_bigvan_spec_201608.pdf
+  {make:'TOYOTA',models:['COASTER']},
   {make:'HINO',models:['RANGER','PROFIA','SELEGA','SEREGA']},
   {make:'ISUZU',models:['FORWARD','GIGA','GALA','ERGA']},
   {make:'MITSUBISHI',models:fusoModels},
@@ -25,8 +28,8 @@ export function knownHeavyVehicleFamily(make:unknown,model:unknown){
   name===family||[' ','-','/'].some(separator=>name.startsWith(family+separator))));
 }
 /** Fixed identifiers only; same family boundary as the local guard. */
-export function heavyVehicleSqlExclusion(){
- return heavyVehicleFamilies.map(group=>`not (marka_name='${group.make}' and (${group.models.flatMap(model=>[
+export function heavyVehicleSqlExclusion(legacyCache=false){
+ return heavyVehicleFamilies.filter(group=>!legacyCache||group.make!=='TOYOTA').map(group=>`not (marka_name='${group.make}' and (${group.models.flatMap(model=>[
   `model_name='${model}'`,...[' ','-','/'].map(separator=>`model_name like '${model}${separator}%'`),
  ]).join(' or ')}))`).join(' and ');
 }

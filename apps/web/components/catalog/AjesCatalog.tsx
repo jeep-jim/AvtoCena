@@ -26,12 +26,14 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <section className={embedded?'w-full py-5':'mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
  <JapanSectionTabs active="auction" params={initial}/>
 
- <h1 className="flex items-center gap-3 text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl"><CatalogMarketFlag market="japan" className="h-6 w-9"/>Япония <span className="text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={result?.total??undefined}>· {formatCatalogCount(result?.total??NaN)}</span></h1>
+ <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">Япония</span></nav>
+ <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто под заказ</h1>
  <p role="status" className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" data-catalog-result-count={result?.total??undefined}><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{result?.total!=null?`Найдено: ${formatCatalogCount(result.total)}`:'Количество уточняется'}</p>
  <CatalogFilters initial={initial} facets={facets} resultCount={result?.total??undefined} auctionResults/>
  {makes.length>0&&<BrandLogoRail brands={makes} resultCount={result?.total??undefined}/>}
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href="/cars?market=japan">Сбросить условия</Link></p>}
- {result&&<div className="mt-8">{result.stale&&<p className="mb-4 text-sm text-[var(--ac-muted)]">Сохранённые результаты от {new Date(result.observedAt).toLocaleDateString('ru-RU')}. Обновление временно недоступно.</p>}
+ {result&&<div className="mt-8">
+ <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market="japan" className="h-5 w-7 md:h-6 md:w-9"/><span>Япония</span>{result.total!=null&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={result.total}>· {formatCatalogCount(result.total)}</span>}</h2>
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market:'japan'} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.received===result.pageSize}/>
  </div>}
  </section>
