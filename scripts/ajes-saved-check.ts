@@ -11,16 +11,12 @@ async function main(){
   }
  }
  console.log('AJES_MATCHES',found.size);
- for(const query of [{table:'stats',make:'SUBARU',model:'FORESTER',chassis:'SKE',lotNumber:'30132'},{table:'stats',id:'0j4oBEkgoLQPes'}]){
-  try{const v=await ajesClient.read(query,process.env.AJES_DIAG_IP||'');console.log('AJES_TARGET',JSON.stringify({query,observedAt:v.observedAt,stale:v.stale,items:v.items.map((l:any)=>({id:l.id,make:l.make,model:l.model,lot:l.lot,chassis:l.chassisCode,date:l.auctionDate,fuel:l.sourceFuel,power:l.sourcePower,engine:l.engineCc,images:l.images?.length}))}));}
-  catch(e){console.log('AJES_TARGET_FAILURE',JSON.stringify({query,reason:(e as any)?.reason||'failed'}));if((e as any)?.reason==='visitor_restricted')break;}
- }
-
+ for(const table of ['main','stats']){const q:any=await store.readJson('catalog/operations/ajes-quota-'+table+'.json',null);console.log('AJES_QUOTA_STATE',JSON.stringify({table,buckets:q?.buckets}));}
  const raw:any=await store.readJson('catalog/partner-cache/ajes/evidence/stats-last-detail.json',null);
  console.log('AJES_RAW_MATCH',JSON.stringify({present:!!raw,matchesOwnerLot:!!raw&&found.has(raw.id),observedAt:raw?.observedAt}));
  if(raw){
   const fields=Object.fromEntries(['ENG_V','PW','TIME','FUEL','PRIV','KPP'].map(k=>[k,{present:Array.isArray(raw.fields)&&raw.fields.includes(k),type:typeof raw.values?.[k],value:raw.values?.[k]}]));
-  console.log('AJES_LAST_RAW',JSON.stringify({matchesOwnerLot:found.has(raw.id),observedAt:raw.observedAt,fields,infoLength:String(raw.values?.INFO||'').length}));
+  console.log('AJES_LAST_RAW',JSON.stringify({matchesOwnerLot:found.has(raw.id),observedAt:raw.observedAt,fields,fieldNames:raw.fields,infoLength:String(raw.values?.INFO||'').length}));
  }
  for(const [id,list] of [...found].slice(0,3)){
   console.log('AJES_OWNER_LIST',JSON.stringify({observedAt:list.savedAt,schemaVersion:list.schemaVersion,engineCc:list.engineCc,power:list.sourcePower,fuel:list.sourceFuel,fuelField:list.sourceFuelField,drive:list.sourceDrive,chassisCode:list.chassisCode}));
