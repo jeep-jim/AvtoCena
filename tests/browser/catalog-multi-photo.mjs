@@ -35,7 +35,7 @@ const facets={makes:['Toyota','BMW','Mazda'],models:[{make:'Toyota',model:'Corol
 try {
  for(const width of [390,1440])for(const theme of ['dark','light']) {
   const context=await browser.newContext({viewport:{width,height:1000}}), page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
-  await page.route('**/api/catalog/**',route=>{const u=new URL(route.request().url());const models=[{make:'Toyota',model:'Yaris L'},{make:'Kia',model:'KX1'}];return route.fulfill({json:u.pathname.endsWith('brand-counts')?{counts:{Toyota:10,Kia:8},modelCounts:{Toyota:1,Kia:1}}:{facets:{makes:['Toyota','Kia']},items:models.filter(x=>!u.searchParams.get('q')||x.model.toLowerCase().includes(u.searchParams.get('q').toLowerCase()))}});});
+  await page.route('**/api/catalog/**',route=>{const u=new URL(route.request().url());const models=[{make:'Toyota',model:'Yaris L'},{make:'Kia',model:'KX1'}];return route.fulfill({json:u.pathname.endsWith('models')&&u.searchParams.get('scope')==='inventory'?{version:1,brands:[['Toyota',[]],['Kia',[]]],models:models.map(x=>[x.make,x.model,[],1])}:u.pathname.endsWith('brand-counts')?{counts:{Toyota:10,Kia:8},modelCounts:{Toyota:1,Kia:1}}:{facets:{makes:['Toyota','Kia']},items:models.filter(x=>!u.searchParams.get('q')||x.model.toLowerCase().includes(u.searchParams.get('q').toLowerCase()))}});});
   await page.goto(`${origin}/cars?theme=${theme}${width===1440?'&slowRouter=1':''}`);
   if(width===1440)await page.evaluate(()=>{const original=history.replaceState.bind(history);history.replaceState=(...args)=>{clearTimeout(window.__routeTimer);return original(...args);};});
   let scope=page.locator('.ac-catalog-filter-panel');
