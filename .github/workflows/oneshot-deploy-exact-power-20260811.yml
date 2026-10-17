@@ -20,7 +20,7 @@ jobs:
               const runs = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {...repo, head_sha: target, per_page: 100});
               for (const run of runs) {
                 if (run.head_sha !== target || run.status === 'completed') continue;
-                try { await github.rest.actions.forceCancelWorkflowRun({...repo, run_id: run.id}); core.info('Cancelled '+run.id+' '+run.name); }
+                try { await github.request('POST /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel', {...repo, run_id: run.id}); core.info('Cancelled '+run.id+' '+run.name); }
                 catch (error) { if (![409,422].includes(error.status)) throw error; }
               }
               if (pass<2) await new Promise(resolve=>setTimeout(resolve,10000));
