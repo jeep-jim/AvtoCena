@@ -1,0 +1,7269 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 68,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-09c5ad9fe39a55bc27ec",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 74,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR (E-TECH PLUG-IN H",
+        "CAPTUR E-TECH PLUG IN HYBRID",
+        "CAPTUR E-TECH PLUG-IN HY",
+        "CAPTUR E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 1410,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe3ffae20c1b22e0cc26",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR / 1.0 /",
+        "CAPTUR 1.0"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 80191,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c23fa389e25603284a1a",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 103,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-124b0451c4346b47d05c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1727,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76c25e070d4e86615bfe",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 53,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9ba62da750834451da1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 168,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f169ef163b8b5089934",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR (E-Tech Hibrid)",
+        "CAPTUR (E-TECH HYBRID)",
+        "CAPTUR / E-TECH / HYBRID",
+        "CAPTUR /E-TECH / HYBRID",
+        "CAPTUR E TECH HYBRID",
+        "CAPTUR E-TECH",
+        "CAPTUR E-TECH HYBRID",
+        "CAPTUR E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 166691,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c7ff8eb5d865024cdbb",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 74,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID",
+        "CAPTUR E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1167af78ccd0d4ae172",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 149,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d22108edd19897062461",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAPTUR E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1f9f429b361446b0280",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f8372ecef643a85a186",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 81,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a126b33321ea857ccbb",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 24,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ce85117673f5f1bb4f8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAPTUR E TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a20b5ec201b4e81bfaf0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 163,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98467e06691367b2fcfc",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 683,
+      "commercialNames": [
+        "CAPTUR E-TECH PLUG IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecc930aa1764787d9fea",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1598,
+      "powerKw": 68,
+      "commercialNames": [
+        "CAPTUR E-TECH PLUG-IN"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e48bcc6e34d0e3176098",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abd7b8923dd6ca60bdf9",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 11,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80cc5ea27ca913a01828",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 394,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d60fed347af63ca85462",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3975,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3831d30b91d240e0408f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e1267c3a7f57cfc8d56",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-762afed2c36161e3ec10",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 58,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-700a71db63a4dd8e5463",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 62,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1036c3be4711338bb19b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-338c26cb21b30804d987",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 84,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR 1.2"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 753,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0399cd96a08e094a85ba",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1099,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-595d2d7907a72797b037",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 104,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR 1.3 16V",
+        "CAPTUR 1.3 16V AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 736,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df203ce254778324cafc",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 346,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ac55b7ef173e44a4d03",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 51,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12adc8753642ed916702",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 80,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7bf3bad42acf01a9217",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 92,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aab9ac6cd38bff569e40",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 111,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f8537e02b265d72e44b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 132,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e342b2c4eb679b56068",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 459,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac35fbe34e73d5439cfd",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "CAPTUR",
+        "CAPTUR (E-TECH HYBRID)",
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 18063,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f001f157733c6355cc7f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7983f3dc81968509bf33",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 116,
+      "commercialNames": [
+        "CAPTUR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8fa473085644c7fec5e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4f4ba187f6ba6ed65b7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Captur",
+      "modelId": "renault/captur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "CAPTUR E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6f41d0256146bd5dba6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO PLAY TCE CVT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5531b3a3303e0f2f9593",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO",
+        "CLIO ICONIC BOSE BLUE DCI",
+        "CLIO ICONIC DCI",
+        "CLIO PLAY DCI",
+        "CLIO RS LINE BOSE BLUE DCI",
+        "CLIO RS LINE DCI",
+        "CLIO S EDITION BLUE DCI",
+        "CLIO S EDITION BOSE BLUE DCI"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 614,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b50d297442a24bf930a",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 55,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1348,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-060171a72fdd0066c936",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 63,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.5 / DCI",
+        "CLIO 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 133018,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28c9875e228e60fb1da8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "CLIO",
+        "CLIO 15 DCI",
+        "CLIO SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 637,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac89cc240955a57a2ba7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "Clio",
+        "CLIO",
+        "CLIO / 1.5 / DCI",
+        "CLIO 15 DCI"
+      ],
+      "sourceMakeNames": [
+        "Renault",
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 28431,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-521cd84d116ceac1558d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 112,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33a9ece25299757a6473",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.0 /",
+        "CLIO 1.0"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 84447,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19d4b9c174b4054933cc",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9394bf564f1da0639a1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.0 /",
+        "CLIO 10"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 92792,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-646198bbb33fcc8c9e8d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de1a99bfcf384daf5c4a",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO GT LINE TCE",
+        "CLIO ICONIC TCE",
+        "CLIO PLAY TCE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e307a40ef5d9e4d89879",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 56,
+      "commercialNames": [
+        "Clio",
+        "CLIO",
+        "CLIO / 0.9 / TCE",
+        "CLIO 09 TCE",
+        "RENAULT CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 29040,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-408aabfadead0154b89b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "Clio",
+        "CLIO",
+        "CLIO / 0.9 / TCE",
+        "CLIO 09 TCE",
+        "CLIO SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 47008,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f21d49aa85f20614ff6f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO",
+        "CLIO ICONIC BOSE SCE",
+        "CLIO ICONIC BOSE TCE",
+        "CLIO ICONIC SCE",
+        "CLIO ICONIC TCE",
+        "CLIO ICONIC TCE CVT",
+        "CLIO PLAY SCE",
+        "CLIO PLAY TCE",
+        "CLIO PLAY TCE CVT",
+        "CLIO RS LINE BOSE EDITION TCE",
+        "CLIO RS LINE BOSE TCE",
+        "CLIO RS LINE BOSE TCE CVT",
+        "CLIO RS LINE TCE",
+        "CLIO RS LINE TCE CVT",
+        "CLIO S EDITION BOSE TCE",
+        "CLIO S EDITION BOSE TCE CVT",
+        "CLIO S EDITION TCE",
+        "CLIO S EDITION TCE CVT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 10212,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d34944d5011855ec36fb",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 48,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6118,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-137b368bb42e5f9b94a8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.0 /",
+        "CLIO 1.0",
+        "CLIO 10",
+        "CLIO AUTOSCUOLA"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 79162,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b7b862eda1a8e0c548b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.0 /",
+        "CLIO 10"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 34465,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c0831aa3c8707528fc1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.0 /",
+        "CLIO / 1.0 / AUT.",
+        "CLIO 1.0",
+        "CLIO 1.0 AUT.",
+        "CLIO 1.5DCI",
+        "CLIO 5",
+        "CLIO 10",
+        "CLIO AUTOSCUOLA",
+        "RENAULT CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 547451,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38dd98cfc9da5a551132",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.0 /",
+        "CLIO 10"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 178500,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-550cebd722016de8ab2f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1149,
+      "powerKw": 55,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-373c82ce32d8db8a1e88",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1330,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO RS LINE BOSE TCE AUTO",
+        "CLIO RS LINE TCE AUTO",
+        "CLIO S EDITION BOSE TCE AUTO",
+        "CLIO S EDITION TCE AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1015,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54306584784e29de1540",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.3 / 16 V AUT.",
+        "CLIO 13 16 V AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 38308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cfb4f3f13845e1bb785",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 72,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07df29fad6f6a4794f36",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO",
+        "CLIO (E-Tech Hibrid)",
+        "CLIO (E-TECH HYBRID)",
+        "CLIO (E-Tech Hybrid)",
+        "CLIO / E-TECH / HYBRID",
+        "CLIO E-TECH H.",
+        "CLIO E-TECH HYB",
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 119535,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6074b0afb50a184f219f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO E-TECH HYBRID",
+        "CLIO ICONIC E-TECH AUTO",
+        "CLIO LAUNCH EDITION E-TECH A",
+        "CLIO RS LINE E-TECH AUTO",
+        "CLIO S EDITION E-TECH AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 384,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5ea68d4c95ced8e69d7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO",
+        "CLIO (E-Tech Hybrid)",
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b358f7ad1c9f3c28c2b9",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 30,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f94c96004aadbdf1bd40",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 74,
+      "commercialNames": [
+        "CLIO",
+        "CLIO / 1.5 / DCI",
+        "CLIO 1.5 DCI",
+        "CLIO AUTOSCUOLA"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 118466,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82e9f39f6b7395f3b7a9",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1154,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97804e3470c6e9ead3d0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 9,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f0e89ac642ca648a62d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07fd64a86df101ecbc4b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 139,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9af22c4013794a22f2a8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1029,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b8de8a5b8d287e62990",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 319,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ee5ba4533ea1eba0e4f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02f35be6a94da7762742",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1331,
+      "powerKw": 133,
+      "commercialNames": [
+        "CLIO RSR RALLY",
+        "CLIO RSR RALLY5"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05981b5e496e76affaf7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "CLIO",
+        "Clio",
+        "CLIO / 1.3 / 16V"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 16670,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abd8d109451ac9705f96",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 51,
+      "commercialNames": [
+        "CLIO",
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-954edd10441376132943",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-332ce6b3ab4ded321437",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1149,
+      "powerKw": 54,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-812fa2871c0e5e8726e6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 158,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-293bfcef44df87f4ca44",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1333,
+      "powerKw": 103,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95171bf112bb5e7300d4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "CLIO",
+        "CLIO (E-TECH HYBRID)",
+        "CLIO / E-TECH / HYBRID",
+        "CLIO E-TECH",
+        "CLIO E-TECH H.",
+        "CLIO E-TECH HYB",
+        "CLIO E-TECH HYBRID",
+        "CLIO E-TECH HYBRID //"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 157880,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fdbc61e115cb80d9ec0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1461,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74430f788858a80898b5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-358a6397a178c162156c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 583,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9d4a47f09dcf73ee150",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e01f8b9b5176c629024",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 84,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 288,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c76b5c61273bbd78cff8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 128,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2df8d63fe2927bd35c3f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 58,
+      "commercialNames": [
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-945ab16b3b634b2bb890",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 105,
+      "commercialNames": [
+        "CLIO E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14e9ef8884f145712770",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": null,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b877cbe1e8909978555",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3055,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c29cfb7be0e08fa51e66",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Clio",
+      "modelId": "renault/clio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1789,
+      "powerKw": 80,
+      "commercialNames": [
+        "CLIO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6f7bce8d21ac6e930e5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2536,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9f7ff3f6e00512ed044",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "Renault",
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 222,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a184c26b31c167cca5c7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "Renault"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de53fee21efaa861a96c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "Duster"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 673,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-624990078688e72ef08e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6fa4876438f65aebb09",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "Renault",
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 188,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbdff5b7bc6f4da90ba6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "Renault",
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 160,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec28e2f1dd895edf065f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 84,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-774d2c1de87c2f1ed15b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 105,
+      "commercialNames": [
+        "DUSTER",
+        "DUSTER E 4X4 20L"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 188,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-630c56ffd783f3f2f597",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "DUSTER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ed12d2181ad41e5322c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Duster",
+      "modelId": "renault/duster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1998,
+      "powerKw": 105,
+      "commercialNames": [
+        "DUSTER E 4X4 20L"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33c30d5b34aab35d2d4d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 118,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f643413872a678d11a69",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 127,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecf7f3b1e5c0c6c1aa50",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 118,
+      "commercialNames": [
+        "ESPACE",
+        "ESPACE 20 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 3520,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88b28107a9853407c469",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 139,
+      "commercialNames": [
+        "ESPACE",
+        "ESPACE / 2.0 / DCI AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 3819,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf1b6991ccebd9bc3c9d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 147,
+      "commercialNames": [
+        "ESPACE",
+        "ESPACE / 2.0 / DCI AUT.",
+        "ESPACE 20 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 6484,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d94042217a8ba139582",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 165,
+      "commercialNames": [
+        "ESPACE",
+        "ESPACE 18 16V AUT"
+      ],
+      "sourceMakeNames": [
+        "Renault",
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1320,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2ba4332660534ad279d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cf6bb911537a40c168e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "ESPACE",
+        "ESPACE / 1.2 / AUT.",
+        "ESPACE 1.2 AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 46394,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c41bd07cafe16bae494e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbf456177ba644b3b05e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 8,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83a7ef007a85b62b6f3e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 147,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1461da6183302b752a5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Espace",
+      "modelId": "renault/espace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "ESPACE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 257,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10f9c951e48781bb9f67",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "KADJAR GT LINE BLUE DCI",
+        "KADJAR GT LINE BLUE DCI AUTO",
+        "KADJAR ICONIC BLUE DCI",
+        "KADJAR ICONIC BLUE DCI AUTO",
+        "KADJAR PLAY BLUE DCI",
+        "KADJAR PLAY BLUE DCI AUTO",
+        "KADJAR S EDITION BLUE DCI",
+        "KADJAR S EDITION BLUE DCI AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1179,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b63df44f862b7d5439ab",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 81,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7c291a6f3df921255fa",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "KADJAR",
+        "KADJAR / 1.5 / DCI",
+        "KADJAR / 1.5 / DCI AUT.",
+        "KADJAR 15 DCI",
+        "KADJAR 15 DCI AUT",
+        "RENAULT KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 88214,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-009cd4a214d8732fcb8c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-580d1f6d8106cdb07b12",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": null,
+      "commercialNames": [
+        "KADJAR GT LINE BLUE DCI",
+        "KADJAR GT LINE BLUE DCI 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97feaf19c3229b6371d2",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": 110,
+      "commercialNames": [
+        "KADJAR",
+        "KADJAR / 1.7 / DCI",
+        "KADJAR 17 DCI",
+        "KADJAR 17 DCI 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5364,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82c439756fcfa9b96773",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 96,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68c188411a4605074ca5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1330,
+      "powerKw": null,
+      "commercialNames": [
+        "KADJAR DYNAMIQUE NAV TCE",
+        "KADJAR DYNAMIQUE S NAV TCE",
+        "KADJAR ICONIC TCE",
+        "KADJAR PLAY TCE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1075,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6272dec7cc56c3cab323",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "KADJAR DYNAMIQUE NAV TCE",
+        "KADJAR GT LINE TCE",
+        "KADJAR GT LINE TCE AUTO",
+        "KADJAR ICONIC TCE",
+        "KADJAR ICONIC TCE AUTO",
+        "KADJAR PLAY TCE",
+        "KADJAR PLAY TCE AUTO",
+        "KADJAR S EDITION TCE",
+        "KADJAR S EDITION TCE AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 5925,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd6eea8d5ede318837f6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "KADJAR",
+        "KADJAR / 1.3 / 16V",
+        "KADJAR / 1.3 / 16V AUT.",
+        "KADJAR 13 16V"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 93158,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11ec58224315686a11f3",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 116,
+      "commercialNames": [
+        "KADJAR",
+        "KADJAR / 1.3 / 16V AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 5093,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4344f476eb2e0cfaefb5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 117,
+      "commercialNames": [
+        "Kadjar",
+        "KADJAR",
+        "KADJAR 13 16V AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7383,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c82ba41ffac0b7b883a4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1333,
+      "powerKw": null,
+      "commercialNames": [
+        "KADJAR GT LINE TCE",
+        "KADJAR GT LINE TCE AUTO",
+        "KADJAR ICONIC TCE",
+        "KADJAR ICONIC TCE AUTO",
+        "KADJAR S EDITION TCE",
+        "KADJAR S EDITION TCE AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc7f4214c15c4f2b01fa",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a06edd66b99589902a8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbc2c8a386c091a19103",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e26fad6ccf167637aee7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kadjar",
+      "modelId": "renault/kadjar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 103,
+      "commercialNames": [
+        "KADJAR"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b225183af233e7ced306",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO LL21 B-NESS ENERGY DCI"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 231,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2cf9bbbb1bae0f8b93e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 59,
+      "commercialNames": [
+        "KANGOO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4200,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dba186287776f23b2bd",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO / 1.5 / DCI",
+        "KANGOO 15 DCI",
+        "KANGOO VAN"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 48571,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de5bbf7b2097ae4dd2f5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 81,
+      "commercialNames": [
+        "KANGOO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bffc8485634f8d5fd982",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO - OLMEDO AVH R KW - RENAULT TECH",
+        "KANGOO - OLMEDO AVH R KW -RENAULT TECH",
+        "KANGOO - OLMEDO S.V.- RENAUT TECH",
+        "KANGOO - OLMEDO SV- RENAUT TECH",
+        "KANGOO / 1.5 / DCI",
+        "KANGOO 1.5 DCI",
+        "KANGOO 15 DCI",
+        "KANGOO VAN"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 15951,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f2943275f86688255c2",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO BUSINESS ML20 I ZE 33",
+        "KANGOO E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa99a6b5523a7a1de0e6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 44,
+      "commercialNames": [
+        "KANGOO EXPRESS Z.E",
+        "KANGOO EXPRESS ZE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b39a0845f371b68c8ebb",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 55,
+      "commercialNames": [
+        "KANGOO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 889,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8f37a6b2c2de7f4b7ea",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "KANGOO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aeb0f3ee672d1c13a01",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 12269,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ca04a6667a075f475f5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO / 1.3 / 16V",
+        "KANGOO 1.3 16V",
+        "KANGOO FLEXIRAMP",
+        "KANGOO GRAND EQUILIBRE",
+        "KANGOO TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 27473,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8037cf22ca346eec6c5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO E-TECH",
+        "KANGOO E-TECH ELECTRIC",
+        "KANGOO VAN E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 552,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91cd0600e9be16bb442c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "KANGOO E-TECH",
+        "KANGOO E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2740,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0be14ebac60cb8274420",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1461,
+      "powerKw": 11,
+      "commercialNames": [
+        "KANGOO",
+        "RENAULT KANGOO COMBI A"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 44,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5489092a5fa303e4f76",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "KANGOO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4a5b39754bc795169bf",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "KANGOO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ea6f0b10c2cdc2fa326",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Kangoo",
+      "modelId": "renault/kangoo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "KANGOO",
+        "KANGOO TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 304,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39ae0d6a344865bcd871",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": null,
+      "commercialNames": [
+        "KOLEOS GT LINE BLUE DCI CVT",
+        "KOLEOS ICONIC BLUE DCI CVT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 291,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78bc9ae1f8c15f9e93f1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": 110,
+      "commercialNames": [
+        "KOLEOS",
+        "KOLEOS / 1.7 / DCI AUT.",
+        "KOLEOS 17 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 4761,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a8eaa46fdbab05e0a37",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "KOLEOS GT LINE BLUE DCI 4X4CVT",
+        "KOLEOS GT LINE DCI 4X4 CVT",
+        "KOLEOS ICONIC BLUE DCI 4X4 CVT",
+        "KOLEOS ICONIC DCI CVT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 215,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bc587fea3f3aee60a0e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 130,
+      "commercialNames": [
+        "KOLEOS",
+        "KOLEOS 20 DCI AUT",
+        "KOLEOS 20 DCI AUT 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 467,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a13a4ae111c012a0d91a",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "KOLEOS",
+        "KOLEOS / 2.0 / DCI AUT. 4X4",
+        "KOLEOS 20 DCI AUT 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7750,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-231a25e2265a49770445",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "KOLEOS"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc73b1b1474dd3f113c1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 135,
+      "commercialNames": [
+        "KOLEOS",
+        "KOLEOS / 2.0 / DCI AUT.",
+        "KOLEOS / 2.0 / DCI AUT. 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 10262,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52a575b534fa33b266f0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 116,
+      "commercialNames": [
+        "KOLEOS",
+        "KOLEOS / 1.3 / 16V AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 8820,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9847b229434a724bc133",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 126,
+      "commercialNames": [
+        "KOLEOS",
+        "KOLEOS 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 78,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d24e2efec3e641d22273",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Koleos",
+      "modelId": "renault/koleos",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "KOLEOS"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce438a1c229515583275",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Laguna",
+      "modelId": "renault/laguna",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 81,
+      "commercialNames": [
+        "LAGUNA"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ab69441e26703f700c9",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Laguna",
+      "modelId": "renault/laguna",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "LAGUNA"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12c50d49200f621edbf0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Laguna",
+      "modelId": "renault/laguna",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1997,
+      "powerKw": 103,
+      "commercialNames": [
+        "LAGUNA"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3af753cf8b59555abe18",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE GT LINE BLUE DCI",
+        "MEGANE GT LINE BLUE DCI AUTO",
+        "MEGANE GT LINE DCI",
+        "MEGANE ICONIC BLUE DCI",
+        "MEGANE ICONIC BLUE DCI AUTO",
+        "MEGANE ICONIC DCI",
+        "MEGANE ICONIC DCI AUTO",
+        "MEGANE PLAY BLUE DCI",
+        "MEGANE PLAY BLUE DCI AUTO",
+        "MEGANE PLAY DCI",
+        "MEGANE RS LINE BLUE DCI"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 463,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4db9ee10d424a2df6f2c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 66,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2ede365d91c82bab895",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 70,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE 15 DCI",
+        "MEGANE GRANDTOUR 15 DCI",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 11496,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-113fbafe5dc0873e5cc5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 78,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd12e9463e8625c9ca84",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 81,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 302,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ccd20806b89657bbf9c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.5 / DCI",
+        "MEGANE / 1.5 / DCI AUT.",
+        "MEGANE / GRANDTOUR",
+        "MEGANE / GRANDTOUR 1.5 / DCI",
+        "MEGANE / GRANDTOUR 1.5 / DCI AUT.",
+        "MEGANE 1.5 DCI AUT.",
+        "MEGANE 15 DCI",
+        "MEGANE 15 DCI AUT",
+        "MEGANE GRANDCOUPE 15 DCI",
+        "MEGANE GRANDCOUPE 15 DCI AUT",
+        "MEGANE GRANDTOUR 1.5 DCI AUT.",
+        "MEGANE GRANDTOUR 15 DCI",
+        "MEGANE GRANDTOUR 15 DCI AUT",
+        "MEGANE SPORT TOURER",
+        "RENAULT MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 33,
+      "registrations": 192431,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6438ffe45bc07f59089",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": 110,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d8eb3b7f03066029edc",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1750,
+      "powerKw": 110,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.7 / DCI AUT.",
+        "MEGANE / GRANDTOUR 1.7 / DCI AUT.",
+        "MEGANE GRANDTOUR 17 DCI AUT",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1751,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57ce72c5a0b2df5cab2b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da0bf2a8d73451e58a73",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 74,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bcc2afba3c7ec30f00f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 97,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 77,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8eb3cb131cbc8287a2cb",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1330,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE GT LINE TCE",
+        "MEGANE GT LINE TCE AUTO",
+        "MEGANE ICONIC TCE",
+        "MEGANE ICONIC TCE AUTO",
+        "MEGANE PLAY TCE",
+        "MEGANE PLAY TCE AUTO",
+        "MEGANE RS LINE TCE",
+        "MEGANE RS LINE TCE AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 400,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f806d11d097d3c9c44b2",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 75,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.3 / 16V",
+        "MEGANE / GRANDTOUR 1.3 / 16V",
+        "MEGANE 13 16V",
+        "MEGANE GRANDTOUR 13 16V",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1604,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5b6bde58f11b5b7aca1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.3 / 16V",
+        "MEGANE / GRANDCOUPE 1.3 / 16V",
+        "MEGANE / GRANDTOUR 1.3 / 16V",
+        "MEGANE 13 16V",
+        "MEGANE GRANDCOUPE 13 16V",
+        "MEGANE GRANDTOUR 13 16V",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 20441,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-426580b68e8322bf1910",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.3 / 16V",
+        "MEGANE / 1.3 / 16V AUT.",
+        "MEGANE / GRANDCOUPE 1.3 / 16V",
+        "MEGANE / GRANDTOUR",
+        "MEGANE / GRANDTOUR 1.3 / 16V",
+        "MEGANE / GRANDTOUR 1.3 / 16V AUT.",
+        "MEGANE 13 16V",
+        "MEGANE 13 16V AUT",
+        "MEGANE CONQUEST",
+        "MEGANE CONQUEST (*)",
+        "MEGANE CONQUEST / 1.3 / 16V AUT.",
+        "MEGANE CONQUEST 1.3 16V AUT.",
+        "MEGANE GRANDCOUPE 13 16V",
+        "MEGANE GRANDTOUR 13 16V",
+        "MEGANE GRANDTOUR 13 16V AUT",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 37,
+      "registrations": 95797,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae92b100d2d9f449a0af",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 116,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.3 / 16V AUT.",
+        "MEGANE / GRANDTOUR",
+        "MEGANE / GRANDTOUR 1.3 / 16V AUT.",
+        "MEGANE CONQUEST",
+        "MEGANE CONQUEST (*)",
+        "MEGANE CONQUEST / 1.3 / 16V AUT.",
+        "MEGANE CONQUEST 1.3 16V AUT.",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 3511,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e4785007dcd58bc74e5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 117,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.3 / 16V AUT.",
+        "MEGANE / GRANDTOUR 1.3 / 16V AUT.",
+        "MEGANE 13 16V AUT",
+        "MEGANE GRANDTOUR 13 16V",
+        "MEGANE GRANDTOUR 13 16V AUT",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 4787,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e76d0921182059fc31a6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1333,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE ICONIC TCE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad0e0b02931257038241",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE E-TECH PLUG-IN HYBRID",
+        "MEGANE SPORT TOURER E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 387,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b88eed5b5c448bb495b2",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE RENAULTSPORT",
+        "MEGANE RENAULTSPORT AUTO",
+        "MEGANE RENAULTSPORT TROPHY",
+        "MEGANE RENAULTSPORT TROPHY A",
+        "MEGANE RS TROPHY-R TCE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 276,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05327ff079dde572887d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 205,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE 18 16V",
+        "MEGANE 18 16V AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 693,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d57fcf5a5277ef54b4d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 221,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.8 / 16V",
+        "MEGANE / 1.8 / 16V AUT.",
+        "MEGANE 1.8 16V AUT.",
+        "MEGANE 18 16V",
+        "MEGANE 18 16V AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 6724,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f66b46f757ef06233a8e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1461,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1424c0f11cdb279789fe",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE ICONIC E-TECH AUTO",
+        "MEGANE RS LINE E-TECH AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5e9ddbbb72f58d1a40c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 31,
+      "commercialNames": [
+        "MEGANE E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 125,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8d82aacd9c10e6f65d5",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 67,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE E-TECH",
+        "MEGANE E-Tech Plug-In Hibrid",
+        "MEGANE E-TECH PLUG-IN HY",
+        "MEGANE E-TECH PLUG-IN HYBRID",
+        "MEGANE E-TECH PUG-IN HYBRID",
+        "MEGANE SPORT TOURER E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 24388,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fea7f15b4b3a3f90fd7",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 74,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE E-TECH PLUG-IN HY",
+        "MEGANE E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 541,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-700acf7ca81e554fdc34",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 115,
+      "commercialNames": [
+        "MEGANE E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30694b3b35ea64ba07c6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4391ea86c917ba164615",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "MEGANE E-TECH",
+        "MEGANE E-TECH 100% ELECTRIC",
+        "MEGANE E-TECH ELECTRIC",
+        "MEGANE E-TECH ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 19423,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c210684614e24ffb94b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37b9d48ced21a5838363",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE / 1.0 /",
+        "MEGANE / GRANDTOUR 1.0 /",
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4852,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3838a61af6770b96c82",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5469039b8f583d2989ab",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "MEGANE CONQUEST E-TECH",
+        "MEGANE CONQUEST E-TECH (*)",
+        "MEGANE CONQUEST E-TECH / 1.6 / 16V AUT.",
+        "MEGANE CONQUEST E-TECH 1.6 16V AUT.",
+        "MEGANE E-TECH PLUG-IN HYBRID",
+        "MEGANE ONQUEST E-TECH"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 428,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f12eadb00fb7651a06a",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE E -TECH",
+        "MEGANE E-TECH PLUG-IN HY",
+        "MEGANE E-TECH PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5140,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9dab418f1688a9ba9ec4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 776,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae7dd9f837ccb24aaf09",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE E-T",
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 26794,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-429d4237e09e9e51b12c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE E-TECH ELECTRIC",
+        "MEGANE E-TECH ELEKTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 65595,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20a821895fd782f13c5e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 24,
+      "commercialNames": [
+        "MEGANE CONQUEST E-TECH",
+        "MEGANE CONQUEST E-TECH (*)"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6e317a76e02db8d226c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 68,
+      "commercialNames": [
+        "MEGANE SPORT TOURER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfaae4458364ba919fbf",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f536c566cafbcdfa4819",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "MEGANE SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ed76cc3262d569f118d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "MEGANE",
+        "MEGANE III BERLINA"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb46e549e97a784c80d4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaeddbc7c19da7e8d82d",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1870,
+      "powerKw": 96,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfc50f825704c1f3466e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Megane",
+      "modelId": "renault/megane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "MEGANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 206,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92a42cb93caceeebb50b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Modus",
+      "modelId": "renault/modus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1149,
+      "powerKw": 74,
+      "commercialNames": [
+        "MODUS"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f79cac8fa33fb5fff5d1",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 86,
+      "commercialNames": [
+        "RAFALE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1043c3e0a502005cabf8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "RAFALE",
+        "RAFALE / 1.2 / AUT.",
+        "RAFALE 1.2 AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 21402,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a876c04913e3070c79b0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 110,
+      "commercialNames": [
+        "RAFALE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42761c2205ff738585c4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "RAFALE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 156,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-470d7aed1ad914862482",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 110,
+      "commercialNames": [
+        "RAFALE",
+        "RAFALE 1.2 AUT. 4X4"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11247,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5cc61574d42658bc1a4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 175,
+      "commercialNames": [
+        "RAFALE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 333,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f71830360d36c6a66eac",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Rafale",
+      "modelId": "renault/rafale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "RAFALE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 463,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abf57700df4c7fc00705",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Safrane",
+      "modelId": "renault/safrane",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2963,
+      "powerKw": 123,
+      "commercialNames": [
+        "SAFRANE"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1ee21bb987a3cee1ba4",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 81,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-280e3b242381e36a375c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01875b1ce19fd5b0f771",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": null,
+      "commercialNames": [
+        "SCENIC SIGNATURE BLUE DCI"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-370031871a31f486ff8f",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": 88,
+      "commercialNames": [
+        "RENAULT SCENIC",
+        "SCENIC",
+        "SCENIC / 1.7 / DCI",
+        "SCENIC / 1.7 / DCI AUT.",
+        "SCENIC 17 DCI",
+        "SCENIC 17 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 36749,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40d93b420c1c9b8e4876",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1749,
+      "powerKw": 110,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC 17 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10794,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63eec7d00e1a332d29ee",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1750,
+      "powerKw": 88,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC 17 DCI",
+        "SCENIC 17 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7864,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bd9be1384961d081578",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1750,
+      "powerKw": 110,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC 17 DCI AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1704,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1705acec5461e93f29c",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f627215559ad8b20f5b3",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1330,
+      "powerKw": null,
+      "commercialNames": [
+        "SCENIC ICONIC TCE",
+        "SCENIC PLAY TCE AUTO"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a1dfcd034d328a89593",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC / 1.3 / 16V",
+        "SCENIC 13 16V"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5420,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d84ba47bff9f5cc455ed",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC / 1.3 / 16V",
+        "SCENIC 13 16V"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 41574,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffaf86c7c8b4b68347ad",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 116,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5586,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-167fd3c495bd2c1dfe90",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 117,
+      "commercialNames": [
+        "RENAULT SCENIC",
+        "SCENIC",
+        "SCENIC 13 16V AUT"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5552,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f210e5104b9c594ae8b0",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 120,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df93f3f27ccabc3c6cf2",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86919320656333fd5f67",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 88,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c06b689de2cd01968b36",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "SCENIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8f442a601d6a0b7cf84",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC E-TECH",
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 41870,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-656342c628e79462d1d6",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1397,
+      "powerKw": 96,
+      "commercialNames": [
+        "SCENIC III 5 POSTI"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7e0d62a41fc3768ae19",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 187,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23c7b99d6a8bc50bf944",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "SCENIC E-TECH ELECTRIC",
+        "SCENIC E-TECH ELECTRIC / /"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2495,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6512eda0143c2f917a51",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Scenic",
+      "modelId": "renault/scenic",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "SCENIC",
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5528,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1875e22983ea7548a46e",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Spider",
+      "modelId": "renault/spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 108,
+      "commercialNames": [
+        "SPIDER"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-855beaf01b61ff5248b8",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Symbioz",
+      "modelId": "renault/symbioz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 51,
+      "commercialNames": [
+        "SYMBIOZ"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcf3fe7af9e62d173a84",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Symbioz",
+      "modelId": "renault/symbioz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "SYMBIOZ",
+        "SYMBIOZ /E-TECH / HYBRID",
+        "SYMBIOZ E-TECH HYBRID"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 53906,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-260b47a7d7832ba7f554",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Symbioz",
+      "modelId": "renault/symbioz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1598,
+      "powerKw": 69,
+      "commercialNames": [
+        "SYMBIOZ"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 436,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-433ef30535946a2f0638",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Symbioz",
+      "modelId": "renault/symbioz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "SYMBIOZ"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 137,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c2839d41b391c8ee83b",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Symbioz",
+      "modelId": "renault/symbioz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 103,
+      "commercialNames": [
+        "SYMBIOZ",
+        "SYMBIOZ 1.3 16V"
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1285,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69b7979427403395b2eb",
+      "brandId": "renault",
+      "brand": "Renault",
+      "canonicalModel": "Symbioz",
+      "modelId": "renault/symbioz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 104,
+      "commercialNames": [
+        "SYMBIOZ",
+        "SYMBIOZ 1.3 16V",
+        "SYMBIOZ 1.3 16V AUT."
+      ],
+      "sourceMakeNames": [
+        "RENAULT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 837,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

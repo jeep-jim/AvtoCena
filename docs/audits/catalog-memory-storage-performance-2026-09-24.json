@@ -1,0 +1,846 @@
+{
+  "checkedAt": "2026-09-24T03:50:00Z",
+  "beforeKeepAlive": [
+    {
+      "url_effective": "https://avtocena.com/cars/china",
+      "http_code": 200,
+      "time_total": 10.139412,
+      "time_appconnect": 8.168419,
+      "time_starttransfer": 9.945213,
+      "num_connects": 1,
+      "size_download": 94631
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/china",
+      "http_code": 200,
+      "time_total": 0.609928,
+      "time_appconnect": 0,
+      "time_starttransfer": 0.52602,
+      "num_connects": 0,
+      "size_download": 91547
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/china",
+      "http_code": 200,
+      "time_total": 0.526828,
+      "time_appconnect": 0,
+      "time_starttransfer": 0.482418,
+      "num_connects": 0,
+      "size_download": 91547
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/green",
+      "http_code": 200,
+      "time_total": 1.052922,
+      "time_appconnect": 0,
+      "time_starttransfer": 0.96479,
+      "num_connects": 0,
+      "size_download": 70836
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/green",
+      "http_code": 200,
+      "time_total": 0.859837,
+      "time_appconnect": 0,
+      "time_starttransfer": 0.762644,
+      "num_connects": 0,
+      "size_download": 70471
+    }
+  ],
+  "beforeNewConnections": [
+    {
+      "url": "https://avtocena.com/",
+      "code": 200,
+      "total": 10.773109,
+      "tls": 8.788183,
+      "ttfb": 10.712522,
+      "bytes": 71378,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/cars",
+      "code": 200,
+      "total": 13.177556,
+      "tls": 8.788183,
+      "ttfb": 12.972882,
+      "bytes": 148313,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/cars/china",
+      "code": 200,
+      "total": 9.769818,
+      "tls": 7.881139,
+      "ttfb": 9.6184,
+      "bytes": 94614,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/cars/green",
+      "code": 200,
+      "total": 7.258428,
+      "tls": 5.486003,
+      "ttfb": 7.202365,
+      "bytes": 70712,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/",
+      "code": 200,
+      "total": 10.855942,
+      "tls": 9.297091,
+      "ttfb": 10.795496,
+      "bytes": 71370,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/cars",
+      "code": 200,
+      "total": 11.119528,
+      "tls": 9.186136,
+      "ttfb": 10.923098,
+      "bytes": 148313,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/cars/china",
+      "code": 200,
+      "total": 10.296151,
+      "tls": 8.043989,
+      "ttfb": 10.101366,
+      "bytes": 91533,
+      "error": ""
+    },
+    {
+      "url": "https://avtocena.com/cars/green",
+      "code": 200,
+      "total": 9.765753,
+      "tls": 7.665745,
+      "ttfb": 9.662523,
+      "bytes": 70472,
+      "error": ""
+    }
+  ],
+  "runtimeLogSample": {
+    "count": 35,
+    "maxMemoryMB": 1109,
+    "memoryLimitMB": 2048,
+    "maxCpuPercent": 99.902,
+    "medianDurationMs": 635.424,
+    "maxDurationMs": 3922.998,
+    "maxQueueMs": 691.738
+  },
+  "storage": {
+    "consoleUsedGiB": 30.9,
+    "consoleLimitGiB": 50,
+    "apiBytes": 33181789309,
+    "lastCleanupDeleted": 190,
+    "lastCleanupBeforeBytes": 36211456869,
+    "lastCleanupAfterBytes": 33179918438,
+    "multipartRule": {
+      "days": 7,
+      "enabled": true,
+      "completedObjectExpiration": false
+    },
+    "cleanupAfterChina": {
+      "runId": 35950285723,
+      "conclusion": "success",
+      "beforeBytes": 39706149087,
+      "afterBytes": 36652983401,
+      "deletedObjects": 194,
+      "freedBytes": 3053165686
+    }
+  },
+  "afterKeepAlive": [
+    {
+      "url_effective": "https://avtocena.com/cars/china",
+      "http_code": 200,
+      "time_total": 9.824735,
+      "time_appconnect": 8.128149,
+      "time_starttransfer": 9.669488,
+      "num_connects": 1,
+      "size_download": 94616
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/china",
+      "http_code": 200,
+      "time_total": 5.70842,
+      "time_appconnect": 0,
+      "time_starttransfer": 5.597972,
+      "num_connects": 0,
+      "size_download": 94633
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/china",
+      "http_code": 200,
+      "time_total": 5.18247,
+      "time_appconnect": 0,
+      "time_starttransfer": 5.068537,
+      "num_connects": 0,
+      "size_download": 94626
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/green",
+      "http_code": 200,
+      "time_total": 0.789465,
+      "time_appconnect": 0,
+      "time_starttransfer": 0.697911,
+      "num_connects": 0,
+      "size_download": 70711
+    },
+    {
+      "url_effective": "https://avtocena.com/cars/green",
+      "http_code": 200,
+      "time_total": 1.155465,
+      "time_appconnect": 0,
+      "time_starttransfer": 1.104637,
+      "num_connects": 0,
+      "size_download": 70834
+    }
+  ],
+  "releaseSha": "e73382a9190164d2b7cb3a95796d6a5350c12a48",
+  "compactReadModel": [
+    {
+      "kind": "indexes",
+      "generationId": "gen_1790204950962_12b9f8ce",
+      "results": [
+        {
+          "market": "korea",
+          "total": 13598,
+          "samples": 192,
+          "bytes": 469953
+        },
+        {
+          "market": "china",
+          "total": 25991,
+          "samples": 192,
+          "bytes": 552033
+        },
+        {
+          "market": "japan",
+          "total": 14800,
+          "samples": 192,
+          "bytes": 272437
+        },
+        {
+          "market": "uae",
+          "total": 701,
+          "samples": 192,
+          "bytes": 227163
+        },
+        {
+          "market": "europe",
+          "total": 21413,
+          "samples": 192,
+          "bytes": 460452
+        },
+        {
+          "market": "georgia",
+          "total": 7888,
+          "samples": 192,
+          "bytes": 224795
+        }
+      ]
+    },
+    {
+      "kind": "market",
+      "attempt": 1,
+      "result": [
+        {
+          "kind": "facets",
+          "ms": 443,
+          "makes": 100
+        },
+        {
+          "kind": "page",
+          "ms": 2455,
+          "cards": 24,
+          "total": 25991
+        }
+      ],
+      "rssMiB": 179
+    },
+    {
+      "kind": "market",
+      "attempt": 2,
+      "result": [
+        {
+          "kind": "facets",
+          "ms": 0,
+          "makes": 100
+        },
+        {
+          "kind": "page",
+          "ms": 0,
+          "cards": 24,
+          "total": 25991
+        }
+      ],
+      "rssMiB": 179
+    }
+  ],
+  "compactReleaseSha": "6f931353ca762e082db332ca4d5098763fe2eaef",
+  "duringChinaGenerationChange": {
+    "releaseSha": "98c585dd342651d3d2c145f45fda102966709ea4",
+    "requests": [
+      {
+        "url_effective": "https://avtocena.com/api/health",
+        "http_code": 200,
+        "time_total": 8.692939,
+        "time_appconnect": 7.181479,
+        "time_starttransfer": 8.652217,
+        "num_connects": 1,
+        "size_download": 92
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 9.33642,
+        "time_appconnect": 0,
+        "time_starttransfer": 8.95416,
+        "num_connects": 0,
+        "size_download": 507602
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 1.303135,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.079392,
+        "num_connects": 0,
+        "size_download": 507602
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 13.120303,
+        "time_appconnect": 0,
+        "time_starttransfer": 12.884971,
+        "num_connects": 0,
+        "size_download": 507602
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/green",
+        "http_code": 200,
+        "time_total": 0.807909,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.703833,
+        "num_connects": 0,
+        "size_download": 366220
+      },
+      {
+        "url_effective": "https://avtocena.com/cars",
+        "http_code": 200,
+        "time_total": 0.881183,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.749673,
+        "num_connects": 0,
+        "size_download": 952417
+      },
+      {
+        "url_effective": "https://avtocena.com/",
+        "http_code": 200,
+        "time_total": 0.726577,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.577192,
+        "num_connects": 0,
+        "size_download": 797645
+      }
+    ],
+    "stderr": ""
+  },
+  "chinaRecovery": {
+    "runId": 35948372577,
+    "jobId": 107471398799,
+    "conclusion": "success",
+    "generationId": "gen_1790218460284_6134de05",
+    "publishedAt": "2026-09-24T03:16:50Z",
+    "previousCount": 25991,
+    "nextCount": 28382,
+    "largestLoggedRssBytes": 7381065728,
+    "largestLoggedHeapBytes": 6820502776
+  },
+  "quota": {
+    "initialGiB": 50,
+    "approvedGiB": 60,
+    "reserveBytes": 5000000000,
+    "europeBlockedBeforeWrites": {
+      "currentBytes": 39632020579,
+      "inputBytes": 1071531439,
+      "estimatedAdditionalBytes": 8572251512
+    },
+    "budgetBytes": 60000000000
+  },
+  "finalHttpAfterChinaIndex": {
+    "releaseSha": "98c585dd342651d3d2c145f45fda102966709ea4",
+    "requests": [
+      {
+        "url_effective": "https://avtocena.com/api/health",
+        "http_code": 200,
+        "time_total": 8.366451,
+        "time_appconnect": 7.41095,
+        "time_starttransfer": 8.324802,
+        "num_connects": 1,
+        "size_download": 92
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 2.303631,
+        "time_appconnect": 0,
+        "time_starttransfer": 2.146971,
+        "num_connects": 0,
+        "size_download": 92467
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 0.968569,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.862438,
+        "num_connects": 0,
+        "size_download": 89356
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 0.582627,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.525759,
+        "num_connects": 0,
+        "size_download": 89356
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/china",
+        "http_code": 200,
+        "time_total": 1.18438,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.165562,
+        "num_connects": 0,
+        "size_download": 89356
+      },
+      {
+        "url_effective": "https://avtocena.com/cars/green",
+        "http_code": 200,
+        "time_total": 1.308354,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.256771,
+        "num_connects": 0,
+        "size_download": 70846
+      },
+      {
+        "url_effective": "https://avtocena.com/cars",
+        "http_code": 200,
+        "time_total": 2.127255,
+        "time_appconnect": 0,
+        "time_starttransfer": 2.021256,
+        "num_connects": 0,
+        "size_download": 150132
+      },
+      {
+        "url_effective": "https://avtocena.com/",
+        "http_code": 200,
+        "time_total": 1.150982,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.053281,
+        "num_connects": 0,
+        "size_download": 72840
+      }
+    ],
+    "stderr": ""
+  },
+  "europeRecovery": {
+    "runId": 35952431208,
+    "jobId": 107483699625,
+    "reuseRunId": 35940256627,
+    "status": "in_progress"
+  },
+  "relatedOfferOptimization": {
+    "mergeSha": "5b0ec112c6ccd35f4d81a630a3fdf06bcfd31b56",
+    "ciRunId": 35951947776,
+    "diagnosticRunId": 35952400690,
+    "firstReadMs": 2127,
+    "repeatReadMs": 0,
+    "rssMiB": 262,
+    "sharedBrandIndex": true
+  },
+  "finalReleaseSha": "5b0ec112c6ccd35f4d81a630a3fdf06bcfd31b56",
+  "finalDeploy": {
+    "runId": 35952400697,
+    "conclusion": "success"
+  },
+  "finalHttp": {
+    "health": "{\"ok\":true,\"service\":\"avtocena-web\",\"releaseSha\":\"5b0ec112c6ccd35f4d81a630a3fdf06bcfd31b56\"}",
+    "requests": [
+      {
+        "http_code": 200,
+        "num_connects": 1,
+        "size_download": 92,
+        "time_appconnect": 7.690643,
+        "time_starttransfer": 9.976682,
+        "time_total": 9.976991,
+        "url_effective": "https://avtocena.com/api/health"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 95772,
+        "time_appconnect": 0,
+        "time_starttransfer": 8.478279,
+        "time_total": 8.644574,
+        "url_effective": "https://avtocena.com/cars/offer/nissan-sylphy-2021-classic-1-6xl-cvt-luxury-edition-2021--3f94ca02f2313c09d677b990"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 93578,
+        "time_appconnect": 0,
+        "time_starttransfer": 3.441475,
+        "time_total": 3.497766,
+        "url_effective": "https://avtocena.com/cars/offer/nissan-sylphy-2021-classic-1-6xl-cvt-luxury-edition-2021--3f94ca02f2313c09d677b990"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 93559,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.652486,
+        "time_total": 1.731551,
+        "url_effective": "https://avtocena.com/cars/offer/nissan-sylphy-2021-classic-1-6xl-cvt-luxury-edition-2021--3f94ca02f2313c09d677b990"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 89679,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.567076,
+        "time_total": 0.612385,
+        "url_effective": "https://avtocena.com/cars/china"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 70850,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.23656,
+        "time_total": 1.284252,
+        "url_effective": "https://avtocena.com/cars/green"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 150143,
+        "time_appconnect": 0,
+        "time_starttransfer": 0.934992,
+        "time_total": 1.088522,
+        "url_effective": "https://avtocena.com/cars"
+      },
+      {
+        "http_code": 200,
+        "num_connects": 0,
+        "size_download": 72855,
+        "time_appconnect": 0,
+        "time_starttransfer": 1.526723,
+        "time_total": 1.582814,
+        "url_effective": "https://avtocena.com/"
+      }
+    ],
+    "stderr": ""
+  },
+  "remainingChecks": {
+    "mobileBudgetRun": 35952400694,
+    "mobileBudgetConclusion": "failure: non-OK HTTP after release; separate repeat 200 for both markets",
+    "dropdownRun": 35952399140,
+    "dropdownConclusion": "failure: wheel scroll assertion after fixed 100 ms; same PR browser suite previously passed"
+  },
+  "finalParity": {
+    "runId": 35952860678,
+    "conclusion": "success",
+    "checkedAt": "2026-09-24T03:48:23.607Z",
+    "requests": [
+      {
+        "path": "/api/catalog/home",
+        "status": 200,
+        "ttfbMs": 1095,
+        "totalMs": 1101,
+        "bytes": 143360
+      },
+      {
+        "path": "/cars/offer/nissan-sylphy-2021-classic-1-6xl-cvt-luxury-edition-2021--3f94ca02f2313c09d677b990",
+        "status": 200,
+        "ttfbMs": 1945,
+        "totalMs": 2102,
+        "bytes": 409904
+      },
+      {
+        "path": "/cars/offer/mazda-mazda3-2023-2-0l-auto-zhiya-2023--e1bbcb6b9058d511cb184f82",
+        "status": 200,
+        "ttfbMs": 2421,
+        "totalMs": 2886,
+        "bytes": 511988
+      },
+      {
+        "path": "/cars/offer/chevrolet-trax-%E1%84%90%E1%85%A5%E1%84%87%E1%85%A9-1-2-%E1%84%85%E1%85%A6%E1%84%83%E1%85%B3%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB-2024--f649514e83647d1d84c917e0",
+        "status": 200,
+        "ttfbMs": 2115,
+        "totalMs": 2580,
+        "bytes": 478288
+      },
+      {
+        "path": "/cars/offer/kia-k3-ii-%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B5%E1%84%8C%E1%85%B5-2023--c08a47a9254cec72ab3e1402",
+        "status": 200,
+        "ttfbMs": 2934,
+        "totalMs": 3090,
+        "bytes": 393124
+      },
+      {
+        "path": "/cars/offer/hyundai-kona-comfort-2020--9b8facb987a949c5fddee0c8",
+        "status": 200,
+        "ttfbMs": 5638,
+        "totalMs": 5796,
+        "bytes": 447353
+      },
+      {
+        "path": "/cars/offer/nissan-sunny-s-2024--d4960797f66ec58b3e366101",
+        "status": 200,
+        "ttfbMs": 3547,
+        "totalMs": 3859,
+        "bytes": 349818
+      },
+      {
+        "path": "/cars/offer/chevrolet-trail-blazer-chevrolet-trailblazer-2022--c22969c48cd84921fd16a9c3",
+        "status": 200,
+        "ttfbMs": 2294,
+        "totalMs": 2451,
+        "bytes": 351059
+      },
+      {
+        "path": "/cars/offer/nissan-rogue-nissan-rogue-2022--0d4790ad0351bf2b8a5bab00",
+        "status": 200,
+        "ttfbMs": 1515,
+        "totalMs": 1828,
+        "bytes": 475945
+      },
+      {
+        "path": "/cars/offer/audi-q2-35-tfsi-sport-aut-navi-pdc-shz-2020--f78aeaf264da3a8f163d6133",
+        "status": 200,
+        "ttfbMs": 3161,
+        "totalMs": 3474,
+        "bytes": 447301
+      },
+      {
+        "path": "/cars/offer/volkswagen-touran-1-5-tsi-act-highline-bluemotion-tech-aut-2020--fea94cd00ae87839b2a7a54c",
+        "status": 200,
+        "ttfbMs": 4845,
+        "totalMs": 5310,
+        "bytes": 469311
+      },
+      {
+        "path": "/cars/offer/toyota-yaris-g-2020--e25516c85eb54b9e830ef511",
+        "status": 200,
+        "ttfbMs": 2537,
+        "totalMs": 2849,
+        "bytes": 427908
+      },
+      {
+        "path": "/cars/offer/peugeot-208-gt-2024--1854b9eff7883e198a93d4a6",
+        "status": 200,
+        "ttfbMs": 1373,
+        "totalMs": 1684,
+        "bytes": 344922
+      },
+      {
+        "path": "/cars/offer/unavailable-verification-example",
+        "status": 307,
+        "ttfbMs": 1755,
+        "totalMs": 1755,
+        "bytes": 0
+      },
+      {
+        "path": "/cars/offer/avtomobil--unavailable-verification-example",
+        "status": 200,
+        "ttfbMs": 3416,
+        "totalMs": 3727,
+        "bytes": 207512
+      },
+      {
+        "path": "/api/catalog/home",
+        "status": 200,
+        "ttfbMs": 518,
+        "totalMs": 520,
+        "bytes": 143360
+      }
+    ],
+    "quotes": [
+      {
+        "market": "china",
+        "id": "3f94ca02f2313c09d677b990",
+        "listRub": 1424667,
+        "expectedRub": 1424667,
+        "quoteBasis": "catalog",
+        "detailRub": 1424667,
+        "equal": true,
+        "hasImage": true,
+        "depositRub": 160000,
+        "expectedDepositRub": 160000,
+        "marketConfigId": "market_china_v7_6729268e-16f6-4281-94a3-19d64801f4ad",
+        "vehicleRemainderRub": 550841,
+        "breakdownSumRub": 1424667,
+        "serviceBundleRub": 35000
+      },
+      {
+        "market": "china",
+        "id": "e1bbcb6b9058d511cb184f82",
+        "listRub": 1743770,
+        "expectedRub": 1743770,
+        "quoteBasis": "catalog",
+        "detailRub": 1743770,
+        "equal": true,
+        "hasImage": true,
+        "depositRub": 160000,
+        "expectedDepositRub": 160000,
+        "marketConfigId": "market_china_v7_6729268e-16f6-4281-94a3-19d64801f4ad",
+        "vehicleRemainderRub": 882505,
+        "breakdownSumRub": 1743770,
+        "serviceBundleRub": 35000
+      },
+      {
+        "market": "korea",
+        "id": "f649514e83647d1d84c917e0",
+        "listRub": 1661563,
+        "expectedRub": 1661563,
+        "quoteBasis": "catalog",
+        "detailRub": 1661563,
+        "equal": true,
+        "hasImage": true,
+        "depositRub": 110000,
+        "expectedDepositRub": 110000,
+        "marketConfigId": "market_korea_v3_9aed1a82-28fc-4dff-9217-659feb8093c6",
+        "vehicleRemainderRub": 924642,
+        "breakdownSumRub": 1661563,
+        "serviceBundleRub": 25000
+      },
+      {
+        "market": "korea",
+        "id": "c08a47a9254cec72ab3e1402",
+        "listRub": 1593369,
+        "expectedRub": 1593369,
+        "quoteBasis": "catalog",
+        "detailRub": 1593369,
+        "equal": true,
+        "hasImage": true,
+        "depositRub": 110000,
+        "expectedDepositRub": 110000,
+        "marketConfigId": "market_korea_v3_9aed1a82-28fc-4dff-9217-659feb8093c6",
+        "vehicleRemainderRub": 912231,
+        "breakdownSumRub": 1593369,
+        "serviceBundleRub": 25000
+      },
+      {
+        "market": "uae",
+        "id": "9b8facb987a949c5fddee0c8",
+        "listRub": 666736,
+        "expectedRub": 666736,
+        "quoteBasis": "catalog",
+        "detailRub": 666736,
+        "equal": true,
+        "hasImage": true
+      },
+      {
+        "market": "uae",
+        "id": "d4960797f66ec58b3e366101",
+        "listRub": 852409,
+        "expectedRub": 852409,
+        "quoteBasis": "catalog",
+        "detailRub": 852409,
+        "equal": true,
+        "hasImage": true
+      },
+      {
+        "market": "georgia",
+        "id": "c22969c48cd84921fd16a9c3",
+        "listRub": 1173117,
+        "expectedRub": 1173117,
+        "quoteBasis": "catalog",
+        "detailRub": 1173117,
+        "equal": true,
+        "hasImage": true
+      },
+      {
+        "market": "georgia",
+        "id": "0d4790ad0351bf2b8a5bab00",
+        "listRub": 1206876,
+        "expectedRub": 1206876,
+        "quoteBasis": "catalog",
+        "detailRub": 1206876,
+        "equal": true,
+        "hasImage": true
+      },
+      {
+        "market": "europe",
+        "id": "f78aeaf264da3a8f163d6133",
+        "listRub": 2776371,
+        "expectedRub": 2776371,
+        "quoteBasis": "catalog",
+        "detailRub": 2776371,
+        "equal": true,
+        "hasImage": true,
+        "depositRub": 110000,
+        "expectedDepositRub": 110000,
+        "marketConfigId": "market_europe_v4_d47adec6-03bd-4cef-b6df-d88cf7fc2ab9",
+        "vehicleRemainderRub": 1736558,
+        "breakdownSumRub": 2776371,
+        "serviceBundleRub": 30000
+      },
+      {
+        "market": "europe",
+        "id": "fea94cd00ae87839b2a7a54c",
+        "listRub": 3277661,
+        "expectedRub": 3277661,
+        "quoteBasis": "catalog",
+        "detailRub": 3277661,
+        "equal": true,
+        "hasImage": true,
+        "depositRub": 110000,
+        "expectedDepositRub": 110000,
+        "marketConfigId": "market_europe_v4_d47adec6-03bd-4cef-b6df-d88cf7fc2ab9",
+        "vehicleRemainderRub": 2228019,
+        "breakdownSumRub": 3277661,
+        "serviceBundleRub": 30000
+      },
+      {
+        "market": "japan",
+        "id": "e25516c85eb54b9e830ef511",
+        "listRub": 407211,
+        "expectedRub": 407211,
+        "quoteBasis": "catalog",
+        "detailRub": 407211,
+        "equal": true,
+        "hasImage": true
+      },
+      {
+        "market": "japan",
+        "id": "1854b9eff7883e198a93d4a6",
+        "listRub": 1192624,
+        "expectedRub": 1192624,
+        "quoteBasis": "catalog",
+        "detailRub": 1192624,
+        "equal": true,
+        "hasImage": true
+      }
+    ],
+    "ok": true,
+    "marketCounts": {
+      "korea": 13598,
+      "china": 28382,
+      "japan": 14800,
+      "uae": 701,
+      "europe": 21413,
+      "georgia": 7888
+    }
+  },
+  "crmSmoke": {
+    "runId": 35952400709,
+    "conclusion": "success"
+  }
+}

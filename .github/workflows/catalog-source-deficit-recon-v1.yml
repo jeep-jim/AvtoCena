@@ -1,0 +1,59 @@
+name: Catalog source qualification · deficit recon v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/source-deficit-recon-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-deficit-recon-v1.yml"
+      - "scripts/catalog-source-deficit-recon-v1.mjs"
+      - "tests/catalog-source-deficit-recon-v1.test.ts"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+      - "docs/catalog-source-deficit-recon-v1.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-deficit-recon-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify targeted deficit recon contract
+        run: node --import tsx --test tests/catalog-source-deficit-recon-v1.test.ts
+      - name: Inspect unresolved source-bound evidence without publication
+        env:
+          CATALOG_SOURCE_DEFICIT_RECON_TIMEOUT_MS: "15000"
+          CATALOG_SOURCE_DEFICIT_RECON_MAX_BODY_BYTES: "1400000"
+        run: node scripts/catalog-source-deficit-recon-v1.mjs
+      - name: Verify no-write evidence envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-deficit-recon-v1.json', 'utf8'));
+          if (p.productionWrites !== false) throw new Error('productionWrites');
+          if (p.classificationMutations !== false) throw new Error('classificationMutations');
+          if (p.publishAllowedMutations !== false) throw new Error('publishAllowedMutations');
+          if (p.rawBodiesStored !== false) throw new Error('rawBodiesStored');
+          if (p.alternateRouteRequestsPerformed !== false) throw new Error('alternateRouteRequestsPerformed');
+          if (p.sampleCount !== 8) throw new Error(`sampleCount=${p.sampleCount}`);
+          if (!Array.isArray(p.results) || p.results.length !== 8) throw new Error('results');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-deficit-recon-v1
+          path: catalog-source-deficit-recon-v1.json
+          if-no-files-found: error
+          retention-days: 7

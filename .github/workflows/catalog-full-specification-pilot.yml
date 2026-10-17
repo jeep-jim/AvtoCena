@@ -1,0 +1,41 @@
+name: Catalog · Six-market specification pilot
+on:
+  workflow_dispatch:
+  push:
+    branches: [feat/catalog-full-specifications]
+    paths:
+      - .github/workflows/catalog-full-specification-pilot.yml
+      - scripts/catalog-full-specification-pilot.mjs
+permissions:
+  contents: read
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        market: [japan, china, korea, uae, europe, georgia]
+    env:
+      CATALOG_PILOT_MARKET: ${{ matrix.market }}
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "20000"
+      CATALOG_SOURCE_TIMEOUT_MS: "25000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"
+      CATALOG_MAX_IMAGES_PER_OFFER: "5"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Read one list page and up to two details per approved source
+        run: node --import tsx scripts/catalog-full-specification-pilot.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-specification-pilot-${{ matrix.market }}
+          path: catalog-specification-pilot-${{ matrix.market }}.json
+          retention-days: 14

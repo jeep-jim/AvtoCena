@@ -1,0 +1,64 @@
+name: Catalog V6 · Prestige chunk canary
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-prestige-chunk-canary.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-prestige-chunk-canary
+  cancel-in-progress: true
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PRESTIGE_CHUNK_ID: canary-alphard-0-100
+      PRESTIGE_CHUNK_START_CURSOR: "0:0:0"
+      PRESTIGE_CHUNK_MAKE_INDEX: "0"
+      PRESTIGE_CHUNK_MODEL_INDEX: "0"
+      PRESTIGE_CHUNK_END_OFFSET: "100"
+      PRESTIGE_CHUNK_MAX_PAGES: "5"
+      PRESTIGE_CHUNK_OUTPUT: prestige-japan-chunk-canary.json
+      PRESTIGE_JAPAN_DETAIL_CONCURRENCY: "5"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Verify first exact sold-result partition
+        run: npx tsx scripts/prestige-japan-strict-chunk.mjs
+      - name: Gate canary report
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync('prestige-japan-chunk-canary.json', 'utf8'));
+          const r = data.report || {};
+          const problems = [];
+          if (r.passed !== true) problems.push('chunk_not_passed');
+          if (r.mode !== 'prestige_exact_sold_source_only_chunk_no_publish') problems.push('mode');
+          if (r.pages !== 5) problems.push(`pages_${r.pages}`);
+          if (!(r.accepted > 0)) problems.push(`accepted_${r.accepted}`);
+          if ((r.invariantProblems || []).length) problems.push('invariants');
+          if (!r.digest || String(r.digest).length !== 64) problems.push('digest');
+          console.log(JSON.stringify({ report: r, problems }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prestige-japan-chunk-canary
+          path: prestige-japan-chunk-canary.json
+          if-no-files-found: error
+          retention-days: 5

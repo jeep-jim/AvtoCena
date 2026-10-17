@@ -1,0 +1,7004 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 34,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-d6ed8faca618570744b1",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1993,
+      "powerKw": 109,
+      "commercialNames": [
+        "CR-V",
+        "CR-V / 2.0 / PHEV / AVT / 2WD",
+        "CR-V 2.0 PHEV AVT 2WD",
+        "CR-V E:PHEV",
+        "CR-V PHEV 2.0 ADVANC",
+        "CR-V PHEV 20 ADVANC",
+        "HONDA CR-V",
+        "HONDA CRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 4312,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bda34c4f55205bfa8c01",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 49,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7aa42628af3228f8e114",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 51,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb311bba24c79902dab5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 52,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4069c686b8b89047176d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 53,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cfc6a8c095a10a07b08",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 61,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c84770580c9851c56d29",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 62,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7c80982accdaf66f67e",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 67,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-071f5edbfbe9f9c797d2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 68,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2853bd4ace120c71c886",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 69,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ba0ce59a0d946ef5f40",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 70,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7966a9c9c75619a38124",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 72,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dad00a14f39921c4442",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 81,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfa39f650c67a49c4fc1",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 84,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d02bf074b24d05710355",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 85,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5f0503001127db94921",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 88,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a8d0a2ada6dbcbe9fb2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 90,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-832d15bfb39b3760ec91",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 91,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db153fbc32db746c1e49",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 92,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-309d08c3e8a8e9151120",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 95,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5030bc0c95b62a26336",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 96,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e309dd75d49060028c12",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 109,
+      "commercialNames": [
+        "CR-V",
+        "CR-V / 2.0 / FHEV / AVT / 2WD",
+        "CR-V / 2.0 / FHEV / AVT / 4WD",
+        "CR-V / 20 / FHEV / AVT / 4WD",
+        "CR-V 2.0 FHEV AVT 2WD",
+        "CR-V 2.0 FHEV AVT 4WD",
+        "CR-V E:HEV 2WD 2.0 E",
+        "CR-V E:HEV 2WD 20 E",
+        "CR-V E:HEV 4WD 2.0 A",
+        "CR-V E:HEV 4WD 2.0 E",
+        "CR-V E:HEV 4WD 20 A",
+        "HONDA CR V",
+        "HONDA CR-V",
+        "HONDA CRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 11128,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f02f1339b6762dea38c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 110,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f97b717f30016a46d111",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 112,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5617f2998e98fc798da",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 114,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5792750f0ef0c18e80e",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 116,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-793b20612c13c1d35783",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 117,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3653fc97f777bf746b6b",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 120,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77b4982a1c7aaa89e9b8",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 125,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f28c7afa742c51c5407",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 131,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9735df4914c279b263c6",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 132,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63d4889a38dbe93fb8b3",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 136,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6ae29f1ee12e1e2d23d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 137,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d214efc6526ebae87692",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 140,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a089c9997b2b71b996d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 142,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae4564bdc77701741761",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 145,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49759256e74b2c72a2cb",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 147,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-629156c303275978b69e",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 148,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a2044a2c1a347b60af2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 150,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-680459d2f920e40f5234",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 155,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a1d12c08a3eadb9ce1f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 165,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6a82c74db8b3db06aa7",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 173,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f7ad14222f4d48ecde9",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 184,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13dc3b90849543355731",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 190,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e2691d0c37e891df73c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 192,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0511e1846e608034985",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 200,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3b25b4d40cb910cf0ad",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 210,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b49294b69a2cc56df28",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 228,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-383a7be0504d31e506a9",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 245,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67a10d526bea52fbc870",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 267,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99dff791c4b926cc8fa6",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 280,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1591009c3d15bd8f4123",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 294,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9b98f2e0890e2d1da56",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 310,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1e16605bb3abb5646d8",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 320,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71f4efbb7bd637ac97bf",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 375,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ac40e4d86fd1b7eb9a0",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 430,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb8d9821eb0c06295fd4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 460,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a16790b45092dec9a116",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1993,
+      "powerKw": 135,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 307,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd108c52682f9217a349",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1597,
+      "powerKw": 118,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c0c45b56e3089c84306",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "CR-V E:PHEV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbee6eece49ad6e2b5b2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 106,
+      "commercialNames": [
+        "CR-V",
+        "CR-V E:HEV 4WD 2.0 A",
+        "CR-V E:HEV 4WD 2.0 E",
+        "HONDA CR-V",
+        "HONDA CRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1065,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b67845419e7e44ccabb",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1997,
+      "powerKw": 110,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec0f608ad265f35964c5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1993,
+      "powerKw": null,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c2cbe1aee470519a4b4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1993,
+      "powerKw": 58,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ae9a07c63e67139d29f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1993,
+      "powerKw": 92,
+      "commercialNames": [
+        "CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a046cf66fd855dd00db",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr",
+      "modelId": "honda/cr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1993,
+      "powerKw": 106,
+      "commercialNames": [
+        "CR-V",
+        "HONDA CR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ddad35339108f26e119",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr-V EX",
+      "modelId": "honda/cr-v-ex",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "CR-V EX I-VTEC",
+        "CR-V EX I-VTEC CVT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 780,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-315a118728e2b3f30ebe",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Cr-V EX",
+      "modelId": "honda/cr-v-ex",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1993,
+      "powerKw": null,
+      "commercialNames": [
+        "CR-V EX I-MMD CVT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2966,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97baebfb4fbb3be9c27d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "CR-Z",
+      "modelId": "honda/cr-z",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1993,
+      "powerKw": 107,
+      "commercialNames": [
+        "CR-Z"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a2c42ac0d41e18e08c4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "E",
+        "Honda e",
+        "HONDA E",
+        "HONDA-E"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 191,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46b38303511a6efac16b",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "E",
+        "HONDA E",
+        "HONDA E EV ADVANCE",
+        "HONDA E EV BASE",
+        "HONDA E EV HP",
+        "HONDA E EV LIMITED E"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 7960,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-978895024ca958de8f97",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "E",
+        "HONDA E",
+        "Honda e"
+      ],
+      "sourceMakeNames": [
+        "HONDA",
+        "Honda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 449,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef55a92dfcb38f34c094",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "E",
+        "HONDA E",
+        "Honda e"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 4095,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f2357089125af52ff80",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "E"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fc86f9c8e6b4ec43096",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "HONDA E"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e11841a3dfaf0a8237c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E",
+      "modelId": "honda/e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "HONDA E"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb4ffdbe5716aee44b00",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E Advance",
+      "modelId": "honda/e-advance",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "E ADVANCE"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1938,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74680e82fd87f1737eef",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E:NY1",
+      "modelId": "honda/e-ny1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "E NY1",
+        "E:NY1",
+        "E:NY1 EV ADVANCE",
+        "E:NY1 EV ELEGANCE"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 337,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cb63e12011c9ee6e657",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E:NY1",
+      "modelId": "honda/e-ny1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "E NY1",
+        "E:NY1",
+        "HONDA E NY1"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 5479,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17d8f2602875eaa7ff82",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E:NY1",
+      "modelId": "honda/e-ny1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "E:NY1"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-386299eea09c61fbc616",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "E:NY1",
+      "modelId": "honda/e-ny1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "E NY1"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea45d7e9eb52154675d5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Element",
+      "modelId": "honda/element",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2354,
+      "powerKw": 119,
+      "commercialNames": [
+        "ELEMENT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd50afdb3bf115c9052d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Fit",
+      "modelId": "honda/fit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 82,
+      "commercialNames": [
+        "FIT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6b05181384bffa8f7fb",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Fit",
+      "modelId": "honda/fit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 81,
+      "commercialNames": [
+        "FIT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fcefd67551a7cad5b1f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1597,
+      "powerKw": null,
+      "commercialNames": [
+        "HR-V EX I-DTEC",
+        "HR-V S I-DTEC",
+        "HR-V SE I-DTEC"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 912,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-463f76660ea6131e1579",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1597,
+      "powerKw": 88,
+      "commercialNames": [
+        "HR-V",
+        "HR-V 1.6 ELEGANCE",
+        "HR-V 1.6 EXECUTIVE",
+        "HR-V 16 ELEGANCE",
+        "HR-V 16 EXECUTIVE",
+        "HRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 853,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8076e9eed41ec32da6b5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89862553452ea5d348de",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "HR-V",
+        "HR-V EX I-VTEC",
+        "HR-V EX I-VTEC CVT",
+        "HR-V S I-VTEC",
+        "HR-V SE I-VTEC",
+        "HR-V SE I-VTEC CVT",
+        "HR-V SPORT I-VTEC",
+        "HR-V SPORT I-VTEC CVT",
+        "HRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 7665,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-221af46e38550b09d024",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "HONDA HRV",
+        "HR-V",
+        "HR-V / 1.5 /",
+        "HR-V / 1.5 / CVT",
+        "HR-V 1.5 ELEGANCE",
+        "HR-V 1.5 EXECUTIVE",
+        "HR-V 15",
+        "HR-V 15 COMFORT",
+        "HR-V 15 CVT",
+        "HR-V 15 ELEGANCE",
+        "HR-V 15 EXECUTIVE",
+        "HRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 22180,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89bb8e2ed004df718643",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 134,
+      "commercialNames": [
+        "HR-V",
+        "HR-V 1.5 SPORT",
+        "HR-V 15 SPORT",
+        "HR-V 15 TURBO",
+        "HRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4674,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6187e06d9b7e0db19b78",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1799,
+      "powerKw": 104,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdfe32591880e6a842c3",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 79,
+      "commercialNames": [
+        "HONDA HRV",
+        "HR-V",
+        "HR-V / 1.5 / E-CVT / FHEV",
+        "HR-V / 1.5 / E-CVT FHEV",
+        "HR-V / 15 / E-CVT / FHEV",
+        "HR-V 1.5 E-CVT FHEV",
+        "HR-V E:HEV",
+        "HR-V E:HEV 1.5 ADVAN",
+        "HR-V E:HEV 1.5 ELEGA",
+        "HR-V E:HEV 15 ADVAN",
+        "HR-V E:HEV 15 ELEGA",
+        "HR-V.",
+        "HRV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 47842,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a87788cc04e6930fa05",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1799,
+      "powerKw": 105,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f430184cdf9a175b1b2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 51,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-914aacddb5efa704ea2e",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 55,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efacdc2320bfed59232a",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-826e3cc230c30a4cd49f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27c2dd32e69de19b67d4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5a2aa4abe6817f13ffa",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9945f39429ab0d30fc2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3043b8dc6b7e78064503",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0bb93ec60e55d85b959",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 74,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5b7fb79eadab8818f60",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52915c0c6326d8d6d5d2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 80,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8b8f6203dbe4f6394c4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc8575b0a917c6be4b6d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61fe3d5d6f1f89136e1d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5046eed0e72c13775f88",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 88,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94131584c6059fb0b67d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bb9040a2152265b8c78",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c7ee58709db85a1a111",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 92,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-370d89cc59220a127c06",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a58d6868cbbc42062de",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad5af9e100e841d35dc2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7511b5c7c4c36b7ae44",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f601d9e0d2d239e49e3c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 116,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-babfc4d4dc923a6f6460",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb5ca33192176edca772",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4208184b7d373c1db561",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 140,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1222a321a4226098abda",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 141,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb0714b23eac860bab24",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 145,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b1eb6c58b6b69d399b6",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 147,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c6f3efb22b9dd142568",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 150,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-792a866013dfdea70fea",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 228,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-255c20b2f443e623494c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 331,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19c6fc294f22d2ad4965",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 390,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d3328c1bdd277fe275b",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1996,
+      "powerKw": 118,
+      "commercialNames": [
+        "HONDA HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdd65cd7c53350e23166",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1fe04ff2d1620d1ce54",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1489,
+      "powerKw": 79,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc883b7335912128ff37",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 79,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 262,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9a392a5935d443d7251",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 62,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f494da94e3a0f3a6dd4e",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 115,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bd6507a8182865b2cdc",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "HR-V",
+      "modelId": "honda/hr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "HR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 337,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-876ba0a1aa63781628c1",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Insight",
+      "modelId": "honda/insight",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1339,
+      "powerKw": 65,
+      "commercialNames": [
+        "INSIGHT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db7b775ea9bdec135511",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Insight",
+      "modelId": "honda/insight",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1297,
+      "powerKw": 89,
+      "commercialNames": [
+        "INSIGHT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6390b1d04114e111cb5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Insight",
+      "modelId": "honda/insight",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 111,
+      "commercialNames": [
+        "INSIGHT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-706517b71ddaede16a18",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Insight",
+      "modelId": "honda/insight",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "INSIGHT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d596e7055b3505f695da",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1218,
+      "powerKw": 75,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56d9174176a71fe8ec27",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1318,
+      "powerKw": null,
+      "commercialNames": [
+        "JAZZ EX I-VTEC",
+        "JAZZ EX I-VTEC CVT",
+        "JAZZ EX NAVI I-VTEC",
+        "JAZZ EX NAVI I-VTEC CVT",
+        "JAZZ S I-VTEC",
+        "JAZZ S I-VTEC CVT",
+        "JAZZ SE I-VTEC",
+        "JAZZ SE I-VTEC CVT",
+        "JAZZ SE NAVI I-VTEC",
+        "JAZZ SE NAVI I-VTEC CVT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 9696,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cf0362d09a1d861e0a6",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1318,
+      "powerKw": 75,
+      "commercialNames": [
+        "JAZZ",
+        "JAZZ / 1.3 /",
+        "JAZZ 1.3 COMFORT",
+        "JAZZ 1.3 ELEGANCE",
+        "JAZZ 1.3 TREND",
+        "JAZZ 13",
+        "JAZZ 13 COMFORT",
+        "JAZZ 13 ELEGANCE",
+        "JAZZ 13 TREND"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 8001,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-403bcc749ffe3f313f9c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1319,
+      "powerKw": 75,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20a642aee8b7d099949d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1339,
+      "powerKw": 73,
+      "commercialNames": [
+        "JAZZ",
+        "JAZZ 14"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-832402a04c00e1927ac9",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 72,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b2f09c663060c7946c5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "JAZZ",
+        "JAZZ CROSSTAR EX I-MMD CVT",
+        "JAZZ EX I-MMD CVT",
+        "JAZZ SE I-MMD CVT",
+        "JAZZ SPORT I-VTEC CVT",
+        "JAZZ SPORT NAVI I-VTEC CVT",
+        "JAZZ SR I-MMD CVT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 12035,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fd6a19022bf5646f52d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "JAZZ",
+        "JAZZ / 1.5 / HIBRID",
+        "JAZZ / 1.5 / HIBRID / CROSS",
+        "JAZZ / 15 / HIBRID",
+        "JAZZ / 15 / HIBRID / CROSS",
+        "JAZZ 1.5 COMFORT",
+        "JAZZ 1.5 ELEGANCE",
+        "JAZZ 1.5 EXECUTIVE",
+        "JAZZ 15 COMFORT",
+        "JAZZ 15 ELEGANCE",
+        "JAZZ 15 EXECUTIVE",
+        "JAZZ 15 HIBRID",
+        "JAZZ CROSSTAR 1.5 EX",
+        "JAZZ CROSSTAR 15 EX",
+        "JAZZ E:HEV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 58182,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43dcd92f4ad0cfd3e942",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fb3ea1704470bc869c4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 80,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1850,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-564d5c514dbee222656d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "JAZZ",
+        "JAZZ 1.5 DYNAMIC"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 282,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6e543b0ca56c53d1151",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de230a6a7db5b5a365fc",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 79,
+      "commercialNames": [
+        "JAZZ",
+        "JAZZ / 1.5 / HIBRID",
+        "JAZZ / 1.5 / HIBRID / CROSS",
+        "JAZZ / 1.5 / HIBRID CROSS",
+        "JAZZ / 15 / HIBRID",
+        "JAZZ / 15 / HIBRID / CROSS",
+        "JAZZ 1.5 ADVANCE",
+        "JAZZ 1.5 ADVANCE SPO",
+        "JAZZ 1.5 ELEGANCE",
+        "JAZZ 1.5 HIBRID",
+        "JAZZ 1.5 HIBRID CROSS",
+        "JAZZ 15 ADVANCE",
+        "JAZZ 15 ADVANCE SPO",
+        "JAZZ 15 ELEGANCE",
+        "JAZZ CROSSTAR 1.5 AD",
+        "JAZZ CROSSTAR 15 AD",
+        "JAZZ E:HEV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 17090,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14d0d34b160c8cc44a12",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1318,
+      "powerKw": 72,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a702df2559456ab2a985",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 55,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3141cb6cbbea736c192f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 59,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-862661d7368b71d38088",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eee481ca3aabac6ba6f5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8dc335ac10764be2f44f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3814d93195ba46304d4d",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbdd3ef967dd8084c103",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 397,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06d1b1d1e7733d9e4b43",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cb4186953c18e3b4cf2",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2dfae322a0aa26875da",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7a7fcfe0829fdd13749",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca66362bf08ae719a605",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 136,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-492d31d47e74450e67fd",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 141,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2eed5db40eb1b9979ad",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 142,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb1d6b3d6cfb165c116f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 210,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-601425384e884ff05bf1",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 260,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1afd36fb9ef0b76d412",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 265,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac03f74f291c5e2aa0c7",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 430,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd66c92a9764d7015ea4",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 79,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a9035df85e64fbe29ac",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Jazz",
+      "modelId": "honda/jazz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 79,
+      "commercialNames": [
+        "JAZZ"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30bcb9940d3ffd2e7176",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Nsx",
+      "modelId": "honda/nsx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3493,
+      "powerKw": null,
+      "commercialNames": [
+        "NSX V6 AUTO"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6028f47857c3afbc273e",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Nsx",
+      "modelId": "honda/nsx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3493,
+      "powerKw": 373,
+      "commercialNames": [
+        "NSX"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-237e99fa4c901c9ec3ce",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Odyssey",
+      "modelId": "honda/odyssey",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 209,
+      "commercialNames": [
+        "HONDA ODYSSEY",
+        "ODYSSEY"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66c1e445bcbe7be2fe9b",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Odyssey",
+      "modelId": "honda/odyssey",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 185,
+      "commercialNames": [
+        "ODYSSEY"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5bfc2a6454226910601",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Odyssey",
+      "modelId": "honda/odyssey",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": null,
+      "commercialNames": [
+        "ODYSSEY EXL 3.5"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a828068d92aaa01f79b5",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Odyssey",
+      "modelId": "honda/odyssey",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 179,
+      "commercialNames": [
+        "ODYSSEY"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a9578e21bb386c9b967",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Odyssey",
+      "modelId": "honda/odyssey",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3471,
+      "powerKw": 185,
+      "commercialNames": [
+        "ODYSSEY"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2115ba6e6cdf49f6858f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Passport",
+      "modelId": "honda/passport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 209,
+      "commercialNames": [
+        "HONDA PASSPORT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e183c7acbcdb672b5b9",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Passport",
+      "modelId": "honda/passport",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": null,
+      "commercialNames": [
+        "PASSPORT 3.5"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a57ace39458c8dbda15",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Passport",
+      "modelId": "honda/passport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 205,
+      "commercialNames": [
+        "PASSPORT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ac91b0d11725968fc30",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Pilot",
+      "modelId": "honda/pilot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 184,
+      "commercialNames": [
+        "PILOT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbf27708a0265a07ca37",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Pilot",
+      "modelId": "honda/pilot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 209,
+      "commercialNames": [
+        "HONDA PILOT",
+        "PILOT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dcdb55d480dc1e03f21",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Pilot",
+      "modelId": "honda/pilot",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": null,
+      "commercialNames": [
+        "PILOT 3.5"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc458027750f0cdc956f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Pilot",
+      "modelId": "honda/pilot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3471,
+      "powerKw": 205,
+      "commercialNames": [
+        "PILOT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c27fcf2900b5c656b53",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Pilot",
+      "modelId": "honda/pilot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3500,
+      "powerKw": 184,
+      "commercialNames": [
+        "PILOT"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81a39eddfedcfc55f1fa",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "Prelude",
+      "modelId": "honda/prelude",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 105,
+      "commercialNames": [
+        "PRELUDE"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a41812ca94390f38a049",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1993,
+      "powerKw": 105,
+      "commercialNames": [
+        "HONDA ZRV",
+        "Z-RV",
+        "ZR-V",
+        "ZR-V / 2.0 / EHEV / AVT /",
+        "ZR-V / 20 / EHEV / AVT /",
+        "ZR-V 2.0 ADVANCE",
+        "ZR-V 2.0 EHEV AVT",
+        "ZR-V 2.0 ELEGANCE",
+        "ZR-V 2.0 SPORT",
+        "ZR-V 20 ADVANCE",
+        "ZR-V 20 SPORT",
+        "ZR-V E:HEV"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 13744,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66fda39aa7fab8d743b1",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": null,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 130,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91a74156d474c9eeb53c",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 55,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74a81bde12d447f01365",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 67,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db0113002fce27801219",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 81,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d72dc1ee7a7efeffdcb",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 88,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4df0b2489b48b9c8ce6",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 131,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-557a26f9afb2764a1755",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 135,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 259,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2c34155b6edd11f4730",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 147,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a7d33d9aa4e3298493f",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 12,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fa36148666e91ed61ae",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1993,
+      "powerKw": 105,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 248,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2c00942f1a2f6aa8d69",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 58,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-271b0c5fd7d9e3772d43",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 62,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f31dde4877e818d5425",
+      "brandId": "honda",
+      "brand": "Honda",
+      "canonicalModel": "ZR-V",
+      "modelId": "honda/zr-v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1993,
+      "powerKw": 103,
+      "commercialNames": [
+        "ZR-V"
+      ],
+      "sourceMakeNames": [
+        "HONDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d6f6cced3a7e234aac3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Accent",
+      "modelId": "hyundai/accent",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ACCENT"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a26dac9ff06ab3bc262",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Accent",
+      "modelId": "hyundai/accent",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 78,
+      "commercialNames": [
+        "ACCENT"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37aacf10d8d9fde3262b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Accent",
+      "modelId": "hyundai/accent",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 90,
+      "commercialNames": [
+        "ACCENT"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57e73c67237b3bb10e0f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1197,
+      "powerKw": 62,
+      "commercialNames": [
+        "BAYON",
+        "BAYON BI-FUEL"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1797,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1932ba6253658f96f358",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "BAYON",
+        "Hyundai Bayon"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1619,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbe7a1d733b4637aacb0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "BAYON",
+        "Bayon"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 39785,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83d98d4735d609d92589",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "BAYON",
+        "Bayon",
+        "BAYON / 1.0 / T-GDI",
+        "BAYON / 1.0 / T-GDI 48V HEV",
+        "BAYON / 1.0 / T-GDI DCT",
+        "BAYON 1.0 T-GDI",
+        "BAYON 1.0 T-GDI DCT",
+        "BAYON F/L",
+        "BAYON PE",
+        "Hyundai Bayon"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 47128,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1eacf49d8bb500d92a0c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 88,
+      "commercialNames": [
+        "BAYON",
+        "Bayon",
+        "BAYON / 1.0 / T-GDI HP 48V HEV",
+        "BAYON / 1.0 / T-GDI HP DCT 48V HEV",
+        "HYUNDAI BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 2704,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55927ca089291062e5de",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 242,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f31878b792166b08676",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 61,
+      "commercialNames": [
+        "BAYON",
+        "Bayon"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 12540,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48128bc1e671ed8768d7",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 62,
+      "commercialNames": [
+        "Bayon",
+        "BAYON",
+        "BAYON / 1.2 /",
+        "BAYON 1.2"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 11257,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f0cad2ef801a5fcf24f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 12,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f961db547a4d14755a4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 74,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45047b6485c92a7a614e",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 51,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e4e2e953fb88250aba1",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1ea818e0206084046dd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 55,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da394ab931c35b60734c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 59,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a12e69fe7536771077d5",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 61,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eeb4450c909f91a7e2f6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 67,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcb0100d94186e7ead4a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 68,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7a5af2431cd1949204a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 69,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eba91f46f6ba55bac860",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 70,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01e1fc1e4872473c1f60",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 72,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82542a4b9d971c8bbe79",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 75,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25039f706925045d38fb",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 80,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b06c2cda22b8f435178c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 81,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e89f00dccc1c7c644a8",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 84,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-214a8022cbaf431adb4d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 85,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6eae3c5c2725f4f2d462",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 90,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f125bc0fb516f3531f5",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 91,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a45ac53f9b7d55eb0a21",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 92,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ede584faafec9e54c098",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 95,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e30622d3f44091612460",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 96,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69c0951aa707e5e5a019",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 110,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13472a4e19692c56202c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 112,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c726656a01f043e27b5f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 114,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cfffc1d2d2eee3672d6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 116,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-126170954e4c651521c6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 120,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53b11bcfe2639b62f6a6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 131,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7d514a2f067399bd337",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 132,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c0e023b2e5a857bf9d8",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 135,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4226dbc7ba757c7ddafb",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 137,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-849ed96ca6999ab34c6d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 140,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-537e5948c25953fc65bb",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 143,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bea71d43b8516de1c518",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 145,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0db850323d02ff2652a6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 150,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2310bfc0bb7607ab7662",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 170,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e55177d8d99f0376ac0a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 180,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b90889a19eb544d5c9bc",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Bayon",
+      "modelId": "hyundai/bayon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 190,
+      "commercialNames": [
+        "BAYON"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

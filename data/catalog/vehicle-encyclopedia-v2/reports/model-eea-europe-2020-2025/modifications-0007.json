@@ -1,0 +1,7029 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 7,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-ea92caf714b5f0e21323",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 160,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88f591bac692b2b94567",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7",
+        "Q7 / 3.0 / TDI Q AUT.",
+        "Q7 3.0 TDI Q AUT.",
+        "Q7 30 TDI Q AUT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 10985,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd5964a3c96fa8170084",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 190,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28000e1a3f7c564462da",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e51f737dd6da71d57af",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q 7",
+        "Q7",
+        "Q7 / 3.0 / TDI Q AUT.",
+        "Q7 / 30 / TDI Q AUT",
+        "Q7 3.0 TDI Q AUT.",
+        "Q7 30 TDI Q AUT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 33015,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bfa498368925ab0238b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3956,
+      "powerKw": 320,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d6571b608cb81352c60",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q7",
+        "Q7 55 TFSI E",
+        "Q7 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2cf62f85d5809c4fde3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be1556f1fc8a69f76b98",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27321ea548952b26e52a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7 QUAT.2.0 R4195 A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a998c7447b12f61b32a3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd71b214448543a91687",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "Q7",
+        "Q7 55 TFSI E",
+        "Q7 60 TFSI E",
+        "Q7 S LINE 55 TFSI MHEV QUAT A",
+        "Q7 SLN BLK ED 55TFSI MHEV QT A",
+        "Q7 SLN VOR 55 TFSI MHEV QUAT A",
+        "Q7 SPORT 55 TFSI MHEV QUAT A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1381,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a5eada17cc0833a9665",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7",
+        "Q7 / 3.0 / TFSI Q AUT.",
+        "Q7 / 30 / TFSI Q AUT",
+        "Q7 3.0 TFSI Q AUT.",
+        "Q7 55 TFSI e",
+        "Q7 55 TFSI E",
+        "Q7 55 TFSIE",
+        "Q7 60 TFSI e",
+        "Q7 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 5349,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a5ddbfa3167dd5da463",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 373,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edc5a784cc3c4baac341",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-199ba3d8e52e58f00fe6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "Q7",
+        "Q7 55 TFSI E",
+        "Q7 60 TFSI E",
+        "Q7 S LINE 55 TFSI E QUATTRO A",
+        "Q7 SPORT 55 TFSI E QUATTRO A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 554,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-690ab65716dad7c291af",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 60,
+      "commercialNames": [
+        "Q7 55 TFSI E",
+        "Q7 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d04b23de420d3a92c06d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7",
+        "Q7 55 E / 3.0 / TFSI Q AUT.",
+        "Q7 55 E 3.0 TFSI Q AUT.",
+        "Q7 55 TFSI E",
+        "Q7 55 TFSI e",
+        "Q7 60 E / 3.0 / TFSI Q AUT.",
+        "Q7 60 E / 30 / TFSI Q AUT",
+        "Q7 60 E 3.0 TFSI Q AUT.",
+        "Q7 60 E 30 TFSI Q AUT",
+        "Q7 60 TFSI e",
+        "Q7 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 23518,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae377fec262a00e6227c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 87,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2066d213ee18da760c0a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 100,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a69d879e3798ad659f1a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6077c401f61e0593100",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 171,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-895ac94e55e21a24910b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03daaeb4ebf2540efa3d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 245,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80f887a6a36d9bfeb4f4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 280,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28b701026f882cf55ff0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 183,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-675e7b3c9e17c087898e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bca4a1cb225595579940",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4134,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cce3a43fa1d727cfcfab",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 200,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99de1ff5e828083afe49",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7 QUAT.3.0 V6270 A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 98,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-148c0bd4180d6d5538f6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 100,
+      "commercialNames": [
+        "Q7 55 TFSI E",
+        "Q7 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cca0a27da2f2ccab59f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa6733c9833f8affd40f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c121102b6f01fd32d26",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 220,
+      "commercialNames": [
+        "AUDI Q7",
+        "Q7 QUATTRO",
+        "Q7 QUATTRO TDI 3.0"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 155,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77a1f03aa419eabc02a7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3967,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f76cd6af2c69e9ae585f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79b51a9737f6fac74d2d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 49,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a35883ae73df48091e0e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 59,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b60b68009dc997969794",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 61,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0488344e35c6350a4458",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 67,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-694c58ec3d832cdf0cda",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 68,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63b96c4128615f9d0080",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 69,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f0d0170fd3cbcf68ea2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 70,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-563b84342e900d989d15",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 72,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4865be33512fba57d8f4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 74,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcec690c1618aab6face",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 81,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51558ba5c4d3c36ee2a2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 84,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69cd182a472f0095db4a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 85,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f32a5b06a24bd991fec0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 90,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4f4d5426d7d6db729e9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 91,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79f5d65807ffe6973722",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 92,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca67d0b37138653a3fdd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 95,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5f87c1b36429f325161",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 110,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1cc08b5f129b5c0d453",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 112,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae6c60e76f47183b0842",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 116,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e14c5807713ac1e16fa5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 120,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e4c7f8042740d9761ad",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 131,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5175ecd4bbfda99618fb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 132,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a35075b6c94a96c7a5d6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 135,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac949c0a5b1d2fbadfed",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 136,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45b74eb033b8b66f8543",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 140,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93501f2a17a8058dade3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 145,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-decf1d5177306b2e26cd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 147,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92f843385e0e723edb6e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f591d7d26204c494fc8e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37f67885f78b07245262",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 190,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1a10c8a6e696857f52d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 270,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27ca052af1a2365b4910",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 320,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1c98fe7a62d39d33709",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 360,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59795cc7268d80e077d1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 410,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b6b7c4812008807bc61",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 460,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6eb3b5f6fdd80ca49276",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 57,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-101fd75920b77d694434",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 300,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db8620511a02d9c65e88",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 320,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f01388198c2b2c850ae6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 425,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dff218e668c61c08e35d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f6695914b2c0e5aab4f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 66,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6845754e990888076a8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "Q7",
+        "Q7 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-260df056ce1ccafa2307",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 68,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81b646fe9639f1976b7d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 69,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-474e75a2cf5a4c3a8ca6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 70,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb7e66cf0a632ca037ef",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 72,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35032a35f276b083a23b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 73,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1aeda3321a5d4a1f56d9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 80,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c502a83682d15c217a1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "Q7",
+        "Q7 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9f964159d45e915dbee",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 84,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfeb8e5ee83d03e20abd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-515743ccbd4aa85d2a6b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 88,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81a31ae6e225d8c34087",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 90,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84e38aeea8c6f6d35ab7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 92,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7de0e85a18dbb1b4d0d9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-315bb66631759c4483bb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 96,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27d59dbb7156ad032332",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e19b7e2814982edeb313",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 112,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-633e3eb1ae888b7ec3e7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 120,
+      "commercialNames": [
+        "Q7",
+        "Q7 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55a5f376dbd9bdeb2b7f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 125,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8d4615a1acff690934b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 131,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c708744006eff7ccd92",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 140,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-636424381e9de089d68a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c6c7ea0d13b78585aed",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 155,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93956a8c7f42488bdce3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-695879361278d9b74781",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 243,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8249d790da991f81ebf",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4e703102ac4e4d4243d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 300,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24d610467342d6ad2b88",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 370,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-367f979c600728774b26",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2984,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q7 QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6c86267095e2733a75a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 106,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20c98bd47491d7914c93",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5085497d78c1b1f446d7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ed5f49ca518762aa946",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2968,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e677bee05f86f27b89c9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2995,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3adaae7873e1319898cc",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2327a8cd05f55a34120d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1dcef97d13aea781ced7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 329,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b65b7431903bc06463d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18eb6a96306c3fd1758e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q7 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaa13e94e5b9ebfaa956",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q7",
+      "modelId": "audi/q7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 290,
+      "commercialNames": [
+        "AUDI Q7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6be5f9cf705cb77fee03",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "Q8",
+        "Q8 S LINE 50 TDI QUATTRO AUTO",
+        "Q8 S LINE 50TDI MHEV QUATTRO A",
+        "Q8 S LINE ED 1 50 TDI QUAT A",
+        "Q8 S-LN VORSPRUNG50 TDI QUAT A",
+        "Q8 SLN BLK ED 50 TDI MHEV QT A",
+        "Q8 SLN VSPRUNG 50TDI MHEV QT A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2095,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b765c1385016fad1dd48",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "AUDI Q8",
+        "Q8",
+        "Q8 / 3.0 / TDI Q AUT.",
+        "Q8 / 30 / TDI Q AUT",
+        "Q8 30 TDI Q AUT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 5863,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da955b07847d3211956b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 183,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03140dc351737f760ccb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "AUDI Q8",
+        "Q8",
+        "Q8 / 3.0 / TDI Q AUT.",
+        "Q8 / 30 / TDI Q AUT",
+        "Q8 3.0 TDI Q AUT.",
+        "Q8 30 TDI Q AUT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 39611,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02c0d4eb6c7c52d7bc91",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3956,
+      "powerKw": 320,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79a606d68cd968d27aef",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 147,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8462e6c875f6de3000db",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-134841789b9a7293ce79",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-508357c3c025d896e02c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f84136ada9f894ddf926",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E",
+        "Q8 60 TFSI E",
+        "Q8 S LINE 55 TFSI MHEV QUAT A",
+        "Q8 S LINE 55 TFSI QUATTRO AUTO",
+        "Q8 SLN BLK ED 55TFSI MHEV QT A",
+        "Q8 SLN ED 1 55 TFSI MHEV QTO A",
+        "Q8 SLN VOR 55 TFSI MHEV QUAT A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 940,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd4cfa4f1a675a52b537",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI Q8",
+        "Q8",
+        "Q8 / 3.0 / TFSI Q AUT.",
+        "Q8 / 30 / TFSI Q AUT",
+        "Q8 3.0 TFSI Q AUT.",
+        "Q8 55 TFSI E",
+        "Q8 60 TFSI e",
+        "Q8 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 6750,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af6a21ea6b0ea34299cf",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 373,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5482b0109c3d2d506325",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d93942b762f776e1275",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI Q8",
+        "Q8",
+        "Q8 55 E / 3.0 / TFSI Q AUT.",
+        "Q8 55 E / 30 / TFSI Q AUT",
+        "Q8 55 E 3.0 TFSI Q AUT.",
+        "Q8 55 TFSI E",
+        "Q8 55 TFSIE",
+        "Q8 55TFSI E",
+        "Q8 60 E 3.0 TFSI Q AUT.",
+        "Q8 60 TFSI E",
+        "Q8 60 TSFI E",
+        "Q8 60TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 21071,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12d8de8b6d7e7445d3e4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8bd7094ce2422d317b0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2dd3977cfdf2e33a9077",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 236,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f3112e29ce29e44d5a1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 294,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d37106c8ea0672e33d4b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI Q8",
+        "Q8 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e7e9552548bb585e871",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bd2270292f96a7ecf4e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2967,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0981902dddb7e7efcee8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 158,
+      "commercialNames": [
+        "AUDI Q8 E-TRON",
+        "Q8",
+        "Q8 50 E-TRON",
+        "Q8 50 E-TRON / /",
+        "Q8 50E-TRON",
+        "Q8 55 E-TRON",
+        "Q8 55 E-TRON / /",
+        "Q8 E-TRON",
+        "Q8 E-TRON 50",
+        "Q8 E-TRON 55",
+        "Q8 E-TRON DAKAR",
+        "Q8 SPORTBACK",
+        "Q8 SPORTBACK 50 E-TRON",
+        "Q8 SPORTBACK 50 E-TRON / /",
+        "Q8 SPORTBACK 55 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON / /"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 4474,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b35cbb07975199747252",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI Q8 E-TRON",
+        "Q8 50 E TRON",
+        "Q8 50 E-TRON",
+        "Q8 E-TRON",
+        "Q8 E-TRON SPORTBACK",
+        "Q8 SPORTBACK 50 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 6985,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-515979bcab3906edfb8f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "AUDI Q8 E-TRON",
+        "AUDI Q8 E-TRON SPORTBACK",
+        "Q8",
+        "Q8 55 E-TRON",
+        "Q8 55 E-TRON / /",
+        "Q8 E-TRON",
+        "Q8 E-TRON DAKAR",
+        "Q8 E-TRON SPORTBACK",
+        "Q8 SPORTBACK 55 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON / /",
+        "Q8 SPORTBACK E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 15579,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e315ee1812d7c364185a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 370,
+      "commercialNames": [
+        "AUDI Q8 E-TRON",
+        "Q8 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f96bccb2b8c545fe617a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59b383d1eb6c1fbcafb2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bab655864b86594cc1cc",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9c22cc05d8cd86d6ec2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 49,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d791b790c48664f3260",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 53,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94098875bfd7c4ff1d1c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 61,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3eb3882f3f30c83f22a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 67,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19d271eefaabef54a128",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 68,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dff985f6789809c58640",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 69,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a811a9994ab621382e2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 70,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5877556f95621808f77b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 72,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cf28264f4b4f1a6ec14",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 74,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-131fdf3bf97bc5fcea8b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 75,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d3325c94d0a295f7eda",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 77,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d7aee164c7e73971944",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 80,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41530954428cb46ed722",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 81,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2efbdcd2372d1633be57",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 84,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d962830ccb0eb396343d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 90,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d47652b9fa357694fa6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 91,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b43d6ad03007476642eb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 92,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a46054a05d42f98e77e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 95,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bafae518de3416eaeb8a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 96,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49ef8bb22ab3b471df72",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 110,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcfe2ca3d966c0f266f5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 112,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-834f8ad1d1bcb326ef66",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 117,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afb7faa65e099181b77c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 120,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d5c9842125b1f62d2f6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 131,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51aa6d0264e42a1ae1f1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 132,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-095e10cdcf715245bb9e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 135,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92249f7e1e6a7105471c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 137,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-522a9a3c085bfda47c2f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 140,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-965be5463fe2a331f33d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 145,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a458d47272772ce5436b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 147,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68ef4176cdedb408af87",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 148,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43227035da7ff73139c8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83bc30f2f15bc5d9103c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 173,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60986b6160918498b074",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 190,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79aea25cfb070356b11d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 200,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45f99a32499d2d7b841f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 228,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79ea635a6d055cb53688",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 243,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9e3cb0b398fab51d7e5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ca3b5b6959fd1225121",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 338,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea98b56e1b0374d70d10",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "Q8",
+        "Q8 50 E-TRON",
+        "Q8 55 E-TRON",
+        "Q8 SPORTBACK 50 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 209,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4b89bd1d08d28fb6c97",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "Q8 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63bc1dbf315d067fda88",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "Q8 SPORTBACK 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5534445807dfc6ec123",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "Q8 SPORTBACK 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-191693e32bfce5d2bc04",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "Q8 50 E-TRON",
+        "Q8 SPORTBACK 50 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-523c52d04827949298b2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "Q8 SPORTBACK 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abeb5a758945b3bab8ee",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-020fff7bb9e01260c3a0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "Q8 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8feb8f52cdb1bd3e0ca6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "Q8 55 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9352b05e4e360a5b3c87",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "Q8 50 E-TRON",
+        "Q8 SPORTBACK 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ca2dae746801406a350",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "Q8 55 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e67293bf76c1a84d0aa",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "Q8 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cf634d091bc01cf3241",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "Q8 50 E-TRON",
+        "Q8 SPORTBACK 50 E-TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c423e0b550def6892542",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e17f8bb696fafcdf359b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "Q8 50 E TRON",
+        "Q8 50 E-TRON",
+        "Q8 SPORTBACK 50 E TRON",
+        "Q8 SPORTBACK 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 894,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c08fa9a6d4b6efd5ba20",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 137,
+      "commercialNames": [
+        "Q8 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-948134072d2cf65b51ff",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 141,
+      "commercialNames": [
+        "Q8 55 E TRON",
+        "Q8 55 E-TRON",
+        "Q8 SPORTBACK 55 E TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1030,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b22f0ec549d1ee28c5a2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "Q8 50 E-TRON",
+        "Q8 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b15e917f3957ef1ec47d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 172,
+      "commercialNames": [
+        "Q8 50 E TRON",
+        "Q8 55 E TRON",
+        "Q8 SPORTBACK 50 E TRON",
+        "Q8 SPORTBACK 55 E TRON",
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 78,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc258a01f8ddd2500a10",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q8 50 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ff02d0219033bc282f0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 220,
+      "commercialNames": [
+        "Q8 SPORTBACK 55 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-694ca59e33691795e988",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 226,
+      "commercialNames": [
+        "AUDI Q8 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f10b511ddedc554f204",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 408,
+      "commercialNames": [
+        "Q8 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-631015f53f7c910945d7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0971da5f85fcc7314eaa",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a357900cbcf6346d1cf",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 49,
+      "commercialNames": [
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a03a1a21be1bc643b2a9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 61,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05224bc4b7f31fdeabb6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 62,
+      "commercialNames": [
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e00ddcf470d313edbe8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b34e2ce34043c789f228",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 68,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02014e2d2fbe3d4771ae",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 72,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40468159e28c1a5ea518",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 73,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b59cf80f31546d27929f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 80,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6da204b655807849f1e9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae2a2e71dbc7e14d5b97",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 84,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d52a2db73b0cabd2cd6d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a02cb7157e8e67164c0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 88,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8b0bb122a733db35fa3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 91,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-786681a43f617a68789b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39f16f5b0b1623ec6d1c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 96,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d7cddcde2413a6a0c69",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a22b85b7f67fa20f3f54",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 112,
+      "commercialNames": [
+        "Q8 55 TFSI E",
+        "Q8 60 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f210c4bdcdffcb08417",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 116,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-601ef2c06feef9554ce1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 117,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd080f47f4669830e8a0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 132,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98fb08f5cac6cfb08d05",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 135,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a6f5476bee98b490af3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 136,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17474de2af8fce4355d3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 141,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e4e74c905cbd5c73f29",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 145,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4a819d1241a91bfdb56",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 147,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c676d43b358cf02a2fd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-300737f7e64afb1ee2ae",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 174,
+      "commercialNames": [
+        "Q8",
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-370cd71fa540c02cff7a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af6c06c71554655da5ee",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 221,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-113804959f2652e16e0f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 224,
+      "commercialNames": [
+        "Q8 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd9bc01a0aa1b4ff3600",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c1a6e1bab1cde20e294",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 373,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2e681db9919f611a221",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 430,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdf345cfc9222ac9d766",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2042660655ccb98ecb1f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2957,
+      "powerKw": 210,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-337356f3b53658795986",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 58,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-218e1a61bfa15f6b194a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 74,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7db82cdc5bc91ae569d9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 85,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2271a72173462328c886",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 243,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-816b4dcc4b54e551c103",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Q8",
+      "modelId": "audi/q8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 92,
+      "commercialNames": [
+        "Q8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0610577b7f146b6737b0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "R8",
+      "modelId": "audi/r8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5204,
+      "powerKw": null,
+      "commercialNames": [
+        "R8 PERFORMANCE V10 QUATTRO S-A",
+        "R8 PRFRM CARBN BLK V10 QUAT SA",
+        "R8 V10 QUATTRO S-A",
+        "R8 V10 RWD S-A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 282,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

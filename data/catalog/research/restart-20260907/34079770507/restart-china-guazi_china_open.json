@@ -1,0 +1,140 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:29:54.127Z",
+  "productionWrites": false,
+  "existingProductionBridgeAllowed": true,
+  "bridgeUpstreamTrafficObserved": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 50,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "china",
+      "requests": [
+        {
+          "origin": "https://avtocena.com",
+          "path": "/api/internal/guazi-egress-b8c4d1",
+          "method": "GET",
+          "status": 503,
+          "contentType": "application/json",
+          "bodyEvidence": {
+            "bytes": 247,
+            "sha256": "fc814968ea39c903b4ae40293d10feae27e7d00ec7965c53464a953137abf0b8",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        }
+      ],
+      "sourceId": "guazi_china_open",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "status": "blocked_or_failed",
+      "error": "yandex_bridge_http_503_guazi_1_guazi_source_blocked_bot_challenge",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "3d2306f9e8877ee8119d0d45222ef046af67026c",
+  "businessSettings": {
+    "china": {
+      "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "profileSource": "production_crm_version",
+      "provisional": false,
+      "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+      "effectiveExpenses": {
+        "topAvtoCommissionRub": 90000,
+        "securityDepositRub": 160000,
+        "contractInitialPaymentRub": 250000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 80000,
+        "logisticsRub": 150000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

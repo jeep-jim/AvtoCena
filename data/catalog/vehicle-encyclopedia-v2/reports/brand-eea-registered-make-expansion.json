@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactEeaRegisteredMakesOnly": true,
+    "independentAutomotiveMarquesOnly": true,
+    "coachbuildersAndMotorhomesExcluded": true,
+    "convertersAndAddressStringsExcluded": true,
+    "crossBrandStringsExcluded": true,
+    "publicationGateRequired": true
+  },
+  "totals": {
+    "reviewedDefinitions": 17,
+    "newBrands": 17,
+    "observedRegistrations": 5205
+  },
+  "observations": [
+    {
+      "id": "brabus",
+      "canonicalName": "Brabus",
+      "rawMakes": [
+        "BRABUS"
+      ],
+      "years": [
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 88
+    },
+    {
+      "id": "bugatti",
+      "canonicalName": "Bugatti",
+      "rawMakes": [
+        "BUGATTI"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2025
+      ],
+      "registrations": 73
+    },
+    {
+      "id": "cirelli",
+      "canonicalName": "Cirelli",
+      "rawMakes": [
+        "CIRELLI"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "registrations": 557
+    },
+    {
+      "id": "dallara",
+      "canonicalName": "Dallara",
+      "rawMakes": [
+        "DALLARA"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 162
+    },
+    {
+      "id": "donkervoort",
+      "canonicalName": "Donkervoort",
+      "rawMakes": [
+        "DONKERVOORT"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 99
+    },
+    {
+      "id": "ego-mobile",
+      "canonicalName": "e.GO",
+      "rawMakes": [
+        "E.GO",
+        "EGO"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 1767
+    },
+    {
+      "id": "elaris",
+      "canonicalName": "Elaris",
+      "rawMakes": [
+        "ELARIS"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "registrations": 378
+    },
+    {
+      "id": "exlantix",
+      "canonicalName": "Exlantix",
+      "rawMakes": [
+        "EXLANTIX"
+      ],
+      "years": [
+        2025
+      ],
+      "registrations": 133
+    },
+    {
+      "id": "ktm",
+      "canonicalName": "KTM",
+      "rawMakes": [
+        "KTM"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 167
+    },
+    {
+      "id": "mobilize",
+      "canonicalName": "Mobilize",
+      "rawMakes": [
+        "MOBILIZE"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "registrations": 80
+    },
+    {
+      "id": "moke",
+      "canonicalName": "Moke",
+      "rawMakes": [
+        "MOKE"
+      ],
+      "years": [
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 122
+    },
+    {
+      "id": "ruf",
+      "canonicalName": "RUF",
+      "rawMakes": [
+        "RUF"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 91
+    },
+    {
+      "id": "secma",
+      "canonicalName": "SECMA",
+      "rawMakes": [
+        "SECMA"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 468
+    },
+    {
+      "id": "suda",
+      "canonicalName": "Suda",
+      "rawMakes": [
+        "SUDA"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022
+      ],
+      "registrations": 336
+    },
+    {
+      "id": "togg",
+      "canonicalName": "Togg",
+      "rawMakes": [
+        "TOGG"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 159
+    },
+    {
+      "id": "yudo",
+      "canonicalName": "Yudo",
+      "rawMakes": [
+        "YUDO"
+      ],
+      "years": [
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 425
+    },
+    {
+      "id": "zhidou",
+      "canonicalName": "Zhidou",
+      "rawMakes": [
+        "ZHIDOU"
+      ],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 100
+    }
+  ]
+}

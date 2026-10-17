@@ -1,0 +1,130 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+import {isElectrifiedPrice} from "../apps/web/lib/catalog/electrified-price";
+
+const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
+const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogPrice.tsx", import.meta.url), "utf8");
+const auctionCardPrice = fs.readFileSync(new URL("../apps/web/components/catalog/AuctionCardPrice.tsx", import.meta.url), "utf8");
+const preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");
+const publicSheet = fs.readFileSync(new URL("../apps/web/components/ui/PublicSheet.tsx", import.meta.url), "utf8");
+const priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");
+const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loading.tsx", import.meta.url), "utf8");
+const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
+const catalogFilters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");
+const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
+const priceSheetCss = fs.readFileSync(new URL("../apps/web/app/public-price-sheet-fix.css", import.meta.url), "utf8");
+const editablePower = fs.readFileSync(new URL("../apps/web/components/catalog/EditablePowerTile.tsx", import.meta.url), "utf8");
+const rootLayout = fs.readFileSync(new URL("../apps/web/app/layout.tsx", import.meta.url), "utf8");
+const citySelector = fs.readFileSync(new URL("../apps/web/components/home/CitySelector.tsx", import.meta.url), "utf8");
+
+test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
+  assert.match(catalogPrice, /highlightElectrified/);
+  for(const fuel of ["electric","hybrid","PHEV","MHEV","Электро","Гибрид"]) assert.equal(isElectrifiedPrice({fuel}),true);
+  for(const powertrainKind of ["electric","series_hybrid","other_hybrid"]) assert.equal(isElectrifiedPrice({powertrainKind}),true);
+  for(const fuel of ["petrol","diesel",""]) assert.equal(isElectrifiedPrice({fuel}),false);
+  assert.match(catalogPrice, /PreliminaryPrice[^;]+highlightElectrified=\{highlightElectrified\}/s);
+  assert.match(catalogPrice, /PriceTrend[^;]+highlightElectrified=\{highlightElectrified\}/s);
+  assert.match(preliminaryPrice, /highlightElectrified \? \(lightTheme \? "#c58a00" : "#ffd21f"\) : "var\(--ac-text\)"/);
+  assert.match(priceTrend, /highlightElectrified \? \(lightTheme \? "#c58a00" : "#ffd21f"\) : undefined/);
+  assert.match(priceTrend, /style=\{priceColor \? \{ color: priceColor \} : undefined\}/);
+  assert.match(priceTrend, /ac-price--electrified/);
+  assert.match(preliminaryPrice, /ac-price--electrified/);
+  assert.match(priceSheetCss, /\.ac-price\.ac-price--electrified[^}]+#ffd21f !important/s);
+  assert.match(priceSheetCss, /html\[data-theme="light"\][^}]+\.ac-price\.ac-price--electrified[^}]+#c58a00 !important/s);
+  assert.match(preliminaryPrice, /Почему цена предварительная/);
+  assert.match(offerPage, /PreliminaryPrice[^;]+highlightElectrified=\{electrified\}/s);
+  assert.match(offerPage, /PriceTrend[^;]+highlightElectrified=\{electrified\}/s);
+  assert.match(preliminaryPrice, /rgba\(197, 138, 0, 0\.10\)/);
+  assert.match(preliminaryPrice, /rgba\(255, 210, 31, 0\.14\)/);
+  assert.match(preliminaryPrice, /: "var\(--ac-surface-2\)"/);
+  assert.match(priceTrend, /if \(highlightElectrified && !greenCorner\)/);
+  assert.match(priceTrend, /rgba\(197, 138, 0, 0\.10\)/);
+  assert.match(priceTrend, /rgba\(255, 210, 31, 0\.14\)/);
+  assert.match(priceTrend, /\[panel, lightTheme, direction, highlightElectrified, greenCorner\]/);
+  assert.match(preliminaryPrice, /setProperty\("background", electrifiedPanelBackground, "important"\)/);
+  assert.match(preliminaryPrice, /setProperty\("background-color", electrifiedPanelBackground, "important"\)/);
+  assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
+});
+
+test("pending cards require an admitted modification selector to enter the public grid", () => {
+  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(catalogCard, /totalRub:\s*visibleRub \|\| null/);
+});
+
+test("Japanese auction cards retain historical pricing with source badges instead of a gavel", () => {
+  assert.match(catalogPrice, /japanAuction/);
+  assert.match(catalogPrice, /AuctionCardPrice/);
+  assert.match(auctionCardPrice, /JapanAuctionBadges/);
+  assert.doesNotMatch(auctionCardPrice, /Gavel|onClick/);
+  assert.match(priceTrend, /export function AuctionResultPrice/);
+  assert.match(priceTrend, /<AuctionCardPrice offer=\{offer\}/);
+  assert.match(offerPage, /const japanAuction = [^;]+&& !greenCorner/);
+  assert.match(offerPage, /const auctionStatus = japanAuction/);
+  assert.doesNotMatch(offerPage, /data-green-corner-status/);
+  assert.match(offerPage, /headerAside=\{auctionStatus \|\| updatedStatus\}/);
+  assert.match(offerPage, /<AuctionResultPrice offer=\{\{\.\.\.o,auctionGrade:undefined,japanExportRestriction:undefined\}\} label="Завершённый аукцион"/);
+  assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
+  assert.match(offerPage, /Продано на торгах[^\n]+auctionDateLabel \|\| updatedDate[^\n]+sourceUrl \? <a href=\{sourceUrl\}[^\n]+aria-label="Открыть результат аукциона"[^\n]+>↗<\/a>/);
+  assert.doesNotMatch(offerPage, /Завершённый лот\{auctionDateLabel/);
+});
+
+test("catalog helper popovers preserve card rounding and currency opens only on click", () => {
+  assert.match(priceSheetCss, /> a > div:first-child\s*\{[^}]+border-radius:\s*var\(--ac-card-radius\) var\(--ac-card-radius\) 0 0 !important/s);
+  assert.match(priceSheetCss, /> a > div:last-child\s*\{[^}]+border-radius:\s*0 0 var\(--ac-card-radius\) var\(--ac-card-radius\) !important/s);
+  assert.doesNotMatch(priceTrend, /onMouseEnter=\{\(\) => \{ if \(canShowRate && desktopHover\) setPopoverOpen\(true\); \}\}/);
+  assert.doesNotMatch(priceTrend, /onMouseLeave=\{\(\) => \{ if \(desktopHover\) setPopoverOpen\(false\); \}\}/);
+  assert.match(priceTrend, /if \(desktopHover\) setPopoverOpen\(\(current\) => !current\); else openSheet\(\);/);
+});
+
+test("saved total changes are not mislabeled as currency impact", () => {
+  assert.match(priceTrend, /trendUsesCurrency/);
+  assert.match(priceTrend, /const currencyImpactRub = currencyDelta\(pricedOffer\) \|\| undefined/);
+  assert.match(priceTrend, /const canShowRate = Boolean\(sheetRate\)/);
+  assert.match(priceTrend, /\{sheetRate \? <CurrencyRatesSheet/);
+  assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"/);
+  assert.match(priceTrend, /impactRub=\{currencyImpactRub\}/);
+  assert.match(priceTrend, /Стрелка показывает влияние последнего изменения курса на стоимость автомобиля\./);
+});
+
+test("mobile offer controls remain tappable", () => {
+  assert.doesNotMatch(editablePower, /onBlur=/);
+  assert.match(preliminaryPrice, /<button[\s\S]+aria-label="Почему цена предварительная"/);
+  assert.doesNotMatch(preliminaryPrice, /aria-label="Почему цена предварительная"[\s\S]+onPointerDown=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); \}\}/);
+  assert.match(priceTrend, /aria-label=\{panel && canShowRate \? `Показать курс \$\{currency\} и полный расчёт`/);
+  assert.doesNotMatch(priceSheetCss, /@media \(max-width: 1023px\)[\\s\\S]+\\.ac-price-trend-panel\s*\{[\\s\\S]+pointer-events:\s*none !important/);
+  assert.match(preliminaryPrice, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
+  assert.match(priceTrend, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
+  assert.match(preliminaryPrice, /\.\.\.tapActivation/);
+  assert.match(priceTrend, /\.\.\.tapActivation/);
+  assert.doesNotMatch(preliminaryPrice, /onTouchEnd=/);
+  assert.doesNotMatch(priceTrend, /onTouchEnd=\{panel/);
+  assert.match(citySelector, /onClick=\{\(\) => choose\(item\.value\)\}/);
+  assert.match(citySelector, /onClick=\{\(\) => choose\(city\)\}/);
+});
+
+test("mobile currency sheet closes without bubbling back to the price opener", () => {
+  assert.match(priceTrend, /const dismiss = \(event: SyntheticEvent\) => \{[\s\S]+event\.preventDefault\(\);[\s\S]+event\.stopPropagation\(\);[\s\S]+closeRef\.current\(\);[\s\S]+\};/);
+  assert.match(publicSheet, /onTouchEnd=\{dismissBackdrop\} onClick=\{dismissBackdrop\}/);
+  assert.match(publicSheet, /onTouchEnd=\{stopSheetEvent\} onClick=\{stopSheetEvent\}/);
+  assert.match(priceTrend, /<button type="button" onTouchEnd=\{dismiss\} onClick=\{dismiss\}[^>]+aria-label="Закрыть">×<\/button>/);
+});
+
+test("theme bootstrap does not mutate managed head before hydration", () => {
+  assert.match(rootLayout, /document\.documentElement\.dataset\.theme = theme/);
+  assert.doesNotMatch(rootLayout, /document\.head\.appendChild\(link\)/);
+  assert.doesNotMatch(rootLayout, /link\.href = theme ===/);
+});
+
+test("catalog route loader follows active light or dark theme variables", () => {
+  assert.match(carsLoading, /bg-\[var\(--ac-surface\)\]/);
+  assert.match(carsLoading, /text-\[var\(--ac-text\)\]/);
+  assert.match(carsLoading, /text-\[var\(--ac-muted\)\]/);
+  assert.match(carsLoading, /bg-\[var\(--ac-surface-3\)\]/);
+  assert.doesNotMatch(carsLoading, /bg-\[#0f172a\]|text-white|bg-white\/\[/);
+});
+
+test("catalog filter changes have one client navigation owner", () => {
+  assert.match(catalogFilters, /router\.push/);
+  assert.doesNotMatch(carsLayout, /CatalogFilterAutoApply/);
+});

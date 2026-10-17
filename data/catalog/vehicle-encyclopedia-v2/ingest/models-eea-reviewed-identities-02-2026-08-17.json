@@ -1,0 +1,909 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "borgward/bx7",
+          "brandId": "borgward",
+          "canonicalName": "BX7",
+          "slug": "bx7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "BX7 S",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            },
+            {
+              "value": "BX7 TS",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021; 212 registrations and 4 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dfsk/fengon-5",
+          "brandId": "dfsk",
+          "canonicalName": "Fengon 5",
+          "slug": "fengon-5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "FENGON 5",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2021, 2022, 2023, 2024, 2025; 830 registrations and 28 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dr-automobiles/7h",
+          "brandId": "dr-automobiles",
+          "canonicalName": "DR 7H",
+          "slug": "7h",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "DR 7H",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2024, 2025; 262 registrations and 2 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dr-automobiles/art-e3",
+          "brandId": "dr-automobiles",
+          "canonicalName": "DR ART e3",
+          "slug": "art-e3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "DR ART E3",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024; 243 registrations and 5 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "forthing/friday",
+          "brandId": "forthing",
+          "canonicalName": "Friday",
+          "slug": "friday",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "FRIDAY 1.5T DCT",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "FRIDAY 1.5T DCT DUAL-FUEL",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "FRIDAY EV",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "FRIDAY HEV 1.5T",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "FRIDAY S7",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2024, 2025; 376 registrations and 8 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "geely/atlas-pro",
+          "brandId": "geely",
+          "canonicalName": "Atlas Pro",
+          "slug": "atlas-pro",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ATLAS PRO",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2023, 2024; 273 registrations and 2 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "great-wall/wey-05",
+          "brandId": "great-wall",
+          "canonicalName": "Wey 05",
+          "slug": "wey-05",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "WEY 05",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2024, 2025; 287 registrations and 7 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hongqi/e-hs9",
+          "brandId": "hongqi",
+          "canonicalName": "E-HS9",
+          "slug": "e-hs9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "HONGQI E-HS9",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2023, 2024, 2025; 389 registrations and 7 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac/e-js4",
+          "brandId": "jac",
+          "canonicalName": "E-JS4",
+          "slug": "e-js4",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "E-JS4",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2022, 2023, 2024, 2025; 232 registrations and 6 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac/e30x",
+          "brandId": "jac",
+          "canonicalName": "E30X",
+          "slug": "e30x",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "E30X",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E30X; E30X; E-JS3; E-JS3",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E30X; E30X; E-JS3; ES3; E",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2024, 2025; 229 registrations and 5 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac/es4",
+          "brandId": "jac",
+          "canonicalName": "ES4",
+          "slug": "es4",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ES4",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "ES4 ESE14 E-S4 E-JS4",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2023-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2022, 2023, 2024, 2025; 265 registrations and 5 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac/iev7s",
+          "brandId": "jac",
+          "canonicalName": "iEV7S",
+          "slug": "iev7s",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "IEV7S",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            },
+            {
+              "value": "IEV7S E-S2 E-S2",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            },
+            {
+              "value": "IEV7S, E-S2",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2020, 2021, 2022, 2023, 2024; 288 registrations and 24 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sportequipe/ich-x-k3",
+          "brandId": "sportequipe",
+          "canonicalName": "ICH-X K3",
+          "slug": "ich-x-k3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ICH-X K3",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2025; 537 registrations and 3 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sportequipe/x-k2",
+          "brandId": "sportequipe",
+          "canonicalName": "X K2",
+          "slug": "x-k2",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "X K2",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "X K2 ROCK 'S'",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+            }
+          ],
+          "researchNotes": [
+            "EEA registration observations cover 2024, 2025; 189 registrations and 3 specification groups. Counts establish observed presence, not production boundaries.",
+            "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

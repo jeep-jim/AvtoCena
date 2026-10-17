@@ -1,0 +1,3342 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 8,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "mercedesbenz:gle4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gle4504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gle450e4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450e 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gle5804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 580 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gleclass",
+      "make": "Mercedes-Benz",
+      "model": "GLE-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gls4504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLS 450 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:gls4504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLS 450 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gls5804matic",
+      "make": "Mercedes-Benz",
+      "model": "GLS 580 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:gls5804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLS 580 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gls6004maticmaybachsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLS 600 4MATIC Maybach SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:glsclass",
+      "make": "Mercedes-Benz",
+      "model": "GLS-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:maybachamgsl6804maticroadster",
+      "make": "Mercedes-Benz",
+      "model": "Maybach AMG SL 680 4MATIC Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:maybacheqs6804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "Maybach EQS 680 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:maybachgls6004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "Maybach GLS 600 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:maybachs5604matic",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 560 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:maybachs5804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 580 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:maybachs650",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 650",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:maybachs6804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 680 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:metriscargo",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:metriscargolwb",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:metriscargovan",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo Van",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:metriscargovanlwb",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo Van LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:metrispassenger",
+      "make": "Mercedes-Benz",
+      "model": "Metris Passenger",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:metrispassengervan",
+      "make": "Mercedes-Benz",
+      "model": "Metris Passenger Van",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:s4504maticswb",
+      "make": "Mercedes-Benz",
+      "model": "S 450 4MATIC SWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:s5004maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 500 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:s5004maticswbsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 500 4MATIC SWB Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:s5604matic",
+      "make": "Mercedes-Benz",
+      "model": "S 560 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:s5604maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "S 560 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:s5604maticswb",
+      "make": "Mercedes-Benz",
+      "model": "S 560 4MATIC SWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:s560cabriolet",
+      "make": "Mercedes-Benz",
+      "model": "S 560 Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:s560e",
+      "make": "Mercedes-Benz",
+      "model": "S 560e",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:s5804maticlwbsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 580 4MATIC LWB Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:s5804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 580 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:s580e4maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 580e 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "mercedesbenz:sclass",
+      "make": "Mercedes-Benz",
+      "model": "S-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:sl450",
+      "make": "Mercedes-Benz",
+      "model": "SL 450",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:sl550",
+      "make": "Mercedes-Benz",
+      "model": "SL 550",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:slclass",
+      "make": "Mercedes-Benz",
+      "model": "SL-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:slc300",
+      "make": "Mercedes-Benz",
+      "model": "SLC 300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:slcclass",
+      "make": "Mercedes-Benz",
+      "model": "SLC-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mini:clubman",
+      "make": "MINI",
+      "model": "Clubman",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "mini:cooper",
+      "make": "MINI",
+      "model": "Cooper",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:cooper3door",
+      "make": "MINI",
+      "model": "Cooper 3 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:cooper5door",
+      "make": "MINI",
+      "model": "Cooper 5 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:cooperclubmanall4",
+      "make": "MINI",
+      "model": "Cooper Clubman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:cooperconvertible",
+      "make": "MINI",
+      "model": "Cooper Convertible",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:coopercountryman",
+      "make": "MINI",
+      "model": "Cooper Countryman",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:coopercountrymanall4",
+      "make": "MINI",
+      "model": "Cooper Countryman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "mini:coopers3door",
+      "make": "MINI",
+      "model": "Cooper S 3 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:coopers5door",
+      "make": "MINI",
+      "model": "Cooper S 5 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:coopersclubman",
+      "make": "MINI",
+      "model": "Cooper S Clubman",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:coopersclubmanall4",
+      "make": "MINI",
+      "model": "Cooper S Clubman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:coopersconvertible",
+      "make": "MINI",
+      "model": "Cooper S Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:cooperscountryman",
+      "make": "MINI",
+      "model": "Cooper S Countryman",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:cooperscountrymanall4",
+      "make": "MINI",
+      "model": "Cooper S Countryman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mini:cooperse3door",
+      "make": "MINI",
+      "model": "Cooper SE 3 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "mini:coopersecountrymanall4",
+      "make": "MINI",
+      "model": "Cooper SE Countryman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:countryman",
+      "make": "MINI",
+      "model": "Countryman",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mini:countrymansall4",
+      "make": "MINI",
+      "model": "Countryman S ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:countrymanseall418wheels",
+      "make": "MINI",
+      "model": "Countryman SE ALL4 (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:countrymanseall419wheels",
+      "make": "MINI",
+      "model": "Countryman SE ALL4 (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:jcw3door",
+      "make": "MINI",
+      "model": "JCW 3 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:jcwconvertible",
+      "make": "MINI",
+      "model": "JCW Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:jcwcountrymanall4",
+      "make": "MINI",
+      "model": "JCW Countryman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:johncooperworks",
+      "make": "MINI",
+      "model": "John Cooper Works",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mini:johncooperworks3door",
+      "make": "MINI",
+      "model": "John Cooper Works 3 Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mini:johncooperworksclubmanall4",
+      "make": "MINI",
+      "model": "John Cooper Works Clubman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mini:johncooperworksconvertible",
+      "make": "MINI",
+      "model": "John Cooper Works Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mini:johncooperworkscountrymanall4",
+      "make": "MINI",
+      "model": "John Cooper Works Countryman ALL4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mini:johncooperworksgp",
+      "make": "MINI",
+      "model": "John Cooper Works GP",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mitsubishi:eclipsecross",
+      "make": "Mitsubishi",
+      "model": "Eclipse Cross",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mitsubishi:eclipsecross4wd",
+      "make": "Mitsubishi",
+      "model": "Eclipse Cross 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mitsubishi:mirage",
+      "make": "Mitsubishi",
+      "model": "Mirage",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "mitsubishi:mirageg4",
+      "make": "Mitsubishi",
+      "model": "Mirage G4",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "mitsubishi:outlander",
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mitsubishi:outlander4wd",
+      "make": "Mitsubishi",
+      "model": "Outlander 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mitsubishi:outlanderphevawd",
+      "make": "Mitsubishi",
+      "model": "Outlander PHEV AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mitsubishi:rvr",
+      "make": "Mitsubishi",
+      "model": "RVR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mitsubishi:rvr4wd",
+      "make": "Mitsubishi",
+      "model": "RVR 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:370z",
+      "make": "Nissan",
+      "model": "370Z",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "nissan:370zroadster",
+      "make": "Nissan",
+      "model": "370Z Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "nissan:altima",
+      "make": "Nissan",
+      "model": "Altima",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:altimaawd",
+      "make": "Nissan",
+      "model": "Altima AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:altimaawdsrplatinum",
+      "make": "Nissan",
+      "model": "Altima AWD SR/Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:ariya",
+      "make": "Nissan",
+      "model": "ARIYA",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:ariyaengage",
+      "make": "Nissan",
+      "model": "ARIYA Engage",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:ariyaevolvee4orce",
+      "make": "Nissan",
+      "model": "ARIYA Evolve e-4ORCE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:ariyaevolve",
+      "make": "Nissan",
+      "model": "ARIYA Evolve+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:ariyaevolveplatinume4orce",
+      "make": "Nissan",
+      "model": "ARIYA Evolve+ Platinum e-4ORCE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:ariyaevolvepremieree4orce",
+      "make": "Nissan",
+      "model": "ARIYA Evolve+ Premiere e-4ORCE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:ariyaplatinume4orce",
+      "make": "Nissan",
+      "model": "ARIYA Platinum+ e-4ORCE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:ariyasle4orce",
+      "make": "Nissan",
+      "model": "ARIYA SL e-4ORCE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:ariyasl",
+      "make": "Nissan",
+      "model": "ARIYA SL+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:ariyasv",
+      "make": "Nissan",
+      "model": "ARIYA SV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:armada",
+      "make": "Nissan",
+      "model": "Armada",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:armada4wd",
+      "make": "Nissan",
+      "model": "Armada 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:armada4wdpro4x",
+      "make": "Nissan",
+      "model": "Armada 4WD PRO-4X",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:frontier",
+      "make": "Nissan",
+      "model": "Frontier",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:frontier4wd",
+      "make": "Nissan",
+      "model": "Frontier 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:frontier4wdiss",
+      "make": "Nissan",
+      "model": "Frontier 4WD (ISS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "nissan:frontier4wdpro4x",
+      "make": "Nissan",
+      "model": "Frontier 4WD PRO-4X",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:frontier4wdpro4xiss",
+      "make": "Nissan",
+      "model": "Frontier 4WD PRO-4X (ISS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "nissan:gtr",
+      "make": "Nissan",
+      "model": "GT-R",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "nissan:kicks",
+      "make": "Nissan",
+      "model": "Kicks",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:kicksawd",
+      "make": "Nissan",
+      "model": "Kicks AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:kicksplay",
+      "make": "Nissan",
+      "model": "Kicks Play",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:leaf",
+      "make": "Nissan",
+      "model": "Leaf",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:leaf40kwh",
+      "make": "Nissan",
+      "model": "LEAF (40 kWh)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "nissan:leafplatinumplus",
+      "make": "Nissan",
+      "model": "LEAF Platinum PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:leafsplus",
+      "make": "Nissan",
+      "model": "LEAF S PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:leafsv",
+      "make": "Nissan",
+      "model": "LEAF SV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:leafsvplus",
+      "make": "Nissan",
+      "model": "LEAF SV PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:leafsvslplus",
+      "make": "Nissan",
+      "model": "LEAF SV/SL PLUS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "nissan:maxima",
+      "make": "Nissan",
+      "model": "Maxima",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "nissan:murano",
+      "make": "Nissan",
+      "model": "Murano",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:muranoawd",
+      "make": "Nissan",
+      "model": "Murano AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:nv200cargovan",
+      "make": "Nissan",
+      "model": "NV200 Cargo Van",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "nissan:pathfinder",
+      "make": "Nissan",
+      "model": "Pathfinder",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:pathfinder4wd",
+      "make": "Nissan",
+      "model": "Pathfinder 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:pathfinder4wdplatinum",
+      "make": "Nissan",
+      "model": "Pathfinder 4WD Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "nissan:pathfinder4wdrockcreek",
+      "make": "Nissan",
+      "model": "Pathfinder 4WD Rock Creek",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:qashqai",
+      "make": "Nissan",
+      "model": "Qashqai",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "nissan:qashqaiawd",
+      "make": "Nissan",
+      "model": "Qashqai AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "nissan:rogue",
+      "make": "Nissan",
+      "model": "Rogue",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:rogueawd",
+      "make": "Nissan",
+      "model": "Rogue AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:rogueawdrockcreek",
+      "make": "Nissan",
+      "model": "Rogue AWD Rock Creek",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:rogueawdslplatinum",
+      "make": "Nissan",
+      "model": "Rogue AWD SL/Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "nissan:roguepluginhybrid",
+      "make": "Nissan",
+      "model": "Rogue Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:roguesport",
+      "make": "Nissan",
+      "model": "Rogue Sport",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "nissan:sentra",
+      "make": "Nissan",
+      "model": "Sentra",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:sentras",
+      "make": "Nissan",
+      "model": "Sentra S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:sentraslsr",
+      "make": "Nissan",
+      "model": "Sentra SL/SR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:sentrasr",
+      "make": "Nissan",
+      "model": "Sentra SR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:sentrasv",
+      "make": "Nissan",
+      "model": "Sentra SV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "nissan:titan",
+      "make": "Nissan",
+      "model": "Titan",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "nissan:titan4wd",
+      "make": "Nissan",
+      "model": "Titan 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "nissan:titan4wdpro4x",
+      "make": "Nissan",
+      "model": "Titan 4WD PRO-4X",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "nissan:versa",
+      "make": "Nissan",
+      "model": "Versa",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "nissan:z",
+      "make": "Nissan",
+      "model": "Z",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "nissan:znismo",
+      "make": "Nissan",
+      "model": "Z NISMO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "pagani:huayra",
+      "make": "Pagani",
+      "model": "Huayra",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "polestar:1",
+      "make": "Polestar",
+      "model": "1",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "polestar:2",
+      "make": "Polestar",
+      "model": "2",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:2bstedition",
+      "make": "Polestar",
+      "model": "2 BST Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "polestar:2dualmotor",
+      "make": "Polestar",
+      "model": "2 Dual Motor",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "polestar:2dualmotor19wheels",
+      "make": "Polestar",
+      "model": "2 Dual Motor (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:2dualmotor20wheels",
+      "make": "Polestar",
+      "model": "2 Dual Motor (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:2dualmotorperformancepack",
+      "make": "Polestar",
+      "model": "2 Dual Motor Performance Pack",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:2singlemotor",
+      "make": "Polestar",
+      "model": "2 Single Motor",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "polestar:2singlemotor19wheels",
+      "make": "Polestar",
+      "model": "2 Single Motor (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:2singlemotor20wheels",
+      "make": "Polestar",
+      "model": "2 Single Motor (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:3",
+      "make": "Polestar",
+      "model": "3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangedualmotor20wheels",
+      "make": "Polestar",
+      "model": "3 Long Range Dual Motor (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangedualmotor21wheels",
+      "make": "Polestar",
+      "model": "3 Long Range Dual Motor (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangedualmotor22wheels",
+      "make": "Polestar",
+      "model": "3 Long Range Dual Motor (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangedualmotorperformancepack",
+      "make": "Polestar",
+      "model": "3 Long Range Dual Motor Performance Pack",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangesinglemotor20wheels",
+      "make": "Polestar",
+      "model": "3 Long Range Single Motor (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangesinglemotor21wheels",
+      "make": "Polestar",
+      "model": "3 Long Range Single Motor (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:3longrangesinglemotor22wheels",
+      "make": "Polestar",
+      "model": "3 Long Range Single Motor (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "polestar:4",
+      "make": "Polestar",
+      "model": "4",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:4longrangedualmotor",
+      "make": "Polestar",
+      "model": "4 Long Range Dual Motor",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:4longrangedualmotorperformance",
+      "make": "Polestar",
+      "model": "4 Long Range Dual Motor Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "polestar:4longrangesinglemotor",
+      "make": "Polestar",
+      "model": "4 Long Range Single Motor",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:718",
+      "make": "Porsche",
+      "model": "718",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718boxster",
+      "make": "Porsche",
+      "model": "718 Boxster",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718boxstergts",
+      "make": "Porsche",
+      "model": "718 Boxster GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718boxstergts40",
+      "make": "Porsche",
+      "model": "718 Boxster GTS 4.0",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:718boxsters",
+      "make": "Porsche",
+      "model": "718 Boxster S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718boxstert",
+      "make": "Porsche",
+      "model": "718 Boxster T",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:718cayman",
+      "make": "Porsche",
+      "model": "718 Cayman",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718caymangt4",
+      "make": "Porsche",
+      "model": "718 Cayman GT4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:718caymangts",
+      "make": "Porsche",
+      "model": "718 Cayman GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718caymangts40",
+      "make": "Porsche",
+      "model": "718 Cayman GTS 4.0",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:718caymans",
+      "make": "Porsche",
+      "model": "718 Cayman S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718caymant",
+      "make": "Porsche",
+      "model": "718 Cayman T",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:718gt4rs",
+      "make": "Porsche",
+      "model": "718 GT4 RS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:718spyder",
+      "make": "Porsche",
+      "model": "718 Spyder",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:718spyderrs",
+      "make": "Porsche",
+      "model": "718 Spyder RS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911",
+      "make": "Porsche",
+      "model": "911",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:911carrera",
+      "make": "Porsche",
+      "model": "911 Carrera",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:911carrera4",
+      "make": "Porsche",
+      "model": "911 Carrera 4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911carrera4cabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera 4 Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911carrera4gts",
+      "make": "Porsche",
+      "model": "911 Carrera 4 GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carrera4gtscabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera 4 GTS Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carrera4s",
+      "make": "Porsche",
+      "model": "911 Carrera 4S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911carrera4scabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera 4S Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911carreracabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:911carreragts",
+      "make": "Porsche",
+      "model": "911 Carrera GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carreragtscabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera GTS Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carreras",
+      "make": "Porsche",
+      "model": "911 Carrera S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carrerascabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera S Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carrerat",
+      "make": "Porsche",
+      "model": "911 Carrera T",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911carreratcabriolet",
+      "make": "Porsche",
+      "model": "911 Carrera T Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911dakar",
+      "make": "Porsche",
+      "model": "911 Dakar",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911gt3",
+      "make": "Porsche",
+      "model": "911 GT3",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911gt3rs",
+      "make": "Porsche",
+      "model": "911 GT3 RS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911gt3touring",
+      "make": "Porsche",
+      "model": "911 GT3 Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911st",
+      "make": "Porsche",
+      "model": "911 S/T",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911sportclassic",
+      "make": "Porsche",
+      "model": "911 Sport Classic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:911targa4",
+      "make": "Porsche",
+      "model": "911 Targa 4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911targa4gts",
+      "make": "Porsche",
+      "model": "911 Targa 4 GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911targa4s",
+      "make": "Porsche",
+      "model": "911 Targa 4S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "porsche:911turbo",
+      "make": "Porsche",
+      "model": "911 Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911turbocabriolet",
+      "make": "Porsche",
+      "model": "911 Turbo Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911turbos",
+      "make": "Porsche",
+      "model": "911 Turbo S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:911turboscabriolet",
+      "make": "Porsche",
+      "model": "911 Turbo S Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:boxster",
+      "make": "Porsche",
+      "model": "Boxster",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "porsche:cayenne",
+      "make": "Porsche",
+      "model": "Cayenne",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:cayennecoupe",
+      "make": "Porsche",
+      "model": "Cayenne Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:cayenneehybrid",
+      "make": "Porsche",
+      "model": "Cayenne E-Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "porsche:cayennegts",
+      "make": "Porsche",
+      "model": "Cayenne GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:cayennegtscoupe",
+      "make": "Porsche",
+      "model": "Cayenne GTS Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:cayennes",
+      "make": "Porsche",
+      "model": "Cayenne S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:cayennescoupe",
+      "make": "Porsche",
+      "model": "Cayenne S Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:cayenneturbo",
+      "make": "Porsche",
+      "model": "Cayenne Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:cayenneturbocoupe",
+      "make": "Porsche",
+      "model": "Cayenne Turbo Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:cayenneturbogt",
+      "make": "Porsche",
+      "model": "Cayenne Turbo GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:cayenneturbogtcoupe",
+      "make": "Porsche",
+      "model": "Cayenne Turbo GT Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:cayenneturbosehybrid",
+      "make": "Porsche",
+      "model": "Cayenne Turbo S E-Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "porsche:cayman",
+      "make": "Porsche",
+      "model": "Cayman",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "porsche:macan",
+      "make": "Porsche",
+      "model": "Macan",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:macan4electric",
+      "make": "Porsche",
+      "model": "Macan 4 Electric",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:macan4selectric",
+      "make": "Porsche",
+      "model": "Macan 4S Electric",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:macanelectric",
+      "make": "Porsche",
+      "model": "Macan Electric",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:macangts",
+      "make": "Porsche",
+      "model": "Macan GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:macans",
+      "make": "Porsche",
+      "model": "Macan S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:macant",
+      "make": "Porsche",
+      "model": "Macan T",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:macanturbo",
+      "make": "Porsche",
+      "model": "Macan Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "porsche:macanturboelectric",
+      "make": "Porsche",
+      "model": "Macan Turbo Electric",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:panamera",
+      "make": "Porsche",
+      "model": "Panamera",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:panamera4",
+      "make": "Porsche",
+      "model": "Panamera 4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:panamera4ehybrid",
+      "make": "Porsche",
+      "model": "Panamera 4 E-Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "porsche:panamera4executive",
+      "make": "Porsche",
+      "model": "Panamera 4 Executive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panamera4st",
+      "make": "Porsche",
+      "model": "Panamera 4 ST",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panamera4s",
+      "make": "Porsche",
+      "model": "Panamera 4S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panamera4sehybrid",
+      "make": "Porsche",
+      "model": "Panamera 4S E-Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "porsche:panamera4sexecutive",
+      "make": "Porsche",
+      "model": "Panamera 4S Executive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panamera4sst",
+      "make": "Porsche",
+      "model": "Panamera 4S ST",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panameragts",
+      "make": "Porsche",
+      "model": "Panamera GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:panameragtsst",
+      "make": "Porsche",
+      "model": "Panamera GTS ST",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panameraturbo",
+      "make": "Porsche",
+      "model": "Panamera Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "porsche:panameraturboexecutive",
+      "make": "Porsche",
+      "model": "Panamera Turbo Executive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "porsche:panameraturbos",
+      "make": "Porsche",
+      "model": "Panamera Turbo S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panameraturbosehybrid",
+      "make": "Porsche",
+      "model": "Panamera Turbo S E-Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "porsche:panameraturbosexecutive",
+      "make": "Porsche",
+      "model": "Panamera Turbo S Executive",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panameraturbosst",
+      "make": "Porsche",
+      "model": "Panamera Turbo S ST",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "porsche:panameraturbost",
+      "make": "Porsche",
+      "model": "Panamera Turbo ST",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "porsche:taycan",
+      "make": "Porsche",
+      "model": "Taycan",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "porsche:taycan4crossturismo",
+      "make": "Porsche",
+      "model": "Taycan 4 Cross Turismo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    }
+  ]
+}

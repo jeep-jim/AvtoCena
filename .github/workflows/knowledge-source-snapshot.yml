@@ -1,0 +1,219 @@
+name: Knowledge CORE source snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - fix/catalog-core-recovery-20260822
+    paths:
+      - scripts/catalog-download-knowledge-source-snapshot.mjs
+      - scripts/catalog-download-korea-jeju-registry.mjs
+      - scripts/catalog-download-korea-energy-models.mjs
+      - scripts/catalog-download-western-knowledge-sources.mjs
+      - scripts/catalog-download-vehiclesdb-csv.mjs
+      - scripts/catalog-download-miit-products.mjs
+      - scripts/catalog-enrich-mlit-attachment-context.mjs
+      - scripts/catalog-extract-mlit-pdf-knowledge.mjs
+      - scripts/catalog-extract-mlit-tabular.py
+      - scripts/catalog-download-autohome-china-core.mjs
+      - scripts/catalog-build-knowledge-denominator.mjs
+      - scripts/catalog-extend-knowledge-denominator-west.mjs
+      - scripts/catalog-extend-knowledge-denominator-asia.mjs
+      - scripts/catalog-build-knowledge-source-master.mjs
+      - scripts/catalog-validate-knowledge-source-corpus.mjs
+      - data/catalog/knowledge-source-snapshots/SOURCES.json
+      - .github/workflows/knowledge-source-snapshot.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: knowledge-core-source-snapshot-main
+  cancel-in-progress: true
+
+jobs:
+  snapshot:
+    name: snapshot / ${{ matrix.source }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        source: [vehiclesdb, eea, miit, mlit, korea, western]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-core-recovery-20260822
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Snapshot base public source
+        if: matrix.source != 'western'
+        env:
+          KNOWLEDGE_SOURCE: ${{ matrix.source }}
+          KNOWLEDGE_OUTPUT_ROOT: knowledge-output
+          KNOWLEDGE_MAX_TEXT_BYTES: "25000000"
+          KNOWLEDGE_FETCH_TIMEOUT_MS: "60000"
+          KNOWLEDGE_EEA_PAGE_SIZE: "5000"
+          KNOWLEDGE_EEA_MAX_PAGES_PER_YEAR: "250"
+          KNOWLEDGE_MIIT_FIRST_BATCH: "328"
+          KNOWLEDGE_MIIT_LAST_BATCH: "408"
+          KNOWLEDGE_MLIT_MAX_PAGES: "150"
+        run: node scripts/catalog-download-knowledge-source-snapshot.mjs
+      - name: Download and compact Korean public registry
+        if: matrix.source == 'korea'
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: knowledge-output
+          KNOWLEDGE_KOREA_MAX_BYTES: "100000000"
+        run: node scripts/catalog-download-korea-jeju-registry.mjs
+      - name: Snapshot US and Canada government sources
+        if: matrix.source == 'western'
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: knowledge-output
+          KNOWLEDGE_WEST_MAX_BYTES: "60000000"
+          KNOWLEDGE_WEST_TIMEOUT_MS: "90000"
+        run: node scripts/catalog-download-western-knowledge-sources.mjs
+      - name: Snapshot VehiclesDB bulk CSV
+        if: matrix.source == 'vehiclesdb'
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: knowledge-output
+          KNOWLEDGE_VEHICLESDB_MAX_BYTES: "50000000"
+        shell: bash
+        run: |
+          set +e
+          node scripts/catalog-download-vehiclesdb-csv.mjs
+          code=$?
+          if [ "$code" -ne 0 ]; then echo "VehiclesDB CSV failed; JSON snapshot remains available."; fi
+          exit 0
+      - name: Show source files
+        if: always()
+        run: find knowledge-output -maxdepth 3 -type f -printf '%p %s bytes\n' | sort | head -250 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: knowledge-source-${{ matrix.source }}
+          path: knowledge-output/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 9
+
+  assemble:
+    name: assemble full knowledge corpus
+    needs: snapshot
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-core-recovery-20260822
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: knowledge-source-*
+          path: assembled
+          merge-multiple: true
+      - name: Install base snapshot set
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf data/catalog/knowledge-source-snapshots/generated
+          mkdir -p data/catalog/knowledge-source-snapshots/generated
+          cp -a assembled/. data/catalog/knowledge-source-snapshots/generated/
+      - name: Install source extraction dependencies
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          python -m pip install --disable-pip-version-check --quiet openpyxl xlrd
+      - name: Complete China regulatory product snapshot
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_MIIT_FIRST_BATCH: "328"
+          KNOWLEDGE_MIIT_LAST_BATCH: "408"
+          KNOWLEDGE_MIIT_PAGE_SIZE: "1000"
+          KNOWLEDGE_MIIT_MAX_PAGES_PER_BATCH: "2"
+          KNOWLEDGE_MIIT_ENTERPRISE_QUERY: "汽车"
+        run: node scripts/catalog-download-miit-products.mjs
+      - name: Rebuild Japan attachment map with year-page context
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+        run: node scripts/catalog-enrich-mlit-attachment-context.mjs
+      - name: Complete Japan passenger PDF extraction
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_MLIT_PDF_MAX: "350"
+        run: node scripts/catalog-extract-mlit-pdf-knowledge.mjs
+      - name: Complete Japan official tabular extraction
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_MLIT_TABLE_MAX: "200"
+        run: python scripts/catalog-extract-mlit-tabular.py
+      - name: Complete Korea Energy Agency model snapshot
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+        run: node scripts/catalog-download-korea-energy-models.mjs
+      - name: Complete China 2020+ model and variant catalog
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_AUTOHOME_MAX_SERIES: "6000"
+          KNOWLEDGE_AUTOHOME_DELAY_MS: "150"
+          KNOWLEDGE_AUTOHOME_CONCURRENCY: "2"
+        run: node scripts/catalog-download-autohome-china-core.mjs
+      - name: Build source-evidence denominators
+        env:
+          KNOWLEDGE_SNAPSHOT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
+        run: |
+          node scripts/catalog-build-knowledge-denominator.mjs
+          node scripts/catalog-extend-knowledge-denominator-west.mjs
+          node scripts/catalog-extend-knowledge-denominator-asia.mjs
+      - name: Build one source-backed knowledge master
+        env:
+          KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
+          KNOWLEDGE_MASTER_ROOT: data/catalog/knowledge-source-snapshots/master
+        run: node scripts/catalog-build-knowledge-source-master.mjs
+      - name: Build global snapshot manifest
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),path=require('path'),crypto=require('crypto');
+          const root='data/catalog/knowledge-source-snapshots/generated';
+          const manifests=[['vehiclesdb','snapshot-manifest.json'],['eea','snapshot-manifest.json'],['miit','snapshot-manifest.json'],['miit-products','products-manifest.json'],['mlit','snapshot-manifest.json'],['mlit-pdf','pdf-text-manifest.json'],['mlit-tabular','tabular-manifest.json'],['korea','snapshot-manifest.json'],['korea-jeju','jeju-registry-manifest.json'],['korea-energy','energy-agency-manifest.json'],['us','snapshot-manifest.json'],['canada','snapshot-manifest.json'],['autohome-china','snapshot-manifest.json']].map(([source,file])=>{const rootSource=source.startsWith('miit-')?'miit':source.startsWith('mlit-')?'mlit':source.startsWith('korea-')?'korea':source;const p=path.join(root,rootSource,file);try{return{source,...JSON.parse(fs.readFileSync(p,'utf8'))}}catch(error){return{source,status:'missing',errors:[{error:String(error.message||error)}]}}});
+          const walk=(dir,out=[])=>{if(!fs.existsSync(dir))return out;for(const n of fs.readdirSync(dir)){const f=path.join(dir,n),s=fs.statSync(f);s.isDirectory()?walk(f,out):out.push({path:f.replaceAll('\\','/'),bytes:s.size})}return out};const files=walk(root);const payload={schemaVersion:1,builtAt:new Date().toISOString(),status:'awaiting_completion_gate',sources:manifests.map(x=>({source:x.source,status:x.status,fetchedAt:x.fetchedAt||null,counts:x.counts||{},errors:(x.errors||[]).slice(0,20)})),files:files.length,totalBytes:files.reduce((n,x)=>n+x.bytes,0),contentDigest:crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex')};fs.writeFileSync(path.join(root,'snapshot-manifest.json'),JSON.stringify(payload,null,2)+'\n');console.log(JSON.stringify(payload,null,2));
+          NODE
+      - name: Validate complete source corpus
+        shell: bash
+        env:
+          KNOWLEDGE_SNAPSHOT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
+          KNOWLEDGE_MASTER_ROOT: data/catalog/knowledge-source-snapshots/master
+          KNOWLEDGE_COMPLETION_REPORT: data/catalog/knowledge-source-snapshots/completion-report.json
+        run: |
+          set -euo pipefail
+          for f in scripts/catalog-download-knowledge-source-snapshot.mjs scripts/catalog-download-korea-jeju-registry.mjs scripts/catalog-download-korea-energy-models.mjs scripts/catalog-download-western-knowledge-sources.mjs scripts/catalog-download-vehiclesdb-csv.mjs scripts/catalog-download-miit-products.mjs scripts/catalog-enrich-mlit-attachment-context.mjs scripts/catalog-extract-mlit-pdf-knowledge.mjs scripts/catalog-download-autohome-china-core.mjs scripts/catalog-build-knowledge-denominator.mjs scripts/catalog-extend-knowledge-denominator-west.mjs scripts/catalog-extend-knowledge-denominator-asia.mjs scripts/catalog-build-knowledge-source-master.mjs scripts/catalog-validate-knowledge-source-corpus.mjs; do node --check "$f"; done
+          python -m py_compile scripts/catalog-extract-mlit-tabular.py
+          node scripts/catalog-validate-knowledge-source-corpus.mjs
+      - name: Mark source corpus complete
+        run: |
+          node <<'NODE'
+          const fs=require('fs');const p='data/catalog/knowledge-source-snapshots/generated/snapshot-manifest.json';const m=JSON.parse(fs.readFileSync(p,'utf8'));const c=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/completion-report.json','utf8'));if(!c.ready)throw new Error('completion_report_not_ready');m.status='complete_source_corpus';m.completion={ready:true,report:'../completion-report.json',headline:c.headline};fs.writeFileSync(p,JSON.stringify(m,null,2)+'\n');console.log(JSON.stringify(m.completion,null,2));
+          NODE
+      - name: Commit complete source corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/knowledge-source-snapshots/generated data/catalog/knowledge-source-snapshots/denominator data/catalog/knowledge-source-snapshots/master data/catalog/knowledge-source-snapshots/completion-report.json
+          if git diff --cached --quiet; then echo "Knowledge source corpus is unchanged."; exit 0; fi
+          git commit -m "Build complete vehicle knowledge source corpus"
+          git push origin HEAD:fix/catalog-core-recovery-20260822

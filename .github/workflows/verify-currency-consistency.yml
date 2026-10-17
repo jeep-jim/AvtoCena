@@ -1,0 +1,30 @@
+name: Verify currency comparison consistency
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/PriceTrend.tsx'
+      - 'apps/web/components/legal/ConsentCheckbox.tsx'
+      - 'tests/browser/currency-consistency*'
+      - '.github/workflows/verify-currency-consistency.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/currency-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: CHROME_BIN=$(command -v google-chrome) node tests/browser/currency-consistency.mjs
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/currency-browser/node_modules/playwright/index.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: currency-consistency
+          path: artifacts/currency-consistency

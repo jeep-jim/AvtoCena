@@ -1,0 +1,569 @@
+{
+  "workflowRun": 34068683053,
+  "jobId": 101581919045,
+  "runtimeCommit": "3e45aa3e1ef15984259b4718ddd31be5437ef119",
+  "report": {
+    "checkedAt": "2026-09-07T00:05:49.164Z",
+    "completed": true,
+    "currencyRequests": 0,
+    "detailsRequested": true,
+    "japanRequests": 0,
+    "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+    "markets": [
+      {
+        "details": [
+          {
+            "after": {
+              "fuel": "petrol",
+              "sourceCurrency": "USD",
+              "sourcePrice": 30340,
+              "year": 2019
+            },
+            "before": {
+              "fuel": "petrol",
+              "sourceCurrency": "USD",
+              "sourcePrice": 30340,
+              "year": 2019
+            },
+            "changedFields": [],
+            "detailNetworkRequests": 2,
+            "error": "verified_specifications_required",
+            "fields": {
+              "certifiedPower": {
+                "provenance": "none",
+                "reason": "combustion_vehicle",
+                "state": "not_applicable"
+              },
+              "engineCc": {
+                "provenance": "none",
+                "reason": "engine_cc_missing",
+                "state": "missing"
+              },
+              "fuelPowertrain": {
+                "provenance": "source_evidence",
+                "reason": "usable_fuel_powertrain",
+                "state": "exact"
+              },
+              "powerHp": {
+                "provenance": "none",
+                "reason": "peak_power_missing",
+                "state": "missing"
+              },
+              "year": {
+                "provenance": "source_evidence",
+                "reason": "valid_source_year",
+                "state": "exact"
+              }
+            },
+            "images": 18,
+            "sourceOfferId": "59754526",
+            "sourceWitness": {
+              "apiEngine": "2.0T 245 horsepower L4",
+              "apiFuel": "Gasoline",
+              "boundParameters": null,
+              "detailId": 59754526,
+              "semanticEvidence": {
+                "engineCc": {
+                  "rawValues": [
+                    "2.0T 245 horsepower L4"
+                  ],
+                  "source": "che168_global_carinfo",
+                  "status": "missing"
+                },
+                "fuel": {
+                  "rawValues": [
+                    "Gasoline"
+                  ],
+                  "source": "che168_global_listing_and_carinfo",
+                  "status": "exact",
+                  "value": "petrol"
+                },
+                "powerHp": {
+                  "rawValues": [
+                    "2.0T 245 horsepower L4"
+                  ],
+                  "source": "che168_global_carinfo",
+                  "status": "missing"
+                },
+                "year": {
+                  "rawValues": [
+                    "2019",
+                    "2019"
+                  ],
+                  "source": "che168_global_listing_and_carinfo",
+                  "status": "exact",
+                  "value": 2019
+                }
+              },
+              "specId": 36921
+            },
+            "yearAllowed": false
+          },
+          {
+            "after": {
+              "fuel": "hybrid",
+              "powerHp": 381,
+              "sourceCurrency": "USD",
+              "sourcePrice": 103330,
+              "year": 2026
+            },
+            "before": {
+              "fuel": "hybrid",
+              "sourceCurrency": "USD",
+              "sourcePrice": 103330,
+              "year": 2026
+            },
+            "changedFields": [
+              "powerHp"
+            ],
+            "detailNetworkRequests": 2,
+            "error": "verified_specifications_required",
+            "fields": {
+              "certifiedPower": {
+                "provenance": "none",
+                "reason": "certified_30min_power_missing",
+                "state": "missing"
+              },
+              "engineCc": {
+                "provenance": "none",
+                "reason": "engine_cc_missing",
+                "state": "missing"
+              },
+              "fuelPowertrain": {
+                "provenance": "source_evidence",
+                "reason": "usable_fuel_powertrain",
+                "state": "exact"
+              },
+              "powerHp": {
+                "provenance": "source_evidence",
+                "reason": "usable_peak_power",
+                "state": "exact"
+              },
+              "year": {
+                "provenance": "source_evidence",
+                "reason": "valid_source_year",
+                "state": "exact"
+              }
+            },
+            "images": 20,
+            "sourceOfferId": "59769656",
+            "sourceWitness": {
+              "apiEngine": "3.0T 381HP L6",
+              "apiFuel": "Gasoline + 48V Mild Hybrid System",
+              "boundParameters": null,
+              "detailId": 59769656,
+              "semanticEvidence": {
+                "engineCc": {
+                  "rawValues": [
+                    "3.0T 381HP L6"
+                  ],
+                  "source": "che168_global_carinfo",
+                  "status": "missing"
+                },
+                "fuel": {
+                  "rawValues": [
+                    "Gasoline + 48V Mild Hybrid System"
+                  ],
+                  "source": "che168_global_listing_and_carinfo",
+                  "status": "exact",
+                  "value": "hybrid"
+                },
+                "powerHp": {
+                  "rawValues": [
+                    "3.0T 381HP L6"
+                  ],
+                  "source": "che168_global_carinfo",
+                  "status": "exact",
+                  "value": 381
+                },
+                "year": {
+                  "rawValues": [
+                    "2026",
+                    "2026"
+                  ],
+                  "source": "che168_global_listing_and_carinfo",
+                  "status": "exact",
+                  "value": 2026
+                }
+              },
+              "specId": 74703
+            },
+            "yearAllowed": true
+          },
+          {
+            "after": {
+              "fuel": "petrol",
+              "powerHp": 208,
+              "sourceCurrency": "USD",
+              "sourcePrice": 9090,
+              "year": 2018
+            },
+            "before": {
+              "fuel": "petrol",
+              "sourceCurrency": "USD",
+              "sourcePrice": 9090,
+              "year": 2018
+            },
+            "changedFields": [
+              "powerHp"
+            ],
+            "detailNetworkRequests": 2,
+            "error": "verified_specifications_required",
+            "fields": {
+              "certifiedPower": {
+                "provenance": "none",
+                "reason": "combustion_vehicle",
+                "state": "not_applicable"
+              },
+              "engineCc": {
+                "provenance": "none",
+                "reason": "engine_cc_missing",
+                "state": "missing"
+              },
+              "fuelPowertrain": {
+                "provenance": "source_evidence",
+                "reason": "usable_fuel_powertrain",
+                "state": "exact"
+              },
+              "powerHp": {
+                "provenance": "source_evidence",
+                "reason": "usable_peak_power",
+                "state": "exact"
+              },
+              "year": {
+                "provenance": "source_evidence",
+                "reason": "valid_source_year",
+                "state": "exact"
+              }
+            },
+            "images": 24,
+            "sourceOfferId": "59282752",
+            "sourceWitness": {
+              "apiEngine": "2.4L 208hp L4",
+              "apiFuel": "Gasoline",
+              "boundParameters": null,
+              "detailId": 59282752,
+              "semanticEvidence": {
+                "engineCc": {
+                  "rawValues": [
+                    "2.4L 208hp L4"
+                  ],
+                  "source": "che168_global_carinfo",
+                  "status": "missing"
+                },
+                "fuel": {
+                  "rawValues": [
+                    "Gasoline"
+                  ],
+                  "source": "che168_global_listing_and_carinfo",
+                  "status": "exact",
+                  "value": "petrol"
+                },
+                "powerHp": {
+                  "rawValues": [
+                    "2.4L 208hp L4"
+                  ],
+                  "source": "che168_global_carinfo",
+                  "status": "exact",
+                  "value": 208
+                },
+                "year": {
+                  "rawValues": [
+                    "2018",
+                    "2018"
+                  ],
+                  "source": "che168_global_listing_and_carinfo",
+                  "status": "exact",
+                  "value": 2018
+                }
+              },
+              "specId": 32677
+            },
+            "yearAllowed": false
+          }
+        ],
+        "duplicates": 0,
+        "listingRows": 24,
+        "market": "china",
+        "normalizationRejected": 0,
+        "normalizedRows": 24,
+        "pages": [
+          {
+            "cursor": "1",
+            "diagnostics": {
+              "listingRows": 24,
+              "rejectedRows": 0
+            },
+            "health": {
+              "checkedAt": "2026-09-07T00:05:50.138Z",
+              "contentType": "application/json; charset=utf-8",
+              "httpStatus": 200,
+              "message": "Che168 Global API page=1/166 items=24 total=3970",
+              "ok": true
+            },
+            "returnedRows": 24
+          }
+        ],
+        "requests": [
+          {
+            "bodyEvidence": {
+              "bytes": 18661,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "5b2c2f95055e915f5cde3d183a979b694f31f3c2049015ecd9126eec7b1a6f7d"
+            },
+            "contentType": "application/json; charset=utf-8",
+            "method": "GET",
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/search",
+            "status": 200
+          },
+          {
+            "bodyEvidence": {
+              "bytes": 3625,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "4ef9aa731fe89b5912460d02b41239c9408b7e8d294d0002a0e7a09e832da26b"
+            },
+            "contentType": "application/json; charset=utf-8",
+            "method": "GET",
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/carinfo/59754526",
+            "status": 200
+          },
+          {
+            "bodyEvidence": {
+              "bytes": 29169,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "e78c6ebe146e076d41badaba9b77fe4d2b694b2e19235e347bb63710e85ae1fe"
+            },
+            "contentType": "text/html",
+            "method": "GET",
+            "origin": "https://global.che168.com",
+            "path": "/en/detail/59754526",
+            "status": 200
+          },
+          {
+            "bodyEvidence": {
+              "bytes": 3890,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "ea3fc378773f4cf4ddc521db89866752b5cc47e21586bc83b241d2b5d58d50e1"
+            },
+            "contentType": "application/json; charset=utf-8",
+            "method": "GET",
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/carinfo/59769656",
+            "status": 200
+          },
+          {
+            "bodyEvidence": {
+              "bytes": 29169,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "ab8e3e41140d606333477edc7d75ec52b4ffbab2dcef2009580bc16533d0150f"
+            },
+            "contentType": "text/html",
+            "method": "GET",
+            "origin": "https://global.che168.com",
+            "path": "/en/detail/59769656",
+            "status": 200
+          },
+          {
+            "bodyEvidence": {
+              "bytes": 4338,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "83233155aab727f58df9bd5249d968c9c9ae2d88f39dbde0c2c070be7477f02f"
+            },
+            "contentType": "application/json; charset=utf-8",
+            "method": "GET",
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/carinfo/59282752",
+            "status": 200
+          },
+          {
+            "bodyEvidence": {
+              "bytes": 29169,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false,
+              "hasSpecTable": false,
+              "rscPushCount": 0,
+              "sha256": "e67e16714b79f734147ddafd42047775b0e2329e05e4e52fd98e12a307e8cdb1"
+            },
+            "contentType": "text/html",
+            "method": "GET",
+            "origin": "https://global.che168.com",
+            "path": "/en/detail/59282752",
+            "status": 200
+          }
+        ],
+        "samples": [
+          {
+            "fields": {
+              "certifiedPower": {
+                "provenance": "none",
+                "reason": "combustion_vehicle",
+                "state": "not_applicable"
+              },
+              "engineCc": {
+                "provenance": "none",
+                "reason": "engine_cc_missing",
+                "state": "missing"
+              },
+              "fuelPowertrain": {
+                "provenance": "source_evidence",
+                "reason": "usable_fuel_powertrain",
+                "state": "exact"
+              },
+              "powerHp": {
+                "provenance": "none",
+                "reason": "peak_power_missing",
+                "state": "missing"
+              },
+              "year": {
+                "provenance": "source_evidence",
+                "reason": "valid_source_year",
+                "state": "exact"
+              }
+            },
+            "fuel": "petrol",
+            "make": "Lexus",
+            "model": "RC",
+            "sourceOfferId": "59754526",
+            "year": 2019
+          },
+          {
+            "fields": {
+              "certifiedPower": {
+                "provenance": "none",
+                "reason": "certified_30min_power_missing",
+                "state": "missing"
+              },
+              "engineCc": {
+                "provenance": "none",
+                "reason": "engine_cc_missing",
+                "state": "missing"
+              },
+              "fuelPowertrain": {
+                "provenance": "source_evidence",
+                "reason": "usable_fuel_powertrain",
+                "state": "exact"
+              },
+              "powerHp": {
+                "provenance": "source_evidence",
+                "reason": "usable_peak_power",
+                "state": "exact"
+              },
+              "year": {
+                "provenance": "source_evidence",
+                "reason": "valid_source_year",
+                "state": "exact"
+              }
+            },
+            "fuel": "hybrid",
+            "make": "BMW",
+            "model": "7 Series",
+            "powerHp": 381,
+            "sourceOfferId": "59769656",
+            "year": 2026
+          },
+          {
+            "fields": {
+              "certifiedPower": {
+                "provenance": "none",
+                "reason": "combustion_vehicle",
+                "state": "not_applicable"
+              },
+              "engineCc": {
+                "provenance": "none",
+                "reason": "engine_cc_missing",
+                "state": "missing"
+              },
+              "fuelPowertrain": {
+                "provenance": "source_evidence",
+                "reason": "usable_fuel_powertrain",
+                "state": "exact"
+              },
+              "powerHp": {
+                "provenance": "source_evidence",
+                "reason": "usable_peak_power",
+                "state": "exact"
+              },
+              "year": {
+                "provenance": "source_evidence",
+                "reason": "valid_source_year",
+                "state": "exact"
+              }
+            },
+            "fuel": "petrol",
+            "make": "Acura",
+            "model": "TLX-L",
+            "powerHp": 208,
+            "sourceOfferId": "59282752",
+            "year": 2018
+          }
+        ],
+        "sourceHealth": {
+          "checkedAt": "2026-09-07T00:05:50.138Z",
+          "contentType": "application/json; charset=utf-8",
+          "httpStatus": 200,
+          "message": "Che168 Global API page=1/166 items=24 total=3970",
+          "ok": true
+        },
+        "sourceId": "autohome_used_china_open",
+        "status": "listing_received",
+        "summary": {
+          "adapterRejectedRows": 0,
+          "allowedYearCalculated": 0,
+          "allowedYearExamined": 1,
+          "calculated": 0,
+          "duplicateRows": 0,
+          "examined": 3,
+          "failures": {
+            "verified_specifications_required": 3
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 1,
+          "passingAllFilters": 0,
+          "returnedRows": 24,
+          "sourceListingRows": 24,
+          "unexaminedRows": 21,
+          "uniqueNormalizedRows": 24
+        }
+      },
+      {
+        "market": "korea",
+        "reason": "Not selected for this run; no inference about source availability.",
+        "status": "not_attempted"
+      }
+    ],
+    "maxRequestsPerSource": 8,
+    "pageLimit": 1,
+    "pricesCalculated": true,
+    "productionWrites": false,
+    "sampleLimit": 3,
+    "version": 3
+  }
+}

@@ -1,0 +1,25 @@
+name: Stop superseded Che168 collection before publication
+on:
+  push:
+    branches: [fix/che168-heavy-vehicle-scope-20261009]
+    paths: ['.github/workflows/che168-stop-superseded-collect.yml']
+permissions:
+  actions: write
+  contents: read
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const repo = {owner: context.repo.owner, repo: context.repo.repo};
+            const run_id = 37921027097;
+            const {data: run} = await github.rest.actions.getWorkflowRun({...repo, run_id});
+            if (run.head_sha !== '8e0eb8a9969bf67f77b57e9a6878ba3b203425f5' || run.name !== 'Catalog refresh china') throw Error('unexpected_run');
+            if (run.status === 'completed') { core.info('Superseded run already stopped'); return; }
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {...repo, run_id, per_page: 100});
+            if (jobs.some(job => job.name.includes('/ publish') && job.status !== 'queued')) throw Error('publication_already_started_do_not_cancel');
+            if (!jobs.some(job => job.name === 'refresh / collect (china)' && job.status === 'in_progress')) throw Error('collection_not_running');
+            await github.rest.actions.cancelWorkflowRun({...repo, run_id});
+            core.info('Cancelled only the superseded collector before publication; archived CSV and completed journal pages remain recoverable.');

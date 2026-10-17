@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-fiat-doblo-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Fiat official archive: new Doblò",
+          "publisher": "Stellantis N.V.",
+          "url": "https://www.media.stellantis.com/uk-en/fiat/press/new-fiat-dobl-unveiled",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Fiat's official media archive identifies Doblò. Grades, engines and production boundaries are not copied into this identity-only batch."
+        },
+        {
+          "id": "src-mlit-passenger-1f0b6518346f5e62",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001612597.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001612597.xlsx",
+          "documentId": "001612597.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-a7425abba0698f6c",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001612596.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001612596.xlsx",
+          "documentId": "001612596.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "fiat/doblo",
+          "brandId": "fiat",
+          "canonicalName": "Doblò",
+          "slug": "doblo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ドブロ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-1f0b6518346f5e62",
+                "src-mlit-passenger-454e5722e59fd750",
+                "src-mlit-passenger-5ec4d0281774cc11",
+                "src-mlit-passenger-7a08b1992059d315",
+                "src-mlit-passenger-a7425abba0698f6c",
+                "src-mlit-passenger-b6daeae0fcee39cd",
+                "src-mlit-passenger-bb8a8756dd475499",
+                "src-mlit-passenger-d2d3686a62ecde44"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-fiat-doblo-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

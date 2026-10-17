@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-vauxhall-combo-vivaro-life-official-2022",
+          "type": "manufacturer",
+          "title": "Vauxhall official archive: Combo Life and Vivaro Life electrification",
+          "publisher": "Vauxhall Motors Limited",
+          "url": "https://www.vauxhall.co.uk/discover/vauxhall-news/2022/01/vauxhall-accelerates-its-move-to-full-electrification.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official manufacturer model-family identity only; generation boundaries and detailed configurations are not inferred."
+        },
+        {
+          "id": "src-volkswagen-crafter-official-2026",
+          "type": "manufacturer",
+          "title": "Volkswagen Commercial Vehicles official model page: Crafter panel van",
+          "publisher": "Volkswagen Commercial Vehicles UK",
+          "url": "https://www.volkswagen-vans.co.uk/en/new-vehicles/crafter-panel-van.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official manufacturer model-family identity only; generation boundaries and detailed configurations are not inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "vauxhall/combo-life",
+          "brandId": "vauxhall",
+          "canonicalName": "Combo Life",
+          "slug": "combo-life",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Combo-e Life",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-vauxhall-combo-vivaro-life-official-2022"
+              ]
+            },
+            {
+              "value": "Combo Life Electric",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-vauxhall-combo-vivaro-life-official-2022"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-vauxhall-combo-vivaro-life-official-2022",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer model-family and body identity; technical configurations remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "vauxhall/vivaro-life",
+          "brandId": "vauxhall",
+          "canonicalName": "Vivaro Life",
+          "slug": "vivaro-life",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Vivaro-e Life",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-vauxhall-combo-vivaro-life-official-2022"
+              ]
+            },
+            {
+              "value": "Vivaro Life Combi",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-vauxhall-combo-vivaro-life-official-2022"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-vauxhall-combo-vivaro-life-official-2022",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer model-family and body identity; technical configurations remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/crafter",
+          "brandId": "volkswagen",
+          "canonicalName": "Crafter",
+          "slug": "crafter",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Crafter panel van",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-volkswagen-crafter-official-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-volkswagen-crafter-official-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer model-family and body identity; technical configurations remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

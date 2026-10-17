@@ -1,0 +1,146 @@
+import {sourceTransportFailure} from './source-transport-failure.mjs';
+import { createHash } from 'node:crypto';
+
+function recordConfirmedWithdrawal(state, offer) {
+  if (offer.market === 'japan' || state.role === 'auction_history' || !offer.sourceOfferId
+    || !['sold', 'removed'].includes(offer.status)) return;
+  state.confirmedWithdrawals.set(offer.id, {
+    id: offer.id, sourceId: offer.sourceId, sourceOfferId: offer.sourceOfferId,
+    market: offer.market, status: offer.status, observedAt: new Date().toISOString(),
+  });
+}
+
+// Independent sites must not wait for the slowest site's detail page. Each
+// source still has exactly one pagination loop and its own bounded workers.
+export async function collectSourceStates(states, optionsForState, collect = collectSourcePage) {
+  await Promise.all(states.map(async state => {
+    const options = optionsForState(state);
+    try { while (!state.done && Date.now() < options.deadline) await collect(state, options); }
+    catch(error){state.done=true;state.stopReason="collector_error";state.errors.push({stage:"collector",message:String(error?.message||error)});await options.checkpoint();}
+  }));
+}
+
+// Collection is separate from publication: incomplete records are retained.
+export async function collectSourcePage(state, options) {
+  const { snapshot, writeObservation, checkpoint, deadline, maxRows, maxPages, minYear, specificationReport } = options;
+  if (state.done || Date.now() >= deadline) return;
+  if(options.hasDiskRoom && !await options.hasDiskRoom()){state.done=true;state.stopReason="disk_budget";await checkpoint();return;}
+  if (state.pages >= maxPages || state.seen.size >= maxRows) { state.done = true; state.stopReason = 'budget'; return; }
+  const cursorKey = JSON.stringify(state.cursor ?? null);
+  if (state.cursors.has(cursorKey)) { state.done = true; state.stopReason = 'cursor_loop'; return; }
+  let page;
+  try { page = await state.source.fetchPage(state.cursor); }
+  catch (error) {
+    const message=String(error?.message || error);
+    const blocked=error?.blocked || /(?:401|403|429|captcha|bot.?challenge|access.?block)/i.test(message);
+    const transient=!blocked && sourceTransportFailure(message);
+    state.listFailures=(state.listFailures || 0)+1;
+    state.consecutiveListFailures=(state.consecutiveListFailures || 0)+1;
+    state.done=!transient || state.consecutiveListFailures>=3 || Date.now()>=deadline;
+    state.stopReason=state.done?(blocked?'blocked':'list_failed'):'retry_pending';
+    if(state.errors.length<30)state.errors.push({stage:'list',message});
+    await checkpoint();
+    if (!state.done) {
+      // Retry transient transport failures on the same cursor, with breathing
+      // room for the source. Access denials and the third failure never retry.
+      const delayMs = Math.min(1000 * 2 ** (state.consecutiveListFailures - 1), Math.max(0, deadline - Date.now()));
+      if (delayMs > 0) await (options.waitForRetry || (ms => new Promise(resolve => setTimeout(resolve, ms))))(delayMs);
+      if (Date.now() >= deadline) { state.done = true; state.stopReason = 'time_budget'; await checkpoint(); }
+    }
+    return;
+  }
+  state.consecutiveListFailures=0;
+  state.stopReason='running';
+  if (page.health?.blocked) { state.done = true; state.stopReason = 'blocked'; state.health = page.health; await checkpoint(); return; }
+  state.cursors.add(cursorKey); state.pages++; state.listingRows += page.items?.length || 0;
+  state.health = page.health; state.diagnostics = page.diagnostics;
+  state.upstreamListingRows = (state.upstreamListingRows || 0) + Number(page.diagnostics?.listingRows ?? page.items?.length ?? 0);
+  for(const [reason,count] of Object.entries(page.diagnostics?.rejectionReasons || {})) {
+    state.upstreamRejections ||= {};
+    state.upstreamRejections[reason] = (state.upstreamRejections[reason] || 0) + Number(count || 0);
+  }
+  // This is the source's reported count, not a claim of complete coverage.
+  if (Number.isFinite(Number(page.count))) state.sourceReportedCount = Number(page.count);
+  let pageComplete = true;
+  let nextRaw = 0;
+  const rawRows = page.items || [];
+  const pageIds = [];
+  async function worker() {
+   while (nextRaw < rawRows.length && !state.done) {
+    const raw = rawRows[nextRaw++];
+    if (Date.now() >= deadline || state.seen.size >= maxRows) { pageComplete = false; break; }
+    let offer;
+    try { offer = state.source.normalizeOffer(raw); } catch { state.normalizationFailures++; continue; }
+    if (!offer?.id || offer.sourceId !== state.sourceId || offer.market !== options.market) { state.normalizationFailures++; continue; }
+    pageIds.push(String(offer.id));
+    recordConfirmedWithdrawal(state, offer);
+    if (state.seen.has(offer.id)) { state.duplicates++; continue; }
+    if (options.inventoryAgeEligible ? !options.inventoryAgeEligible(offer) : Number.isFinite(offer.year) && offer.year < minYear) { state.outsideAge++; continue; }
+    if (['withdrawn','deleted','inactive','removed','stale'].includes(offer.status) || (offer.status==='sold' && state.role!=='auction_history')) { state.withdrawn++; continue; }
+    state.seen.add(offer.id);
+    await writeObservation(snapshot(offer,'listing'));
+    state.detailAttempts++;
+    try {
+      const images = await state.source.fetchImages(offer);
+      recordConfirmedWithdrawal(state, offer);
+      if (images?.length) offer.images = images;
+      await writeObservation(snapshot(offer,'detail'));
+      state.withImages += Boolean(offer.images?.length);
+      const groups = offer.operational?.sourceSpecifications?.groups;
+      state.withNamedTables += Boolean(groups?.length);
+      state.namedFields += (groups || []).reduce((sum, group) => sum + group.items.length, 0);
+      const collectionStatus = offer.operational?.specificationCollection?.status || 'not_reported';
+      state.tableStatuses[collectionStatus] = (state.tableStatuses[collectionStatus] || 0) + 1;
+      const untranslated = options.translationReport?.(groups || []) || [];
+      state.untranslatedFields += untranslated.length;
+      for (const item of untranslated.slice(0,10)) {
+        if(state.untranslatedSamples.length<30 && !state.untranslatedSamples.some(row=>row.name===item.name)) state.untranslatedSamples.push(item);
+      }
+      const kind = offer.operational?.specificationCollection?.kind || 'unclassified';
+      if (groups?.length) state.tableKinds[kind] = (state.tableKinds[kind] || 0) + 1;
+      else state.withoutNamedTable++;
+      const fields = specificationReport?.(offer) || {};
+      for (const [field,status] of Object.entries(fields)) {
+        state.fieldEvidence[field] ||= {};
+        state.fieldEvidence[field][status] = (state.fieldEvidence[field][status] || 0) + 1;
+      }
+    } catch (error) {
+      const message = String(error?.message || error);
+      if (state.errors.length < 30) state.errors.push({stage:'detail',offerId:offer.id,message});
+      if (error?.blocked || /(?:http[_: ](?:401|403|429)|bot.?challenge|captcha|(?:^|[_: ])blocked(?:[_: ]|$)|access.denied)/i.test(message)) {
+        state.done = true; state.stopReason = 'blocked_detail'; pageComplete = false; break;
+      }
+    }
+  }
+  }
+  await Promise.all(Array.from({length:Math.min(rawRows.length,Math.max(1,Math.min(4,Number(options.detailConcurrency || 1))))},worker));
+  if (pageComplete && pageIds.length) {
+    const signature = createHash('sha256').update(JSON.stringify([...new Set(pageIds)].sort())).digest('hex');
+    state.repeatedPages = signature === state.lastPageSignature ? (state.repeatedPages || 0) + 1 : 0;
+    state.lastPageSignature = signature;
+    if (state.repeatedPages >= 2 && page.nextCursor) {
+      state.done = true;
+      state.stopReason = 'repeated_page';
+      await checkpoint();
+      return;
+    }
+  }
+  if (pageComplete) {
+    state.cursor = page.nextCursor ?? null;
+    if (!state.cursor) { state.done = true; state.stopReason = 'source_finished'; }
+  } else if (!state.done) { state.done = true; state.stopReason = 'budget_mid_page'; }
+  await checkpoint();
+}
+export function intakeState(source, required) {
+  return {source,sourceId:required.sourceId,sourceUrl:required.canonicalUrl,role:required.role,cursor:null,initialCursor:null,
+    seen:new Set(),cursors:new Set(),confirmedWithdrawals:new Map(),pages:0,listingRows:0,duplicates:0,normalizationFailures:0,outsideAge:0,withdrawn:0,
+    detailAttempts:0,withImages:0,withNamedTables:0,namedFields:0,withoutNamedTable:0,tableKinds:{},tableStatuses:{},untranslatedFields:0,untranslatedSamples:[],fieldEvidence:{},errors:[],done:!source,stopReason:source?'running':'adapter_missing'};
+}
+export function intakeSummary(state) {
+  const {source,seen,cursors,confirmedWithdrawals,...rest} = state;
+  return {...rest,observations:seen.size};
+}
+export function intakeReportEvidence(states) {
+  return { sources: states.map(intakeSummary),
+    confirmedWithdrawals: states.flatMap(state => [...state.confirmedWithdrawals.values()]) };
+}

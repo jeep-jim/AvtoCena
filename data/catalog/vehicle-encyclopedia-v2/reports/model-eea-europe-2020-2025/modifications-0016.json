@@ -1,0 +1,7103 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 16,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-204ce1e595a69e0422ba",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 67,
+      "commercialNames": [
+        "X4 M40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6d86f56fa672ff85332",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 68,
+      "commercialNames": [
+        "X4 M40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f91e89edd24675cdbfe6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 69,
+      "commercialNames": [
+        "X4 M40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5e10b8c92e869c45c78",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 131,
+      "commercialNames": [
+        "X4 M40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0efb610d3dda6af539e5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "X4 XDRIVE20I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d98362dc4b3146acd2f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 275,
+      "commercialNames": [
+        "X4 M40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-134ac820762db7c59b78",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": 85,
+      "commercialNames": [
+        "X4 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-beb7ded4349929e5ecbe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "X4 XDRIVE 20I",
+        "X4 XDRIVE20I",
+        "X4 XDRIVE30I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 344,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8468c8a2b6aabc708ce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "X4 XDRIVE30I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-400592e94db9a0633992",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X4",
+      "modelId": "bmw/x4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 265,
+      "commercialNames": [
+        "X4 M40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b12d967c005c3a0f9ae",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 155,
+      "commercialNames": [
+        "X5",
+        "X5 XDRIVE 25D",
+        "X5 xDrive25d",
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 407,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad3cd7c3f87b36711b69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 160,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09bd54fb517da4923ce1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 170,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE25 / D AUT",
+        "X5 / XDRIVE25 / D AUT.",
+        "X5 SDRIVE25D",
+        "X5 X DRIVER25D",
+        "X5 XDRIVE 25D",
+        "X5 XDRIVE25 D AUT",
+        "X5 XDRIVE25D",
+        "X5 xDrive25d",
+        "X5 XDRIVE25D G05 B47"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 11357,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff2116d10ff5dcbfc656",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "X5",
+        "X5 DRIVE 40D",
+        "X5 M50D AUTO",
+        "X5 XDRIVE 30D",
+        "X5 XDRIVE30D",
+        "X5 XDRIVE30D M SPORT AUTO",
+        "X5 XDRIVE30D M SPORT MHEV AUTO",
+        "X5 XDRIVE30D XLINE AUTO",
+        "X5 XDRIVE30D XLINE MHEV AUTO",
+        "X5 XDRIVE40D",
+        "X5 XDRIVE40D M SPORT MHEV AUTO",
+        "X5 XDRIVE40D XLINE MHEV AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 5508,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee9271250cde214c4254",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 160,
+      "commercialNames": [
+        "X5",
+        "X5 30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17c4f6666c2002627cf4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 173,
+      "commercialNames": [
+        "X5",
+        "X5 3.0D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b881cecde8085771ff72",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 190,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 xDrive30d"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fd6d60c870e4f4c7e80",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 195,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE30 / D AUT.",
+        "X5 XDRIVE 30D",
+        "X5 XDRIVE30 D AUT",
+        "X5 XDRIVE30D",
+        "X5 xDrive30d",
+        "X5 XDRIVE30D G05 B57"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 17430,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb5f8755ce730ccd4902",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE30 / D AUT",
+        "X5 / XDRIVE30 / D AUT.",
+        "X5 DRIVE",
+        "X5 X DRIVER30D",
+        "X5 XDRIVE",
+        "X5 XDRIVE 30D",
+        "X5 xDrive 30d",
+        "X5 XDRIVE 360D",
+        "X5 XDRIVE30 D AUT",
+        "X5 XDRIVE30 D AUT.",
+        "X5 XDRIVE30D",
+        "X5 xDrive30d",
+        "X5 XDRIVE30D G05",
+        "X5 XDRIVE30D G05 B57",
+        "X5 XDRIVE40D",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 41,
+      "registrations": 61579,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9f8d98df55c25d72e0a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE40 / D AUT",
+        "X5 / XDRIVE40 / D AUT.",
+        "X5 XDRIVE 40D",
+        "X5 xDrive30d",
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40 D AUT",
+        "X5 XDRIVE40 D AUT.",
+        "X5 XDRIVE40D",
+        "X5 XDRIVE40D G05 B57",
+        "X5 XDRIVE40D G05 XD5",
+        "X5 XDRIVE40D M SPORT",
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 22761,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0320488b7d6eb4da970f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 294,
+      "commercialNames": [
+        "X5",
+        "X5 / M50 / D AUT.",
+        "X5 M50 D AUT",
+        "X5 M50d",
+        "X5 M50D",
+        "X5 M50D G05 B57"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 8339,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-199f1402d597ea4e6ecf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 XDRIVE 30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdca9c19c329c2a54562",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5 XDRIVE 40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4198f9213bfd1091661a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 294,
+      "commercialNames": [
+        "X5 XDRIVE 50D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f088d206ed0d3322d3b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 195,
+      "commercialNames": [
+        "X5 XDRIVE 30I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b60ad7fdae0b04869954",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2988,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5 XDRIVE 40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4bda26a3acc630a306e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 195,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-977ea7f2d8f312befb1d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": null,
+      "commercialNames": [
+        "X5",
+        "X5 XDRIVE40D",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE40I M SPORT AUTO",
+        "X5 XDRIVE40I XLINE AUTO",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1112,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-041cfa78cfd52322f0c0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5",
+        "X5 xDrive45e",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1375,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edf4b0f3e5a2b8cf4287",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 245,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE40 / I AUT",
+        "X5 / XDRIVE40 / I AUT.",
+        "X5 XDRIVE 40I",
+        "X5 XDRIVE 40LI",
+        "X5 XDRIVE40I",
+        "X5 xDrive40i",
+        "X5 XDRIVE40I G05 B58"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 3656,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6766458efb59c5969474",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5",
+        "X5 SDRIVE 40I",
+        "X5 XDRIVE 40I",
+        "X5 XDRIVE40 I AUT",
+        "X5 XDRIVE40I",
+        "X5 xDrive40i",
+        "X5 XDRIVE40I G05 B58"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 4476,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d525beedc818f24220a3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 280,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE40 / I AUT",
+        "X5 / XDRIVE40 / I AUT.",
+        "X5 40",
+        "X5 40L XDRIVE",
+        "X5 SDRIVE 40I",
+        "X5 SDRIVE40I",
+        "X5 XDRIVE",
+        "X5 XDRIVE 40 I",
+        "X5 XDRIVE 40I",
+        "X5 XDRIVE40D",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE40I G05 B58"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 4036,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b75b1e45df40cfd70b7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": null,
+      "commercialNames": [
+        "X5",
+        "X5 M COMPETITION",
+        "X5 M COMPETITION AUTO",
+        "X5 M50I",
+        "X5 M50I AUTO",
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 432,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f91719761848c686306",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 390,
+      "commercialNames": [
+        "X5",
+        "X5 / M50 / I AUT",
+        "X5 / M50 / I AUT.",
+        "X5 / M60 / I XDRIVE AUT",
+        "X5 / M60 / I XDRIVE AUT.",
+        "X5 M50 I AUT",
+        "X5 M50I",
+        "X5 M50i",
+        "X5 M50I G05 N63",
+        "X5 M60 I X-DRIVE",
+        "X5 M60 I XDRIVE AUT.",
+        "X5 M60I XDRIVE",
+        "X5 M60I XDRIVE G05 S68"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 7892,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37514d9a0e290b0385f0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 441,
+      "commercialNames": [
+        "X5 M",
+        "X5 M / / AUT.",
+        "X5 M F95 S63"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 241,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58981b301d5ce9e8bd8c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 460,
+      "commercialNames": [
+        "X5",
+        "X5 M",
+        "X5 M COMPETITION",
+        "X5 M Competition",
+        "X5 M COMPETITION / / AUT",
+        "X5 M COMPETITION / / AUT.",
+        "X5 M COMPETITION AUT",
+        "X5 M COMPETITION AUT.",
+        "X5 M COMPETITION F95 S68",
+        "X5 M F95 S63"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 5131,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1d99d1f021313016de9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5",
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f258f81543953050ff41",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2996,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 XDRIVE 45E IPERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3847b7153cb13b7909f9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": null,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE45E M SPORT AUTO",
+        "X5 XDRIVE45E XLINE AUTO",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1535,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27e06b5261d4461230d8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 55,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 708,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-747a51871559ca3c6577",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 155,
+      "commercialNames": [
+        "X5 XDRIVE 45E",
+        "X5 xDrive45e",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 3909,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0f592de023acebef3a6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE45 / E AUT",
+        "X5 / XDRIVE45 / E AUT.",
+        "X5 XDRIVE 45E",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45 E AUT",
+        "X5 XDRIVE45E",
+        "X5 xDrive45e",
+        "X5 XDRIVE45E G05 XB1",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 84674,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21ca79c99184a81d4b16",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 230,
+      "commercialNames": [
+        "X5",
+        "X5 / XDRIVE50 / E AUT",
+        "X5 / XDRIVE50 / E AUT.",
+        "X5 50 E XDRIVE",
+        "X5 M50E XDRIVE",
+        "X5 XDRIVE",
+        "X5 XDRIVE 45E",
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50 E AUT.",
+        "X5 XDRIVE50E",
+        "X5 XDRIVE50E G05 XB1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 41325,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4dc5f5cfb33c976ea2e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 280,
+      "commercialNames": [
+        "X5 M50D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb9ffd31df27b1048ae8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 195,
+      "commercialNames": [
+        "X5 XDRIVE 30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ce7b002e8631ad8b8d1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": null,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0402298505e15797dc9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": 2998,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 xDrive45e"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-490a5a373bfcb36859d8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "X5 XDRIVE 30LI"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f17b644157d645bee315",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": null,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a24eda75c27b592fde09",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5",
+        "X5 XDRIVE 30D",
+        "X5 xDrive30d",
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-323b4a0f682d96bec2b2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2996,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 XDRIVE 45E IPERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da863905a4eb5930c8e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 55,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef911f69155caa9bca61",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 330,
+      "commercialNames": [
+        "X5 XDRIVE50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c50739196739c381c05",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2988,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dc346f43ecd228efc3a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 235,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a5b2f8693b694005cf1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 245,
+      "commercialNames": [
+        "X5 xDrive40i",
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-048b5ca2e96108b9f78a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43fba5a857d43704e13f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 2998,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19b320e19a8db1813666",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 xDrive30d",
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 248,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6057c9113d7229435226",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 XDRIVE 45E",
+        "X5 xDrive45e"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-054cf6a1256d4b3633d4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 170,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfbd8726af09d8c68e2a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 21,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfab00a36dda71923e0a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-194a4e61e121e0e54a69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99f82b0df2b7484fc85a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 49,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-960757d6cd47b38b77a4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e131c84ca8c8bc50059",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 80,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aee25515e1a5002c9c7d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16b312c9508199ad2dd9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b8c8557aa73a1b0ec14",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e72ca6677b8e153ebc59",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 116,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f498970e16f475c2e932",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 195,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29207eb54af00cc5dcca",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 460,
+      "commercialNames": [
+        "X5 XDRIVE25D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9662daae6e5110e4265c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2979,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af07c454a807febd1ff7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2979,
+      "powerKw": 225,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a834473d9f35c1bfbd7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2998,
+      "powerKw": 210,
+      "commercialNames": [
+        "X5 XDRIVE 35D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ffd2af0386b83d2c9d0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 99,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-799a618d37c7236ae600",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 49,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71ffadc931213e469efa",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 51,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8562bcce9cef978dda44",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 52,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a63036c1f80e9592750",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 53,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f9a22ef43a638c7344f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 55,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64218fcadae79619d192",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 59,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e0df73b3dbf062daf58",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 61,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af708b035e02179e90e4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 62,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f9123557593fad4ef8d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 67,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 97,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-812904a5c0e43c6f8ed2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 68,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a9bbaa3fab5774a6066",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 69,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-950c8daad784f1ada229",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 70,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-990c9cd7040543f31de5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 72,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-687fae7089740d883a11",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 73,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee4fcebae749d3b4853a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 74,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8131504cbd1585c0f8b4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 75,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87183909f3f6ac043995",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 77,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9aa337ef61f61fb6fb09",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 80,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e539cdd193bfed06466",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 81,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-148bfc27383cbe298ecd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 84,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf1a2a07a8dbf2efcdff",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 85,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0964cee6e6db26b9fe28",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 88,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5f8c7ffdedb49c420f7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 90,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a65bcde62be918f6c51",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 91,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56c1162fc7d91fbdd71e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 92,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e3e80741a4eb8673ea9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 95,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f67fd7da1fff3f767099",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 96,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-236e95c8b37f6c80ec37",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 110,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 59,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2eac20c6eb06bdde195",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 112,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86813516da274384d1cd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 114,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c26185b4f5945c7ee5f8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 116,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd86327c64888572807a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 117,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e85e37bac4c46a89170f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 118,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49b28833f15a7b3d8100",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 120,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abeda959e1c4ce055179",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 121,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aab7c00e9b571af1cd1f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 124,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5181a5d198a8f133b477",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 125,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c033a88fd5bc4275a44a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 131,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57de12360d190bf96151",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 132,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-859d3207d60ce4a66eaa",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 135,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5fea7910bae70db7b3b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 136,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef4cabe15da64c1379c5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 137,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bade21175b5f7634d9bd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 140,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa0801bb003735b99fb7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 141,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb0413b22338c58107b2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 143,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03e55e0e7a542aed8443",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 147,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2dfe789c59d55aa2c68",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 148,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-727a128fb0b530fda765",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 150,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5faf8db161636b03baa0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 155,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-262a1176bbb4b5ab3adc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 165,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75fa445f1a34ccd0f7fe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 170,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b85ba1ac1342a98abee3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 173,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8062fe8a20d32382b1d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 174,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca6ae48583138e6f9050",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 190,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c15df99ca6b781657cd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 220,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cb76d9cbc824299ad52",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 230,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b77958e31325f91a2342",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 243,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc964370872180366f91",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 67,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c5fca648f6f2db9277f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 275,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72ade96f8d628108f434",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 320,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-235864207c18cf27a172",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 375,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0722082d3d1222d10de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 420,
+      "commercialNames": [
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-761ebb1d07542062a032",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 460,
+      "commercialNames": [
+        "X5 XDRIVE30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdc1a4f75d6e77c8e9e3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "X5 XDRIVE 30D",
+        "X5 XDRIVE 40D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-213d8112e12ffac89887",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": 230,
+      "commercialNames": [
+        "X5",
+        "X5 DRIVE 50E",
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 382,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e27cb5ee8e2ccf16b85a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 67,
+      "commercialNames": [
+        "X5 M COMPETITION",
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5318f9658a4c519b49f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 68,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ed44997d3888147c148",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 74,
+      "commercialNames": [
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eeabc076b4c6e3a92399",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 81,
+      "commercialNames": [
+        "X5 M COMPETITION",
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63a5ce90054f0053dc1f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 84,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b0b9383bb013bf63263",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 88,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1729c523a079be797f81",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 91,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cebda27513af392afdce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 92,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aaeb328c32fcf552dafe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 110,
+      "commercialNames": [
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81f3ed89daadfd36160e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 112,
+      "commercialNames": [
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1844699784b735a7a56e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 116,
+      "commercialNames": [
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a98856135ea19f63bf4c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 117,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b1ff083c7ce902d70cd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 132,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20f3f0969f2e2a143323",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 137,
+      "commercialNames": [
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbbe54d2b036cea30f89",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 140,
+      "commercialNames": [
+        "X5 M COMPETITION",
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-defac764fc7319c979cd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 147,
+      "commercialNames": [
+        "X5 M50I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38bc93deeadb1fe87f31",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 299,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faef0925eed198df9ce1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 408,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aa5dae689808dee7cc1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "X5"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6a56c8859f5eb9bbe8a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2988,
+      "powerKw": 230,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abe38de8e194038b5a69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 49,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86e5dc4bccab9b3bb8c2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 51,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e94827f1f2f26dedfad8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 61,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d2ba10ddf20ee532998",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 62,
+      "commercialNames": [
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd68b1963e36cf60fec0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 67,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d80f510847322ef52e15",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 68,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6361bed4df32b02129ef",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 69,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f7c16a0420ff22c1640",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 70,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f71af5a3d6bca35f442",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 72,
+      "commercialNames": [
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-505fa0f0fe915ee7a8c4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 73,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bd048d2f1199302ab47",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 74,
+      "commercialNames": [
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a7cebb7c204fdadc740",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 77,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc69b221fd7e29a90808",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 79,
+      "commercialNames": [
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f55ce09168341eefb85",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 80,
+      "commercialNames": [
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfd6317ff37eee7403dd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 81,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7037b0693eaa2a19fe63",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 83,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fbecbd0b727049d4c14",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 84,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc3387d16257a56ec8ee",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 85,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2c6fc7837a6be1ae958",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 88,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecf289164d0d51a72ab5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 90,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bd16e7b57d8f54b799b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 91,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b078813d51b7ccc2904",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 92,
+      "commercialNames": [
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e77327cf4f6906f34c30",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 95,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d35de4e09205dbdd42c3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 96,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52d8781962a31ee10cc2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 110,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e40a3e4dc9b03ad938e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 112,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f81f3c104d6bb366da95",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 114,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6ba746a074063caa9ee",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 116,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9926ee6955dcb4c7df6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 117,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d357a31cf9bcc845ac2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 120,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-577ca706c0e5a3ea30a5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 121,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13ad9076aca98b1d8101",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 130,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3f8d853d872aaad10e0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 131,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c365c023a57402c49f09",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 132,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d684a66d41615216fe6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 133,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba17ba70a60b14a19575",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 135,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d17d6700bb6ebfa28b13",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 136,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b69d9c4f2fb131835f1b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 137,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e41e9a77ccf2c7fb05a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 140,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed661760f1d7f4fde5f2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 141,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe11da3ffe1fecfa6549",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 142,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d0820fd513aec092ab7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 143,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf4f950c54ce635f0271",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 145,
+      "commercialNames": [
+        "X5",
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27520759cbfeb75d99ce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 147,
+      "commercialNames": [
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f193caee8805fe3b95a3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 150,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a88903211c781091d616",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 170,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dba3f03a288ddd7403e8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 180,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5a9db87af4d030d0bdd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 185,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-982ec8f8cec66c45b42c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 195,
+      "commercialNames": [
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-beb14c2c48baca0b1071",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 200,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99c4bf3bf2ceedd86d2d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 221,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b75a4054ba3793f63df5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 228,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc93b68a3f6bfdadd390",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 243,
+      "commercialNames": [
+        "X5 XDRIVE40I",
+        "X5 XDRIVE45E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-581cce4c179f4094aef1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 260,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cc2331fd6f667e4f0f3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 275,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8897d35621c55e753b6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 280,
+      "commercialNames": [
+        "X5 M50E XDRIVE",
+        "X5 XDRIVE 50E",
+        "X5 XDRIVE M60E",
+        "X5 XDRIVE40I",
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 137,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfb3d366810b340ff2fb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 294,
+      "commercialNames": [
+        "X5 XDRIVE40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b906b4419216cf196e7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 360,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6982244f2f3093f9bce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 520,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2da30a2e38e1018b100f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": null,
+      "commercialNames": [
+        "X5 M COMPETITION",
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38ae4ad73b8f13c880f0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 53,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cbd1dba5f754dc0506a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 61,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce771326430dd1243b7f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 67,
+      "commercialNames": [
+        "X5 M COMPETITION",
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-973823622e351245af3e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 72,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9fa286fc0a961723509",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 84,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86e87260d3b2c23e3795",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 90,
+      "commercialNames": [
+        "X5 M COMPETITION",
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b687e678679a23d2ecc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 95,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ad79b79ebd1d9e7019e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 110,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2581aa01e7e086aff578",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 112,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e9d0e65d8ab19d6c51e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 136,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c396594fbdfc9145811",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 140,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72d7aefdb97dc35b1004",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 143,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-116b1550fd3fa667238c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 145,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a3fa3c0ab1f6136591c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 147,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-139ca8673dd13c9fccb8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 150,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57602b0ae05be064a966",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 390,
+      "commercialNames": [
+        "X5 M60I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76b662eecc5362a67792",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": 230,
+      "commercialNames": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84c49218461a04dcb1e3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": 145,
+      "commercialNames": [
+        "X5 XDRIVE50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc94b337555bd3f9eaa6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4398,
+      "powerKw": 390,
+      "commercialNames": [
+        "X5 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65d3f942c77fe85df3e8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4799,
+      "powerKw": 265,
+      "commercialNames": [
+        "X5 4.8IS"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99d5e1f97a809cd286bd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 4395,
+      "powerKw": 460,
+      "commercialNames": [
+        "X5 M COMPETITION"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd7d0c077f96380c8dde",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 190,
+      "commercialNames": [
+        "X5 30L XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aab28228c64bc149cd3c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 280,
+      "commercialNames": [
+        "X5 XDRIVE 40I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57425ee787c7fc124fd1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 118,
+      "commercialNames": [
+        "X5 XDRIVE 30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb4665e901dc05faa0ec",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 58,
+      "commercialNames": [
+        "X5 XDRIVE 50E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26048f63b1542ca6e930",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X5",
+      "modelId": "bmw/x5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 313,
+      "commercialNames": [
+        "X5 XDRIVE M60E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8889f5ed5215316d25c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X6",
+      "modelId": "bmw/x6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2979,
+      "powerKw": 195,
+      "commercialNames": [
+        "X6 XDRIVE 30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d59924138af71a299834",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "X6",
+      "modelId": "bmw/x6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2979,
+      "powerKw": 210,
+      "commercialNames": [
+        "X6 XDRIVE 30D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 53,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-gm-wuling-air-ev-china-launch-en-2022",
+          "type": "manufacturer",
+          "title": "SAIC-GM-Wuling Launches Wuling Air EV in China",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2022/Dec/1212-wuling.html",
+          "documentId": "GM China Wuling Air EV 2022-12-12 EN",
+          "documentDate": "2022-12-12",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "powertrainKind",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "seats"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English launch establishes the Air EV public name, four China launch variants, two- and four-seat editions, 300 km CLTC range and exact dimensions for the four-seat edition. It also records the earlier August 2022 Indonesia launch."
+        },
+        {
+          "id": "src-gm-wuling-air-ev-china-launch-zh-2022",
+          "type": "manufacturer",
+          "title": "售价6.78 万至8.28 万元 胡歌携五菱新能源首款全球车Air ev晴空上市",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2022/Dec/1212-wuling.html",
+          "documentId": "GM China Wuling Air ev晴空 2022-12-12 ZH",
+          "documentDate": "2022-12-12",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "powertrainKind",
+            "rangeKm",
+            "rangeStandard",
+            "seats"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official Chinese launch explicitly names Standard and Advanced grades for both the two-seat and four-seat editions and states that all four have 300 km range."
+        },
+        {
+          "id": "src-gm-wuling-air-ev-china-production-en-2022",
+          "type": "manufacturer",
+          "title": "SAIC-GM-Wuling Marks 20 Years with New Plant Groundbreaking and New NEV",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2022/Nov/1118-wuling.html",
+          "documentId": "GM China Wuling Air EV production 2022-11-18 EN",
+          "documentDate": "2022-11-18",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "motorPeakKw",
+            "seats"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official production release assigns 30 kW and 50 kW drive motors to the two-seat and four-seat editions respectively. Maximum motor power is never reused as legal 30-minute power."
+        },
+        {
+          "id": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+          "type": "manufacturer",
+          "title": "Wuling Launches New Air ev and New Cloud EV at Indonesia International Motor Show 2025",
+          "publisher": "PT SGMW Motor Indonesia (Wuling Motors)",
+          "url": "https://wuling.id/en/blog/press-release/wuling-launches-new-air-ev-and-new-cloud-ev-at-indonesia-international-motor-show-2025",
+          "documentId": "Wuling Indonesia New Air ev launch 2025-02-13 EN",
+          "documentDate": "2025-02-13",
+          "verifiedAt": "2026-08-18",
+          "market": "Indonesia",
+          "language": "en",
+          "supportedFields": [
+            "bodyTypes",
+            "bodyType"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Wuling's official English release directly classifies the Air ev as a compact city car. The normalized V2 body label is City car."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/air-ev",
+          "brandId": "wuling",
+          "canonicalName": "Air EV",
+          "slug": "air-ev",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 Air ev晴空",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            },
+            {
+              "value": "Air ev晴空",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-air-ev-china-launch-zh-2022"
+              ]
+            }
+          ],
+          "productionFrom": "2022-08",
+          "productionTo": null,
+          "bodyTypes": [
+            "City car"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English release uses Air EV, records the first Indonesia launch in August 2022 and identifies the vehicle as battery electric."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling directly classifies Air ev as a compact city car."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "All four official 2022 China launch configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/air-ev/china-launch-2022",
+          "modelId": "wuling/air-ev",
+          "name": "China launch lineup (2022)",
+          "aliases": [
+            {
+              "value": "Air ev晴空",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-air-ev-china-launch-zh-2022"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2022-12",
+          "productionTo": null,
+          "bodyTypes": [
+            "City car"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+              "fields": [
+                "name",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China release dates the four-variant launch to 2022-12-12."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling's public English classification is compact city car."
+            }
+          ],
+          "researchNotes": [
+            "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/air-ev/china-launch-2022/2-seat-standard",
+          "modelId": "wuling/air-ev",
+          "generationId": "wuling/air-ev/china-launch-2022",
+          "faceliftId": null,
+          "name": "2-seat Standard",
+          "aliases": [
+            {
+              "value": "两座版 标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-air-ev-china-launch-zh-2022"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "City car",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 30,
+          "rangeKm": 300,
+          "rangeStandard": "CLTC",
+          "seats": 2,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+              "fields": [
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the China-market date, seating edition, 300 km CLTC range and, for four-seat editions only, exact dimensions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-zh-2022",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Chinese launch distinguishes Standard and Advanced grades within the two-seat and four-seat editions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-production-en-2022",
+              "fields": [
+                "motorPeakKw",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official production release assigns 30 kW to two-seat editions and 50 kW to four-seat editions."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling's public English classification is compact city car."
+            }
+          ],
+          "researchNotes": [
+            "Peak drive-motor output is not reused as legal 30-minute power.",
+            "Battery capacity and charging power remain empty because the launch releases do not provide an explicit capacity basis or charging-kW value."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/air-ev/china-launch-2022/2-seat-advanced",
+          "modelId": "wuling/air-ev",
+          "generationId": "wuling/air-ev/china-launch-2022",
+          "faceliftId": null,
+          "name": "2-seat Advanced",
+          "aliases": [
+            {
+              "value": "两座版 进阶版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-air-ev-china-launch-zh-2022"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "City car",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 30,
+          "rangeKm": 300,
+          "rangeStandard": "CLTC",
+          "seats": 2,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+              "fields": [
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the China-market date, seating edition, 300 km CLTC range and, for four-seat editions only, exact dimensions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-zh-2022",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Chinese launch distinguishes Standard and Advanced grades within the two-seat and four-seat editions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-production-en-2022",
+              "fields": [
+                "motorPeakKw",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official production release assigns 30 kW to two-seat editions and 50 kW to four-seat editions."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling's public English classification is compact city car."
+            }
+          ],
+          "researchNotes": [
+            "Peak drive-motor output is not reused as legal 30-minute power.",
+            "Battery capacity and charging power remain empty because the launch releases do not provide an explicit capacity basis or charging-kW value."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/air-ev/china-launch-2022/4-seat-standard",
+          "modelId": "wuling/air-ev",
+          "generationId": "wuling/air-ev/china-launch-2022",
+          "faceliftId": null,
+          "name": "4-seat Standard",
+          "aliases": [
+            {
+              "value": "四座版 标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-air-ev-china-launch-zh-2022"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "City car",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 50,
+          "rangeKm": 300,
+          "rangeStandard": "CLTC",
+          "seats": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+              "fields": [
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the China-market date, seating edition, 300 km CLTC range and, for four-seat editions only, exact dimensions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-zh-2022",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Chinese launch distinguishes Standard and Advanced grades within the two-seat and four-seat editions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-production-en-2022",
+              "fields": [
+                "motorPeakKw",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official production release assigns 30 kW to two-seat editions and 50 kW to four-seat editions."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling's public English classification is compact city car."
+            }
+          ],
+          "researchNotes": [
+            "Peak drive-motor output is not reused as legal 30-minute power.",
+            "Battery capacity and charging power remain empty because the launch releases do not provide an explicit capacity basis or charging-kW value."
+          ],
+          "updatedAt": "2026-08-18",
+          "lengthMm": 2974,
+          "widthMm": 1505,
+          "heightMm": 1631,
+          "wheelbaseMm": 2010
+        },
+        {
+          "id": "wuling/air-ev/china-launch-2022/4-seat-advanced",
+          "modelId": "wuling/air-ev",
+          "generationId": "wuling/air-ev/china-launch-2022",
+          "faceliftId": null,
+          "name": "4-seat Advanced",
+          "aliases": [
+            {
+              "value": "四座版 进阶版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-air-ev-china-launch-zh-2022"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "City car",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 50,
+          "rangeKm": 300,
+          "rangeStandard": "CLTC",
+          "seats": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+              "fields": [
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the China-market date, seating edition, 300 km CLTC range and, for four-seat editions only, exact dimensions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-launch-zh-2022",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Chinese launch distinguishes Standard and Advanced grades within the two-seat and four-seat editions."
+            },
+            {
+              "sourceId": "src-gm-wuling-air-ev-china-production-en-2022",
+              "fields": [
+                "motorPeakKw",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official production release assigns 30 kW to two-seat editions and 50 kW to four-seat editions."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Wuling's public English classification is compact city car."
+            }
+          ],
+          "researchNotes": [
+            "Peak drive-motor output is not reused as legal 30-minute power.",
+            "Battery capacity and charging power remain empty because the launch releases do not provide an explicit capacity basis or charging-kW value."
+          ],
+          "updatedAt": "2026-08-18",
+          "lengthMm": 2974,
+          "widthMm": 1505,
+          "heightMm": 1631,
+          "wheelbaseMm": 2010
+        }
+      ]
+    }
+  ]
+}

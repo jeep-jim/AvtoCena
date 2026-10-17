@@ -1,0 +1,47 @@
+{
+  "version": 18,
+  "market": "china",
+  "before": 227,
+  "after": 248,
+  "reached": false,
+  "imported": 21,
+  "updated": 206,
+  "rejectedByQuality": 23,
+  "imageFailures": 108,
+  "duplicateFirstImages": [
+    {
+      "checksum": "7627d08a2729299b475cbc1117a10ddf19ef7d31962c31b5848ada2aa214f914",
+      "rows": [
+        {
+          "id": "1aa16a22f79d40288c774100",
+          "make": "Geely Auto",
+          "model": "icon 2023 1.5TD Chocolate Luxe Edition",
+          "year": 2023
+        },
+        {
+          "id": "85fd7fea4ce865bfe8c57881",
+          "make": "Geely Auto",
+          "model": "Monjaro L 2024 2.0TD DCT EVO Two-Wheel Drive",
+          "year": 2024
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "sourceId": "guazi_china_export",
+      "market": "china",
+      "scanCycleId": "scan_a81d8594-d763-4a3a-87c7-8552214fd84c",
+      "ok": true,
+      "seen": 250,
+      "saved": 227,
+      "cursor": "14",
+      "sourceExhausted": false,
+      "stoppedByLimit": true,
+      "stoppedByBudget": false,
+      "partialScan": true,
+      "staleEligible": false
+    }
+  ],
+  "finishedAt": "2026-07-18T09:17:43.452Z"
+}

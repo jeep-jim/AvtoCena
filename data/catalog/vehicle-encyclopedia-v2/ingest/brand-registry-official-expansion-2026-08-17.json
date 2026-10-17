@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-nio-three-brand-portfolio-2026",
+          "type": "manufacturer",
+          "title": "NIO, ONVO and firefly brand portfolio",
+          "publisher": "NIO",
+          "url": "https://www.nio.com/news/20260424001",
+          "documentId": null,
+          "documentDate": "2026-04-24",
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official NIO release explicitly names the company's three vehicle brands NIO, ONVO and firefly. This source is used only to establish the two missing brand identities; country, aliases, logos and model range remain separate review items."
+        },
+        {
+          "id": "src-byd-fangchengbao-yangwang-portfolio-2025",
+          "type": "manufacturer",
+          "title": "BYD luxury brands FANGCHENGBAO and YANGWANG",
+          "publisher": "BYD",
+          "url": "https://www.byd.com/br/noticias-byd-brasil/marcas-de-luxo-da-byd-marcam-presenca-no-salao-do-automovel-de-x",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "pt-BR",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official BYD page explicitly names FANGCHENGBAO and YANGWANG as vehicle brands. This identity seed does not yet claim aliases, country, logo approval or complete model coverage."
+        },
+        {
+          "id": "src-geely-galaxy-portfolio-2026",
+          "type": "manufacturer",
+          "title": "Geely Holding 2025 Sustainability Report brand portfolio",
+          "publisher": "Geely Holding Group",
+          "url": "https://global.geely.com/en/news/2026/geely-holding-group-sustainability-report-2025",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official Geely portfolio material explicitly identifies Geely Galaxy. This source supports the canonical identity only in the current staging seed."
+        },
+        {
+          "id": "src-baic-arcfox-portfolio-2026",
+          "type": "manufacturer",
+          "title": "BAIC Group brand portfolio including ARCFOX",
+          "publisher": "BAIC Group",
+          "url": "https://www.baicgroup.com.cn/baicgroup/News/NewsShort/2026/1/I1457793774951333888.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official BAIC Group material explicitly identifies ARCFOX. This source is limited to the canonical brand identity in the current seed."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "arcfox",
+          "canonicalName": "ARCFOX",
+          "slug": "arcfox",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-baic-arcfox-portfolio-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official portfolio identity confirmed; aliases, country, logos and model inventory remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Officially discovered active brand missing from the production static denominator. Keep blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "fangchengbao",
+          "canonicalName": "FANGCHENGBAO",
+          "slug": "fangchengbao",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-byd-fangchengbao-yangwang-portfolio-2025",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official portfolio identity confirmed; aliases, country, logos and model inventory remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Officially discovered active brand missing from the production static denominator. Keep blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "firefly",
+          "canonicalName": "firefly",
+          "slug": "firefly",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-nio-three-brand-portfolio-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official portfolio identity and lowercase public spelling confirmed; aliases, country, logos and model inventory remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Officially discovered active brand missing from the production static denominator. Keep blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "geely-galaxy",
+          "canonicalName": "Geely Galaxy",
+          "slug": "geely-galaxy",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-geely-galaxy-portfolio-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official portfolio identity confirmed; aliases, country, logos and model inventory remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Officially discovered active brand missing from the production static denominator. Keep separate from the parent Geely brand until official model and alias mapping is completed."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "onvo",
+          "canonicalName": "ONVO",
+          "slug": "onvo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-nio-three-brand-portfolio-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official portfolio identity confirmed; aliases, country, logos and model inventory remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Officially discovered active brand missing from the production static denominator. Keep separate from NIO and blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "yangwang",
+          "canonicalName": "YANGWANG",
+          "slug": "yangwang",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-byd-fangchengbao-yangwang-portfolio-2025",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official portfolio identity confirmed; aliases, country, logos and model inventory remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Officially discovered active brand missing from the production static denominator. Keep blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

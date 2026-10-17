@@ -1,0 +1,55 @@
+name: UI home finance cleanup 20260813
+
+on:
+  push:
+    branches:
+      - ui/home-finance-pixel-match-20260813
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/home-finance-pixel-match-20260813
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Verify exact assets and requested layout
+        run: |
+          set -euo pipefail
+          echo '7d7a8da384a7d8f8374f46030374b91e841ca621ff8a7c1c2ce6b82be7e58772  apps/web/public/home/credit-mascot.png' | sha256sum -c -
+          echo '1f6042dad23b094ab9ba0348ce4cc86ba5b4cd3c8d6c723d77909563dc527666  apps/web/public/home/osago-mascot.png' | sha256sum -c -
+          grep -F 'emptyLabel="Бюджет"' apps/web/components/home/HomePageClient.tsx
+          grep -F '.ac-budget-desktop{display:none!important}' apps/web/components/home/HomePageClient.tsx
+          grep -F 'src="/home/credit-mascot.png"' apps/web/components/home/HomePageClient.tsx
+          grep -F 'src="/home/osago-mascot.png"' apps/web/components/home/HomePageClient.tsx
+          grep -F 'h-[46px] w-[46px]' apps/web/components/home/HomePageClient.tsx
+
+      - name: Remove temporary patch artifacts
+        run: |
+          rm -f .github/workflows/ui-home-finance-pixel-match-20260813.yml
+          rm -f .github/workflows/ui-home-finance-cleanup-20260813.yml
+          rm -f apps/web/public/home/.pixel-match-note
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: git diff --check
+
+      - name: Commit clean UI-only branch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git diff --cached --quiet && exit 1
+          git commit -m "Clean temporary finance UI patch files"
+          git push origin HEAD:ui/home-finance-pixel-match-20260813

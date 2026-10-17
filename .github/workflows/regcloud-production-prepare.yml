@@ -1,0 +1,79 @@
+name: Regcloud — prepare production configuration
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-production-prepare.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-prepare
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read public routing
+        run: |
+          set -euo pipefail
+          for type in NS A AAAA CNAME; do
+            echo "avtocena.com $type"
+            dig +time=5 +tries=1 +short avtocena.com "$type"
+          done
+          echo 'www.avtocena.com routing'
+          dig +time=5 +tries=1 +short www.avtocena.com
+      - name: Preserve production settings on REG without activation
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          TARGET_ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          TARGET_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          SMARTCAPTCHA_CLIENT_KEY: ${{ secrets.SMARTCAPTCHA_CLIENT_KEY }}
+          SMARTCAPTCHA_SERVER_KEY: ${{ secrets.SMARTCAPTCHA_SERVER_KEY }}
+          ACCOUNT_MAIL_PROVIDER: ${{ vars.ACCOUNT_MAIL_PROVIDER }}
+          ACCOUNT_SMTP_HOST: ${{ vars.ACCOUNT_SMTP_HOST }}
+          ACCOUNT_SMTP_PORT: ${{ vars.ACCOUNT_SMTP_PORT }}
+          ACCOUNT_SMTP_USER: ${{ secrets.ACCOUNT_SMTP_USER }}
+          ACCOUNT_SMTP_PASSWORD: ${{ secrets.ACCOUNT_SMTP_PASSWORD }}
+          ACCOUNT_MAIL_FROM: ${{ vars.ACCOUNT_MAIL_FROM }}
+          DEALER_YOOKASSA_SHOP_ID: ${{ secrets.DEALER_YOOKASSA_SHOP_ID }}
+          DEALER_YOOKASSA_SECRET: ${{ secrets.DEALER_YOOKASSA_SECRET }}
+          DEALER_PAYMENTS_ENABLED: ${{ vars.DEALER_PAYMENTS_ENABLED }}
+          DEALER_PAYMENTS_MODE: ${{ vars.DEALER_PAYMENTS_MODE }}
+          DEALER_RECEIPTS_CONFIRMED: ${{ vars.DEALER_RECEIPTS_CONFIRMED }}
+          DEALER_FISCAL_FLOW_CONFIRMED: ${{ vars.DEALER_FISCAL_FLOW_CONFIRMED }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
+          CRM_GITHUB_DISPATCH_TOKEN: ${{ secrets.CRM_GITHUB_DISPATCH_TOKEN }}
+          DADATA_API_KEY: ${{ vars.DADATA_API_KEY }}
+          TELEGRAM_BOT_USERNAME: ${{ vars.TELEGRAM_BOT_USERNAME }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_WEBHOOK_SECRET: ${{ secrets.TELEGRAM_WEBHOOK_SECRET }}
+        run: |
+          set -euo pipefail
+          umask 077
+          task_dir=$(mktemp -d)
+          trap 'rm -rf -- "$task_dir"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$task_dir/key"
+          unset SSH_PRIVATE_KEY
+          python3 scripts/regcloud-prepare-production-env.py "$task_dir/production.env"
+          ssh_opts=(-i "$task_dir/key" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/production-prepared/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" "$task_dir/production.env" "root@151.248.113.177:$remote_dir/production.env"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote_dir'" <<'REMOTE'
+          set -euo pipefail
+          chmod 600 "$1/production.env"
+          echo 'Production configuration stored privately, not activated'
+          docker ps --format 'container={{.Names}} state={{.Status}} ports={{.Ports}}'
+          df -h /
+          if test -f /opt/avtocena/staging/runtime-smoke.json; then
+            cat /opt/avtocena/staging/runtime-smoke.json
+          fi
+          REMOTE

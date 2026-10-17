@@ -1,0 +1,2319 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:29:09.996Z",
+  "productionWrites": false,
+  "existingProductionBridgeAllowed": true,
+  "bridgeUpstreamTrafficObserved": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 50,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "korea",
+      "requests": [
+        {
+          "origin": "https://avtocena.com",
+          "path": "/api/internal/encar-egress-71b8e4",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json",
+          "bodyEvidence": {
+            "bytes": 285677,
+            "sha256": "cc09b893dd198abfc6e50466a8622b32fd7344e8cc5500ad5c5ec24b8c998ff9",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        }
+      ],
+      "sourceId": "encar_direct",
+      "listingRows": 20,
+      "normalizedRows": 20,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [
+        {
+          "sourceOfferId": "40610538",
+          "yearAllowed": false,
+          "before": {
+            "year": 2017,
+            "fuel": "diesel",
+            "engineCc": 2199,
+            "sourcePrice": 13800000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40610538",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture09/pic3969/39691618_001.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_010.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_020.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_007.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_008.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_022.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_021.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_016.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_002.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_018.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_004.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_005.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_017.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_001.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_006.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_023.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_024.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_015.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_019.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_003.jpg",
+            "https://ci.encar.com/carpicture09/pic3969/39691618_009.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2017,
+            "fuel": "diesel",
+            "engineCc": 2199,
+            "sourcePrice": 13800000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "40672260",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "diesel",
+            "engineCc": 2925,
+            "sourcePrice": 58000000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40672260",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture05/pic4065/40654959_001.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_003.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_007.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_008.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_005.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_009.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_001.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_010.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_017.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_020.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_024.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_006.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_022.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_002.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_018.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_004.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_021.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_023.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_015.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_019.jpg",
+            "https://ci.encar.com/carpicture05/pic4065/40654959_016.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "diesel",
+            "engineCc": 2925,
+            "sourcePrice": 58000000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "40704487",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 1969,
+            "sourcePrice": 32900000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40704487",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture10/pic4070/40700995_001.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_006.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_002.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_004.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_016.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_020.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_009.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_007.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_023.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_010.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_017.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_024.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_021.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_022.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_001.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_005.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_008.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_018.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_019.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_003.jpg",
+            "https://ci.encar.com/carpicture10/pic4070/40700995_015.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 1969,
+            "sourcePrice": 32900000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "40802603",
+          "yearAllowed": false,
+          "before": {
+            "year": 2018,
+            "fuel": "petrol",
+            "engineCc": 1362,
+            "sourcePrice": 5990000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40802603",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture09/pic4079/40792258_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_016.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_020.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_021.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_008.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_022.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_023.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_007.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_010.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_019.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_003.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_004.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_005.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_018.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_015.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_024.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_009.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_002.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_017.jpg",
+            "https://ci.encar.com/carpicture09/pic4079/40792258_006.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2018,
+            "fuel": "petrol",
+            "engineCc": 1362,
+            "sourcePrice": 5990000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "40994130",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "diesel",
+            "engineCc": 1998,
+            "sourcePrice": 23500000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40994130",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture09/pic4099/40993705_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_008.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_010.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_016.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_021.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_015.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_004.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_009.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_007.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_019.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_005.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_003.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_020.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_006.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_017.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_023.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_002.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_024.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_018.jpg",
+            "https://ci.encar.com/carpicture09/pic4099/40993705_022.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "diesel",
+            "engineCc": 1998,
+            "sourcePrice": 23500000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41125336",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "diesel",
+            "engineCc": 2996,
+            "sourcePrice": 62800000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41125336",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture01/pic4111/41116825_001.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_008.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_022.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_023.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_001.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_020.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_021.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_018.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_002.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_016.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_007.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_003.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_006.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_009.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_019.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_024.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_017.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_010.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_005.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_004.jpg",
+            "https://ci.encar.com/carpicture01/pic4111/41116825_015.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "diesel",
+            "engineCc": 2996,
+            "sourcePrice": 62800000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41142769",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "engineCc": 1598,
+            "sourcePrice": 18500000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41142769",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture04/pic4114/41140483_001.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_001.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_008.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_009.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_004.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_015.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_016.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_020.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_023.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_007.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_021.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_010.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_019.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_003.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_005.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_018.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_002.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_006.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_024.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_022.jpg",
+            "https://ci.encar.com/carpicture04/pic4114/41140483_017.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "engineCc": 1598,
+            "sourcePrice": 18500000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41199973",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 3495,
+            "sourcePrice": 45500000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41199973",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture09/pic4119/41191925_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_022.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_024.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_010.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_015.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_004.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_023.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_017.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_008.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_005.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_018.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_003.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_006.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_009.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_007.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_002.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_019.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_021.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_016.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_020.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41191925_001.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 3495,
+            "sourcePrice": 45500000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41159793",
+          "yearAllowed": false,
+          "before": {
+            "year": 2018,
+            "fuel": "diesel",
+            "engineCc": 1968,
+            "sourcePrice": 14700000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41159793",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture05/pic4115/41158770_001.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_020.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_008.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_015.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_007.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_021.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_023.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_001.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_019.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_022.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_016.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_018.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_002.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_003.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_024.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_004.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_010.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_017.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_006.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_005.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41158770_009.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2018,
+            "fuel": "diesel",
+            "engineCc": 1968,
+            "sourcePrice": 14700000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41198413",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "diesel",
+            "engineCc": 1998,
+            "sourcePrice": 20300000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41198413",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture09/pic4119/41196607_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_010.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_006.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_021.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_005.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_002.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_007.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_015.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_009.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_019.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_008.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_017.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_024.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_016.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_018.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_020.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_022.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_023.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_004.jpg",
+            "https://ci.encar.com/carpicture09/pic4119/41196607_003.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "diesel",
+            "engineCc": 1998,
+            "sourcePrice": 20300000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41234942",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "petrol",
+            "engineCc": 3778,
+            "sourcePrice": 21800000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41234942",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture02/pic4122/41223591_001.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_003.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_009.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_023.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_024.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_005.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_007.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_001.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_016.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_017.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_020.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_004.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_008.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_022.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_006.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_019.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_018.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_010.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_021.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_002.jpg",
+            "https://ci.encar.com/carpicture02/pic4122/41223591_015.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "petrol",
+            "engineCc": 3778,
+            "sourcePrice": 21800000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41435566",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 2993,
+            "sourcePrice": 66900000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41435566",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture02/pic4142/41425885_001.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_001.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_005.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_003.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_010.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_020.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_006.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_023.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_002.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_019.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_016.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_004.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_009.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_018.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_017.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_007.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_015.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_021.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_024.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_022.jpg",
+            "https://ci.encar.com/carpicture02/pic4142/41425885_008.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 2993,
+            "sourcePrice": 66900000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "40736686",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "diesel",
+            "engineCc": 2151,
+            "sourcePrice": 24900000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40736686",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture03/pic4073/40736449_001.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_009.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_015.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_023.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_017.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_018.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_008.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_016.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_019.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_002.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_006.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_021.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_001.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_003.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_024.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_020.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_010.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_005.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_022.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_004.jpg",
+            "https://ci.encar.com/carpicture03/pic4073/40736449_007.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "diesel",
+            "engineCc": 2151,
+            "sourcePrice": 24900000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "40902785",
+          "yearAllowed": false,
+          "before": {
+            "year": 2018,
+            "fuel": "petrol",
+            "engineCc": 2997,
+            "sourcePrice": 58000000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/40902785",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture09/pic4089/40890043_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_003.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_004.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_001.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_007.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_017.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_021.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_023.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_016.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_020.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_010.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_015.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_009.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_019.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_022.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_002.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_024.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_005.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_006.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_008.jpg",
+            "https://ci.encar.com/carpicture09/pic4089/40890043_018.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2018,
+            "fuel": "petrol",
+            "engineCc": 2997,
+            "sourcePrice": 58000000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41090918",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 3470,
+            "sourcePrice": 37500000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41090918",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture08/pic4108/41089975_001.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_008.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_023.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_002.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_006.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_007.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_005.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_019.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_017.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_021.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_024.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_022.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_001.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_018.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_015.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_009.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_003.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_004.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_010.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_016.jpg",
+            "https://ci.encar.com/carpicture08/pic4108/41089975_020.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 3470,
+            "sourcePrice": 37500000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "39463383",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "petrol",
+            "engineCc": 1998,
+            "sourcePrice": 8090000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/39463383",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture05/pic3945/39454801_001.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_001.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_009.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_016.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_022.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_018.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_008.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_003.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_005.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_007.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_020.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_010.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_004.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_024.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_006.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_021.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_017.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_019.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_015.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_002.jpg",
+            "https://ci.encar.com/carpicture05/pic3945/39454801_023.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "petrol",
+            "engineCc": 1998,
+            "sourcePrice": 8090000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41157164",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "hybrid",
+            "engineCc": 1598,
+            "sourcePrice": 18500000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41157164",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture05/pic4115/41156643_001.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_005.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_017.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_007.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_015.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_002.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_018.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_009.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_006.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_021.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_019.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_022.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_020.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_003.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_016.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_004.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_024.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_001.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_010.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_023.jpg",
+            "https://ci.encar.com/carpicture05/pic4115/41156643_008.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "hybrid",
+            "engineCc": 1598,
+            "sourcePrice": 18500000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41162179",
+          "yearAllowed": false,
+          "before": {
+            "year": 2017,
+            "fuel": "diesel",
+            "engineCc": 1995,
+            "sourcePrice": 12300000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41162179",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture06/pic4116/41161188_001.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_001.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_002.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_006.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_017.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_019.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_023.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_003.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_022.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_005.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_015.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_018.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_016.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_024.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_009.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_007.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_020.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_004.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_008.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_010.jpg",
+            "https://ci.encar.com/carpicture06/pic4116/41161188_021.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2017,
+            "fuel": "diesel",
+            "engineCc": 1995,
+            "sourcePrice": 12300000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41217630",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 2999,
+            "sourcePrice": 54000000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41217630",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture01/pic4121/41215990_001.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_006.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_005.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_003.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_018.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_021.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_020.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_004.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_001.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_009.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_016.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_015.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_010.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_002.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_007.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_024.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_023.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_017.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_008.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_022.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41215990_019.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 2999,
+            "sourcePrice": 54000000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "41216750",
+          "yearAllowed": false,
+          "before": {
+            "year": 2015,
+            "fuel": "diesel",
+            "engineCc": 1998,
+            "sourcePrice": 4200000,
+            "sourceCurrency": "KRW"
+          },
+          "images": 21,
+          "sourceUrl": "https://fem.encar.com/cars/detail/41216750",
+          "galleryUrls": [
+            "https://ci.encar.com/carpicture/carpicture01/pic4121/41211943_001.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_023.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_016.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_006.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_001.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_002.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_007.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_019.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_005.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_015.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_018.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_022.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_009.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_017.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_004.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_010.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_008.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_020.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_021.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_003.jpg",
+            "https://ci.encar.com/carpicture01/pic4121/41211943_024.jpg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2015,
+            "fuel": "diesel",
+            "engineCc": 1998,
+            "sourcePrice": 4200000,
+            "sourceCurrency": "KRW"
+          },
+          "changedFields": []
+        }
+      ],
+      "pages": [
+        {
+          "cursor": "1",
+          "returnedRows": 20,
+          "diagnostics": null,
+          "health": {
+            "ok": true,
+            "message": "Yandex encar bridge page 1: 20",
+            "checkedAt": "2026-09-07T03:29:21.176Z",
+            "httpStatus": 200,
+            "contentType": "application/json"
+          }
+        }
+      ],
+      "sourceHealth": {
+        "ok": true,
+        "message": "Yandex encar bridge page 1: 20",
+        "checkedAt": "2026-09-07T03:29:21.176Z",
+        "httpStatus": 200,
+        "contentType": "application/json"
+      },
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 20,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 20,
+        "unexaminedRows": 0,
+        "examined": 20,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 12,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 20
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "samples": [
+        {
+          "sourceOfferId": "40610538",
+          "make": "현대",
+          "model": "그랜저 IG",
+          "year": 2017,
+          "engineCc": 2199,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "40672260",
+          "make": "벤츠",
+          "model": "GLE-클래스 W167",
+          "year": 2020,
+          "engineCc": 2925,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "40704487",
+          "make": "볼보",
+          "model": "XC40",
+          "year": 2021,
+          "engineCc": 1969,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "40802603",
+          "make": "쉐보레(GM대우)",
+          "model": "더 뉴 트랙스",
+          "year": 2018,
+          "engineCc": 1362,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "40994130",
+          "make": "기아",
+          "model": "스포티지 5세대",
+          "year": 2022,
+          "engineCc": 1998,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41125336",
+          "make": "제네시스",
+          "model": "GV80",
+          "year": 2021,
+          "engineCc": 2996,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41142769",
+          "make": "기아",
+          "model": "스포티지 5세대",
+          "year": 2022,
+          "engineCc": 1598,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41199973",
+          "make": "링컨",
+          "model": "네비게이터 4세대",
+          "year": 2020,
+          "engineCc": 3495,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41159793",
+          "make": "아우디",
+          "model": "뉴 A6",
+          "year": 2018,
+          "engineCc": 1968,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41198413",
+          "make": "기아",
+          "model": "스포티지 5세대",
+          "year": 2022,
+          "engineCc": 1998,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41234942",
+          "make": "현대",
+          "model": "팰리세이드",
+          "year": 2019,
+          "engineCc": 3778,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41435566",
+          "make": "BMW",
+          "model": "X3M (G01)",
+          "year": 2021,
+          "engineCc": 2993,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "40736686",
+          "make": "기아",
+          "model": "카니발 4세대",
+          "year": 2021,
+          "engineCc": 2151,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "40902785",
+          "make": "포르쉐",
+          "model": "마칸",
+          "year": 2018,
+          "engineCc": 2997,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41090918",
+          "make": "기아",
+          "model": "카니발 4세대",
+          "year": 2023,
+          "engineCc": 3470,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "39463383",
+          "make": "쉐보레(GM대우)",
+          "model": "더 뉴 말리부",
+          "year": 2019,
+          "engineCc": 1998,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41157164",
+          "make": "기아",
+          "model": "K8 하이브리드",
+          "year": 2022,
+          "engineCc": 1598,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41162179",
+          "make": "르노코리아(삼성)",
+          "model": "QM6",
+          "year": 2017,
+          "engineCc": 1995,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41217630",
+          "make": "벤츠",
+          "model": "E-클래스 W213",
+          "year": 2021,
+          "engineCc": 2999,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "41216750",
+          "make": "쉐보레(GM대우)",
+          "model": "올란도",
+          "year": 2015,
+          "engineCc": 1998,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "3d2306f9e8877ee8119d0d45222ef046af67026c",
+  "businessSettings": {
+    "korea": {
+      "rawActiveVersion": null,
+      "effectiveVersion": "market_korea_system_average_v2",
+      "profileSource": "runtime_average_defaults",
+      "provisional": true,
+      "effectiveHash": "c5d5dc8cd2f72c8e6f3443dd65af6fdf422d962ea2100fd89db35c2e7a6e6235",
+      "effectiveExpenses": {
+        "securityDepositRub": 110000,
+        "topAvtoCommissionRub": 90000,
+        "contractInitialPaymentRub": 200000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 70000,
+        "logisticsRub": 250000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

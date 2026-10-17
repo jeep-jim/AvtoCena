@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 3,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 4
+  },
+  "modelId": "wuling/zhengcheng",
+  "canonicalName": "Zhengcheng",
+  "generationIds": [
+    "wuling/zhengcheng/launch-2021"
+  ],
+  "variantIds": [
+    "wuling/zhengcheng/launch-2021/1-5t-6mt-comfort-window-van-2-seat",
+    "wuling/zhengcheng/launch-2021/1-5t-6mt-comfort-7-seat",
+    "wuling/zhengcheng/launch-2021/1-5t-6mt-luxury-7-seat",
+    "wuling/zhengcheng/launch-2021/1-5t-6mt-luxury-commercial-7-seat"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "exactManufacturerValuesOnly": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "unassignedSeatWeightChoicesNotCollapsed": true,
+    "ambiguousCommercialTopSpeedNotStored": true,
+    "horsepowerNotCalculated": true,
+    "automaticPublicationReady": false
+  }
+}

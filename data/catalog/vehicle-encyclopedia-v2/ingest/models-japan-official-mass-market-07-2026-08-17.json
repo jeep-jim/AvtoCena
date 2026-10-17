@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-daihatsu-altis-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Daihatsu Altis undergoes minor changes",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.com/news/2015/20151006-4.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-atrai-wagon-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Daihatsu partial redesign of Atrai Wagon",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.com/news/2017/20171113-2.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-be-go-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Daihatsu and Toyota launch new compact SUV",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.com/news/2006/06011701.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-mebius-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Daihatsu launches a new hybrid vehicle: MEBIUS",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.com/news/2013/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-mira-cocoa-move-conte-2015",
+          "type": "manufacturer",
+          "title": "Daihatsu Mira Cocoa and Move Conte special models",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.com/news/2015/20150408-2.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-mira-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Daihatsu production vehicles at the 39th Tokyo Motor Show",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.com/news/2009/09100701.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-az-offroad-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Mazda Introduces New AZ-Offroad",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://newsroom.mazda.com/en/publicity/release/1998/9810/981013_04e.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-mlit-passenger-587ba3e113a19902",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001282785.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001282785.xls",
+          "documentId": "001282785.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-87010f06c48df9a5",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001178241.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001178241.xls",
+          "documentId": "001178241.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-a12ae3d3e6910c9e",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001125036.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001125036.xls",
+          "documentId": "001125036.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-subaru-idling-stop-model-list-2026",
+          "type": "manufacturer",
+          "title": "Subaru idling-stop model list",
+          "publisher": "Subaru Corporation",
+          "url": "https://www.subaru.jp/dealerservice/idlingstop/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-comfort-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Toyota introduces Crown Comfort and Comfort for taxi use",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/detail/7912522",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-crown-sedan-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Toyota Crown Sedan enhances Japan luxury lineup",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/detail/7911245",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this model in the Japan priority window. Only explicitly stated fields are staged; generation and end-of-production boundaries are not inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "daihatsu/altis",
+          "brandId": "daihatsu",
+          "canonicalName": "Altis",
+          "slug": "altis",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "アルティス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "sedan"
+          ],
+          "powertrainKinds": [
+            "HEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-altis-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/atrai-wagon",
+          "brandId": "daihatsu",
+          "canonicalName": "Atrai Wagon",
+          "slug": "atrai-wagon",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "アトレーワゴン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "kei-car"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-atrai-wagon-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/be-go",
+          "brandId": "daihatsu",
+          "canonicalName": "Be-go",
+          "slug": "be-go",
+          "aliases": [
+            {
+              "value": "Bego",
+              "kind": "punctuation",
+              "safe": true,
+              "language": "en",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-be-go-japan-archive-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "ビーゴ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-60a79e46229b4485"
+              ]
+            }
+          ],
+          "productionFrom": "2006-01",
+          "productionTo": null,
+          "bodyTypes": [
+            "suv"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-be-go-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/mebius",
+          "brandId": "daihatsu",
+          "canonicalName": "Mebius",
+          "slug": "mebius",
+          "aliases": [
+            {
+              "value": "MEBIUS",
+              "kind": "punctuation",
+              "safe": true,
+              "language": "en",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-mebius-japan-archive-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "メビウス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-8ecb1b07ea639549"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [
+            "HEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-mebius-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/mira",
+          "brandId": "daihatsu",
+          "canonicalName": "Mira",
+          "slug": "mira",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ミラ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-mira-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/mira-cocoa",
+          "brandId": "daihatsu",
+          "canonicalName": "Mira Cocoa",
+          "slug": "mira-cocoa",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ミラ ココア",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-152b614a03568b0c",
+                "src-mlit-passenger-275e23d903d6ea87",
+                "src-mlit-passenger-3103c8bcb5f32eab",
+                "src-mlit-passenger-587ba3e113a19902",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "kei-car"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-mira-cocoa-move-conte-2015",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/move-conte",
+          "brandId": "daihatsu",
+          "canonicalName": "Move Conte",
+          "slug": "move-conte",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ムーヴ コンテ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "kei-car"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-mira-cocoa-move-conte-2015",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/az-offroad",
+          "brandId": "mazda",
+          "canonicalName": "AZ-Offroad",
+          "slug": "az-offroad",
+          "aliases": [
+            {
+              "value": "AZ-OFFROAD",
+              "kind": "punctuation",
+              "safe": true,
+              "language": "en",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mazda-az-offroad-japan-archive-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "AZ-オフロード",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-152b614a03568b0c",
+                "src-mlit-passenger-275e23d903d6ea87",
+                "src-mlit-passenger-3103c8bcb5f32eab",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972"
+              ]
+            }
+          ],
+          "productionFrom": "1998-10",
+          "productionTo": null,
+          "bodyTypes": [
+            "suv"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-az-offroad-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "subaru/dias-wagon",
+          "brandId": "subaru",
+          "canonicalName": "Dias Wagon",
+          "slug": "dias-wagon",
+          "aliases": [
+            {
+              "value": "Dias",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "en",
+              "market": "Japan",
+              "sourceIds": [
+                "src-subaru-idling-stop-model-list-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "ディアス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-f13d82dd215e8972"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-subaru-idling-stop-model-list-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2017, 2018, 2019.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "subaru/pleo",
+          "brandId": "subaru",
+          "canonicalName": "Pleo",
+          "slug": "pleo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "プレオ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-f13d82dd215e8972"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-subaru-idling-stop-model-list-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2017, 2018, 2019.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/comfort",
+          "brandId": "toyota",
+          "canonicalName": "Comfort",
+          "slug": "comfort",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "コンフォート",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-7695174a89800601",
+                "src-mlit-passenger-87010f06c48df9a5",
+                "src-mlit-passenger-a12ae3d3e6910c9e"
+              ]
+            }
+          ],
+          "productionFrom": "1995-12",
+          "productionTo": null,
+          "bodyTypes": [
+            "sedan"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-comfort-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/crown-sedan",
+          "brandId": "toyota",
+          "canonicalName": "Crown Sedan",
+          "slug": "crown-sedan",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "クラウンセダン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-7695174a89800601",
+                "src-mlit-passenger-87010f06c48df9a5",
+                "src-mlit-passenger-a12ae3d3e6910c9e"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "sedan"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-crown-sedan-japan-archive-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-18",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 8,
+    "replacedModels": 3,
+    "newGenerations": 3,
+    "newVariants": 17
+  },
+  "modelIds": [
+    "wuling/yangguang",
+    "wuling/bingo-s",
+    "wuling/bingo-pro"
+  ],
+  "generationIds": [
+    "wuling/yangguang/current-family-2025",
+    "wuling/bingo-s/launch-2025",
+    "wuling/bingo-pro/launch-2026"
+  ],
+  "variantIds": [
+    "wuling/yangguang/current-family-2025/300km-cargo-practical",
+    "wuling/yangguang/current-family-2025/300km-cargo-comfort",
+    "wuling/yangguang/current-family-2025/330km-passenger-comfort-6-seat",
+    "wuling/yangguang/current-family-2025/310km-cargo-catl-custom",
+    "wuling/yangguang/current-family-2025/340km-passenger-catl-custom-6-seat",
+    "wuling/yangguang/current-family-2025/440km-passenger-comfort-6-seat",
+    "wuling/yangguang/current-family-2025/440km-passenger-comfort-9-seat",
+    "wuling/yangguang/current-family-2025/440km-operating-9-seat",
+    "wuling/bingo-s/launch-2025/325km-exclusive",
+    "wuling/bingo-s/launch-2025/325km-flagship",
+    "wuling/bingo-s/launch-2025/430km-exclusive",
+    "wuling/bingo-s/launch-2025/430km-flagship",
+    "wuling/bingo-s/launch-2025/525km-flagship",
+    "wuling/bingo-pro/launch-2026/330km-exclusive",
+    "wuling/bingo-pro/launch-2026/330km-flagship",
+    "wuling/bingo-pro/launch-2026/403km-exclusive",
+    "wuling/bingo-pro/launch-2026/403km-flagship"
+  ],
+  "perModel": {
+    "wuling/yangguang": {
+      "variants": 8
+    },
+    "wuling/bingo-s": {
+      "variants": 5
+    },
+    "wuling/bingo-pro": {
+      "variants": 4
+    }
+  },
+  "policy": {
+    "groupedMassModelBatch": true,
+    "officialManufacturerSourcesOnly": true,
+    "EnglishCanonicalNames": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "ambiguousDuplicateAliasesMarkedUnsafe": true,
+    "unspecifiedBatteryBasisRejected": true,
+    "unstatedRangeCycleRejected": true,
+    "motorPeakNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

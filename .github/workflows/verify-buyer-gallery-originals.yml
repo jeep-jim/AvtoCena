@@ -1,0 +1,34 @@
+name: Verify buyer gallery originals
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/public/buyers/**'
+      - 'apps/web/components/home/HomePageClient.tsx'
+      - 'scripts/verify-buyer-gallery-originals.mjs'
+      - '.github/workflows/verify-buyer-gallery-originals.yml'
+  pull_request:
+    paths:
+      - 'apps/web/public/buyers/**'
+      - 'scripts/verify-buyer-gallery-originals.mjs'
+      - '.github/workflows/verify-buyer-gallery-originals.yml'
+permissions:
+  contents: read
+concurrency:
+  group: verify-buyer-gallery-originals-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Compare gallery with the owner's accepted upload
+        run: node scripts/verify-buyer-gallery-originals.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: buyer-gallery-originals-report
+          path: buyer-gallery-originals-report.json
+          retention-days: 30

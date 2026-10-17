@@ -1,0 +1,7231 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 32,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-529080e43abbeef1abd1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 62,
+      "commercialNames": [
+        "TOURNEO CUSTOM TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43e26692c3861fd2fc84",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 996,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 47,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54f30c21b7d2ae74a9fe",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 996,
+      "powerKw": 62,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e2c2d2e5576c0f6e22b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO COURIER ZETEC"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e832b51c11a597664a1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "Tourneo Courier"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 78,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca188ef8e8026ec31dd7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "TOURNEO COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 106,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-046bfd86a572df4d42fb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CONNECT TITANIUM",
+        "TOURNEO COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 259,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb7151b5707c142222ff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 62,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0cdf4966c0880fcd441",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "Tourneo Connect",
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 122,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cc8f792437d669921fe",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CUSTOM 320 TI EBLUE A"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01d2d6766717123c655f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CUSTOM 310 T-NIUM TDCI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ad18720184a652ec9bd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CUST 320TNIUM PHEV CVT",
+        "Tourneo Custom"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 108,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9471aecebb6c2808b359",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CUSTOM",
+        "Tourneo Custom",
+        "TOURNEO CUSTOM TITANIUM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 467,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b7be02736cccff9e8d0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 62,
+      "commercialNames": [
+        "TOURNEO CUSTOM",
+        "Tourneo Custom",
+        "TOURNEO CUSTOM TITANIUM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 523,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dab7f8ec164a32e63fb6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 63,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59ceb1672f6c9b6c917c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 93,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e0142a9b7a6bcd298b0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 73,
+      "commercialNames": [
+        "TOURNEO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9735fa21ef663d457aa4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e574a8a46c9510eae1f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 92,
+      "commercialNames": [
+        "Tourneo Custom",
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54daca60e650e69ca68f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 55,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a8276e11499a6b82081",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 75,
+      "commercialNames": [
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT / 2.0 / 75 N2 245 L FM6",
+        "TOURNEO CONNECT 2.0 75 H2 230 L FM6",
+        "TOURNEO CONNECT 2.0 75 N1 222 N FM6",
+        "TOURNEO CONNECT ACTIVE",
+        "TOURNEO CONNECT SPORT",
+        "TOURNEO CONNECT TIT.",
+        "TOURNEO CONNECT TITANIUM",
+        "TOURNEO CONNECT TREND",
+        "TOURNEO CONNECT TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 3791,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1d85a1ce1babdd99a90",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT / 2.0 / 90 H1 222 N FM6",
+        "TOURNEO CONNECT / 2.0 / 90 H1 225 N FD7",
+        "TOURNEO CONNECT / 2.0 / 90 H2 230 L FD7",
+        "TOURNEO CONNECT / 2.0 / 90 H2 230 L FM6",
+        "TOURNEO CONNECT / 2.0 / 90 N1 230 N AM6",
+        "TOURNEO CONNECT / 2.0 / 90 N1 235 N FM6",
+        "TOURNEO CONNECT / 2.0 / 90 N1 240 N FD7",
+        "TOURNEO CONNECT / 2.0 / 90 N2 245 L FD7",
+        "TOURNEO CONNECT / 2.0 / 90 N2 245 L FM6",
+        "TOURNEO CONNECT / 2.0 / TDCI 90 PP 300V A7",
+        "TOURNEO CONNECT / 2.0 / TDCI 90 PP 300V M6",
+        "TOURNEO CONNECT / 2.0 / TDCI 90 PP L2 300V A7",
+        "TOURNEO CONNECT / 20 / 90 H1 222 N FM6",
+        "TOURNEO CONNECT / 20 / 90 H2 230 L FD7",
+        "TOURNEO CONNECT / 20 / 90 H2 230 L FM6",
+        "TOURNEO CONNECT / 20 / 90 N1 225 N FD7",
+        "TOURNEO CONNECT / 20 / 90 N1 230 N AM6",
+        "TOURNEO CONNECT / 20 / 90 N1 235 N FM6",
+        "TOURNEO CONNECT / 20 / 90 N1 240 N FD7",
+        "TOURNEO CONNECT / 20 / 90 N2 235 L AM6",
+        "TOURNEO CONNECT / 20 / 90 N2 245 L FD7",
+        "TOURNEO CONNECT / 20 / 90 N2 245 L FM6",
+        "TOURNEO CONNECT / 20 / 90 N2 250 L AM6",
+        "TOURNEO CONNECT / 20 / TDCI 90 PP 300V A7",
+        "TOURNEO CONNECT / 20 / TDCI 90 PP 300V M6",
+        "TOURNEO CONNECT 2.0",
+        "TOURNEO CONNECT 2.0 90 N1 225 N FD7",
+        "TOURNEO CONNECT 2.0 90 N2 230 L FD7",
+        "TOURNEO CONNECT 2.0 90 N2 230 L FM6",
+        "TOURNEO CONNECT 2.0 90 N2 235 L AM6",
+        "TOURNEO CONNECT 2.0 90 N2 245 L FD7",
+        "TOURNEO CONNECT 2.0 90 N2 250 L AM6",
+        "TOURNEO CONNECT ACT.",
+        "TOURNEO CONNECT ACTIVE",
+        "TOURNEO CONNECT SPORT",
+        "TOURNEO CONNECT TIT",
+        "TOURNEO CONNECT TIT.",
+        "TOURNEO CONNECT TITANIUM",
+        "TOURNEO CONNECT TREND",
+        "TOURNEO CONNECT TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 60,
+      "registrations": 18718,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25bb4d2714077d87c884",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM / 2.0 / 110.3 320L M6",
+        "TOURNEO CUSTOM / 2.0 / 110.3 320S M6",
+        "TOURNEO CUSTOM / 2.0 / 110.3 MHEV 320L M6",
+        "TOURNEO CUSTOM / 2.0 / 110.3 MHEV 320L SP M6",
+        "TOURNEO CUSTOM / 2.0 / 110.3 MHEV 320S M6",
+        "TOURNEO CUSTOM / 2.0 / 110.3 MHEV 320S SP M6",
+        "TOURNEO CUSTOM / 20 / 1103 320L M6",
+        "TOURNEO CUSTOM / 20 / 1103 320S M6",
+        "TOURNEO CUSTOM / 20 / 1103 MHEV 320L M6",
+        "TOURNEO CUSTOM / 20 / 1103 MHEV 320L SP M6",
+        "TOURNEO CUSTOM / 20 / 1103 MHEV 320S M6",
+        "TOURNEO CUSTOM / 20 / 1103 MHEV 320S SP M6",
+        "TOURNEO CUSTOM ACTIVE",
+        "TOURNEO CUSTOM TITANIUM",
+        "TOURNEO CUSTOM TITANIUM X",
+        "TOURNEO CUSTOM TRANSIT CUSTOM",
+        "TOURNEO CUSTOM TREND",
+        "Tourneo Custom. Transit Custom",
+        "TOURNEO/TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 33,
+      "registrations": 7306,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6d476890ca86e03e6ea",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1996,
+      "powerKw": 136,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5aa89bf62c2c209c1106",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT / 1.5 / 84 H1 215 N FM6",
+        "TOURNEO CONNECT / 1.5 / 84 N1 215 N FM6",
+        "TOURNEO CONNECT / 1.5 / 84 N1 230 N FM6",
+        "TOURNEO CONNECT / 15 / 84 H1 215 N FM6",
+        "TOURNEO CONNECT / 15 / 84 H2 222 L FM6",
+        "TOURNEO CONNECT / 15 / 84 N1 215 N FM6",
+        "TOURNEO CONNECT / 15 / 84 N2 222 L FM6",
+        "TOURNEO CONNECT / 15 / 84 N2 235 L FM6",
+        "TOURNEO CONNECT 1.5 84 H1 215 N FM6",
+        "TOURNEO CONNECT 1.5 84 N1 230 N FM6",
+        "TOURNEO CONNECT ACTIVE",
+        "TOURNEO CONNECT AMF-BRUNS",
+        "TOURNEO CONNECT SPORT",
+        "TOURNEO CONNECT TITANIUM",
+        "TOURNEO CONNECT TREND",
+        "TOURNEO CONNECT TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 6143,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c19c963ac5d78c8e2605",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b6e37768427723ec69b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 136,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb619b6807e51920b7a0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1195,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d3eedac3b6233b57191",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df6e9d2e847021953b97",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 281,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-908cbbe53223a12b4904",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 13,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cbded05ac15d0afc7a7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 53,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed140f0970683f3c49b6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-427a774036b7b2b3c092",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b9ded8cc5c75191fc01",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 68,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68aeca913d7a1c4c5dc2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 69,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c4280232ee924bad2cb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16a544bcd195f8ed928e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 72,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77b17ba1728068a6fff3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 73,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24f60216f8fca9781021",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 77,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49ccb1b4322c23176779",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 80,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13a5bf4788bcf5488e5d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efbd84db97ead5fbaffc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6696b554d75f477a7706",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca0e86c142415ad19724",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 95,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-344fe4277eac3dce26ae",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d6e926ce96bc7fd64dc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e6bafb0d7df81780d7a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 114,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-172c0b1b14c6d879c2b8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 116,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f775faa8953bafbe083d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 117,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a64d5ea4bf87776b703",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df521dae7de9ce44270f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 121,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b0b1a994591d8f85006",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b492da29ab7fe10ed89",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 132,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5c1ca9650eef3f0379b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 143,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7934254e392195b10f36",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 243,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30479277fc95fd9dd1a0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 49,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eba3b3d6d05b712215b8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 62,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ab253cae33176fc4c75",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cb8c3dbc8115614a041",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7337a2916fbeda39537a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7b29fe4032fbd6b3eb4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 74,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e560028a588b9e22dc0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 80,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44ed8f84182e27b26597",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc53344e2c6497853fdc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d47bfdbad1471b589f8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d8833af1a70c1988e5f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 92,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a3f8658a017159c92ff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b11f295da8bc3790514",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e8e0c8f5281113cfb5f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4ec74c3b01f3a0a8c17",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5981712e35215424a94",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ededb0123f3d26858a55",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 180,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e106f740b52dcbc94d8b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 184,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-052233d605a245ef0513",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 210,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ef0daecef6496e70321",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f484f42ef1b7d3439b61",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 280,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecd2197c5be10d316a22",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 354,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91d127f59477d9d28c01",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 125,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO BUS ACTIVE",
+        "TOURNEO BUS SPORT",
+        "TOURNEO BUS TIT. X",
+        "TOURNEO BUS TITANIUM",
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM / 2.0 / 125 320L H1 A8",
+        "TOURNEO CUSTOM / 2.0 / 125 320S H1 A8",
+        "TOURNEO CUSTOM / 2.0 / 125 H1 320L A8",
+        "TOURNEO CUSTOM / 2.0 / 125 H1 320S A8",
+        "TOURNEO CUSTOM 2.0 125 H1 320L A8",
+        "TOURNEO CUSTOM 2.0 125 H1 320S A8",
+        "TOURNEO CUSTOM ACT.",
+        "TOURNEO CUSTOM ACTIVE",
+        "TOURNEO CUSTOM SPORT",
+        "TOURNEO CUSTOM TIT.",
+        "TOURNEO CUSTOM TIT. X",
+        "TOURNEO CUSTOM TITANIUM",
+        "TOURNEO CUSTOM TITANIUM X",
+        "TOURNEO CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 17225,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bbe94a14c8b5904f6d4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3100,
+      "powerKw": 75,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a159af6b0c0fe001e6f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3100,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7aef7886dcc50b2eaae2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM ACT.",
+        "TOURNEO CUSTOM ACTIVE",
+        "TOURNEO CUSTOM SPORT",
+        "TOURNEO CUSTOM TIT.",
+        "TOURNEO CUSTOM TIT. X",
+        "TOURNEO CUSTOM TITANIUM",
+        "TOURNEO CUSTOM TITANIUM X",
+        "TOURNEO CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 51,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b880f67b3b5370a3210b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOURNEO COURIER",
+        "TOURNEO COURIER / 1.0 / 91.9 A7",
+        "TOURNEO COURIER / 1.0 / 91.9 M6"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 7141,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fb1c44797a31d307110",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CO",
+        "TOURNEO COURIER",
+        "TOURNEO COURIER 1.0 91.9 A7",
+        "TOURNEO COURIER 1.0 91.9 M6",
+        "TOURNEO COURIER ACTIVE",
+        "TOURNEO COURIER TIT.",
+        "TOURNEO COURIER TITANIUM",
+        "TOURNEO COURIER TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 28471,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63c51aea3fe2b843748f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 175,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-390d7c3bb97184dae0e1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 11,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a588fa712639f7c2ec2f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 51,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5bd6510cceceaf5edff0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 53,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83ef64f335986a420127",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0f01f852c266f4661cc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-015c5c560660bdf3de47",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88ece2e8bea18f57f463",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43e0608f423d0e5454b1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 73,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39e6f9efff512abcc42d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 79,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-873641c2390be8321272",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-477d59585534882115be",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT / 1.5 / 85 N1 215 N FD7",
+        "TOURNEO CONNECT / 1.5 / 85 N2 235 L FD7",
+        "TOURNEO CONNECT / 1.5 / 85 N2 235 L FM6",
+        "TOURNEO CONNECT 1.5 85 H2 235 L FD7",
+        "TOURNEO CONNECT 1.5 85 N1 215 N FD7",
+        "TOURNEO CONNECT 1.5 85 N1 215 N FM6",
+        "TOURNEO CONNECT 1.5 85 N1 230 N FD7",
+        "TOURNEO CONNECT 1.5 85 N2 235 L FD7",
+        "TOURNEO CONNECT 1.5 85 N2 235 L FM6",
+        "TOURNEO CONNECT AMF-BRUNS",
+        "TOURNEO CONNECT TIT.",
+        "TOURNEO CONNECT TREND",
+        "TOURNEO CONNECT TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 2783,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eff2198604019728c28b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d96015814c0f19b3268",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd6e80ae86dc1b060682",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e82b39bb9d7a83a8c86",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e47b81cbd4b3c742c589",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35ac87847fe7178f5329",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d353d42cb57825b0fdff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 143,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c9be342829a04ee456a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 147,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb26380453790ab8a8b0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 210,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd7e4d01bb01c3aaf0de",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURNEO CONNECT",
+        "TOURNEO CONNECT 1.5 85 H2 250 L FD6",
+        "TOURNEO CONNECT 1.5 85 N1 242 N FD6",
+        "TOURNEO CONNECT 1.5 85 N2 250 L FD6",
+        "TOURNEO CONNECT 1.5 85 N2 256 L FD6",
+        "TOURNEO CONNECT 1.5 85 PHEV H2 250 L FD6",
+        "TOURNEO CONNECT ACT.",
+        "TOURNEO CONNECT TIT.",
+        "TOURNEO CONNECT TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 2307,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64462b023d0404d9daf1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "TOURNEO COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2ac1e767451e1238da0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ea0770d943a95171ffa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 100,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO BUS TITANIUM",
+        "TOURNEO BUS TREND",
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM / 2.0 / 100.1 H1 320L M6",
+        "TOURNEO CUSTOM / 2.0 / 100.1 H1 320S M6",
+        "TOURNEO CUSTOM 2.0 100.1 H1 320L M6",
+        "TOURNEO CUSTOM 2.0 100.1 H1 320S M6",
+        "TOURNEO CUSTOM TIT.",
+        "TOURNEO CUSTOM TITANIUM",
+        "TOURNEO CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 6359,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bae85c3caa64fa682a01",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO BUS ACTIVE",
+        "TOURNEO BUS TITANIUM",
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM / 2.0 / 100.3 H1 320L M6",
+        "TOURNEO CUSTOM / 2.0 / 110 320L H1 M6",
+        "TOURNEO CUSTOM 2.0 100.3 H1 320L M6",
+        "TOURNEO CUSTOM ACT.",
+        "TOURNEO CUSTOM ACTIVE",
+        "TOURNEO CUSTOM TIT.",
+        "TOURNEO CUSTOM TITANIUM",
+        "TOURNEO CUSTOM TRANSIT CUSTOM",
+        "TOURNEO CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 6375,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98b50fe0071e4c623ec5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2488,
+      "powerKw": 87,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d78f8d2cf181269a56a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURNEO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9492895113368f137146",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM BEV 160 H1 340L 1SA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 674,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12d5e8fb929367ac2922",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 87,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88434c8f2d83aaaa2d84",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 86,
+      "commercialNames": [
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM / 2.5 / PHEV 156 H1 340L",
+        "TOURNEO CUSTOM / 2.5 / PHEV 171 H1 340L"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1529,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eb9b98ac90b7cde49af",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 87,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO BUS ACTIVE",
+        "TOURNEO BUS SPORT",
+        "TOURNEO BUS TIT. X",
+        "TOURNEO BUS TITANIUM",
+        "TOURNEO BUS TREND",
+        "TOURNEO CUSTOM",
+        "TOURNEO CUSTOM 2.5 PHEV 171 H1 340L",
+        "TOURNEO CUSTOM 2.5 PHEV 171 H1 340S",
+        "TOURNEO CUSTOM ACT.",
+        "TOURNEO CUSTOM ACTIVE",
+        "TOURNEO CUSTOM LIMITED",
+        "TOURNEO CUSTOM SPORT",
+        "TOURNEO CUSTOM TIT.",
+        "TOURNEO CUSTOM TIT. X",
+        "TOURNEO CUSTOM TITANIUM",
+        "TOURNEO CUSTOM TITANIUM X",
+        "TOURNEO CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 5631,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b55a20511649b0794d5e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 111,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 150,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8801bad39237e22e4bc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 46,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c101be408f81ed01e233",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO",
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 456,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6e4be8e5d09e64e8902",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 58,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5377dfb95f9869f36c6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 74,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a34e43af7050517ab69",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 90,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bfa0b078133de770f8b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 92,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df3b15f739b0628812a9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURNEO CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89d98d818aadaf69d01a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO COURIER",
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07d4d58e0aacf15401bd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "TOURNEO COURIER",
+        "TOURNEO COURIER ACTIVE",
+        "TOURNEO COURIER TIT.",
+        "TOURNEO COURIER TITANIUM",
+        "TOURNEO COURIER TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 218,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9799470ba18585fd36bb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "TOURNEO CO",
+        "TOURNEO COURIER",
+        "TOURNEO COURIER BEV 100 1SA",
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 743,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca9cd3d48b0371fffe2a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 99,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-801bc5d3b367cd2fcc3c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 212,
+      "commercialNames": [
+        "TOURNEO COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a1c957d1627780f5aa4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 58,
+      "commercialNames": [
+        "TOURNEO COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-611b7ccc4a8ecd230591",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 115,
+      "commercialNames": [
+        "TOURNEO COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9dadc47fde82b807b7e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 80,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0245c76e45b18fc21d6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95dd90c56928845a1414",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a694a065d0c05d49dcb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Tourneo",
+      "modelId": "ford/tourneo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 173,
+      "commercialNames": [
+        "TOURNEO CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbc30857fda99895e3ce",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "Transit Courtier"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae3d393878f1c65db798",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT COURIER BSE KOMBI TDCI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae52c776a95a725b7a69",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 55,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT CONNECT",
+        "TRANSIT COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 748,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-211780bf54caa358513a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 73,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT CONNECT",
+        "TRANSIT CONNECT TREND",
+        "TRANSIT KASTEN TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2888,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cc2e3df774f89d15bc5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT CONNECT",
+        "TRANSIT COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1985,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb8ed37b0e66ad6ff936",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "TRANSIT",
+        "Transit Connect",
+        "TRANSIT CONNECT",
+        "TRANSIT CONNECT AMF-BRUNS",
+        "TRANSIT CONNECT TOURNEO CONNEC",
+        "TRANSIT CONNECT TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2618,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50ae07fdf6c72f33385e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT 110 T350M FWD",
+        "TRANSIT 140 T300M FWD",
+        "TRANSIT 350 LEADER ECOBLUE",
+        "TRANSIT CONNECT 230TRND TDCI A"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37f7ce08a5febdbce699",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 77,
+      "commercialNames": [
+        "TRANSIT",
+        "Transit",
+        "TRANSIT TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2415,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26eac6f980a0e7a65eed",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 79,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT KASTEN AMBIENTE",
+        "TRANSIT KASTEN TREND",
+        "TRANSIT VARIO TREND",
+        "TRANSIT VARIOBUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1038,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c358157634244a6f3a22",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT CUNSTOM",
+        "TRANSIT KOMBI TREND",
+        "TRANSIT TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 7877,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71f20351167ae743dab1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "FORD TRANSIT TOURNEO",
+        "TRANSIT",
+        "Transit",
+        "TRANSIT CUSTON",
+        "TRANSIT KASTEN TREND",
+        "TRANSIT KOMBI / 2.0 / EB MHEV 95,6 350 L2H2 HEA",
+        "TRANSIT KOMBI 2.0 EB MHEV 95.6 350L H2 HEA M6",
+        "TRANSIT KOMBI 20 EB 96 310 L2H2 HEA A6",
+        "TRANSIT KOMBI 20 EB 96 310 L3H2 HEA",
+        "TRANSIT KOMBI 20 EB 96 350 L2H2 HEA",
+        "TRANSIT KOMBI 20 EB 96 350 L2H2 HEA A6",
+        "TRANSIT KOMBI 20 EB MHEV 96 350 L2H2 HEA",
+        "TRANSIT KOMBI 20 EB MHEV 96 350 L3H2 HEA",
+        "TRANSIT KOMBI TREND",
+        "TRANSIT LIMITED",
+        "TRANSIT TRAIL",
+        "TRANSIT TREND",
+        "TRANSIT VARIOBUS LIMITED",
+        "TRANSIT VARIOBUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 11937,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3acca60308a6342b2f5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 125,
+      "commercialNames": [
+        "Transit",
+        "TRANSIT",
+        "TRANSIT KASTEN TREND",
+        "TRANSIT KOMBI / 2.0 / EB MHEV 125 350 L3H2 HEA",
+        "TRANSIT KOMBI 20 EB 125 330 L3H2 HEA",
+        "TRANSIT KOMBI 20 EB 125 350 L3H2 HEA",
+        "TRANSIT KOMBI 20 EB MHEV 125 350 L3H2 HEA",
+        "TRANSIT KOMBI TRAIL",
+        "TRANSIT KOMBI TREND",
+        "TRANSIT LIMITED",
+        "TRANSIT VARIOBUS TREND",
+        "TRANSIT/KRONOS 234 TL"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 2589,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d7c4a3af5fd46fe6017",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 136,
+      "commercialNames": [
+        "FORD TRANSIT TOURNEO",
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 674,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1202b50be3240fe8163",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b50f0f9ca93d2f883edd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74f42dc2c0e92246e126",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 996,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT CUST 340TREND PHEV CVT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d99353370c13d33bd86",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 996,
+      "powerKw": 61,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a507084474ad46fb693",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT 290 TREND ECOBLUE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3aef9b987fc32572520",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "TRANSIT COURIER",
+        "Transit Courtier"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-765ad540b463b956b2d6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 240,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71857bcf6ac2982f0d2b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT 120 L"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-616116cc0271e586685d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 61,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-612a35c825c6e7bf0934",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT KOMBI / 2.0 / 110.3 350L H2 HEA M6",
+        "TRANSIT KOMBI / 2.0 / 110.3 350L H2 M6",
+        "TRANSIT KOMBI / 20 / 1103 350L H2 HEA A6",
+        "TRANSIT KOMBI / 20 / 1103 350L H2 HEA M6",
+        "TRANSIT KOMBI / 20 / 1103 350L H2 M6",
+        "TRANSIT KOMBI / 20 / MHEV 1103 350L H2 HEA M6",
+        "TRANSIT KOMBI 2.0 EB MHEV 110,3 350L H2 HEA M6",
+        "TRANSIT KOMBI 2.0 EB MHEV 110.3 350L H2 HEA M6",
+        "TRANSIT TREND",
+        "TRANSIT/ITS SYSTEM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1665,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1df9f2523d6d5d9e4f0b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2198,
+      "powerKw": 63,
+      "commercialNames": [
+        "TRANSIT TOURNEO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23b1ba005681c935db6e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2496,
+      "powerKw": 50,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4afd0c2e1cb02aa83f1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "TRANSIT CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2da20410aeb47ed28483",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "TRANSIT CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1962239a307af9f617b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 53,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef00d494376cb98d2c43",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 55,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa54b2ab07b987bddfd0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc8f57a47bbcc4aa0a31",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de39751d3ba7f93b739e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d516747296f2e3a7bdaa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ee9d6b24a6980f38972",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 72,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c30836d951def82f42f1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8533957a855a5e97ef93",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 75,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ff38c8a5d3db52a769e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 80,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f1cb27e21d9ecdbc0be",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83153515710a62e1df1b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79fe2afb2b32913c7258",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da5e83aa761cd97d1a7b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 88,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-664b21fd99a6bbe53ae9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 90,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c5c4120d295a73470d9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c34b8fdc794491675209",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 92,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1079bd045133d26f09aa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a076b7eabe880eff83d5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 114,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36d02926ee7b12f11204",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 117,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be0e95bdcb6e8a100779",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-776178c7bef4b38d4a3b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 121,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-643d3b5e4e0b9fd6cdc6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 131,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2366d06fa60b321ce029",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-736e79b1a8f29088cd9d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b58a63384e5da7604b13",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 174,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-babbe4f1fc499d6e096e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 190,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c4e04bdbe766b7240c0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 253,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3cfdfe6172ec2538caf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 270,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08890e8c7b67af4a08df",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 110,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT KOMBI 2.0 110.3 350L H2 A8",
+        "TRANSIT KOMBI TREND",
+        "TRANSIT TREND",
+        "TRANSIT/TOURNEO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 559,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6541a338c9a8f583f4a6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 125,
+      "commercialNames": [
+        "TRANSIT KASTEN TRAIL",
+        "TRANSIT KASTEN TREND",
+        "TRANSIT/TOURNEO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca90d36b38e6ad46aa8b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 117,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-829147388d0307c2febf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2b8cce81dc44c1753c9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "e85",
+      "engineCc": null,
+      "powerKw": 202,
+      "commercialNames": [
+        "TRANSIT 150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5887e4e911b68e4983cf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1eef48d7fa4eb5792354",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 55,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f635983f6a36936c7630",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "TRANSIT COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b63a557c2a05f8de21b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TRANSIT CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb992b75f53a8a9ca177",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TRANSIT CONNECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d46c9dd561c6a65717e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 13,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a58ffbeb153b7d32fdf0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 100,
+      "commercialNames": [
+        "TRANSIT CUNSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3d787e60c5deb4d347a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT/TOURNEO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6dd1a6f0b02b3375ee3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT CUNSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f60d3c53292c848ba37",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 95,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 207,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fbf4fe114dbbed7c93c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 96,
+      "commercialNames": [
+        "TRANSIT",
+        "TRANSIT KOMBI",
+        "TRANSIT KOMBI TREND",
+        "TRANSIT TREND",
+        "TRANSIT TREND KOMBI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 695,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c726ec72255c61a59da1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 121,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c83975a11d7048f12139",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 198,
+      "commercialNames": [
+        "TRANSIT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65601c757a0921040c76",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit",
+      "modelId": "ford/transit",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT COURIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f62aff8497ce43b8cb3a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfb225cd1af5fe455d5e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM 310 TDCI",
+        "TRANSIT CUSTOM 320 BASE E-BLUE",
+        "TRANSIT CUSTOM 320 BASE TDCI",
+        "TRANSIT CUSTOM 320 NUGGET EBLU",
+        "TRANSIT CUSTOM 320 SPORT EBLUE",
+        "TRANSIT CUSTOM 320 TDCI",
+        "TRANSIT CUSTOM 320 TDCI AUTO",
+        "TRANSIT CUSTOM 320 TREND EBLUE",
+        "TRANSIT CUSTOM 320 TREND TDCI",
+        "TRANSIT CUSTOM 320LEADER EBLUE",
+        "TRANSIT CUSTOM 320NUGET EBLU A",
+        "TRANSIT CUSTOM 320SPRT EBLUE A",
+        "TRANSIT CUSTOM 320TREND TDCI A",
+        "TRANSIT CUSTOM 320TRND EBLUE A",
+        "TRANSIT CUSTOM 340 TREND EBLUE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 17,
+      "registrations": 886,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cff916d940a8ac55ae38",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 77,
+      "commercialNames": [
+        "TRANSIT CUSTOM",
+        "Transit Custom",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 77 H1L1 320 M6",
+        "TRANSIT CUSTOM 20 K MHEV 77 H1L1 320 M6",
+        "TRANSIT CUSTOM 20 K MHEV 79 H1L1 320 M6",
+        "TRANSIT CUSTOM BASIS",
+        "TRANSIT CUSTOM KOMBI",
+        "TRANSIT CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 8476,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5339b1b18753155ded14",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 79,
+      "commercialNames": [
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM BASIS",
+        "TRANSIT CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 4694,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37507eab0706d554f3bc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "FORD TRANSIT CUSTOM",
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM ACTIVE",
+        "TRANSIT CUSTOM BASIS",
+        "TRANSIT CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 11477,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9bcc820b321cadaf2b0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "FORD TRANSIT CUSTOM",
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM / 2.0 / K 95.6 320L M6",
+        "TRANSIT CUSTOM / 2.0 / K 95.6 320S M6",
+        "TRANSIT CUSTOM / 2.0 / K 96 H1L1 320",
+        "TRANSIT CUSTOM / 2.0 / K 96 H1L1 320 A6",
+        "TRANSIT CUSTOM / 2.0 / K 96 H1L1 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K 96 H1L2 320 A6",
+        "TRANSIT CUSTOM / 2.0 / K 96 H1L2 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K 96 H2L1 320 A6",
+        "TRANSIT CUSTOM / 20 / K 956 320L M6",
+        "TRANSIT CUSTOM / 20 / K 956 320S A6",
+        "TRANSIT CUSTOM / 20 / K 956 320S M6",
+        "TRANSIT CUSTOM 20 K 96 H1L1 320 A6",
+        "TRANSIT CUSTOM 20 K 96 H1L2 320",
+        "TRANSIT CUSTOM 20 K 96 H1L2 320 A6",
+        "TRANSIT CUSTOM BASIS",
+        "TRANSIT CUSTOM KOMBI",
+        "TRANSIT CUSTOM TRAIL",
+        "TRANSIT CUSTOM TREND",
+        "TRANSIT CUSTOM-FOCACCIA WAV",
+        "Transit Custom/Tourneo Custom"
+      ],
+      "sourceMakeNames": [
+        "FORD",
+        "Ford"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 28388,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df8f04735e830aac1331",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 125,
+      "commercialNames": [
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM / 2.0 / K 125 320L A6",
+        "TRANSIT CUSTOM / 2.0 / K 125 H1L1 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K 125 H1L2 320 A6",
+        "TRANSIT CUSTOM / 2.0 / K 125 H1L2 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K 125 H2L2 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 125 H1L1 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 125 H1L1 340 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 125 H1L2 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 125 H2L2 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 125 TH1L1 340 M6",
+        "TRANSIT CUSTOM / 20 / K 125 320L A6",
+        "TRANSIT CUSTOM 20 K 125 H1L1 320 A6",
+        "TRANSIT CUSTOM 20 K 125 H1L2 320",
+        "TRANSIT CUSTOM 20 K 125 H1L2 320 A6",
+        "TRANSIT CUSTOM 20 K MHEV 125 H1L1 320 M6",
+        "TRANSIT CUSTOM 20 K MHEV 125 H1L2 320 M6",
+        "TRANSIT CUSTOM KOMBI 20 EB H1L2 125 320",
+        "TRANSIT CUSTOM TREND",
+        "Transit Custom/Tourneo Custom"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 4734,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88bf5bbfff4c0ff7af42",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 136,
+      "commercialNames": [
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM / 2.0 / K 136 H1L2 340 A6",
+        "TRANSIT CUSTOM / 2.0 / K 136 TH1L2 340 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 136 H1L1 320 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 136 TH1L2 340 M6",
+        "TRANSIT CUSTOM / 2.0 / K MHEV 136 TH2L2 340 M6",
+        "TRANSIT CUSTOM 20 K 136 H1L2 340 M6",
+        "TRANSIT CUSTOM 20 K MHEV 136 H1L1 320 M6",
+        "TRANSIT CUSTOM SPORT",
+        "TRANSIT CUSTOM TREND",
+        "Transit Custom/Tourneo Custom"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 2807,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3fc3357ec7c438cf829",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 175,
+      "commercialNames": [
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM LIMITED"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51f354e17db991524400",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-331bfcf71b0056b7ef68",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT CUSTOM 300 BASE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3946cece5f5616429aff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT CUSTOM 300 LIMITED A"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-375dbf1992bcd258538f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5038,
+      "powerKw": null,
+      "commercialNames": [
+        "TRANSIT CUSTOM 310 LIMITED"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4eac0ce01ad8d45d16a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 61,
+      "commercialNames": [
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 94,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3df6f1c3fd7f50a0c1e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 62,
+      "commercialNames": [
+        "Transit Custom",
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 317,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02dd6c54db70c8218d28",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 63,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 122,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0787bb00910bb19056b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": null,
+      "commercialNames": [
+        "Transit Custom"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54820e1f4d32a67ca8cb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 996,
+      "powerKw": 92,
+      "commercialNames": [
+        "Transit Custom"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e677fd330cf04cc25739",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "TRANSIT CUSTOM",
+        "TRANSIT CUSTOM / 2.0 / K 110.3 320L M6",
+        "TRANSIT CUSTOM / 2.0 / K 110.3 340S M6",
+        "TRANSIT CUSTOM / 20 / K 1103 320L M6",
+        "TRANSIT CUSTOM / 20 / K 1103 340L M6",
+        "TRANSIT CUSTOM KOMBI",
+        "TRANSIT CUSTOM TRAIL",
+        "TRANSIT CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 2431,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00e0073574958afb2684",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 996,
+      "powerKw": 61,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccbd63e3623dbc0ce862",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 49,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cf01796a69c10c0b46e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 51,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1698fbc8f585bc84a091",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 55,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbb016eb03e5fbdee50c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2109b037fe534a88111",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 61,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b241f63e433573d6d3f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41116e02773ce3314e00",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 69,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77c76eab4ddb61c6a9ff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87712351dd22faf7481b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 72,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b5b062cd92cd51f67eb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 73,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-944c10ec9f08f2b9133b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 74,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6285fbef9ba408993157",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 80,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d84e2d7042976dc1756",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7921cf35bc3d3dd91c27",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7186c826174a3fe6ff1d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fc75ca3fd9d8eef0593",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 88,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36a9b49277a2757ee842",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 90,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dd50017986c43380bce",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66167a6e747959a07e22",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 92,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65f7874835108c99a1d2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Transit Custom",
+      "modelId": "ford/transit-custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "TRANSIT CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

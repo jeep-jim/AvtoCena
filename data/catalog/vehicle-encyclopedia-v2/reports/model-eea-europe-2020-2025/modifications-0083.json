@@ -1,0 +1,6985 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 83,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-3d97d30f260d3e35be38",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 105,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-564f60477931a4032db3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-284d3d3bc7aa93516249",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 60,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a4aaae1c1d0adf92623",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f85282991433696b23e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbfa166d536a3ff72e33",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6436cb831fd04fa1d070",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 235,
+      "commercialNames": [
+        "GOLF VARIANT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8de207a8f371a062ac7e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1364,
+      "powerKw": 110,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c3de6ddd2eb2d13344b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 60,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-289d7e3a292f61faa0f6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1400,
+      "powerKw": 150,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab2df6a950b3bf812d79",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 118,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 65,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8505283ebace58a8beb1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1595,
+      "powerKw": 75,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d60e4f98e67222a5391d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfce0d115a40bdc505d6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "GOLF",
+        "GOLF / 2.0 / TSI 4M AUT.",
+        "GOLF / 20 / TSI 4M AUT",
+        "GOLF / 20 / TSI AUT",
+        "GOLF VARIANT",
+        "GOLF VARIANT / 2.0 / TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 8341,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-686ad9389d486d97c29c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 506,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b4796006d67f56b23d6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 155,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f678a3c3b2f32656aba6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 162,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e687aadaa3dc5f942e6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "GOLF",
+        "GOLF / 2.0 / GTI AUT.",
+        "GOLF 2.0 GTI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 16893,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c540cba575cab5ce694",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 235,
+      "commercialNames": [
+        "GOLF",
+        "GOLF / 2.0 / TSI 4M AUT.",
+        "GOLF / 20 / TSI 4M AUT",
+        "GOLF GTE",
+        "GOLF VARIANT",
+        "GOLF VARIANT / 2.0 / TSI 4M AUT.",
+        "GOLF VARIANT / 20 / TSI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 15180,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86442497989f747e0ef7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 245,
+      "commercialNames": [
+        "GOLF",
+        "GOLF / 2.0 / TSI 4M AUT.",
+        "GOLF / 20 / TSI 4M AUT",
+        "GOLF 2.0 TSI 4M AUT.",
+        "GOLF R",
+        "GOLF VARIANT 2.0 TSI 4M AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 11698,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47e065d96faead7c75c9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 1404,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4716753712e338964dfe",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5adddc188bc05072640",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "GOLF",
+        "GOLF 1.5 TSI AUT.",
+        "GOLF GTE",
+        "GOLF STYLE EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 17507,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-112c10d3aa9971ba133a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-921df4e6ada6ae70d708",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1896,
+      "powerKw": 77,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36eadb1dc017b473545a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e7dc9dfd45eee93bd13",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 81,
+      "commercialNames": [
+        "GOLF SPORTSVAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07a41da5f23cb366b80c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 90,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35e8ff2a2b58ee0128bc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 92,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4245191a237191909ee6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 103,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd4848b1c268fefb5d69",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 169,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d28e1a66071037f52a5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 199,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8ad78dc46cc9195e9f9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 224,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcca2dc371078cb8b868",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "GOLF",
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 7951,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-824fedab2e685f18cf7e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 49,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad725d804a7caade7e7f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 51,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f2c1f283dd06f9cfd66",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 52,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-133dc91d29a3be82b584",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 53,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd01b83d7237b82356ad",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 59,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8153eb5abd87b089ea88",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 61,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d28205142b63b759634",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 62,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef0eeb58f98fe6925917",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-266c75a5520e8ca03a23",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 68,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd63be2b2a0b587ddc4c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 70,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5787e17c9b6e7f5d737",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 72,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-011478e95c4a4d5e9056",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 73,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1aaa9a9ba11daee8807d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 74,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1e155f37f7a7d1ecf40",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 77,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc5c943111c8a5dc8ba5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 80,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49664d2d5c61d5c0efef",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b05f7f2c5464d0b8bb35",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 91,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1371dc6393ec67f131b1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 92,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9087fc1c8652c7fa149f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 95,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b3061062a85abb24bf2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 96,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a808e5f76710ad79989",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 112,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbc3463d19b4e89c95bd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 114,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4db6345c2f45a83385d3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 116,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-911d8e7d7649cd3c7e16",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 117,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de948fe1746f2680105b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fc900fb6921fc07045c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 131,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10440e4e08c28404124a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 132,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53360bb1854b50650897",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 136,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-971823d322f23035e1a1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 137,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3942362abde064b6c2eb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcc42f8ef0ab4b20a1ef",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 141,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d33e39a3b354d5ce500f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 143,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e7179b81555562961b2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 145,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6729508cda4b494b07cc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 148,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99963387f52f7093f966",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d14777fd968d7ce54a6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 173,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eff4982ec838e482c41c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 174,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e229ca520366bdc7e001",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 210,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ec0ab587b19de8411ea",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 220,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b583027ddc29597eac3e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 228,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3754d85e12176a61dea3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 230,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8af737d15e0a70fe0c82",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 243,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c81a2da79c6a7e37fa4e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 250,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-077d3e810cd82ab0b446",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 270,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc707b7532d058425529",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b25268e03cf12e803c6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b4b2b755158a65a22a4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3284ad952cd09e596db5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-509cac828126f5b338a0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-124ccb2e51d5ee726dd2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 62,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e8d49bce9def2b81a29",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5349ef592d59d2120f8a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-058747dda5c7cb6553ee",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2986a6932e7b076ac59",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0fc5b8271a70335d99f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb88924ba7f1a828c1b4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f2ce9e5f40b921d91f6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b1cb18e21f624ed4c5f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d5075d6a16a4b1840c7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 77,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80bbab5e95a022778573",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-687ad2c4e95a3573cb42",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d93b72f01c19e69365db",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8452222935d8f0ef074",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a9e39cba1bbe94948d5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f15286caaaaf2e86cf82",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6326bd2a75ace5b92d8f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2b9d7a190eb72c43475",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea62cbe384130c4e0be2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-633e54cccc5c26c8eb18",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15c2813660e44214f321",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 114,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6547cceacd1fb2fe79f0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8e093d996700ebff78e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad9a36f9cd3b323ed653",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 120,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8efd10f80f4f27a3f4e5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 121,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4117e06405cc23ca711b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 125,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72ff3223e1d4e3f26b7b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 129,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88ed74484e9dcc8646ac",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9775e7573cf33e420945",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8f9207a198f96803044",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 133,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0855e047c85c4b1875f3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 135,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a6760d4b7e8d9d98019",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 136,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c81b542e67e30737d06",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 137,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-991b6f4d600f353e1f25",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 140,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3bf1cd940a832ac5659",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 141,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef1d2518708c56d94bbf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 145,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0f9b4a9b6f3ef6088e4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 147,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aaff6ab2d22eef359c4a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03ed7958f3f7adc3a27b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 170,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eae3f287450ab4716a73",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 173,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d52eacea2598c768778",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 180,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33f01173393c5bc31d81",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 184,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-026b9d476098d4e75ffe",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 195,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40a657bbde1bf18577df",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 206,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-325388b891ba0c6b8b83",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 210,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40c8a5f0caa368179f2a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 230,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6d212496116d6a16843",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 243,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-180ba1a1cdd82db5466c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 245,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6aaf6fde84fa3c205c8e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 250,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-898201da95ed1480664a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 270,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1b2d3fae5958e751389",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 280,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33fe9142ce8dd1c90776",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 320,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-202d79e71eb400df2dbc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 370,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a01f593a575292259e3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 49,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f61ab056813450532b39",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 51,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eaa304d9be8404738d8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 53,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86cb813d1ed1bc6d834e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba477e190124aed67cc2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 62,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c48631f0c912901c6c4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 100,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b8db2299378bf00a020",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a7569148efe10fb0877",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f47df418e55c5024aaff",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07459d93ae416bdb0ae9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62e76fb3c4727b8a0380",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 73,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5f2896a908bf4ec2af9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 74,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5bbfe8989760e5c5e9c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70bd84d7e15e7d9a553d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 80,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-351b4bffafc08074bd4e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-facc24d2d7e79e82688c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98ef08ebdf7a920d8fdd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 88,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5071c273abcc30209d8c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-698d4e255253ca688285",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a72ab4ccb375e79c76b6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 92,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-716eb6d2946d0a285af4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27656a8c0949b30abfe0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fd234179205fd56e581",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-606d64ae53af448ad26c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 116,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65154459ab910a78b353",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 117,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5a1c377d15680ab3252",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c3cf7cc1fcae41c8884",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 121,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a52bc4f1972d59f9aae",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 131,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5f18e858d53f40bd2d4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ec9b63ba74de7cc6ac4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 135,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-214b1dbd2ab8e8685c70",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 136,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b715a11503d213ce25a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 137,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5797d40d920ac5415a6b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 140,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3861e2f3a1184a68ecf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 141,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64003f05d5bf9f3633e9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 143,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94eca7c58f4b1ee9f571",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 145,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aaee3ccb53a76f0808c2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 147,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e6000dc94f31eef347c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 148,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26bbf3b6c444f5618ec7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 150,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-068c3a97834f19c91dad",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 155,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ef342fb1590656ac58f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 165,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00dbe4e27a55fd9b4a82",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 170,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-971d80df9e7ffcaeb9f2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 173,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e6df4543aee2b1b4e00",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 174,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2801b197cfb9b52f1129",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 195,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af1782107fd8cd0eddb9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 210,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2803de3d13b1e2561c14",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 225,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55150e670b1af0339f18",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 228,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eeddad6e603406ab2c9c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 243,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-314a0af264b73dba8385",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 250,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-643ef789da9e7608fa2a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 253,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ae2e905386c48c3586e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 270,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0ed390fc6b82d240088",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 280,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c19fe324bd960d05b10",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 294,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2cbc3d397519cdbe529",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 310,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cffbcbadd1bf2216eb8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 360,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6301f44c71dbd0c8976a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 430,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01e44143b493cfbcf771",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 441,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bc195281ebbaed29c1f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 460,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d2496bd0da8ce7c49f6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 478,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f4064de15155ff5dab9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 520,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9007feb1c92098c7d4b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ee5b42abd1efd2123c7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 67,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-923915d0797eb2626ce7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 84,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a790f662ae8ee927cc0b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 131,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71b8cbbcf93afaf9b97a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 170,
+      "commercialNames": [
+        "GOLF GTI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ce0fb45e6337fbd0a8b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 190,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb7398adf9a7ac9a807b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 243,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e3ee1f0b64b0b0bf9a8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 282,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79fcc2f5f6f8b2662a64",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 245,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-775a7198b533aa26da86",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 51,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc56bc59f6931f77496f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 61,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbb638e80adbba1a88d0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 67,
+      "commercialNames": [
+        "GOLF",
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2f3ca620b80b38e55d2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 68,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcd6b99e9669ac6de393",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 80,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-007e93c14f35e3862968",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 81,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fd3d8130d657a44f9f3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 91,
+      "commercialNames": [
+        "GOLF",
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2ebd363db07befd2af5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 95,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16ebc25f2c0f2e7c11ed",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 130,
+      "commercialNames": [
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81fccba81aef4cce83cd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 131,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bef35049716864061f7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 150,
+      "commercialNames": [
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cacf2b7362ff0aca561f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 228,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e35e2920a02aab78d13",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 460,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05f63a8f18229fa43363",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1398,
+      "powerKw": 110,
+      "commercialNames": [
+        "GOLF GTE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fb9b6bec29ecb180af5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 125,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c2ffe2384ed01e67a60",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1390,
+      "powerKw": 55,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-109ec999eff397a17292",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b04032efa9c583b2061",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 230,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0ac6e33cfa52ebe4997",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 240,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-789a6d2e6526f0613f34",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 294,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-968b58cdf5676fad2a2c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43d7caf696a04036134e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 655,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d5aa540702a5049056b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-936db318c8596256f8d1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 94,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de7bfba1cdb43ad9670c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1486,
+      "powerKw": 85,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b520477e046fb8eeb9b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 14,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8bfe9af37a1e5f6d431",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 124,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59686dd50d4f2b536ffd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45e25d3ee5cd2b494993",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbdc6b86258f97e088b8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 13,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72a41975bdce33460fdf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 58,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00b73311c887ce821da3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 239,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00cb65aaed3c88067ecd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1495,
+      "powerKw": 130,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c3266bd033ef7ec70fe",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05a917ff27b806d705f3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Golf",
+      "modelId": "volkswagen/golf",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 62,
+      "commercialNames": [
+        "GOLF"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0f31d145b729f07617e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Grand California",
+      "modelId": "volkswagen/grand-california",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "GRAND CALIFORNIA TDI AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b1459c40953ad9a4518",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Grand California",
+      "modelId": "volkswagen/grand-california",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 130,
+      "commercialNames": [
+        "GRAND CALIFORNIA"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0cf56640776471c600b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "ID BUZZ",
+        "ID BUZZ PRO 150 KW",
+        "ID. BUZZ",
+        "ID. BUZZ KR 140KW",
+        "ID. BUZZ KR 170KW",
+        "ID. BUZZ PRO 150 KW",
+        "ID. BUZZ PRO 150KW",
+        "ID. BUZZ PRO 150KW AD",
+        "ID. BUZZ PRO 205 KW",
+        "ID. BUZZ PURE 125KW",
+        "ID. BUZZ PURE KR 125 KW",
+        "ID. BUZZ PURE KR 125KW",
+        "ID. BUZZ PURE KR 140KW",
+        "ID.BUZZ",
+        "ID.BUZZ 150 KW",
+        "ID.BUZZ PRO 150 KW",
+        "ID.BUZZ PRO 150 KW / /",
+        "IDBUZZ",
+        "IDBUZZ PRO 150 KW",
+        "IDBUZZ PRO 150 KW AD"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 582,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9d735ab88b2fbc69e89",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 82,
+      "commercialNames": [
+        "ID BUZZ",
+        "ID. BUZZ PEOPLE PRO 210KW",
+        "ID. BUZZ PRO KR 210KW",
+        "IDBUZZ PEOPLE PRO 150 KW",
+        "IDBUZZ PEOPLE PRO 210 KW"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e7fbecd129450acae58",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "\"ID. BUZZ PRO 150 KW\"",
+        "ID BUZZ",
+        "ID BUZZ CARGO 150 KW",
+        "ID BUZZ PEOPLE",
+        "ID BUZZ PEOPLE PRO",
+        "ID BUZZ PRO",
+        "ID BUZZ PRO 150 KW",
+        "ID BUZZ PRO 150W",
+        "ID. BUZZ",
+        "ID. BUZZ CARGO 150 KW",
+        "ID. BUZZ P",
+        "ID. BUZZ PRO",
+        "ID. BUZZ PRO 150 KW",
+        "ID. BUZZ PRO 150KW",
+        "ID. BUZZ PRO LR 210 KW",
+        "ID.BUZZ PEOPLE",
+        "ID.BUZZ PRO 150 KW",
+        "ID.BUZZ PRO 150 KW / /",
+        "ID.BUZZ PRO 150KW",
+        "IDBUZZ",
+        "IDBUZZ PEOPLE",
+        "IDBUZZ PEOPLE PRO",
+        "IDBUZZ PRO",
+        "IDBUZZ PRO 150 KW"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 48,
+      "registrations": 19475,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2323f2285261d76af0d8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ID BUZZ PRO 150 KW",
+        "ID. BUZZ GTX KR 250 KW",
+        "ID. BUZZ GTX LR 250 KW",
+        "ID. BUZZ PRO 150 KW",
+        "ID. BUZZ PRO KR 210 KW",
+        "ID. BUZZ PRO LR 210 KW",
+        "ID.BUZZ GTX LR 250 KW",
+        "IDBUZZ PEOPLE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 179,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc38a849c90ef77df410",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "ID. BUZZ",
+        "ID. BUZZ GTX",
+        "ID. BUZZ GTX 250KW",
+        "ID. BUZZ GTX KR 250 KW",
+        "ID. BUZZ GTX KR 250KW",
+        "ID.BUZZ",
+        "IDBUZZ",
+        "IDBUZZ GTX",
+        "IDBUZZ GTX 250 KW"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4534d55351613a745cf2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 205,
+      "commercialNames": [
+        "ID.BUZZ",
+        "IDBUZZ PEOPLE PRO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9aad83c2771bd03b3b11",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Id. Buzz",
+      "modelId": "volkswagen/id-buzz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "\"ID. BUZZ PRO KR 210 KW\"",
+        "\"ID. BUZZ PRO LR 210 KW\"",
+        "ID BUZZ",
+        "ID BUZZ PRO KR 210KW",
+        "ID BUZZ PRO LR 210 KW",
+        "ID. BUZZ",
+        "ID. BUZZ PRO",
+        "ID. BUZZ PRO 210 KW",
+        "ID. BUZZ PRO KR",
+        "ID. BUZZ PRO KR 210 KW",
+        "ID. BUZZ PRO KR 210KW",
+        "ID. BUZZ PRO LR",
+        "ID. BUZZ PRO LR 210 KW",
+        "ID. BUZZ PRO LR 210 KW / /",
+        "ID. BUZZ PRO LR 210KW",
+        "ID.BUZZ",
+        "ID.BUZZ PEOPLE",
+        "ID.BUZZ PRO",
+        "ID.BUZZ PRO LR 210 KW",
+        "IDBUZZ",
+        "IDBUZZ PEOPLE",
+        "IDBUZZ PEOPLE LWB",
+        "IDBUZZ PRO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 14913,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

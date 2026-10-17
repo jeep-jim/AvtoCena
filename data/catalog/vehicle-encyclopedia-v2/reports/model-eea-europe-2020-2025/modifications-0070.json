@@ -1,0 +1,7376 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 70,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-16e51cbf30126d81b046",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Ibiza",
+      "modelId": "seat/ibiza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "IBIZA"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27a7960ee21c0ad323d6",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Ibiza",
+      "modelId": "seat/ibiza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 58,
+      "commercialNames": [
+        "IBIZA"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f978360e1a5e6c7520b0",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Ibiza",
+      "modelId": "seat/ibiza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "IBIZA"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c81d312f79efeeb6457d",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Ibiza",
+      "modelId": "seat/ibiza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1198,
+      "powerKw": 51,
+      "commercialNames": [
+        "IBIZA"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57b227297a9faf683c1a",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Ibiza",
+      "modelId": "seat/ibiza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "IBIZA"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2960fe2840ed58928b2d",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66cbcb6351fabf595c3a",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON SE DYNAMIC TDI",
+        "LEON SE TDI",
+        "LEON SE TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1446,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dcce15dd8b6d14b4acc",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 66,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5736aecfcd5be01ae0e8",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5597c1d0838f3622815b",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da1fbe217d0901cfacce",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "LEON",
+        "LEON 16 TDI",
+        "LEON SPORTOURER",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 16 TDI",
+        "LEON SPORTSTOURER",
+        "LEON ST",
+        "LEON X-PERIENCE"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 11937,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a13c0c87e26c1384eeeb",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON FR BLACK EDITION TDI",
+        "LEON FR BLACK EDITION TDI S-A",
+        "LEON FR SPORT TDI",
+        "LEON FR SPORT TDI S-A",
+        "LEON FR TDI",
+        "LEON FR TDI S-A",
+        "LEON SE DYNAMIC TDI",
+        "LEON SE DYNAMIC TDI S-A",
+        "LEON SE TDI",
+        "LEON SE TDI S-A",
+        "LEON STYLE",
+        "LEON XCELLENCE LUX TDI",
+        "LEON XCELLENCE LUX TDI S-A",
+        "LEON XCELLENCE TDI",
+        "LEON XCELLENCE TDI S-A",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 2093,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e43db822535eb8d03585",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "LEON",
+        "LEON / 2.0 / TDI",
+        "LEON 2.0 TDI",
+        "LEON 20 TDI",
+        "LEON SP",
+        "LEON SP / 2.0 / TDI",
+        "LEON SP 2.0 TDI",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 31510,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-deec2c79d0d8b1966555",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON",
+        "LEON / 2.0 / TDI",
+        "LEON / 2.0 / TDI AUT.",
+        "LEON 20 TDI",
+        "LEON 20 TDI AUT",
+        "LEON SP",
+        "LEON SP / 2.0 / TDI",
+        "LEON SP / 2.0 / TDI 4WD AUT.",
+        "LEON SP / 2.0 / TDI AUT.",
+        "LEON SP 2.0 TDI AUT.",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 20 TDI",
+        "LEON SPORTOURER ST 20 TDI AUT",
+        "LEON SPORTSTOURER",
+        "LEON SPORTSTOURER / 2.0 / TDI AUT.",
+        "LEON SPORTSTOURER 20 TDI AUT",
+        "LEON ST",
+        "LEON ST 20 TDI",
+        "LEON X-PERIENCE",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "Seat",
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 43,
+      "registrations": 69551,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-860f3b99bc8fb4dc2d2e",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 135,
+      "commercialNames": [
+        "LEON",
+        "LEON ST",
+        "LEON X-PERIENCE"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bb8d332c08a6959140f",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "NG",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "LEON",
+        "LEON SP",
+        "LEON SPORTOURER ST",
+        "LEON SPORTSTOURER",
+        "LEON ST",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 13885,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c73511a3de148e03635",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "LEON",
+        "LEON SPORTOURER ST",
+        "LEON SPORTSTOURER",
+        "LEON ST",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 3084,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5a3242e7fbd08c25466",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON FR ETSI S-A",
+        "LEON FR TSI EVO",
+        "LEON SE DYNAMIC TSI",
+        "LEON SE DYNAMIC TSI EVO",
+        "LEON SE TSI",
+        "LEON SE TSI EVO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 3326,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17674ca4e5f331cbc488",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 63,
+      "commercialNames": [
+        "LEON",
+        "LEON ST"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7af6d85ab516f534ab93",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "LEON",
+        "LEON / 1.0 / TSI",
+        "LEON 10 TSI",
+        "LEON SP / 1.0 / TSI",
+        "LEON SPORTSTOURER",
+        "LEON SPORTSTOURER / 1.0 / TSI",
+        "LEON SPORTSTOURER 10 TSI",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "Seat",
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 4922,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84784389aec64fbfec41",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "LEON",
+        "LEON / 1.0 / TSI",
+        "LEON / 1.0 / TSI AUT.",
+        "LEON 10 TSI",
+        "LEON SP",
+        "LEON SP / 1.0 / TSI",
+        "LEON SP / 1.0 / TSI AUT.",
+        "LEON SPORTSTOURER",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 36510,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e374d6f14948c24463d",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "LEON",
+        "LEON 10 TSI",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 10 TSI",
+        "LEON SPORTOURZE ST",
+        "LEON SPORTSTOURER",
+        "LEON ST",
+        "LEON ST 10 TSI"
+      ],
+      "sourceMakeNames": [
+        "Seat",
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 12823,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d8ac35b79cf699a2f67",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 80,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3f3806d6c30334bbd6c",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 103,
+      "commercialNames": [
+        "LEON SC"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e3adf99fb1283976545",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON",
+        "LEON SP E-HYBRID150",
+        "LEON SPORTSTOURER",
+        "SEAT LEON",
+        "SEAT LEON SP E-HYBRID150"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1321,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-114efe2f75cb389d37b0",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 150,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37f5b3cdddc75518861c",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON",
+        "LEON FIRST EDITION ETSI EVO SA",
+        "LEON FR BLACK ED TSI EVO S-A",
+        "LEON FR BLACK EDITION TSI EVO",
+        "LEON FR ETSI S-A",
+        "LEON FR SPORT TSI EVO",
+        "LEON FR SPORT TSI EVO S-A",
+        "LEON FR TSI EVO",
+        "LEON FR TSI EVO S-A",
+        "LEON SE DYNAMIC TSI",
+        "LEON SE DYNAMIC TSI EVO",
+        "LEON SE TSI EVO",
+        "LEON SP",
+        "LEON ST",
+        "LEON XCELLENCE LUX TSI EVO",
+        "LEON XCELLENCE LUX TSI EVO S-A",
+        "LEON XCELLENCE TSI EVO",
+        "LEON XCELLENCE TSI EVO S-A",
+        "SEAT LEON",
+        "SEAT LEON E-HYBRID150",
+        "SEAT LEON SP",
+        "SEAT LEON SP E-HYBRID150"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 17064,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e04f67942049eddcc3f",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "LEON",
+        "LEON / 1.5 / TSI",
+        "LEON 15 TSI",
+        "LEON SP",
+        "LEON SP / 1.5 / TSI",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 15 TSI",
+        "LEON SPORTSTOURER",
+        "LEON SPORTSTOURER / 1.5 / TSI",
+        "LEON SPORTSTOURER 15 TSI",
+        "LEON ST",
+        "LEON ST 15 TSI",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 36,
+      "registrations": 64591,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64cc27a096761cee14e1",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON",
+        "LEON / 1.5 / TSI",
+        "LEON / 1.5 / TSI AUT.",
+        "LEON 1.5 TSI",
+        "LEON 1.5 TSI AUT.",
+        "LEON 15 TSI",
+        "LEON 15 TSI AUT",
+        "LEON SP",
+        "LEON SP / 1.5 / TSI",
+        "LEON SP / 1.5 / TSI AUT.",
+        "LEON SP 1.5 TSI",
+        "LEON SP 1.5 TSI AUT.",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 15 TSI",
+        "LEON SPORTOURER ST 15 TSI AUT",
+        "LEON SPORTSTOUR",
+        "LEON SPORTSTOURER",
+        "LEON SPORTSTOURER / 1.5 / TSI",
+        "LEON SPORTSTOURER / 1.5 / TSI AUT.",
+        "LEON SPORTSTOURER 15 TSI",
+        "LEON SPORTSTOURER 15 TSI AUT",
+        "LEON SPORTSTOURER ST",
+        "LEON ST",
+        "LEON ST 15 TSI",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT",
+        "Seat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 53,
+      "registrations": 144788,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6147ca22e56e49305be",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON CUPRA 290 TSI S-A",
+        "LEON CUPRA 300 TSI 4DRIVE S-A",
+        "LEON CUPRA LUX 290 TSI S-A",
+        "LEON CUPRA LUX 300 TSI 4D SA",
+        "LEON CUPRA ST R TSI 4DRIVE S-A",
+        "LEON FR SPORT TSI S-A",
+        "LEON FR TSI S-A",
+        "LEON XCELLENCE TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 3890,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab1af55e83970969810a",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "LEON",
+        "LEON / 2.0 / TSI AUT.",
+        "LEON SP",
+        "LEON SP / 2.0 / TSI AUT.",
+        "LEON ST",
+        "LEON X-PERIENCE",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 1400,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5bbd6a609ded38978f66",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8698526856baba16a1b",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 213,
+      "commercialNames": [
+        "LEON",
+        "LEON 20 TSI AUT",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 20 TSI AUT",
+        "LEON SPORTSTOURER",
+        "LEON ST"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4502,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2075fc24f6a50494b08",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 221,
+      "commercialNames": [
+        "LEON",
+        "LEON SPORTOURER ST",
+        "LEON SPORTOURER ST 20 TSI 4WD AUT",
+        "LEON SPORTSTOURER",
+        "LEON ST",
+        "LEON ST 20 TSI 4WD AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 11119,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7b9387017b7645d08a5",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 228,
+      "commercialNames": [
+        "LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c79a13e08e6753180821",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "LEON FR FIRST EDITION PHEV S-A",
+        "LEON FR PHEV S-A",
+        "LEON FR SPORT PHEV S-A"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1736,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b412cc7dd1cf7ce1b371",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 55,
+      "commercialNames": [
+        "LEON",
+        "LEON SPORTSTOURER"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 130,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7f921c8215655c9bf1a",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON",
+        "LEON CUPRA",
+        "LEON E-HYBRID",
+        "LEON E-HYBRID / 1.4 / TSI AUT.",
+        "LEON E-HYBRID 150",
+        "LEON E-HYBRID150",
+        "LEON SP E-HYBRID 150",
+        "LEON SP E-HYBRID150",
+        "LEON SPORTSTOURER",
+        "LEON ST",
+        "SEAT LEON E - HYBRID 150",
+        "SEAT LEON E-HYBRID 150",
+        "SEAT LEON E-HYBRID150",
+        "SEAT LEON SP E - HYBRID 150",
+        "SEAT LEON SP E-HYBRID 150",
+        "SEAT LEON SP E-HYBRID150"
+      ],
+      "sourceMakeNames": [
+        "SEAT",
+        "Seat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 35149,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b0d75cd3e597398954e",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b99177781ce2e0d6707",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON",
+        "LEON E-HYBRID150",
+        "LEON SP E-HYBRID150",
+        "Leon Sportstourer",
+        "SEAT LEON",
+        "SEAT LEON E-HYBRID150",
+        "SEAT LEON SP",
+        "SEAT LEON SP E-HYBRID150"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 5940,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4edb82176cb87ddb52a",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "SEAT LEON E-HYBRID150"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a97fa7b48cceb1fc04d4",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 92,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e5944aed6310df6263b",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 96,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a0bcbe2678bc6ccd459",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1390,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEON",
+        "LEON E-HYBRID 150"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2242c2de688d4ae63138",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG",
+      "engineCc": 1498,
+      "powerKw": 11,
+      "commercialNames": [
+        "SEAT LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-953588b6cd18406ab145",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 206,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82540e72e79b70306c2b",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 1100,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d87ea944b2916d414012",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1395,
+      "powerKw": 90,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb3140aa40842fc20ae8",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1395,
+      "powerKw": 92,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9129dbf766b3c3cf4b7",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 132,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1fd65d8e577cc797ec3c",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9dc6a3a8400630ce348",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 11,
+      "commercialNames": [
+        "SEAT LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a16332783818cd4c013",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "LEON",
+        "LEON / 1.5 / TSI",
+        "LEON 1.5 TSI",
+        "LEON SP",
+        "LEON SP / 1.5 / TSI",
+        "LEON SP 1.5 TSI",
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 20627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2ad404507daef8b99f4",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-379e950b7b468bdc6fe1",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "SEAT LEON"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f5da4a63badd475949b",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Leon",
+      "modelId": "seat/leon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "SEAT LEON",
+        "SEAT LEON SP"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c60871c0ffbcebd833e",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Malaga",
+      "modelId": "seat/malaga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "MALAGA PREMIER"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b511d94f8e9285cd4ca4",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MII",
+        "MII EV"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12652,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-378ba9d85389b0f37281",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "MII"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 18134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba43dc3bb172a351bf9e",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 89,
+      "commercialNames": [
+        "MII"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd171e09e0e57b2a170c",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "MII"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5bca001cb32ad60a2c9c",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG",
+      "engineCc": 999,
+      "powerKw": 50,
+      "commercialNames": [
+        "MII"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 238,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f48a4eb99ee62dbf98bf",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "MII",
+        "MII 10"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 567,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf930ba2e120e1c021ca",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "MII",
+        "MII 10",
+        "MII 10 AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 92,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-924100a664c2ffccc135",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Mii",
+      "modelId": "seat/mii",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "MII EV"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-757913624b0fecfcb832",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "TARRACO",
+        "TARRACO FR SPORT TDI",
+        "TARRACO FR SPORT TDI 4DRIVE SA",
+        "TARRACO FR SPORT TDI S-A",
+        "TARRACO FR TDI",
+        "TARRACO FR TDI 4DRIVE S-A",
+        "TARRACO SE TDI",
+        "TARRACO SE TDI 4DRIVE S-A",
+        "TARRACO SE TECH TDI 4DRIVE SA",
+        "TARRACO SE TECHNOLOGY TDI",
+        "TARRACO X-LNC 1ST ED+TDI 4D SA",
+        "TARRACO XCELLENC LUX TDI 4D SA",
+        "TARRACO XCELLENCE FIRST ED TDI",
+        "TARRACO XCELLENCE LUX TDI",
+        "TARRACO XCELLENCE TDI",
+        "TARRACO XCELLENCE TDI 4D S-A",
+        "TARRACO XCELLENCE TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 17,
+      "registrations": 2119,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-132777260e3bb69c271d",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "SEAT TARRACO",
+        "TARRACO",
+        "TARRACO / 2.0 / TDI",
+        "TARRACO / 2.0 / TDI AUT.",
+        "TARRACO 2.0 TDI AUT.",
+        "TARRACO 20 TDI",
+        "TARRACO 20 TDI 4WD AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 33315,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02258152296a6379c1d3",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "TARRACO",
+        "TARRACO 20 TDI 4WD AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8358,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-473543bfefdd529ba394",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "SEAT TARRACO",
+        "TARRACO",
+        "TARRACO / 2.0 / TDI 4WD AUT.",
+        "TARRACO 20 TDI 4WD AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 13564,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8eef18e3daf808e634c",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2000,
+      "powerKw": 110,
+      "commercialNames": [
+        "SEAT TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-913b4f426cbb73adb0e2",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dbf7db144a56208e603",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 80,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8ed728e35f8a6bad205",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfe494f994005fc97f1f",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TARRACO",
+        "TARRACO FR SPORT TSI",
+        "TARRACO FR SPORT TSI EVO",
+        "TARRACO FR SPORT TSI EVO S-A",
+        "TARRACO FR SPORT TSI S-A",
+        "TARRACO FR TSI",
+        "TARRACO FR TSI EVO",
+        "TARRACO FR TSI S-A",
+        "TARRACO SE FIRST ED TSI EVO",
+        "TARRACO SE TECHNOLOGY TSI EVO",
+        "TARRACO SE TSI EVO",
+        "TARRACO SE TSI EVO S-A",
+        "TARRACO X-LNC 1ST ED TSI EVO",
+        "TARRACO XCELLENCE LUX TSI EVO",
+        "TARRACO XCELLENCE TSI EVO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 1838,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cef44b1cb41d0baf504b",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "SEAT TARRACO",
+        "TARRACO",
+        "TARRACO / 1.5 / TSI",
+        "TARRACO / 1.5 / TSI AUT.",
+        "TARRACO 1.5 TSI AUT.",
+        "TARRACO 15 TSI",
+        "TARRACO 15 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT",
+        "Seat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 24683,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d57ca7f4d7e1538a985",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "TARRACO FR SPORT TSI 4DRIVE SA",
+        "TARRACO FR TSI 4DRIVE S-A",
+        "TARRACO X-LNC 1ST ED+TSI 4D SA",
+        "TARRACO X-LNC LUX TSI 4D SA",
+        "TARRACO XCELLENCE TSI 4D SA"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 332,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a4312c25dff18dd3cac",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "SEAT TARRACO",
+        "TARRACO",
+        "TARRACO / 2.0 / TSI 4WD AUT.",
+        "TARRACO 20 TSI 4WD AUT"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 9985,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91d99b7732fe371b5240",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "TARRACO",
+        "TARRACO / 2.0 / TSI 4WD AUT."
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2429,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3a748e20faeeecf33b7",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "TARRACO",
+        "TARRACO / 1.4 / TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "SEAT",
+        "Seat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 15969,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a936fe5467af7d76c034",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a211f3906f4c2d78b6e",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d5ae1b36be6fa6a4a79",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 85,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0032083607d890350a2",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "ng",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b72c98b3ea2b39cb5bf3",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7848c08fa6b25aae2ee1",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Tarraco",
+      "modelId": "seat/tarraco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 13,
+      "commercialNames": [
+        "TARRACO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e38127d61fc7de900666",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Toledo",
+      "modelId": "seat/toledo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOLEDO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ca5dfae4e3147bf109f",
+      "brandId": "seat",
+      "brand": "SEAT",
+      "canonicalModel": "Toledo",
+      "modelId": "seat/toledo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOLEDO"
+      ],
+      "sourceMakeNames": [
+        "SEAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75f93ca6d66a175d140e",
+      "brandId": "secma",
+      "brand": "SECMA",
+      "canonicalModel": "Fun 1600",
+      "modelId": "secma/fun-1600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "FUN 1600",
+        "FUN 1600 BUGGY"
+      ],
+      "sourceMakeNames": [
+        "SECMA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 298,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d58e30f273abde7fa9b",
+      "brandId": "secma",
+      "brand": "SECMA",
+      "canonicalModel": "Fun 1600",
+      "modelId": "secma/fun-1600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 165,
+      "commercialNames": [
+        "FUN 1600 TURBO",
+        "FUN 1600 TURBO GT"
+      ],
+      "sourceMakeNames": [
+        "SECMA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 122,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bbfcac82a8ed828055f",
+      "brandId": "secma",
+      "brand": "SECMA",
+      "canonicalModel": "Fun 1600",
+      "modelId": "secma/fun-1600",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "FUN 1600",
+        "FUN 1600 BUGGY"
+      ],
+      "sourceMakeNames": [
+        "SECMA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7443033d9b86974538e5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "CITIGO",
+        "CITIGO E SE IV",
+        "CITIGO E SE L IV"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 4662,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c77ab5bf2e70d0a93468",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "Skoda",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 31210,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-087441d5071e5975f5c6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 64,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cc71a09d822fa67a2a7",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1b91f9b0f88a044668f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG",
+      "engineCc": 999,
+      "powerKw": 50,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc204f2093a74a7cc082",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 50,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cfaff9e5eb84a727b0f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "CITIGO COLOUR ED GREENTECH MPI"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e972e61617e7646dc854",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 614,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a72299398d6071d80eb6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Citigo",
+      "modelId": "skoda/citigo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "CITIGO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d27aa3fe2aca4134219f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "ELROQ 50",
+        "ELROQ 60"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 977,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e3572c1da7bb9ebcddd",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 89,
+      "commercialNames": [
+        "ELROQ",
+        "ELROQ 85"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2140,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc07637101614460d93a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ELROQ",
+        "ELROQ 50",
+        "ELROQ 60",
+        "ELROQ 85",
+        "ELROQ 85X",
+        "ELROQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1531,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cfc9c60955a6e0c746e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "ELROQ",
+        "ELROQ 85X",
+        "ELROQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 380,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b713ba0c5e87b763b494",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "ELROQ 85X",
+        "ELROQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 229,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c42081f1b866abec44e1",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "ELROQ 50",
+        "ELROQ 60",
+        "ELROQ 85"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9123,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-330ff641e3583c421a49",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "ELROQ",
+        "ELROQ 60"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 21574,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2f137c96bb35b2d6224",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "ELROQ",
+        "ELROQ 85",
+        "ELROQ 85X",
+        "SKODA ELROQ 85"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 40113,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6989a900029f8a077672",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Elroq",
+      "modelId": "skoda/elroq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "ELROQ 85",
+        "ELROQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4223,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e6eb2cbf151684b45ef",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 50",
+        "ENYAQ 60",
+        "ENYAQ 60 / /",
+        "ENYAQ 80",
+        "ENYAQ 80 / /",
+        "ENYAQ 80X",
+        "ENYAQ IV 50",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 33,
+      "registrations": 48627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8058844320f4e2fcdd85",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 60",
+        "ENYAQ 60 / /",
+        "ENYAQ 80X",
+        "ENYAQ COUPA IV",
+        "ENYAQ COUPE 60",
+        "ENYAQ COUPE IV",
+        "ENYAQ IV 60"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 34081,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7ed41263c0c7a84c9c0",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "ENYAQ",
+        "enyaq",
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ 85",
+        "ENYAQ COUPA IV",
+        "ENYAQ COUPE 60",
+        "ENYAQ COUPE IV",
+        "ENYAQ IV",
+        "ENYAQ IV 80",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 73598,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fd6bb1224a7d3dcab3b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ 85",
+        "ENYAQ 85X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 4730,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd212fe1be6043be5442",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 80X",
+        "ENYAQ 80X / /",
+        "ENYAQ 85X",
+        "ENYAQ RS",
+        "ENYAQ RS / /"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 11776,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-397d6af8662a26b5e649",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "ENYAQ 80X",
+        "ENYAQ 85X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 14325,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68d8d71c58776e231c9d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 60",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-843d8f1e4f3aeec6fc5a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 109,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 50",
+        "ENYAQ IV 50"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 5204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dd46a6237db1b5ab2be",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ COUPA IV",
+        "ENYAQ COUPE IV",
+        "ENYAQ IV",
+        "ENYAQ IV 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "Skoda",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 15417,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-263daaddc8e4cceab297",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 220,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 80",
+        "ENYAQ COUPA IV",
+        "ENYAQ COUPA RS",
+        "ENYAQ COUPA‰",
+        "ENYAQ COUPE IV",
+        "ENYAQ IV 80",
+        "ENYAQ RS",
+        "ENYAQ RS IV"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 7434,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0800669cd4fb0e996d3a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ENYAQ"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8a2849f65db8076476b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a8ba876485c25eda6ef",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 80",
+        "ENYAQ 85",
+        "ENYAQ 85 / /",
+        "ENYAQ 85X",
+        "ENYAQ 85X / /",
+        "ENYAQ COUPA 85",
+        "ENYAQ COUPE",
+        "ENYAQ COUPE 85",
+        "ENYAQ COUPE 85X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 81003,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa150d66b93eb8944bcd",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 49,
+      "commercialNames": [
+        "ENYAQ 60"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6e74cc73353c8eee069",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26aa16f59d662fc2b0a8",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cc1240b469053fbe71c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d610f2dd4d821fa8c71c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 59,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32a73904aae6920652e9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a98668e999c187fc239",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31c2c09c960338b3d800",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc90c2be11a1c836dfec",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41d0542631ebde676690",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1241daff46243bbcf5c1",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "ENYAQ 60"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8aad464717bb4767571",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-887124bcae75c899b64d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-300b14ee0087b0df6987",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8747973e4413352a86f3",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a05116a886e540d634e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 89,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 85",
+        "ENYAQ 85 / /"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 6630,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccd7adcdb91033c0fd73",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d88e77bf4f4bbb14b5fe",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab939881c078ae68f422",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-143c4a50c24d8455d9f2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0ec742cfb53d5ef8669",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf3f6da122951ef0627d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8413663dff7204f0385",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a73479d4a4c35ba8ddea",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "ENYAQ 80",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93d3f504a17bdafee54f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d46e158426ea1d034c38",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6aefa7934ae3d14bb69",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 133,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e420137ce3140345aca6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb1294411662cc6c35f4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "ENYAQ 60",
+        "ENYAQ 80",
+        "ENYAQ 80X",
+        "ENYAQ RS"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0a73f3d2ed30e468433",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f07507ea957a207fe78a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d31d7cb1c81ed6256ce",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 165,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-165cdf2acb756295493c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 173,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12801555740c7034fa20",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 228,
+      "commercialNames": [
+        "ENYAQ 80",
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f59cc3a337a06da89ca5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "ENYAQ",
+        "ENYAQ 60",
+        "ENYAQ COUPE RS",
+        "ENYAQ RS",
+        "ENYAQ RS / /"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 9462,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-064f58f2872d0b57b237",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 258,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b121c398550bf63d0d1c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 390,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8330fa2f1de3ff3ed93",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 460,
+      "commercialNames": [
+        "ENYAQ 80X"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-baff02d670eaada1adf0",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "ENYAQ 50"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 438,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-352692ccef1e62735429",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Enyaq",
+      "modelId": "skoda/enyaq",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 124,
+      "commercialNames": [
+        "ENYAQ 80"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f24429c60525ecae402",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Epiq",
+      "modelId": "skoda/epiq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "EPIQ"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55c7cfd241eb3657c61e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 413,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e60308ef31a7a96bcd5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56915dcaa0f3fb08df4d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "FABIA",
+        "FABIA COLOUR EDITION MPI",
+        "FABIA COLOUR EDITION TSI",
+        "FABIA COLOUR EDITION TSI S-A",
+        "FABIA EDITION",
+        "FABIA MONTE CARLO TSI",
+        "FABIA MONTE CARLO TSI S-A",
+        "FABIA S MPI",
+        "FABIA S TSI",
+        "FABIA S TSI S-A",
+        "FABIA SE DRIVE MPI",
+        "FABIA SE DRIVE TSI",
+        "FABIA SE DRIVE TSI S-A",
+        "FABIA SE L MPI",
+        "FABIA SE L TSI",
+        "FABIA SE L TSI S-A",
+        "FABIA SE MPI",
+        "FABIA SE TSI",
+        "FABIA SE TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 25306,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d34e1df18a6304b3252",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "FABIA",
+        "FABIA / 1.0 /",
+        "FABIA 10",
+        "FABIA 10 TSI"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 64018,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd1eff5eceb428aeaabb",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 804,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f765fb50d0d11691985",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 59,
+      "commercialNames": [
+        "FABIA",
+        "FABIA / 1.0 /",
+        "FABIA / 10 /",
+        "FABIA 1.0",
+        "SKODA FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 73590,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e2094d45b76b8fcde8d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FABIA",
+        "FABIA / 1.0 / TSI",
+        "FABIA / 1.0 / TSI AUT.",
+        "FABIA / 10 / TSI",
+        "FABIA / COMBI 1.0 / TSI",
+        "FABIA / COMBI 1.0 / TSI AUT.",
+        "FABIA / COMBI 10 / TSI",
+        "FABIA 1.0 TSI",
+        "FABIA 10 TSI",
+        "FABIA COMBI 10 TSI",
+        "SKODA FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "Skoda",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 341358,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61ca2748b6f4473c4bfc",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "FABIA",
+        "FABIA / 1.0 / TSI",
+        "FABIA / 1.0 / TSI AUT.",
+        "FABIA / 10 / TSI",
+        "FABIA / 10 / TSI AUT",
+        "FABIA 10 TSI",
+        "Fabia Combi",
+        "FABIA COMBI 10 TSI"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 89077,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30589c84c25448c43a5f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 81,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6f8adcb231e3cff4398",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1620,
+      "powerKw": 202,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c6f665782305ed61cbf",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1620,
+      "powerKw": 205,
+      "commercialNames": [
+        "FABIA",
+        "FABIA R5"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6aca6d0d8eda27c81a6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1620,
+      "powerKw": 205,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ba6d3279eb3233a59ad",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89fbe8c40a8c634ff6f9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 59,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f09dcace645fd793c0f6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 48,
+      "commercialNames": [
+        "FABIA",
+        "FABIA / 1.0 /",
+        "FABIA / 10 /"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 13716,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a408a0593c032ccc20cf",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1198,
+      "powerKw": 51,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb2e58acbc779d13c9d5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "FABIA",
+        "FABIA - NEWTRON",
+        "FABIA / 1.5 / TSI AUT.",
+        "FABIA / 15 / TSI AUT",
+        "FABIA 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 16027,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6482e88a1b7c45a0ec69",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80a4c3f1b5cafb1bb71f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d56df386ed7446a13246",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1199,
+      "powerKw": 55,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-069de9958c8b5d9e3457",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1620,
+      "powerKw": 205,
+      "commercialNames": [
+        "FABIA R5"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00cadf7c8df16a9708d9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c29839c1a72a61a97000",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3f9bf5571c40393711b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98f2f689b8bc7cbc6518",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9ee19253b3688588045",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a83e7ac7251998681bb6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 62,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e98be3fd77a7de566f3d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 185,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af5c3ab43da533e0749a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57858cd11a2bf35f91c4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c146a1f11f362e15140f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7a7668c703fc435c47c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c3683d4bc3e515b7b5d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7514f27a277c03ce4fc1",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca69b9a9591f0f5ed38d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 77,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a570625bc71d09c1c989",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 79,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71535e25cc04665f3ca4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bf1d71dde366d42fa1b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cb9985073c0be31f659",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "FABIA",
+        "FABIA / 1.0 / TSI",
+        "FABIA / 1.0 / TSI AUT.",
+        "FABIA 1.0 TSI",
+        "FABIA 1.0 TSI 130 LET",
+        "FABIA 1.0 TSI AUT.",
+        "FABIA MONTE CARLO"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 55377,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ff1e0fb446c65350e9b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a9d880222850978e410",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4176671a8b0127dba9e8",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fc1a005686f44c86864",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5b8880f5bd41e024aa7",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4ea5572f0834bf9bf01",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ce1353838cd493b2203",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 97,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cef095dbf7ee79718603",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 88,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cef6d143d33372a377c9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44b381844c9d915db3a5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 115,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2635edc50cc503d7d208",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aae59861118ca5638d80",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59f8ecbc5e2b6cf9ba7a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 120,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-055ea246a39cf37d5bac",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 121,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b49315fe21155240e18c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 124,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b703438653f2b311313",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57910a44870a3e034599",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa36841a42c3b0a555e7",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 133,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de42338aca5d8fb8674c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 135,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a798a6057ddb81a0f8b8",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 136,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1511b6e8cf897366974",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 137,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f0c8f25edb2c4e1d67a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 140,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2e0a08fb16e56347b96",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 141,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c7e9d529230944e5d7a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 142,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3342e63fe3cb12f89ea",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 143,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56cfdb34995e0674896e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 145,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d14213c2d4c8d5d7d61",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 147,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f3baacc41b8adf81da8",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 148,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77ccf4e1a189081ccb4d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67ee5ab49d291e802a43",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 155,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcd50a7a3ec64499adec",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 170,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b56ff3e7ef9bde49617",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 173,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c76fdb7ca3c1c4031dc",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 180,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f188cbeddb162ab65c3",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 185,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcbef0cdf68a6529ac53",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 186,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5b9de25eb196de22270",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 195,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea151c4b9e3f74f553a4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 210,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-152e2301590016a3bd9b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 221,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-061877589d505e89466a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 228,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b510bd79036999e24090",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 243,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec7a91f39aff8bb2f16b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 250,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06fcced01eb936dfe21d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 270,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cef78b19a9951c95877",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 280,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cff7f39a195cb7ae1cf",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 283,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-854e7ed44bc7a29d4330",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 294,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41509144307269eb775a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 320,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d6a2ed8bf5582be8375",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 331,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e64ca11c3eac90ad6e00",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 338,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f2b8df0e392785067a4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Fabia",
+      "modelId": "skoda/fabia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 360,
+      "commercialNames": [
+        "FABIA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

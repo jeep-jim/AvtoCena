@@ -1,0 +1,88 @@
+name: Regcloud — sample anonymous route load once
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-traffic-sample.json']
+permissions:
+  contents: read
+jobs:
+  sample:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Sample route categories for 45 seconds and restore nginx
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 60 9
+          target=/etc/nginx/conf.d/avtocena-prepare.conf
+          format=/etc/nginx/conf.d/avtocena-performance-format.conf
+          test ! -e "$format"
+          backup=$(mktemp)
+          cp -a "$target" "$backup"
+          sample=/var/log/nginx/avtocena-performance-once.log
+          restore() { cp -a "$backup" "$target"; rm -f "$format"; nginx -t && systemctl reload nginx; rm -f "$backup" "$sample"; }
+          trap restore EXIT
+          cat > "$format" <<'NGINX'
+          map $uri $ac_perf_route {
+            default other;
+            ~^/cars/offer/ offer;
+            ~^/api/catalog/photo/ photo;
+            ~^/api/catalog/ catalog_api;
+            ~^/cars catalog;
+            ~^/crm crm;
+            ~^/api/crm/ crm_api;
+            ~^/api/health health;
+            ~^/_next/ static;
+            ~^/sitemap sitemap;
+            / home;
+          }
+          map $http_user_agent $ac_perf_agent {
+            default other;
+            ~*(bot|crawler|spider) crawler;
+            ~*(Mozilla|Chrome|Safari) browser;
+          }
+          map "$http_purpose:$http_next_router_prefetch:$http_sec_purpose" $ac_perf_intent {
+            default request;
+            ~*(prefetch|:1:) prefetch;
+          }
+          log_format avtocena_perf '$ac_perf_route $ac_perf_agent $ac_perf_intent $status $request_time $upstream_response_time';
+          NGINX
+          python3 - "$target" "$sample" <<'PYTHON'
+          import pathlib,sys
+          p=pathlib.Path(sys.argv[1]);s=p.read_text();assert 'access_log off;' in s
+          p.write_text(s.replace('access_log off;',f'access_log {sys.argv[2]} avtocena_perf;'))
+          PYTHON
+          nginx -t
+          systemctl reload nginx
+          sleep 45
+          python3 - "$sample" <<'PYTHON'
+          import pathlib,sys,json,collections
+          groups=collections.defaultdict(list)
+          p=pathlib.Path(sys.argv[1])
+          for line in p.read_text().splitlines() if p.exists() else []:
+              parts=line.split()
+              if len(parts)<5:continue
+              groups[tuple(parts[:4])].append(float(parts[4]))
+          print('TRAFFIC_SAMPLE',json.dumps([dict(route=k[0],agent=k[1],intent=k[2],status=k[3],requests=len(v),meanSeconds=round(sum(v)/len(v),3),maxSeconds=max(v)) for k,v in sorted(groups.items())]))
+          PYTHON
+          restore
+          trap - EXIT
+          echo TRAFFIC_CONFIG_RESTORED
+          REMOTE

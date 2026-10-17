@@ -1,0 +1,20 @@
+name: Catalog refresh uae
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 20 * * *"
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-refresh.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-uae
+  cancel-in-progress: false
+jobs:
+  refresh:
+    uses: ./.github/workflows/catalog-market-refresh.yml
+    with:
+      market: uae
+    secrets: inherit

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 5,
+    "newModels": 5,
+    "officialManufacturerSources": 5,
+    "newMlitWorkbookSources": 0,
+    "totalNewSources": 5,
+    "modelsWithMlitIntersection": 1
+  },
+  "reviewed": [
+    {
+      "id": "toyota/premio",
+      "canonicalName": "Premio",
+      "officialSourceId": "src-toyota-premio-japan-archive-2026",
+      "exactSourceNames": [
+        "プレミオ"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "toyota/esquire",
+      "canonicalName": "Esquire",
+      "officialSourceId": "src-toyota-esquire-japan-archive-2026",
+      "exactSourceNames": [
+        "エスクァイア"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "toyota/crown-comfort",
+      "canonicalName": "Crown Comfort",
+      "officialSourceId": "src-toyota-crown-comfort-japan-archive-2026",
+      "exactSourceNames": [
+        "クラウンコンフォート"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "toyota/tank",
+      "canonicalName": "Tank",
+      "officialSourceId": "src-toyota-tank-japan-archive-2026",
+      "exactSourceNames": [
+        "タンク"
+      ],
+      "mlitCandidateIdentities": 0,
+      "mlitObservationYears": []
+    },
+    {
+      "id": "mazda/scrum",
+      "canonicalName": "Scrum",
+      "officialSourceId": "src-mazda-scrum-japan-archive-2026",
+      "exactSourceNames": [
+        "スクラム"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    }
+  ]
+}

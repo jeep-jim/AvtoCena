@@ -1,0 +1,23 @@
+name: Catalog safety · cancel stale verified restore
+run-name: Cancel stale catalog rollback · ${{ github.sha }}
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-cancel-stale-restore.yml
+
+permissions:
+  contents: read
+
+# Adding this one-shot workflow replaces the already queued automatic restore
+# in GitHub's shared writer group. It performs no storage writes itself.
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: true
+
+jobs:
+  cancel-stale-restore:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Stale automatic catalog rollback cancelled; recovery is manual-only."

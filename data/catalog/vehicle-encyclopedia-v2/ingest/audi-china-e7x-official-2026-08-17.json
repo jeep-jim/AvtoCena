@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-audi-china-e7x-production-2026",
+          "type": "manufacturer",
+          "title": "AUDI E7X: China-exclusive sister brand presents its first SUV",
+          "publisher": "AUDI AG",
+          "url": "https://www.audi.com/de/pressemitteilungen/audi-e7x-china-exklusive-schwestermarke-stellt-ihren-ersten-suv-vor-17100",
+          "documentId": null,
+          "documentDate": "2026-04-24",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "de",
+          "supportedFields": [
+            "canonicalName",
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "powerKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "zeroTo100Sec"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Latest official production release supersedes the 2025 preview dimensions. The two power/drive versions are explicit; 100/109 kWh battery sizes and four/five-seat layouts are not paired to a drivetrain and are therefore not assigned to these variants."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi-china/e7x",
+          "brandId": "audi-china",
+          "canonicalName": "E7X",
+          "slug": "e7x",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e7x-production-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "AUDI AG explicitly identifies E7X as the second production model of the China-only AUDI brand, an all-electric SUV entering the market in 2026."
+            }
+          ],
+          "researchNotes": [
+            "Review-only until the AUDI China identity, exact logo and canonical cover pass publication review.",
+            "The announced third AUDI model for 2027 is not added because no production model name is published."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi-china/e7x/adp",
+          "modelId": "audi-china/e7x",
+          "name": "ADP",
+          "aliases": [],
+          "platformCodes": [
+            "ADP"
+          ],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e7x-production-2026",
+              "fields": [
+                "name",
+                "platformCodes",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The production release explicitly identifies the E7X Advanced Digitized Platform and 2026 market introduction."
+            }
+          ],
+          "researchNotes": [
+            "Review-only first published E7X production specification; no later generation boundary is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi-china/e7x/adp/300-kw-rwd",
+          "modelId": "audi-china/e7x",
+          "generationId": "audi-china/e7x/adp",
+          "faceliftId": null,
+          "name": "300 kW RWD",
+          "aliases": [],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "powerKw": 300,
+          "lengthMm": 5049,
+          "widthMm": 1997,
+          "heightMm": 1710,
+          "wheelbaseMm": 3060,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e7x-production-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "powerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact final production-release values. quattro is normalized to AWD; no battery, range, seat count, charging power or 30-minute power is assigned because the release does not bind those values to this drivetrain row."
+            }
+          ],
+          "researchNotes": [
+            "Review-only exact manufacturer specification; production pricing remains disconnected.",
+            "The 2025 preview dimensions were not retained because the later April 2026 production release provides revised values."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "audi-china/e7x/adp/500-kw-quattro",
+          "modelId": "audi-china/e7x",
+          "generationId": "audi-china/e7x/adp",
+          "faceliftId": null,
+          "name": "500 kW quattro",
+          "aliases": [],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "AWD",
+          "powerKw": 500,
+          "lengthMm": 5049,
+          "widthMm": 1997,
+          "heightMm": 1710,
+          "wheelbaseMm": 3060,
+          "zeroTo100Sec": 3.9,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e7x-production-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "powerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "zeroTo100Sec"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact final production-release values. quattro is normalized to AWD; no battery, range, seat count, charging power or 30-minute power is assigned because the release does not bind those values to this drivetrain row."
+            }
+          ],
+          "researchNotes": [
+            "Review-only exact manufacturer specification; production pricing remains disconnected.",
+            "The 2025 preview dimensions were not retained because the later April 2026 production release provides revised values."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

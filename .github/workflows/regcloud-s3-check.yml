@@ -1,0 +1,50 @@
+name: Regcloud staging — check S3
+on:
+  workflow_dispatch:
+    inputs:
+      signing_region:
+        description: 'S3 signing region to test (us-east-1 is an initial compatibility candidate)'
+        required: true
+        default: us-east-1
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-staging
+  cancel-in-progress: false
+jobs:
+  check:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test actual application S3 adapter on synthetic objects only
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: ${{ inputs.signing_region }}
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/compatibility/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+        run: node --experimental-strip-types scripts/regcloud-s3-smoke.mjs
+      - name: Diagnose conditional writes after a failed compatibility check
+        if: failure()
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: ${{ inputs.signing_region }}
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/compatibility/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+        run: node --experimental-strip-types scripts/regcloud-s3-diagnose.mjs

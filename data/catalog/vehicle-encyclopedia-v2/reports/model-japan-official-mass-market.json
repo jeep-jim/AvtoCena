@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasRequired": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 20,
+    "newModels": 20,
+    "officialManufacturerSources": 20,
+    "newMlitWorkbookSources": 3,
+    "totalNewSources": 23,
+    "modelsWithMlitIntersection": 19
+  },
+  "reviewed": [
+    {
+      "id": "toyota/alphard",
+      "canonicalName": "Alphard",
+      "officialSourceId": "src-toyota-alphard-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 8
+    },
+    {
+      "id": "toyota/vellfire",
+      "canonicalName": "Vellfire",
+      "officialSourceId": "src-toyota-vellfire-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 4
+    },
+    {
+      "id": "toyota/roomy",
+      "canonicalName": "Roomy",
+      "officialSourceId": "src-toyota-roomy-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 12
+    },
+    {
+      "id": "toyota/noah",
+      "canonicalName": "Noah",
+      "officialSourceId": "src-toyota-noah-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 5
+    },
+    {
+      "id": "toyota/voxy",
+      "canonicalName": "Voxy",
+      "officialSourceId": "src-toyota-voxy-japan-current-2026",
+      "mlitCandidateIdentities": 0,
+      "mlitSourceIds": 0
+    },
+    {
+      "id": "toyota/crown",
+      "canonicalName": "Crown",
+      "officialSourceId": "src-toyota-crown-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 17
+    },
+    {
+      "id": "toyota/harrier",
+      "canonicalName": "Harrier",
+      "officialSourceId": "src-toyota-harrier-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 17
+    },
+    {
+      "id": "toyota/hiace",
+      "canonicalName": "HiAce",
+      "officialSourceId": "src-toyota-hiace-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 19
+    },
+    {
+      "id": "honda/step-wgn",
+      "canonicalName": "STEP WGN",
+      "officialSourceId": "src-honda-step-wgn-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 24
+    },
+    {
+      "id": "nissan/serena",
+      "canonicalName": "SERENA",
+      "officialSourceId": "src-nissan-serena-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 17
+    },
+    {
+      "id": "suzuki/wagon-r",
+      "canonicalName": "Wagon R",
+      "officialSourceId": "src-suzuki-wagon-r-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 20
+    },
+    {
+      "id": "suzuki/spacia",
+      "canonicalName": "Spacia",
+      "officialSourceId": "src-suzuki-spacia-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 19
+    },
+    {
+      "id": "suzuki/solio",
+      "canonicalName": "Solio",
+      "officialSourceId": "src-suzuki-solio-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 19
+    },
+    {
+      "id": "suzuki/hustler",
+      "canonicalName": "Hustler",
+      "officialSourceId": "src-suzuki-hustler-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 20
+    },
+    {
+      "id": "suzuki/alto",
+      "canonicalName": "Alto",
+      "officialSourceId": "src-suzuki-alto-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 19
+    },
+    {
+      "id": "suzuki/fronx",
+      "canonicalName": "Fronx",
+      "officialSourceId": "src-suzuki-fronx-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 6
+    },
+    {
+      "id": "daihatsu/rocky",
+      "canonicalName": "Rocky",
+      "officialSourceId": "src-daihatsu-rocky-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 16
+    },
+    {
+      "id": "daihatsu/taft",
+      "canonicalName": "Taft",
+      "officialSourceId": "src-daihatsu-taft-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 13
+    },
+    {
+      "id": "daihatsu/mira-e-s",
+      "canonicalName": "Mira e:S",
+      "officialSourceId": "src-daihatsu-mira-e-s-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 20
+    },
+    {
+      "id": "daihatsu/move",
+      "canonicalName": "Move",
+      "officialSourceId": "src-daihatsu-move-japan-current-2026",
+      "mlitCandidateIdentities": 1,
+      "mlitSourceIds": 17
+    }
+  ]
+}

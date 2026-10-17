@@ -1,0 +1,135 @@
+import type { VehicleOffer } from "./types";
+
+const HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|混合动力|油电混合|插电混动|插混|轻混|混动|双擎|增程|하이브리드/i;
+const SERIES_HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:reev|erev)\b|\be[ -]?power\b|последовательн\w*\s+гибрид|增程/i;
+const ELECTRIC_PRIMARY_RE = /battery[ -]?electric|pure[ -]?electric|\b(?:bev|ev)\b|электромоб|электро(?:кар|мобиль)|纯电|전기차|일렉트릭/i;
+// Lexus uses the numeric `h` badge as an identity-bound hybrid designation
+// (UX250h, NX350h, RX450h, ES300h, and so on). These badges occur in exact
+// marketplace titles even when a generic model field only says "UX".
+const LEXUS_HYBRID_BADGE_RE = /\b(?:ct|ux|nx|rx|es|gs|ls|lc)\s*\d{3}h(?:\+)?\b/i;
+const COMBUSTION_FUELS = new Set(["petrol", "diesel", "lpg", "gasoline", "benzin"]);
+const HYBRID_FUEL_RE = /\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|range[ -]?(?:extender|extended)|extended[ -]?range|гибрид|混合动力|油电混合|插电混动|插混|轻混|混动|双擎|增程|하이브리드|ハイブリッド/i;
+const ELECTRIC_FUEL_RE = /electric(?:ity)?|\belektro\b|\b(?:bev|ev)\b|электро|电动|電気|전기|일렉트릭|ელექტრო/i;
+const PETROL_FUEL_RE = /petrol|gasoline|benzin|essence|бензин|汽油|ガソリン|가솔린|휘발유|ბენზინ/i;
+const DIESEL_FUEL_RE = /diesel|дизел|柴油|軽油|디젤|경유|დიზელ/i;
+const GAS_FUEL_RE = /\b(?:lpg|lpi|cng|gpl)\b|газ/i;
+
+function positive(value: unknown) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+function text(value: unknown) { return String(value || "").trim().toLocaleLowerCase("en-US"); }
+export function canonicalSourceFuel(value: unknown) {
+  const v=text(value); if(!v) return undefined;
+  const electric = ELECTRIC_FUEL_RE.test(v);
+  const petrol = PETROL_FUEL_RE.test(v);
+  const diesel = DIESEL_FUEL_RE.test(v);
+  const gas = GAS_FUEL_RE.test(v);
+  // Marketplaces often spell a hybrid as two energy carriers instead of the
+  // word "hybrid" (for example Encar: "Gasoline + Electricity"). The
+  // combination is stronger evidence than either individual token.
+  if (HYBRID_FUEL_RE.test(v) || (electric && (petrol || diesel || gas))) return "hybrid";
+  if (diesel) return "diesel";
+  if (gas) return "lpg";
+  if (petrol) return "petrol";
+  if (electric) return "electric";
+  return undefined;
+}
+function transmission(value: unknown) {
+  const v=text(value); if(!v) return undefined;
+  if (/cvt|e-cvt|ecvt|xtronic|вариатор|无级变速/.test(v)) return "cvt";
+  if (/dct|dsg|pdk|dual clutch|робот|双离合/.test(v)) return "dct";
+  if (/manual|\bmt\b|механик|手动|수동/.test(v)) return "manual";
+  if (/automatic|automatik|\bauto\b|a\/t|\bat\b|автомат|手自一体|自动挡?|오토|자동/.test(v)) return "automatic";
+  return undefined;
+}
+function drive(value: unknown) {
+  const v=text(value); if(!v) return undefined;
+  if (/\b(?:awd|4wd|4x4)\b|all[ -]?wheel|four[ -]?wheel|полный привод|四驱|사륜|4륜/.test(v)) return "awd";
+  if (/\brwd\b|rear[ -]?wheel|задний привод|后驱|후륜/.test(v)) return "rwd";
+  if (/\bfwd\b|front[ -]?wheel|\b2wd\b|передний привод|前驱|两驱|전륜/.test(v)) return "fwd";
+  return undefined;
+}
+function body(value: unknown) {
+  const v=text(value); if(!v) return undefined;
+  if (/pickup|pick-up|пикап|皮卡/.test(v)) return "pickup";
+  if (/\b(?:truck|lorry)\b|грузов|货车|卡车|轻卡|微卡/.test(v)) return "truck";
+  if (/\b(?:bus|minibus|coach)\b|автобус|客车|巴士|轻客/.test(v)) return "bus";
+  if (/minivan|\bmpv\b|минивэн|미니밴/.test(v)) return "minivan";
+  if (/panel van|cargo van|commercial van|^van$|фургон/.test(v)) return "van";
+  if (/convertible|cabrio|roadster|кабриолет/.test(v)) return "convertible";
+  if (/coupe|coupé|купе|쿠페/.test(v)) return "coupe";
+  if (/wagon|estate|touring|универсал|旅行车|왜건/.test(v)) return "wagon";
+  if (/hatchback|hatch|fastback|хэтчбек|两厢|해치백/.test(v)) return "hatchback";
+  if (/sedan|saloon|limousine|седан|轿车|三厢|세단/.test(v)) return "sedan";
+  if (/off[ -]?road|внедорожник|越野车/.test(v)) return "offroad";
+  if (/suv|crossover|кроссовер/.test(v)) return "suv";
+  return undefined;
+}
+
+export function canonicalizeSemanticSourceFields<T extends Partial<VehicleOffer>>(input:T):T {
+  return {...input, fuel:canonicalSourceFuel(input.fuel), transmission:transmission(input.transmission), drive:drive(input.drive), bodyType:body(input.bodyType)} as T;
+}
+
+/**
+ * Resolve an explicitly named electrified powertrain only from identity-bound
+ * top-level fields. Raw marketplace payloads are deliberately excluded: they
+ * frequently contain menus and recommendations for unrelated vehicles.
+ */
+export function namedElectrifiedPowertrainKind(input: Partial<VehicleOffer>) {
+  const operational = input.operational as any;
+  // Published detail records can intentionally omit the raw source title while
+  // retaining the identity resolver's exact marketplace model. That field is
+  // identity-bound and uniqueness-checked, so it is safe evidence (unlike an
+  // arbitrary raw response containing menus or recommended vehicles).
+  const primary=[
+    input.make,
+    input.model,
+    input.generation,
+    input.trim,
+    input.engineType,
+    input.fuel,
+    input.sourceTitle,
+    operational?.sourceTitle,
+    operational?.encyclopediaIdentity?.rawModel,
+    operational?.encyclopediaIdentity?.rawTrim,
+  ].filter(Boolean).join(" ");
+  // Volvo Korea explicitly identifies XC40 B4 as a 48 V mild hybrid:
+  // https://www.volvocars.com/kr/cars/xc40/ . Generic petrol in a listing
+  // describes the fuel, and cannot override this exact model/trim badge.
+  const volvoXc40B4 = /^(?:volvo|볼보)$/i.test(String(input.make || "").trim())
+    && /^XC40(?:\b|\s)/i.test(String(input.model || "").trim())
+    && Number(input.year) >= 2020
+    && /\bB4\b/i.test([input.trim, input.sourceTitle, operational?.sourceTitle, operational?.encyclopediaIdentity?.rawTrim].filter(Boolean).join(" "));
+  if (volvoXc40B4) return "other_hybrid" as const;
+  if (SERIES_HYBRID_PRIMARY_RE.test(primary)) return "series_hybrid" as const;
+  if (HYBRID_PRIMARY_RE.test(primary) || LEXUS_HYBRID_BADGE_RE.test(primary)) return "other_hybrid" as const;
+  if (ELECTRIC_PRIMARY_RE.test(primary)) return "electric" as const;
+  return undefined;
+}
+
+export function preferExplicitCombustionPowertrain<T extends Partial<VehicleOffer>>(input: T): T {
+  const canonical=canonicalizeSemanticSourceFields(input);
+  const namedKind=namedElectrifiedPowertrainKind(canonical);
+  if (namedKind) {
+    const correctedFromCombustion=canonical.powertrainKind === "combustion";
+    const raw=typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {};
+    return {
+      ...canonical,
+      fuel:namedKind === "electric" ? "electric" : "hybrid",
+      powertrainKind:namedKind,
+      engineCc:namedKind === "electric" ? undefined : canonical.engineCc,
+      icePowerKw:correctedFromCombustion || namedKind === "electric" ? undefined : canonical.icePowerKw,
+      utilizationPowerKw:correctedFromCombustion ? undefined : canonical.utilizationPowerKw,
+      operational:{...canonical.operational,raw:{...raw,powertrainSafety:{correctedTo:namedKind,reason:"identity_bound_electrified_name"}}},
+    } as T;
+  }
+  const canonicalFuel=String(canonical.fuel||"");
+  const engineCc=positive(canonical.engineCc);
+  if ((canonical.powertrainKind === "electric" || canonicalFuel === "electric") && engineCc) {
+    return {...canonical,engineCc:undefined,icePowerKw:undefined,operational:{...canonical.operational,raw:{...(typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {}),powertrainSafety:{correctedTo:"electric",reason:"electric_powertrain_cannot_have_engine_displacement",removedEngineCc:engineCc}}}} as T;
+  }
+  if (!engineCc || !COMBUSTION_FUELS.has(canonicalFuel)) return canonical;
+  const powerKw=positive(canonical.icePowerKw)||positive(canonical.powerKw)||(positive(canonical.powerHp)?Math.round((Number(canonical.powerHp)/1.35962)*100)/100:undefined);
+  return {...canonical,powertrainKind:"combustion",icePowerKw:positive(canonical.icePowerKw)||powerKw,power30MinKw:undefined,power30MinKwByMotor:undefined,utilizationPowerKw:powerKw,operational:{...canonical.operational,raw:{...(typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {}),powertrainSafety:{correctedTo:"combustion",reason:"explicit_combustion_fuel_and_engine"}}}} as T;
+}

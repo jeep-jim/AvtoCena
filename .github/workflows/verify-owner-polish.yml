@@ -1,0 +1,40 @@
+name: Verify owner UI polish
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/**'
+      - 'tests/browser/owner-polish*'
+      - 'tests/browser/assistant-layout.mjs'
+      - 'tests/browser/assistant-extension.mjs'
+      - 'apps/web/public/assistant-connector/**'
+      - '.github/workflows/verify-owner-polish.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/owner-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Test guest and employee controls at 320, 390 and 1440 pixels
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/owner-browser/node_modules/playwright/index.mjs
+        run: |
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-polish.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/assistant-layout.mjs
+          node "$RUNNER_TEMP/owner-browser/node_modules/playwright/cli.js" install chromium --no-shell
+          node tests/browser/assistant-extension.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-polish
+          path: |
+            artifacts/owner-polish
+            artifacts/assistant-layout
+          retention-days: 7

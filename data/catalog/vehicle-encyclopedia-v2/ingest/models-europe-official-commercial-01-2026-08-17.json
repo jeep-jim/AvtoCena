@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-citroen-jumpy-jumper-range-2023",
+          "type": "manufacturer",
+          "title": "Citroën official commercial range: new Berlingo Van, Jumpy and Jumper",
+          "publisher": "Stellantis N.V.",
+          "url": "https://www.media.stellantis.com/es-es/citroen/press/nuevos-berlingo-van-jumpy-y-jumper-citroen-introduce-su-gama-de-vehiculos-comerciales-en-una-nueva-era",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "es",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-fiat-ducato-official-2024",
+          "type": "manufacturer",
+          "title": "Fiat Professional official archive: Ducato 2024",
+          "publisher": "Stellantis N.V.",
+          "url": "https://www.media.stellantis.com/uk-en/fiat-professional/press/fiat-professional-ducato-wins-large-van-of-the-year-2024-at-the-company-car-and-van-awards",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-fiat-talento-my2020",
+          "type": "manufacturer",
+          "title": "Fiat Professional official archive: Talento MY2020",
+          "publisher": "Stellantis N.V.",
+          "url": "https://www.fiatprofessional.com/fiat-pro-world/new-talento-my-2020",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-peugeot-boxer-official-2026",
+          "type": "manufacturer",
+          "title": "Peugeot official UK model page: Boxer and E-Boxer",
+          "publisher": "Peugeot UK Limited",
+          "url": "https://www.peugeot.co.uk/models/peugeot-boxer.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-peugeot-partner-official-2025",
+          "type": "manufacturer",
+          "title": "Peugeot official archive: Partner and E-Partner",
+          "publisher": "Stellantis N.V.",
+          "url": "https://www.media.stellantis.com/uk-en/peugeot/press/peugeot-announces-new-professional-plus-trim-level-for-partner-e-partner",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-vauxhall-vivaro-third-generation-2021",
+          "type": "manufacturer",
+          "title": "Vauxhall official archive: Vivaro twentieth anniversary",
+          "publisher": "Vauxhall Motors Limited",
+          "url": "https://www.vauxhall.co.uk/business/fleet/news/2021/vauxhall-vivaro-celebrates-20-birthday.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-volkswagen-transporter-kombi-official-2026",
+          "type": "manufacturer",
+          "title": "Volkswagen Commercial Vehicles official model page: Transporter Kombi",
+          "publisher": "Volkswagen Commercial Vehicles UK",
+          "url": "https://www.volkswagen-vans.co.uk/en/new-vehicles/transporter-kombi.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer source identifies the marketed model family and its van/combi range. Exact generation and production boundaries are not inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "citroen/jumper",
+          "brandId": "citroen",
+          "canonicalName": "Jumper",
+          "slug": "jumper",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "New Jumper",
+              "kind": "market_name",
+              "safe": true,
+              "language": "es",
+              "market": "Europe",
+              "sourceIds": [
+                "src-citroen-jumpy-jumper-range-2023"
+              ]
+            },
+            {
+              "value": "ë-Jumper",
+              "kind": "market_name",
+              "safe": true,
+              "language": "es",
+              "market": "Europe",
+              "sourceIds": [
+                "src-citroen-jumpy-jumper-range-2023"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-citroen-jumpy-jumper-range-2023",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "citroen/jumpy",
+          "brandId": "citroen",
+          "canonicalName": "Jumpy",
+          "slug": "jumpy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "New Jumpy",
+              "kind": "market_name",
+              "safe": true,
+              "language": "es",
+              "market": "Europe",
+              "sourceIds": [
+                "src-citroen-jumpy-jumper-range-2023"
+              ]
+            },
+            {
+              "value": "ë-Jumpy",
+              "kind": "market_name",
+              "safe": true,
+              "language": "es",
+              "market": "Europe",
+              "sourceIds": [
+                "src-citroen-jumpy-jumper-range-2023"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-citroen-jumpy-jumper-range-2023",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "fiat/ducato",
+          "brandId": "fiat",
+          "canonicalName": "Ducato",
+          "slug": "ducato",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "FIAT Professional Ducato",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-fiat-ducato-official-2024"
+              ]
+            },
+            {
+              "value": "New Ducato",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-fiat-ducato-official-2024"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-fiat-ducato-official-2024",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "fiat/talento",
+          "brandId": "fiat",
+          "canonicalName": "Talento",
+          "slug": "talento",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Talento MY2020",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-fiat-talento-my2020"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-fiat-talento-my2020",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "opel/vivaro",
+          "brandId": "opel",
+          "canonicalName": "Vivaro",
+          "slug": "vivaro",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Vivaro-e",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-vauxhall-vivaro-third-generation-2021"
+              ]
+            },
+            {
+              "value": "Vivaro Electric",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-vauxhall-vivaro-third-generation-2021"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-vauxhall-vivaro-third-generation-2021",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/boxer",
+          "brandId": "peugeot",
+          "canonicalName": "Boxer",
+          "slug": "boxer",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "E-Boxer",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-peugeot-boxer-official-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-peugeot-boxer-official-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/partner",
+          "brandId": "peugeot",
+          "canonicalName": "Partner",
+          "slug": "partner",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "E-Partner",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-peugeot-partner-official-2025"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-peugeot-partner-official-2025",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/transporter",
+          "brandId": "volkswagen",
+          "canonicalName": "Transporter",
+          "slug": "transporter",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Transporter Kombi",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-volkswagen-transporter-kombi-official-2026"
+              ]
+            },
+            {
+              "value": "Kombi",
+              "kind": "market_name",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-volkswagen-transporter-kombi-official-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-volkswagen-transporter-kombi-official-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official European manufacturer identity and commercial-vehicle body family; detailed body, generation and powertrain configurations remain separate review work."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

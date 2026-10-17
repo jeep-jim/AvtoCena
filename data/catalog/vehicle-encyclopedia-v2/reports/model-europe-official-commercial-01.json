@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "inWindowMassMarketCommercialModelsFirst": true,
+    "productionYearsNotInferred": true,
+    "generationsAndVariantsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 8,
+    "newModels": 8,
+    "newSources": 7
+  },
+  "modelIds": [
+    "citroen/jumper",
+    "citroen/jumpy",
+    "fiat/ducato",
+    "fiat/talento",
+    "opel/vivaro",
+    "peugeot/boxer",
+    "peugeot/partner",
+    "volkswagen/transporter"
+  ]
+}

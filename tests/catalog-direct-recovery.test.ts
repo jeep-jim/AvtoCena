@@ -1,0 +1,39 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+
+const script = fs.readFileSync("scripts/catalog-live-recovery-direct-exact.mjs", "utf8");
+const workflow = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-georgia-direct.yml", "utf8");
+const requiredSources = fs.readFileSync("apps/web/lib/catalog/required-catalog-sources.ts", "utf8");
+
+test("direct UAE and Georgia recovery keeps only exact or explicit preliminary-power calculations", () => {
+  assert.match(script, /calculateOfferWithPreliminaryPowerPricing/);
+  assert.match(script, /isPreliminaryPowerPendingCalculation/);
+  assert.match(script, /if \(!exactCalculation\(calculated\) && !preliminaryPowerPending\)/);
+  assert.match(script, /recoveryPreliminaryPowerPending: preliminaryPowerPending/);
+  assert.match(script, /preliminaryCount: offers\.filter\(isPreliminaryPowerPendingCalculation\)\.length/);
+  assert.doesNotMatch(script, /calculateOfferWithRussiaCustoms\(offer\)/);
+});
+
+test("direct recovery has enough crawl budget and enforces the shared model-year quota", () => {
+  assert.match(workflow, /RECOVERY_TARGET: "3000"/);
+  assert.match(workflow, /RECOVERY_MAX_PAGES: "300"/);
+  assert.match(workflow, /RECOVERY_TIME_LIMIT_MS: "5100000"/);
+  assert.match(workflow, /timeout-minutes: 95/);
+  assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+  assert.match(workflow, /RECOVERY_PUBLISH_MAX: "5000"/);
+  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
+  assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
+  assert.match(workflow, /maxPerExactModelYear/);
+  assert.doesNotMatch(workflow, /CATALOG_MAX_OFFERS_PER_MODEL: "20"/);
+  assert.doesNotMatch(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+});
+
+test("Georgia direct recovery is canonical MyAuto + AutoPapa only, with no AUTO.GE fallback", () => {
+  assert.match(requiredSources, /sourceId: "myauto_georgia_list"[\s\S]*canonicalUrl: "https:\/\/www\.myauto\.ge\/"[\s\S]*required: true[\s\S]*anchor: true/);
+  assert.match(requiredSources, /sourceId: "autopapa_georgia_open"[\s\S]*canonicalUrl: "https:\/\/autopapa\.ge\/"[\s\S]*required: true[\s\S]*anchor: true/);
+  assert.match(workflow, /RECOVERY_SOURCE_IDS="myauto_georgia_list,autopapa_georgia_open"/);
+  assert.match(workflow, /fallbackForbidden: true/);
+  assert.match(workflow, /usedFallback: false/);
+  assert.doesNotMatch(workflow, /auto_georgia_open|www\.auto\.ge|fallbackSourceId|usedFallback: true/i);
+});

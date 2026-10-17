@@ -1,0 +1,17 @@
+.trigger { position: absolute; left: 12px; top: 12px; display: flex; align-items: center; gap: 8px; min-height: 44px; max-width: calc(100% - 80px); padding: 8px 12px; border-radius: 14px; background: #282132; color: #fff; font-size: 14px; font-weight: 700; text-align: left; }
+.trigger img { flex-shrink: 0; }
+.trigger:focus-visible, .dialog :is(button, a, summary):focus-visible { outline: 2px solid #b794ff; outline-offset: 3px; }
+.dialog { position: fixed; inset: 0; width: min(560px, calc(100% - 24px)); max-height: 90dvh; margin: auto; padding: 0; border: 1px solid var(--ac-border); border-radius: 22px; background: var(--ac-surface, #202936); color: var(--ac-text, #fff); overflow-y: auto; overscroll-behavior: contain; }
+.dialog::backdrop { background: rgb(0 0 0 / .75); }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 16px; border-bottom: 1px solid var(--ac-border); }
+.header h2 { font-size: 17px; font-weight: 800; }
+.header button { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--ac-surface-2); font-size: 28px; }
+.body { display: grid; gap: 14px; padding: 16px; font-size: 14px; line-height: 1.5; }
+.action { display: block; width: 100%; padding: 12px; border-radius: 12px; background: #7040ac; color: #fff; text-align: center; font-weight: 700; }
+.action:disabled { opacity: .6; }
+.imageLink { text-decoration: underline; text-underline-offset: 3px; }
+.body textarea { display: block; width: 100%; margin-top: 10px; padding: 10px; border: 1px solid var(--ac-border); border-radius: 10px; background: var(--ac-surface-2); color: inherit; resize: vertical; }
+.body summary { cursor: pointer; }
+.body [role="status"]:empty { display: none; }
+.note { color: var(--ac-muted); font-size: 12px; }
+@media (min-width: 640px) { .trigger { top: 24px; left: 24px; } }

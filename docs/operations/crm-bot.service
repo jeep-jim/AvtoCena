@@ -1,0 +1,21 @@
+[Unit]
+Description=AvtoCena Telegram bot and group delivery
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=avtocena-bot
+WorkingDirectory=/opt/avtocena
+EnvironmentFile=/etc/avtocena-bot.env
+ExecStart=/usr/bin/node --import tsx scripts/crm-bot-service.ts
+Restart=always
+RestartSec=5
+TimeoutStopSec=120
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

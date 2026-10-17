@@ -1,0 +1,76 @@
+import {dealerClientReady,readyDealerClients} from '../dealers/client-workflow';
+import {documentCompany,workspaceClientsPath,canAccessDocumentClient,contractIndexPath,contractBelongsToWorkspace} from "../document-workspace";
+import {readShowcase} from "../dealers/showcase-store";
+import {hasCrmPermission} from "../crm-permissions";
+import {recordCrmActivity} from "../crm-activity";
+import defaults from './default-templates.json';
+import {randomUUID} from 'node:crypto';
+import {appendChunkedDataJson,getJsonStorage,mutateDataJson,readChunkedDataJson,readDataJson} from '../data';
+import {encryptClientDocument,decryptClientDocument} from '../client-documents';
+import {canSeeLead} from '../crm-visibility';
+import type {AuthUser} from '../auth';
+import {initialFields,today,type ContractRecord,type ContractTemplate,type TemplateId} from './model';
+type Index={id:string;createdBy:string;createdAt:string};
+type Envelope={encrypted:string;purgedAt?:never}|{purgedAt:string;encrypted?:never};
+const key=(id:string)=>{if(!/^[a-f0-9-]{36}$/.test(id))throw Error('Договор не найден.');return `contracts/records/${id}.json`;};
+const seal=(r:ContractRecord):Envelope=>({encrypted:encryptClientDocument(Buffer.from(JSON.stringify(r)),key(r.id)).toString('base64')});
+const open=(id:string,e:Envelope):ContractRecord=>{if(!e.encrypted)throw Error('Договор не найден.');return JSON.parse(decryptClientDocument(Buffer.from(e.encrypted,'base64'),key(id)).toString());};
+export async function accessibleClient(user:AuthUser,id:string){if(!id)return null;const c=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);if(!c||!canAccessDocumentClient(user,c)||!await dealerClientReady(user,c))throw Error('Нет доступа к клиенту.');return c;}
+export async function getContract(user:AuthUser,id:string){const e=await readDataJson<Envelope|null>(key(id),null);if(!e)throw Error('Договор не найден.');const r=open(id,e);if(!contractBelongsToWorkspace(user,r))throw Error('Нет доступа к договору.');if(!documentCompany(user)&&!hasCrmPermission(user,'viewAll')&&r.createdBy!==user.id)throw Error('Нет доступа к договору.');if(r.clientId)await accessibleClient(user,r.clientId);return r;}
+// Internal dependency check: never returns document contents to the caller.
+export async function hasStoredContractForClient(clientId:string){
+ if(!clientId)return false;
+ const items=await readChunkedDataJson<Index>('contracts/index.json',[]);
+ for(let i=0;i<items.length;i+=8){
+  const matches=await Promise.all(items.slice(i,i+8).map(async item=>{
+   const envelope=await readDataJson<Envelope|null>(key(item.id),null);
+   return Boolean(envelope?.encrypted&&open(item.id,envelope).clientId===clientId);
+  }));
+  if(matches.some(Boolean))return true;
+ }
+ return false;
+}
+export async function listContracts(user:AuthUser){
+ const items=await readChunkedDataJson<Index>(contractIndexPath(user),[]);
+ const admin=Boolean(documentCompany(user))||hasCrmPermission(user,'viewAll');
+ const clients=await readChunkedDataJson<any>(workspaceClientsPath(user),[]);
+ const visibleClients=new Set((await readyDealerClients(user,clients.filter(c=>canAccessDocumentClient(user,c)))).map(c=>c.id));
+ const eligible=items.filter(i=>admin||i.createdBy===user.id),result=[];
+ for(let i=0;i<eligible.length;i+=8){const batch=await Promise.all(eligible.slice(i,i+8).map(async item=>{
+  const encrypted=await readDataJson<Envelope|null>(key(item.id),null);if(!encrypted?.encrypted)return null;
+  const r=open(item.id,encrypted);if(!contractBelongsToWorkspace(user,r))return null;if((!admin&&r.createdBy!==user.id)||(r.clientId&&!visibleClients.has(r.clientId)))return null;
+  return {id:r.id,clientId:r.clientId,revision:r.revision,createdAt:r.createdAt,createdBy:r.createdBy,market:r.fields.market,templateId:r.template.id,archivedAt:r.archivedAt,number:r.number,client:r.fields.fio||'Без клиента',car:r.fields.car||'',updatedAt:r.updatedAt,versions:r.versions.length};
+ }));result.push(...batch.filter((r):r is NonNullable<typeof r>=>r!==null));}
+ return result.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+}
+const templateKey=(id:TemplateId,user?:AuthUser)=>{if(!['japan','other'].includes(id))throw Error('Шаблон не найден.');const company=documentCompany(user);return company?`dealers/${encodeURIComponent(company)}/contracts/templates/${id}.json`:`contracts/builder-templates/${id}.json`;};
+async function workspaceDefault(id:TemplateId,user?:AuthUser):Promise<ContractTemplate>{
+ const company=documentCompany(user);if(!company)return defaultTemplate(id);
+ const showcase=await readShowcase(company);if(!showcase)throw Error('Компания не найдена.');const r=showcase.requisites;
+ return {...defaultTemplate(id),companyName:showcase.name,city:showcase.offices[0]?.city||'',agent:r?.legalName||'',requisites:r?Object.entries(r).filter(([,v])=>v).map(([k,v])=>`${({legalName:'Наименование',inn:'ИНН',ogrn:'ОГРН / ОГРНИП',kpp:'КПП',legalAddress:'Адрес',bank:'Банк',bik:'БИК',account:'Расчётный счёт',correspondentAccount:'Корреспондентский счёт'} as Record<string,string>)[k]}: ${v}`).join('\n'):''};
+}
+async function decodeTemplate(id:TemplateId,e:Envelope|null,user?:AuthUser):Promise<ContractTemplate>{return e?.encrypted?JSON.parse(decryptClientDocument(Buffer.from(e.encrypted,'base64'),templateKey(id,user)).toString()):workspaceDefault(id,user);}
+export async function getTemplate(id:TemplateId,user?:AuthUser){return decodeTemplate(id,await readDataJson<Envelope|null>(templateKey(id,user),null),user);}
+export async function saveTemplate(t:ContractTemplate,expected:number,user?:AuthUser){const fallback=await workspaceDefault(t.id,user);const k=templateKey(t.id,user);const saved=await mutateDataJson<Envelope|null>(k,null,e=>{const current=e?.encrypted?JSON.parse(decryptClientDocument(Buffer.from(e.encrypted,'base64'),k).toString()):fallback;if(current.revision!==expected)throw Error('Шаблон уже изменён. Откройте его заново.');return {encrypted:encryptClientDocument(Buffer.from(JSON.stringify({...t,revision:current.revision+1})),k).toString('base64')};});return decodeTemplate(t.id,saved,user);}
+export async function createContract(user:AuthUser,templateId:TemplateId,clientId:string,id:string){const k=key(id);const existing=await readDataJson<Envelope|null>(k,null);if(existing){const r=await getContract(user,id);await appendChunkedDataJson<Index>(contractIndexPath(user),{id:r.id,createdBy:r.createdBy,createdAt:r.createdAt});return r;}const client=await accessibleClient(user,clientId);const template=await getTemplate(templateId,user);const day=today();const allocation=await mutateDataJson<Record<string,number>>(documentCompany(user)?`dealers/${encodeURIComponent(documentCompany(user)!)}/contracts/numbers/${day}.json`:`contracts/numbers/${day}.json`,{},current=>current[id]?current:{...current,[id]:Math.max(0,...Object.values(current))+1});const number=`${day.slice(8,10)}.${day.slice(5,7)}/${String(allocation[id]).padStart(2,'0')}`;const now=new Date().toISOString();const record:ContractRecord={...(documentCompany(user)?{companyId:documentCompany(user)!}:{}),id,revision:1,number,createdAt:now,updatedAt:now,createdBy:user.id,clientId,template,fields:{...initialFields(templateId),...(client?{fio:client.fio||'',phone:client.phone||'',deliveryCity:client.city||''}:{})},calculation:null,versions:[]};await mutateDataJson<Envelope|null>(k,null,current=>{if(current)throw Error('Договор уже создан. Откройте список документов.');return seal(record);});await appendChunkedDataJson<Index>(contractIndexPath(user),{id,createdBy:user.id,createdAt:now});await recordCrmActivity(user,{id:`contract_created_${id}`,createdAt:now,type:"contract_created",title:"Создан договор",entityType:"contract",entityId:id,clientId:clientId||undefined,entityLabel:`№ ${number}`,href:`/crm/documents?id=${id}`});return record;}
+export async function updateContract(user:AuthUser,id:string,revision:number,update:(r:ContractRecord)=>ContractRecord){await getContract(user,id);const result=await mutateDataJson<Envelope|null>(key(id),null,current=>{if(!current)throw Error('Договор не найден.');const r=open(id,current);if(r.revision!==revision)throw Error('Договор изменён в другом окне. Откройте его заново, чтобы не затереть изменения.');if(r.archivedAt)throw Error('Договор в архиве. Сначала восстановите его.');const next=update(r);next.revision=r.revision+1;next.updatedAt=new Date().toISOString();return seal(next);});const record=open(id,result!);await recordCrmActivity(user,{id:`contract_updated_${id}_${record.revision}`,type:"contract_updated",title:"Изменён договор",entityType:"contract",entityId:id,clientId:record.clientId||undefined,entityLabel:`№ ${record.number}`,href:`/crm/documents?id=${id}`,text:`Редакция ${record.revision}. Готовых версий: ${record.versions.length}.`});return record;}
+
+export function defaultTemplate(id:TemplateId):ContractTemplate{return structuredClone(defaults.find(t=>t.id===id)!) as ContractTemplate;}
+
+/** Archive/restore uses the same revision lock as editing. Purging replaces the
+ * encrypted content with a tombstone, so stale editors cannot recreate it. */
+export async function changeContractState(user:AuthUser,id:string,revision:number,action:'archive'|'restore'|'purge') {
+ const previous=await getContract(user,id);
+ await mutateDataJson<Envelope|null>(key(id),null,current=>{
+  if(!current)throw Error('Договор не найден.');
+  const r=open(id,current);
+  if(!documentCompany(user)&&!hasCrmPermission(user,'viewAll')&&r.createdBy!==user.id)throw Error('Нет доступа к договору.');
+  if(r.revision!==revision)throw Error('Договор изменён в другом окне. Обновите список.');
+  if(action==='purge') {
+   if(!r.archivedAt)throw Error('Сначала переместите договор в архив.');
+   return {purgedAt:new Date().toISOString()};
+  }
+  return seal({...r,revision:r.revision+1,updatedAt:new Date().toISOString(),archivedAt:action==='archive'?new Date().toISOString():undefined,archivedBy:action==='archive'?user.id:undefined});
+ });
+ await recordCrmActivity(user,{type:`contract_${action}`,title:action==='archive'?'Договор перенесён в архив':action==='restore'?'Договор восстановлен':'Договор удалён окончательно',entityType:"contract",entityId:id,clientId:previous.clientId||undefined,entityLabel:`№ ${previous.number}`,href:action==='purge'?'/crm/documents':`/crm/documents?id=${id}`});
+}

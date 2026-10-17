@@ -1,0 +1,71 @@
+name: Regcloud — isolate market page latency once
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-market-latency.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Let short caches expire after the release audit
+        run: sleep 180
+      - name: Measure market HTML and API separately
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 60 9
+          port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
+          python3 - "$port" <<'PYTHON'
+          import urllib.request,time,json,sys
+          base='http://127.0.0.1:'+sys.argv[1]
+          with urllib.request.urlopen(base+'/api/health',timeout=15) as health:assert json.load(health)['releaseSha']=='c54f625328437f5925184e24e4eb95b23fa67fa1'
+          for path in ['/api/health','/cars?market=korea','/cars?market=korea','/api/catalog/search?market=korea&pageSize=24','/cars?market=japan']:
+              start=time.monotonic()
+              with urllib.request.urlopen(base+path,timeout=90) as r:
+                  first=time.monotonic()-start;body=r.read()
+                  print('MARKET_HTTP',json.dumps({'path':path,'status':r.status,'firstSeconds':round(first,3),'totalSeconds':round(time.monotonic()-start,3),'bytes':len(body),'complete':path.startswith('/api/') or b'</html>' in body}),flush=True)
+          PYTHON
+          docker logs --since 20m --tail 10000 avtocena-production 2>&1 | python3 -c 'import sys,json;rows=[]
+          for line in sys.stdin:
+              if "catalog_storage_read " in line:
+                  try:rows.append(json.loads(line.split("catalog_storage_read ",1)[1]))
+                  except:pass
+          print("MARKET_SLOW_READS",json.dumps(sorted(rows,key=lambda x:x["ms"],reverse=True)[:25]))'
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          REMOTE
+      - name: Separate navigation from first photos in the browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/market-live" --no-package-lock --ignore-scripts playwright@1.55.0
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/market-live/node_modules/playwright/index.mjs" CHROME_BIN="$(command -v google-chrome)" node --input-type=module <<'JS'
+          const {chromium}=await import(process.env.PLAYWRIGHT_MODULE);
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
+          try {for(const market of ['korea','japan']) {
+            const context=await browser.newContext({viewport:{width:1440,height:900}});
+            const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+            const start=Date.now();const response=await page.goto('https://avtocena.com/cars?market='+market,{waitUntil:'domcontentloaded',timeout:90000});
+            const navigationMs=Date.now()-start;
+            await page.locator('[data-catalog-batch="1"] article').last().waitFor({timeout:30000});const cardsMs=Date.now()-start;
+            let photosReady=true;
+            try {await page.waitForFunction(()=>{const imgs=[...document.querySelectorAll('[data-catalog-batch="1"] article img[width="400"]')].slice(0,4);return imgs.length===4&&imgs.every(i=>i.complete&&i.naturalWidth>0);},null,{timeout:30000});}catch {photosReady=false;}
+            console.log('MARKET_BROWSER',JSON.stringify({market,status:response.status(),navigationMs,cardsMs,photosMs:Date.now()-start,photosReady,errors,resources:await page.evaluate(()=>performance.getEntriesByType('navigation').map(n=>({responseStart:n.responseStart,responseEnd:n.responseEnd,domContentLoaded:n.domContentLoadedEventEnd})))}));
+            await context.close();
+          }}finally {await browser.close();}
+          JS

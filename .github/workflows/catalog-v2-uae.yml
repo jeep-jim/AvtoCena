@@ -1,0 +1,23 @@
+name: Catalog V3 · UAE · 10k
+run-name: Catalog V3 · UAE · 10k · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/market-runs/uae"
+
+# Automatic scheduling lives only in catalog-v3-sequential-queue.yml.
+permissions:
+  contents: read
+
+jobs:
+  uae:
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: uae
+      display_name: ОАЭ
+      reset_cursor: ${{ github.event_name != 'schedule' }}
+      priority_target: "500"
+    secrets: inherit

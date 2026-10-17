@@ -1,0 +1,254 @@
+.ac-catalog-card {
+  --ac-card-radius: 1.35rem;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  border: 0 !important;
+  border-radius: var(--ac-card-radius) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html[data-theme="light"] .ac-catalog-card,
+.ac-catalog-card > a,
+.ac-catalog-card > a > div:first-child {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.ac-catalog-card > a {
+  overflow: hidden !important;
+  border-radius: var(--ac-card-radius) !important;
+}
+
+.ac-catalog-card > a > div:first-child {
+  border-radius: var(--ac-card-radius) var(--ac-card-radius) 0 0 !important;
+}
+
+.ac-catalog-card > a > div:last-child {
+  border-radius: 0 0 var(--ac-card-radius) var(--ac-card-radius) !important;
+}
+
+.ac-catalog-card .ac-price-trend-label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.38em !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+}
+
+.ac-catalog-card .ac-price-trend-label::before {
+  content: "";
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 1.05em;
+  background: currentColor;
+  opacity: 0.68;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h2v3h6V2h2v3h1a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h1V2Zm11 7H6v9h12V9Z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h2v3h6V2h2v3h1a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h1V2Zm11 7H6v9h12V9Z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* The active price card and its link must sit above both its own favorite button
+   and every neighboring card. This keeps the tooltip completely unobstructed. */
+.ac-catalog-card:has(.ac-price-trend-popover) {
+  z-index: 11990 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+.ac-catalog-card:has(.ac-price-trend-popover) > a {
+  position: relative !important;
+  z-index: 12010 !important;
+  overflow: visible !important;
+}
+
+.ac-catalog-card:has(.ac-price-trend-popover) > button {
+  z-index: 1 !important;
+}
+
+.ac-price-trend-arrow {
+  z-index: 12015 !important;
+}
+
+.ac-price-trend-popover {
+  z-index: 12020 !important;
+}
+
+/* Auction microcards use a plain theme-aware gavel with no colored backing. */
+.ac-catalog-card .ac-auction-gavel,
+.ac-catalog-card .ac-auction-gavel:hover,
+.ac-catalog-card .ac-auction-gavel:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--ac-text) !important;
+}
+
+/* The full offer uses a neutral dark control so the requested white gavel
+   remains visible in the light theme without bringing back the red backing. */
+.ac-offer-auction-gavel,
+.ac-offer-auction-gavel:hover,
+.ac-offer-auction-gavel:active {
+  background: #11151d !important;
+  background-color: #11151d !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+
+.ac-offer-auction-gavel > svg {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+
+/* Falling customer price is always green; rising price is always red. */
+.is-down .ac-price,
+.is-down .ac-price-trend-delta,
+.is-down .ac-price-trend-arrow,
+.ac-price--down {
+  color: #20a85e !important;
+}
+
+.is-up .ac-price,
+.is-up .ac-price-trend-delta,
+.is-up .ac-price-trend-arrow,
+.ac-price--up {
+  color: #ef3340 !important;
+}
+
+/* Electrified prices stay yellow regardless of the independent up/down trend. */
+.ac-page-copy .ac-price.ac-price--electrified {
+  color: #ffd21f !important;
+}
+html[data-theme="light"] .ac-page-copy .ac-price.ac-price--electrified {
+  color: #c58a00 !important;
+}
+
+html[data-theme="light"] .ac-price-trend-panel.is-down {
+  background: #cfe5d8 !important;
+}
+html[data-theme="light"] .ac-price-trend-panel.is-up {
+  background: #f2d1d5 !important;
+}
+
+/* Offer-page price trend tint must survive generic light-theme panel styles. */
+html[data-theme="light"] body .ac-price-trend-panel.ac-offer-price-panel.is-down {
+  background: #cfe5d8 !important;
+  background-color: #cfe5d8 !important;
+}
+html[data-theme="light"] body .ac-price-trend-panel.ac-offer-price-panel.is-up {
+  background: #f2d1d5 !important;
+  background-color: #f2d1d5 !important;
+}
+
+/* The offer price panel uses the same is-up / is-down state logic in dark mode.
+   Keep these selectors stronger than the generic graphite-panel rule in flat-ui.css. */
+html:not([data-theme="light"]) body .ac-price-trend-panel.ac-offer-price-panel.is-down {
+  background: #0b3021 !important;
+  background-color: #0b3021 !important;
+}
+html:not([data-theme="light"]) body .ac-price-trend-panel.ac-offer-price-panel.is-up {
+  background: #3b161c !important;
+  background-color: #3b161c !important;
+}
+
+/* The budget help icon is mobile-only regardless of Tailwind output or cache. */
+@media (min-width: 1024px) {
+  html body main.ac-home-page .ac-budget-help {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* On phones keep the original small tap tooltip, only reduce the visual arrow. */
+@media (max-width: 767px) {
+  .ac-price-trend-arrow > svg {
+    transform: scale(.7) !important;
+    transform-origin: 100% 50% !important;
+  }
+}
+
+/* Catalog range fields: uniform 1px outer border and 1px central divider. */
+.ac-catalog-filter-drawer .ac-filter-range,
+.ac-catalog-filter-panel .ac-filter-range {
+  box-sizing: border-box !important;
+  border: 1px solid rgba(255, 255, 255, 0.085) !important;
+}
+
+.ac-catalog-filter-drawer .ac-filter-range > input,
+.ac-catalog-filter-panel .ac-filter-range > input {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.ac-catalog-filter-drawer .ac-filter-range > input + input,
+.ac-catalog-filter-panel .ac-filter-range > input + input {
+  border-left: 1px solid rgba(255, 255, 255, 0.085) !important;
+}
+
+html[data-theme="light"] .ac-catalog-filter-drawer .ac-filter-range,
+html[data-theme="light"] .ac-catalog-filter-panel .ac-filter-range {
+  border-color: rgba(35, 42, 55, 0.12) !important;
+}
+
+html[data-theme="light"] .ac-catalog-filter-drawer .ac-filter-range > input + input,
+html[data-theme="light"] .ac-catalog-filter-panel .ac-filter-range > input + input {
+  border-left-color: rgba(35, 42, 55, 0.12) !important;
+}
+
+/* Brand rails are page content, not cards: no backing in either theme, on catalog or home. */
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail,
+html body main.ac-page-copy.ac-home-page section.ac-brand-rail {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"],
+html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] {
+  padding-right: 2.75rem !important;
+}
+
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar,
+html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child,
+html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child {
+  margin-left: -9px !important;
+}
+
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button,
+html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button {
+  right: 0 !important;
+}
+
+/* Card hover should never introduce a square/rectangular backing, border or
+   shadow around the rounded catalog card. */
+.ac-catalog-card:hover,
+.ac-catalog-card:hover > a,
+.ac-catalog-card:hover > a > div:first-child,
+.ac-catalog-card:hover > a > div:last-child {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Shared EV/hybrid price identity, including saved calculations and seller prices. */
+html body .ac-price.ac-price--electrified { color:#ffd21f!important; }
+html[data-theme="light"] body .ac-price.ac-price--electrified { color:#c58a00!important; }
+.ac-offer-page [data-city-delivery] .ac-city-selector { font-size:16px; }

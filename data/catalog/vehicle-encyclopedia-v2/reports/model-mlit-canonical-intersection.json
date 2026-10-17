@@ -1,0 +1,2643 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactNormalizedMlitToVehiclesDbIntersectionRequired": true,
+    "importedStatus": "review",
+    "safeAutomaticResolution": false,
+    "productionYearsInferred": false,
+    "completionClaimAllowed": false
+  },
+  "totals": {
+    "mlitSourceIdentities": 1341,
+    "exactCanonicalIntersections": 62,
+    "existingModelIntersections": 62,
+    "newReviewModels": 0,
+    "brandsWithNewReviewModels": 0,
+    "ambiguousIntersections": 0,
+    "unresolvedCrossBrandIdentities": 45,
+    "sources": 0
+  },
+  "byBrand": [
+    {
+      "brandId": "212",
+      "brand": "212",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ac-cars",
+      "brand": "AC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "acura",
+      "brand": "Acura",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "aion",
+      "brand": "AION",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "aito",
+      "brand": "AITO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "amc",
+      "brand": "AMC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "arcfox",
+      "brand": "ARCFOX",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "aro",
+      "brand": "Aro",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "asia",
+      "brand": "Asia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "audi",
+      "brand": "Audi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "avatr",
+      "brand": "Avatr",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "baic",
+      "brand": "BAIC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "baojun",
+      "brand": "Baojun",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "baw",
+      "brand": "BAW",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "belgee",
+      "brand": "Belgee",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "bestune",
+      "brand": "Bestune",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "bmw",
+      "brand": "BMW",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "borgward",
+      "brand": "Borgward",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "brabus",
+      "brand": "Brabus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "brilliance",
+      "brand": "Brilliance",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "bugatti",
+      "brand": "Bugatti",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "buick",
+      "brand": "Buick",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "byd",
+      "brand": "BYD",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "cadillac",
+      "brand": "Cadillac",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "caterham",
+      "brand": "Caterham",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "changan",
+      "brand": "Changan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "changfeng",
+      "brand": "Changfeng",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "changhe",
+      "brand": "Changhe",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "chery",
+      "brand": "Chery",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "coda",
+      "brand": "Coda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dadi",
+      "brand": "Dadi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "daewoo",
+      "brand": "Daewoo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "daihatsu",
+      "brand": "Daihatsu",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "datsun",
+      "brand": "Datsun",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dayun",
+      "brand": "Dayun",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "denza",
+      "brand": "Denza",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dongfeng",
+      "brand": "Dongfeng",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dongfeng-aeolus",
+      "brand": "Dongfeng Aeolus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dongfeng-epi",
+      "brand": "Dongfeng eπ",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dongfeng-nammi",
+      "brand": "Dongfeng Nammi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "donkervoort",
+      "brand": "Donkervoort",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ds-automobiles",
+      "brand": "DS Automobiles",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "eagle",
+      "brand": "Eagle",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ebro",
+      "brand": "EBRO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ego-mobile",
+      "brand": "e.GO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "elaris",
+      "brand": "Elaris",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "emc",
+      "brand": "EMC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "esteo",
+      "brand": "ESTEO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "evo",
+      "brand": "EVO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "exeed",
+      "brand": "EXEED",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "exlantix",
+      "brand": "Exlantix",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "fangchengbao",
+      "brand": "FANGCHENGBAO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "farizon",
+      "brand": "Farizon",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "faw",
+      "brand": "FAW",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "firefly",
+      "brand": "firefly",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "forthing",
+      "brand": "Forthing",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "foton",
+      "brand": "Foton",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "gac",
+      "brand": "GAC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "geely",
+      "brand": "Geely",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "geely-galaxy",
+      "brand": "Geely Galaxy",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "genesis",
+      "brand": "Genesis",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "geo",
+      "brand": "Geo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "gmc",
+      "brand": "GMC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hafei",
+      "brand": "Hafei",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "haima",
+      "brand": "Haima",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "haval",
+      "brand": "Haval",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hawtai",
+      "brand": "Hawtai",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hedmos",
+      "brand": "HEDMOS",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hiphi",
+      "brand": "HiPhi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "honda",
+      "brand": "Honda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 15
+    },
+    {
+      "brandId": "hongqi",
+      "brand": "Hongqi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hozon",
+      "brand": "Hozon",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "huanghai",
+      "brand": "Huanghai",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hummer",
+      "brand": "Hummer",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hyptec",
+      "brand": "HYPTEC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "icar",
+      "brand": "iCAR",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "im-motors",
+      "brand": "IM Motors",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ineos",
+      "brand": "INEOS",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "infiniti",
+      "brand": "Infiniti",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "iran-khodro",
+      "brand": "Iran Khodro",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "isuzu",
+      "brand": "Isuzu",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "iveco",
+      "brand": "IVECO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jac",
+      "brand": "JAC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jaecoo",
+      "brand": "Jaecoo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jaguar",
+      "brand": "Jaguar",
+      "newReviewModels": 0,
+      "existingModelIntersections": 6
+    },
+    {
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jeland",
+      "brand": "Jeland",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jetour",
+      "brand": "Jetour",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jetta",
+      "brand": "Jetta",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jinbei",
+      "brand": "Jinbei",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "jmc",
+      "brand": "JMC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "kaiyi",
+      "brand": "Kaiyi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "kgm",
+      "brand": "KGM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "kia",
+      "brand": "Kia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "knewstar",
+      "brand": "Knewstar",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ktm",
+      "brand": "KTM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lada",
+      "brand": "Lada",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lamborghini",
+      "brand": "Lamborghini",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lancia",
+      "brand": "Lancia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "land-rover",
+      "brand": "Land Rover",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "landwind",
+      "brand": "Landwind",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "leapmotor",
+      "brand": "Leapmotor",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "levc",
+      "brand": "LEVC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "li-auto",
+      "brand": "Li Auto",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lifan",
+      "brand": "Lifan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "livan",
+      "brand": "Livan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "luxeed",
+      "brand": "LUXEED",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "luxgen",
+      "brand": "Luxgen",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "m-hero",
+      "brand": "M-Hero",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "maextro",
+      "brand": "Maextro",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "man",
+      "brand": "MAN",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "maybach",
+      "brand": "Maybach",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 9
+    },
+    {
+      "brandId": "mclaren",
+      "brand": "McLaren",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mercury",
+      "brand": "Mercury",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mini",
+      "brand": "MINI",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "mitsubishi",
+      "brand": "Mitsubishi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "mitsuoka",
+      "brand": "Mitsuoka",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "mobilize",
+      "brand": "Mobilize",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "moke",
+      "brand": "Moke",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "morgan",
+      "brand": "Morgan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "neta",
+      "brand": "Neta",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "nio",
+      "brand": "Nio",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "nissan",
+      "brand": "Nissan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "oldsmobile",
+      "brand": "Oldsmobile",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "omoda",
+      "brand": "OMODA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "onvo",
+      "brand": "ONVO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "opel",
+      "brand": "Opel",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ora",
+      "brand": "ORA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "oshan",
+      "brand": "Oshan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "oting",
+      "brand": "Oting",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "peugeot",
+      "brand": "Peugeot",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "plymouth",
+      "brand": "Plymouth",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "polar-stone",
+      "brand": "Polar Stone",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "polestar",
+      "brand": "Polestar",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "pontiac",
+      "brand": "Pontiac",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "proton",
+      "brand": "Proton",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "radar",
+      "brand": "RADAR",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ram",
+      "brand": "RAM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ravon",
+      "brand": "Ravon",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "renault",
+      "brand": "Renault",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "renault-samsung",
+      "brand": "Renault Samsung",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "rising-auto",
+      "brand": "Rising Auto",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "rivian",
+      "brand": "Rivian",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "roewe",
+      "brand": "Roewe",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "rolls-royce",
+      "brand": "Rolls-Royce",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "rover",
+      "brand": "Rover",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "rox",
+      "brand": "Rox",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ruf",
+      "brand": "RUF",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "saab",
+      "brand": "Saab",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "saipa",
+      "brand": "SAIPA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "saturn",
+      "brand": "Saturn",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "scion",
+      "brand": "Scion",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "seat",
+      "brand": "SEAT",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "secma",
+      "brand": "SECMA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "seres",
+      "brand": "Seres",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "shangjie",
+      "brand": "SHANGJIE",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "shuanghuan",
+      "brand": "Shuanghuan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "skyworth",
+      "brand": "Skyworth",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "smart",
+      "brand": "Smart",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "soueast",
+      "brand": "Soueast",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "stelato",
+      "brand": "STELATO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "suda",
+      "brand": "Suda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "swm",
+      "brand": "SWM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "tank",
+      "brand": "Tank",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "tata",
+      "brand": "TATA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "tianma",
+      "brand": "Tianma",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "tianye",
+      "brand": "Tianye",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "togg",
+      "brand": "Togg",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "trabant",
+      "brand": "Trabant",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "umo",
+      "brand": "Umo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "vauxhall",
+      "brand": "Vauxhall",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "venucia",
+      "brand": "Venucia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "vgv",
+      "brand": "VGV",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "vinfast",
+      "brand": "VinFast",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "wartburg",
+      "brand": "Wartburg",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "weltmeister",
+      "brand": "Weltmeister",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "wey",
+      "brand": "WEY",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "willys",
+      "brand": "Willys",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "wuling",
+      "brand": "Wuling",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "xiaomi",
+      "brand": "Xiaomi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "xin-kai",
+      "brand": "Xin Kai",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "yangwang",
+      "brand": "YANGWANG",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "yema",
+      "brand": "Yema",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "yudo",
+      "brand": "Yudo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "zhidou",
+      "brand": "Zhidou",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "zotye",
+      "brand": "Zotye",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    },
+    {
+      "brandId": "zx-auto",
+      "brand": "ZX",
+      "newReviewModels": 0,
+      "existingModelIntersections": 0
+    }
+  ],
+  "intersections": [
+    {
+      "brandId": "alfa-romeo",
+      "sourceBrandId": "alfa-romeo",
+      "canonicalName": "Mito",
+      "disposition": "existing_model",
+      "modelIds": [
+        "alfa-romeo/mito"
+      ],
+      "sourceNames": [
+        "MiTo"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "RSQ3",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/rsq3"
+      ],
+      "sourceNames": [
+        "RSQ3"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "RSQ8",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/rsq8"
+      ],
+      "sourceNames": [
+        "RSQ8"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "S6",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/s6"
+      ],
+      "sourceNames": [
+        "S6"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "S8",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/s8"
+      ],
+      "sourceNames": [
+        "S8"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "SQ5",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/sq5"
+      ],
+      "sourceNames": [
+        "SQ5"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "SQ7",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/sq7"
+      ],
+      "sourceNames": [
+        "SQ7"
+      ]
+    },
+    {
+      "brandId": "audi",
+      "sourceBrandId": "audi",
+      "canonicalName": "SQ8",
+      "disposition": "existing_model",
+      "modelIds": [
+        "audi/sq8"
+      ],
+      "sourceNames": [
+        "SQ8"
+      ]
+    },
+    {
+      "brandId": "citroen",
+      "sourceBrandId": "citroen",
+      "canonicalName": "C3",
+      "disposition": "existing_model",
+      "modelIds": [
+        "citroen/c3"
+      ],
+      "sourceNames": [
+        "C3"
+      ]
+    },
+    {
+      "brandId": "citroen",
+      "sourceBrandId": "citroen",
+      "canonicalName": "C4",
+      "disposition": "existing_model",
+      "modelIds": [
+        "citroen/c4"
+      ],
+      "sourceNames": [
+        "C4"
+      ]
+    },
+    {
+      "brandId": "citroen",
+      "sourceBrandId": "citroen",
+      "canonicalName": "DS4",
+      "disposition": "existing_model",
+      "modelIds": [
+        "citroen/ds4"
+      ],
+      "sourceNames": [
+        "DS4"
+      ]
+    },
+    {
+      "brandId": "citroen",
+      "sourceBrandId": "citroen",
+      "canonicalName": "DS5",
+      "disposition": "existing_model",
+      "modelIds": [
+        "citroen/ds5"
+      ],
+      "sourceNames": [
+        "DS5"
+      ]
+    },
+    {
+      "brandId": "fiat",
+      "sourceBrandId": "fiat",
+      "canonicalName": "500 X",
+      "disposition": "existing_model",
+      "modelIds": [
+        "fiat/500-x"
+      ],
+      "sourceNames": [
+        "500X"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Accord",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/accord"
+      ],
+      "sourceNames": [
+        "ACCORD"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "CR-Z",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/cr-z"
+      ],
+      "sourceNames": [
+        "CR-Z"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Freed",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/freed"
+      ],
+      "sourceNames": [
+        "FREED",
+        "FREED+"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Grace",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/grace"
+      ],
+      "sourceNames": [
+        "GRACE"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Jade",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/jade"
+      ],
+      "sourceNames": [
+        "JADE"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Legend",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/legend"
+      ],
+      "sourceNames": [
+        "LEGEND"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "N-Box",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/n-box"
+      ],
+      "sourceNames": [
+        "N BOX",
+        "N-BOX",
+        "N-BOX +"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "N-One",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/n-one"
+      ],
+      "sourceNames": [
+        "N-ONE"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "N-Wgn",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/n-wgn"
+      ],
+      "sourceNames": [
+        "N-WGN"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Odyssey",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/odyssey"
+      ],
+      "sourceNames": [
+        "ODYSSEY"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Prelude",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/prelude"
+      ],
+      "sourceNames": [
+        "PRELUDE"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "S660",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/s660"
+      ],
+      "sourceNames": [
+        "S660"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Shuttle",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/shuttle"
+      ],
+      "sourceNames": [
+        "SHUTTLE"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "Wr-V",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/wr-v"
+      ],
+      "sourceNames": [
+        "WR-V"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceBrandId": "honda",
+      "canonicalName": "ZR-V",
+      "disposition": "existing_model",
+      "modelIds": [
+        "honda/zr-v"
+      ],
+      "sourceNames": [
+        "ZR-V"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceBrandId": "jaguar",
+      "canonicalName": "E-Pace",
+      "disposition": "existing_model",
+      "modelIds": [
+        "jaguar/e-pace"
+      ],
+      "sourceNames": [
+        "E-PACE"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceBrandId": "jaguar",
+      "canonicalName": "F-Pace",
+      "disposition": "existing_model",
+      "modelIds": [
+        "jaguar/f-pace"
+      ],
+      "sourceNames": [
+        "F-PACE"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceBrandId": "jaguar",
+      "canonicalName": "F-Type",
+      "disposition": "existing_model",
+      "modelIds": [
+        "jaguar/f-type"
+      ],
+      "sourceNames": [
+        "F-TYPE"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceBrandId": "jaguar",
+      "canonicalName": "Xe",
+      "disposition": "existing_model",
+      "modelIds": [
+        "jaguar/xe"
+      ],
+      "sourceNames": [
+        "XE"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceBrandId": "jaguar",
+      "canonicalName": "XF",
+      "disposition": "existing_model",
+      "modelIds": [
+        "jaguar/xf"
+      ],
+      "sourceNames": [
+        "XF"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceBrandId": "jaguar",
+      "canonicalName": "Xfr",
+      "disposition": "existing_model",
+      "modelIds": [
+        "jaguar/xfr"
+      ],
+      "sourceNames": [
+        "XFR"
+      ]
+    },
+    {
+      "brandId": "lexus",
+      "sourceBrandId": "lexus",
+      "canonicalName": "GS F",
+      "disposition": "existing_model",
+      "modelIds": [
+        "lexus/gs-f"
+      ],
+      "sourceNames": [
+        "GS F"
+      ]
+    },
+    {
+      "brandId": "lexus",
+      "sourceBrandId": "lexus",
+      "canonicalName": "LBX",
+      "disposition": "existing_model",
+      "modelIds": [
+        "lexus/lbx"
+      ],
+      "sourceNames": [
+        "LBX"
+      ]
+    },
+    {
+      "brandId": "lexus",
+      "sourceBrandId": "lexus",
+      "canonicalName": "RC F",
+      "disposition": "existing_model",
+      "modelIds": [
+        "lexus/rc-f"
+      ],
+      "sourceNames": [
+        "RC F"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "CX-3",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/cx-3"
+      ],
+      "sourceNames": [
+        "CX-3"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "CX-30",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/cx-30"
+      ],
+      "sourceNames": [
+        "CX-30"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "CX-60",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/cx-60"
+      ],
+      "sourceNames": [
+        "CX-60"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "CX-8",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/cx-8"
+      ],
+      "sourceNames": [
+        "CX-8"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "MAZDA2",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/mazda2"
+      ],
+      "sourceNames": [
+        "MAZDA 2"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "MAZDA3",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/mazda3"
+      ],
+      "sourceNames": [
+        "MAZDA 3"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "MAZDA6",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/mazda6"
+      ],
+      "sourceNames": [
+        "MAZDA 6"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "MPV",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/mpv"
+      ],
+      "sourceNames": [
+        "MPV"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceBrandId": "mazda",
+      "canonicalName": "MX-30",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mazda/mx-30"
+      ],
+      "sourceNames": [
+        "MX-30"
+      ]
+    },
+    {
+      "brandId": "mini",
+      "sourceBrandId": "bmw",
+      "canonicalName": "Cooper",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mini/cooper"
+      ],
+      "sourceNames": [
+        "MINI Cooper"
+      ]
+    },
+    {
+      "brandId": "mini",
+      "sourceBrandId": "bmw",
+      "canonicalName": "Jcw",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mini/jcw"
+      ],
+      "sourceNames": [
+        "MINI JCW"
+      ]
+    },
+    {
+      "brandId": "mitsubishi",
+      "sourceBrandId": "mitsubishi",
+      "canonicalName": "RVR",
+      "disposition": "existing_model",
+      "modelIds": [
+        "mitsubishi/rvr"
+      ],
+      "sourceNames": [
+        "RVR"
+      ]
+    },
+    {
+      "brandId": "nissan",
+      "sourceBrandId": "nissan",
+      "canonicalName": "GT-R",
+      "disposition": "existing_model",
+      "modelIds": [
+        "nissan/gt-r"
+      ],
+      "sourceNames": [
+        "GT-R"
+      ]
+    },
+    {
+      "brandId": "porsche",
+      "sourceBrandId": "porsche",
+      "canonicalName": "Cayenne",
+      "disposition": "existing_model",
+      "modelIds": [
+        "porsche/cayenne"
+      ],
+      "sourceNames": [
+        "Cayenne"
+      ]
+    },
+    {
+      "brandId": "porsche",
+      "sourceBrandId": "porsche",
+      "canonicalName": "Macan",
+      "disposition": "existing_model",
+      "modelIds": [
+        "porsche/macan"
+      ],
+      "sourceNames": [
+        "Macan"
+      ]
+    },
+    {
+      "brandId": "porsche",
+      "sourceBrandId": "porsche",
+      "canonicalName": "Panamera",
+      "disposition": "existing_model",
+      "modelIds": [
+        "porsche/panamera"
+      ],
+      "sourceNames": [
+        "Panamera"
+      ]
+    },
+    {
+      "brandId": "subaru",
+      "sourceBrandId": "subaru",
+      "canonicalName": "Brz",
+      "disposition": "existing_model",
+      "modelIds": [
+        "subaru/brz"
+      ],
+      "sourceNames": [
+        "BRZ"
+      ]
+    },
+    {
+      "brandId": "subaru",
+      "sourceBrandId": "subaru",
+      "canonicalName": "Wrx",
+      "disposition": "existing_model",
+      "modelIds": [
+        "subaru/wrx"
+      ],
+      "sourceNames": [
+        "WRX"
+      ]
+    },
+    {
+      "brandId": "subaru",
+      "sourceBrandId": "subaru",
+      "canonicalName": "Xv",
+      "disposition": "existing_model",
+      "modelIds": [
+        "subaru/xv"
+      ],
+      "sourceNames": [
+        "XV"
+      ]
+    },
+    {
+      "brandId": "suzuki",
+      "sourceBrandId": "suzuki",
+      "canonicalName": "SX4",
+      "disposition": "existing_model",
+      "modelIds": [
+        "suzuki/sx4"
+      ],
+      "sourceNames": [
+        "SX4"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceBrandId": "toyota",
+      "canonicalName": "Bb",
+      "disposition": "existing_model",
+      "modelIds": [
+        "toyota/bb"
+      ],
+      "sourceNames": [
+        "bB"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceBrandId": "toyota",
+      "canonicalName": "C-HR",
+      "disposition": "existing_model",
+      "modelIds": [
+        "toyota/c-hr"
+      ],
+      "sourceNames": [
+        "C-HR"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceBrandId": "toyota",
+      "canonicalName": "GR86",
+      "disposition": "existing_model",
+      "modelIds": [
+        "toyota/gr86"
+      ],
+      "sourceNames": [
+        "GR86"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceBrandId": "toyota",
+      "canonicalName": "iQ",
+      "disposition": "existing_model",
+      "modelIds": [
+        "toyota/iq"
+      ],
+      "sourceNames": [
+        "iQ"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceBrandId": "toyota",
+      "canonicalName": "Sai",
+      "disposition": "existing_model",
+      "modelIds": [
+        "toyota/sai"
+      ],
+      "sourceNames": [
+        "SAI"
+      ]
+    }
+  ],
+  "ambiguous": [],
+  "unresolvedCrossBrandIdentities": [
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI Cooper 5 Door"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini Cooper D"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini Cooper D 5 door"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI Cooper S"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI Cooper S 5 Door"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini Cooper SD"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini Cooper SD 5 door"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI Cooper クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI Cooper ペ-スマン A4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI Cooper ペースマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI JCW クラブマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI JCW クロスオ-バ-"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI JCW クロスオ-バ- A4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI JCW クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI JCW コンバ-チブル"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI JCW ペースマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI One"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI One 5 Door"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI One クラブマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI ONE クロスオ-バ-"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI ONE クロスオーバー",
+        "MINI One クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI ク-パ-S クロスオ-バ-"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI ク-パ- クロスオ-バ-"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパ-S クラブマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパ-S クラブマン A4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパ- S コンバ-チブル"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパ- クラブマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパ- コンバ-チブル"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クラブマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クロスオーバーA4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD ペースマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパー S"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーSD クラブマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーSD クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーSD クロスオーバーA4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパー S クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパー S クロスオーバー A4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパー S ペースマン"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパー S ペースマン A4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "bmw",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "MINI クーパー クロスオーバー A4"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "citroen",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "jaguar",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "mercedes-benz",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    },
+    {
+      "sourceBrandId": "volvo",
+      "possibleBrandIds": [
+        "mini"
+      ],
+      "sourceNames": [
+        "Mini クーパーD クロスオーバー"
+      ],
+      "reason": "source common name starts with another staged brand, but no exact target-brand legacy model boundary exists"
+    }
+  ]
+}

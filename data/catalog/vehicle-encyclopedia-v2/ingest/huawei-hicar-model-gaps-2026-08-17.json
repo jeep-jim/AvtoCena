@@ -1,0 +1,1448 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "aion/i60",
+          "brandId": "aion",
+          "canonicalName": "i60",
+          "slug": "i60",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "埃安 i60",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aion/rt",
+          "brandId": "aion",
+          "canonicalName": "RT",
+          "slug": "rt",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "埃安 RT",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aion/ut",
+          "brandId": "aion",
+          "canonicalName": "UT",
+          "slug": "ut",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "埃安 UT",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aion/y-plus",
+          "brandId": "aion",
+          "canonicalName": "Y Plus",
+          "slug": "y-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "埃安 Y Plus",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aiways/u6",
+          "brandId": "aiways",
+          "canonicalName": "U6",
+          "slug": "u6",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "爱驰 U6",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rc-5",
+          "brandId": "baojun",
+          "canonicalName": "RC-5",
+          "slug": "rc-5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RC-5",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rc-5w",
+          "brandId": "baojun",
+          "canonicalName": "RC-5W",
+          "slug": "rc-5w",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RC-5W",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rc-6",
+          "brandId": "baojun",
+          "canonicalName": "RC-6",
+          "slug": "rc-6",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RC-6",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rm-5",
+          "brandId": "baojun",
+          "canonicalName": "RM-5",
+          "slug": "rm-5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RM-5",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rs-3",
+          "brandId": "baojun",
+          "canonicalName": "RS-3",
+          "slug": "rs-3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RS-3",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rs-5",
+          "brandId": "baojun",
+          "canonicalName": "RS-5",
+          "slug": "rs-5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RS-5",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/rs-7",
+          "brandId": "baojun",
+          "canonicalName": "RS-7",
+          "slug": "rs-7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 RS-7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/valli",
+          "brandId": "baojun",
+          "canonicalName": "Valli",
+          "slug": "valli",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 Valli",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "baojun/xiangjing",
+          "brandId": "baojun",
+          "canonicalName": "Xiangjing",
+          "slug": "xiangjing",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 享境",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bestune/b70",
+          "brandId": "bestune",
+          "canonicalName": "B70",
+          "slug": "b70",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "奔腾 B70",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bestune/yueyi-03",
+          "brandId": "bestune",
+          "canonicalName": "Yueyi 03",
+          "slug": "yueyi-03",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "奔腾 悦意03",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bestune/yueyi-07",
+          "brandId": "bestune",
+          "canonicalName": "Yueyi 07",
+          "slug": "yueyi-07",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "奔腾 悦意07",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bestune/yueyi-08",
+          "brandId": "bestune",
+          "canonicalName": "Yueyi 08",
+          "slug": "yueyi-08",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "奔腾 悦意08",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "exeed/et5",
+          "brandId": "exeed",
+          "canonicalName": "ET5",
+          "slug": "et5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "星途 ET5",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "exeed/ex7",
+          "brandId": "exeed",
+          "canonicalName": "EX7",
+          "slug": "ex7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "星途 EX7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/p7",
+          "brandId": "honda",
+          "canonicalName": "P7",
+          "slug": "p7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "本田 P7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/s7",
+          "brandId": "honda",
+          "canonicalName": "S7",
+          "slug": "s7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "本田 S7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "im-motors/l6",
+          "brandId": "im-motors",
+          "canonicalName": "L6",
+          "slug": "l6",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智己 L6",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "im-motors/ls6",
+          "brandId": "im-motors",
+          "canonicalName": "LS6",
+          "slug": "ls6",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智己 LS6",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "im-motors/ls7",
+          "brandId": "im-motors",
+          "canonicalName": "LS7",
+          "slug": "ls7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智己 LS7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "im-motors/ls8",
+          "brandId": "im-motors",
+          "canonicalName": "LS8",
+          "slug": "ls8",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智己 LS8",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "im-motors/ls9",
+          "brandId": "im-motors",
+          "canonicalName": "LS9",
+          "slug": "ls9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智己 LS9",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo-s",
+          "brandId": "wuling",
+          "canonicalName": "Bingo S",
+          "slug": "bingo-s",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 缤果S",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight",
+          "brandId": "wuling",
+          "canonicalName": "Starlight",
+          "slug": "starlight",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-560",
+          "brandId": "wuling",
+          "canonicalName": "Starlight 560",
+          "slug": "starlight-560",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光560",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730",
+          "brandId": "wuling",
+          "canonicalName": "Starlight 730",
+          "slug": "starlight-730",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光730",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-s",
+          "brandId": "wuling",
+          "canonicalName": "Starlight S",
+          "slug": "starlight-s",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光S",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xpeng/mona-m03",
+          "brandId": "xpeng",
+          "canonicalName": "MONA M03",
+          "slug": "mona-m03",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "小鹏 M03",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xpeng/p7-plus",
+          "brandId": "xpeng",
+          "canonicalName": "P7+",
+          "slug": "p7-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "小鹏 P7+",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xpeng/x9",
+          "brandId": "xpeng",
+          "canonicalName": "X9",
+          "slug": "x9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "小鹏 X9",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

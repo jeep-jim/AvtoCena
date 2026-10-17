@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-18",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 7,
+    "replacedModels": 3,
+    "newGenerations": 3,
+    "newVariants": 13
+  },
+  "modelIds": [
+    "baojun/yunhai",
+    "baojun/yep-plus",
+    "baojun/xiangjing"
+  ],
+  "generationIds": [
+    "baojun/yunhai/2026-model-year",
+    "baojun/yep-plus/2026-model-year",
+    "baojun/xiangjing/launch-2025"
+  ],
+  "variantIds": [
+    "baojun/yunhai/2026-model-year/2026-140km-phev-standard",
+    "baojun/yunhai/2026-model-year/2026-500km-ev-standard",
+    "baojun/yunhai/2026-model-year/2026-600km-ev-standard",
+    "baojun/yunhai/2026-model-year/2026-500km-ev",
+    "baojun/yunhai/2026-model-year/2026-600km-ev",
+    "baojun/yep-plus/2026-model-year/2026-301km-flagship",
+    "baojun/yep-plus/2026-model-year/2026-401km-flagship",
+    "baojun/yep-plus/2026-model-year/2026-501km-flagship",
+    "baojun/yep-plus/2026-model-year/2026-501km-intelligent-premium",
+    "baojun/xiangjing/launch-2025/140km-phev-standard",
+    "baojun/xiangjing/launch-2025/140km-phev-luxury",
+    "baojun/xiangjing/launch-2025/600km-ev-standard",
+    "baojun/xiangjing/launch-2025/600km-ev-luxury"
+  ],
+  "perModel": {
+    "baojun/yunhai": {
+      "variants": 5
+    },
+    "baojun/yep-plus": {
+      "variants": 4
+    },
+    "baojun/xiangjing": {
+      "variants": 4
+    }
+  },
+  "policy": {
+    "groupedMassModelBatch": true,
+    "officialManufacturerSourcesOnly": true,
+    "EnglishCanonicalNames": true,
+    "officialEnglishSourceSpellingsSearchable": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "unspecifiedBatteryBasisRejected": true,
+    "unstatedRangeCycleRejected": true,
+    "motorPeakNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

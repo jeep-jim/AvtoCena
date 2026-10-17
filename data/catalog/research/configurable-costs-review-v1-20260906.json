@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T23:56:22.317805+00:00",
+  "productionWrites": false,
+  "classification": "expected_active_crm_configuration",
+  "publicationBlocker": false,
+  "ownerEvidence": "CRM screenshot and owner clarification in this conversation: commercial costs are configurable.",
+  "china": {
+    "activeLogisticsRub": 150000,
+    "repositoryFallbackLogisticsRub": 250000,
+    "expectedDeltaRub": -100000,
+    "replayedCalculations": 13,
+    "allDeltasExpected": true,
+    "action": "Preserve the active owner setting; do not overwrite with repository fallback."
+  },
+  "otherMarkets": "Missing stored market records may resolve to active system average profiles; they do not establish that a market is disabled.",
+  "sources": [
+    {
+      "path": "data/catalog/research/production-settings-replay-v1-20260906.json",
+      "sha256": "be495c57fd2a3edb8f1c6f9e34627029b2947e9ff5d77e98fce2fcb9b277fa4c"
+    },
+    {
+      "path": "apps/web/lib/effective-market-settings.ts"
+    },
+    {
+      "path": "apps/web/lib/catalog/estimated-market-config.ts"
+    },
+    {
+      "path": "tests/catalog-configurable-market-costs.test.ts"
+    }
+  ],
+  "remaining": "Verify new inventory with current effective CRM settings. Vehicle evidence gaps and publication readiness are separate from commercial cost overrides.",
+  "limitation": "Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides."
+}

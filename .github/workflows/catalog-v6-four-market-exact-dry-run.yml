@@ -1,0 +1,128 @@
+name: Catalog V6 · four-market exact dry run
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_per_market:
+        description: Maximum exact public-ready cards per market
+        required: false
+        default: "1500"
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-four-market-exact-dry-run.yml"
+      - "scripts/catalog-live-recovery-market.mjs"
+      - "scripts/catalog-four-market-exact-dry-run-audit.mjs"
+      - "tests/catalog-four-market-exact-dry-run.test.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-four-market-exact-dry-run-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    name: ${{ matrix.market }} · strict exact no-write
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { market: korea, source_ids: "encar_direct,kcar_korea_open" }
+          - { market: uae, source_ids: "dubizzle_uae_open,dubicars_uae_exact" }
+          - {
+              market: europe,
+              source_ids: "mobile_de_open,autoscout_europe_open",
+            }
+          - {
+              market: georgia,
+              source_ids: "myauto_georgia_list,autopapa_georgia_open",
+            }
+    env:
+      RECOVERY_MARKET: ${{ matrix.market }}
+      RECOVERY_SOURCE_IDS: ${{ matrix.source_ids }}
+      RECOVERY_TARGET: ${{ github.event.inputs.target_per_market || '1500' }}
+      RECOVERY_MAX_PAGES: "1000"
+      RECOVERY_TIME_LIMIT_MS: "5100000"
+      RECOVERY_PREPARE_CONCURRENCY: "6"
+      RECOVERY_REQUEST_TIMEOUT_MS: "45000"
+      RECOVERY_RETRY_ATTEMPTS: "4"
+      RECOVERY_PREFERRED_MAX_RUB: "8000000"
+      RECOVERY_OUTPUT: exact-${{ matrix.market }}.json
+      RECOVERY_AUDIT_OUTPUT: exact-${{ matrix.market }}-audit.json
+      RECOVERY_STRICT_PUBLIC_READY: "1"
+      RECOVERY_AUDIT_SAMPLE_LIMIT: "100"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect and calculate strict exact cards without publishing
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - name: Audit every collected card
+        if: always()
+        run: npx tsx scripts/catalog-four-market-exact-dry-run-audit.mjs
+      - name: Compress diagnostic payload
+        if: always()
+        run: if [ -f "$RECOVERY_OUTPUT" ]; then gzip -9 "$RECOVERY_OUTPUT"; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: four-market-${{ matrix.market }}
+          path: |
+            exact-${{ matrix.market }}.json.gz
+            exact-${{ matrix.market }}-audit.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  summarize:
+    name: Four-market diagnostic summary
+    if: always()
+    needs: collect
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: four-market-*
+          path: reports
+      - name: Build no-write summary
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const files = fs.existsSync('reports')
+            ? fs.readdirSync('reports', { recursive: true }).filter((name) => String(name).endsWith('-audit.json'))
+            : [];
+          const reports = files.map((name) => JSON.parse(fs.readFileSync(`reports/${name}`, 'utf8')));
+          const total = reports.reduce((sum, report) => sum + Number(report.count || 0), 0);
+          const rows = reports.map((report) => `| ${report.expectedMarket} | ${report.count} | ${Object.entries(report.perSource || {}).map(([id, count]) => `${id}: ${count}`).join('<br>')} | ${report.passed ? 'yes' : 'no'} |`);
+          const markdown = [
+            '# Four-market exact dry-run',
+            '',
+            `Total exact public-ready cards: **${total}**`,
+            '',
+            '| Market | Cards | Sources | Passed |',
+            '|---|---:|---|---|',
+            ...rows,
+            '',
+            'Production writes: **none**. China and Japan: **not included**.',
+          ].join('\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);
+          fs.writeFileSync('four-market-summary.json', JSON.stringify({ version: 1, writes: false, total, reports }, null, 2));
+          console.log(markdown);
+          if (reports.length !== 4 || reports.some((report) => !report.passed)) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: four-market-summary
+          path: four-market-summary.json
+          if-no-files-found: warn
+          retention-days: 7

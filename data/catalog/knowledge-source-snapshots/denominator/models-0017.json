@@ -1,0 +1,8225 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 17,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "pontiac:montana",
+      "make": "Pontiac",
+      "model": "Montana",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:parisienne",
+      "make": "Pontiac",
+      "model": "Parisienne",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:phoenix",
+      "make": "Pontiac",
+      "model": "Phoenix",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:safari",
+      "make": "Pontiac",
+      "model": "Safari",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:silverstreak",
+      "make": "Pontiac",
+      "model": "Silver Streak",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:six",
+      "make": "Pontiac",
+      "model": "Six",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:solstice",
+      "make": "Pontiac",
+      "model": "Solstice",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:starchief",
+      "make": "Pontiac",
+      "model": "Star Chief",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:stratochief",
+      "make": "Pontiac",
+      "model": "Strato Chief",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:streamliner",
+      "make": "Pontiac",
+      "model": "Streamliner",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:sunbird",
+      "make": "Pontiac",
+      "model": "Sunbird",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:sunfire",
+      "make": "Pontiac",
+      "model": "Sunfire",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:superchief",
+      "make": "Pontiac",
+      "model": "Super Chief",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:tempest",
+      "make": "Pontiac",
+      "model": "Tempest",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:tempestlemans",
+      "make": "Pontiac",
+      "model": "Tempest Le Mans",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:torpedo",
+      "make": "Pontiac",
+      "model": "Torpedo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:torrent",
+      "make": "Pontiac",
+      "model": "Torrent",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:transsport",
+      "make": "Pontiac",
+      "model": "Trans Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:ventura",
+      "make": "Pontiac",
+      "model": "Ventura",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:vibe",
+      "make": "Pontiac",
+      "model": "Vibe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:wave",
+      "make": "Pontiac",
+      "model": "Wave",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:356",
+      "make": "Porsche",
+      "model": "356",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:718",
+      "make": "Porsche",
+      "model": "718",
+      "aliases": [
+        "718 Boxster",
+        "718 Boxster / 718 Cayman",
+        "718 Boxster / 718 Cayman / 718 Boxster T/ 718 Cayman T",
+        "718 Boxster S",
+        "718 Boxster S / 718 Cayman S",
+        "718 Cayman",
+        "718 Cayman S"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/718",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "718"
+      }
+    },
+    {
+      "key": "porsche:904",
+      "make": "Porsche",
+      "model": "904",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:911",
+      "make": "Porsche",
+      "model": "911",
+      "aliases": [
+        "911 Carrera",
+        "911 Carrera 4",
+        "911 Carrera 4 GTS",
+        "911 Carrera 4S",
+        "911 Carrera GTS",
+        "911 Carrera S",
+        "911 Targa 4",
+        "911 Targa 4 GTS",
+        "911 Targa 4S",
+        "911 Turbo",
+        "911 Turbo S",
+        "992 GT3",
+        "992 GT3 RS",
+        "992 GT3 S/T",
+        "992 GT3 SPORT TURISMO",
+        "992 GT3 TOURING"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/911",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "911"
+      }
+    },
+    {
+      "key": "porsche:912",
+      "make": "Porsche",
+      "model": "912",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:914",
+      "make": "Porsche",
+      "model": "914",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:918",
+      "make": "Porsche",
+      "model": "918",
+      "aliases": [
+        "918 SPYDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/918",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "918"
+      }
+    },
+    {
+      "key": "porsche:924",
+      "make": "Porsche",
+      "model": "924",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/924",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "924"
+      }
+    },
+    {
+      "key": "porsche:928",
+      "make": "Porsche",
+      "model": "928",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:944",
+      "make": "Porsche",
+      "model": "944",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:968",
+      "make": "Porsche",
+      "model": "968",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:boxster",
+      "make": "Porsche",
+      "model": "Boxster",
+      "aliases": [
+        "BOXSTER"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/boxster",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "Boxster"
+      }
+    },
+    {
+      "key": "porsche:cayenne",
+      "make": "Porsche",
+      "model": "Cayenne",
+      "aliases": [
+        "Cayenne",
+        "Cayenne GTS",
+        "Cayenne S",
+        "Cayenne Turbo"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/cayenne",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "Cayenne"
+      }
+    },
+    {
+      "key": "porsche:cayman",
+      "make": "Porsche",
+      "model": "Cayman",
+      "aliases": [
+        "CAYMAN",
+        "PORSCHE CAYMAN"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/cayman",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "Cayman"
+      }
+    },
+    {
+      "key": "porsche:gt",
+      "make": "Porsche",
+      "model": "GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": null,
+        "canonicalMake": "Porsche",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "porsche:macan",
+      "make": "Porsche",
+      "model": "Macan",
+      "aliases": [
+        "Macan",
+        "Macan GTS",
+        "Macan S",
+        "Macan T",
+        "Macan Turbo"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/macan",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "Macan"
+      }
+    },
+    {
+      "key": "porsche:panamera",
+      "make": "Porsche",
+      "model": "Panamera",
+      "aliases": [
+        "Panamera",
+        "Panamera 4",
+        "Panamera 4S",
+        "Panamera GTS",
+        "Panamera Turbo",
+        "Panamera Turbo S"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/panamera",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "Panamera"
+      }
+    },
+    {
+      "key": "porsche:taycan",
+      "make": "Porsche",
+      "model": "Taycan",
+      "aliases": [],
+      "bodyTypes": [
+        "Sports saloon",
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2019,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "porsche",
+        "modelId": "porsche/taycan",
+        "canonicalMake": "Porsche",
+        "canonicalModel": "Taycan"
+      }
+    },
+    {
+      "key": "prince:gloria6",
+      "make": "Prince",
+      "model": "Gloria 6",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "princess:1800hl",
+      "make": "Princess",
+      "model": "1800 Hl",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "proton:emas5",
+      "make": "Proton",
+      "model": "E.mas 5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:emas7",
+      "make": "Proton",
+      "model": "E.mas 7",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:gen2",
+      "make": "Proton",
+      "model": "Gen 2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:iriz",
+      "make": "Proton",
+      "model": "Iriz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:persona",
+      "make": "Proton",
+      "model": "Persona",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:s70",
+      "make": "Proton",
+      "model": "S70",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:saga",
+      "make": "Proton",
+      "model": "Saga",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:satria",
+      "make": "Proton",
+      "model": "Satria",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:suprima",
+      "make": "Proton",
+      "model": "Suprima",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:x50",
+      "make": "Proton",
+      "model": "X50",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:x70",
+      "make": "Proton",
+      "model": "X70",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "proton:x90",
+      "make": "Proton",
+      "model": "X90",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "proton",
+        "modelId": null,
+        "canonicalMake": "Proton",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "puch:230ge",
+      "make": "Puch",
+      "model": "230 GE",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "puch:g320",
+      "make": "Puch",
+      "model": "G320",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ram:1500",
+      "make": "RAM",
+      "model": "1500",
+      "aliases": [
+        "RAM 1500"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ram",
+        "modelId": "ram/1500",
+        "canonicalMake": "RAM",
+        "canonicalModel": "1500"
+      }
+    },
+    {
+      "key": "ram:1500classic",
+      "make": "Ram",
+      "model": "1500 Classic",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ram",
+        "modelId": null,
+        "canonicalMake": "RAM",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ram:promaster",
+      "make": "Ram",
+      "model": "Promaster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ram",
+        "modelId": null,
+        "canonicalMake": "RAM",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ram:promastercity",
+      "make": "Ram",
+      "model": "Promaster City",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ram",
+        "modelId": null,
+        "canonicalMake": "RAM",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rambler:770classic",
+      "make": "Rambler",
+      "model": "770 Classic",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:ambassador",
+      "make": "Rambler",
+      "model": "Ambassador",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:ambassador990",
+      "make": "Rambler",
+      "model": "Ambassador 990",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:american",
+      "make": "Rambler",
+      "model": "American",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:american220",
+      "make": "Rambler",
+      "model": "American 220",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:classic",
+      "make": "Rambler",
+      "model": "Classic",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:classic6",
+      "make": "Rambler",
+      "model": "Classic 6",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:classic660",
+      "make": "Rambler",
+      "model": "Classic 660",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:classic770",
+      "make": "Rambler",
+      "model": "Classic 770",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:custom",
+      "make": "Rambler",
+      "model": "Custom",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:javelin",
+      "make": "Rambler",
+      "model": "Javelin",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:rebel",
+      "make": "Rambler",
+      "model": "Rebel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:rebel770",
+      "make": "Rambler",
+      "model": "Rebel 770",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rambler:super",
+      "make": "Rambler",
+      "model": "Super",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ravon:r2",
+      "make": "Ravon",
+      "model": "R2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ravon",
+        "modelId": null,
+        "canonicalMake": "Ravon",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ravon:r4",
+      "make": "Ravon",
+      "model": "R4",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ravon",
+        "modelId": null,
+        "canonicalMake": "Ravon",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "reliant:kitten",
+      "make": "Reliant",
+      "model": "Kitten",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reliant:rebel",
+      "make": "Reliant",
+      "model": "Rebel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reliant:regal",
+      "make": "Reliant",
+      "model": "Regal",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reliant:robin",
+      "make": "Reliant",
+      "model": "Robin",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reliant:scimitar",
+      "make": "Reliant",
+      "model": "Scimitar",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reliant:scimitarss1",
+      "make": "Reliant",
+      "model": "Scimitar SS1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reliant:supervan",
+      "make": "Reliant",
+      "model": "Supervan",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "renault:10",
+      "make": "Renault",
+      "model": "10",
+      "aliases": [
+        "10-1100"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/10",
+        "canonicalMake": "Renault",
+        "canonicalModel": "10"
+      }
+    },
+    {
+      "key": "renault:11",
+      "make": "Renault",
+      "model": "11",
+      "aliases": [
+        "Renault Encore"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:12",
+      "make": "Renault",
+      "model": "12",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:14",
+      "make": "Renault",
+      "model": "14",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:16",
+      "make": "Renault",
+      "model": "16",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:17",
+      "make": "Renault",
+      "model": "17",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:18",
+      "make": "Renault",
+      "model": "18",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:19",
+      "make": "Renault",
+      "model": "19",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:20",
+      "make": "Renault",
+      "model": "20",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:21",
+      "make": "Renault",
+      "model": "21",
+      "aliases": [
+        "Eagle Medallion",
+        "Renault Medallion"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:25",
+      "make": "Renault",
+      "model": "25",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:30",
+      "make": "Renault",
+      "model": "30",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:4",
+      "make": "Renault",
+      "model": "4",
+      "aliases": [
+        "RENAULT 4"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/4",
+        "canonicalMake": "Renault",
+        "canonicalModel": "4"
+      }
+    },
+    {
+      "key": "renault:4cv",
+      "make": "Renault",
+      "model": "4CV",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:5",
+      "make": "Renault",
+      "model": "5",
+      "aliases": [
+        "5 E-TECH",
+        "5 E-TECH ELECTRIC",
+        "RENAULT 5"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/5",
+        "canonicalMake": "Renault",
+        "canonicalModel": "5"
+      }
+    },
+    {
+      "key": "renault:5turbo",
+      "make": "Renault",
+      "model": "5 Turbo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:6",
+      "make": "Renault",
+      "model": "6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:8",
+      "make": "Renault",
+      "model": "8",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:9",
+      "make": "Renault",
+      "model": "9",
+      "aliases": [
+        "Renault Alliance"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:adriatik",
+      "make": "Renault",
+      "model": "Adriatik",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:alliance",
+      "make": "Renault",
+      "model": "Alliance",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:alpine",
+      "make": "Renault",
+      "model": "Alpine",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:arkana",
+      "make": "Renault",
+      "model": "Arkana",
+      "aliases": [
+        "Renault Arkana"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/arkana",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Arkana"
+      }
+    },
+    {
+      "key": "renault:austral",
+      "make": "Renault",
+      "model": "Austral",
+      "aliases": [
+        "Renault Austral"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/austral",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Austral"
+      }
+    },
+    {
+      "key": "renault:avantime",
+      "make": "Renault",
+      "model": "Avantime",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:ax",
+      "make": "Renault",
+      "model": "Ax",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:burstnert625",
+      "make": "Renault",
+      "model": "Burstner T625",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:captur",
+      "make": "Renault",
+      "model": "Captur",
+      "aliases": [
+        "Renault Captur",
+        "キャプチャー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/captur",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Captur"
+      }
+    },
+    {
+      "key": "renault:caravelle",
+      "make": "Renault",
+      "model": "Caravelle",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:clio",
+      "make": "Renault",
+      "model": "Clio",
+      "aliases": [
+        "CLIO",
+        "RENAULT CLIO",
+        "ルーテシア"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/clio",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Clio"
+      }
+    },
+    {
+      "key": "renault:cliov6",
+      "make": "Renault",
+      "model": "Clio V6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:cv545bc",
+      "make": "Renault",
+      "model": "CV545BC",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:dauphine",
+      "make": "Renault",
+      "model": "Dauphine",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:delfinperformance625",
+      "make": "Renault",
+      "model": "Delfin Performance 625",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:duster",
+      "make": "Renault",
+      "model": "Duster",
+      "aliases": [
+        "DUSTER",
+        "Dacia Duster"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/duster",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Duster"
+      }
+    },
+    {
+      "key": "renault:espace",
+      "make": "Renault",
+      "model": "Espace",
+      "aliases": [
+        "ESPACE"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/espace",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Espace"
+      }
+    },
+    {
+      "key": "renault:floride",
+      "make": "Renault",
+      "model": "Floride",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:fluence",
+      "make": "Renault",
+      "model": "Fluence",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:fuego",
+      "make": "Renault",
+      "model": "Fuego",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:gordini",
+      "make": "Renault",
+      "model": "Gordini",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:gta",
+      "make": "Renault",
+      "model": "Gta",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:kadjar",
+      "make": "Renault",
+      "model": "Kadjar",
+      "aliases": [
+        "KADJAR",
+        "RENAULT KADJAR"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/kadjar",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Kadjar"
+      }
+    },
+    {
+      "key": "renault:kangoo",
+      "make": "Renault",
+      "model": "Kangoo",
+      "aliases": [
+        "KANGOO",
+        "カングー"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/kangoo",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Kangoo"
+      }
+    },
+    {
+      "key": "renault:koleos",
+      "make": "Renault",
+      "model": "Koleos",
+      "aliases": [
+        "KOLEOS"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/koleos",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Koleos"
+      }
+    },
+    {
+      "key": "renault:laguna",
+      "make": "Renault",
+      "model": "Laguna",
+      "aliases": [
+        "LAGUNA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/laguna",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Laguna"
+      }
+    },
+    {
+      "key": "renault:latitude",
+      "make": "Renault",
+      "model": "Latitude",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:logan",
+      "make": "Renault",
+      "model": "Logan",
+      "aliases": [
+        "Dacia Logan"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:mascott",
+      "make": "Renault",
+      "model": "Mascott",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:master",
+      "make": "Renault",
+      "model": "Master",
+      "aliases": [
+        "MASTER",
+        "MASTER E-TECH",
+        "MASTER ETRUSCO",
+        "MASTER L2H2",
+        "MASTER LL35 BUSINESS DCI",
+        "MASTER ML35 BUSINESS DCI",
+        "MASTER MM33 BUSINESS DCI",
+        "MASTER RED - COMBI 8/9 FWD 3T5",
+        "MASTER SL28 BNESS ENGY DCI S-A",
+        "MASTER STIL",
+        "MASTER Z.E.",
+        "New Renault Master"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/master",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Master"
+      }
+    },
+    {
+      "key": "renault:megane",
+      "make": "Renault",
+      "model": "Megane",
+      "aliases": [
+        "MEGANE",
+        "RENAULT MEGANE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/megane",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Megane"
+      }
+    },
+    {
+      "key": "renault:modus",
+      "make": "Renault",
+      "model": "Modus",
+      "aliases": [
+        "MODUS"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/modus",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Modus"
+      }
+    },
+    {
+      "key": "renault:mt",
+      "make": "Renault",
+      "model": "MT",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:nn",
+      "make": "Renault",
+      "model": "Nn",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:r44",
+      "make": "Renault",
+      "model": "R44",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:rafale",
+      "make": "Renault",
+      "model": "Rafale",
+      "aliases": [
+        "RAFALE"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/rafale",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Rafale"
+      }
+    },
+    {
+      "key": "renault:rodeo",
+      "make": "Renault",
+      "model": "Rodeo",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:rt6844",
+      "make": "Renault",
+      "model": "Rt 6844",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:safrane",
+      "make": "Renault",
+      "model": "Safrane",
+      "aliases": [
+        "SAFRANE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/safrane",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Safrane"
+      }
+    },
+    {
+      "key": "renault:samsungqm6",
+      "make": "Renault",
+      "model": "Samsung QM6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:sandero",
+      "make": "Renault",
+      "model": "Sandero",
+      "aliases": [
+        "Dacia Sandero"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:sanderostepway",
+      "make": "Renault",
+      "model": "Sandero Stepway",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:scenic",
+      "make": "Renault",
+      "model": "Scenic",
+      "aliases": [
+        "GRAND SCENIC",
+        "GRAND SCENIC 13 16V",
+        "GRAND SCENIC 13 16V AUT",
+        "GRAND SCENIC 17 DCI",
+        "GRAND SCENIC 17 DCI AUT",
+        "GRAND SCENIC ICONIC BLUE DCI",
+        "GRAND SCENIC ICONIC BLUE DCI A",
+        "GRAND SCENIC ICONIC TCE",
+        "GRAND SCENIC ICONIC TCE AUTO",
+        "GRAND SCENIC PLAY BLUE DCI",
+        "GRAND SCENIC PLAY BLUE DCI A",
+        "GRAND SCENIC PLAY TCE",
+        "GRAND SCENIC SIGN BLUE DCI A",
+        "GRAND SCENIC SIGNATURE DCI",
+        "GRAND SCENIC SIGNATURE TCE",
+        "GRAND SCENIC SIGNATURE TCE A",
+        "RENAULT SCENIC",
+        "SCENIC"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/scenic",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Scenic"
+      }
+    },
+    {
+      "key": "renault:spider",
+      "make": "Renault",
+      "model": "Spider",
+      "aliases": [
+        "SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/spider",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Spider"
+      }
+    },
+    {
+      "key": "renault:symbioz",
+      "make": "Renault",
+      "model": "Symbioz",
+      "aliases": [
+        "SYMBIOZ"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/symbioz",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Symbioz"
+      }
+    },
+    {
+      "key": "renault:symbol",
+      "make": "Renault",
+      "model": "Symbol",
+      "aliases": [
+        "SYMBOL"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/symbol",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Symbol"
+      }
+    },
+    {
+      "key": "renault:talisman",
+      "make": "Renault",
+      "model": "Talisman",
+      "aliases": [
+        "TALISMAN"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/talisman",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Talisman"
+      }
+    },
+    {
+      "key": "renault:thalia",
+      "make": "Renault",
+      "model": "Thalia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:trafic",
+      "make": "Renault",
+      "model": "Trafic",
+      "aliases": [
+        "TRAFFIC",
+        "TRAFIC"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/trafic",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Trafic"
+      }
+    },
+    {
+      "key": "renault:twingo",
+      "make": "Renault",
+      "model": "Twingo",
+      "aliases": [
+        "RENAULT TWINGO",
+        "TWINGO",
+        "トゥインゴ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/twingo",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Twingo"
+      }
+    },
+    {
+      "key": "renault:twizy",
+      "make": "Renault",
+      "model": "Twizy",
+      "aliases": [
+        "TWIZY"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/twizy",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Twizy"
+      }
+    },
+    {
+      "key": "renault:velsatis",
+      "make": "Renault",
+      "model": "Vel Satis",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:wind",
+      "make": "Renault",
+      "model": "Wind",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": null,
+        "canonicalMake": "Renault",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "renault:zoe",
+      "make": "Renault",
+      "model": "Zoe",
+      "aliases": [
+        "ZOE",
+        "ZOE / /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "renault",
+        "modelId": "renault/zoe",
+        "canonicalMake": "Renault",
+        "canonicalModel": "Zoe"
+      }
+    },
+    {
+      "key": "reo:flyingcloud",
+      "make": "Reo",
+      "model": "Flying Cloud",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reo:runabout",
+      "make": "Reo",
+      "model": "Runabout",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "reo:wolverine",
+      "make": "Reo",
+      "model": "Wolverine",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:112litre",
+      "make": "Riley",
+      "model": "1 1/2 Litre",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:1300",
+      "make": "Riley",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:212ltr",
+      "make": "Riley",
+      "model": "2 1/2 Ltr",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:adelphi",
+      "make": "Riley",
+      "model": "Adelphi",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:brooklands",
+      "make": "Riley",
+      "model": "Brooklands",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:elf",
+      "make": "Riley",
+      "model": "Elf",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:elfmk",
+      "make": "Riley",
+      "model": "Elf Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:elfmkii",
+      "make": "Riley",
+      "model": "Elf Mkii",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:falcon",
+      "make": "Riley",
+      "model": "Falcon",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:gamecock",
+      "make": "Riley",
+      "model": "Gamecock",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:imp",
+      "make": "Riley",
+      "model": "Imp",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:kestrel",
+      "make": "Riley",
+      "model": "Kestrel",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:lynx",
+      "make": "Riley",
+      "model": "Lynx",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:mentone",
+      "make": "Riley",
+      "model": "Mentone",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:merlin",
+      "make": "Riley",
+      "model": "Merlin",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:monaco",
+      "make": "Riley",
+      "model": "Monaco",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:nine",
+      "make": "Riley",
+      "model": "Nine",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:onepointfive",
+      "make": "Riley",
+      "model": "One-Point-Five",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:pathfinder",
+      "make": "Riley",
+      "model": "Pathfinder",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:rma",
+      "make": "Riley",
+      "model": "R M A",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:rmb",
+      "make": "Riley",
+      "model": "Rmb",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "riley:sports",
+      "make": "Riley",
+      "model": "Sports",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "rivian:r1s",
+      "make": "Rivian",
+      "model": "R1S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rivian",
+        "modelId": null,
+        "canonicalMake": "Rivian",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rivian:r1t",
+      "make": "Rivian",
+      "model": "R1T",
+      "aliases": [
+        "RIVIAN R1T"
+      ],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rivian",
+        "modelId": "rivian/r1t",
+        "canonicalMake": "Rivian",
+        "canonicalModel": "R1T"
+      }
+    },
+    {
+      "key": "rollsroyce:20",
+      "make": "Rolls-Royce",
+      "model": "20",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:20hp",
+      "make": "Rolls-Royce",
+      "model": "20 Hp",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:2025",
+      "make": "Rolls-Royce",
+      "model": "2025",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:4050hpphantom",
+      "make": "Rolls-Royce",
+      "model": "40/50 Hp Phantom",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:4050silverghost",
+      "make": "Rolls-Royce",
+      "model": "40/50 Silver Ghost",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:blackbadgecullinan",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Cullinan",
+      "aliases": [
+        "BLACK BADGE CULLINAN"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/black-badge-cullinan",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Black Badge Cullinan"
+      }
+    },
+    {
+      "key": "rollsroyce:blackbadgeghost",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Ghost",
+      "aliases": [
+        "BLACK BADGE GHOST"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/black-badge-ghost",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Black Badge Ghost"
+      }
+    },
+    {
+      "key": "rollsroyce:blackbadgespectre",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Spectre",
+      "aliases": [
+        "BLACK BADGE SPECTRE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/black-badge-spectre",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Black Badge Spectre"
+      }
+    },
+    {
+      "key": "rollsroyce:camargue",
+      "make": "Rolls-Royce",
+      "model": "Camargue",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:cloud",
+      "make": "Rolls-Royce",
+      "model": "Cloud",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:corniche",
+      "make": "Rolls-Royce",
+      "model": "Corniche",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:corniche2",
+      "make": "Rolls-Royce",
+      "model": "Corniche 2",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:cullinan",
+      "make": "Rolls-Royce",
+      "model": "Cullinan",
+      "aliases": [
+        "CULLINAN"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/cullinan",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Cullinan"
+      }
+    },
+    {
+      "key": "rollsroyce:cullinanblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Cullinan Black Badge",
+      "aliases": [
+        "CULLINAN BLACK BADGE",
+        "Rolls-Royce Cullinan Black Badge"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/cullinan-black-badge",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Cullinan Black Badge"
+      }
+    },
+    {
+      "key": "rollsroyce:dawn",
+      "make": "Rolls-Royce",
+      "model": "Dawn",
+      "aliases": [
+        "DAWN",
+        "Rolls-Royce Dawn"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/dawn",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Dawn"
+      }
+    },
+    {
+      "key": "rollsroyce:dawnblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Dawn Black Badge",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:flyingspur",
+      "make": "Rolls-Royce",
+      "model": "Flying Spur",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:ghost",
+      "make": "Rolls-Royce",
+      "model": "Ghost",
+      "aliases": [
+        "GHOST",
+        "Rolls-Royce Ghost"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/ghost",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Ghost"
+      }
+    },
+    {
+      "key": "rollsroyce:ghostblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Ghost Black Badge",
+      "aliases": [
+        "GHOST BLACK BADGE"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/ghost-black-badge",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Ghost Black Badge"
+      }
+    },
+    {
+      "key": "rollsroyce:ghostewb",
+      "make": "Rolls-Royce",
+      "model": "Ghost Ewb",
+      "aliases": [
+        "GHOST EWB",
+        "Ghost EWB",
+        "Rolls-Royce Ghost EWB"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/ghost-ewb",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Ghost Ewb"
+      }
+    },
+    {
+      "key": "rollsroyce:ghostextended",
+      "make": "Rolls-Royce",
+      "model": "Ghost Extended",
+      "aliases": [
+        "GHOST EXTENDED"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/ghost-extended",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Ghost Extended"
+      }
+    },
+    {
+      "key": "rollsroyce:parkward",
+      "make": "Rolls-Royce",
+      "model": "Park Ward",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:phantom",
+      "make": "Rolls-Royce",
+      "model": "Phantom",
+      "aliases": [
+        "PHANTOM"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/phantom",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Phantom"
+      }
+    },
+    {
+      "key": "rollsroyce:phantom1",
+      "make": "Rolls-Royce",
+      "model": "Phantom 1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:phantom2",
+      "make": "Rolls-Royce",
+      "model": "Phantom 2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:phantomdrophead",
+      "make": "Rolls-Royce",
+      "model": "Phantom Drophead",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "my",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:phantomewb",
+      "make": "Rolls-Royce",
+      "model": "Phantom Ewb",
+      "aliases": [
+        "PHANTOM EWB",
+        "Phantom EWB"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/phantom-ewb",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Phantom Ewb"
+      }
+    },
+    {
+      "key": "rollsroyce:phantomextended",
+      "make": "Rolls-Royce",
+      "model": "Phantom Extended",
+      "aliases": [
+        "PHANTOM EXTENDED"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/phantom-extended",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Phantom Extended"
+      }
+    },
+    {
+      "key": "rollsroyce:phantomi",
+      "make": "Rolls-Royce",
+      "model": "Phantom I",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:royce",
+      "make": "Rolls-Royce",
+      "model": "Royce",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:seraph",
+      "make": "Rolls-Royce",
+      "model": "Seraph",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silver",
+      "make": "Rolls-Royce",
+      "model": "Silver",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvercloud",
+      "make": "Rolls-Royce",
+      "model": "Silver Cloud",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvercloud1",
+      "make": "Rolls-Royce",
+      "model": "Silver Cloud 1",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvercloud11",
+      "make": "Rolls-Royce",
+      "model": "Silver Cloud 11",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvercloud2",
+      "make": "Rolls-Royce",
+      "model": "Silver Cloud 2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvercloud3",
+      "make": "Rolls-Royce",
+      "model": "Silver Cloud 3",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverdawn",
+      "make": "Rolls-Royce",
+      "model": "Silver Dawn",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverghost",
+      "make": "Rolls-Royce",
+      "model": "Silver Ghost",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverseraph",
+      "make": "Rolls-Royce",
+      "model": "Silver Seraph",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvershadow",
+      "make": "Rolls-Royce",
+      "model": "Silver Shadow",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvershadow1",
+      "make": "Rolls-Royce",
+      "model": "Silver Shadow 1",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvershadow2",
+      "make": "Rolls-Royce",
+      "model": "Silver Shadow 2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvershadowi",
+      "make": "Rolls-Royce",
+      "model": "Silver Shadow I",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvershadowlwb",
+      "make": "Rolls-Royce",
+      "model": "Silver Shadow Lwb",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverspirit",
+      "make": "Rolls-Royce",
+      "model": "Silver Spirit",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverspirit2",
+      "make": "Rolls-Royce",
+      "model": "Silver Spirit 2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverspur",
+      "make": "Rolls-Royce",
+      "model": "Silver Spur",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silverwraith",
+      "make": "Rolls-Royce",
+      "model": "Silver Wraith",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:silvercloudi",
+      "make": "Rolls-Royce",
+      "model": "Silver-Cloud I",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:spectre",
+      "make": "Rolls-Royce",
+      "model": "Spectre",
+      "aliases": [
+        "SPECTRE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/spectre",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Spectre"
+      }
+    },
+    {
+      "key": "rollsroyce:spirit",
+      "make": "Rolls-Royce",
+      "model": "Spirit",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": null,
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rollsroyce:wraith",
+      "make": "Rolls-Royce",
+      "model": "Wraith",
+      "aliases": [
+        "WRAITH"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/wraith",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Wraith"
+      }
+    },
+    {
+      "key": "rollsroyce:wraithblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Wraith Black Badge",
+      "aliases": [
+        "WRAITH BLACK BADGE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rolls-royce",
+        "modelId": "rolls-royce/wraith-black-badge",
+        "canonicalMake": "Rolls-Royce",
+        "canonicalModel": "Wraith Black Badge"
+      }
+    },
+    {
+      "key": "rover:10",
+      "make": "Rover",
+      "model": "10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:100",
+      "make": "Rover",
+      "model": "100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:109",
+      "make": "Rover",
+      "model": "109",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:110",
+      "make": "Rover",
+      "model": "110",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:114",
+      "make": "Rover",
+      "model": "114",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:12",
+      "make": "Rover",
+      "model": "12",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:14",
+      "make": "Rover",
+      "model": "14",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:16",
+      "make": "Rover",
+      "model": "16",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:200",
+      "make": "Rover",
+      "model": "200",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:2000",
+      "make": "Rover",
+      "model": "2000",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:214",
+      "make": "Rover",
+      "model": "214",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:216",
+      "make": "Rover",
+      "model": "216",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:218",
+      "make": "Rover",
+      "model": "218",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "rover:220",
+      "make": "Rover",
+      "model": "220",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "rover",
+        "modelId": null,
+        "canonicalMake": "Rover",
+        "canonicalModel": null
+      }
+    }
+  ]
+}

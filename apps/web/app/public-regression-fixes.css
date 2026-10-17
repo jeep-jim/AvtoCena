@@ -1,0 +1,419 @@
+/* Small, isolated corrections for public pages. Do not restyle established components. */
+
+/* Homepage keeps the complete one-line wordmark and its subtitle. */
+.ac-home-page .ac-public-header a[href="/"] > div:last-child > div:first-child {
+  display: block !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+.ac-home-page .ac-public-header a[href="/"] > div:last-child > div:last-child {
+  display: block !important;
+}
+
+/* Inner public pages use a compact wordmark: no subtitle, two lines only on narrow screens. */
+:is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:last-child {
+  display: none !important;
+}
+:is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
+  white-space: nowrap;
+}
+@media (max-width: 639px) {
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header > div {
+    gap: .4rem !important;
+    padding-left: .65rem !important;
+    padding-right: .65rem !important;
+  }
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] {
+    gap: .4rem !important;
+  }
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
+    display: grid !important;
+    line-height: .78 !important;
+    white-space: normal !important;
+    font-size: 15px !important;
+  }
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:first-child > span {
+    display: block;
+  }
+}
+
+/* Price explanations always sit above photos, favorites and adjacent cards. */
+.ac-catalog-card:has(.ac-price-trend-popover) {
+  z-index: 11990 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+.ac-catalog-card:has(.ac-price-trend-popover) > a {
+  position: relative !important;
+  z-index: 12010 !important;
+  overflow: visible !important;
+}
+.ac-price-trend-popover {
+  z-index: 12020 !important;
+}
+
+/* Brand tiles share one rail surface; Local brand PNGs stay transparent and equal-sized. */
+.ac-brand-rail a[href^="/cars/brand/"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  -webkit-tap-highlight-color: transparent;
+}
+.ac-brand-rail img {
+  display: block;
+  width: 76px !important;
+  height: 40px !important;
+  max-width: 76px !important;
+  max-height: 40px !important;
+  object-fit: contain !important;
+  background: transparent !important;
+  filter: none !important;
+}
+
+/* Keep homepage brands before cars; mobile rates follow the whole catalogue. */
+.ac-home-page section:has(> .ac-brand-rail) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.ac-home-page section:has(> .ac-brand-rail) > div:first-child {
+  order: 1;
+}
+.ac-home-page section:has(> .ac-brand-rail) > .ac-brand-rail {
+  order: 2;
+  margin-top: 1rem !important;
+}
+.ac-home-page section:has(> .ac-brand-rail) > div.mt-7 {
+  order: 3;
+}
+
+/* TopAvto copy keeps a readable width; the logo has no coloured backing. */
+.ac-executor-block {
+  position: relative !important;
+  min-width: 0 !important;
+}
+.ac-executor-block > div:first-child {
+  min-width: 0 !important;
+}
+.ac-executor-logo {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.ac-executor-logo img {
+  display: block;
+  width: 100% !important;
+  object-fit: contain !important;
+  background: transparent !important;
+}
+
+/* Buyer gallery uses native momentum while the requestAnimationFrame loop moves it continuously. */
+.ac-buyers-rail {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  will-change: scroll-position;
+}
+.ac-buyers-rail::-webkit-scrollbar { display: none; }
+
+@media (min-width: 768px) {
+  .ac-executor-block {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 240px) !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: start !important;
+    gap: .7rem 1.5rem !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+  .ac-executor-block::before,
+  .ac-executor-block::after {
+    display: none !important;
+  }
+  .ac-executor-block > div:first-child {
+    display: contents !important;
+  }
+  .ac-executor-block > div:first-child > h3 {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: center !important;
+  }
+  .ac-executor-block > div:first-child > p:first-of-type {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: .15rem !important;
+    padding: 0 !important;
+  }
+  .ac-executor-block > div:first-child > p:last-of-type {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: .2rem !important;
+    padding: 0 !important;
+  }
+  .ac-executor-logo {
+    position: static !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: start !important;
+    justify-self: end !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .ac-executor-logo img {
+    max-height: 82px !important;
+  }
+  html[data-theme="light"] .ac-executor-logo img {
+    mix-blend-mode: multiply;
+  }
+}
+
+/* Three compact logo columns and a stepped TopAvto heading on phones. */
+@media (max-width: 767px) {
+  .ac-page-copy p.text-sm,
+  .ac-page-copy li.text-sm {
+    line-height: 1.48 !important;
+  }
+
+  .ac-brand-rail > div.grid.grid-cols-2 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: .15rem !important;
+  }
+  .ac-brand-rail > div.grid.grid-cols-2 > a[href^="/cars/brand/"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding-left: .1rem !important;
+    padding-right: .1rem !important;
+  }
+
+  .ac-executor-block {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 90px !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: start !important;
+    gap: .45rem .65rem !important;
+    padding: 1rem !important;
+  }
+  .ac-executor-block > div:first-child {
+    display: contents !important;
+  }
+  .ac-executor-logo {
+    position: static !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: start !important;
+    justify-self: end !important;
+    width: 90px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .ac-executor-block > div:first-child > h3 {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: start !important;
+    line-height: 1.25 !important;
+  }
+  .ac-executor-block > div:first-child > p {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .ac-executor-block > div:first-child > p:first-of-type {
+    grid-row: 2 !important;
+    margin-top: .1rem !important;
+  }
+  .ac-executor-block > div:first-child > p:last-of-type {
+    grid-row: 3 !important;
+    margin-top: .45rem !important;
+  }
+  .ac-executor-logo img {
+    max-height: 44px !important;
+  }
+}
+
+/* Exact mobile TopAvto composition from the approved Figma.
+   The float starts at the paragraph top, but its wrapping shape exists only
+   around the logo at the bottom. Therefore all upper lines use the full width
+   and only the final line flows to the left of the logo. */
+@media (max-width: 767px) {
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block {
+    display: block !important;
+    position: relative !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 0 !important;
+    padding: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > h3,
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p {
+    display: block !important;
+    float: none !important;
+    clear: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:first-of-type {
+    margin-top: .55rem !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:last-of-type {
+    display: flow-root !important;
+    margin-top: .45rem !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:last-of-type::before {
+    content: "" !important;
+    display: block !important;
+    float: right !important;
+    clear: none !important;
+    width: 100px !important;
+    height: 90px !important;
+    margin: 0 !important;
+    background: transparent url("/brands/topavto-logo.png") right bottom / 100px 26px no-repeat !important;
+    shape-outside: inset(calc(100% - 26px) 0 0 0) !important;
+    shape-margin: .65rem !important;
+  }
+
+  html[data-theme="light"] body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:last-of-type::before {
+    filter: invert(1) hue-rotate(180deg) !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > .ac-executor-logo {
+    display: none !important;
+    position: static !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+/* 12.08.2026 — catalog brands sit directly on the page background on desktop and mobile. */
+.ac-catalog-page section.ac-brand-rail {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] {
+  padding-right: 2.75rem !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child {
+  margin-left: -9px !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button {
+  right: 0 !important;
+}
+
+/* Desktop sorting has the same 52px field height as the neighboring controls. */
+@media (min-width: 1024px) {
+  .ac-catalog-page .ac-catalog-filter-panel .ac-sort-control {
+    height: 3.25rem !important;
+    min-height: 3.25rem !important;
+  }
+  .ac-catalog-page .ac-catalog-filter-panel .ac-sort-control > button {
+    height: 100% !important;
+    min-height: 3.25rem !important;
+  }
+}
+
+@media(max-width:359px){
+ .account-cabinet-page .ac-public-header button[aria-label="Назад"]{width:28px;min-width:28px;padding:0;flex:none;justify-content:center}
+ .account-cabinet-page .ac-public-header>div>div:first-child{gap:4px}
+}
+
+/* Homepage desktop dealer rails: three cards in each half, independent scrolling. */
+@media (min-width: 1024px) {
+  .ac-special-rails--split { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+  .ac-special-rails--split > section { display: flex; flex-direction: column; }
+  .ac-special-rails--split > section:only-child { grid-column: 1 / -1; }
+  .ac-special-rails--split .ac-special-rail-heading { justify-content: flex-start; align-items: center; }
+  .ac-special-rails--split .ac-special-rail-frame { margin-top: auto; padding-top: 16px; }
+  .ac-special-rails--split .ac-special-rail-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; }
+  .ac-special-rails--split .ac-special-rail-track > a { width: 100%; display: flex; flex-direction: column; }
+  .ac-special-rails--split .ac-special-rail-track > a > div { display: flex; flex: 1; flex-direction: column; }
+  .ac-special-rails--split .ac-special-rail-track > a > div > p:first-child { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 16px; }
+  .ac-special-rails--split h3 { min-height: 40px; line-height: 20px; }
+  .ac-special-rails--split .ac-price { margin-top: auto; padding-top: 4px; }
+  .ac-special-rails--split [data-site-block="stock"] .ac-special-rail-track > a > div > p { color: #fb923c !important; }
+  html[data-theme="light"] .ac-special-rails--split [data-site-block="stock"] .ac-special-rail-track > a > div > p { color: #c4510a !important; }
+  html[data-finance-hidden="true"] .ac-home-services { display: none !important; }
+  .ac-home-desktop-bottom-rates .ac-currency-rates-grid { grid-template-columns: repeat(10,minmax(0,1fr)); }
+}
+
+/* Consistent card baselines in rails and expanded dealer sheets, on every device. */
+.ac-special-card { display:flex; flex-direction:column; }
+.ac-special-card-body { display:flex; flex:1; flex-direction:column; gap:4px; }
+.ac-special-card-status { line-height:16px; }
+.ac-special-card h3 { line-height:20px; }
+.ac-special-card .ac-price { margin-top:auto; }
+[data-site-block="stock"] .ac-special-card .ac-special-card-status,
+[data-site-block="stock"] .ac-special-card .ac-price { color:#fb923c!important; }
+html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-special-card-status,
+html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-price { color:#c4510a!important; }
+.ac-special-offers-sheet > header > h2 { flex:1; align-self:stretch; display:flex; }
+@media(min-width:1024px) { .ac-special-rails--split .ac-special-card-status { min-height:16px; } }
+.ac-catalog-editor-trigger { color:#fff!important; background:rgba(0,0,0,.82)!important; }
+.ac-catalog-editor-form .ac-catalog-editor-actions { position:sticky; bottom:-16px; padding:12px 0; background:var(--ac-surface); }
+
+@media(min-width:1024px) { .ac-special-rails--split [data-site-block="market-orders"] .ac-special-rail-track { grid-auto-columns:calc((100% - 80px) / 6); } }

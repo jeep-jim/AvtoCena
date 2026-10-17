@@ -1,0 +1,37 @@
+name: QR and gallery browser QA
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/**'
+      - 'apps/web/components/layout/PublicLegalFooter.tsx'
+      - 'apps/web/components/sharing/**'
+      - 'apps/web/lib/public-page-url.ts'
+      - 'tests/browser/qr-gallery-*'
+      - '.github/workflows/qr-gallery-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-web-assets.mjs
+      - name: Install isolated browser test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/avtocena-browser-qa" --no-package-lock playwright@1.51.1
+          node "$RUNNER_TEMP/avtocena-browser-qa/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Check QR, touch zoom, sharing, favorites and auction sheets
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/avtocena-browser-qa/node_modules/playwright/index.mjs" node --import tsx tests/browser/qr-gallery-preview.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qr-gallery-browser-qa
+          path: artifacts/qr-gallery/
+          retention-days: 7

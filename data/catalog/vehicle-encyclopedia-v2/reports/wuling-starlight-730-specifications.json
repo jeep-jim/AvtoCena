@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 3,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 7
+  },
+  "modelId": "wuling/starlight-730",
+  "generationIds": [
+    "wuling/starlight-730/launch-lineup-2025"
+  ],
+  "variantIds": [
+    "wuling/starlight-730/launch-lineup-2025/fuel-1-5t-6mt-comfort",
+    "wuling/starlight-730/launch-lineup-2025/fuel-1-5t-cvt-elite",
+    "wuling/starlight-730/launch-lineup-2025/phev-125-km-luxury",
+    "wuling/starlight-730/launch-lineup-2025/bev-500-km-luxury",
+    "wuling/starlight-730/launch-lineup-2025/fuel-1-5t-cvt-exclusive",
+    "wuling/starlight-730/launch-lineup-2025/phev-125-km-exclusive",
+    "wuling/starlight-730/launch-lineup-2025/bev-500-km-exclusive"
+  ],
+  "policy": {
+    "exactManufacturerValuesOnly": true,
+    "EnglishCanonicalLocalizedAliases": true,
+    "sparse2026GradesNotBackfilled": true,
+    "nominalDisplacementNotConverted": true,
+    "batteryBasisUnspecifiedAndRejected": true,
+    "motorPeakNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

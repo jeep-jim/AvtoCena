@@ -1,0 +1,3309 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 6,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "kia:sportageawd",
+      "make": "Kia",
+      "model": "Sportage AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:sportagehybridawd",
+      "make": "Kia",
+      "model": "Sportage Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:sportagepluginhybrid",
+      "make": "Kia",
+      "model": "Sportage Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:stinger",
+      "make": "Kia",
+      "model": "Stinger",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:stingerawd",
+      "make": "Kia",
+      "model": "Stinger AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:telluride",
+      "make": "Kia",
+      "model": "Telluride",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:tellurideawd",
+      "make": "Kia",
+      "model": "Telluride AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "koenigsegg:regera",
+      "make": "Koenigsegg",
+      "model": "Regera",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lamborghini:aventador",
+      "make": "Lamborghini",
+      "model": "Aventador",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:aventadorcountach",
+      "make": "Lamborghini",
+      "model": "Aventador Countach",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:aventadorcoupe",
+      "make": "Lamborghini",
+      "model": "Aventador Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lamborghini:aventadorcoupes",
+      "make": "Lamborghini",
+      "model": "Aventador Coupe S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:aventadorcoupesvj",
+      "make": "Lamborghini",
+      "model": "Aventador Coupe SVJ",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:aventadorroadster",
+      "make": "Lamborghini",
+      "model": "Aventador Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lamborghini:aventadorroadsters",
+      "make": "Lamborghini",
+      "model": "Aventador Roadster S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:aventadorroadstersvj",
+      "make": "Lamborghini",
+      "model": "Aventador Roadster SVJ",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:aventadorsiancoupe",
+      "make": "Lamborghini",
+      "model": "Aventador Sian Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:aventadorsianroadster",
+      "make": "Lamborghini",
+      "model": "Aventador Sian Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:aventadorultimaecoupe",
+      "make": "Lamborghini",
+      "model": "Aventador Ultimae Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:aventadorultimaeroadster",
+      "make": "Lamborghini",
+      "model": "Aventador Ultimae Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:huracnevocoupe",
+      "make": "Lamborghini",
+      "model": "Hurac n EVO Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lamborghini:huracnevocoupeawd",
+      "make": "Lamborghini",
+      "model": "Hurac n EVO Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lamborghini:huracnevospyder",
+      "make": "Lamborghini",
+      "model": "Hurac n EVO Spyder",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:huracnevospyderawd",
+      "make": "Lamborghini",
+      "model": "Hurac n EVO Spyder AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lamborghini:huracnsterrato",
+      "make": "Lamborghini",
+      "model": "Hurac n Sterrato",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:huracnsto",
+      "make": "Lamborghini",
+      "model": "Hurac n STO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:huracntecnica",
+      "make": "Lamborghini",
+      "model": "Hurac n Tecnica",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:huracan",
+      "make": "Lamborghini",
+      "model": "Huracan",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:huracanawd",
+      "make": "Lamborghini",
+      "model": "Huracan AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:huracancoupe",
+      "make": "Lamborghini",
+      "model": "Huracan Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lamborghini:huracancoupeawd",
+      "make": "Lamborghini",
+      "model": "Huracan Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lamborghini:huracanevocoupe",
+      "make": "Lamborghini",
+      "model": "Huracan evo Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:huracanevocoupeawd",
+      "make": "Lamborghini",
+      "model": "Huracan evo Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:huracanevospyder",
+      "make": "Lamborghini",
+      "model": "Huracan evo Spyder",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:huracanevospyderawd",
+      "make": "Lamborghini",
+      "model": "Huracan evo Spyder AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lamborghini:huracanspyder",
+      "make": "Lamborghini",
+      "model": "Huracan Spyder",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:huracanspyderawd",
+      "make": "Lamborghini",
+      "model": "Huracan Spyder AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:huracansto",
+      "make": "Lamborghini",
+      "model": "Huracan STO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lamborghini:revuelto",
+      "make": "Lamborghini",
+      "model": "Revuelto",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lamborghini:temerario",
+      "make": "Lamborghini",
+      "model": "Temerario",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lamborghini:urus",
+      "make": "Lamborghini",
+      "model": "Urus",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lamborghini:urusperformante",
+      "make": "Lamborghini",
+      "model": "Urus Performante",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:uruss",
+      "make": "Lamborghini",
+      "model": "Urus S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "lamborghini:urusse",
+      "make": "Lamborghini",
+      "model": "Urus SE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender",
+      "make": "Land Rover",
+      "model": "Defender",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender11050lv8",
+      "make": "Land Rover",
+      "model": "Defender 110 5.0L V8",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "landrover:defender110octa",
+      "make": "Land Rover",
+      "model": "Defender 110 OCTA",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender110octap635",
+      "make": "Land Rover",
+      "model": "Defender 110 OCTA P635",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender110p300",
+      "make": "Land Rover",
+      "model": "Defender 110 P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender110p400",
+      "make": "Land Rover",
+      "model": "Defender 110 P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender110p500p525",
+      "make": "Land Rover",
+      "model": "Defender 110 P500/P525",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender110v8p500p525",
+      "make": "Land Rover",
+      "model": "Defender 110 V8 P500/P525",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender130outbound",
+      "make": "Land Rover",
+      "model": "Defender 130 Outbound",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "landrover:defender130p300",
+      "make": "Land Rover",
+      "model": "Defender 130 P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender130p400",
+      "make": "Land Rover",
+      "model": "Defender 130 P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender130p400outbound",
+      "make": "Land Rover",
+      "model": "Defender 130 P400 Outbound",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender130p500",
+      "make": "Land Rover",
+      "model": "Defender 130 P500",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender130v8p500",
+      "make": "Land Rover",
+      "model": "Defender 130 V8 P500",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender9050lv8",
+      "make": "Land Rover",
+      "model": "Defender 90 5.0L V8",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "landrover:defender90p300",
+      "make": "Land Rover",
+      "model": "Defender 90 P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender90p400",
+      "make": "Land Rover",
+      "model": "Defender 90 P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:defender90p525",
+      "make": "Land Rover",
+      "model": "Defender 90 P525",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:defender90v8",
+      "make": "Land Rover",
+      "model": "Defender 90 V8",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:discovery",
+      "make": "Land Rover",
+      "model": "Discovery",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:discoveryp300",
+      "make": "Land Rover",
+      "model": "Discovery P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:discoveryp360",
+      "make": "Land Rover",
+      "model": "Discovery P360",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:discoverysport",
+      "make": "Land Rover",
+      "model": "Discovery Sport",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:discoverysportp250",
+      "make": "Land Rover",
+      "model": "Discovery Sport P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:discoverysportp290",
+      "make": "Land Rover",
+      "model": "Discovery Sport P290",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:discoverytd6diesel",
+      "make": "Land Rover",
+      "model": "Discovery Td6 Diesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:evoque",
+      "make": "Land Rover",
+      "model": "Evoque",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:newrangerover",
+      "make": "Land Rover",
+      "model": "New Range Rover",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "landrover:newrangeroverp400",
+      "make": "Land Rover",
+      "model": "New Range Rover P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:newrangeroverp400lwb",
+      "make": "Land Rover",
+      "model": "New Range Rover P400 LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:newrangeroverp530",
+      "make": "Land Rover",
+      "model": "New Range Rover P530",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:newrangeroverp530lwb",
+      "make": "Land Rover",
+      "model": "New Range Rover P530 LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangerover",
+      "make": "Land Rover",
+      "model": "Range Rover",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "landrover:rangerover30",
+      "make": "Land Rover",
+      "model": "Range Rover 3.0",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangerover50supercharged",
+      "make": "Land Rover",
+      "model": "Range Rover 5.0 Supercharged",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangerover50superchargedlwb",
+      "make": "Land Rover",
+      "model": "Range Rover 5.0 Supercharged LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangeroverevoque",
+      "make": "Land Rover",
+      "model": "Range Rover Evoque",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "landrover:rangeroverevoquep250",
+      "make": "Land Rover",
+      "model": "Range Rover Evoque P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroverevoquep300",
+      "make": "Land Rover",
+      "model": "Range Rover Evoque P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "landrover:rangeroverp360",
+      "make": "Land Rover",
+      "model": "Range Rover P360",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangeroverp360p400",
+      "make": "Land Rover",
+      "model": "Range Rover P360/P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroverp400",
+      "make": "Land Rover",
+      "model": "Range Rover P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroverp400lwb",
+      "make": "Land Rover",
+      "model": "Range Rover P400 LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroverp525",
+      "make": "Land Rover",
+      "model": "Range Rover P525",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangeroverp525lwb",
+      "make": "Land Rover",
+      "model": "Range Rover P525 LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangeroverp525supercharged",
+      "make": "Land Rover",
+      "model": "Range Rover P525 Supercharged",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroverp525superchargedlwb",
+      "make": "Land Rover",
+      "model": "Range Rover P525 Supercharged LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroverp530",
+      "make": "Land Rover",
+      "model": "Range Rover P530",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroverp530lwb",
+      "make": "Land Rover",
+      "model": "Range Rover P530 LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroverp550ephev",
+      "make": "Land Rover",
+      "model": "Range Rover P550e PHEV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroversport",
+      "make": "Land Rover",
+      "model": "Range Rover Sport",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "landrover:rangeroversport30",
+      "make": "Land Rover",
+      "model": "Range Rover Sport 3.0",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangeroversporthstp400",
+      "make": "Land Rover",
+      "model": "Range Rover Sport HST P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "landrover:rangeroversportp360",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P360",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroversportp360p400",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P360/P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroversportp400",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroversportp460ephev",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P460e PHEV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroversportp525",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P525",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangeroversportp525supercharged",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P525 Supercharged",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroversportp530",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P530",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroversportp550ephev",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P550e PHEV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "landrover:rangeroversportp575svr",
+      "make": "Land Rover",
+      "model": "Range Rover Sport P575 SVR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangeroversportsupercharged",
+      "make": "Land Rover",
+      "model": "Range Rover Sport Supercharged",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangeroversportsv",
+      "make": "Land Rover",
+      "model": "Range Rover Sport SV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "landrover:rangeroversportsvp635",
+      "make": "Land Rover",
+      "model": "Range Rover Sport SV P635",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroversportsvr",
+      "make": "Land Rover",
+      "model": "Range Rover Sport SVR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroversporttd6diesel",
+      "make": "Land Rover",
+      "model": "Range Rover Sport Td6 Diesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangeroversv",
+      "make": "Land Rover",
+      "model": "Range Rover SV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "landrover:rangeroversvlwb",
+      "make": "Land Rover",
+      "model": "Range Rover SV LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "landrover:rangeroversvp615",
+      "make": "Land Rover",
+      "model": "Range Rover SV P615",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroversvp615lwb",
+      "make": "Land Rover",
+      "model": "Range Rover SV P615 LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangeroversvautobiography",
+      "make": "Land Rover",
+      "model": "Range Rover SVAutobiography",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangeroversvautobiographydynamic",
+      "make": "Land Rover",
+      "model": "Range Rover SVAutobiography Dynamic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangeroversvautobiographylwb",
+      "make": "Land Rover",
+      "model": "Range Rover SVAutobiography LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "landrover:rangerovertd6diesel",
+      "make": "Land Rover",
+      "model": "Range Rover Td6 Diesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "landrover:rangerovervelar",
+      "make": "Land Rover",
+      "model": "Range Rover Velar",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "landrover:rangerovervelarp250",
+      "make": "Land Rover",
+      "model": "Range Rover Velar P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangerovervelarp300",
+      "make": "Land Rover",
+      "model": "Range Rover Velar P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangerovervelarp340",
+      "make": "Land Rover",
+      "model": "Range Rover Velar P340",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangerovervelarp380",
+      "make": "Land Rover",
+      "model": "Range Rover Velar P380",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "landrover:rangerovervelarp400",
+      "make": "Land Rover",
+      "model": "Range Rover Velar P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "landrover:rangerovervelarsvautobiographydynamic",
+      "make": "Land Rover",
+      "model": "Range Rover Velar SVAutobiography Dynamic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lexus:es",
+      "make": "Lexus",
+      "model": "ES",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:es250awd",
+      "make": "Lexus",
+      "model": "ES 250 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:es300h",
+      "make": "Lexus",
+      "model": "ES 300h",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:es350",
+      "make": "Lexus",
+      "model": "ES 350",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:es350fsport",
+      "make": "Lexus",
+      "model": "ES 350 F SPORT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:es350e19wheels",
+      "make": "Lexus",
+      "model": "ES 350e (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:es350e21wheels",
+      "make": "Lexus",
+      "model": "ES 350e (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:es350hawd",
+      "make": "Lexus",
+      "model": "ES 350h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:es500eawd19wheels",
+      "make": "Lexus",
+      "model": "ES 500e AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:es500eawd21wheels",
+      "make": "Lexus",
+      "model": "ES 500e AWD (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:gs",
+      "make": "Lexus",
+      "model": "GS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lexus:gs350awd",
+      "make": "Lexus",
+      "model": "GS 350 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lexus:gsf",
+      "make": "Lexus",
+      "model": "GS F",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lexus:gx",
+      "make": "Lexus",
+      "model": "GX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:gx460",
+      "make": "Lexus",
+      "model": "GX 460",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "lexus:gx550",
+      "make": "Lexus",
+      "model": "GX 550",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:is",
+      "make": "Lexus",
+      "model": "IS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:is300",
+      "make": "Lexus",
+      "model": "IS 300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "lexus:is300awd",
+      "make": "Lexus",
+      "model": "IS 300 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:is350awd",
+      "make": "Lexus",
+      "model": "IS 350 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:is500",
+      "make": "Lexus",
+      "model": "IS 500",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:lc",
+      "make": "Lexus",
+      "model": "LC",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:lc500",
+      "make": "Lexus",
+      "model": "LC 500",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:lc500convertible",
+      "make": "Lexus",
+      "model": "LC 500 Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:lc500h",
+      "make": "Lexus",
+      "model": "LC 500h",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:ls",
+      "make": "Lexus",
+      "model": "LS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:ls500awd",
+      "make": "Lexus",
+      "model": "LS 500 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:ls500hawd",
+      "make": "Lexus",
+      "model": "LS 500h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:lx",
+      "make": "Lexus",
+      "model": "LX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:lx570",
+      "make": "Lexus",
+      "model": "LX 570",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lexus:lx600",
+      "make": "Lexus",
+      "model": "LX 600",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:lx700h",
+      "make": "Lexus",
+      "model": "LX 700h",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:nx",
+      "make": "Lexus",
+      "model": "NX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:nx250awd",
+      "make": "Lexus",
+      "model": "NX 250 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:nx300awd",
+      "make": "Lexus",
+      "model": "NX 300 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lexus:nx300awdfsport",
+      "make": "Lexus",
+      "model": "NX 300 AWD F SPORT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lexus:nx300hawd",
+      "make": "Lexus",
+      "model": "NX 300h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lexus:nx350awd",
+      "make": "Lexus",
+      "model": "NX 350 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:nx350awdfsport",
+      "make": "Lexus",
+      "model": "NX 350 AWD F SPORT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:nx350hawd",
+      "make": "Lexus",
+      "model": "NX 350h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:nx450hawd",
+      "make": "Lexus",
+      "model": "NX 450h+ AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rc",
+      "make": "Lexus",
+      "model": "RC",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:rc300awd",
+      "make": "Lexus",
+      "model": "RC 300 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:rc350awd",
+      "make": "Lexus",
+      "model": "RC 350 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:rcf",
+      "make": "Lexus",
+      "model": "RC F",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "lexus:rx",
+      "make": "Lexus",
+      "model": "RX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rx350awd",
+      "make": "Lexus",
+      "model": "RX 350 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rx350lawd",
+      "make": "Lexus",
+      "model": "RX 350 L AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "lexus:rx350hawd",
+      "make": "Lexus",
+      "model": "RX 350h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rx450hlawd",
+      "make": "Lexus",
+      "model": "RX 450h L AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "lexus:rx450hawd",
+      "make": "Lexus",
+      "model": "RX 450h+ AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rx500hawd",
+      "make": "Lexus",
+      "model": "RX 500h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rz",
+      "make": "Lexus",
+      "model": "RZ",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rz350e",
+      "make": "Lexus",
+      "model": "RZ 350e",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rz450eawd18wheels",
+      "make": "Lexus",
+      "model": "RZ 450e AWD (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rz450eawd20wheels",
+      "make": "Lexus",
+      "model": "RZ 450e AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:rz550eawd",
+      "make": "Lexus",
+      "model": "RZ 550e AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:tx",
+      "make": "Lexus",
+      "model": "TX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:tx350awd",
+      "make": "Lexus",
+      "model": "TX 350 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:tx500hawd",
+      "make": "Lexus",
+      "model": "TX 500h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:ux",
+      "make": "Lexus",
+      "model": "UX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lexus:ux200",
+      "make": "Lexus",
+      "model": "UX 200",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "lexus:ux250h",
+      "make": "Lexus",
+      "model": "UX 250h",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "lexus:ux250hawd",
+      "make": "Lexus",
+      "model": "UX 250h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "lexus:ux300hawd",
+      "make": "Lexus",
+      "model": "UX 300h AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:aviator",
+      "make": "Lincoln",
+      "model": "Aviator",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:aviatorawd",
+      "make": "Lincoln",
+      "model": "Aviator AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:aviatorawdwithoutstopstart",
+      "make": "Lincoln",
+      "model": "Aviator AWD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lincoln:aviatorgrandtouring",
+      "make": "Lincoln",
+      "model": "Aviator Grand Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "lincoln:continental",
+      "make": "Lincoln",
+      "model": "Continental",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lincoln:continentalawd",
+      "make": "Lincoln",
+      "model": "Continental AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lincoln:corsair",
+      "make": "Lincoln",
+      "model": "Corsair",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:corsairawd",
+      "make": "Lincoln",
+      "model": "Corsair AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:corsairgrandtouring",
+      "make": "Lincoln",
+      "model": "Corsair Grand Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:mkz",
+      "make": "Lincoln",
+      "model": "MKZ",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lincoln:mkzawd",
+      "make": "Lincoln",
+      "model": "MKZ AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lincoln:mkzhybrid",
+      "make": "Lincoln",
+      "model": "MKZ Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "lincoln:nautilus",
+      "make": "Lincoln",
+      "model": "Nautilus",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:nautilusawd",
+      "make": "Lincoln",
+      "model": "Nautilus AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:nautilushybridawd",
+      "make": "Lincoln",
+      "model": "Nautilus Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:navigator",
+      "make": "Lincoln",
+      "model": "Navigator",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "lincoln:navigator4wd",
+      "make": "Lincoln",
+      "model": "Navigator 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "lincoln:navigator4x4",
+      "make": "Lincoln",
+      "model": "Navigator 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "lincoln:navigator4x4withoutstopstart",
+      "make": "Lincoln",
+      "model": "Navigator 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lordstown:endurance",
+      "make": "Lordstown",
+      "model": "Endurance",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lotus:eletrerlongrange",
+      "make": "Lotus",
+      "model": "Eletre R Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lotus:eletrerperformance",
+      "make": "Lotus",
+      "model": "Eletre R Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lotus:eletreslongrange",
+      "make": "Lotus",
+      "model": "Eletre S Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lotus:eletresperformance",
+      "make": "Lotus",
+      "model": "Eletre S Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "lotus:emira",
+      "make": "Lotus",
+      "model": "Emira",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027
+    },
+    {
+      "key": "lotus:evora",
+      "make": "Lotus",
+      "model": "Evora",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "lucid:air",
+      "make": "Lucid",
+      "model": "Air",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "lucid:airdreampawd19wheels",
+      "make": "Lucid",
+      "model": "Air Dream P AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lucid:airdreampawd21wheels",
+      "make": "Lucid",
+      "model": "Air Dream P AWD (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lucid:airdreamrawd19wheels",
+      "make": "Lucid",
+      "model": "Air Dream R AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lucid:airdreamrawd21wheels",
+      "make": "Lucid",
+      "model": "Air Dream R AWD (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lucid:airgrandtouringawd19wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lucid:airgrandtouringawd21wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring AWD (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "lucid:airgrandtouringperformance21wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring Performance (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airgrandtouringxr19wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring XR (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airgrandtouringxr20wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring XR (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airgrandtouringxr21wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring XR (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airgrandtouringxrawd19wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring XR AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airgrandtouringxrawd20wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring XR AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airgrandtouringxrawd21wheels",
+      "make": "Lucid",
+      "model": "Air Grand Touring XR AWD (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airpure19wheels",
+      "make": "Lucid",
+      "model": "Air Pure (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airpure20wheels",
+      "make": "Lucid",
+      "model": "Air Pure (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airsapphireawd",
+      "make": "Lucid",
+      "model": "Air Sapphire AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airtouring19wheels",
+      "make": "Lucid",
+      "model": "Air Touring (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airtouring20wheels",
+      "make": "Lucid",
+      "model": "Air Touring (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airtouring21wheels",
+      "make": "Lucid",
+      "model": "Air Touring (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "lucid:airtouringawd19wheels",
+      "make": "Lucid",
+      "model": "Air Touring AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airtouringawd20wheels",
+      "make": "Lucid",
+      "model": "Air Touring AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:airtouringawd21wheels",
+      "make": "Lucid",
+      "model": "Air Touring AWD (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "lucid:gravity",
+      "make": "Lucid",
+      "model": "Gravity",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "maserati:ghibli",
+      "make": "Maserati",
+      "model": "Ghibli",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:ghibligt",
+      "make": "Maserati",
+      "model": "Ghibli GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:ghiblimodena",
+      "make": "Maserati",
+      "model": "Ghibli Modena",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:ghiblimodenaawd",
+      "make": "Maserati",
+      "model": "Ghibli Modena AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:ghiblis",
+      "make": "Maserati",
+      "model": "Ghibli S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "maserati:ghiblisq4",
+      "make": "Maserati",
+      "model": "Ghibli S Q4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "maserati:ghiblitrofeo",
+      "make": "Maserati",
+      "model": "Ghibli Trofeo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:grancabrio",
+      "make": "Maserati",
+      "model": "Grancabrio",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "maserati:grancabriotrofeo",
+      "make": "Maserati",
+      "model": "Grancabrio Trofeo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    }
+  ]
+}

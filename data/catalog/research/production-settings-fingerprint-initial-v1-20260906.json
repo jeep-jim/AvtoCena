@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-09-06T15:53:59.665Z",
+  "markets": [
+    {
+      "activeHash": "ef1282b33c204ee045405263197507c49094e7fe418c66b738301d5b7f087f77",
+      "configVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "effectiveFrom": "2026-08-20T10:09:12.511Z",
+      "market": "china"
+    }
+  ],
+  "productionWrites": false,
+  "reads": [
+    {
+      "found": true,
+      "hash": "5d91519b09be25a2c6e37d11094eb7315d70423404d20a6043a329641a292a29",
+      "path": "markets/markets.json"
+    },
+    {
+      "found": true,
+      "hash": "e8bbea7a970e18e1aae7389f23163c3e3c7d40a3c440b00c5198272b3e35a928",
+      "path": "settings/site-business.json"
+    }
+  ],
+  "site": {
+    "activeVersionId": "site_business_v2_e13de083-c45e-4904-9384-299f523413c3"
+  },
+  "storageDriver": "object",
+  "workflowRun": 34043717015
+}

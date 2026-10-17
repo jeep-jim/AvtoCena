@@ -1,0 +1,1540 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-valli-launch-en-2021",
+          "type": "manufacturer",
+          "title": "Baojun Launches Valli Station Wagon",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2021/Jun/0611-baojun.html",
+          "documentId": "GM China Baojun Valli launch EN",
+          "documentDate": "2021-06-11",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "bodyType",
+            "powertrainKind",
+            "icePowerKw",
+            "transmission",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm"
+          ],
+          "notes": "Official English launch establishes the Valli station-wagon identity, 2021 launch, exact dimensions and shared 108-kW turbo/CVT specification."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-valli-launch-zh-2021",
+          "type": "manufacturer",
+          "title": "Valli（向往）7.98-10.58万重磅上市",
+          "url": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2021/Jun/0611-baojun.html",
+          "documentId": "GM China Baojun Valli launch ZH",
+          "documentDate": "2021-06-11",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "transmission",
+            "seats"
+          ],
+          "notes": "Official China launch lists all four exact sale configurations, identifies the MT/CVT split and describes the five-seat layout."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-kiwi-launch-en-2021",
+          "type": "manufacturer",
+          "title": "Baojun Launches KiWi Electric Vehicle",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2021/Aug/0831-baojun-kiwi.html",
+          "documentId": "GM China Baojun KiWi launch EN",
+          "documentDate": "2021-08-31",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "powertrainKind",
+            "motorPeakKw",
+            "rangeKm",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "seats"
+          ],
+          "notes": "Official English launch supplies the public KiWi EV identity and exact shared values for the two original configurations. The range cycle is not stated."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-kiwi-launch-zh-2021",
+          "type": "manufacturer",
+          "title": "“未来感摩登座驾”KiWi EV携手宋茜正式上市",
+          "url": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2021/Aug/0831-baojun-kiwi.html",
+          "documentId": "GM China Baojun KiWi launch ZH",
+          "documentDate": "2021-08-31",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw",
+            "rangeKm"
+          ],
+          "notes": "Official China launch names the Designer and Artist configurations and confirms the shared 40-kW motor and 305-km range."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-kiwi-2023-launch-zh",
+          "type": "manufacturer",
+          "title": "2023款KiWi EV上市 开启“人人都能拥有的智能驾驶”新时代",
+          "url": "https://media.gm.com/media/cn/zh/baojun/home.detail.html/content/Pages/news/cn/zh/2022/Sept/0915-baojun-kiwi-ev.html",
+          "documentId": "GM China Baojun KiWi 2023 launch ZH",
+          "documentDate": "2022-09-15",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw"
+          ],
+          "notes": "Official launch lists all three 2023-model-year configurations and explicitly states a 50-kW motor."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-yunduo-launch-zh-2023",
+          "type": "manufacturer",
+          "title": "9.58万元起！宝骏云朵“史诗级”上市",
+          "url": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2023/Aug/0810-baojun.html",
+          "documentId": "GM China Baojun Yunduo launch ZH",
+          "documentDate": "2023-08-10",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "powertrainKind",
+            "motorPeakKw",
+            "topSpeedKmh",
+            "seats"
+          ],
+          "notes": "Official China launch lists the four exact Yunduo configurations and confirms five seats, BEV propulsion, a 100-kW motor and 150-km/h top speed. Trim numbers are not reinterpreted as certified range values."
+        },
+        {
+          "id": "src-wuling-indonesia-cloud-ev-body-en-2024",
+          "type": "manufacturer",
+          "title": "Wuling Introduces Cloud EV, Medium Hatchback EV with The Future of Comfort",
+          "publisher": "PT SGMW Motor Indonesia",
+          "url": "https://wuling.id/en/blog/press-release/wuling-introduces-cloud-ev-medium-hatchback-ev-with-the-future-of-comfort",
+          "documentId": "Wuling Indonesia Cloud EV introduction EN",
+          "documentDate": "2024-02-15",
+          "verifiedAt": "2026-08-18",
+          "market": "Indonesia",
+          "language": "en",
+          "supportedFields": [
+            "bodyTypes",
+            "bodyType"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official SGMW Indonesia material identifies the export sibling of Baojun Yunduo as a medium hatchback. No Indonesia-market technical value is copied into the China variants."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-sgmw-baojun-e6-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "宝骏E6参数配置",
+          "url": "https://www.sgmw.com.cn/carDetail?id=307",
+          "documentId": "SGMW carDetail 307",
+          "documentDate": null,
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "acChargeKw"
+          ],
+          "notes": "Official current technical table supplies one exact 2026 E6 configuration and its dimensions, performance and charging values. Battery energy and range cycle are left uninterpreted because their legal basis is unstated."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "baojun/valli",
+          "brandId": "baojun",
+          "canonicalName": "Valli",
+          "slug": "valli",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 Valli",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2021-06",
+          "productionTo": null,
+          "bodyTypes": [
+            "Wagon"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            },
+            {
+              "sourceId": "src-gm-baojun-valli-launch-en-2021",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the Latin public identity, body class and powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom.",
+            "Exact configurations are staged in a grouped mass-model batch; publication and pricing remain disconnected pending review."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev",
+          "brandId": "baojun",
+          "canonicalName": "KiWi EV",
+          "slug": "kiwi-ev",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 KiWi EV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-launch-en-2021"
+              ]
+            }
+          ],
+          "productionFrom": "2021-08",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-launch-en-2021",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the Latin public identity, body class and powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "Exact configurations are staged in a grouped mass-model batch; publication and pricing remain disconnected pending review."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunduo",
+          "brandId": "baojun",
+          "canonicalName": "Yunduo",
+          "slug": "yunduo",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏云朵",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yunduo-launch-zh-2023"
+              ]
+            }
+          ],
+          "productionFrom": "2023-08",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yunduo-launch-zh-2023",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the Latin public identity, body class and powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "Exact configurations are staged in a grouped mass-model batch; publication and pricing remain disconnected pending review."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/e6",
+          "brandId": "baojun",
+          "canonicalName": "E6",
+          "slug": "e6",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 E6",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-current-zh-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's current China portfolio explicitly lists the model; E6 needs a model-specific page before any technical fields are staged."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-e6-current-spec",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the Latin public identity, body class and powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "No edition or sales-channel suffix is promoted to a standalone model.",
+            "Publication and pricing remain disconnected until generation, exact specifications and canonical cover pass review.",
+            "Exact configurations are staged in a grouped mass-model batch; publication and pricing remain disconnected pending review."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "baojun/valli/2021-launch",
+          "modelId": "baojun/valli",
+          "name": "Launch generation (2021)",
+          "aliases": [
+            {
+              "value": "Valli（向往）",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-valli-launch-zh-2021"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2021-06",
+          "productionTo": null,
+          "bodyTypes": [
+            "Wagon"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-valli-launch-zh-2021",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup container and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2021-launch",
+          "modelId": "baojun/kiwi-ev",
+          "name": "Launch generation (2021)",
+          "aliases": [
+            {
+              "value": "KiWi EV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-launch-zh-2021"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2021-08",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-launch-zh-2021",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup container and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2023-model-year",
+          "modelId": "baojun/kiwi-ev",
+          "name": "2023 model year",
+          "aliases": [
+            {
+              "value": "2023款KiWi EV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-2023-launch-zh"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2022-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-2023-launch-zh",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup container and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunduo/2023-launch",
+          "modelId": "baojun/yunduo",
+          "name": "Launch generation (2023)",
+          "aliases": [
+            {
+              "value": "宝骏云朵",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yunduo-launch-zh-2023"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2023-08",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yunduo-launch-zh-2023",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup container and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/e6/2026-model-year",
+          "modelId": "baojun/e6",
+          "name": "2026 model year",
+          "aliases": [
+            {
+              "value": "宝骏E6 2026款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-e6-current-spec"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-e6-current-spec",
+              "fields": [
+                "name",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup container and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "baojun/valli/2021-launch/moganshan-valley-mt-elite",
+          "modelId": "baojun/valli",
+          "generationId": "baojun/valli/2021-launch",
+          "faceliftId": null,
+          "name": "2021 Moganshan Valley MT Elite",
+          "aliases": [
+            {
+              "value": "莫干山谷MT精英型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-valli-launch-zh-2021"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "Wagon",
+          "powertrainKind": "ICE",
+          "transmission": "Manual",
+          "icePowerKw": 108,
+          "lengthMm": 4685,
+          "widthMm": 1806,
+          "heightMm": 1485,
+          "wheelbaseMm": 2700,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-valli-launch-en-2021",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "icePowerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the shared station-wagon dimensions and 108-kW specification."
+            },
+            {
+              "sourceId": "src-gm-baojun-valli-launch-zh-2021",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and its MT/CVT designation."
+            }
+          ],
+          "researchNotes": [
+            "The public 1.5T label is not rounded into an invented exact engine displacement; the simulated CVT ratio count is not stored as physical gears."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/valli/2021-launch/ili-pasture-cvt-luxury",
+          "modelId": "baojun/valli",
+          "generationId": "baojun/valli/2021-launch",
+          "faceliftId": null,
+          "name": "2021 Ili Pasture CVT Luxury",
+          "aliases": [
+            {
+              "value": "伊犁牧场CVT豪华型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-valli-launch-zh-2021"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "Wagon",
+          "powertrainKind": "ICE",
+          "transmission": "CVT",
+          "icePowerKw": 108,
+          "lengthMm": 4685,
+          "widthMm": 1806,
+          "heightMm": 1485,
+          "wheelbaseMm": 2700,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-valli-launch-en-2021",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "icePowerKw",
+                "transmission",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the shared station-wagon dimensions and 108-kW specification."
+            },
+            {
+              "sourceId": "src-gm-baojun-valli-launch-zh-2021",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and its MT/CVT designation."
+            }
+          ],
+          "researchNotes": [
+            "The public 1.5T label is not rounded into an invented exact engine displacement; the simulated CVT ratio count is not stored as physical gears."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/valli/2021-launch/dali-sky-cvt-premium",
+          "modelId": "baojun/valli",
+          "generationId": "baojun/valli/2021-launch",
+          "faceliftId": null,
+          "name": "2021 Dali Sky CVT Premium",
+          "aliases": [
+            {
+              "value": "大理天空CVT尊享型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-valli-launch-zh-2021"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "Wagon",
+          "powertrainKind": "ICE",
+          "transmission": "CVT",
+          "icePowerKw": 108,
+          "lengthMm": 4685,
+          "widthMm": 1806,
+          "heightMm": 1485,
+          "wheelbaseMm": 2700,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-valli-launch-en-2021",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "icePowerKw",
+                "transmission",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the shared station-wagon dimensions and 108-kW specification."
+            },
+            {
+              "sourceId": "src-gm-baojun-valli-launch-zh-2021",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and its MT/CVT designation."
+            }
+          ],
+          "researchNotes": [
+            "The public 1.5T label is not rounded into an invented exact engine displacement; the simulated CVT ratio count is not stored as physical gears."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/valli/2021-launch/nagqu-stars-cvt-flagship",
+          "modelId": "baojun/valli",
+          "generationId": "baojun/valli/2021-launch",
+          "faceliftId": null,
+          "name": "2021 Nagqu Stars CVT Flagship",
+          "aliases": [
+            {
+              "value": "那曲繁星CVT旗舰型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-valli-launch-zh-2021"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "Wagon",
+          "powertrainKind": "ICE",
+          "transmission": "CVT",
+          "icePowerKw": 108,
+          "lengthMm": 4685,
+          "widthMm": 1806,
+          "heightMm": 1485,
+          "wheelbaseMm": 2700,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-valli-launch-en-2021",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "icePowerKw",
+                "transmission",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies the shared station-wagon dimensions and 108-kW specification."
+            },
+            {
+              "sourceId": "src-gm-baojun-valli-launch-zh-2021",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and its MT/CVT designation."
+            }
+          ],
+          "researchNotes": [
+            "The public 1.5T label is not rounded into an invented exact engine displacement; the simulated CVT ratio count is not stored as physical gears."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2021-launch/designer",
+          "modelId": "baojun/kiwi-ev",
+          "generationId": "baojun/kiwi-ev/2021-launch",
+          "faceliftId": null,
+          "name": "2021 Designer",
+          "aliases": [
+            {
+              "value": "设计师",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-launch-zh-2021"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 40,
+          "rangeKm": 305,
+          "topSpeedKmh": 100,
+          "lengthMm": 2894,
+          "widthMm": 1655,
+          "heightMm": 1595,
+          "wheelbaseMm": 2020,
+          "seats": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-launch-en-2021",
+              "fields": [
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies exact shared values for the original two configurations."
+            },
+            {
+              "sourceId": "src-gm-baojun-kiwi-launch-zh-2021",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and its shared motor output."
+            }
+          ],
+          "researchNotes": [
+            "KiWi is conservatively classified as a hatchback from the official two-box passenger-car presentation; publication remains review-only.",
+            "The 305-km release value has no stated certification cycle; no battery-capacity basis or legal 30-minute power is invented."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2021-launch/artist",
+          "modelId": "baojun/kiwi-ev",
+          "generationId": "baojun/kiwi-ev/2021-launch",
+          "faceliftId": null,
+          "name": "2021 Artist",
+          "aliases": [
+            {
+              "value": "艺术家",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-launch-zh-2021"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 40,
+          "rangeKm": 305,
+          "topSpeedKmh": 100,
+          "lengthMm": 2894,
+          "widthMm": 1655,
+          "heightMm": 1595,
+          "wheelbaseMm": 2020,
+          "seats": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-launch-en-2021",
+              "fields": [
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch supplies exact shared values for the original two configurations."
+            },
+            {
+              "sourceId": "src-gm-baojun-kiwi-launch-zh-2021",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and its shared motor output."
+            }
+          ],
+          "researchNotes": [
+            "KiWi is conservatively classified as a hatchback from the official two-box passenger-car presentation; publication remains review-only.",
+            "The 305-km release value has no stated certification cycle; no battery-capacity basis or legal 30-minute power is invented."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2023-model-year/trend",
+          "modelId": "baojun/kiwi-ev",
+          "generationId": "baojun/kiwi-ev/2023-model-year",
+          "faceliftId": null,
+          "name": "2023 Trend",
+          "aliases": [
+            {
+              "value": "智潮版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-2023-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 50,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-2023-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Official China launch lists this exact configuration and its shared motor output."
+            }
+          ],
+          "researchNotes": [
+            "KiWi is conservatively classified as a hatchback from the official two-box passenger-car presentation; publication remains review-only.",
+            "Carry-over dimensions, range and battery values are deliberately not copied into the 2023 model-year variants without an exact reviewed table."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2023-model-year/luxury",
+          "modelId": "baojun/kiwi-ev",
+          "generationId": "baojun/kiwi-ev/2023-model-year",
+          "faceliftId": null,
+          "name": "2023 Luxury",
+          "aliases": [
+            {
+              "value": "智奢版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-2023-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 50,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-2023-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Official China launch lists this exact configuration and its shared motor output."
+            }
+          ],
+          "researchNotes": [
+            "KiWi is conservatively classified as a hatchback from the official two-box passenger-car presentation; publication remains review-only.",
+            "Carry-over dimensions, range and battery values are deliberately not copied into the 2023 model-year variants without an exact reviewed table."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/kiwi-ev/2023-model-year/dji-edition",
+          "modelId": "baojun/kiwi-ev",
+          "generationId": "baojun/kiwi-ev/2023-model-year",
+          "faceliftId": null,
+          "name": "2023 DJI Edition",
+          "aliases": [
+            {
+              "value": "大疆版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-kiwi-2023-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 50,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-kiwi-2023-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Official China launch lists this exact configuration and its shared motor output."
+            }
+          ],
+          "researchNotes": [
+            "KiWi is conservatively classified as a hatchback from the official two-box passenger-car presentation; publication remains review-only.",
+            "Carry-over dimensions, range and battery values are deliberately not copied into the 2023 model-year variants without an exact reviewed table."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunduo/2023-launch/360-plus",
+          "modelId": "baojun/yunduo",
+          "generationId": "baojun/yunduo/2023-launch",
+          "faceliftId": null,
+          "name": "2023 360 Plus",
+          "aliases": [
+            {
+              "value": "360 Plus",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yunduo-launch-zh-2023"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 100,
+          "topSpeedKmh": 150,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yunduo-launch-zh-2023",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "motorPeakKw",
+                "topSpeedKmh",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and the shared five-seat BEV performance values."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-cloud-ev-body-en-2024",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official SGMW export material identifies the same vehicle architecture as a medium hatchback."
+            }
+          ],
+          "researchNotes": [
+            "The numeric trim prefixes remain part of the official configuration names and are not promoted to rangeKm without a reviewed China technical table.",
+            "No battery-capacity basis or legal 30-minute power is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunduo/2023-launch/360-pro",
+          "modelId": "baojun/yunduo",
+          "generationId": "baojun/yunduo/2023-launch",
+          "faceliftId": null,
+          "name": "2023 360 Pro",
+          "aliases": [
+            {
+              "value": "360 Pro",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yunduo-launch-zh-2023"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 100,
+          "topSpeedKmh": 150,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yunduo-launch-zh-2023",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "motorPeakKw",
+                "topSpeedKmh",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and the shared five-seat BEV performance values."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-cloud-ev-body-en-2024",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official SGMW export material identifies the same vehicle architecture as a medium hatchback."
+            }
+          ],
+          "researchNotes": [
+            "The numeric trim prefixes remain part of the official configuration names and are not promoted to rangeKm without a reviewed China technical table.",
+            "No battery-capacity basis or legal 30-minute power is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunduo/2023-launch/460-pro",
+          "modelId": "baojun/yunduo",
+          "generationId": "baojun/yunduo/2023-launch",
+          "faceliftId": null,
+          "name": "2023 460 Pro",
+          "aliases": [
+            {
+              "value": "460 Pro",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yunduo-launch-zh-2023"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 100,
+          "topSpeedKmh": 150,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yunduo-launch-zh-2023",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "motorPeakKw",
+                "topSpeedKmh",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and the shared five-seat BEV performance values."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-cloud-ev-body-en-2024",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official SGMW export material identifies the same vehicle architecture as a medium hatchback."
+            }
+          ],
+          "researchNotes": [
+            "The numeric trim prefixes remain part of the official configuration names and are not promoted to rangeKm without a reviewed China technical table.",
+            "No battery-capacity basis or legal 30-minute power is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunduo/2023-launch/460-max",
+          "modelId": "baojun/yunduo",
+          "generationId": "baojun/yunduo/2023-launch",
+          "faceliftId": null,
+          "name": "2023 460 Max",
+          "aliases": [
+            {
+              "value": "460 Max",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yunduo-launch-zh-2023"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2023,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 100,
+          "topSpeedKmh": 150,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yunduo-launch-zh-2023",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "motorPeakKw",
+                "topSpeedKmh",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official China launch lists this exact configuration and the shared five-seat BEV performance values."
+            },
+            {
+              "sourceId": "src-wuling-indonesia-cloud-ev-body-en-2024",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official SGMW export material identifies the same vehicle architecture as a medium hatchback."
+            }
+          ],
+          "researchNotes": [
+            "The numeric trim prefixes remain part of the official configuration names and are not promoted to rangeKm without a reviewed China technical table.",
+            "No battery-capacity basis or legal 30-minute power is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/e6/2026-model-year/500km-enjoyment",
+          "modelId": "baojun/e6",
+          "generationId": "baojun/e6/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 500 km Enjoyment",
+          "aliases": [
+            {
+              "value": "2026款 500km 畅享版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-e6-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 500,
+          "topSpeedKmh": 170,
+          "lengthMm": 4541,
+          "widthMm": 1880,
+          "heightMm": 1608,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1675,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-e6-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current E6 technical table."
+            }
+          ],
+          "researchNotes": [
+            "The table does not state the range certification cycle or whether battery energy is gross, usable or rated; those fields remain empty.",
+            "Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 4,
+    "newModels": 4,
+    "officialManufacturerSources": 2,
+    "newMlitWorkbookSources": 0,
+    "totalNewSources": 2,
+    "modelsWithMlitIntersection": 4
+  },
+  "reviewed": [
+    {
+      "id": "toyota/corolla-rumion",
+      "canonicalName": "Corolla Rumion",
+      "officialSourceId": "src-toyota-corolla-rumion-japan-archive-2026",
+      "exactSourceNames": [
+        "カローラ ルミオン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015
+      ]
+    },
+    {
+      "id": "mitsubishi/proudia",
+      "canonicalName": "Proudia",
+      "officialSourceId": "src-mitsubishi-car-history-model-identities-2026",
+      "exactSourceNames": [
+        "プラウディア"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "id": "mitsubishi/dignity",
+      "canonicalName": "Dignity",
+      "officialSourceId": "src-mitsubishi-car-history-model-identities-2026",
+      "exactSourceNames": [
+        "ディグニティ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "id": "mitsubishi/lancer-evolution",
+      "canonicalName": "Lancer Evolution",
+      "officialSourceId": "src-mitsubishi-car-history-model-identities-2026",
+      "exactSourceNames": [
+        "ランサーエボ",
+        "ランサーエボリューション"
+      ],
+      "mlitCandidateIdentities": 2,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    }
+  ]
+}

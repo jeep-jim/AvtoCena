@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "builtAt": "2026-08-22T11:21:42.007Z",
+  "ready": true,
+  "coverageContract": {
+    "japan": "2010-present",
+    "allOtherProductionMarkets": "2020-present",
+    "westernEvidenceMarkets": [
+      "us",
+      "canada"
+    ],
+    "truthRule": "Missing, truncated or blocked source data never counts as complete."
+  },
+  "failures": [],
+  "checks": [
+    {
+      "id": "vehiclesdb_denominator",
+      "ok": true,
+      "expected": "makes>=200 models>=4000",
+      "counts": {
+        "makes": 277,
+        "models": 4895
+      },
+      "status": "complete",
+      "summary": null
+    },
+    {
+      "id": "global_denominator",
+      "ok": true,
+      "expected": "sourceModels>=4000 sourceBrands>=200",
+      "counts": {
+        "sourceBrands": 1172,
+        "sourceModels": 5285,
+        "sourceVariantEvidence": 671507,
+        "canonicalBrandResolved": 284,
+        "canonicalModelResolved": 1625,
+        "vehiclesDbCsvRows": 13809,
+        "vehiclesDbCarModelsIntersecting2010Plus": 4895,
+        "existingV2Brands": 255,
+        "existingV2Models": 1619
+      },
+      "status": "partial",
+      "summary": null
+    },
+    {
+      "id": "source_master",
+      "ok": true,
+      "expected": "one master with models>=5000 brands>=200",
+      "counts": {
+        "brands": 754,
+        "models": 20590,
+        "modelsWithKnownMake": 18451,
+        "modelsWithCanonicalV2": 1625,
+        "modelsWithImageUrl": 1476,
+        "byMarket": {
+          "korea": 4903,
+          "china": 8016,
+          "global": 5284,
+          "us": 535,
+          "canada": 2180,
+          "japan": 387
+        },
+        "evidenceChunks": 2851
+      },
+      "status": "source_master_built",
+      "summary": null
+    },
+    {
+      "id": "eea_2020_2025",
+      "ok": true,
+      "expected": "every year 2020..2025 nonzero and technicalTuples>=10000",
+      "counts": {
+        "year2020": 106618,
+        "year2021": 97459,
+        "year2022": 90609,
+        "year2023": 96720,
+        "year2024": 132513,
+        "year2025": 153160,
+        "technicalTuples": 677079
+      },
+      "status": "complete",
+      "summary": null
+    },
+    {
+      "id": "western_denominator",
+      "ok": true,
+      "expected": "models>=500 evidence>=1000 EPA2020+>=1000",
+      "counts": {
+        "sourceModels": 2479,
+        "variantEvidence": 16585,
+        "usFuelEconomyRowsIncluded": 9291,
+        "nhtsaCurrentMakes": 59,
+        "nhtsaModelsObserved": 2341,
+        "nhtsaModelsMatchedTo2020PlusEpa": 444,
+        "canadaRowsIncluded": 7294
+      },
+      "status": "collected",
+      "summary": null
+    },
+    {
+      "id": "us_government_snapshot",
+      "ok": true,
+      "expected": "EPA rows>=1000 NHTSA make responses>=25 models>=500",
+      "counts": {
+        "fuelEconomyRows": 50242,
+        "nhtsaMakes": 12340,
+        "nhtsaCurrentMakesQueried": 59,
+        "nhtsaCurrentMakeResponses": 59,
+        "nhtsaCurrentModels": 2341
+      },
+      "status": "complete",
+      "summary": null
+    },
+    {
+      "id": "canada_government_snapshot",
+      "ok": true,
+      "expected": "NRCan rows>=1000",
+      "counts": {
+        "rows": 12971
+      },
+      "status": "complete",
+      "summary": null
+    },
+    {
+      "id": "miit_china_products",
+      "ok": true,
+      "expected": "MIIT bounded products>=1000 and every live queryable batch 328..408 sampled with no block/failure; this check does not claim an exhaustive MIIT mirror",
+      "counts": {
+        "batchesRequested": 81,
+        "batchesComplete": 81,
+        "products": 16200,
+        "totalMatchesReported": 497981,
+        "blockedBatches": 0,
+        "failedBatches": 0
+      },
+      "status": "complete_bounded_batch_sample",
+      "summary": null
+    },
+    {
+      "id": "china_model_variants",
+      "ok": true,
+      "expected": "brands>=50 series>=200 variants2020+>=500",
+      "counts": {
+        "brands": 396,
+        "seriesDiscovered": 3938,
+        "series": 2114,
+        "seriesFetched": 2143,
+        "variants2020Plus": 17924,
+        "seriesFailed": 1795,
+        "variantsRejectedMissingOrOutsideYearWindow": 261
+      },
+      "status": "partial",
+      "summary": null
+    },
+    {
+      "id": "korea_registration",
+      "ok": true,
+      "expected": "rows>=100000 accepted 2020+ evidence>=1000 unique tuples>=1000 and every accepted row has an explicit model-year or first-registration-year basis; any cached compact fallback must match its pinned workflow provenance, raw hash and reconciled counts",
+      "counts": {
+        "rowsParsed": 424332,
+        "rowsIn2020Plus": 380863,
+        "rowsWithExplicitModelYear": 0,
+        "rowsWithFirstRegistrationWindowOnly": 380863,
+        "rowsRejectedMissingOrOutsideYearWindow": 43469,
+        "uniqueTuples": 6792
+      },
+      "status": "complete_compacted_2020_plus_observation_window",
+      "summary": null
+    },
+    {
+      "id": "korea_energy",
+      "ok": true,
+      "expected": "models>=1000",
+      "counts": {
+        "models": 3370,
+        "responseRows": 3370,
+        "byReleaseYear": {
+          "2020": 452,
+          "2021": 547,
+          "2022": 495,
+          "2023": 537,
+          "2024": 659,
+          "2025": 451,
+          "2026": 229
+        }
+      },
+      "status": "complete",
+      "summary": null
+    },
+    {
+      "id": "mlit_attachment_context",
+      "ok": true,
+      "expected": "attachments>=100 with page title>=50",
+      "counts": null,
+      "status": null,
+      "summary": {
+        "attachments": 433,
+        "withSourcePageTitle": 433
+      }
+    },
+    {
+      "id": "mlit_tabular",
+      "ok": true,
+      "expected": "converted>=5 selected>=5",
+      "counts": null,
+      "status": "complete",
+      "summary": {
+        "selected": 200,
+        "converted": 200,
+        "failed": 0
+      }
+    },
+    {
+      "id": "asia_denominator",
+      "ok": true,
+      "expected": "models>=1000 China variants>=500 Korea models>=1000 Japan rows>=200",
+      "counts": {
+        "models": 13306,
+        "evidence": 48494,
+        "chinaSeries": 2114,
+        "chinaVariants": 17924,
+        "koreaJejuTuples": 6792,
+        "koreaEnergyModels": 3370,
+        "miitProducts": 16200,
+        "japanMlitFiles": 200,
+        "japanMlitRows": 4208,
+        "japanModelsWithMake": 4183,
+        "japanPdfFiles": 61
+      },
+      "status": "collected",
+      "summary": null
+    }
+  ],
+  "headline": {
+    "masterBrands": 754,
+    "masterModels": 20590,
+    "masterModelsWithCanonicalV2": 1625,
+    "globalSourceBrands": 1172,
+    "globalSourceModels": 5285,
+    "globalVariantEvidence": 671507,
+    "westernSourceModels": 2479,
+    "westernVariantEvidence": 16585,
+    "asiaSourceModels": 13306,
+    "asiaVariantEvidence": 48494,
+    "chinaVariants": 17924,
+    "koreaJejuTuples": 6792,
+    "koreaEnergyModels": 3370,
+    "japanMlitRows": 4208,
+    "miitProducts": 16200
+  }
+}

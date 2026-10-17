@@ -1,0 +1,8628 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 11,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "kia:k5",
+      "make": "Kia",
+      "model": "K5",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:k7",
+      "make": "Kia",
+      "model": "K7",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:k900",
+      "make": "Kia",
+      "model": "K900",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:magentis",
+      "make": "Kia",
+      "model": "Magentis",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:mentor",
+      "make": "Kia",
+      "model": "Mentor",
+      "aliases": [
+        "MENTOR GLX EXEC"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/mentor",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Mentor"
+      }
+    },
+    {
+      "key": "kia:mohave",
+      "make": "Kia",
+      "model": "Mohave",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:morning",
+      "make": "Kia",
+      "model": "Morning",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kiamotors:sorento",
+      "make": "Kia Motors",
+      "model": "Sorento",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kia:niro",
+      "make": "Kia",
+      "model": "Niro",
+      "aliases": [
+        "Kia Niro"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/niro",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Niro"
+      }
+    },
+    {
+      "key": "kia:niroev",
+      "make": "Kia",
+      "model": "Niro EV",
+      "aliases": [
+        "NIRO / / EV",
+        "NIRO EV"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/niro-ev",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Niro EV"
+      }
+    },
+    {
+      "key": "kia:opirus",
+      "make": "Kia",
+      "model": "Opirus",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:optima",
+      "make": "Kia",
+      "model": "Optima",
+      "aliases": [
+        "OPTIMA"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/optima",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Optima"
+      }
+    },
+    {
+      "key": "kia:picanto",
+      "make": "Kia",
+      "model": "Picanto",
+      "aliases": [
+        "PICANTO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/picanto",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Picanto"
+      }
+    },
+    {
+      "key": "kia:pregio",
+      "make": "Kia",
+      "model": "Pregio",
+      "aliases": [
+        "PREGIO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/pregio",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Pregio"
+      }
+    },
+    {
+      "key": "kia:pride",
+      "make": "Kia",
+      "model": "Pride",
+      "aliases": [
+        "PRIDE SX"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/pride",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Pride"
+      }
+    },
+    {
+      "key": "kia:proceed",
+      "make": "Kia",
+      "model": "Pro Ceed",
+      "aliases": [
+        "PRO CEED",
+        "PROCEED",
+        "ProCeed"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/pro-ceed",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Pro Ceed"
+      }
+    },
+    {
+      "key": "kia:pv5",
+      "make": "Kia",
+      "model": "PV5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/pv5",
+        "canonicalMake": "Kia",
+        "canonicalModel": "PV5"
+      }
+    },
+    {
+      "key": "kia:retona",
+      "make": "Kia",
+      "model": "Retona",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:rio",
+      "make": "Kia",
+      "model": "Rio",
+      "aliases": [
+        "Kia Rio"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/rio",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Rio"
+      }
+    },
+    {
+      "key": "kia:rondo",
+      "make": "Kia",
+      "model": "Rondo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:sedona",
+      "make": "Kia",
+      "model": "Sedona",
+      "aliases": [
+        "KIA SEDONA",
+        "SEDONA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/sedona",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Sedona"
+      }
+    },
+    {
+      "key": "kia:seltos",
+      "make": "Kia",
+      "model": "Seltos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:sephia",
+      "make": "Kia",
+      "model": "Sephia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:shuma",
+      "make": "Kia",
+      "model": "Shuma",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:sorento",
+      "make": "Kia",
+      "model": "Sorento",
+      "aliases": [
+        "KIA SORENTO",
+        "SORENTO"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/sorento",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Sorento"
+      }
+    },
+    {
+      "key": "kia:soul",
+      "make": "Kia",
+      "model": "Soul",
+      "aliases": [
+        "SOUL"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/soul",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Soul"
+      }
+    },
+    {
+      "key": "kia:soulev",
+      "make": "Kia",
+      "model": "Soul EV",
+      "aliases": [
+        "E-SOUL SILBER UVO 392KWH/AT/13",
+        "E-SOUL/GOLD/E-MOTOR/LR/64,0KWH",
+        "E-SOUL/GOLD/UVO/E-MOTOR/LR/64,",
+        "E-SOUL/GOLD/UVO/LR/64,0KWH/AT/",
+        "E-SOUL/PLATIN/E-MOTOR/LR/64,0K",
+        "E-SOUL/PLATIN/UVO/39,2KWH/AT/1",
+        "E-SOUL/PLATIN/UVO/E-MOTOR/LR/6",
+        "E-SOUL/PLATIN/UVO/LR/64,0KWH/A",
+        "E-SOUL/SILBER/E-MOTOR/LR/64,0K",
+        "E-SOUL/SILBER/UVO/39,2KWH/AT/1",
+        "E-SOUL/SILBER/UVO/E-MOTOR/LR/6",
+        "E-SOUL/SILBER/UVO/LR/64,0KWH/A",
+        "E-SOUL/TITAN/39,2KWH/AT/136",
+        "E-SOUL/TITAN/39,2KWH/AT/136/P1",
+        "E-SOUL/TITAN/LR/64,0KWH/AT/204",
+        "SOUL / / EV",
+        "SOUL EV"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/soul-ev",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Soul EV"
+      }
+    },
+    {
+      "key": "kia:spectra",
+      "make": "Kia",
+      "model": "Spectra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:sportage",
+      "make": "Kia",
+      "model": "Sportage",
+      "aliases": [
+        "SPORTAGE"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/sportage",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Sportage"
+      }
+    },
+    {
+      "key": "kia:stinger",
+      "make": "Kia",
+      "model": "Stinger",
+      "aliases": [
+        "STINGER"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/stinger",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Stinger"
+      }
+    },
+    {
+      "key": "kia:stonic",
+      "make": "Kia",
+      "model": "Stonic",
+      "aliases": [
+        "Kia Stonic"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/stonic",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Stonic"
+      }
+    },
+    {
+      "key": "kia:telluride",
+      "make": "Kia",
+      "model": "Telluride",
+      "aliases": [
+        "KIA TELLURIDE",
+        "TELLURIDE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/telluride",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Telluride"
+      }
+    },
+    {
+      "key": "kia:venga",
+      "make": "Kia",
+      "model": "Venga",
+      "aliases": [
+        "VENGA"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/venga",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Venga"
+      }
+    },
+    {
+      "key": "kia:xceed",
+      "make": "Kia",
+      "model": "X Ceed",
+      "aliases": [
+        "X CEED",
+        "XCeed",
+        "XCEED"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/x-ceed",
+        "canonicalMake": "Kia",
+        "canonicalModel": "X Ceed"
+      }
+    },
+    {
+      "key": "krismar:elite",
+      "make": "Krismar",
+      "model": "Elite",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ktm:xbow",
+      "make": "KTM",
+      "model": "X-Bow",
+      "aliases": [
+        "KTM X-BOW GT-XR",
+        "X BOW GT XR",
+        "X-BOW",
+        "X-BOW GT",
+        "X-BOW GT DSG",
+        "X-BOW GT-XR",
+        "X-BOW R",
+        "X-BOW R - FACELIFT",
+        "X-BOW R (220 KW)",
+        "X-BOW R DSG"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ktm",
+        "modelId": "ktm/x-bow",
+        "canonicalMake": "KTM",
+        "canonicalModel": "X-Bow"
+      }
+    },
+    {
+      "key": "kuayue:d5reev",
+      "make": "Kuayue",
+      "model": "D5 REEV",
+      "aliases": [],
+      "bodyTypes": [
+        "Light truck"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "kuayue",
+        "modelId": "kuayue/d5-reev",
+        "canonicalMake": "Kuayue",
+        "canonicalModel": "D5 REEV"
+      }
+    },
+    {
+      "key": "kuayue:v5",
+      "make": "Kuayue",
+      "model": "V5",
+      "aliases": [],
+      "bodyTypes": [
+        "Microvan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "kuayue",
+        "modelId": "kuayue/v5",
+        "canonicalMake": "Kuayue",
+        "canonicalModel": "V5"
+      }
+    },
+    {
+      "key": "kuayue:v5ev",
+      "make": "Kuayue",
+      "model": "V5 EV",
+      "aliases": [],
+      "bodyTypes": [
+        "Electric van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "kuayue",
+        "modelId": "kuayue/v5-ev",
+        "canonicalMake": "Kuayue",
+        "canonicalModel": "V5 EV"
+      }
+    },
+    {
+      "key": "kuayue:v7",
+      "make": "Kuayue",
+      "model": "V7",
+      "aliases": [],
+      "bodyTypes": [
+        "Microvan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "kuayue",
+        "modelId": "kuayue/v7",
+        "canonicalMake": "Kuayue",
+        "canonicalModel": "V7"
+      }
+    },
+    {
+      "key": "kuayue:v7ev",
+      "make": "Kuayue",
+      "model": "V7 EV",
+      "aliases": [],
+      "bodyTypes": [
+        "Electric van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "kuayue",
+        "modelId": "kuayue/v7-ev",
+        "canonicalMake": "Kuayue",
+        "canonicalModel": "V7 EV"
+      }
+    },
+    {
+      "key": "lada:110",
+      "make": "Lada",
+      "model": "110",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:111",
+      "make": "Lada",
+      "model": "111",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1117",
+      "make": "Lada",
+      "model": "1117",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1119",
+      "make": "Lada",
+      "model": "1119",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:112",
+      "make": "Lada",
+      "model": "112",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1200",
+      "make": "Lada",
+      "model": "1200",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1200s",
+      "make": "Lada",
+      "model": "1200 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1300",
+      "make": "Lada",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1300sl",
+      "make": "Lada",
+      "model": "1300 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1500",
+      "make": "Lada",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1500s",
+      "make": "Lada",
+      "model": "1500 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:1600",
+      "make": "Lada",
+      "model": "1600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2101",
+      "make": "Lada",
+      "model": "2101",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2102",
+      "make": "Lada",
+      "model": "2102",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2103",
+      "make": "Lada",
+      "model": "2103",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2104",
+      "make": "Lada",
+      "model": "2104",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2105",
+      "make": "Lada",
+      "model": "2105",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2106",
+      "make": "Lada",
+      "model": "2106",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2107",
+      "make": "Lada",
+      "model": "2107",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2109",
+      "make": "Lada",
+      "model": "2109",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2121",
+      "make": "Lada",
+      "model": "2121",
+      "aliases": [
+        "LADA 2121"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": "lada/2121",
+        "canonicalMake": "Lada",
+        "canonicalModel": "2121"
+      }
+    },
+    {
+      "key": "lada:2172",
+      "make": "Lada",
+      "model": "2172",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2192",
+      "make": "Lada",
+      "model": "2192",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:2194",
+      "make": "Lada",
+      "model": "2194",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:4x4",
+      "make": "Lada",
+      "model": "4X4",
+      "aliases": [
+        "4X4 BRONTO",
+        "4X4 NIVA TRAVEL",
+        "LADA 4X4",
+        "LADA 4X4 BRONTO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": "lada/4x4",
+        "canonicalMake": "Lada",
+        "canonicalModel": "4X4"
+      }
+    },
+    {
+      "key": "lada:4x4urban",
+      "make": "Lada",
+      "model": "4X4 Urban",
+      "aliases": [
+        "LADA 4X4 - URBAN",
+        "LADA 4X4 URBAN"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": "lada/4x4-urban",
+        "canonicalMake": "Lada",
+        "canonicalModel": "4X4 Urban"
+      }
+    },
+    {
+      "key": "lada:cossack",
+      "make": "Lada",
+      "model": "Cossack",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:granta",
+      "make": "Lada",
+      "model": "Granta",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:largus",
+      "make": "Lada",
+      "model": "Largus",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:niva",
+      "make": "Lada",
+      "model": "Niva",
+      "aliases": [
+        "LADA NIVA TRAVEL 4X4",
+        "NIVA",
+        "NIVA 4X4",
+        "NIVA TRAVEL",
+        "Нива",
+        "4x4"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": "lada/niva",
+        "canonicalMake": "Lada",
+        "canonicalModel": "Niva"
+      }
+    },
+    {
+      "key": "lada:niva1600",
+      "make": "Lada",
+      "model": "Niva 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:niva2121",
+      "make": "Lada",
+      "model": "Niva 2121",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:samara",
+      "make": "Lada",
+      "model": "Samara",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:vaz2101",
+      "make": "Lada",
+      "model": "Vaz 2101",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": null,
+        "canonicalMake": "Lada",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lada:vesta",
+      "make": "Lada",
+      "model": "Vesta",
+      "aliases": [
+        "LADA VESTA",
+        "VESTA"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": "lada/vesta",
+        "canonicalMake": "Lada",
+        "canonicalModel": "Vesta"
+      }
+    },
+    {
+      "key": "lada:xray",
+      "make": "Lada",
+      "model": "Xray",
+      "aliases": [
+        "LADA XRAY",
+        "XRAY"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lada",
+        "modelId": "lada/xray",
+        "canonicalMake": "Lada",
+        "canonicalModel": "Xray"
+      }
+    },
+    {
+      "key": "lagonda:lg45",
+      "make": "Lagonda",
+      "model": "LG45",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lagonda:lg45rapide",
+      "make": "Lagonda",
+      "model": "LG45 Rapide",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lagonda:lg6",
+      "make": "Lagonda",
+      "model": "LG6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lagonda:m45",
+      "make": "Lagonda",
+      "model": "M45",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lagonda:rapier",
+      "make": "Lagonda",
+      "model": "Rapier",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lagonda:v12",
+      "make": "Lagonda",
+      "model": "V12",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lamborghini:140gallardo",
+      "make": "Lamborghini",
+      "model": "140 Gallardo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:147murcielago",
+      "make": "Lamborghini",
+      "model": "147 Murcielago",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:aventador",
+      "make": "Lamborghini",
+      "model": "Aventador",
+      "aliases": [
+        "AVENTADOR"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/aventador",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Aventador"
+      }
+    },
+    {
+      "key": "lamborghini:aventadorcountach",
+      "make": "Lamborghini",
+      "model": "Aventador Countach",
+      "aliases": [
+        "AVENTADOR (COUNTACH)",
+        "AVENTADOR COUNTACH"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/aventador-countach",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Aventador Countach"
+      }
+    },
+    {
+      "key": "lamborghini:aventadorroadster",
+      "make": "Lamborghini",
+      "model": "Aventador Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:aventadors",
+      "make": "Lamborghini",
+      "model": "Aventador S",
+      "aliases": [
+        "AVENTADOR S LP 740-4 S-A"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/aventador-s",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Aventador S"
+      }
+    },
+    {
+      "key": "lamborghini:aventadorsroadster",
+      "make": "Lamborghini",
+      "model": "Aventador S Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:aventadorsian",
+      "make": "Lamborghini",
+      "model": "Aventador Sian",
+      "aliases": [
+        "AVENTADOR (SIAN)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/aventador-sian",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Aventador Sian"
+      }
+    },
+    {
+      "key": "lamborghini:aventadorsianroadster",
+      "make": "Lamborghini",
+      "model": "Aventador Sian Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:aventadorsvj",
+      "make": "Lamborghini",
+      "model": "Aventador Svj",
+      "aliases": [
+        "AVENTADOR SVJ 63 LIMITED ED SA",
+        "AVENTADOR SVJ LP 770-4 S-A"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/aventador-svj",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Aventador Svj"
+      }
+    },
+    {
+      "key": "lamborghini:aventadorultimae",
+      "make": "Lamborghini",
+      "model": "Aventador Ultimae",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:countach",
+      "make": "Lamborghini",
+      "model": "Countach",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:countachlp500s",
+      "make": "Lamborghini",
+      "model": "Countach LP500S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:diablo",
+      "make": "Lamborghini",
+      "model": "Diablo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:gallardo",
+      "make": "Lamborghini",
+      "model": "Gallardo",
+      "aliases": [
+        "GALLARDO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/gallardo",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Gallardo"
+      }
+    },
+    {
+      "key": "lamborghini:gallardospyder",
+      "make": "Lamborghini",
+      "model": "Gallardo Spyder",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:huracan",
+      "make": "Lamborghini",
+      "model": "Huracan",
+      "aliases": [
+        "HURACAN",
+        "HURACáN",
+        "HURACÁN",
+        "HURACAN /"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/huracan",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Huracan"
+      }
+    },
+    {
+      "key": "lamborghini:huracanevo",
+      "make": "Lamborghini",
+      "model": "Huracan Evo",
+      "aliases": [
+        "HURACAN EVO LP 610-2 S-A",
+        "HURACAN EVO LP 640-4 S-A"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/huracan-evo",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Huracan Evo"
+      }
+    },
+    {
+      "key": "lamborghini:huracanevospyder",
+      "make": "Lamborghini",
+      "model": "Huracan Evo Spyder",
+      "aliases": [
+        "HURACAN EVO SPYDER"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/huracan-evo-spyder",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Huracan Evo Spyder"
+      }
+    },
+    {
+      "key": "lamborghini:huracanspyder",
+      "make": "Lamborghini",
+      "model": "Huracan Spyder",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:huracansterrato",
+      "make": "Lamborghini",
+      "model": "Huracan Sterrato",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:huracansto",
+      "make": "Lamborghini",
+      "model": "Huracan Sto",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:islero",
+      "make": "Lamborghini",
+      "model": "Islero",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:jalpa",
+      "make": "Lamborghini",
+      "model": "Jalpa",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:lm002",
+      "make": "Lamborghini",
+      "model": "Lm 002",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:murcielago",
+      "make": "Lamborghini",
+      "model": "Murcielago",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:murcielagoroadster",
+      "make": "Lamborghini",
+      "model": "Murcielago Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:revuelto",
+      "make": "Lamborghini",
+      "model": "Revuelto",
+      "aliases": [
+        "REVUELTO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/revuelto",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Revuelto"
+      }
+    },
+    {
+      "key": "lamborghini:temerario",
+      "make": "Lamborghini",
+      "model": "Temerario",
+      "aliases": [
+        "TEMERARIO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/temerario",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Temerario"
+      }
+    },
+    {
+      "key": "lamborghini:urraco",
+      "make": "Lamborghini",
+      "model": "Urraco",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:urus",
+      "make": "Lamborghini",
+      "model": "Urus",
+      "aliases": [
+        "URUS",
+        "URUS /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/urus",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Urus"
+      }
+    },
+    {
+      "key": "lamborghini:urusperformante",
+      "make": "Lamborghini",
+      "model": "Urus Performante",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:uruss",
+      "make": "Lamborghini",
+      "model": "Urus S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lamborghini:urusse",
+      "make": "Lamborghini",
+      "model": "Urus Se",
+      "aliases": [
+        "URUS SE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": "lamborghini/urus-se",
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": "Urus Se"
+      }
+    },
+    {
+      "key": "lamborghini:venenoroadster",
+      "make": "Lamborghini",
+      "model": "Veneno Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lamborghini",
+        "modelId": null,
+        "canonicalMake": "Lamborghini",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lanchester:10hp",
+      "make": "Lanchester",
+      "model": "10HP",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lancia:2000",
+      "make": "Lancia",
+      "model": "2000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:appia",
+      "make": "Lancia",
+      "model": "Appia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:aprilia",
+      "make": "Lancia",
+      "model": "Aprilia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:aurelia",
+      "make": "Lancia",
+      "model": "Aurelia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:beta",
+      "make": "Lancia",
+      "model": "Beta",
+      "aliases": [
+        "BETA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": "lancia/beta",
+        "canonicalMake": "Lancia",
+        "canonicalModel": "Beta"
+      }
+    },
+    {
+      "key": "lancia:beta2000",
+      "make": "Lancia",
+      "model": "Beta 2000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:beta2000spider",
+      "make": "Lancia",
+      "model": "Beta 2000 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:betamontecarlo",
+      "make": "Lancia",
+      "model": "Beta Monte Carlo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:coupe",
+      "make": "Lancia",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:dedra",
+      "make": "Lancia",
+      "model": "Dedra",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:delta",
+      "make": "Lancia",
+      "model": "Delta",
+      "aliases": [
+        "LANCIA DELTA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": "lancia/delta",
+        "canonicalMake": "Lancia",
+        "canonicalModel": "Delta"
+      }
+    },
+    {
+      "key": "lancia:deltahf",
+      "make": "Lancia",
+      "model": "Delta Hf",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:deltahfintegrale",
+      "make": "Lancia",
+      "model": "Delta Hf Integrale",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:deltahfintegrale16v",
+      "make": "Lancia",
+      "model": "Delta Hf Integrale 16V",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:deltahfintergrale",
+      "make": "Lancia",
+      "model": "Delta Hf Intergrale",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:deltahfturbo",
+      "make": "Lancia",
+      "model": "Delta Hf Turbo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:deltaintegrale",
+      "make": "Lancia",
+      "model": "Delta Integrale",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:flaminia",
+      "make": "Lancia",
+      "model": "Flaminia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:flaminiasport",
+      "make": "Lancia",
+      "model": "Flaminia Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:flavia",
+      "make": "Lancia",
+      "model": "Flavia",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:fulvia",
+      "make": "Lancia",
+      "model": "Fulvia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:fulvia13s",
+      "make": "Lancia",
+      "model": "Fulvia 1.3S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:fulviasport1",
+      "make": "Lancia",
+      "model": "Fulvia Sport 1",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:gamma",
+      "make": "Lancia",
+      "model": "Gamma",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:gamma2500",
+      "make": "Lancia",
+      "model": "Gamma 2500",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:grandvoyager",
+      "make": "Lancia",
+      "model": "Grand Voyager",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:hpe",
+      "make": "Lancia",
+      "model": "Hpe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:kappa",
+      "make": "Lancia",
+      "model": "Kappa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:lybra",
+      "make": "Lancia",
+      "model": "Lybra",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:montecarlo",
+      "make": "Lancia",
+      "model": "Monte Carlo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:musa",
+      "make": "Lancia",
+      "model": "Musa",
+      "aliases": [
+        "LANCIA MUSA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": "lancia/musa",
+        "canonicalMake": "Lancia",
+        "canonicalModel": "Musa"
+      }
+    },
+    {
+      "key": "lancia:phedra",
+      "make": "Lancia",
+      "model": "Phedra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:prisma",
+      "make": "Lancia",
+      "model": "Prisma",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:stratos",
+      "make": "Lancia",
+      "model": "Stratos",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:thema",
+      "make": "Lancia",
+      "model": "Thema",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:thema6v",
+      "make": "Lancia",
+      "model": "Thema 6V",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:thesis",
+      "make": "Lancia",
+      "model": "Thesis",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:trevi",
+      "make": "Lancia",
+      "model": "Trevi",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:volumex",
+      "make": "Lancia",
+      "model": "Volumex",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:voyager",
+      "make": "Lancia",
+      "model": "Voyager",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:y",
+      "make": "Lancia",
+      "model": "Y",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": "lancia/y",
+        "canonicalMake": "Lancia",
+        "canonicalModel": "Y"
+      }
+    },
+    {
+      "key": "lancia:y10",
+      "make": "Lancia",
+      "model": "Y10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": null,
+        "canonicalMake": "Lancia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lancia:ypsilon",
+      "make": "Lancia",
+      "model": "Ypsilon",
+      "aliases": [
+        "LANCIA YPSILON",
+        "YPSILON"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lancia",
+        "modelId": "lancia/ypsilon",
+        "canonicalMake": "Lancia",
+        "canonicalModel": "Ypsilon"
+      }
+    },
+    {
+      "key": "landrover:101",
+      "make": "Land Rover",
+      "model": "101",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:109",
+      "make": "Land Rover",
+      "model": "109",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:110",
+      "make": "Land Rover",
+      "model": "110",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:86",
+      "make": "Land Rover",
+      "model": "86",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:88",
+      "make": "Land Rover",
+      "model": "88",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:90",
+      "make": "Land Rover",
+      "model": "90",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:defender",
+      "make": "Land Rover",
+      "model": "Defender",
+      "aliases": [
+        "DEFENDER",
+        "DEFENDER 110",
+        "ディフェンダー110 (エアサスペンション)",
+        "ディフェンダー110 (コイルサスペンション)",
+        "ディフェンダー130",
+        "ディフェンダー130 / ディフェンダー130 Outbound",
+        "ディフェンダー90 (エアサスペンション)",
+        "ディフェンダー90 (コイルサスペンション)",
+        "ディフェンダー Trophy Edition"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/defender",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Defender"
+      }
+    },
+    {
+      "key": "landrover:discovery",
+      "make": "Land Rover",
+      "model": "Discovery",
+      "aliases": [
+        "DISCOVERY",
+        "ディスカバリー",
+        "ディスカバリー4",
+        "ニューディスカバリー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/discovery",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Discovery"
+      }
+    },
+    {
+      "key": "landrover:discoverysport",
+      "make": "Land Rover",
+      "model": "Discovery Sport",
+      "aliases": [
+        "DISCOVERY SPORT",
+        "DISCOVRY SPRT RDYN HSE P300E A",
+        "ディスカバリー スポーツ"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/discovery-sport",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Discovery Sport"
+      }
+    },
+    {
+      "key": "landrover:freelander",
+      "make": "Land Rover",
+      "model": "Freelander",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:freelander2",
+      "make": "Land Rover",
+      "model": "Freelander 2",
+      "aliases": [
+        "フリーランダー 2"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/freelander-2",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Freelander 2"
+      }
+    },
+    {
+      "key": "landrover:lr2",
+      "make": "Land Rover",
+      "model": "LR2",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:lr3",
+      "make": "Land Rover",
+      "model": "LR3",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:lr4",
+      "make": "Land Rover",
+      "model": "LR4",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:rangerover",
+      "make": "Land Rover",
+      "model": "Range Rover",
+      "aliases": [
+        "LAND ROVER RANGE ROVER",
+        "R ROVER SPRT HSE SILVR P400E A",
+        "R ROVER SPRT HSE SLVR D MHEV A",
+        "R ROVER SVA-BIO DYN V8 SC A",
+        "R ROVER WESTMINSTR BLCK SDV6 A",
+        "R ROVER WESTMNSTR BLCK P400E A",
+        "R ROVER WSTMNSTR BLCK D MHEV A",
+        "RANGE ROVER",
+        "レンジローバー",
+        "レンジローバー 280kW仕様",
+        "レンジローバー VOGUE ロングホイールベース、280kW仕様",
+        "レンジローバー ロングホイールベース",
+        "レンジローバー ロングホイールベース 405kW仕様",
+        "レンジローバーLWB"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/range-rover",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Range Rover"
+      }
+    },
+    {
+      "key": "landrover:rangeroverevoque",
+      "make": "Land Rover",
+      "model": "Range Rover Evoque",
+      "aliases": [
+        "EVOQUE",
+        "EVOQUE D165 R-DYNAMIC S AWD AU",
+        "EVOQUE D165 R-DYNAMIC SE AWD A",
+        "EVOQUE D165 SE AWD AUT",
+        "EVOQUE D200 R-DYNAMIC S AWD AU",
+        "EVOQUE D200 R-DYNAMIC SE AWD A",
+        "EVOQUE P200 SE AWD AUT",
+        "EVOQUE P300E BRONZE COLLECTION",
+        "EVOQUE P300E R-DYNAMIC HSE AWD",
+        "EVOQUE P300E R-DYNAMIC S AWD A",
+        "EVOQUE P300E R-DYNAMIC SE AWD",
+        "EVOQUE P300E SE AWD AUT",
+        "R ROVER EVOQUE",
+        "R ROVER EVOQUE A-BIO D MHEV A",
+        "R ROVER EVOQUE FIRST ED D A",
+        "R ROVER EVOQUE FIRST EDITION A",
+        "R ROVER EVOQUE HSE D MHEV A",
+        "R ROVER EVOQUE R-DYN D MHEV A",
+        "R ROVER EVOQUE R-DYN HSE D A",
+        "R ROVER EVOQUE R-DYN S D 4X2",
+        "R ROVER EVOQUE R-DYN S MHEV A",
+        "R ROVER EVOQUE R-DYN S P300E A",
+        "R ROVER EVOQUE R-DYN SE MHEV A",
+        "R ROVER EVOQUE RDYN HSE MHEV A",
+        "R ROVER EVOQUE RDYN S D MHEV A",
+        "R ROVER EVOQUE RDYN SE DMHEV A",
+        "RANGE ROVER EVOQUE",
+        "RangeRover Evoque",
+        "RROVER EVOQUE R-DYN SE P300E A",
+        "RROVER EVOQUE RDYN HSE P300E A",
+        "レンジローバーEvoque",
+        "レンジローバーEvoque Convertible",
+        "レンジローバーイヴォーク"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/range-rover-evoque",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Range Rover Evoque"
+      }
+    },
+    {
+      "key": "landrover:rangeroversport",
+      "make": "Land Rover",
+      "model": "Range Rover Sport",
+      "aliases": [
+        "LAND ROVER RANGE ROVER SPORT",
+        "R ROVER SPORT",
+        "R ROVER SPORT A-BIO DYN PHEV A",
+        "R ROVER SPORT ABIO DYN P400E A",
+        "R ROVER SPORT ABIO DYN V8 SC A",
+        "R ROVER SPORT HSE DYN D MHEV A",
+        "R ROVER SPORT HSE DYN MHEV A",
+        "R ROVER SPORT HSE DYN P400E A",
+        "R ROVER SPORT HSE DYN PHEV A",
+        "R ROVER SPORT HSE DYN SDV6 A",
+        "RANGE ROVER SPORT",
+        "RANGEROVER SPORT",
+        "RR SPORT HSE DYN BLACK P400E A",
+        "RR SPORT HSE DYN BLCK D MHEV A",
+        "RROVER SPORT A-BIO DYN SDV6 A",
+        "RROVER SPORT A-BIO DYN SDV8 A",
+        "RROVER SPORT ABIO DYN D MHEV A",
+        "レンジローバー スポーツ",
+        "レンジローバー スポーツ HST 280kW仕様",
+        "レンジローバー スポーツ SVR"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/range-rover-sport",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Range Rover Sport"
+      }
+    },
+    {
+      "key": "landrover:rangerovervelar",
+      "make": "Land Rover",
+      "model": "Range Rover Velar",
+      "aliases": [
+        "R ROVER VELAR R-DYN HSE D180 A",
+        "R ROVER VELAR R-DYN HSE D240 A",
+        "R ROVER VELAR R-DYN HSE D275 A",
+        "R ROVER VELAR R-DYN HSE D300 A",
+        "R ROVER VELAR R-DYN HSE MHEV A",
+        "R ROVER VELAR R-DYN HSE P250 A",
+        "R ROVER VELAR R-DYN HSE P300 A",
+        "R ROVER VELAR R-DYN S D MHEV A",
+        "R ROVER VELAR R-DYN S D180 A",
+        "R ROVER VELAR R-DYN S D240 A",
+        "R ROVER VELAR R-DYN S D275 A",
+        "R ROVER VELAR R-DYN S D300 A",
+        "R ROVER VELAR R-DYN S P250 A",
+        "R ROVER VELAR R-DYN S P300 A",
+        "R ROVER VELAR R-DYN SE D180 A",
+        "R ROVER VELAR R-DYN SE D240 A",
+        "R ROVER VELAR R-DYN SE D275 A",
+        "R ROVER VELAR R-DYN SE D300 A",
+        "R ROVER VELAR R-DYN SE P250 A",
+        "R ROVER VELAR R-DYN SE P300 A",
+        "R ROVER VELAR RDYN HSE DMHEV A",
+        "R ROVER VELAR RDYN SE D MHEV A",
+        "R ROVER VELAR SV-ABIO DYN ED A",
+        "RANGE ROVE R VELAR",
+        "RANGE ROVER VELAR",
+        "Range RoverVelar",
+        "レンジローバーヴェラール",
+        "レンジローバーヴェラール (エアサスペンション)",
+        "レンジローバーヴェラール (コイルサスペンション)",
+        "レンジローバーベラール",
+        "レンジローバーベラール (エアサスペンション)",
+        "レンジローバーベラール (コイルサスペンション)"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": "land-rover/range-rover-velar",
+        "canonicalMake": "Land Rover",
+        "canonicalModel": "Range Rover Velar"
+      }
+    },
+    {
+      "key": "landrover:santana88",
+      "make": "Land Rover",
+      "model": "Santana 88",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:series",
+      "make": "Land Rover",
+      "model": "Series",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:series1",
+      "make": "Land Rover",
+      "model": "Series 1",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:series2",
+      "make": "Land Rover",
+      "model": "Series 2",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:series3",
+      "make": "Land Rover",
+      "model": "Series 3",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:seriesi",
+      "make": "Land Rover",
+      "model": "Series I",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:seriesi80",
+      "make": "Land Rover",
+      "model": "Series I 80",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "landrover:seriesiia",
+      "make": "Land Rover",
+      "model": "Series Iia",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "land-rover",
+        "modelId": null,
+        "canonicalMake": "Land Rover",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ldv:convoy",
+      "make": "LDV",
+      "model": "Convoy",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ldv:maxus",
+      "make": "LDV",
+      "model": "Maxus",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ldv:v80",
+      "make": "LDV",
+      "model": "V80",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leapmotor:b05",
+      "make": "Leapmotor",
+      "model": "B05",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "leapmotor",
+        "modelId": null,
+        "canonicalMake": "Leapmotor",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "leapmotor:b10",
+      "make": "Leapmotor",
+      "model": "B10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "leapmotor",
+        "modelId": "leapmotor/b10",
+        "canonicalMake": "Leapmotor",
+        "canonicalModel": "B10"
+      }
+    },
+    {
+      "key": "leapmotor:c10",
+      "make": "Leapmotor",
+      "model": "C10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "leapmotor",
+        "modelId": "leapmotor/c10",
+        "canonicalMake": "Leapmotor",
+        "canonicalModel": "C10"
+      }
+    },
+    {
+      "key": "leapmotor:t03",
+      "make": "Leapmotor",
+      "model": "T03",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "leapmotor",
+        "modelId": "leapmotor/t03",
+        "canonicalMake": "Leapmotor",
+        "canonicalModel": "T03"
+      }
+    },
+    {
+      "key": "lepas:l4",
+      "make": "LEPAS",
+      "model": "L4",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "lepas",
+        "modelId": "lepas/l4",
+        "canonicalMake": "LEPAS",
+        "canonicalModel": "L4"
+      }
+    },
+    {
+      "key": "lepas:l6",
+      "make": "LEPAS",
+      "model": "L6",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "lepas",
+        "modelId": "lepas/l6",
+        "canonicalMake": "LEPAS",
+        "canonicalModel": "L6"
+      }
+    },
+    {
+      "key": "lepas:l8",
+      "make": "LEPAS",
+      "model": "L8",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2025,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "lepas",
+        "modelId": "lepas/l8",
+        "canonicalMake": "LEPAS",
+        "canonicalModel": "L8"
+      }
+    },
+    {
+      "key": "levc:tx",
+      "make": "LEVC",
+      "model": "TX",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "levc",
+        "modelId": "levc/tx",
+        "canonicalMake": "LEVC",
+        "canonicalModel": "TX"
+      }
+    },
+    {
+      "key": "lexus:ct",
+      "make": "Lexus",
+      "model": "CT",
+      "aliases": [
+        "CT200h",
+        "LEXUS CT200H",
+        "LEXUS CT200H 18 E-CVT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/ct",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "CT"
+      }
+    },
+    {
+      "key": "lexus:es",
+      "make": "Lexus",
+      "model": "ES",
+      "aliases": [
+        "ES300h",
+        "ES350h",
+        "LEXUS ES300H",
+        "LEXUS ES350E",
+        "LEXUS ES500E"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/es",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "ES"
+      }
+    },
+    {
+      "key": "lexus:gs",
+      "make": "Lexus",
+      "model": "GS",
+      "aliases": [
+        "GS200t",
+        "GS250",
+        "GS300",
+        "GS300h",
+        "GS350",
+        "GS450h",
+        "LEXUS GS450H"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/gs",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "GS"
+      }
+    },
+    {
+      "key": "lexus:gsf",
+      "make": "Lexus",
+      "model": "GS F",
+      "aliases": [
+        "GS F"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/gs-f",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "GS F"
+      }
+    },
+    {
+      "key": "lexus:gx",
+      "make": "Lexus",
+      "model": "GX",
+      "aliases": [
+        "GX460",
+        "GX550"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/gx",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "GX"
+      }
+    },
+    {
+      "key": "lexus:hs",
+      "make": "Lexus",
+      "model": "HS",
+      "aliases": [
+        "HS250h"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/hs",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "HS"
+      }
+    },
+    {
+      "key": "lexus:is",
+      "make": "Lexus",
+      "model": "IS",
+      "aliases": [
+        "IS200t",
+        "IS250",
+        "IS300",
+        "IS300h",
+        "IS350",
+        "IS500",
+        "IS500 F SPORT PERFORMANCE",
+        "LEXUS IS",
+        "LEXUS IS250",
+        "LEXUS IS300H",
+        "LEXUS IS300H / 2.5 / E-CVT"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/is",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "IS"
+      }
+    },
+    {
+      "key": "lexus:isf",
+      "make": "Lexus",
+      "model": "IS F",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": null,
+        "canonicalMake": "Lexus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lexus:lbx",
+      "make": "Lexus",
+      "model": "LBX",
+      "aliases": [
+        "LBX"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/lbx",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "LBX"
+      }
+    },
+    {
+      "key": "lexus:lc",
+      "make": "Lexus",
+      "model": "LC",
+      "aliases": [
+        "LC500",
+        "LC500 / 5.0 / V8 AUT.",
+        "LC500h",
+        "LC500H / 3.5 / E-CVT",
+        "LEXUS LC500",
+        "LEXUS LC500 CABRIOLET",
+        "LEXUS LC500H"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/lc",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "LC"
+      }
+    },
+    {
+      "key": "lexus:lfa",
+      "make": "Lexus",
+      "model": "LFA",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": null,
+        "canonicalMake": "Lexus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lexus:lm",
+      "make": "Lexus",
+      "model": "LM",
+      "aliases": [
+        "LEXUS LM350H",
+        "LEXUS LM350H 2.5 E-CVT AWD",
+        "LM350h",
+        "LM500h"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/lm",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "LM"
+      }
+    },
+    {
+      "key": "lexus:ls",
+      "make": "Lexus",
+      "model": "LS",
+      "aliases": [
+        "LEXUS LS500",
+        "LEXUS LS500H",
+        "LS430",
+        "LS460",
+        "LS460L",
+        "LS500",
+        "LS500h",
+        "LS500H 35 E-CVT AWD",
+        "LS600h",
+        "LS600hL"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/ls",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "LS"
+      }
+    },
+    {
+      "key": "lexus:lx",
+      "make": "Lexus",
+      "model": "LX",
+      "aliases": [
+        "LX570",
+        "LX600",
+        "LX700h"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/lx",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "LX"
+      }
+    },
+    {
+      "key": "lexus:nx",
+      "make": "Lexus",
+      "model": "NX",
+      "aliases": [
+        "LEXUS NX",
+        "LEXUS NX300",
+        "LEXUS NX300H",
+        "LEXUS NX350F",
+        "LEXUS NX350H",
+        "LEXUS NX450H",
+        "LEXUS NX450H+",
+        "NX200t",
+        "NX250",
+        "NX300",
+        "NX300h",
+        "NX300H 25 E-CVT",
+        "NX300H 25 E-CVT AWD",
+        "NX350",
+        "NX350h",
+        "NX350H / 2.5 / E-CVT",
+        "NX350H / 2.5 / E-CVT AWD",
+        "NX450H+",
+        "NX450H+ / 2.5 / E-CVT AWD PLUG-IN",
+        "NX450H++"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/nx",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "NX"
+      }
+    },
+    {
+      "key": "lexus:rc",
+      "make": "Lexus",
+      "model": "RC",
+      "aliases": [
+        "RC 300H",
+        "RC 300H CVT",
+        "RC 300H F SPORT CVT",
+        "RC 300H TAKUMI CVT",
+        "RC200t",
+        "RC300",
+        "RC350"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/rc",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "RC"
+      }
+    },
+    {
+      "key": "lexus:rcf",
+      "make": "Lexus",
+      "model": "RC F",
+      "aliases": [
+        "RC F"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/rc-f",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "RC F"
+      }
+    },
+    {
+      "key": "lexus:rx",
+      "make": "Lexus",
+      "model": "RX",
+      "aliases": [
+        "LEXUS RX300",
+        "LEXUS RX350H",
+        "LEXUS RX350H / E-CVT",
+        "LEXUS RX350L",
+        "LEXUS RX450H",
+        "LEXUS RX450H+",
+        "LEXUS RX450H+ / E-CVT / PLUGIN",
+        "LEXUS RX450HL",
+        "LEXUS RX500H",
+        "LEXUS RX500H / AUT",
+        "RX200t",
+        "RX270",
+        "RX300",
+        "RX350",
+        "RX350h",
+        "RX450h",
+        "RX450H 35 V6 4WD",
+        "RX450H+",
+        "RX450hL",
+        "RX450HL / 3.5 / V6 4WD",
+        "RX500h",
+        "RXL 450H CVT",
+        "RXL 450H TAKUMI CVT"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/rx",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "RX"
+      }
+    },
+    {
+      "key": "lexus:rz",
+      "make": "Lexus",
+      "model": "RZ",
+      "aliases": [
+        "LEXUS RZ300E",
+        "LEXUS RZ350E",
+        "LEXUS RZ450E",
+        "LEXUS RZ500E",
+        "RZ300E",
+        "RZ450E"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2022,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/rz",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "RZ"
+      }
+    },
+    {
+      "key": "lexus:sc",
+      "make": "Lexus",
+      "model": "SC",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": null,
+        "canonicalMake": "Lexus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lexus:tx",
+      "make": "Lexus",
+      "model": "TX",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": null,
+        "canonicalMake": "Lexus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lexus:ux",
+      "make": "Lexus",
+      "model": "UX",
+      "aliases": [
+        "LEXUS UX200",
+        "LEXUS UX250H",
+        "LEXUS UX300E",
+        "LEXUS UX300E / ELECTRIC /",
+        "LEXUS UX300H",
+        "UX200",
+        "UX250H",
+        "UX300E",
+        "UX300h",
+        "UX300H / 2.0 /",
+        "UX300H / 2.0 / 4WD"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lexus",
+        "modelId": "lexus/ux",
+        "canonicalMake": "Lexus",
+        "canonicalModel": "UX"
+      }
+    },
+    {
+      "key": "leyland:1000",
+      "make": "Leyland",
+      "model": "1000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leylandcars:mini",
+      "make": "Leyland Cars",
+      "model": "Mini",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:clubman",
+      "make": "Leyland",
+      "model": "Clubman",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:clubman1100",
+      "make": "Leyland",
+      "model": "Clubman 1100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:mgb",
+      "make": "Leyland",
+      "model": "MGB",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:mini",
+      "make": "Leyland",
+      "model": "Mini",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:mini1000",
+      "make": "Leyland",
+      "model": "Mini 1000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:mini850",
+      "make": "Leyland",
+      "model": "Mini 850",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:miniclubman",
+      "make": "Leyland",
+      "model": "Mini Clubman",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:minimk",
+      "make": "Leyland",
+      "model": "Mini Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:minimoke",
+      "make": "Leyland",
+      "model": "Mini Moke",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:moke",
+      "make": "Leyland",
+      "model": "Moke",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:princess",
+      "make": "Leyland",
+      "model": "Princess",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:rangerover",
+      "make": "Leyland",
+      "model": "Range Rover",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "leyland:sherpa",
+      "make": "Leyland",
+      "model": "Sherpa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lincoln:aviator",
+      "make": "Lincoln",
+      "model": "Aviator",
+      "aliases": [
+        "AVIATOR",
+        "LINCOLN AVIATOR"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/aviator",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Aviator"
+      }
+    },
+    {
+      "key": "lincoln:capri",
+      "make": "Lincoln",
+      "model": "Capri",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:continental",
+      "make": "Lincoln",
+      "model": "Continental",
+      "aliases": [
+        "CONTINENTAL",
+        "LINCOLN CONTINENTAL"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/continental",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Continental"
+      }
+    },
+    {
+      "key": "lincoln:continentalmark",
+      "make": "Lincoln",
+      "model": "Continental Mark",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:continentalmark4",
+      "make": "Lincoln",
+      "model": "Continental Mark 4",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:continentalmk",
+      "make": "Lincoln",
+      "model": "Continental Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:continentaltown",
+      "make": "Lincoln",
+      "model": "Continental Town",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:continentaltowncar",
+      "make": "Lincoln",
+      "model": "Continental Town Car",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:corsair",
+      "make": "Lincoln",
+      "model": "Corsair",
+      "aliases": [
+        "LINCOLN CORSAIR"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/corsair",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Corsair"
+      }
+    },
+    {
+      "key": "lincoln:excalibur",
+      "make": "Lincoln",
+      "model": "Excalibur",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:kb",
+      "make": "Lincoln",
+      "model": "Kb",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:ls",
+      "make": "Lincoln",
+      "model": "LS",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:mark",
+      "make": "Lincoln",
+      "model": "Mark",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:marklt",
+      "make": "Lincoln",
+      "model": "Mark Lt",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,792 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-wuling-hongguang-bev-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱宏光纯电版参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=265",
+          "documentId": "SGMW carDetail 265",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "grossWeightKg",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact two-column manufacturer table. The 32.6 kWh value is not mapped because SGMW does not identify gross, usable or rated battery basis. The 5/6-seat choice cannot be represented as one exact integer and is therefore omitted."
+        },
+        {
+          "id": "src-sgmw-wuling-hongguang-bev-launch-history-2025",
+          "type": "manufacturer",
+          "title": "上汽通用五菱：2024年销量超154万辆，新能源同比增长63%",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=49099",
+          "documentId": "SGMW portal 49099",
+          "documentDate": "2025-01-02",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "yearFrom",
+            "name"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official annual record explicitly states that the Hongguang BEV launched in September 2024."
+        },
+        {
+          "id": "src-sgmw-wuling-hongguang-erev-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱宏光增程版参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=278",
+          "documentId": "SGMW carDetail 278",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "icePowerKw",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "grossWeightKg",
+            "tankCapacityL",
+            "seats",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact three-column manufacturer table. The 8.5 kWh value is not mapped because SGMW does not identify gross, usable or rated battery basis. The stated 1,000 km combined range has no matching V2 field and is not substituted for electric range."
+        },
+        {
+          "id": "src-sgmw-wuling-hongguang-erev-launch-2025",
+          "type": "manufacturer",
+          "title": "6.88万元起！全球首款6万级增程后驱MPV五菱宏光增程版正式上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=50299",
+          "documentId": "SGMW portal 50299",
+          "documentDate": "2025-04-09",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "seats"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official launch identifies the Hongguang family as originating in 2010, the 2024 BEV, the 2025 EREV, the MPV body, rear-wheel drive and exact three-seat-layout grade names."
+        },
+        {
+          "id": "src-sgmw-wuling-hongguang-english-spec",
+          "type": "manufacturer_technical_document",
+          "title": "Hongguang Specifications",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/en/carDetail?id=5",
+          "documentId": "SGMW English carDetail 5",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "drive"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English specification identifies both EV and REEV columns as FR; this is normalized to RWD only. Its differently scoped REEV range row is not used for the China grade variants."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang",
+          "brandId": "wuling",
+          "canonicalName": "Hongguang",
+          "slug": "hongguang",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 宏光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-red-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2010",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [
+            "BEV",
+            "EREV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-red-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch history dates the Hongguang family to 2010 and explicitly describes its 2024 BEV and 2025 EREV MPV forms."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "The 2024 BEV and 2025 EREV source-backed configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang/bev-2024",
+          "modelId": "wuling/hongguang",
+          "name": "BEV (2024)",
+          "aliases": [
+            {
+              "value": "纯电版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-bev-spec"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2024-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-bev-launch-history-2025",
+              "fields": [
+                "name",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW states that the Hongguang BEV launched in September 2024."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's family history identifies the Hongguang body as a compact MPV and names the 2024 BEV transformation."
+            }
+          ],
+          "researchNotes": [
+            "Powertrain-edition container; no unverified platform code or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang/erev-2025",
+          "modelId": "wuling/hongguang",
+          "name": "EREV (2025)",
+          "aliases": [
+            {
+              "value": "增程版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-launch-2025"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-04",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW launched the named rear-wheel-drive EREV MPV on 2025-04-09."
+            }
+          ],
+          "researchNotes": [
+            "Powertrain-edition container; no unverified platform code or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang/bev-2024/practical-300-km",
+          "modelId": "wuling/hongguang",
+          "generationId": "wuling/hongguang/bev-2024",
+          "faceliftId": null,
+          "name": "Pure Electric 300 km Practical",
+          "aliases": [
+            {
+              "value": "纯电动 300km 实用型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-bev-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 300,
+          "rangeStandard": "CLTC",
+          "lengthMm": 4515,
+          "widthMm": 1725,
+          "heightMm": 1790,
+          "wheelbaseMm": 2850,
+          "curbWeightKg": 1275,
+          "grossWeightKg": 1850,
+          "topSpeedKmh": 135,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-bev-launch-history-2025",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW explicitly records the September 2024 launch."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW identifies the Hongguang family body as an MPV and explicitly references the 2024 BEV."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-english-spec",
+              "fields": [
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official English table identifies the EV driving type as FR, normalized to RWD."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-bev-spec",
+              "fields": [
+                "name",
+                "market",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's two-column China BEV specification."
+            }
+          ],
+          "researchNotes": [
+            "The 32.6 kWh source value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "The source offers 5/6-seat layouts within each grade, so no single seats integer is invented. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang/bev-2024/standard-300-km",
+          "modelId": "wuling/hongguang",
+          "generationId": "wuling/hongguang/bev-2024",
+          "faceliftId": null,
+          "name": "Pure Electric 300 km Standard",
+          "aliases": [
+            {
+              "value": "纯电动 300km 标准型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-bev-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 300,
+          "rangeStandard": "CLTC",
+          "lengthMm": 4515,
+          "widthMm": 1725,
+          "heightMm": 1790,
+          "wheelbaseMm": 2850,
+          "curbWeightKg": 1275,
+          "grossWeightKg": 1850,
+          "topSpeedKmh": 135,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-bev-launch-history-2025",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW explicitly records the September 2024 launch."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW identifies the Hongguang family body as an MPV and explicitly references the 2024 BEV."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-english-spec",
+              "fields": [
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official English table identifies the EV driving type as FR, normalized to RWD."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-bev-spec",
+              "fields": [
+                "name",
+                "market",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's two-column China BEV specification."
+            }
+          ],
+          "researchNotes": [
+            "The 32.6 kWh source value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "The source offers 5/6-seat layouts within each grade, so no single seats integer is invented. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang/erev-2025/practical-50-km-5-seat",
+          "modelId": "wuling/hongguang",
+          "generationId": "wuling/hongguang/erev-2025",
+          "faceliftId": null,
+          "name": "50 km Practical 5-seat",
+          "aliases": [
+            {
+              "value": "50km实用型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-spec"
+              ]
+            },
+            {
+              "value": "实用型-5座",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-launch-2025"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "EREV",
+          "fuel": "Petrol",
+          "engineCc": 1498,
+          "icePowerKw": 73,
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 50,
+          "rangeStandard": "CLTC",
+          "lengthMm": 4515,
+          "widthMm": 1725,
+          "heightMm": 1790,
+          "wheelbaseMm": 2850,
+          "curbWeightKg": 1400,
+          "grossWeightKg": 1990,
+          "tankCapacityL": 55,
+          "seats": 5,
+          "topSpeedKmh": 135,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom",
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact seat-layout grade, 2025 launch year and MPV body."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-spec",
+              "fields": [
+                "market",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "icePowerKw",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "tankCapacityL",
+                "seats",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column China EREV specification; rear drive is normalized to RWD."
+            }
+          ],
+          "researchNotes": [
+            "The 8.5 kWh source value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "The 1,000 km combined range is retained only in source notes; rangeKm stores the exact 50 km CLTC electric range. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang/erev-2025/standard-50-km-5-seat",
+          "modelId": "wuling/hongguang",
+          "generationId": "wuling/hongguang/erev-2025",
+          "faceliftId": null,
+          "name": "50 km Standard 5-seat",
+          "aliases": [
+            {
+              "value": "50km标准型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-spec"
+              ]
+            },
+            {
+              "value": "标准型-5座",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-launch-2025"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "EREV",
+          "fuel": "Petrol",
+          "engineCc": 1498,
+          "icePowerKw": 73,
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 50,
+          "rangeStandard": "CLTC",
+          "lengthMm": 4515,
+          "widthMm": 1725,
+          "heightMm": 1790,
+          "wheelbaseMm": 2850,
+          "curbWeightKg": 1400,
+          "grossWeightKg": 1990,
+          "tankCapacityL": 56,
+          "seats": 5,
+          "topSpeedKmh": 135,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom",
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact seat-layout grade, 2025 launch year and MPV body."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-spec",
+              "fields": [
+                "market",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "icePowerKw",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "tankCapacityL",
+                "seats",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column China EREV specification; rear drive is normalized to RWD."
+            }
+          ],
+          "researchNotes": [
+            "The 8.5 kWh source value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "The 1,000 km combined range is retained only in source notes; rangeKm stores the exact 50 km CLTC electric range. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang/erev-2025/comfort-50-km-7-seat",
+          "modelId": "wuling/hongguang",
+          "generationId": "wuling/hongguang/erev-2025",
+          "faceliftId": null,
+          "name": "50 km Comfort 7-seat",
+          "aliases": [
+            {
+              "value": "50km舒适型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-spec"
+              ]
+            },
+            {
+              "value": "舒适型-7座",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-hongguang-erev-launch-2025"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "EREV",
+          "fuel": "Petrol",
+          "engineCc": 1498,
+          "icePowerKw": 73,
+          "drive": "RWD",
+          "motorPeakKw": 75,
+          "rangeKm": 50,
+          "rangeStandard": "CLTC",
+          "lengthMm": 4515,
+          "widthMm": 1725,
+          "heightMm": 1790,
+          "wheelbaseMm": 2850,
+          "curbWeightKg": 1430,
+          "grossWeightKg": 1990,
+          "tankCapacityL": 57,
+          "seats": 7,
+          "topSpeedKmh": 135,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom",
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact seat-layout grade, 2025 launch year and MPV body."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-hongguang-erev-spec",
+              "fields": [
+                "market",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "icePowerKw",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "tankCapacityL",
+                "seats",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column China EREV specification; rear drive is normalized to RWD."
+            }
+          ],
+          "researchNotes": [
+            "The 8.5 kWh source value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "The 1,000 km combined range is retained only in source notes; rangeKm stores the exact 50 km CLTC electric range. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T15:54:11.682Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 6,
+  "sampleLimit": 3,
+  "markets": [
+    {
+      "market": "korea",
+      "requests": [
+        {
+          "origin": "https://api.encar.com",
+          "path": "/search/car/list/mobile",
+          "method": "GET",
+          "status": 404,
+          "contentType": "text/html"
+        }
+      ],
+      "sourceId": "encar_direct",
+      "status": "blocked_or_failed",
+      "error": "non_json_response status=404 content-type=text/html url=[url] bodyPreview=<!DOCTYPE html> <html> <head> <meta http-equiv=\"refresh\" content=\"0; url=[url] /> </head> <body></body> </html> "
+    }
+  ],
+  "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

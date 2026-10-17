@@ -1,0 +1,7492 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 28,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-e7229bedb2abfe57ee81",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "FORD FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8e89dabc0655160969c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1399,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d19c851045e68869ca6c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA ACTIVE 1 TDCI",
+        "FIESTA ACTIVE EDITION TDCI",
+        "FIESTA ACTIVE X EDITION TDCI",
+        "FIESTA ST-LINE EDITION TDCI",
+        "FIESTA ST-LINE TDCI",
+        "FIESTA ST-LINE X EDITION TDCI",
+        "FIESTA ST-LINE X TDCI",
+        "FIESTA STYLE TDCI",
+        "FIESTA TITANIUM TDCI",
+        "FIESTA TITANIUM X TDCI",
+        "FIESTA TREND",
+        "FIESTA TREND TDCI",
+        "FIESTA TREND TURBO",
+        "FIESTA VIGNALE EDITION TDCI",
+        "FIESTA ZETEC TDCI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 939,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5da22645dc459da11c8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 63,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA 15 63 DV5 3 VR M6",
+        "FIESTA 15 63 DV5 5 VR M6",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE COLOUR LINE",
+        "FIESTA COOL & CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM X",
+        "FIESTA TREND",
+        "FIESTA VIGNALE",
+        "FORD FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 26078,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf18c2ea6e69b74bba34",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b512523714140be08837",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0de274ec49a9232cc0f2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1084,
+      "powerKw": 55,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD",
+        "FORD CNG TECHNIK",
+        "FORD-CNG TECHNIK",
+        "FORD-CNG-TECHNIK"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 18771,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8b0e3a978742fa434af",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1388,
+      "powerKw": 71,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78dc5e99865b1ee78ce1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA ACTIVE 1 TURBO",
+        "FIESTA ACTIVE 1 TURBO AUTO",
+        "FIESTA ACTIVE B AND O PLAY T",
+        "FIESTA ACTIVE EDITION TURBO A",
+        "FIESTA ACTIVE X ED TURBO AUTO",
+        "FIESTA ACTIVE X EDITION TURBO",
+        "FIESTA ACTIVE X TURBO",
+        "FIESTA ACTIVE X TURBO AUTO",
+        "FIESTA B AND O PLAY TITANIUM T",
+        "FIESTA SPORT TDCI",
+        "FIESTA ST-LINE EDITION TURBO",
+        "FIESTA ST-LINE EDITION TURBO A",
+        "FIESTA ST-LINE TURBO",
+        "FIESTA ST-LINE TURBO AUTO",
+        "FIESTA ST-LINE X ED TURBO AUTO",
+        "FIESTA ST-LINE X EDITION TURBO",
+        "FIESTA ST-LINE X TURBO",
+        "FIESTA ST-LINE X TURBO AUTO",
+        "FIESTA TITANIUM TURBO",
+        "FIESTA TITANIUM TURBO AUTO",
+        "FIESTA TITANIUM X TURBO",
+        "FIESTA TITANIUM X TURBO AUTO",
+        "FIESTA VIGNALE EDITION TURBO",
+        "FIESTA VIGNALE EDITION TURBO A",
+        "FIESTA VIGNALE TURBO",
+        "FIESTA VIGNALE TURBO AUTO",
+        "FIESTA ZETEC TURBO",
+        "FIESTA ZETEC TURBO AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 30,
+      "registrations": 24371,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c64800b8c1f80b8bf77",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10740fe19942caf2ef16",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 63,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA 10 625 S 5 VR",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE COLOUR LINE",
+        "FIESTA ACTIVE PLUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 640,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee96f42a7ec4619bebff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 72,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-315bd18a031277751f98",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "FIESTA",
+        "Fiesta",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE X",
+        "FIESTA COOL & CONNECT",
+        "FIESTA ST-LINE",
+        "FIESTA ST-LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM X",
+        "FORD FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 8503,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfec48ef7425a6f3e306",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA / 1.0 / 73,5 S 5 VR",
+        "FIESTA / 1.0 / 73,5 S 5 VR M6",
+        "FIESTA / 1.0 / 73.5 S 5 VR M6",
+        "FIESTA / 10 / 735 S 5 VR M6",
+        "FIESTA 10 735 S 5 VR",
+        "FIESTA 10 735 S A6 5 VR",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE COLOUR LINE",
+        "FIESTA ACTIVE COLOUR-LINE",
+        "FIESTA ACTIVE PLUS",
+        "FIESTA ACTIVE X",
+        "FIESTA COOL & CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA ST-LINE",
+        "FIESTA ST-LINE VIGNALE",
+        "FIESTA ST-LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM X",
+        "FIESTA TREND",
+        "FIESTA VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 46,
+      "registrations": 30838,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a019b78fd0b611151fa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 92,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA ACTIVE PLUS",
+        "FIESTA ST- LINE",
+        "FIESTA VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1307,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb036e3cb180f1b851be",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 103,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA ST- LINE",
+        "FIESTA VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3397,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d00e73abcc9fc101650",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "FIESTA",
+        "Fiesta",
+        "FIESTA ACTIVE EDITION T MHEV",
+        "FIESTA ACTIVE EDITION TURBO",
+        "FIESTA ACTIVE X ED TURBO AUTO",
+        "FIESTA ACTIVE X EDITION T MHEV",
+        "FIESTA ACTIVE X EDITION TURBO",
+        "FIESTA ST-LINE EDITION T MHEV",
+        "FIESTA ST-LINE EDITION TURBO",
+        "FIESTA ST-LINE X ED TURBO AUTO",
+        "FIESTA ST-LINE X EDITION TURBO",
+        "FIESTA STLINE X EDITION T MHEV",
+        "FIESTA TITANIUM TURBO",
+        "FIESTA TITANIUM TURBO AUTO",
+        "FIESTA TITANIUM TURBO MHEV",
+        "FIESTA TITANIUM X TURBO",
+        "FIESTA TITANIUM X TURBO AUTO",
+        "FIESTA TITANIUM X TURBO MHEV",
+        "FIESTA TREND TURBO",
+        "FIESTA TREND TURBO AUTO",
+        "FIESTA TREND TURBO MHEV",
+        "FIESTA VIGNALE EDITION T MHEV",
+        "FIESTA VIGNALE EDITION TURBO",
+        "FIESTA VIGNALE EDITION TURBO A",
+        "FIESTA VIGNALE TURBO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 26,
+      "registrations": 70272,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc2825b38ac4010bc9b0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "FIESTA",
+        "Fiesta",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE X",
+        "FIESTA COOL & CONNECT",
+        "FIESTA COOL + CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM X",
+        "FIESTA TREND",
+        "FORD FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 39282,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cf8d5ab7485803db7de",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA / 1.0 / 69,9 5 VR M6",
+        "FIESTA 1.0 / 69,9 5 VR M6",
+        "FIESTA 10 699 5 VR M6",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE X",
+        "FIESTA COOL & CONNECT",
+        "FIESTA COOL + CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM X",
+        "FIESTA TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 23,
+      "registrations": 65955,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3570de4b00d80dddb793",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE X",
+        "FIESTA COOL & CONNECT",
+        "FIESTA COOL + CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA ST-LINE",
+        "FIESTA ST-LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM X",
+        "FIESTA VIGANLE",
+        "FIESTA VIGNALE",
+        "FORD FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 24074,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-333806ee94ad4b7d472d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA / 1.0 / 91,9 5 VR M6",
+        "FIESTA / 1.0 / 91.9 MHEV 5 VR A7",
+        "FIESTA / 1.0 / 91.9 MHEV 5 VR M6",
+        "FIESTA / 10 / 919 MHEV 5 VR M6",
+        "FIESTA 10 919 MHEV 5 VR M6",
+        "FIESTA ACTIVE",
+        "FIESTA ACTIVE VIGNALE",
+        "FIESTA ACTIVE X",
+        "FIESTA COOL & CONNECT",
+        "FIESTA COOL + CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA ST-LINE",
+        "FIESTA ST-LINE VIGNALE",
+        "FIESTA ST-LINE X",
+        "FIESTA TITANIUM",
+        "FIESTA TITANIUM VIGNALE",
+        "FIESTA TITANIUM X",
+        "FIESTA VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 41,
+      "registrations": 78755,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a8a9bfa2fcd88e7e749",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 114,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA ACTIVE X",
+        "FIESTA ST- LINE",
+        "FIESTA ST- LINE X",
+        "FIESTA ST-LINE",
+        "FIESTA ST-LINE VIGNALE",
+        "FIESTA ST-LINE X",
+        "FIESTA TITANIUM VIGNALE",
+        "FIESTA TITANIUM X"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 5499,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9abdc9fb01dd4cf806d0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1084,
+      "powerKw": null,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA STYLE",
+        "FIESTA TREND",
+        "FIESTA ZETEC"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3179,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85a568e8724078f83488",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1084,
+      "powerKw": 51,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 272,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe3869040be300105f1b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1084,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 450,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e9be91f31b0231088c9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1084,
+      "powerKw": 55,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA / 1.1 / 55,1 5 VR M5",
+        "FIESTA / 1.1 / 55.1 5 VR M5",
+        "FIESTA / 11 / 551 5 VR M5",
+        "FIESTA 11 551 5 VR M5",
+        "FIESTA COOL & CONNECT",
+        "FIESTA COOL + CONNECT",
+        "FIESTA ST- LINE",
+        "FIESTA TITANIUM",
+        "FIESTA TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 76198,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37a3dc49aeb5310b6f10",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1084,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 552,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ebbf8977c20516767b1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1084,
+      "powerKw": 63,
+      "commercialNames": [
+        "FIESTA",
+        "FIESTA ST- LINE",
+        "FIESTA ST-LINE",
+        "FIESTA TITANIUM",
+        "FIESTA TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 683,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-970c0c6e2e66d8b2d6a6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "FIESTA ST EDITION TURBO",
+        "FIESTA ST PERFORMANCE ED TURBO",
+        "FIESTA ST-2 TURBO",
+        "FIESTA ST-3 TURBO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5120,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1748d2b7232bef5cf4eb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 147,
+      "commercialNames": [
+        "Fiesta",
+        "FIESTA",
+        "FIESTA / 1.5 / 147 DRAGON ST S 5 VR B6",
+        "FIESTA / 15 / 147 ST S 5 VR B6",
+        "FIESTA 1.5 / 147 DRAGON ST S 5 VR B6",
+        "FIESTA 15 147 DRAGON ST S 5 VR B6",
+        "FIESTA 15 DRAGON ST 147 S LED 5 VR",
+        "FIESTA ST",
+        "FIESTA ST EDITION",
+        "FIESTA ST PLUS",
+        "FIESTA ST X"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 14335,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9280cc451043317e2d8f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1497,
+      "powerKw": 147,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-933860b3000bca2b4dee",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": null,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-814d399a1647c15d8dec",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIESTA SE",
+        "FIESTA ST"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94f4f5c7bd80b920c3fb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 89,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b15ac94cd1d840fa7d7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 90,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a52a656f25acd6322167",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1618,
+      "powerKw": 214,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3bfa557746420e64ddc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87e59cea2019eb3652a9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "FIESTA",
+        "Fiesta"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ab04711a584c82c8918",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85aee0a5da295dd8e77f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 13018,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20c23e9f36aefaae7b74",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 216,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b83bbe0ebaba940938c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 91,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbed1bf436b77a88bf7d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 44,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cd6f3c471e5d46aa435",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "Fiesta"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-565a55d124595090a131",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "FIESTA TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d98b1a2b3b49e565040",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9bad1c2a3651be6c4eb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 75,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5570f9c47dec2785ae85",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 77,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d220f14ad622a2cdd636",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 48,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e04015e5c803bb859f4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-379944cbbf51132aa997",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 67,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93cdf202539e985d036b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 69,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1bbb42ffaf45ca80bc2c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 80,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c8f6e4383f846ac0049",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 81,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-400b3bbea793f7805b16",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 84,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2e24ab113c82b13f594",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 85,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1f315d4a7ac33dab3e8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d2c531ccb95a298baaf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 95,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31f43859f20a11fd800e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c718c54489735946d6a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 110,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-692be7609514f5a1b1e3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 114,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c81bf5086bf6e1b49d4a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 120,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d17c1c1464096de5b7a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 125,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80875ea602243b4bfdc9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 132,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5350aaa6624e483aaf87",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 137,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c2b6367cadb37b82ab1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 140,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2d3c183162dc5275fdd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 147,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39cf8a3e4469d785cd88",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 155,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-682926e6875e2ba23e1d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 210,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b86f532b004707ed9ae0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 270,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5532bbea8f035d81c7b6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 390,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99460eddca51bdf75d45",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c5542d0185f0078a1cb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90958bd0c6385816f2ec",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbd52c6efc1454ef0c44",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33e21df9db573629f19c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ec86b0b6abcf8ced2c8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea97a18507df73b0b877",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a084eb65805b595612b4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31fe8ab74ad0367897bd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fd4874af9f6936f84ac",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13d1556e563bccca3cdd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e93d3b2f8320d656d0d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa37165ecb757bf250f0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-063a82881aa120a67890",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 154,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dda3e483552655e42987",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 190,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6eac7a65e6b9d85f798",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 210,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a48a2413a3475d5f3d36",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 243,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-115344599683dca621df",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 56,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2f9ff2b4e952a35d917",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 61,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-defd934630cac5f8c883",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 67,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1643914f3102c7a1a07a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 68,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-862569b5106a14b72751",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccc8156fddd65c19a252",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 74,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a98bae02aab93181ce8c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 81,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24180225ce1ddcc4bed1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 84,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9141a6639df4b25ac7ec",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec59521dec0a54d79c47",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 110,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0927791aeb7436a4d66f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 112,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4033c564b676c1916601",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 114,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d07e475abc7bb98f732",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 116,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39ecc55fddb0624d6d7b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 118,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df8efaa00f16e2cad21b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 131,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46faafc7f69d6b16413d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 150,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57c8bfdf5ec006253f90",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1084,
+      "powerKw": 210,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57ae4aba1849a381547f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": 67,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3434ad31c054406994c9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": 112,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82339b2bbc03ee6e0690",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Fiesta",
+      "modelId": "ford/fiesta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1618,
+      "powerKw": 103,
+      "commercialNames": [
+        "FIESTA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68011b6cd67dfd07af6c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Flex",
+      "modelId": "ford/flex",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3500,
+      "powerKw": 211,
+      "commercialNames": [
+        "FLEX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d69837c5a1dd528db9c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Flex",
+      "modelId": "ford/flex",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3500,
+      "powerKw": 214,
+      "commercialNames": [
+        "FLEX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b6114ea484c02f3001a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS ACTIVE ECOBLUE",
+        "FOCUS ACTIVE ECOBLUE AUTO",
+        "FOCUS ACTIVE X ECOBLUE",
+        "FOCUS ACTIVE X ECOBLUE AUTO",
+        "FOCUS ACTIVE X VIGNALE EBLUE A",
+        "FOCUS ACTIVE X VIGNALE ECOBLUE",
+        "FOCUS ST-LINE TDCI",
+        "FOCUS ST-LINE TDCI AUTO",
+        "FOCUS ST-LINE X TDCI",
+        "FOCUS ST-LINE X TDCI AUTO",
+        "FOCUS STYLE TDCI",
+        "FOCUS STYLE TDCI AUTO",
+        "FOCUS TITANIUM TDCI",
+        "FOCUS TITANIUM TDCI AUTO",
+        "FOCUS TITANIUM X TDCI",
+        "FOCUS TITANIUM X TDCI AUTO",
+        "FOCUS VIGNALE TDCI",
+        "FOCUS VIGNALE TDCI AUTO",
+        "FOCUS ZETEC TDCI",
+        "FOCUS ZETEC TDCI AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 22364,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb2bc2452afc44440315",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS 15 ECOBLUE 70 B6",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS TREND",
+        "FOCUS TREND EDI. BUSINESS",
+        "FOCUS TREND EDITION",
+        "FORD FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 8903,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f711321bee1e38f0d033",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS / 1.5 / DV5 88 A8 S",
+        "FOCUS / 1.5 / DV5 88 B6 S",
+        "FOCUS / 1.5 / ECOBLUE 88 A8",
+        "FOCUS / 1.5 / ECOBLUE 88 A8 ACTIVE",
+        "FOCUS / 1.5 / ECOBLUE 88 B6",
+        "FOCUS / 1.5 / ECOBLUE 88 B6 ACTIVE",
+        "FOCUS / 15 / ECOBLUE 88 A8 ACTIVE",
+        "FOCUS 1.5 / ECOBLUE 88 B6",
+        "FOCUS 1.5 / ECOBLUE 88 B6 ACTIVE",
+        "FOCUS 15 DV5 88 A8 S",
+        "FOCUS 15 DV5 88 B6 S",
+        "FOCUS 15 ECOBLUE 88 A8",
+        "FOCUS 15 ECOBLUE 88 B6",
+        "FOCUS 15 ECOBLUE 88 B6 ACTIVE",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE BUSINESS",
+        "FOCUS ACTIVE STYLE",
+        "FOCUS ACTIVE TURNIER",
+        "FOCUS ACTIVE VIGNALE",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS ST LINE",
+        "FOCUS ST LINE BUSINESS",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE BUSINESS",
+        "FOCUS ST- LINE TURNIER",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER",
+        "FOCUS ST-LINE",
+        "FOCUS ST-LINE STYLE",
+        "FOCUS ST-LINE VIGNALE",
+        "FOCUS ST-LINE X",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM BUSINESS",
+        "FOCUS TITANIUM STYLE",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM VIGNALE",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X TURNIER",
+        "FOCUS TREND",
+        "FOCUS TREND BUSINESS",
+        "FOCUS TREND EDI. BUSINESS",
+        "FOCUS TREND EDITION",
+        "FOCUS VIGNALE",
+        "FOCUS VIGNALE TURNIER",
+        "FORD FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 94,
+      "registrations": 131476,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94a499cbf37d4cd7f259",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64896dbbf34afc4028fa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 66,
+      "commercialNames": [
+        "FOCUS C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79f7488ecffb93ff3c23",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 80,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS C - MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-051bc6d96ca10be1c802",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 85,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0dcf43eb6d342f5e47a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "Focus",
+        "FOCUS ACTIVE ECOBLUE",
+        "FOCUS ACTIVE X ECOBLUE",
+        "FOCUS ACTIVE X ECOBLUE AUTO",
+        "FOCUS ACTIVE X VIGNALE EBLUE A",
+        "FOCUS ACTIVE X VIGNALE ECOBLUE",
+        "FOCUS ST",
+        "FOCUS ST ECOBLUE",
+        "FOCUS ST-LINE ECOBLUE",
+        "FOCUS ST-LINE ECOBLUE AUTO",
+        "FOCUS ST-LINE X ECOBLUE",
+        "FOCUS ST-LINE X ECOBLUE AUTO",
+        "FOCUS TITANIUM ECOBLUE",
+        "FOCUS TITANIUM ECOBLUE AUTO",
+        "FOCUS TITANIUM X ECOBLUE",
+        "FOCUS TITANIUM X ECOBLUE AUTO",
+        "FOCUS VIGNALE ECOBLUE",
+        "FOCUS VIGNALE ECOBLUE AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 18,
+      "registrations": 3250,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd0dc0b29a729becc74b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "Focus",
+        "FOCUS",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE TURNIER",
+        "FOCUS ACTIVE VIGNALE",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE TURNIER",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X TURNIER",
+        "FOCUS VIGNALE",
+        "FOCUS VIGNALE TURNIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 40,
+      "registrations": 29533,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9d0babc65506c25f7c4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS ST",
+        "FOCUS ST TURNIER",
+        "FOCUS ST- LINE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1827,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cdde98371cad3439e8f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 100,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf47fb05bd9948eb0c1d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 110,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc6e22bc95166d8b5dd7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05fbb6d09733675ae29d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 67,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64640854e560ae34b1c6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "Focus",
+        "FOCUS",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE AUTO",
+        "FOCUS ACTIVE EDITION MHEV",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X AUTO",
+        "FOCUS ACTIVE X EDITION MHEV",
+        "FOCUS ACTIVE X VIGNALE",
+        "FOCUS ACTIVE X VIGNALE AUTO",
+        "FOCUS ACTIVE X VIGNALE ED MHEV",
+        "FOCUS ST-LINE",
+        "FOCUS ST-LINE AUTO",
+        "FOCUS ST-LINE EDITION MHEV",
+        "FOCUS ST-LINE X",
+        "FOCUS ST-LINE X AUTO",
+        "FOCUS ST-LINE X EDITION AUTO",
+        "FOCUS ST-LINE X EDITION MHEV",
+        "FOCUS STYLE",
+        "FOCUS STYLE AUTO",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM AUTO",
+        "FOCUS TITANIUM EDITION MHEV",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X AUTO",
+        "FOCUS TITANIUM X EDITION MHEV",
+        "FOCUS VIGNALE",
+        "FOCUS VIGNALE AUTO",
+        "FOCUS VIGNALE EDITION MHEV",
+        "FOCUS ZETEC",
+        "FOCUS ZETEC AUTO",
+        "FOCUS ZETEC EDITION MHEV"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 34,
+      "registrations": 50467,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee0a4d65c8411dcc9498",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 63,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33781094357de9af0393",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "FOCUS",
+        "Focus",
+        "FOCUS 1.0 / EB 74 M6",
+        "FOCUS 10 EB 74 M6",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS TREND",
+        "FOCUS TREND BUSINESS",
+        "FOCUS TREND EDI. BUSINESS",
+        "FOCUS TREND EDITION",
+        "FORD FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 16308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3f7e1af5e94d1920d1d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "FOCUS",
+        "Focus",
+        "FOCUS / 1.0 / EB 92 M6",
+        "FOCUS / 1.0 / EB 92 M6 ACTIVE",
+        "FOCUS / 1.0 / MHEV 92 M6",
+        "FOCUS / 1.0 / MHEV 92 M6 ACTIVE",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE TURNIER",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE TURNIER",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X TURNIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 43057,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e14dbfd3f14ad39e787",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS",
+        "Focus",
+        "FOCUS / 1.0 / 92 EB M6 S",
+        "FOCUS / 1.0 / EB 92 A8",
+        "FOCUS / 1.0 / EB 92 M6",
+        "FOCUS / 1.0 / EB 92 M6 ACTIVE",
+        "FOCUS / 1.0 / MHEV 91,9 M6",
+        "FOCUS / 1.0 / MHEV 91,9 M6 ACTIVE",
+        "FOCUS / 1.0 / MHEV 91.9 M6",
+        "FOCUS / 1.0 / MHEV 91.9 M6 ACTIVE",
+        "FOCUS / 1.0 / MHEV 92 A7 ACTIVE",
+        "FOCUS / 1.0 / MHEV 92 M6",
+        "FOCUS / 1.0 / MHEV 92 M6 ACTIVE",
+        "FOCUS / 10 / EB 92 M6",
+        "FOCUS / 10 / EB 92 M6 ACTIVE",
+        "FOCUS / 10 / MHEV 92 A7",
+        "FOCUS / 10 / MHEV 92 A7 ACTIVE",
+        "FOCUS / 10 / MHEV 92 M6",
+        "FOCUS / 10 / MHEV 92 M6 ACTIVE",
+        "FOCUS 1.0 / EB 92 M6",
+        "FOCUS 1.0 / EB 92 M6 ACTIVE",
+        "FOCUS 1.0 EB 92 M6",
+        "FOCUS 1.0 MHEV 91.9 M6",
+        "FOCUS 1.0 MHEV 92 M6",
+        "FOCUS 1.0 MHEV 92 M6 ACTIVE",
+        "FOCUS 10 92 EB M6 S",
+        "FOCUS 10 EB 92 A8",
+        "FOCUS 10 EB 92 M6",
+        "FOCUS 10 EB 92 M6 ACTIVE",
+        "FOCUS 10 MHEV 919 M6",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE BUSINESS",
+        "FOCUS ACTIVE STYLE",
+        "FOCUS ACTIVE TURNIER",
+        "FOCUS ACTIVE VIGNALE",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TUR.",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS FUN TURNIER",
+        "FOCUS ST - LINE",
+        "FOCUS ST - LINE BUSINESS",
+        "FOCUS ST LINE DESIGN",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE BUSINESS",
+        "FOCUS ST- LINE TURNIER",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER",
+        "FOCUS ST-LINE",
+        "FOCUS ST-LINE BUSINESS",
+        "FOCUS ST-LINE DESIGN",
+        "FOCUS ST-LINE STYLE",
+        "FOCUS ST-LINE TUR.",
+        "FOCUS ST-LINE TURNIER",
+        "FOCUS ST-LINE VIGNALE",
+        "FOCUS ST-LINE X",
+        "FOCUS ST-LINE X TUR.",
+        "FOCUS ST-LINE X TURNIER",
+        "FOCUS TIT. EDITION TUR.",
+        "FOCUS TIT. X TURNIER",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM BUSINESS",
+        "FOCUS TITANIUM DESIGN",
+        "FOCUS TITANIUM EDI.",
+        "FOCUS TITANIUM EDITION",
+        "FOCUS TITANIUM STYLE",
+        "FOCUS TITANIUM TUR.",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM VIGNALE",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X TURNIER",
+        "FOCUS TREND",
+        "FOCUS TREND EDI. BUSINESS",
+        "FOCUS TREND EDITION",
+        "FOCUS TURNIER ACTIVE",
+        "FOCUS TURNIER ACTIVE X",
+        "FOCUS TURNIER ST-LINE",
+        "FOCUS TURNIER ST-LINE X",
+        "FOCUS TURNIER TITANIUM",
+        "FOCUS TURNIER TITANIUM X",
+        "FOCUS VIGNALE",
+        "FOCUS VIGNALE TURNIER",
+        "FORD FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 166,
+      "registrations": 208742,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d4ea0032c9b9110e0a7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 114,
+      "commercialNames": [
+        "FOCUS",
+        "Focus",
+        "FOCUS / 1.0 / MHEV 114 A7",
+        "FOCUS / 1.0 / MHEV 114 A7 ACTIVE",
+        "FOCUS / 1.0 / MHEV 114 M6",
+        "FOCUS / 1.0 / MHEV 114 M6 ACTIVE",
+        "FOCUS / 10 / MHEV 114 M6 ACTIVE",
+        "FOCUS 1.0 MHEV 114 A7",
+        "FOCUS 1.0 MHEV 114 A7 ACTIVE",
+        "FOCUS 10 MHEV 114 M6",
+        "FOCUS 10 MHEV 114 M6 ACTIVE",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE TURNIER",
+        "FOCUS ACTIVE VIGNALE",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TUR.",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE TURNIER",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER",
+        "FOCUS ST-LINE",
+        "FOCUS ST-LINE DESIGN",
+        "FOCUS ST-LINE TUR.",
+        "FOCUS ST-LINE VIGNALE",
+        "FOCUS ST-LINE X",
+        "FOCUS ST-LINE X TUR.",
+        "FOCUS ST-LINE X TURNIER",
+        "FOCUS TIT. EDITION TUR.",
+        "FOCUS TIT. X TURNIER",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM EDI.",
+        "FOCUS TITANIUM EDITION",
+        "FOCUS TITANIUM T.",
+        "FOCUS TITANIUM TUR.",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM VIGNALE",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X TURNIER",
+        "FOCUS TURNIER ACTIVE",
+        "FOCUS TURNIER ACTIVE X",
+        "FOCUS TURNIER ST-LINE",
+        "FOCUS TURNIER ST-LINE X",
+        "FOCUS TURNIER TITANIUM",
+        "FOCUS TURNIER TITANIUM X",
+        "FOCUS VIGNALE",
+        "FOCUS VIGNALE TURNIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 97,
+      "registrations": 73517,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8eaf0711f274698a52e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc3fbae04446a3e5ae42",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "Focus",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE AUTO",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X AUTO",
+        "FOCUS ACTIVE X VIGNALE",
+        "FOCUS ACTIVE X VIGNALE AUTO",
+        "FOCUS ACTIVE X VIGNALE ED MHEV",
+        "FOCUS ST-LINE",
+        "FOCUS ST-LINE AUTO",
+        "FOCUS ST-LINE X",
+        "FOCUS ST-LINE X AUTO",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM AUTO",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X AUTO",
+        "FOCUS VIGNALE",
+        "FOCUS VIGNALE AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 18,
+      "registrations": 5354,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da1742fc04514acbfe50",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 91,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fe636efde4c8e721891",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f53f7fa500c1846f34ec",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 110,
+      "commercialNames": [
+        "Focus",
+        "FOCUS",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM X",
+        "FOCUS TITANIUM X TURNIER",
+        "FOCUS VIGNALE",
+        "FORD FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 18,
+      "registrations": 6663,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1050565a13ae7fa2569c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 111,
+      "commercialNames": [
+        "Focus",
+        "FOCUS",
+        "FOCUS 1.5 / EB 110,6 B6",
+        "FOCUS 1.5 / EB 110,6 B6 ACTIVE",
+        "FOCUS 15 EB 1106 A8 ACTIVE",
+        "FOCUS 15 EB 1106 B6",
+        "FOCUS 15 EB 1106 B6 ACTIVE",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE BUSINESS",
+        "FOCUS ACTIVE VIGNALE",
+        "FOCUS ACTIVE X",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE X",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM X",
+        "FOCUS VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 23,
+      "registrations": 29442,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a4463be868f3dbad745",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 133,
+      "commercialNames": [
+        "FOCUS",
+        "Focus",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE X",
+        "FOCUS ST- LINE X TURNIER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2020,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e070f453a5b423d9361",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 134,
+      "commercialNames": [
+        "Focus",
+        "FOCUS",
+        "FOCUS 15 EB 1338 A8 ACTIVE",
+        "FOCUS 15 EB 1338 B6",
+        "FOCUS ACTIVE",
+        "FOCUS ST- LINE",
+        "FOCUS ST- LINE X",
+        "FOCUS VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "Ford",
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 9429,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36f41b4c12904c7321f4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a87117510a3b44dc6900",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 104,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8bfbebeb42ed4a90152",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 106,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-590c1b8b57dfaefe00b5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 119,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2458edb811f0f16e037",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 149,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8c0bfe68b169d9f9b3c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": null,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS ST",
+        "FOCUS ST AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2920,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba710474cf44c55aaefd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 149,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79df954b16a2b55743aa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 206,
+      "commercialNames": [
+        "Focus",
+        "FOCUS",
+        "FOCUS / 2.3 / ST EB 206 A7",
+        "FOCUS / 2.3 / ST EB 206 M6",
+        "FOCUS / 23 / ST EB 206 M6",
+        "FOCUS / 23 / ST ECOBLUE 206 A7",
+        "FOCUS / 23 / ST ECOBLUE 206 M6",
+        "FOCUS 2.3 / ST EB 206 M6",
+        "FOCUS 2.3 ST 206 M6",
+        "FOCUS 2.3 ST EB 206 A7",
+        "FOCUS 2.3 ST EB 206 M6",
+        "FOCUS 2.3 ST EB 206 M7",
+        "FOCUS 23 ST EB 206 M6",
+        "FOCUS ST",
+        "FOCUS ST EDITION",
+        "FOCUS ST TURNIER",
+        "FOCUS ST X",
+        "FOCUS ST X EDITION",
+        "FOCUS ST X TURNIER",
+        "FOCUS ST- LINE",
+        "FOCUS TURNIER ST X"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 36,
+      "registrations": 23076,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95eb036ecb08b34c491f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 120,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8f54f774cfb04e484ba",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2261,
+      "powerKw": 206,
+      "commercialNames": [
+        "Focus"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-799891e0b02d9d14e5de",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 14222,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff0c86903c545e95058d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "E85",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 3014,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3479272b48d44fac99b2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS COOL & CONNECT",
+        "FOCUS COOL + CONNECT",
+        "FOCUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 477,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efdafa7e0de0438732a4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 257,
+      "commercialNames": [
+        "FOCUS RS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39333e1780f5d180f548",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "Focus",
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 167,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec82ce5b5ba0895a732e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS / 1.5 / DV5 85 A8",
+        "FOCUS / 1.5 / DV5 85 A8 ACTIVE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 4887,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94144f5dc114b67bd17b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "FOCUS",
+        "FOCUS / 15 / DV5 85 A8 ACTIVE",
+        "FOCUS 1.5 DV5 84.6 A8",
+        "FOCUS 1.5 DV5 85 A8",
+        "FOCUS 1.5 DV5 85 A8 ACTIVE",
+        "FOCUS ACTIVE",
+        "FOCUS ACTIVE TURNIER",
+        "FOCUS ACTIVE X",
+        "FOCUS ACTIVE X TUR.",
+        "FOCUS ACTIVE X TURNIER",
+        "FOCUS FUN TURNIER",
+        "FOCUS ST-LINE",
+        "FOCUS ST-LINE TUR.",
+        "FOCUS ST-LINE TURNIER",
+        "FOCUS ST-LINE X",
+        "FOCUS ST-LINE X TUR.",
+        "FOCUS ST-LINE X TURNIER",
+        "FOCUS TIT. EDITION TUR.",
+        "FOCUS TIT. X TURNIER",
+        "FOCUS TITANIUM",
+        "FOCUS TITANIUM EDI.",
+        "FOCUS TITANIUM EDITION",
+        "FOCUS TITANIUM STYLE",
+        "FOCUS TITANIUM T.",
+        "FOCUS TITANIUM TURNIER",
+        "FOCUS TITANIUM X",
+        "FOCUS TURNIER ACTIVE",
+        "FOCUS TURNIER ACTIVE X",
+        "FOCUS TURNIER ST-LINE",
+        "FOCUS TURNIER ST-LINE X",
+        "FOCUS TURNIER TITANIUM",
+        "FOCUS TURNIER TITANIUM X"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 59,
+      "registrations": 36577,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1acc04bb1be80a766907",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 118,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b47012b8861a00ce1293",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 183,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c17aee22308d4cf95126",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 184,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1845d49b986b7eee995e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2727783aef542ffcab03",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 49,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2e08134f08ab12338db",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 55,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8cb84cbcc9020d69ab6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 59,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64269f9dda1ef711065e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4f88465da7a2f321e0c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58bb697d09c989837173",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 68,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-645dc69fbeb114329434",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 69,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-116d8fc267b2d64f5bdb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 72,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3de0d5e4c12b060f334",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 73,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be4d7ef91860957663ba",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f6a1543dc858ec143f1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 80,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59b57aaf6c933d236ef2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31fe84ac0b988a969ad0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 90,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3895f8e783516843033",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 91,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6c3e81d890936457d38",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 95,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d121d24d147ca223d18",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79616b661e4f80cd201e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3c7ad0cfa65de6c55d2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b7242b77515d360089f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 114,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f80cd82efa4c2ca5375",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf186db29fb2183a2d57",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 116,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79f761e6dd7d3069a096",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 117,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5b1623ede9d82170380",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 118,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-827dbd5484f8a0cb7fb5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 120,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78602a7e8c6e3f53046f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 121,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-451771a2467922dd3e27",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 125,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e92f213563dbf26b072",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 131,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7a4a4f751754edb493f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 132,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-499d44d63b399a518c8a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 135,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a58cefad725f428f7517",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 137,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-712ddcf8855d334acd02",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 140,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83a5868156f5384280af",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 147,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-266a68f5b2a3c7231acd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e46a544e3a0f6beeb1a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 180,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b5c2d2882554326431a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 195,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05cfb5ce6947e11a1fca",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 206,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d50ff029ca8dd92118c3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 250,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11cfa1d7c0525f2ddcb8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 270,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5bcf26c7c675b561b2cd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 280,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec6c74f2833ff5aea5bd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 310,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4e6b61ba6f2dfcbe04a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 370,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80356d50e9766ceb5612",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 390,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-197d90712ebd2aad07bd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1499,
+      "powerKw": 441,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d78c4829e9fff705f477",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1997,
+      "powerKw": 103,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a9dd886785edb8e013e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 92,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8187ecd3824aa6a26a58",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 49,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd692c85378fcfdbea03",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-702f1953eb99fdb6b338",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4a3cceaa3f0d5e3a73f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 53,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bd15b074a974f3d13ca",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1c014dffa0225bb816f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 59,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e43011ee50f767611e4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af6244ae71bf00d7a601",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 62,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e90ee0b3955717ca31f4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 190,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6af6f06abeb2cf9903aa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f89fd2f786e33ccb669a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-052591bb4888541d9ae9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-836116cf69be96d586a3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f27b92168c9a0000b349",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb7167bab55bf816f6e1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 80,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86f680339b1eed9cf581",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dc2081cea74261d8b36",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c6645524049bb2f8087",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e6b6d48ef0700910673",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad57fa2db9a23f81bbf5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21eecc6f9e65699c8c84",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75e4d40d42e758b40e8e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a46a42a583ed51473e28",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 87,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e7d94ae16297b1639c1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2389f8076553d50763b1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0af733d5a6b56e6e9cff",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 118,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53f7c4513f6887d98659",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 120,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d132c01771a4c5f262f3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 121,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e64e2911ab2ce4c0864",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 125,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3aede9c69fe58a4e5f21",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 130,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-976e8a7ded54a825e980",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f072d434c8b900edd9f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82263adbfe0969ec9fe0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 135,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e84345639d3fcadc4f6e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 136,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff9a619fdef2ae9e8365",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 137,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-710e3865559c4f6f3327",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 140,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3aa2e1377d254ef4bfb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 142,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aba8ac7882326f111dd3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 143,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfb16df1cd24016b7b39",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 145,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-581f325185a4f63f093e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 147,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64ef1180c0a6d100649e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 148,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-911985b7c2540ad91221",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2ed55dcc70c694dd22d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 154,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0980b6c6ad25d6010102",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 155,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e371f79344c558e51a5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 165,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5ef5ee485b18850c5c9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Focus",
+      "modelId": "ford/focus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 170,
+      "commercialNames": [
+        "FOCUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

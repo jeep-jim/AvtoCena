@@ -1,0 +1,3319 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 9,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "porsche:taycan4sperformancebatteryplus",
+      "make": "Porsche",
+      "model": "Taycan 4S (Performance Battery Plus)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycan4sperformancebattery",
+      "make": "Porsche",
+      "model": "Taycan 4S (Performance Battery)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycan4scrossturismo",
+      "make": "Porsche",
+      "model": "Taycan 4S Cross Turismo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycangts",
+      "make": "Porsche",
+      "model": "Taycan GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycangtssportturismo",
+      "make": "Porsche",
+      "model": "Taycan GTS Sport Turismo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycanturbo",
+      "make": "Porsche",
+      "model": "Taycan Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycanturbocrossturismo",
+      "make": "Porsche",
+      "model": "Taycan Turbo Cross Turismo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycanturbogt",
+      "make": "Porsche",
+      "model": "Taycan Turbo GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycanturbogtwithweissachpackage",
+      "make": "Porsche",
+      "model": "Taycan Turbo GT with Weissach Package",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycanturbos",
+      "make": "Porsche",
+      "model": "Taycan Turbo S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "porsche:taycanturboscrossturismo",
+      "make": "Porsche",
+      "model": "Taycan Turbo S Cross Turismo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "ram:1500",
+      "make": "Ram",
+      "model": "1500",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "ram:15004x4",
+      "make": "Ram",
+      "model": "1500 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ram:15004x4ecodiesel",
+      "make": "Ram",
+      "model": "1500 4X4 EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ram:15004x4etorque",
+      "make": "Ram",
+      "model": "1500 4X4 eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ram:15004x4ho",
+      "make": "Ram",
+      "model": "1500 4X4 HO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ram:15004x4rho",
+      "make": "Ram",
+      "model": "1500 4X4 RHO",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ram:15004x4trx",
+      "make": "Ram",
+      "model": "1500 4X4 TRX",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "ram:1500classic",
+      "make": "Ram",
+      "model": "1500 Classic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "ram:1500classic4x4",
+      "make": "Ram",
+      "model": "1500 Classic 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "ram:1500ecodiesel",
+      "make": "Ram",
+      "model": "1500 EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ram:1500etorque",
+      "make": "Ram",
+      "model": "1500 eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ram:1500hfeecodiesel",
+      "make": "Ram",
+      "model": "1500 HFE EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "ram:1500hfeetorque",
+      "make": "Ram",
+      "model": "1500 HFE eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ram:promastercity",
+      "make": "Ram",
+      "model": "Promaster City",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "rivian:r1s",
+      "make": "Rivian",
+      "model": "R1S",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "rivian:r1s20wheels",
+      "make": "Rivian",
+      "model": "R1S (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s20wheelsallterrain",
+      "make": "Rivian",
+      "model": "R1S (20\" Wheels) All-Terrain",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s20wheelsatduallarge",
+      "make": "Rivian",
+      "model": "R1S (20\" Wheels) AT Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s20wheelsatdualmax",
+      "make": "Rivian",
+      "model": "R1S (20\" Wheels) AT Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s20wheelsatperformanceduallarge",
+      "make": "Rivian",
+      "model": "R1S (20\" Wheels) AT Performance Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s20wheelsatperformancedualmax",
+      "make": "Rivian",
+      "model": "R1S (20\" Wheels) AT Performance Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s21wheels",
+      "make": "Rivian",
+      "model": "R1S (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s21wheelsduallarge",
+      "make": "Rivian",
+      "model": "R1S (21\" Wheels) Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s21wheelsdualmax",
+      "make": "Rivian",
+      "model": "R1S (21\" Wheels) Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s21wheelsperformanceduallarge",
+      "make": "Rivian",
+      "model": "R1S (21\" Wheels) Performance Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s21wheelsperformancedualmax",
+      "make": "Rivian",
+      "model": "R1S (21\" Wheels) Performance Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s22wheels",
+      "make": "Rivian",
+      "model": "R1S (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s22wheelsduallarge",
+      "make": "Rivian",
+      "model": "R1S (22\" Wheels) Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s22wheelsdualmax",
+      "make": "Rivian",
+      "model": "R1S (22\" Wheels) Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s22wheelsperformanceduallarge",
+      "make": "Rivian",
+      "model": "R1S (22\" Wheels) Performance Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1s22wheelsperformancedualmax",
+      "make": "Rivian",
+      "model": "R1S (22\" Wheels) Performance Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1sallterrainduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1S All-Terrain Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sallterrainduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1S All-Terrain Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sallterraindualmax20wheels",
+      "make": "Rivian",
+      "model": "R1S All-Terrain Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sallterrainperformancedualmax20wheels",
+      "make": "Rivian",
+      "model": "R1S All-Terrain Performance Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sallterrainquadlarge20wheels",
+      "make": "Rivian",
+      "model": "R1S All-Terrain Quad Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1sallterraintrimax20wheels",
+      "make": "Rivian",
+      "model": "R1S All-Terrain Tri Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1satperformanceduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1S AT Performance Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1satperformanceduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1S AT Performance Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sduallarge21wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Large (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1sduallarge22wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Large (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sduallargeplus22wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Large Plus (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sdualmax20wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sdualmax21wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Max (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1sdualmax22wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sdualstandard20wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Standard (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sdualstandard22wheels",
+      "make": "Rivian",
+      "model": "R1S Dual Standard (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sperformanceduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sperformanceduallarge21wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Large (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1sperformanceduallarge22wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Large (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sperformanceduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sperformanceduallargeplus22wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Large Plus (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sperformancedualmax20wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1sperformancedualmax21wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Max (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1sperformancedualmax22wheels",
+      "make": "Rivian",
+      "model": "R1S Performance Dual Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1squadlarge20wheels",
+      "make": "Rivian",
+      "model": "R1S Quad Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1squadlarge21wheels",
+      "make": "Rivian",
+      "model": "R1S Quad Large (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1squadlarge22wheels",
+      "make": "Rivian",
+      "model": "R1S Quad Large (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1squadmax20wheelsat",
+      "make": "Rivian",
+      "model": "R1S Quad Max (20\" Wheels AT)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1squadmax22wheelsuhp",
+      "make": "Rivian",
+      "model": "R1S Quad Max (22\" Wheels UHP)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1squadmax22wheels",
+      "make": "Rivian",
+      "model": "R1S Quad Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1strimax22wheels",
+      "make": "Rivian",
+      "model": "R1S Tri Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1t",
+      "make": "Rivian",
+      "model": "R1T",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "rivian:r1t20wheels",
+      "make": "Rivian",
+      "model": "R1T (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t20wheelsallterrain",
+      "make": "Rivian",
+      "model": "R1T (20\" Wheels) All-Terrain",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t20wheelsatduallarge",
+      "make": "Rivian",
+      "model": "R1T (20\" Wheels) AT Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t20wheelsatdualmax",
+      "make": "Rivian",
+      "model": "R1T (20\" Wheels) AT Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t20wheelsatperformanceduallarge",
+      "make": "Rivian",
+      "model": "R1T (20\" Wheels) AT Performance Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t20wheelsatperformancedualmax",
+      "make": "Rivian",
+      "model": "R1T (20\" Wheels) AT Performance Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t21wheels",
+      "make": "Rivian",
+      "model": "R1T (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t21wheelsduallarge",
+      "make": "Rivian",
+      "model": "R1T (21\" Wheels) Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t21wheelsdualmax",
+      "make": "Rivian",
+      "model": "R1T (21\" Wheels) Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t21wheelsperformanceduallarge",
+      "make": "Rivian",
+      "model": "R1T (21\" Wheels) Performance Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t21wheelsperformancedualmax",
+      "make": "Rivian",
+      "model": "R1T (21\" Wheels) Performance Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t22wheels",
+      "make": "Rivian",
+      "model": "R1T (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t22wheelsduallarge",
+      "make": "Rivian",
+      "model": "R1T (22\" Wheels) Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t22wheelsdualmax",
+      "make": "Rivian",
+      "model": "R1T (22\" Wheels) Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t22wheelsperformanceduallarge",
+      "make": "Rivian",
+      "model": "R1T (22\" Wheels) Performance Dual Large",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1t22wheelsperformancedualmax",
+      "make": "Rivian",
+      "model": "R1T (22\" Wheels) Performance Dual Max",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rivian:r1tallterrainduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1T All-Terrain Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tallterrainduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1T All-Terrain Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tallterraindualmax20wheels",
+      "make": "Rivian",
+      "model": "R1T All-Terrain Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tallterrainperformancedualmax20wheels",
+      "make": "Rivian",
+      "model": "R1T All-Terrain Performance Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tallterrainquadlarge20wheels",
+      "make": "Rivian",
+      "model": "R1T All-Terrain Quad Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tallterraintrimax20wheels",
+      "make": "Rivian",
+      "model": "R1T All-Terrain Tri Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tatperformanceduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1T AT Performance Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tatperformanceduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1T AT Performance Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tduallarge21wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Large (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tduallarge22wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Large (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tduallargeplus22wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Large Plus (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tdualmax20wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tdualmax21wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Max (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tdualmax22wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tdualstandard20wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Standard (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tdualstandard22wheels",
+      "make": "Rivian",
+      "model": "R1T Dual Standard (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tperformanceduallarge20wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tperformanceduallarge21wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Large (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tperformanceduallarge22wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Large (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tperformanceduallargeplus20wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Large Plus (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tperformanceduallargeplus22wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Large Plus (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tperformancedualmax20wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Max (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tperformancedualmax21wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Max (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tperformancedualmax22wheels",
+      "make": "Rivian",
+      "model": "R1T Performance Dual Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tquadlarge20wheels",
+      "make": "Rivian",
+      "model": "R1T Quad Large (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tquadlarge21wheels",
+      "make": "Rivian",
+      "model": "R1T Quad Large (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tquadlarge22wheels",
+      "make": "Rivian",
+      "model": "R1T Quad Large (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "rivian:r1tquadmax20wheelsat",
+      "make": "Rivian",
+      "model": "R1T Quad Max (20\" Wheels AT)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tquadmax22wheelsuhp",
+      "make": "Rivian",
+      "model": "R1T Quad Max (22\" Wheels UHP)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1tquadmax22wheels",
+      "make": "Rivian",
+      "model": "R1T Quad Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r1ttrimax22wheels",
+      "make": "Rivian",
+      "model": "R1T Tri Max (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rivian:r2",
+      "make": "Rivian",
+      "model": "R2",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "rollsroyce:blackbadgecullinan",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Cullinan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:blackbadgeghost",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Ghost",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:blackbadgespectre22wheels",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Spectre (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:blackbadgespectre23wheels",
+      "make": "Rolls-Royce",
+      "model": "Black Badge Spectre (23\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:cullinan",
+      "make": "Rolls-Royce",
+      "model": "Cullinan",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "rollsroyce:cullinanblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Cullinan Black Badge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "rollsroyce:dawn",
+      "make": "Rolls-Royce",
+      "model": "Dawn",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "rollsroyce:dawnblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Dawn Black Badge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "rollsroyce:ghost",
+      "make": "Rolls-Royce",
+      "model": "Ghost",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "rollsroyce:ghostblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Ghost Black Badge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "rollsroyce:ghostewb",
+      "make": "Rolls-Royce",
+      "model": "Ghost EWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "rollsroyce:ghostextended",
+      "make": "Rolls-Royce",
+      "model": "Ghost Extended",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:phantom",
+      "make": "Rolls-Royce",
+      "model": "Phantom",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "rollsroyce:phantomewb",
+      "make": "Rolls-Royce",
+      "model": "Phantom EWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "rollsroyce:phantomextended",
+      "make": "Rolls-Royce",
+      "model": "Phantom Extended",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:spectre",
+      "make": "Rolls-Royce",
+      "model": "Spectre",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:spectre22wheels",
+      "make": "Rolls-Royce",
+      "model": "Spectre (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:spectre23wheels",
+      "make": "Rolls-Royce",
+      "model": "Spectre (23\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "rollsroyce:wraith",
+      "make": "Rolls-Royce",
+      "model": "Wraith",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "rollsroyce:wraithblackbadge",
+      "make": "Rolls-Royce",
+      "model": "Wraith Black Badge",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "roushperformance:f150",
+      "make": "Roush Performance",
+      "model": "F150",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "roushperformance:mustang",
+      "make": "Roush Performance",
+      "model": "Mustang",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "roushperformance:stage3mustang",
+      "make": "Roush Performance",
+      "model": "Stage 3 Mustang",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "rufautomobile:t12ctr3ctranniversary",
+      "make": "RUF Automobile",
+      "model": "T12/CTR3/CTR Anniversary",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "rufautomobile:turbo12ctr3ctranniversary",
+      "make": "RUF Automobile",
+      "model": "TURBO12/CTR3/CTR ANNIVERSARY",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "subaru:ascent",
+      "make": "Subaru",
+      "model": "Ascent",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "subaru:ascentawd",
+      "make": "Subaru",
+      "model": "Ascent AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:brz",
+      "make": "Subaru",
+      "model": "BRZ",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "subaru:brzts",
+      "make": "Subaru",
+      "model": "BRZ tS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "subaru:crosstrek",
+      "make": "Subaru",
+      "model": "Crosstrek",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:crosstrekawd",
+      "make": "Subaru",
+      "model": "Crosstrek AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:crosstrekhybridawd",
+      "make": "Subaru",
+      "model": "Crosstrek Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:crosstrekwildernessawd",
+      "make": "Subaru",
+      "model": "Crosstrek Wilderness AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:forester",
+      "make": "Subaru",
+      "model": "Forester",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:foresterawd",
+      "make": "Subaru",
+      "model": "Forester AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:forestereboxerhybridawd",
+      "make": "Subaru",
+      "model": "Forester e-BOXER Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "subaru:foresterhybridawd",
+      "make": "Subaru",
+      "model": "Forester Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:foresterwildernessawd",
+      "make": "Subaru",
+      "model": "Forester Wilderness AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:impreza",
+      "make": "Subaru",
+      "model": "Impreza",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:impreza4doorawd",
+      "make": "Subaru",
+      "model": "Impreza 4-Door AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "subaru:impreza5doorawd",
+      "make": "Subaru",
+      "model": "Impreza 5-Door AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "subaru:imprezaawd",
+      "make": "Subaru",
+      "model": "Impreza AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:legacy",
+      "make": "Subaru",
+      "model": "Legacy",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "subaru:legacyawd",
+      "make": "Subaru",
+      "model": "Legacy AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "subaru:outback",
+      "make": "Subaru",
+      "model": "Outback",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "subaru:outbackawd",
+      "make": "Subaru",
+      "model": "Outback AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:outbackwildernessawd",
+      "make": "Subaru",
+      "model": "Outback Wilderness AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:solterra",
+      "make": "Subaru",
+      "model": "Solterra",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "subaru:solterraawd",
+      "make": "Subaru",
+      "model": "Solterra AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "subaru:trailseeker",
+      "make": "Subaru",
+      "model": "Trailseeker",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027
+    },
+    {
+      "key": "subaru:uncharted",
+      "make": "Subaru",
+      "model": "Uncharted",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027
+    },
+    {
+      "key": "subaru:wrx",
+      "make": "Subaru",
+      "model": "WRX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "subaru:wrxawd",
+      "make": "Subaru",
+      "model": "WRX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "subaru:wrxstiawd",
+      "make": "Subaru",
+      "model": "WRX STI AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:cybertruck",
+      "make": "Tesla",
+      "model": "Cybertruck",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:cybertruckawd",
+      "make": "Tesla",
+      "model": "Cybertruck AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:cybertruckpremium",
+      "make": "Tesla",
+      "model": "Cybertruck Premium",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:model3",
+      "make": "Tesla",
+      "model": "Model 3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:model3longrange",
+      "make": "Tesla",
+      "model": "Model 3 Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:model3longrangeawd",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:model3longrangeawdimport",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD (Import)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:model3longrangeawdpre11023",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD (pre-1/10/23)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "tesla:model3longrangeawdperformance18wheels",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD Performance (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:model3longrangeawdperformance19wheels",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD Performance (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:model3longrangeawdperformance20wheels",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD Performance (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:model3longrangeawdi",
+      "make": "Tesla",
+      "model": "Model 3 Long Range AWD-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:model3longrangei",
+      "make": "Tesla",
+      "model": "Model 3 Long Range-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:model3midrange",
+      "make": "Tesla",
+      "model": "Model 3 Mid Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:model3performance",
+      "make": "Tesla",
+      "model": "Model 3 Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:model3performanceawd",
+      "make": "Tesla",
+      "model": "Model 3 Performance AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:model3performancei",
+      "make": "Tesla",
+      "model": "Model 3 Performance-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:model3premiumawdi",
+      "make": "Tesla",
+      "model": "Model 3 Premium AWD-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:model3premiumi",
+      "make": "Tesla",
+      "model": "Model 3 Premium-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:model3rwd",
+      "make": "Tesla",
+      "model": "Model 3 RWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:model3rwdimport",
+      "make": "Tesla",
+      "model": "Model 3 RWD (Import)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:model3standardrange",
+      "make": "Tesla",
+      "model": "Model 3 Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "tesla:model3standardrangeplus",
+      "make": "Tesla",
+      "model": "Model 3 Standard Range Plus",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:models",
+      "make": "Tesla",
+      "model": "Model S",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelslongrange",
+      "make": "Tesla",
+      "model": "Model S Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelslongrangeplus",
+      "make": "Tesla",
+      "model": "Model S Long Range Plus",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelslongrangepluspre15620",
+      "make": "Tesla",
+      "model": "Model S Long Range Plus (pre-15/6/20)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:modelsperformance19wheels",
+      "make": "Tesla",
+      "model": "Model S Performance (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelsperformance21wheels",
+      "make": "Tesla",
+      "model": "Model S Performance (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelsplaid19wheels",
+      "make": "Tesla",
+      "model": "Model S Plaid (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelsplaid21wheels",
+      "make": "Tesla",
+      "model": "Model S Plaid (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelsstandardrange",
+      "make": "Tesla",
+      "model": "Model S Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:modelx",
+      "make": "Tesla",
+      "model": "Model X",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelxlongrange",
+      "make": "Tesla",
+      "model": "Model X Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelxlongrangeplus",
+      "make": "Tesla",
+      "model": "Model X Long Range Plus",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelxperformance20wheels",
+      "make": "Tesla",
+      "model": "Model X Performance (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelxperformance22wheels",
+      "make": "Tesla",
+      "model": "Model X Performance (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelxplaid",
+      "make": "Tesla",
+      "model": "Model X Plaid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelxplaid20wheels",
+      "make": "Tesla",
+      "model": "Model X Plaid (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:modelxplaid22wheels",
+      "make": "Tesla",
+      "model": "Model X Plaid (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:modelxstandardrange",
+      "make": "Tesla",
+      "model": "Model X Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:modely",
+      "make": "Tesla",
+      "model": "Model Y",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelyawd",
+      "make": "Tesla",
+      "model": "Model Y AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "tesla:modelylongrangeawd",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:modelylongrangeawdimport",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD (Import)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:modelylongrangeawdb",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD-B",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelylongrangeawdbpre61125",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD-B (pre-6/11/25)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelylongrangeawdi",
+      "make": "Tesla",
+      "model": "Model Y Long Range AWD-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelylongrangei",
+      "make": "Tesla",
+      "model": "Model Y Long Range-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:modelyperformance",
+      "make": "Tesla",
+      "model": "Model Y Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:modelyperformance21wheels",
+      "make": "Tesla",
+      "model": "Model Y Performance (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "tesla:modelyperformanceimport",
+      "make": "Tesla",
+      "model": "Model Y Performance (Import)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:modelyperformanceb",
+      "make": "Tesla",
+      "model": "Model Y Performance-B",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelyperformancei",
+      "make": "Tesla",
+      "model": "Model Y Performance-I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "tesla:modelypremiumawdb",
+      "make": "Tesla",
+      "model": "Model Y Premium AWD-B",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelyrwd",
+      "make": "Tesla",
+      "model": "Model Y RWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:modelyrwdimport",
+      "make": "Tesla",
+      "model": "Model Y RWD (Import)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "tesla:modelyrwdb",
+      "make": "Tesla",
+      "model": "Model Y RWD-B",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "tesla:modelystandardrange",
+      "make": "Tesla",
+      "model": "Model Y Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "tesla:modelystandardb",
+      "make": "Tesla",
+      "model": "Model Y Standard-B",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:4runner",
+      "make": "Toyota",
+      "model": "4Runner",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:4runner4wd",
+      "make": "Toyota",
+      "model": "4Runner 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "toyota:4runner4wdparttime4wd",
+      "make": "Toyota",
+      "model": "4Runner 4WD (Part-Time 4WD)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:4runner4wdlimited",
+      "make": "Toyota",
+      "model": "4Runner 4WD Limited",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:4runnerhybrid4wdparttime4wd",
+      "make": "Toyota",
+      "model": "4Runner Hybrid 4WD (Part-Time 4WD)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:4runnerhybrid4wdplatinum",
+      "make": "Toyota",
+      "model": "4Runner Hybrid 4WD Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "toyota:86",
+      "make": "Toyota",
+      "model": "86",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "toyota:avalon",
+      "make": "Toyota",
+      "model": "Avalon",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "toyota:avalonawd",
+      "make": "Toyota",
+      "model": "Avalon AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "toyota:bz",
+      "make": "Toyota",
+      "model": "bZ",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    }
+  ]
+}

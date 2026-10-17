@@ -1,0 +1,21 @@
+name: One-shot stop unsafe legacy Georgia writer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-stop-unsafe-legacy-georgia-writer.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: true
+
+jobs:
+  safety-stop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stop legacy shared writer before unverified Georgia publish
+        run: echo "Legacy shared writer cancelled by concurrency safety guard; future scheduled workflow excludes Georgia from merge/publish."

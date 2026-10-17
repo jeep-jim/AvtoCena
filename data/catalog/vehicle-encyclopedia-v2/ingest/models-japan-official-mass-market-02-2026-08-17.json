@@ -1,0 +1,1633 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-daihatsu-move-canbus-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Move Canbus official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/move_canbus/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Move Canbus; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-thor-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Thor official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/thor/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Thor; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-carol-japan-current-2026",
+          "type": "manufacturer",
+          "title": "CAROL official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/light-vehicle/carol/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies CAROL; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-flair-crossover-japan-current-2026",
+          "type": "manufacturer",
+          "title": "FLAIR CROSSOVER official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/light-vehicle/flair-crossover/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies FLAIR CROSSOVER; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-flair-japan-current-2026",
+          "type": "manufacturer",
+          "title": "FLAIR official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/light-vehicle/flair/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies FLAIR; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-flair-wagon-japan-current-2026",
+          "type": "manufacturer",
+          "title": "FLAIR WAGON official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/light-vehicle/flair-wagon/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies FLAIR WAGON; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mitsubishi-delica-d2-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Delica D:2 official Japan model page",
+          "publisher": "Mitsubishi Motors Corporation",
+          "url": "https://www.mitsubishi-motors.co.jp/lineup/delica_d2/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Delica D:2; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mitsubishi-delica-d5-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Delica D:5 official Japan model page",
+          "publisher": "Mitsubishi Motors Corporation",
+          "url": "https://www.mitsubishi-motors.co.jp/lineup/delica_d5/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Delica D:5; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mitsubishi-town-box-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Town Box official Japan model page",
+          "publisher": "Mitsubishi Motors Corporation",
+          "url": "https://www.mitsubishi-motors.co.jp/lineup/townbox/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Town Box; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mlit-passenger-b29b86346a4c1d6a",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 000234316.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/000234316.xlsx",
+          "documentId": "000234316.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-c6beb5dd34536cc2",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001247669.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001247669.xlsx",
+          "documentId": "001247669.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-d60d0057642dc4b2",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 000234330.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/000234330.xlsx",
+          "documentId": "000234330.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-e1a02decb9f51c0b",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001365468.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001365468.xlsx",
+          "documentId": "001365468.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-nissan-aura-japan-current-2026",
+          "type": "manufacturer",
+          "title": "AURA official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://www3.nissan.co.jp/vehicles/new/aura.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies AURA; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-nissan-caravan-japan-current-2026",
+          "type": "manufacturer",
+          "title": "CARAVAN official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://www3.nissan.co.jp/vehicles/new/caravan.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies CARAVAN; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-nissan-elgrand-japan-current-2026",
+          "type": "manufacturer",
+          "title": "ELGRAND official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://www3.nissan.co.jp/vehicles/new/elgrand.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies ELGRAND; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-subaru-chiffon-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Chiffon official Japan model page",
+          "publisher": "Subaru Corporation",
+          "url": "https://www.subaru.jp/chiffon/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Chiffon; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-subaru-pleo-plus-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Pleo Plus official Japan model page",
+          "publisher": "Subaru Corporation",
+          "url": "https://www.subaru.jp/pleoplus/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Pleo Plus; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-subaru-rex-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Rex official Japan model page",
+          "publisher": "Subaru Corporation",
+          "url": "https://www.subaru.jp/rex/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Rex; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-landy-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Landy official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/landy/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Landy; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-lapin-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Lapin official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/lapin/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Lapin; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-wagon-r-smile-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Wagon R Smile official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/wagonr_smile/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Wagon R Smile; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-xbee-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Xbee official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/xbee/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Xbee; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-raize-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Raize official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/raize/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Raize; historical generation and production boundaries are not inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "daihatsu/move-canbus",
+          "brandId": "daihatsu",
+          "canonicalName": "Move Canbus",
+          "slug": "move-canbus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ムーヴ キャンバス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-move-canbus-japan-current-2026",
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-0a08b4157aca6203",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-eba2e67c2979bb93",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-f859ea48a4a0d9cd",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-move-canbus-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/thor",
+          "brandId": "daihatsu",
+          "canonicalName": "Thor",
+          "slug": "thor",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "トール",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-thor-japan-current-2026",
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-33f67cea6daed0f1",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-a9c19180ce23f1a9",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-thor-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/carol",
+          "brandId": "mazda",
+          "canonicalName": "CAROL",
+          "slug": "carol",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "キャロル",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d60d0057642dc4b2",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-dd731b895e20bd8c",
+                "src-mlit-passenger-e1a02decb9f51c0b",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-carol-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/flair",
+          "brandId": "mazda",
+          "canonicalName": "FLAIR",
+          "slug": "flair",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "フレア",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d60d0057642dc4b2",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-dd731b895e20bd8c",
+                "src-mlit-passenger-e1a02decb9f51c0b",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-flair-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/flair-crossover",
+          "brandId": "mazda",
+          "canonicalName": "FLAIR CROSSOVER",
+          "slug": "flair-crossover",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "フレア クロスオーバー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d60d0057642dc4b2",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-dd731b895e20bd8c",
+                "src-mlit-passenger-e1a02decb9f51c0b",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-flair-crossover-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/flair-wagon",
+          "brandId": "mazda",
+          "canonicalName": "FLAIR WAGON",
+          "slug": "flair-wagon",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "フレア ワゴン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d60d0057642dc4b2",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-dd731b895e20bd8c",
+                "src-mlit-passenger-e1a02decb9f51c0b",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-flair-wagon-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mitsubishi/delica-d2",
+          "brandId": "mitsubishi",
+          "canonicalName": "Delica D:2",
+          "slug": "delica-d2",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "デリカD:2",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mitsubishi-delica-d2-japan-current-2026",
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-65f8223d18573774",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-869a40a6c3feefc5",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mitsubishi-delica-d2-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mitsubishi/delica-d5",
+          "brandId": "mitsubishi",
+          "canonicalName": "Delica D:5",
+          "slug": "delica-d5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "デリカD:5",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mitsubishi-delica-d5-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mitsubishi-delica-d5-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mitsubishi/town-box",
+          "brandId": "mitsubishi",
+          "canonicalName": "Town Box",
+          "slug": "town-box",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "タウンボックス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mitsubishi-town-box-japan-current-2026",
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57127ade4cf27c50",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-af983edf19674dc3",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mitsubishi-town-box-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/aura",
+          "brandId": "nissan",
+          "canonicalName": "AURA",
+          "slug": "aura",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "オーラ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-nissan-aura-japan-current-2026"
+              ]
+            },
+            {
+              "value": "ノート オーラ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-371951746ee3954d",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-90f41a4e69ee44f7",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f14fef9166bd3a02",
+                "src-mlit-passenger-f3dc7ac5cfae04d6"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-aura-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/caravan",
+          "brandId": "nissan",
+          "canonicalName": "CARAVAN",
+          "slug": "caravan",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "キャラバン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-371951746ee3954d",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-f14fef9166bd3a02",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-nissan-caravan-japan-current-2026"
+              ]
+            },
+            {
+              "value": "NV350 キャラバン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-caravan-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/elgrand",
+          "brandId": "nissan",
+          "canonicalName": "ELGRAND",
+          "slug": "elgrand",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "エルグランド",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-371951746ee3954d",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-f14fef9166bd3a02",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-nissan-elgrand-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-elgrand-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "subaru/chiffon",
+          "brandId": "subaru",
+          "canonicalName": "Chiffon",
+          "slug": "chiffon",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "シフォン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-b29b86346a4c1d6a",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-c6beb5dd34536cc2",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-subaru-chiffon-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-subaru-chiffon-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "subaru/pleo-plus",
+          "brandId": "subaru",
+          "canonicalName": "Pleo Plus",
+          "slug": "pleo-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "プレオ プラス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-b29b86346a4c1d6a",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-c6beb5dd34536cc2",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-f859ea48a4a0d9cd",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-subaru-pleo-plus-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-subaru-pleo-plus-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "subaru/rex",
+          "brandId": "subaru",
+          "canonicalName": "Rex",
+          "slug": "rex",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "レックス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-8ee42da64747e260",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-efd9f8cee958c1c7",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-subaru-rex-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-subaru-rex-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/landy",
+          "brandId": "suzuki",
+          "canonicalName": "Landy",
+          "slug": "landy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ランディ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-6060628ed203d5b8",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-suzuki-landy-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-landy-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/lapin",
+          "brandId": "suzuki",
+          "canonicalName": "Lapin",
+          "slug": "lapin",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ラパン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-suzuki-lapin-japan-current-2026"
+              ]
+            },
+            {
+              "value": "アルト ラパン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-lapin-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/wagon-r-smile",
+          "brandId": "suzuki",
+          "canonicalName": "Wagon R Smile",
+          "slug": "wagon-r-smile",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ワゴンR スマイル",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-suzuki-wagon-r-smile-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-wagon-r-smile-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/xbee",
+          "brandId": "suzuki",
+          "canonicalName": "Xbee",
+          "slug": "xbee",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "クロスビー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-4eb27bf1197af19c",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-6060628ed203d5b8",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-suzuki-xbee-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-xbee-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/raize",
+          "brandId": "toyota",
+          "canonicalName": "Raize",
+          "slug": "raize",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ライズ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5615de0cd2580a2f",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-93b9e6a0b69a3392",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-raize-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-raize-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

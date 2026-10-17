@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 2,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 2
+  },
+  "modelId": "wuling/xingchen",
+  "canonicalName": "Asta",
+  "retainedAliases": [
+    "Xingchen",
+    "五菱 星辰"
+  ],
+  "generationIds": [
+    "wuling/xingchen/hybrid-2022"
+  ],
+  "variantIds": [
+    "wuling/xingchen/hybrid-2022/2-0l-dht-power",
+    "wuling/xingchen/hybrid-2022/2-0l-dht-speed"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "exactManufacturerValuesOnly": true,
+    "exactUnitConversionOnly": true,
+    "motorRatedPowerNotPeakOrPower30Min": true,
+    "horsepowerNotCalculated": true,
+    "automaticPublicationReady": false
+  }
+}

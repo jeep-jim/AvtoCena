@@ -1,0 +1,49 @@
+import { checkTelegramNetwork, telegramNetworkError } from "@/lib/telegram-network";
+import { request as httpsRequest } from "node:https";
+import { pollingEnabled } from "@/lib/crm-polling";
+import { NextResponse } from "next/server";
+import { crmRelayAuthorized, claimCrmNotices, authorizeCrmNotice, completeCrmNotice } from "@/lib/crm-relay";
+import { getTelegramRuntimeConfig, telegramWebhookUrl } from "@/lib/telegram-config";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+const reply = (body: unknown, status = 200) => NextResponse.json(body, {status, headers: {"cache-control": "no-store"}});
+export async function POST(request: Request) {
+  if (!crmRelayAuthorized(request.headers.get("x-crm-relay-key") || "", process.env.AUTH_ACCESS_KEY || ""))
+    return reply({ok: false}, 403);
+  const body = await request.json().catch(() => null);
+  try {
+    if (body?.action === "network") {
+      const config = await getTelegramRuntimeConfig();
+      const botCheck = async () => {
+        if (!config?.token) return {ok:false, detail:"not_configured"};
+        const started = Date.now();
+        try {
+          const result = await new Promise<any>((resolve, reject) => {
+            const req = httpsRequest(`https://api.telegram.org/bot${config.token}/getMe`, {method:"POST", family:4, signal:AbortSignal.timeout(8000), headers:{"content-type":"application/json"}}, res => {
+              let text = "";
+              res.on("data", chunk => {text += chunk; if(text.length > 16000) req.destroy();});
+              res.on("end", () => {try {resolve(JSON.parse(text));} catch {reject(new Error("invalid_json"));}});
+              res.on("error", reject);
+            }); req.on("error", reject); req.end("{}");
+          });
+          return {ok:result.ok === true && result.result?.username?.toLowerCase() === "avtocena_bot", durationMs:Date.now()-started};
+        } catch(error) {return {ok:false, detail:telegramNetworkError(error), durationMs:Date.now()-started};}
+      };
+      const [checks, bot] = await Promise.all([checkTelegramNetwork(), botCheck()]);
+      return reply({ok:true, releaseSha:process.env.AVTOCENA_RELEASE_SHA, polling:await pollingEnabled(), checks, bot});
+    }
+    if (body?.action === "claim") return reply({ok: true, notices: await claimCrmNotices()});
+    if (body?.action === "webhook") {
+      if (await pollingEnabled()) return reply({ok: false, error: "polling_active"}, 409);
+      const config = await getTelegramRuntimeConfig();
+      if (!config) return reply({ok: false}, 503);
+      return reply({ok: true, url: `${telegramWebhookUrl()}?key=${encodeURIComponent(config.webhookSecret)}`, secret: config.webhookSecret});
+    }
+    if (typeof body?.id !== "string" || body.id.length > 240 || typeof body?.token !== "string" || body.token.length > 100)
+      return reply({ok: false}, 400);
+    if (body.action === "authorize") return reply({ok: true, allowed: await authorizeCrmNotice(body.id, body.token)});
+    if (body.action === "ack" && (body.messageId === undefined || (Number.isSafeInteger(body.messageId) && body.messageId > 0)))
+      return reply({ok: await completeCrmNotice(body.id, body.token, body.messageId)});
+    return reply({ok: false}, 400);
+  } catch { return reply({ok: false, error: "relay_unavailable"}, 503); }
+}

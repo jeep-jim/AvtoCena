@@ -1,0 +1,30 @@
+name: Verify China variants and reviewed duplicates
+on:
+  push:
+    branches: [fix/china-catalog-variants-20261001]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/china-card-variant.test.ts tests/china-reviewed-duplicates.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-card-contract.test.ts
+      - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/china-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node "$RUNNER_TEMP/china-browser/node_modules/playwright/cli.js" install --with-deps webkit
+      - run: CHROME_BIN=$(command -v google-chrome) node tests/browser/china-cards.mjs
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/china-browser/node_modules/playwright/index.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-card-screenshots
+          path: artifacts/china-cards/*.png

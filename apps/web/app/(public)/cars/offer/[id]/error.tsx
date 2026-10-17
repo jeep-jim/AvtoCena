@@ -1,0 +1,2 @@
+"use client";
+export default function OfferError({reset}:{reset:()=>void}){return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold">Не удалось открыть автомобиль</h1><p className="my-4">Данные временно недоступны. Попробуйте ещё раз чуть позже.</p><button onClick={()=>window.location.reload()} className="rounded-lg border px-4 py-2">Повторить</button><a href="/cars" className="ml-5 underline">К каталогу</a></main>;}

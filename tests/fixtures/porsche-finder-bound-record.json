@@ -1,0 +1,151 @@
+{
+  "record": {
+    "listingId": "7062DL",
+    "listed": true,
+    "meta": {
+      "title": "Macan",
+      "imageUrl": "https://images.finder.porsche.com/11484051-c377-467b-bc1d-3b91430aca06/960",
+      "detailsUrl": "https://finder.porsche.com/xa/en-XA/details/porsche-macan-preowned-7062DL",
+      "priceCurrency": "AED",
+      "priceValue": 219000,
+      "mileage": {
+        "value": 78216,
+        "unitCode": "KMT"
+      },
+      "vin": "FIXTURE-7062DL",
+      "modelYear": 2022,
+      "productionDate": "$undefined",
+      "firstRegistration": "2021-12-23",
+      "engineType": "PETROL",
+      "modelCategory": "Macan",
+      "bodyType": "SUV",
+      "drivetrain": "ALL_WHEEL_DRIVE",
+      "transmission": "PDK (Automatic)",
+      "seller": {
+        "name": "Porsche Centre Mussafah"
+      }
+    },
+    "sections": {
+      "title": {
+        "title": "2022 Porsche Macan",
+        "titleAddition": "$undefined",
+        "subtitle": {
+          "title": "Porsche Approved Pre-Owned",
+          "incomingVehicleTag": "$undefined",
+          "warrantyAndMaintenanceTags": "$undefined",
+          "reserved": false
+        }
+      },
+      "gallery": {
+        "imagesType": "real",
+        "images": [
+          {
+            "id": "11484051-c377-467b-bc1d-3b91430aca06",
+            "category": "EXTERIOR"
+          },
+          {
+            "id": "748ad1b0-8aec-46a7-831c-ca1d1bd78887",
+            "category": "EXTERIOR"
+          },
+          {
+            "id": "a6bf9f96-08c7-4b40-980c-31aa581b4fb2",
+            "category": "EXTERIOR"
+          },
+          {
+            "id": "e982d886-54ce-45d9-b417-a3f9755bf887",
+            "category": "INTERIOR"
+          },
+          {
+            "id": "5560fa1a-2408-4bc6-ac1f-f08138a356b7",
+            "category": "INTERIOR"
+          }
+        ],
+        "totalNumberOfImages": 32
+      },
+      "technicalData": {
+        "technicalData": [
+          {
+            "key": "engine",
+            "name": "Engine",
+            "disclaimer": "$undefined",
+            "items": [
+              {
+                "label": "Number of cylinders",
+                "value": "4"
+              },
+              {
+                "label": "Displacement",
+                "value": "1,984 cm³ / 2.0 l"
+              },
+              {
+                "label": "Bore",
+                "value": "82.5 mm"
+              },
+              {
+                "label": "Stroke",
+                "value": "92.8 mm"
+              },
+              {
+                "label": "Maximum power combustion engine",
+                "value": "195 kW / 265 hp"
+              },
+              {
+                "label": "Maximum power combustion engine at rpm range",
+                "value": "5,000 - 6,500 r/min"
+              },
+              {
+                "label": "Maximum torque combustion engine",
+                "value": "400 Nm"
+              },
+              {
+                "label": "Maximum torque combustion engine at rpm range",
+                "value": "1,800 - 4,500 r/min"
+              },
+              {
+                "label": "Maximum engine speed",
+                "value": "6,800 r/min"
+              },
+              {
+                "label": "Maximum power per litre",
+                "value": "97.8 kW/l / 133.0 hp/l"
+              }
+            ],
+            "footNote": "$undefined"
+          }
+        ]
+      },
+      "summary": {
+        "characteristics": [
+          {
+            "title": "Maximum power combustion engine",
+            "value": "195 kW / 265 hp"
+          }
+        ]
+      }
+    }
+  },
+  "product": {
+    "@type": [
+      "Product",
+      "Car"
+    ],
+    "brand": {
+      "name": "Porsche"
+    },
+    "offers": {
+      "url": "https://finder.porsche.com/xa/en-XA/details/porsche-macan-preowned-7062DL",
+      "price": 219000,
+      "priceCurrency": "AED",
+      "availability": "https://schema.org/InStock"
+    },
+    "vehicleIdentificationNumber": "FIXTURE-7062DL",
+    "vehicleEngine": {
+      "@type": "EngineSpecification",
+      "fuelType": "PETROL"
+    },
+    "vehicleModelDate": "2022-01-01",
+    "image": "https://images.finder.porsche.com/11484051-c377-467b-bc1d-3b91430aca06/960"
+  },
+  "source": "https://finder.porsche.com/xa/en-XA/details/porsche-macan-preowned-7062DL",
+  "sanitized": true
+}

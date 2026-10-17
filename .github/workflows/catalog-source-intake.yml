@@ -1,0 +1,41 @@
+name: Catalog · Six-market source intake
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalog-source-intake
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        market: [korea, china, uae, europe, georgia, japan]
+    env:
+      CATALOG_INTAKE_MARKET: ${{ matrix.market }}
+      CATALOG_INTAKE_TIME_MS: '2400000'
+      CATALOG_SOURCE_INVENTORY_MODE: '1'
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
+      CATALOG_SOURCE_TIMEOUT_MS: '25000'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '2'
+      CATALOG_MAX_IMAGES_PER_OFFER: '30'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect source listings and full details into JSONL
+        run: node --import tsx scripts/catalog-source-intake.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-intake-${{ matrix.market }}
+          path: catalog-intake-${{ matrix.market }}/
+          retention-days: 14

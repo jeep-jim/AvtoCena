@@ -1,0 +1,1809 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "miit-road-vehicle-products",
+  "batch": 382,
+  "status": "sampled",
+  "totalExpected": 7218,
+  "products": [
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "大众牌",
+      "clxh": "FV7007ACBEV",
+      "clmc": "纯电动轿车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633266"
+    },
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "大众牌",
+      "clxh": "FV7007ADBEV",
+      "clmc": "纯电动轿车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633336"
+    },
+    {
+      "qymc": "一汽丰田汽车(成都)有限公司",
+      "cpsb": "丰田(TOYOTA)牌",
+      "clxh": "CA64812G",
+      "clmc": "多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9610622"
+    },
+    {
+      "qymc": "一汽丰田汽车(成都)有限公司",
+      "cpsb": "丰田(TOYOTA)牌",
+      "clxh": "CA64812GHEV",
+      "clmc": "混合动力多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9610492"
+    },
+    {
+      "qymc": "一汽丰田汽车(成都)有限公司",
+      "cpsb": "丰田(TOYOTA)牌",
+      "clxh": "CA64814GHEV",
+      "clmc": "混合动力多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9610625"
+    },
+    {
+      "qymc": "一汽丰田汽车(成都)有限公司",
+      "cpsb": "丰田(TOYOTA)牌",
+      "clxh": "SCT64945HEV",
+      "clmc": "混合动力多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA632873"
+    },
+    {
+      "qymc": "一汽丰田汽车(成都)有限公司",
+      "cpsb": "丰田(TOYOTA)牌",
+      "clxh": "SCT64946HEV",
+      "clmc": "混合动力多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633041"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1046P40K51L2E6PHEVA84",
+      "clmc": "插电式混合动力载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA024205"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1046P40K51L2E6PHEVA84",
+      "clmc": "插电式混合动力载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3521899"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5045XXYP40K51L2E6PHEVA84",
+      "clmc": "插电式混合动力厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9312126"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5046CCYP40K51L2E6PHEVA84",
+      "clmc": "插电式混合动力仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9312028"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5046XXYP40K51L2E6PHEVA84",
+      "clmc": "混合动力厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z5151477"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5189XXYP28K2L8BE6A80",
+      "clmc": "厢式运输车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3449697"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5189XYKP28K2L8E6A80",
+      "clmc": "翼开启厢式车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z0133033"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1120T1BEVL1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3803709"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1PHEV",
+      "clmc": "插电式混合动力载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823911"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1312T1FCEV2",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823923"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T3FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3671958"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1316T1FCEV1",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823883"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1316T2BEV1",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3773346"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311T1PHEV",
+      "clmc": "插电式混合动力自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3722755"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311TH6BEV2",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823920"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311TM6FCEV",
+      "clmc": "燃料电池自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823916"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA430960"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6BEV1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA431272"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6BEV2",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633918"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6SEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA431088"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZM6FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633633"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T5BEV2",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3605602"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX5BEV2",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9065529"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX3FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9811284"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314ZZX4BEV1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9B14414"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM42503S1SEV3",
+      "clmc": "换电式纯电动半挂牵引车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y9129113"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5030TXFQC10",
+      "clmc": "器材消防车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634549"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5031TXFQC15",
+      "clmc": "器材消防车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634552"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5040JQZ0CTSHEV",
+      "clmc": "插电式混合动力汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9C16511"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5040TGP",
+      "clmc": "远程供排水抢险车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633475"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5190GXFAP50",
+      "clmc": "压缩空气泡沫消防车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633982"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5190JQZ12TP",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633965"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5210THB1F",
+      "clmc": "混凝土泵车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3690664"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5290TXFBP450/YDXZ",
+      "clmc": "泵浦消防车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634008"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5311GJB1PHEV",
+      "clmc": "插电式混合动力混凝土搅拌运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634558"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5311GJB6BEV1",
+      "clmc": "换电式纯电动混凝土搅拌运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA125679"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5311ZLJPHEV",
+      "clmc": "插电式混合动力自卸式垃圾车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633699"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5316GJB1FCEV1",
+      "clmc": "燃料电池混凝土搅拌运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633420"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5318GJB1F6",
+      "clmc": "混凝土搅拌运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6153066"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5340JXFJP46",
+      "clmc": "举高喷射消防车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634433"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5402JQZ50C8",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA227003"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5403JQZ50C8",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633972"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5451JQZ80C",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA329559"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5452JQZ80C",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA329405"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5456JQZ55T8",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z1137522"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5461JQZ80C",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA227495"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5506JQZ100C",
+      "clmc": "汽车起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9E20427"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM5721JQZ600T",
+      "clmc": "全地面起重机",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633885"
+    },
+    {
+      "qymc": "上汽大众汽车有限公司",
+      "cpsb": "大众汽车(VOLKSWAGEN)牌",
+      "clxh": "SVW6461HEV",
+      "clmc": "纯电动多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633400"
+    },
+    {
+      "qymc": "上汽大众汽车有限公司",
+      "cpsb": "大众汽车(VOLKSWAGEN)牌",
+      "clxh": "SVW6461JEV",
+      "clmc": "纯电动多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633538"
+    },
+    {
+      "qymc": "上汽大众汽车有限公司",
+      "cpsb": "大众汽车(VOLKSWAGEN)牌",
+      "clxh": "SVW7000DEV",
+      "clmc": "纯电动轿车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633249"
+    },
+    {
+      "qymc": "上汽大众汽车有限公司",
+      "cpsb": "大众汽车(VOLKSWAGEN)牌",
+      "clxh": "SVW71528AT",
+      "clmc": "轿车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA632979"
+    },
+    {
+      "qymc": "上汽大众汽车有限公司",
+      "cpsb": "大众汽车(VOLKSWAGEN)牌",
+      "clxh": "SVW72028BV",
+      "clmc": "轿车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633387"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1031D6DD-P",
+      "clmc": "多用途货车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3670585"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1031D8DD",
+      "clmc": "多用途货车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9711365"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1031D8DD-S",
+      "clmc": "多用途货车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9711957"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1031E6DD-P",
+      "clmc": "多用途货车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3670002"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1031E8DD",
+      "clmc": "多用途货车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9710993"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1031E8DD-S",
+      "clmc": "多用途货车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9710235"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1043H7DB-PS",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3189745"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1047MFEVMZ3",
+      "clmc": "纯电动载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA632757"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH1047MFEVMZY3",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823852"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5021TXUN1GD",
+      "clmc": "巡逻车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633401"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5031XXYU6BEV-Z50",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634479"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5040XJCA2DB",
+      "clmc": "检测车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W6156605"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5040XJHA2DB",
+      "clmc": "救护车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W0145764"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5041XXYH7FCEV",
+      "clmc": "燃料电池厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z5151175"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5041XXYU6BEV-J51",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA024155"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5042XQCH4DB",
+      "clmc": "囚车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W4151042"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5043XDWH2DB",
+      "clmc": "流动服务车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W2149808"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5047CCYMFEVMZ1",
+      "clmc": "纯电动仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9F21268"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5047CCYMFEVMZ3",
+      "clmc": "纯电动仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633482"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5047XLCMFEVMZ1",
+      "clmc": "纯电动冷藏车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9D18023"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5047XLCMFEVMZ2",
+      "clmc": "纯电动冷藏车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634310"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5047XXYMFEVMZ1",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9D17601"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5047XXYMFEVMZ3",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633129"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH5051XLJVDDB-C",
+      "clmc": "旅居车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y6120482"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6492N1CHEV",
+      "clmc": "插电式混合动力多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA430419"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6521GAGD-A",
+      "clmc": "多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9810917"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6521H2DB",
+      "clmc": "多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y8127939"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6522GADD-A",
+      "clmc": "多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9811067"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6531T1BEV-8",
+      "clmc": "纯电动多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9212000"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6531T1BEV-9",
+      "clmc": "纯电动多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z1136068"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6531T1SEV-9",
+      "clmc": "换电式纯电动多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9510084"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6532T1BEV-9",
+      "clmc": "纯电动多用途乘用车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z1136959"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6551H4DB-N",
+      "clmc": "客车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "V8139742"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6591H4DB-NS",
+      "clmc": "客车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "V8137885"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "大通牌",
+      "clxh": "SH6601H4DB-NS",
+      "clmc": "客车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "X3157562"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1027ZAEVNZY1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823945"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1033PEGCNZ8",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9610952"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1033PFGCNS2",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y5117872"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1033PFGCNS6",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633089"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1033PFGCNSY1",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3440313"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1033PFGCNZ6",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633133"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1033PFGCNZY1",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3440997"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1037PCEVNZY1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3578654"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043PEDBNZ",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W8163171"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043VEDCMZ9",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3408063"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043ZFDCMS",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W6156839"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043ZFDCMS",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3266861"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043ZFDCMS4",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3434774"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043ZFDCMZ1",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3433026"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1043ZFDDMS",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3187258"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1047PCEVNZ1",
+      "clmc": "纯电动载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y7123112"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1047VCEVNZY1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823893"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1083ZFDDMS",
+      "clmc": "载货汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "V8139688"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1127ZHEVWZY2",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823948"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1127ZKEVWZY1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3490451"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH1127ZKEVWZY2",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3823956"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH3043VKFDCNSD",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9065685"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH3043VKFDCNZD",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9610725"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH3043VPEDBNSD",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z7158691"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH3043VPEDBNZD",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z7159062"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH3047VCEVNZ1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633297"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH3167ZFEVWZ1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9B13693"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5027XXYZAEVNZ1",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633646"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033CCYPEGCNZ6",
+      "clmc": "仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9611542"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033CCYPFGCNS2",
+      "clmc": "仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y5119308"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033CCYPFGCNZ2",
+      "clmc": "仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y5117373"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033XXYPFGCNS1",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y4110351"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033XXYPFGCNS2",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y5118626"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033XXYPFGCNS6",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633206"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5033XYKPFGCNZ1",
+      "clmc": "翼开启厢式车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z0131651"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5037XXYPCEVNZ3",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634005"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043CCYPEDBNS",
+      "clmc": "仓栅式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z7158456"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043XLCZFDDWZ1",
+      "clmc": "冷藏车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633057"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043XXYPFDCNS1",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y9130479"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043XXYPFDCNZ1",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y9129024"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043XXYPFDCNZ4",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9310095"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043XXYZFDCMS",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "W6157174"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5043XYZZFDCMZ1",
+      "clmc": "邮政车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y3115340"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5047XLCZFEVMZ5",
+      "clmc": "纯电动冷藏车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6152212"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5083XXYZFDDMS",
+      "clmc": "厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "V8136710"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5127XXYZHEVWZ2",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA634167"
+    },
+    {
+      "qymc": "上汽大通汽车有限公司",
+      "cpsb": "跃进牌",
+      "clxh": "SH5127XXYZKEVWZ2",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA633752"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1181BEVSQ1H",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3562229"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1187AS1",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3622308"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1187EM1J",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3435036"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1187HL1D",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3551807"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1257EL3",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3411478"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1257EM3",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3461522"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1257EM3J",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3409253"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1257EM4Z",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3490464"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1257ES3J",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3578966"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1257HL4Z",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3367027"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1317HL6Z",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3315064"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1317HY6Z",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3378976"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ1327EM6",
+      "clmc": "载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3457283"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ2147EL2",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3499656"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ2147SL2",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3517869"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ2187EL2",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3559755"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AS1",
+      "clmc": "自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3550152"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AY05381",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9064978"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AY05421",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9065229"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AY05451",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z5150375"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AY06381",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9064789"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AY06421",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9065120"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3187AY06451",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9064468"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3250BEVES33QJ",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "AA431200"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3250BEVES3QJ",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3803710"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3250BEVES4",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3501346"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3250BEVES504",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z0131861"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257AS3",
+      "clmc": "自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3562796"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257AY06263",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9110505"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257AY06353",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6152299"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257AY06353H",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z9160729"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HD13424",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6153143"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HD13444",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z4145697"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HD13474",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z3144647"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HD13504",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6152158"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HL4",
+      "clmc": "自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3237493"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV09384",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y4110314"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV09404",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y4108042"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV11404",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y9130117"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV11424",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y5119619"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV11444",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y4108150"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV11474",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y3112749"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV13424",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6152816"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV13444",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z7159693"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HV13474",
+      "clmc": "自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z6152488"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3257HY4",
+      "clmc": "自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3237724"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES336",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y0107769"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES336H",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y7123817"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES446",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y6122312"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES46S",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z7158747"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES46SV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "A9065705"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES486",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y6120674"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES486H",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Y7125029"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES56SH",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z9161216"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES6",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3407174"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES6SA",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3606075"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3310BEVES6SV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 382,
+      "dataTag": "D",
+      "cpid": "3604451"
+    },
+    {
+      "qymc": "上汽红岩汽车有限公司",
+      "cpsb": "红岩牌",
+      "clxh": "CQ3311BEVES56UH",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 382,
+      "dataTag": "Z",
+      "cpid": "Z9162037"
+    }
+  ]
+}

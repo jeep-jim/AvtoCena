@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "replacedModels": 3,
+    "newAliases": 4
+  },
+  "aliases": [
+    {
+      "modelId": "wuling/hongguang",
+      "value": "五菱 宏光纯电版",
+      "sourceId": "src-sgmw-wuling-hongguang-bev-spec"
+    },
+    {
+      "modelId": "wuling/hongguang",
+      "value": "五菱 宏光增程版",
+      "sourceId": "src-sgmw-wuling-hongguang-erev-spec"
+    },
+    {
+      "modelId": "wuling/bingo-plus",
+      "value": "五菱 缤果SUV五座版",
+      "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024"
+    },
+    {
+      "modelId": "wuling/zhiguang",
+      "value": "五菱 之光EV",
+      "sourceId": "src-sgmw-wuling-zhiguang-ev-spec"
+    }
+  ],
+  "policy": {
+    "oneEnglishCanonicalModel": true,
+    "localizedEditionNamesAreAliases": true,
+    "duplicateModelsCreated": false,
+    "automaticPublicationReady": false
+  }
+}
