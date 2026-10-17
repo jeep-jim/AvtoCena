@@ -8,6 +8,7 @@ import {JapanSectionTabs} from './JapanSectionTabs';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
 import {readAjesCatalogPage,readAjesCount,readAjesMakes,readAjesDirectory,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
+import {readSavedAjesFacets} from '@/lib/catalog/ajes-runtime';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {formatCatalogCount} from '@/lib/catalog/count-format';
 type Params=Record<string,string|string[]|undefined>;
@@ -21,9 +22,10 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  const directory=await directoryPromise;
  // Count is independently verified; a partial or failed list must not erase it.
  const displayTotal=await countPromise;
- const models=directory?.models||[...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
  const makeDirectory=await makesPromise;
- const makes=[...new Set([...(makeDirectory?.makes.map(m=>m.make)||[]),...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
+ const savedFacets=(!makeDirectory||!directory)?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
+ const models=directory?.models||[...savedFacets.models,...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
+ const makes=[...new Set([...(makeDirectory?.makes.map(m=>m.make)||savedFacets.makes),...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
  const facets={makes,models,markets:['japan'],bodyTypes:[],fuels:['petrol','diesel','hybrid','electric','lpg'],transmissions:['automatic','manual','cvt','dct'],drives:['fwd','rwd','awd']};
  const Container=embedded?'div':'main';
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>

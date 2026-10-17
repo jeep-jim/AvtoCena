@@ -555,3 +555,22 @@ test('failed live model query recovers only the exact saved make and model',asyn
  assert.equal(findSavedAjesSearch({make:'Nissan',model:'Sylphy',fuel:'petrol'},snapshots),null);
  assert.equal(findSavedAjesSearch({make:'Nissan',model:'Sylphy',page:2},snapshots),null);
 });
+
+
+test('saved brand/model names include all known pages without claiming counts',async()=>{
+ const {savedAjesFacets}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const saved=(make:string,model:string)=>({items:[ajesLot({...row,MARKA_NAME:make,MODEL_NAME:model},'stats',false)!],observedAt:new Date().toISOString()});
+ const result=savedAjesFacets({one:saved('SUBARU','FORESTER'),two:saved('BMW','X1'),three:saved('BMW','X1'),old:{...saved('AUDI','A4'),observedAt:'2020-01-01T00:00:00Z'},heavy:{...saved('TOYOTA','PRIUS'),items:[{...saved('TOYOTA','PRIUS').items[0],model:'COASTER'}]}});
+ assert.deepEqual(result.makes,['BMW','SUBARU']);assert.equal(result.models.length,2);assert.ok(result.models.every(m=>!('total' in m)));
+});
+
+
+test('standalone and whitespace-prefixed provider bot refusals activate visitor cooldown',async()=>{
+ for(const body of ['bot2','  bot2\n','bot2 test-secret']){
+  let calls=0;
+  const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{calls++;return new Response(body);}});
+  await assert.rejects(client.read({},'127.0.0.1'),/visitor_restricted/);
+  await assert.rejects(client.read({make:'NISSAN'},'127.0.0.1'),/visitor_restricted/);
+  assert.equal(calls,1);
+ }
+});

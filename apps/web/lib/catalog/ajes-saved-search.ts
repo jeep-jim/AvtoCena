@@ -25,3 +25,15 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
  return {schemaVersion:2,items:selected.map(s=>s.items[0]),page:1,pageSize:query.pageSize,received:selected.length,rejected:0,
   observedAt:selected.map(s=>s.observedAt).sort()[0],partial:true,stale:true};
 }
+
+
+/** Known names only: a saved sample never supplies inventory/model counts. */
+export function savedAjesFacets(snapshots:Record<string,any>,now=Date.now()){
+ const models=new Map<string,{make:string;model:string}>();
+ for(const saved of Object.values(snapshots)){
+  const lot=saved?.items?.[0],age=now-Date.parse(saved?.observedAt||'');
+  if(!(age>=0&&age<7*86400000)||lot?.table!=='stats'||!lot.make||!lot.model||! /^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')||!Number.isInteger(lot.year)||lot.year<2010||lot.year>new Date(now).getUTCFullYear()+1||!/^sold$/i.test(lot.status||'')||!(lot.finalPriceJpy>0)||knownHeavyVehicleFamily(lot.make,lot.model))continue;
+  models.set(JSON.stringify([lot.make,lot.model]),{make:lot.make,model:lot.model});
+ }
+ return {makes:[...new Set([...models.values()].map(m=>m.make))].sort(),models:[...models.values()]};
+}

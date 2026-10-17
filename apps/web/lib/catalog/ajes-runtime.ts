@@ -6,7 +6,7 @@ import {assertCollectionEnabled} from './collection-controls';
 import {DetailReadCache} from './detail-read-cache';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
 import {createAjesClient} from './ajes-client';
-import {findSavedAjesSearch} from './ajes-saved-search';
+import {findSavedAjesSearch,savedAjesFacets} from './ajes-saved-search';
 import {reserveAjesRequest} from './ajes-quota';
 
 // A cold direct link may need a row already shown by an earlier process. Only
@@ -25,6 +25,7 @@ async function readSavedListIndex(){
   return result;
  });
 }
+export async function readSavedAjesFacets(){await assertCollectionEnabled('ajes_japan_feed');return savedAjesFacets(await readSavedListIndex());}
 async function readListedDetail(table:string,id:string){
  const index=await readSavedListIndex();
  return index[table+':'+id]||null;

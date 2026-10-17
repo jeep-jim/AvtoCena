@@ -67,7 +67,7 @@ export function createAjesClient(deps:Dependencies) {
             // The provider returns a short plaintext bot refusal containing the
             // API password for some visitor addresses. Classify it without ever
             // retaining/logging its contents or replacing the visitor address.
-            if(decoded.length<=256&&/^bot\d*\s/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
+            if(decoded.length<=256&&/^\s*bot\d*(?:\s|$)/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
             rows=JSON.parse(decoded.toString('utf8'));
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'){
