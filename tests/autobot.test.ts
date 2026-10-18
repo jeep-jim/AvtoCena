@@ -71,6 +71,11 @@ test('vehicle specification question receives research before the very first mod
  });
  const answer=await a.runPublicAutobot({text:'Какая у этого авто мощность?',path:'/cars/offer/nexo-2022'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('motor maximum 120 kW')));assert.ok(input[0].content.includes('Ответь на исходный вопрос сейчас'));assert.equal(input[0].role,'system');assert.ok(input.slice(1).every(m=>m.role!=='system'));assert.equal(input.at(-1).role,'user');return {text:JSON.stringify({reply:'Пиковая мощность 120 кВт. 30-минутная не подтверждена.'}),sources:[]}});
  assert.equal(state.researchCalls,1);assert.equal(answer.sources[0].url,'https://hyundai.com/spec');assert.match(answer.text,/120/);assert.equal(answer.cards.length,0);
+ const fallback=await a.runPublicAutobot({text:'Найди в интернете мощность',path:'/cars/offer/nexo-2022'},new Request('https://avtocena.com/api/autobot'),async()=>{throw Error('Ответ не завершён.');});
+ assert.match(fallback.text,/120 kW/);assert.match(fallback.text,/не подтверждено/);assert.equal(fallback.sources[0].url,'https://hyundai.com/spec');
+ const thirty=a.researchFallbackReply([{web:{pages:[{title:'Spec',url:'https://hyundai.com/spec',kind:'manufacturer',text:'Peak power 120 kW.'}]}}],'30-минутная мощность');assert.doesNotMatch(thirty,/120/);assert.match(thirty,/пиковая её не заменяет/);
+ const empty=a.researchFallbackReply([{web:{pages:[],webSearch:{links:[{title:'Google',url:'https://www.google.com/search?q=Nexo'}]}}}],'Найди мощность');assert.match(empty,/получить читаемые материалы не удалось/);assert.match(empty,/google.com/);
+
 });
 
 
