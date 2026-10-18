@@ -7,7 +7,7 @@ import {assertCollectionEnabled} from './collection-controls';
 import {DetailReadCache} from './detail-read-cache';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
 import {createAjesClient} from './ajes-client';
-import {findSavedAjesSearch,savedAjesFacets} from './ajes-saved-search';
+import {findSavedAjesSearch,findSavedAjesStockSearch,savedAjesFacets} from './ajes-saved-search';
 import {reserveAjesRequest} from './ajes-quota';
 
 // A cold direct link may need a row already shown by an earlier process. Only
@@ -35,7 +35,7 @@ export const ajesClient=createAjesClient({
   password:ajesPassword,
   endpoint:ajesEndpoint,
   readListedDetail,
-  readSavedSearch:async input=>input.table==='china'||input.table==='korea'?null:findSavedAjesSearch(input,await readSavedListIndex()),
+  readSavedSearch:async input=>input.table==='china'||input.table==='korea'?(input.make&&input.model?findSavedAjesStockSearch(input,await readSavedListIndex()):null):findSavedAjesSearch(input,await readSavedListIndex()),
   saveAggregateEvidence:(kind,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${kind}-last.json`,value),
   saveEvidence:(table,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${table}-last-detail.json`,value),
   // Bounded list and count pools; exact hashes prevent unrelated cache hits.
