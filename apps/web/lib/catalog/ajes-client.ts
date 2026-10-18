@@ -4,7 +4,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,shouldCache:value=>!value.stale});
@@ -27,13 +27,13 @@ export function createAjesClient(deps:Dependencies) {
     async read(input:unknown,clientIp:string) {
       const query=ajesQuery(input);
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
-      await deps.assertEnabled(); // Also applies to cache hits after an owner disables the source.
+      await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
       const password=await deps.password();
       if(!password)throw new AjesUnavailable('not_configured');
       const visitorKey=clientIp+"\0"+query.sql;
       const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes')?':count':'');
       return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{
-        await deps.assertEnabled(); // Recheck after waiting for concurrency slot.
+        await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=null;
         try {saved=query.kind==='detail'?await deps.readDetail?.(query.table,query.id!):await deps.readQuery?.(query.sql);}catch{}
@@ -44,7 +44,7 @@ export function createAjesClient(deps:Dependencies) {
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
         const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||saved?.schemaVersion===2;
         if(usable&&currentSchema&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
-        const url=new URL('http://87.242.72.57/gzip/');
+        const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
         try {
@@ -67,7 +67,7 @@ export function createAjesClient(deps:Dependencies) {
             // The provider returns a short plaintext bot refusal containing the
             // API password for some visitor addresses. Classify it without ever
             // retaining/logging its contents or replacing the visitor address.
-            if(decoded.length<=256&&/^\s*bot\d*(?:\s|$)/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
+            if(decoded.length<=256&&/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
             rows=JSON.parse(decoded.toString('utf8'));
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'){
@@ -123,13 +123,13 @@ export function createAjesClient(deps:Dependencies) {
             let fallback=listed.get(query.table+':'+query.id)?.value;
             if(!fallback)try{fallback=await deps.readListedDetail?.(query.table,query.id!);}catch{}
             const fallbackAge=Date.now()-Date.parse(fallback?.observedAt||'');
-            if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled();return {...fallback,partial:true,stale:true};}
+            if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
           }
-          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes')&&recoverable){await deps.assertEnabled();return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
+          if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes')&&recoverable){await deps.assertEnabled(query.table);return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
           if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch&&((input as AjesQuery).chassis||(input as AjesQuery).frameNumber||(input as AjesQuery).lotNumber||(input as AjesQuery).make||(input as AjesQuery).model)){
             let fallback:any=null;
             try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
-            if(fallback?.partial&&fallback.items?.length){await deps.assertEnabled();return remember({...fallback,stale:true});}
+            if(fallback?.partial&&fallback.items?.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
           }
           if(error instanceof AjesUnavailable)throw error;
           const code=(error as any)?.cause?.code;

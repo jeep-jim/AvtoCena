@@ -2,7 +2,7 @@ import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {parseEngineCc} from './engine-input';
 import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
-export type AjesTable = 'stats' | 'main';
+export type AjesTable = 'stats' | 'main' | 'korea' | 'china';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
 export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; frameNumber?:string; lotNumber?:string; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
 const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','frameNumber','lotNumber','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
@@ -21,17 +21,21 @@ export function ajesQuery(input: unknown) {
   if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).some(k=>!keys.has(k))) throw new AjesInputError();
   const q = input as AjesQuery;
   const table = q.table ?? 'stats';
-  if (!['stats','main'].includes(table)) throw new AjesInputError();
+  if (!['stats','main','korea','china'].includes(table)) throw new AjesInputError();
   if (q.id !== undefined) {
     if (typeof q.id !== 'string' || !/^[A-Za-z0-9_-]{1,64}$/.test(q.id) || Object.keys(q).some(k=>!['table','id'].includes(k))) throw new AjesInputError();
     return {table, kind:'detail' as const, sql:`select * from ${table} where id='${q.id}'`, id:q.id, page:1, pageSize:1};
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
   const makes=values(q.make,','),models=values(q.model,'|');
-  const yearFrom=integer(q.yearFrom,JAPAN_MIN_MODEL_YEAR,JAPAN_MIN_MODEL_YEAR,2100), yearTo=integer(q.yearTo,2100,JAPAN_MIN_MODEL_YEAR,2100);
+  const stock=table==='korea'||table==='china',minYear=stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR;
+  const yearFrom=integer(q.yearFrom,minYear,minYear,2100), yearTo=integer(q.yearTo,2100,minYear,2100);
   if (yearFrom>yearTo) throw new AjesInputError();
   const page=integer(q.page,1,1,1000000), pageSize=integer(q.pageSize,24,1,48);
-  const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+1)}`,'auction_type!=1'];
+  const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+(stock?0:1))}`];
+  if(!stock)where.push('auction_type!=1');
+  if(stock)where.push('finish>0');
+  if(table==='korea'){const month=new Date(Date.now()+7*3600000).getUTCMonth()+1;where.push(`(year>${new Date().getUTCFullYear()-6} or month=0 or month is null or month>=${month})`);}
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
   where.push(heavyVehicleSqlExclusion());
@@ -66,7 +70,7 @@ export function ajesImageUrl(value: unknown, size: 'small'|'medium'|'original'='
   if (typeof value!=='string') return null;
   try {
     const u=new URL(value);
-    if (u.protocol!=='https:' || u.username || u.password || u.port || !/^(?:7\.tru\.ru|7\.ajes\.com|8\.ajes\.com)$/.test(u.hostname) || !/^\/imgs?\/[A-Za-z0-9_-]+(?:&(?:h|w)=\d+)*$/.test(u.pathname) || u.search || u.hash) return null;
+    if (u.protocol!=='https:' || u.username || u.password || u.port || !/^(?:7\.tru\.ru|7\.ajes\.com|8\.ajes\.com|9\.ajes\.com)$/.test(u.hostname) || !/^\/imgs?\/[A-Za-z0-9_-]+(?:&(?:h|w)=\d+)*$/.test(u.pathname) || u.search || u.hash) return null;
     const base=value.replace(/&(?:h|w)=\d+/g,'');
     return base+(size==='small'?'&h=50':size==='medium'?'&w=320':'');
   } catch {return null;}
@@ -85,23 +89,23 @@ export function ajesText(value: unknown): string {
 export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: boolean) {
   const text=(key:string)=>ajesText(row[key]);
   const number=(key:string)=>/^\d+(?:\.\d+)?$/.test(text(key))?Number(text(key)):null;
-  const id=text('ID'), year=number('YEAR');
-  if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<JAPAN_MIN_MODEL_YEAR || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
+  const id=text('ID'), year=number('YEAR'),stock=table==='korea'||table==='china';
+  if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<(stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR) || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || (!stock&&number('AUCTION_TYPE')===1)) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
   if(knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME')))return null;
   const finish=number('FINISH');
-  if (table==='stats' && (!sold || !finish)) return null;
+  if ((table==='stats' && !sold) || ((table==='stats'||stock)&&!finish)) return null;
   const urls=[...new Set(text('IMAGES').split('#').map(u=>ajesImageUrl(u,'original')).filter((u):u is string=>Boolean(u)))];
   return {
     id,table,kind:table==='stats'?'auction_result':'auction',make:text('MARKA_NAME'),model:text('MODEL_NAME'),year,
     trim:text('GRADE'),color:text('COLOR'),equipment:text('EQUIP'),transmissionCode:text('KPP_TYPE'),auctionTown:text('TOWN'),chassisCode:text('KUZOV'),frameNumber:detail?text('SERIAL'):undefined,
     mileageKm:number('MILEAGE'),engineCc:number('ENG_V'),auction:text('AUCTION'),lot:text('LOT'),auctionDate:text('AUCTION_DATE'),grade:text('RATE'),
-    status:text('STATUS'),currency:'JPY',finalPriceJpy:sold?finish:null,startPriceJpy:table==='main'?(number('START')||null):null,
+    status:text('STATUS'),currency:table==='korea'?'KRW':table==='china'?'CNY':'JPY',sourcePrice:stock?finish:null,productionMonth:number('MONTH'),finalPriceJpy:sold?finish:null,startPriceJpy:table==='main'?(number('START')||null):null,
     // Supplier confirmed 2026-10-16: TIME is the fuel field; FUEL is a legacy alias.
     // Ambiguous PW/PRIV remain source evidence, not invented specifications.
     sourcePower:text('PW'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('TIME')||text('FUEL'),sourceFuelField:text('TIME')?'TIME':text('FUEL')?'FUEL':undefined,
     info:detail?text('INFO'):undefined,
-    images:urls.map((url,i)=>({url:ajesImageUrl(url,'medium')!,thumbnailUrl:ajesImageUrl(url,'small')!,originalUrl:url,role:detail&&i===0?'auction_sheet':'vehicle'})),
+    images:urls.map((url,i)=>({url:ajesImageUrl(url,'medium')!,thumbnailUrl:ajesImageUrl(url,'small')!,originalUrl:url,role:!stock&&detail&&i===0?'auction_sheet':'vehicle'})),
   };
 }
 
@@ -109,7 +113,7 @@ export class AjesFilterUnavailable extends Error {constructor(){super('ajes_filt
 const first=(v:unknown)=>Array.isArray(v)?String(v[0]??''):v==null?'':String(v);
 export function ajesCatalogQuery(params:Record<string,unknown>):AjesQuery {
  if(['budget','budgetFrom','budgetTo','powerFrom','powerTo','bodyType','hasPrice'].some(k=>Boolean(first(params[k]))))throw new AjesFilterUnavailable();
- const q:AjesQuery={table:'stats',page:1,pageSize:24};
+ const q:AjesQuery={table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',page:1,pageSize:24};
  for(const k of ['make','model','fuel','transmission','drive','auctionGrade','chassis','frameNumber','lotNumber'] as const){const v=first(params[k]);if(v)q[k]=v;}
  if(!q.make&&first(params.brand))q.make=first(params.brand);
  for(const k of ['yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page'] as const){const v=first(params[k]);if(v){const n=k.startsWith('engine')?parseEngineCc(v):Number(v);if(n==null||!Number.isFinite(n))throw new AjesInputError();q[k]=n;}}
