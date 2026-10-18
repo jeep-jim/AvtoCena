@@ -17,3 +17,9 @@ test('failed provider directory is evicted so explicit retry can recover',async(
   const search=await loadModelSuggestions(true,{market:'korea',make:'TEST'});assert.equal(calls,2);assert.equal(search('RECOVERED','TEST')[0].model,'RECOVERED');
  }finally{globalThis.fetch=original;}
 });
+
+test('empty supplier directory is a valid result, with no browser HTTP cache',async()=>{
+ const original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async(_url,options)=>{calls++;assert.equal(options?.cache,'no-store');return Response.json({version:1,brands:[],models:[]});};
+ try{const search=await loadModelSuggestions(false,{market:'china',make:'EMPTY'});assert.deepEqual(search('anything','EMPTY'),[]);assert.equal(calls,1);}finally{globalThis.fetch=original;}
+});

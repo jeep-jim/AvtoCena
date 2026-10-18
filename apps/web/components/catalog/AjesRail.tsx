@@ -1,6 +1,6 @@
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
-import {readAjesCount,readAjesCatalogPage} from '@/lib/catalog/ajes-catalog';
-import {formatCatalogCount} from '@/lib/catalog/count-format';
+import {readAjesCountSummary,readAjesCatalogPage} from '@/lib/catalog/ajes-catalog';
+import {ajesCountText,exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {readAjesPublic} from '@/lib/catalog/ajes-public';
 import {assertCollectionEnabled} from '@/lib/catalog/collection-controls';
 import {publicOffer} from '@/lib/catalog/storage';
@@ -13,13 +13,13 @@ export async function AjesRail({market='japan',params={}}:{market?:'japan'|'chin
  const href='/cars?'+linkParams.toString();
  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return null;}
  const query={...params,market};
- const totalPromise=readAjesCount(JSON.stringify(query)).catch(()=>null);
+ const totalPromise=readAjesCountSummary(JSON.stringify(query)).catch(()=>null);
  let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false,partial=false;
  try{const page=await readAjesCatalogPage(query);items=page.items.slice(0,10);partial=Boolean(page.partial);}catch{unavailable=true;}
- const count=await totalPromise;const total=market==='china'||partial?null:count;
+ const count=await totalPromise;const total=exactAjesCount(count);
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
-   <h2 className="flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={total??undefined}>· {formatCatalogCount(total??NaN)}</span></h2>
+   <h2 className="flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={total??undefined}>· {ajesCountText(count)}</span></h2>
    <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
 

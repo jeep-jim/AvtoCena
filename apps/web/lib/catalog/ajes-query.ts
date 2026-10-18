@@ -4,8 +4,8 @@ import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main' | 'korea' | 'china';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
-export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','frameNumber','lotNumber','sourcePriceTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'|'mileage'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < min || value > max) throw new AjesInputError();
@@ -56,13 +56,19 @@ export function ajesQuery(input: unknown) {
     if(q[from]!==undefined)where.push(`${column}>=${low}`);
     if(q[to]!==undefined)where.push(`${column}<=${high}`);
   }
+  if(q.powerFrom!==undefined||q.powerTo!==undefined){
+    const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
+    if(low>high)throw new AjesInputError();
+    // Empty or malformed supplier values must never match a low-power filter.
+    where.push("pw regexp '^[0-9]+([.][0-9]+)?$'",`pw+0>=${low}`,`pw+0<=${high}`);
+  }
   if(q.aggregate!==undefined&&!['count','models','makes'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
   if(q.aggregate==='makes')return {table,kind:'makes' as const,sql:`select marka_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name order by marka_name limit ${(page-1)*500},500`,page,pageSize:500};
   if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
   const sort=q.sort??'updatedAt';
-  if(!['updatedAt','year','yearAsc','totalRub','totalRubDesc'].includes(sort))throw new AjesInputError();
-  const order=stock?(sort==='yearAsc'?'year asc':sort==='year'?'year desc':sort==='totalRub'?'finish asc':sort==='totalRubDesc'?'finish desc':'id desc'):sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':"auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc";
+  if(!['updatedAt','year','yearAsc','totalRub','totalRubDesc','mileage'].includes(sort))throw new AjesInputError();
+  const order=sort==='mileage'?'mileage asc':stock?(sort==='yearAsc'?'year asc':sort==='year'?'year desc':sort==='totalRub'?'finish asc':sort==='totalRubDesc'?'finish desc':'id desc'):sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':"auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc";
   return {table,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
 }
 
@@ -114,12 +120,13 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
 export class AjesFilterUnavailable extends Error {constructor(){super('ajes_filter_unavailable');}}
 const first=(v:unknown)=>Array.isArray(v)?String(v[0]??''):v==null?'':String(v);
 export function ajesCatalogQuery(params:Record<string,unknown>):AjesQuery {
- if(['budget','budgetFrom','budgetTo','powerFrom','powerTo','bodyType','hasPrice'].some(k=>Boolean(first(params[k]))))throw new AjesFilterUnavailable();
+ if(['budget','budgetFrom','budgetTo','bodyType','hasPrice'].some(k=>Boolean(first(params[k]))))throw new AjesFilterUnavailable();
+ if(params.market!=='china'&&params.market!=='korea'&&(first(params.powerFrom)||first(params.powerTo)))throw new AjesFilterUnavailable();
  if((params.market==='korea'||params.market==='china')&&first(params.frameNumber))throw new AjesFilterUnavailable();
  const q:AjesQuery={table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',page:1,pageSize:24};
  for(const k of ['make','model','fuel','transmission','drive','auctionGrade','chassis','frameNumber','lotNumber'] as const){const v=first(params[k]);if(v)q[k]=v;}
  if(!q.make&&first(params.brand))q.make=first(params.brand);
- for(const k of ['yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page'] as const){const v=first(params[k]);if(v){const n=k.startsWith('engine')?parseEngineCc(v):Number(v);if(n==null||!Number.isFinite(n))throw new AjesInputError();q[k]=n;}}
+ for(const k of ['yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','powerFrom','powerTo','page','pageSize'] as const){const v=first(params[k]);if(v){const n=k.startsWith('engine')?parseEngineCc(v):Number(v);if(n==null||!Number.isFinite(n))throw new AjesInputError();q[k]=n;}}
  const sort=first(params.sort);if(sort)q.sort=sort as AjesQuery['sort'];
  return q;
 }

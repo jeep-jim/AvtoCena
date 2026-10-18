@@ -11,12 +11,14 @@ import {readAjesPublic,cappedAjesQuery} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
-export const readAjesCount=cache(async(key='{}'):Promise<number>=>{
+import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
+export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary>=>{
  const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
- return result.total;
+ return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'};
 });
+export const readAjesCount=cache(async(key='{}'):Promise<number> => (await readAjesCountSummary(key)).total);
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
 export const readAjesMakes=cache(async(key='{}')=>{
  const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
@@ -30,36 +32,40 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const query=ajesCatalogQuery(params);
- const [page,total]=await Promise.all([readAjesPublic(query),readAjesCount(JSON.stringify(params)).catch(()=>null)]);
+ const [page,total]=await Promise.all([readAjesPublic(query),readAjesCountSummary(JSON.stringify(params)).catch(()=>null)]);
  const priced=query.table==='china'||query.table==='korea'?await applyActiveBusinessPricingBatch(page.items):page.items;
  const items=priced.filter(v=>v&&ajesChinaPriceAllowed(v));
- return {...page,total:page.partial||query.table==='china'?null:total,items:items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
+ return {...page,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
-export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean}>{
- let result:T & {countIncomplete?:boolean}={...value};
- if(!params.market||params.market==='japan'){
-  let enabled=true;try{await assertCollectionEnabled('ajes_japan_feed');}catch{enabled=false;}
-  if(enabled)try{const total=await readAjesCount(JSON.stringify(params));result={...result,total:result.total+total,marketCounts:{...result.marketCounts,japan:(result.marketCounts?.japan||0)+total}};}catch{result={...result,countIncomplete:true};}
- }
- // China is now exclusively AJES. Its post-calculation ceiling means the
- // upstream count cannot be presented as an exact delivered-price count.
- if(!params.market&&value.marketCounts&&Object.prototype.hasOwnProperty.call(value.marketCounts,'china')){
-  result={...result,total:result.total-(value.marketCounts.china||0),marketCounts:{...result.marketCounts,china:0},countIncomplete:true};
-  if(Array.isArray((result as any).items))result={...result,items:(result as any).items.filter((v:any)=>v.market!=='china')} as typeof result;
-  if(Array.isArray((result as any).items))try{const page=await readAjesCatalogPage({...params,market:'china'});const items=page.items.slice(0,10);result={...result,total:result.total+items.length,marketCounts:{...result.marketCounts,china:items.length},items:[...(result as any).items,...items]} as typeof result;}catch{/* No fallback to the retired supplier. */}
- }
- if(!params.market&&value.marketCounts&&Object.prototype.hasOwnProperty.call(value.marketCounts,'korea')){
-  let enabled=true;try{await assertCollectionEnabled('ajes_korea_feed');}catch{enabled=false;}
-  if(enabled){
-   result={...result,total:result.total-(value.marketCounts.korea||0),marketCounts:{...result.marketCounts,korea:0}};
-   if(Array.isArray((result as any).items))result={...result,items:(result as any).items.filter((v:any)=>v.market!=='korea')} as typeof result;
-   try{
-    const count=await readAjesCount(JSON.stringify({...params,market:'korea'}));
-    result={...result,total:result.total+count,marketCounts:{...result.marketCounts,korea:count}};
-    if(Array.isArray((result as any).items)){const page=await readAjesCatalogPage({...params,market:'korea'});result={...result,items:[...(result as any).items,...page.items.slice(0,10)]} as typeof result;}
-   }catch{result={...result,countIncomplete:true};}
+export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
+ let result:T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}={...value,marketCountInfo:{}};
+ const hasRows=Array.isArray((value as any).items);
+ const markets=['japan','china','korea'].filter(m=>!params.market||params.market===m);
+ const updates=await Promise.all(markets.map(async market=>{
+  if(market!=='japan'&&(!value.marketCounts||!Object.prototype.hasOwnProperty.call(value.marketCounts,market)))return null;
+  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return market==='china'?{market,count:null,page:null}:null;}
+  const query={...params,market};
+  const [count,page]=await Promise.all([
+   readAjesCountSummary(JSON.stringify(query)).catch(()=>null),
+   hasRows&&market!=='japan'?readAjesCatalogPage(query).catch(()=>null):Promise.resolve(null),
+  ]);
+  return {market,count,page};
+ }));
+ for(const update of updates){
+  if(!update)continue;
+  const {market,count,page}=update;
+  result.marketCountInfo[market]=count;
+  if(market==='japan'){
+   if(count)result={...result,total:result.total+count.total,marketCounts:{...result.marketCounts,japan:(result.marketCounts?.japan||0)+count.total}};
+   if(!count||count.stale)result.countIncomplete=true;
+   continue;
   }
+  const items=page?.items.slice(0,10)||[];
+  const safeCount=market==='china'?items.length:count?.total||items.length;
+  result={...result,total:result.total-(value.marketCounts?.[market]||0)+safeCount,marketCounts:{...result.marketCounts,[market]:safeCount}};
+  if(hasRows)result={...result,items:[...(result as any).items.filter((v:any)=>v.market!==market),...items]} as typeof result;
+  if(!count||count.stale||count.upperBound)result.countIncomplete=true;
  }
  return result;
 }

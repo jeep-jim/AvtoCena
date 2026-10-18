@@ -19,3 +19,7 @@ export const followupText=()=>'';
 export const leadReadState=()=>({seenBy:[],unread:true,eventKey:'test'});
 
 export const readStaffProfiles=async()=>({});
+
+// Registration storage is a server boundary, like the other CRM services above.
+export const clientRegistrationAvatars=async()=>new Map([['client-0','/avatars/default.svg']]);
+export const canReadRegisteredCustomers=()=>true;
