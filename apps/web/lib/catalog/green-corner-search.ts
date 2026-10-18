@@ -9,19 +9,20 @@ import { savedCalculationPreviewRub } from "./saved-calculation-preview";
 import { catalogOfferVisibleRub } from "./public-priority";
 export type GreenFilters = Record<string,string|undefined>;
 export function greenCornerNeedsFullPricing(params:GreenFilters) {
- // Keep every filtered/sorted query on the existing exact full-list path.
+ // Price predicates and price sorting need exact calculations for all candidates.
  // Ordinary pagination needs only the 24 visible current calculations.
- return Object.entries(params).some(([key,value])=>Boolean(value) && !['page','city','market','stock'].includes(key));
+ return Boolean(params.budgetFrom||params.budgetTo||params.budget||params.sort==='totalRub'||params.sort==='totalRubDesc');
 }
 export async function greenCornerPageSelection(items:VehicleOffer[],params:GreenFilters,
  price:(items:VehicleOffer[])=>Promise<VehicleOffer[]>,clampPage=true) {
  const full=greenCornerNeedsFullPricing(params);
- const current=full?await price(items):items;
+ const candidates=full?filterGreenCorner(items,{...params,budgetFrom:undefined,budgetTo:undefined,budget:undefined,sort:undefined}):items;
+ const current=full?await price(candidates):items;
  const matched=filterGreenCorner(current,params);
  const requested=Math.max(1,Math.floor(Number(params.page)||1));
  const page=clampPage?Math.min(requested,Math.max(1,Math.ceil(matched.length/24))):requested;
  const visible=matched.slice((page-1)*24,page*24);
- return {items:full?visible:await price(visible),total:matched.length,page,facets:greenCornerFacets(current)};
+ return {items:full?visible:await price(visible),total:matched.length,page,facets:greenCornerFacets(items)};
 }
 // Match the price shown by CatalogPrice, including saved calculations and city delivery.
 export function greenCornerBudgetPrice(row:VehicleOffer, city = ""):number|undefined {
@@ -38,7 +39,7 @@ export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
  const rows=items.filter(row=>{
   if(params.q&&!lower(`${row.make} ${row.model} ${row.year}`).includes(lower(params.q)))return false;
   if(params.make&&!params.make.split(',').some(make=>lower(make)===lower(row.make)))return false;
-  if(params.model&&!matchesCatalogModel(row.model,params.model))return false;
+  if(params.model&&!matchesCatalogModel(row.model,params.model,row.make))return false;
   if(!range(row.year,number('yearFrom'),number('yearTo'))||!range(row.mileageKm,number('mileageFrom'),number('mileageTo')))return false;
   if(!range(row.engineCc,parseEngineCc(params.engineFrom),parseEngineCc(params.engineTo)))return false;
   if(!range(row.powerHp,number('powerFrom'),number('powerTo')))return false;

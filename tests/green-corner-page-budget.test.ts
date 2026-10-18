@@ -16,11 +16,19 @@ test('ordinary stock pages price at most 24 cars and preserve full count, order 
  assert.equal((await greenCornerPageSelection(rows,{page:'20'},price,false)).items.length,0);
 });
 test('budget and price sorting still evaluate the full stock before selecting a page',async()=>{
- for(const params of [{budget:'2300000',sort:'totalRubDesc'},{make:'Toyota'},{sort:'totalRub'}]){
+ for(const params of [{budget:'2300000',sort:'totalRubDesc'},{sort:'totalRub'}]){
   let examined=0;
   const result=await greenCornerPageSelection(rows,params,async items=>{examined+=items.length;return quote(items);});
   const expected=filterGreenCorner(await quote(rows),params);
   assert.equal(examined,454);assert.equal(result.total,expected.length);
   assert.deepEqual(result.items,expected.slice(0,24));
  }
+});
+
+test('identity filters calculate only the displayed page and budget calculates matching candidates',async()=>{
+ const mixed=[...rows,...rows.map(x=>({...x,id:'other-'+x.id,make:'Honda',model:'Fit'}))];
+ let examined=0;const price=async(items:any[])=>{examined+=items.length;return quote(items);};
+ const result=await greenCornerPageSelection(mixed,{make:'Honda',model:'Fit'},price);
+ assert.equal(examined,24);assert.equal(result.total,454);assert.ok(result.items.every(x=>x.make==='Honda'));
+ examined=0;await greenCornerPageSelection(mixed,{make:'Honda',budgetTo:'2000000'},price);assert.equal(examined,454);
 });

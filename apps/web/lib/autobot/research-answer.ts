@@ -13,13 +13,14 @@ export function researchPowerReply(results:any[],question:string){
    const value=Number(found[1].replace(',','.'));if(!(value>0&&value<=2500))continue;
    const power=/^(kW|кВт)$/i.test(found[2])?value+' кВт (≈'+Math.round(value*1.3596216173)+' л.с.)':value+' '+found[2];
    const title=String(page.title||'Спецификация производителя').replace(/[<>\[\]()*_`]/g,'');
-   return 'В ['+(page.kind==='manufacturer'?'официальной спецификации':'прочитанном документе')+']('+page.url+') для **'+variant[1]+' '+variant[2].toUpperCase()+'** указано **'+power+'**.\n\nИсточник: '+title+'. '+(result.web?.webSearch?.readPages===0?'Поисковая выдача не дала читаемых страниц; данные найдены в каталоге производителя. ':'')+'Это справочные данные источника. Применимость именно к указанному году, рынку и комплектации этим ответом не подтверждена. Параметры карточки не изменены.';
+   return 'В ['+(page.kind==='manufacturer'?'официальной спецификации':'прочитанном документе')+']('+page.url+') для **'+variant[1]+' '+variant[2].toUpperCase()+'** указано **'+power+'**.\n\nИсточник: '+title+'. '+'Это справочные данные источника. Применимость именно к указанному году, рынку и комплектации этим ответом не подтверждена. Параметры карточки не изменены.';
   }
  }
  return null;
 }
 /** Preserve completed research if answer generation fails, without inventing a specification. */
 export function researchFallbackReply(results:any[],question:string){
+ const native=results.find(r=>r.web?.searchEvidence?.answer&&r.web.searchEvidence.sources?.length)?.web.searchEvidence;if(native)return native.answer;
  const pages=[...new Map(results.flatMap(r=>r.web?.pages||[]).map(p=>[p.url,p])).values()] as any[];
  const preferred=pages.filter(p=>p.kind==='manufacturer'||p.kind==='document');
  const selected=(preferred.length?preferred:pages).slice(0,3);

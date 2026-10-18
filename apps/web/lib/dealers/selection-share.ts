@@ -2,7 +2,7 @@
 export const SELECTION_TITLE='Подборка вариантов по вашему запросу';
 export const SELECTION_EVENT='avtocena:dealer-selection';
 export const OPEN_SELECTION_FILTERS='avtocena:dealer-selection-filters';
-const textKeys=['make','brand','model','market','stock','bodyType','transmission','fuel','drive','auctionGrade','city','hasPrice'];
+const textKeys=['q','make','brand','model','market','stock','source','chassis','frameNumber','lotNumber','bodyType','transmission','fuel','drive','auctionGrade','city','hasPrice'];
 const numberKeys=['yearFrom','yearTo','budgetFrom','budget','budgetTo','mileageFrom','mileageTo','engineFrom','engineTo','powerFrom','powerTo'];
 export function selectionQuery(input:URLSearchParams,strict=true){
  const out=new URLSearchParams();

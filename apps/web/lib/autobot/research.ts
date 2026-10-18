@@ -1,3 +1,4 @@
+import {regSearch} from './provider';
 import {readSource} from '../autocalc/source';
 
 type Identity={make:string;model:string;year?:number;market?:string;trim?:string;topic?:string;motorCodes?:string;engine?:'google'|'bing';fresh?:boolean};
@@ -16,6 +17,7 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  const make=clean(identity.make),model=clean(identity.model);if(!make||!model)return {status:'unknown_identity',pages:[]};
  const key=JSON.stringify([make,model,identity.year,identity.market,identity.trim,identity.topic,identity.motorCodes,identity.engine]);const hit=cache.get(key);if(!identity.fresh&&read===readSource&&hit&&hit.until>Date.now())return hit.result;
  const pages:Page[]=[],failures:string[]=[];const budget=AbortSignal.any([signal,AbortSignal.timeout(40000)]);
+ const nativeTask=read===readSource?regSearch([{role:'system',content:'Найди характеристики автомобиля в интернете. Отвечай по-русски кратко с источниками. Учитывай год, рынок и комплектацию. Предпочитай документы производителя. Если версии различаются, перечисли различия. Не подменяй 30-минутную мощность пиковой. Не выдумывай найденные данные.'},{role:'user',content:JSON.stringify({make,model,year:identity.year,market:identity.market,trim:identity.trim,topic:identity.topic,motorCodes:identity.motorCodes})}],budget).catch(()=>null):Promise.resolve(null);
  const catalogTask=discoverManufacturerCatalog(identity,budget,read).catch(()=>({pages:[],failures:['Каталог производителя недоступен.']}));
  const discoveryTask=discoverVehicleWeb(identity,budget,read).catch(()=>({pages:[],failures:['Веб-поиск не завершён.'],engine:identity.engine||'bing'}));
  try{
@@ -36,8 +38,10 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  const discovery=await discoveryTask;
  for(const p of discovery.pages.reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...discovery.failures);
  const catalog=await catalogTask;for(const p of [...catalog.pages].reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...catalog.failures);
- const result={webSearch:{manufacturerReadPages:catalog.pages.length,engine:discovery.engine||identity.engine||'bing',readPages:discovery.pages.length,failures:discovery.failures,links:researchQueries(identity).map(q=>({title:'Поиск '+(identity.engine==='google'?'Google':'Bing'),url:(identity.engine==='google'?'https://www.google.com/search?':'https://www.bing.com/search?')+new URLSearchParams({q})}))},identity:{make,model,year:identity.year,market:identity.market,trim:identity.trim},checkedAt:new Date().toISOString(),status:pages.length?'found':'not_found',pages,failures,scope:'Поиск по ограниченному набору запросов в выбранном поисковике, чтение найденных публичных страниц/PDF и справочных ссылок производителя. Непрочитанные документы не подтверждают параметры. Данные справочные; применимость к году, поколению, рынку и комплектации нужно проверять. Не считать максимальную мощность 30-минутной. Не менять карточку или расчёт.'};
- if(read===readSource&&pages.length){if(cache.size>=100)cache.delete(cache.keys().next().value);cache.set(key,{until:Date.now()+(pages.some(p=>p.kind!=='reference')?30*60000:60000),result});}return result;
+ const native=await nativeTask;
+ const searchEvidence=native?.sources?.length?{answer:native.text,sources:native.sources}:undefined;
+ const result={searchEvidence,webSearch:{manufacturerReadPages:catalog.pages.length,engine:discovery.engine||identity.engine||'bing',readPages:discovery.pages.length,failures:discovery.failures,links:researchQueries(identity).map(q=>({title:'Поиск '+(identity.engine==='google'?'Google':'Bing'),url:(identity.engine==='google'?'https://www.google.com/search?':'https://www.bing.com/search?')+new URLSearchParams({q})}))},identity:{make,model,year:identity.year,market:identity.market,trim:identity.trim},checkedAt:new Date().toISOString(),status:pages.length?'found':'not_found',pages,failures,scope:'Поиск по ограниченному набору запросов в выбранном поисковике, чтение найденных публичных страниц/PDF и справочных ссылок производителя. Непрочитанные документы не подтверждают параметры. Данные справочные; применимость к году, поколению, рынку и комплектации нужно проверять. Не считать максимальную мощность 30-минутной. Не менять карточку или расчёт.'};
+ if(read===readSource&&(pages.length||searchEvidence)){if(cache.size>=100)cache.delete(cache.keys().next().value);cache.set(key,{until:Date.now()+(pages.some(p=>p.kind!=='reference')?30*60000:60000),result});}return result;
 }
 
 export function webResults(xml:string){

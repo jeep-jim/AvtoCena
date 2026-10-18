@@ -1,3 +1,4 @@
+import {GET as greenSearch} from "@/app/api/catalog/green/route";
 import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import {ajesErrorResponse} from '@/lib/catalog/ajes-error-response';
@@ -23,6 +24,7 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
+  if(p.get('stock')==='green'&&(!p.get('market')||p.get('market')==='japan'))return greenSearch(request);
   if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
     try{
       const params=Object.fromEntries(p);

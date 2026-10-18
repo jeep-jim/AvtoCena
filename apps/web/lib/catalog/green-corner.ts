@@ -25,7 +25,7 @@ export function publicGreenOffer(offer:VehicleOffer){const {operational,vin,fram
 export async function readGreenCornerPage(items:VehicleOffer[],params:GreenFilters,clampPage=true) {
  return withCatalogEditorial(async()=>{
   const visible=items.filter(item=>!editorialHidden(item)).map(item=>applyCatalogEditorial(item));
-  const current=greenCornerNeedsFullPricing(params)?visible:await applyEncyclopediaDisplayIdentityBatch(visible);
+  const current=await applyEncyclopediaDisplayIdentityBatch(visible);
   return greenCornerPageSelection(current.map(item=>applyCatalogEditorial(item)),params,async rows=>(await currentGreenCornerPrices(rows)).map(item=>applyCatalogEditorial(item)),clampPage);
  });
 }

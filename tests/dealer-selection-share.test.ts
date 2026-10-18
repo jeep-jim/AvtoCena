@@ -57,3 +57,10 @@ test('selection API requires own-company access and published profile; public ca
   g.__selectionActor=null;assert.equal((await POST(req('/cars/offer/car'))).status,200);
  }finally{delete g.__selectionActor;delete g.__selectionPublished;}
 });
+
+test('shared green and auction selections retain their source and query',()=>{
+ for(const query of ['market=japan&stock=green&make=Honda&model=Fit&q=Honda','market=japan&source=ajes&chassis=RK1&lotNumber=123']){
+ const input=new URLSearchParams(query),output=new URL(selectionTarget('dealer_topavto',query),'https://avtocena.com').searchParams;
+ for(const [key,value] of input)assert.equal(output.get(key),value);
+ }
+});
