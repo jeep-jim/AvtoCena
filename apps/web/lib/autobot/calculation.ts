@@ -4,7 +4,18 @@ import {offerParameterDraft} from '../catalog/offer-parameter-draft';
 import {validateCustomerParameters} from '../catalog/customer-parameters';
 import {calculateOfferWithCustomerParametersDetailed} from '../catalog/customs-pricing';
 import {autocalcScenario} from '../autocalc/scenario';
-export async function calculateForChat(args:any){
+export function normalizeCalculationArgs(raw:any){
+ const args={...raw,draft:{...raw?.draft}};
+ const fuel=String(args.draft.fuel||'').trim().toLowerCase();
+ const fuels:Record<string,string>={petrol:'petrol',gasoline:'petrol',petroleum:'petrol','бензин':'petrol','бензиновый':'petrol',diesel:'diesel','дизель':'diesel','дизельный':'diesel',electric:'electric','электро':'electric','электричество':'electric','электромобиль':'electric',hybrid:'hybrid','гибрид':'hybrid',lpg:'lpg','сжиженный газ':'lpg',cng:'cng','метан':'cng'};
+ if(fuels[fuel])args.draft.fuel=fuels[fuel];
+ const markets:Record<string,string>={'китай':'china','япония':'japan','корея':'korea','оаэ':'uae','европа':'europe','грузия':'georgia'};
+ if(typeof args.market==='string')args.market=markets[args.market.trim().toLowerCase()]||args.market.trim().toLowerCase();
+ if(typeof args.currency==='string')args.currency=args.currency.trim().toUpperCase();
+ return args;
+}
+export async function calculateForChat(input:any){
+ const args=normalizeCalculationArgs(input);
  let offer:any,parameters:any;
  if(args?.id){
   if(!/^[a-zA-Z0-9_-]{1,180}$/.test(args.id))throw Error('Уточните автомобиль.');

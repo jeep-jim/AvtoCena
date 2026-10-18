@@ -104,6 +104,7 @@ test('chat calculation uses the production engine and keeps missing power missin
  'customs-pricing':`export const calculateOfferWithCustomerParametersDetailed=async(o,p)=>{globalThis.__ab.seen=p;return {ok:true,calculation:{totalRub:2345678}}};`,
  scenario:`export const autocalcScenario=()=>{throw Error('manual not requested')}`
  });
+ for(const fuel of ['бензин','gasoline','petrol'])assert.equal(c.normalizeCalculationArgs({draft:{fuel}}).draft.fuel,'petrol');assert.equal(c.normalizeCalculationArgs({draft:{fuel:'газ'}}).draft.fuel,'газ');
  const r=await c.calculateForChat({id:'car',city:'Красноярск',draft:{powerHp:'160',unknown:'ignored'}});
  assert.equal(r.calculation.totalRub,2345678);assert.match(c.calculationReply(r).replace(/\s/g,''),/2345678/);assert.equal(c.calculationReply({ok:false,error:'Нужна мощность'}),'Нужна мощность');assert.equal(state.seen.deliveryCity,'Красноярск');assert.equal(state.seen.powerHp,'160');assert.equal(state.seen.unknown,undefined);assert.equal(state.seen.power30MinKw,undefined);
 });
