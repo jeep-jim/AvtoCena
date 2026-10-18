@@ -33,9 +33,10 @@ export async function GET() {
       }
     }
     const readMs = performance.now() - started;
-    const items = await applyActiveBusinessPricingBatch(rows);
+    const combined = await withAjesCount({...result,items:rows});
+    const items = await applyActiveBusinessPricingBatch(combined.items);
     const pricingMs = performance.now() - started - readMs;
-    return NextResponse.json({ ...await withAjesCount(result), items }, {
+    return NextResponse.json({ ...combined, items }, {
       headers: { "Cache-Control": "no-store, max-age=0", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` },
     });
   } catch (error) {

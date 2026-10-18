@@ -44,11 +44,12 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
   let enabled=true;try{await assertCollectionEnabled('ajes_korea_feed');}catch{enabled=false;}
   if(enabled)try{
    const count=await readAjesCount(JSON.stringify({market:'korea'}));
-   result={...result,total:result.total-(value.marketCounts.korea||0)+count,marketCounts:{...result.marketCounts,korea:count}};
+   let next={...result,total:result.total-(value.marketCounts.korea||0)+count,marketCounts:{...result.marketCounts,korea:count}};
    if(Array.isArray((value as any).items)){
     const page=await readAjesPublic({table:'korea',pageSize:10});
-    result={...result,items:[...(value as any).items.filter((v:any)=>v.market!=='korea'),...page.items]} as T;
+    next={...next,items:[...(value as any).items.filter((v:any)=>v.market!=='korea'),...page.items]} as typeof next;
    }
+   result=next;
   }catch{result={...result,countIncomplete:true};}
  }
  return result;
