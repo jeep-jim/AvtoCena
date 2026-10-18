@@ -159,3 +159,18 @@ test('research prioritizes technical manufacturer PDFs and rejects brand-only re
  assert.deepEqual(formats,['document']);assert.ok(result.pages.some((p:any)=>p.url===pdf&&p.kind==='document'));assert.ok(!result.pages.some((p:any)=>p.url==='https://www.audi.com/'));
  assert.match(r.researchQueries({make:'Audi',model:'A5',year:2023,market:'korea'})[0],/^"Audi A5" 2023 Korea/);
 });
+test('official model catalog reaches an archived body and its matching technical PDF within five reads',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ const seen:string[]=[];const root='https://www.audi.com/en/',pdf='https://uploads.audi.com/A5-Coupe-45-TFSI-quattro-2024.pdf';
+ const html:Record<string,string>={
+  [root+'models-4']:'<a href="/en/A5-current">A5</a>',
+  [root+'previous-models-78']:'<a href="/en/A5-until-2024">A5 until 2024</a><a href="https://evil.test/A5">A5 Coupe 45 TFSI</a>',
+  [root+'A5-until-2024']:'<title>Audi A5 until 2024</title><a href="/en/A5-Sportback-until-2024">A5 Sportback</a><a href="/en/A5-Coupe-until-2024">A5 Coupe</a>',
+  [root+'A5-Coupe-until-2024']:'<title>Audi A5 Coupe</title><a href="https://uploads.audi.com/A5-Coupe-35-TDI.pdf">Download</a><a href="'+pdf+'">Download</a>',
+  [pdf]:'Audi A5 Coupe 45 TFSI quattro. Program for Germany 2024. Max. power output 195 kW (265 PS).'
+ };
+ const read=async(url:string,_signal:any,_redirects:any,format:string)=>{seen.push(url);assert.ok(html[url],url);if(url===pdf)assert.equal(format,'document');return {url,html:html[url]};};
+ const result=await r.discoverManufacturerCatalog({make:'Audi',model:'A5',year:2023,trim:'Coupe 45 TFSI quattro Premium'},AbortSignal.timeout(1000),read);
+ assert.equal(seen.length,5);assert.equal(result.pages[0].url,pdf);assert.match(result.pages[0].text,/195 kW/);assert.ok(!seen.some(u=>u.includes('evil.test')||u.includes('35-TDI')||u.includes('Sportback')));
+ const other=await r.discoverManufacturerCatalog({make:'Toyota',model:'Corolla'},AbortSignal.timeout(1000),read);assert.equal(other.pages.length,0);assert.equal(seen.length,5);
+});
