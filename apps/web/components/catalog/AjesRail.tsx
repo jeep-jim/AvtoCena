@@ -14,8 +14,8 @@ export async function AjesRail({market='japan',params={}}:{market?:'japan'|'chin
  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return null;}
  const query={...params,market};
  const totalPromise=readAjesCountSummary(JSON.stringify(query)).catch(()=>null);
- let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false,partial=false;
- try{const page=await readAjesCatalogPage(query);items=page.items.slice(0,10);partial=Boolean(page.partial);}catch{unavailable=true;}
+ let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false,partial=false,filteredByPage=false,hasMore=false;
+ try{const page=await readAjesCatalogPage(query);items=page.items.slice(0,10);partial=Boolean(page.partial);filteredByPage=page.filteredByPage;hasMore=page.hasMore;}catch{unavailable=true;}
  const count=await totalPromise;const total=exactAjesCount(count);
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
@@ -23,6 +23,6 @@ export async function AjesRail({market='japan',params={}}:{market?:'japan'|'chin
    <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
 
-  {unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:auto-cols-auto md:grid-cols-5 md:overflow-visible md:pr-0">{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p className="text-sm text-[var(--ac-muted)]">Подходящих автомобилей пока нет.</p>}
+  {unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:auto-cols-auto md:grid-cols-5 md:overflow-visible md:pr-0">{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore?'В загруженной подборке совпадений нет.':'Подходящих автомобилей пока нет.'} {(filteredByPage||partial||hasMore)&&<Link href={href} className="underline">Продолжить поиск</Link>}</p>}
  </section>;
 }
