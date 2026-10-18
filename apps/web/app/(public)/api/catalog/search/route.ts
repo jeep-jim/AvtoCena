@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
-  if(await usesAjesMarket(p.get('market'),p.get('source'))&&p.get('stock')!=='green'){
+  if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
     try{
       const params=Object.fromEntries(p);
       const result=p.get('countOnly')==='1'?{total:await readAjesCount(JSON.stringify(params)),items:[]}:await readAjesCatalogPage(params);
@@ -74,7 +74,11 @@ export async function GET(request: Request) {
   if (facets) extras.facets = facets;
   if (rateExtras) Object.assign(extras, rateExtras);
   const readMs = performance.now() - started;
-  const items = await applyActiveBusinessPricingBatch(result.items);
+  // Cross-market local search must not resurrect the retired China supplier.
+  // AJES is paginated separately by market; do not invent a combined count.
+  const crossMarket=!query.market;
+  const candidates=crossMarket?result.items.filter(offer=>offer.market!=='china'):result.items;
+  const items = await applyActiveBusinessPricingBatch(candidates);
   const pricingMs = performance.now() - started - readMs;
-  return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
+  return NextResponse.json({ ok: true, ...result, ...(crossMarket?{total:null,partial:true,countIncomplete:true}:{}), items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
 }

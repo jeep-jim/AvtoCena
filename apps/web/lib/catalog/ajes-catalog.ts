@@ -47,7 +47,7 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
  if(!params.market&&value.marketCounts&&Object.prototype.hasOwnProperty.call(value.marketCounts,'china')){
   result={...result,total:result.total-(value.marketCounts.china||0),marketCounts:{...result.marketCounts,china:0},countIncomplete:true};
   if(Array.isArray((result as any).items))result={...result,items:(result as any).items.filter((v:any)=>v.market!=='china')} as typeof result;
-  if(Array.isArray((result as any).items))try{const page=await readAjesCatalogPage({market:'china'});const items=page.items.slice(0,10);result={...result,total:result.total+items.length,marketCounts:{...result.marketCounts,china:items.length},items:[...(result as any).items,...items]} as typeof result;}catch{/* No fallback to the retired supplier. */}
+  if(Array.isArray((result as any).items))try{const page=await readAjesCatalogPage({...params,market:'china'});const items=page.items.slice(0,10);result={...result,total:result.total+items.length,marketCounts:{...result.marketCounts,china:items.length},items:[...(result as any).items,...items]} as typeof result;}catch{/* No fallback to the retired supplier. */}
  }
  if(!params.market&&value.marketCounts&&Object.prototype.hasOwnProperty.call(value.marketCounts,'korea')){
   let enabled=true;try{await assertCollectionEnabled('ajes_korea_feed');}catch{enabled=false;}
@@ -55,9 +55,9 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
    result={...result,total:result.total-(value.marketCounts.korea||0),marketCounts:{...result.marketCounts,korea:0}};
    if(Array.isArray((result as any).items))result={...result,items:(result as any).items.filter((v:any)=>v.market!=='korea')} as typeof result;
    try{
-    const count=await readAjesCount(JSON.stringify({market:'korea'}));
+    const count=await readAjesCount(JSON.stringify({...params,market:'korea'}));
     result={...result,total:result.total+count,marketCounts:{...result.marketCounts,korea:count}};
-    if(Array.isArray((result as any).items)){const page=await readAjesCatalogPage({market:'korea'});result={...result,items:[...(result as any).items,...page.items.slice(0,10)]} as typeof result;}
+    if(Array.isArray((result as any).items)){const page=await readAjesCatalogPage({...params,market:'korea'});result={...result,items:[...(result as any).items,...page.items.slice(0,10)]} as typeof result;}
    }catch{result={...result,countIncomplete:true};}
   }
  }
