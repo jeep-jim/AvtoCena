@@ -1,4 +1,5 @@
 import 'server-only';
+import {resolveAjesModelNames} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {assertCollectionEnabled} from './collection-controls';
@@ -13,9 +14,18 @@ import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
+
+const resolvedCatalogQuery=cache(async(key:string)=>{
+ const params=JSON.parse(key),query=ajesCatalogQuery(params);
+ if(query.model&&query.make&&!query.make.includes(',')){
+  const directory=await readAjesDirectory({market:params.market,make:query.make});
+  query.model=resolveAjesModelNames(query.model,directory.models);
+ }
+ return query;
+});
 export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary>=>{
  const params=JSON.parse(key),filter=ajesResultFilter(params);
- const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
+ const q={...await resolvedCatalogQuery(key)};delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
  return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'||filter.active};
@@ -34,7 +44,7 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const filter=ajesResultFilter(params);
- const query=ajesCatalogQuery(params);
+ const query=await resolvedCatalogQuery(JSON.stringify(params));
  const [page,total]=await Promise.all([readAjesPublic(query),readAjesCountSummary(JSON.stringify(params)).catch(()=>null)]);
  const priced=query.table==='china'||query.table==='korea'||filter.priceFilter?await applyActiveBusinessPricingBatch(page.items):page.items;
  const items=priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v));
