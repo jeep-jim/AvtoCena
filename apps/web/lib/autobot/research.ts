@@ -6,6 +6,8 @@ const manufacturerDomains:Record<string,string[]>={hyundai:['hyundai.com','hyund
 const token=(s:string)=>s.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 const clean=(s:unknown)=>String(s||'').replace(/[<>\u0000-\u001f]/g,' ').replace(/\s+/g,' ').trim().slice(0,100);
 export function manufacturerLink(value:string,make:string){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!u.search&&!/\.(pdf|zip|jpg|png)$/i.test(u.pathname)&&(manufacturerDomains[token(make)]||[]).some(h=>u.hostname===h||u.hostname.endsWith('.'+h));}catch{return false;}}
+export function manufacturerDocument(value:string,make:string){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&/\.pdf$/i.test(u.pathname)&&(manufacturerDomains[token(make)]||[]).some(h=>u.hostname===h||u.hostname.endsWith('.'+h));}catch{return false;}}
+export function mentionsModel(text:string,model:string){const words=(s:string)=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();return (' '+words(text)+' ').includes(' '+words(model)+' ');}
 export function researchText(html:string){return html.replace(/<(script|style|nav|header|footer|aside)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<!--[\s\S]*?-->/g,' ').replace(/<\/(?:tr|p|div|h[1-6]|li)>/gi,'\n').replace(/<[^>]+>/g,' ').replace(/&#(\d+);/g,(_,n)=>Number(n)<0x110000?String.fromCodePoint(Number(n)):' ').replace(/&nbsp;|&#160;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim();}
 export function researchNeeded(question:string,car:any){return Boolean(car&&/(мощ|квт|л\.\s?с|двигател|топлив|привод|объ[её]м|характерист|параметр|найди|найти|интернет|гугл|google|поищи|не\s*заполн|30.?мин|power|specification)/i.test(question));}
 const cache=new Map<string,{until:number;result:any}>();
@@ -24,9 +26,9 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
    const data=JSON.parse((await read('https://en.wikipedia.org/w/api.php?'+new URLSearchParams({action:'parse',pageid:String(page.pageid),prop:'text|externallinks',format:'json'}),budget,0,'json')).html);
    const article=researchText(data.parse?.text?.['*']||'');
    if(article)pages.push({title:page.title+' — Wikipedia',url:'https://en.wikipedia.org/wiki/'+encodeURIComponent(page.title.replace(/ /g,'_')),kind:'reference',text:article.slice(0,12000)});
-   const score=(u:string)=>{const years=u.match(/(?:19|20)\d{2}/g)?.map(Number)||[];return (years.includes(identity.year)?20:years.some(y=>y<=(identity.year||0))?8:0)+(/spec|technical/i.test(u)?5:/performance|powertrain/i.test(u)?4:0);};
-   const ranked=(data.parse?.externallinks||[]).filter((u:any)=>typeof u==='string'&&manufacturerLink(u,make)).sort((a:string,b:string)=>score(b)-score(a));const links:string[]=[];const hosts=new Set<string>();for(const url of ranked){const host=new URL(url).hostname.replace(/^www\./,'');if(!hosts.has(host)){hosts.add(host);links.push(url);}if(links.length===3)break;}for(const url of ranked){if(links.length>=3)break;if(!links.includes(url))links.push(url);}
-   const fetched=await Promise.allSettled(links.map(async(url:string)=>{const p=await read(url,AbortSignal.any([budget,AbortSignal.timeout(8000)]));if(!manufacturerLink(p.url,make))throw Error('redirect');const text=researchText(p.html);if(/access denied|verify you are human|just a moment|captcha/i.test(text.slice(0,1200)))throw Error('blocked');if(!token(text).includes(token(model)))throw Error('wrong model');return {title:make+' — '+(p.html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/<[^>]*>/g,'').slice(0,160)||model),url:p.url,kind:'manufacturer' as const,text:text.slice(0,8000)};}));
+   const score=(u:string)=>{const topicScore=(/spec|technical|data.?sheet/i.test(u)?60:/drive-system|engine|powertrain|performance/i.test(u)?35:0)-(/production|sales|market-launch/i.test(u)?30:0)+(/coupe/i.test(identity.trim||'')&&/coupe/i.test(u)?15:0);const years=u.match(/(?:19|20)\d{2}/g)?.map(Number)||[];return topicScore+(years.includes(identity.year)?20:years.some(y=>y<=(identity.year||0))?8:0)+(/spec|technical/i.test(u)?5:/performance|powertrain/i.test(u)?4:0);};
+   const ranked=(data.parse?.externallinks||[]).filter((u:any)=>typeof u==='string'&&(manufacturerLink(u,make)||manufacturerDocument(u,make))).sort((a:string,b:string)=>score(b)-score(a));const links:string[]=[];const hosts=new Set<string>();for(const url of ranked){const host=new URL(url).hostname.replace(/^www\./,'');if(!hosts.has(host)){hosts.add(host);links.push(url);}if(links.length===3)break;}for(const url of ranked){if(links.length>=3)break;if(!links.includes(url))links.push(url);}
+   const fetched=await Promise.allSettled(links.map(async(url:string)=>{const p=await read(url,AbortSignal.any([budget,AbortSignal.timeout(8000)]),0,manufacturerDocument(url,make)?'document':'html');if(!manufacturerLink(p.url,make)&&!manufacturerDocument(p.url,make))throw Error('redirect');const text=researchText(p.html);if(/access denied|verify you are human|just a moment|captcha/i.test(text.slice(0,1200)))throw Error('blocked');if(!mentionsModel(text,model))throw Error('wrong model');return {title:make+' — '+(p.html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/<[^>]*>/g,'').slice(0,160)||model),url:p.url,kind:manufacturerDocument(p.url,make)?'document' as const:'manufacturer' as const,text:evidenceExcerpt(text)};}));
    for(const result of fetched)if(result.status==='fulfilled')pages.push(result.value);else failures.push('Страница производителя не предоставила доступные данные.');
   }
  }catch{failures.push('Внешний источник сейчас недоступен.');}
@@ -58,7 +60,7 @@ export function googleResults(html:string){
  return [...new Map(rows.map(r=>[r.url,r])).values()].slice(0,8);
 }
 export function researchQueries(identity:Identity){
- const family=[clean(identity.make),clean(identity.model)].filter(Boolean).join(' ');
+ const family='"'+[clean(identity.make),clean(identity.model)].filter(Boolean).join(' ').replace(/"/g,'')+'"';
  const market=({korea:'Korea',china:'China',japan:'Japan',uae:'UAE',europe:'Europe'} as Record<string,string>)[identity.market||''];
  const base=[family,identity.year,market,clean(identity.trim),clean(identity.motorCodes)].filter(Boolean).join(' ');
  return identity.topic==='30-minute'?[base+' 30 minute power UNECE R85 certificate',family+' 30 минутная мощность ОТТС']:[base+' technical specifications',family+' '+(identity.year||'')+' характеристики мощность'];
@@ -87,13 +89,14 @@ export async function discoverVehicleWeb(identity:Identity,signal:AbortSignal,re
  const unique=[...new Map(results.map(r=>[r.url,r])).values()];
  const identityScore=(r:{title:string;snippet:string;url:string})=>{
   const text=token(r.title+' '+r.snippet+' '+r.url);
-  return Number(manufacturerLink(r.url,identity.make))*10+Number(text.includes(token(identity.model)))*5+Number(text.includes(token(identity.make)))*3+Number(Boolean(identity.year)&&text.includes(String(identity.year)))*2;
+  return Number(manufacturerLink(r.url,identity.make)||manufacturerDocument(r.url,identity.make))*10+Number(text.includes(token(identity.model)))*5+Number(text.includes(token(identity.make)))*3+Number(Boolean(identity.year)&&text.includes(String(identity.year)))*2;
  };
  const ranked=unique.sort((a,b)=>identityScore(b)-identityScore(a));
  const fetched=await Promise.allSettled(ranked.slice(0,5).map(async r=>{
   const page=await read(r.url,AbortSignal.any([signal,AbortSignal.timeout(10000)]),0,'document');const text=researchText(page.html);
   if(/access denied|verify you are human|just a moment|captcha/i.test(text.slice(0,1000)))throw Error('blocked');
-  if(!token(text).includes(token(identity.model)))throw Error('model not found');
+  if(!mentionsModel(text,identity.model))throw Error('model not found');
+  if(!mentionsModel(r.title+' '+page.url,identity.model)&&!text.split(/\n/).some(line=>mentionsModel(line,identity.model)&&/\d[\d., ]*\s*(?:kW|кВт|hp|PS|л\.\s?с)|specification|техническ/i.test(line)))throw Error('generic brand page');
   return {title:r.title,url:page.url,kind:manufacturerLink(page.url,identity.make)?'manufacturer' as const:/\.pdf(?:[?#]|$)/i.test(page.url)?'document' as const:'web' as const,text:evidenceExcerpt(text)};
  }));
  for(const r of fetched)if(r.status==='fulfilled')pages.push(r.value);else failures.push('Одна из найденных страниц не прочитана или не содержит указанную модель.');
