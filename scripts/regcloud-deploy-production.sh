@@ -91,7 +91,7 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
-for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
+for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=korea&source=existing&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
@@ -110,6 +110,17 @@ except urllib.error.HTTPError as e:
  value=json.load(e)
  assert value.get('ok') is False and value.get('error')=='japan_filters_unavailable' and 'total' not in value
 print(json.dumps({'japanUnsupportedFilter':'rejected_without_false_zero'}),flush=True)
+# The former Korea budget gate above explicitly tests the retained local source.
+# Live stock sources share the explicit unsupported delivered-price contract.
+for market in ['korea','china']:
+ try:
+  urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source=ajes&budgetTo=3000000',timeout=30)
+  raise AssertionError('unsupported live stock delivered-price filter accepted')
+ except urllib.error.HTTPError as e:
+  assert e.code==400
+  value=json.load(e)
+  assert value.get('ok') is False and value.get('error')=='japan_filters_unavailable' and 'total' not in value
+ print(json.dumps({'market':market,'unsupportedFilter':'rejected_without_false_zero'}),flush=True)
 # Admin resource data must never leak anonymously.
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
 except urllib.error.HTTPError as e:assert e.code in [401,403]
