@@ -89,6 +89,7 @@ jobs:
         market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
     env:
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
+      AUTO_API_DUBICARS_KEY: ${{ matrix.market == 'uae' && secrets.AUTO_API_DUBICARS_KEY || '' }}
       AUTO_API_CHE168_KEY: ${{ matrix.market == 'china' && secrets.AUTO_API_CHE168_KEY || '' }}
       # Fresh owner markers start at page 1. Subsequent budget slices resume only
       # committed cursors; access failures are never resumed past the refusal.
@@ -156,6 +157,9 @@ jobs:
       - name: Sync Che168 from the complete CSV and then only committed changes
         if: steps.sources.outputs.feed == 'true'
         run: node --import tsx scripts/catalog-auto-api-che168-bulk-intake.mjs
+      - name: Sync all Dubicars through the paid API
+        if: steps.sources.outputs.dubicars_feed == 'true'
+        run: node --import tsx scripts/catalog-auto-api-dubicars-intake.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -167,7 +171,7 @@ jobs:
     needs: [plan, collect]
     # Paid China must finish both snapshot and changes. A refusal, exhausted
     # budget or schema drift cannot publish a partially collected paid feed.
-    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (inputs.market != 'china' || needs.collect.result == 'success' || needs.plan.outputs.reuse_run_id != '')
+    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (!contains(fromJSON('["china","uae"]'), inputs.market) || needs.collect.result == 'success' || needs.plan.outputs.reuse_run_id != '')
     environment: regcloud-staging
     runs-on: ubuntu-latest
     # Each market gets its own budget; a large Georgia publish must not consume

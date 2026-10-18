@@ -2,7 +2,9 @@ const BASE = 'https://api1.auto-api.com/api/v2/che168/';
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /** Fixed origin, no redirects, and no upstream bodies/URLs in errors or logs. */
-export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity, requestDelayMs = 0}) {
+export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity, requestDelayMs = 0, platform = "che168"}) {
+  if (!['che168','dubicars'].includes(platform)) throw Error('auto_api_invalid_platform');
+  const base = BASE.replace('/che168/', `/${platform}/`);
   apiKey = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (!apiKey || /\s/.test(apiKey)) throw Error('auto_api_key_missing_or_invalid');
   if (!Number.isSafeInteger(requestDelayMs) || requestDelayMs < 0 || requestDelayMs > 60000) throw Error('auto_api_invalid_request_delay');
@@ -12,7 +14,7 @@ export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, d
   };
   return async (endpoint, params = {}) => {
     if (!['offers', 'offer', 'changes', 'change_id'].includes(endpoint)) throw Error('auto_api_invalid_endpoint');
-    const url = new URL(endpoint, BASE);
+    const url = new URL(endpoint, base);
     for (const [key, value] of Object.entries(params)) url.searchParams.set(key, String(value));
     url.searchParams.set('api_key', apiKey);
     for (let attempt = 0; attempt < 4; attempt++) {
@@ -131,7 +133,7 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
   };
   let pages = 0, rows = 0, changes = 0, page = resume ? null : 1;
   while (page !== null) {
-    const parsed = autoApiPage(await request('offers', {page, year_from: yearFrom}), page);
+    const parsed = autoApiPage(await request('offers', {page, ...(yearFrom === undefined ? {} : {year_from: yearFrom})}), page);
     for (const row of parsed.items) { await onOffer(row, now()); rows++; }
     pages++; page = parsed.next;
     await onProgress({pages, rows, changes, cursor, phase:'snapshot'});
@@ -185,4 +187,12 @@ export function isCompletedChe168Delta(report) {
     && row.stopReason==='source_changes_finished' && row.rejectedIdentity===0 && row.pages===0
     && Number.isSafeInteger(row.initialCursor) && row.initialCursor>=0
     && Number.isSafeInteger(row.cursor) && row.cursor>=row.initialCursor;
+}
+
+export function isCompletedDubicarsDelta(report) {
+ const row=report?.sources?.find(row=>row.sourceId==='dubicars_uae_exact');
+ return report?.provider==='auto_api_dubicars'&&report.market==='uae'&&report.completed===true&&!report.failure
+  &&Number.isFinite(Date.parse(report.completedAt))&&row?.provider==='auto_api_dubicars'&&row.syncMode==='delta'
+  &&row.stopReason==='source_changes_finished'&&row.rejectedIdentity===0&&row.pages===0
+  &&Number.isSafeInteger(row.initialCursor)&&row.initialCursor>=0&&Number.isSafeInteger(row.cursor)&&row.cursor>=row.initialCursor;
 }

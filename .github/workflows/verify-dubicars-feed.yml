@@ -1,0 +1,23 @@
+name: Verify Dubicars paid feed
+on:
+  pull_request:
+    paths:
+      - 'apps/web/lib/catalog/**'
+      - 'scripts/*dubicars*'
+      - 'scripts/lib/auto-api-che168-client.mjs'
+      - 'scripts/lib/catalog-intake-checkpoint.mjs'
+      - 'tests/catalog-auto-api-dubicars.test.ts'
+      - '.github/workflows/catalog-market-refresh.yml'
+      - '.github/workflows/verify-dubicars-feed.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-auto-api-dubicars.test.ts tests/catalog-auto-api-che168.test.ts tests/catalog-collection-controls.test.ts tests/catalog-public-safety.test.ts tests/catalog-public-truth-seo.test.ts
+      - run: npm run typecheck

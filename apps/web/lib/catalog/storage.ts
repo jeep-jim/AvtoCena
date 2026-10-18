@@ -1,3 +1,4 @@
+import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {compressedBudgetSelectors,verifiedCompressedBudgetSelector,type CompressedBudgetDirectory,type CompressedBudgetSelector} from './budget-selector-codec';
@@ -459,8 +460,8 @@ export function projectionCanRenderCard(row: CatalogSearchProjection) {
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
-    && Boolean(row.id && row.market && row.make && row.model && row.year && row.cardImageUrl)
-    && (isSellerPricedOffer(row) || hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
+    && Boolean(row.id && row.market && row.make && row.model && row.year && (row.cardImageUrl||isAllDubicarsOffer(row)))
+    && (isUnpricedDubicarsOffer(row) || isSellerPricedOffer(row) || hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
     && !catalogRequiredSpecificationRejectionReason(row)));
 }
 // Current read-model rows are immutable until their existing cache expires.
@@ -492,7 +493,7 @@ function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
   if(!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer))return false;
   if (isConfirmedSourceWithdrawn(offer) || isReviewedSourceDuplicate(offer)) return false;
   offer = safePublicPricing(offer);
-  return isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
+  return isUnpricedDubicarsOffer(offer) || isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
     && !catalogRequiredSpecificationRejectionReason(offer));
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
@@ -1396,7 +1397,7 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
 export function isPublicOffer(o: VehicleOffer) {
   return isActivePublicCatalogMarket(o.market)
     && o.status === "active"
-    && isCatalogYearAllowed(o.year, o.market)
+    && (isAllDubicarsOffer(o)||isCatalogYearAllowed(o.year, o.market))
     && hasCredibleOfferContent(o)
     && catalogPublicPriority(o).eligible;
 }

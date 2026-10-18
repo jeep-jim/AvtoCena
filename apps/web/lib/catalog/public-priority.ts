@@ -1,3 +1,4 @@
+import {isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {compareCatalogDisplayOrder} from './display-order';
 import { catalogHardPriceCap } from "./china-owner-policy";
 import { isSellerPricedOffer } from "./seller-price-contract";
@@ -329,6 +330,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (isModificationScenario(offer)) return { ...base, eligible: false, tier: 99, reason: "personal_scenario", calculated: false, visibleRub: 0 };
   if (hasModificationSelection(offer) && sourcePriced) return { ...base, eligible: true, tier: 8, reason: "selection_required", calculated: false, preliminary: false, visibleRub: 0 };
 
+  if(isUnpricedDubicarsOffer(offer))return {...base,eligible:true,tier:9,reason:"price_on_request",calculated:false,preliminary:false,visibleRub:0};
   if (isSellerPricedOffer(offer)) return { ...base, eligible: true, tier: 8, reason: "seller_price", calculated: false, preliminary: false, visibleRub: 0 };
 
   // The public catalog is a delivered-price product, not an internal inventory
