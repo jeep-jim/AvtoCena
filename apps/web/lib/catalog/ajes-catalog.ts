@@ -1,4 +1,5 @@
 import 'server-only';
+import {ajesResultFilter} from './ajes-result-filter';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {assertCollectionEnabled} from './collection-controls';
 import {headers} from 'next/headers';
@@ -13,10 +14,11 @@ export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
 export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary>=>{
- const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
+ const params=JSON.parse(key),filter=ajesResultFilter(params);
+ const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
- return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'};
+ return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'||filter.active};
 });
 export const readAjesCount=cache(async(key='{}'):Promise<number> => (await readAjesCountSummary(key)).total);
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
@@ -31,11 +33,12 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
  return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>){
+ const filter=ajesResultFilter(params);
  const query=ajesCatalogQuery(params);
  const [page,total]=await Promise.all([readAjesPublic(query),readAjesCountSummary(JSON.stringify(params)).catch(()=>null)]);
- const priced=query.table==='china'||query.table==='korea'?await applyActiveBusinessPricingBatch(page.items):page.items;
- const items=priced.filter(v=>v&&ajesChinaPriceAllowed(v));
- return {...page,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
+ const priced=query.table==='china'||query.table==='korea'||filter.priceFilter?await applyActiveBusinessPricingBatch(page.items):page.items;
+ const items=priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v));
+ return {...page,filteredByPage:filter.active,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
@@ -58,11 +61,11 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
   result.marketCountInfo[market]=count;
   if(market==='japan'){
    if(count)result={...result,total:result.total+count.total,marketCounts:{...result.marketCounts,japan:(result.marketCounts?.japan||0)+count.total}};
-   if(!count||count.stale)result.countIncomplete=true;
+   if(!count||count.stale||count.upperBound)result.countIncomplete=true;
    continue;
   }
   const items=page?.items.slice(0,10)||[];
-  const safeCount=market==='china'?items.length:count?.total||items.length;
+  const safeCount=market==='china'?items.length:count?.total??items.length;
   result={...result,total:result.total-(value.marketCounts?.[market]||0)+safeCount,marketCounts:{...result.marketCounts,[market]:safeCount}};
   if(hasRows)result={...result,items:[...(result as any).items.filter((v:any)=>v.market!==market),...items]} as typeof result;
   if(!count||count.stale||count.upperBound)result.countIncomplete=true;

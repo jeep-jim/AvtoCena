@@ -18,7 +18,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  const countPromise=readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
  const makesPromise=readAjesMakes(JSON.stringify({market})).catch(()=>null);
  const directoryPromise=initial.make?readAjesDirectory({market,make:initial.make}).catch(()=>null):Promise.resolve(null);
- try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Для этих результатов пока нельзя точно отобрать автомобили по цене с доставкой, мощности или типу кузова. Снимите эти условия; расчёт доступен в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
+ try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  const directory=await directoryPromise;
  // Count is independently verified; a partial or failed list must not erase it.
  const sourceTotal=await countPromise;
@@ -42,6 +42,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  {result&&<div className="mt-8">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{sourceTotal&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={displayTotal}>· {ajesCountText(sourceTotal)}</span>}</h2>
+ {result.filteredByPage&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Условия по цене с доставкой и кузову проверяются при загрузке автомобилей. Количество выше — до этой проверки. Если совпадений пока нет, загрузите следующую страницу.</p>}
  {result.partial&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показаны доступные совпадения. Полный поиск временно недоступен.</p>}
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={!result.partial&&result.received===result.pageSize}/>
  </div>}
