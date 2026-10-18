@@ -11,10 +11,20 @@
 @media(max-width:1023px){.ab-hero-chips{display:none}.ab-hero{grid-template-rows:1fr auto}.ab-hero .ab-mascot--large{width:100px;height:125px}.ab-hero .ab-mascot-sprite{height:100px}}
 @media(max-width:899px){.ab-fab{width:56px;height:56px;min-width:56px;justify-content:center;padding:3px;border-radius:50%;gap:0}.ab-fab .ab-mascot{width:48px;height:48px;border-radius:50%}.ab-fab-label,.ab-panel .ta-suggestions{display:none}.ab-panel .ta-compose{padding:10px 12px}.ab-panel .ta-compose textarea{resize:none}.ab-panel .ta-footnote{font-size:10px}}
 
-.ab-mascot-sprite{background-image:url('/autobot/autocena-faces.webp')}.ab-mascot--busy .ab-mascot-sprite{background-image:url('/autobot/autocena-states.webp')}
+
+/* Keep the entire robot fixed; only the screen inside its helmet changes. */
+.ab-mascot-sprite{position:relative;background-image:url('/autobot/autocena-faces.webp');background-position:0 0}
+.ab-mascot-face{position:absolute;inset:0;background-image:inherit;background-repeat:no-repeat;background-size:300% 200%;background-position:0 0;clip-path:inset(29% 23% 36% 23% round 18%)}
+.ab-mascot--busy .ab-mascot-sprite{background-image:url('/autobot/autocena-states.webp')}.ab-mascot--busy .ab-mascot-face{display:none}
 @media(prefers-reduced-motion:no-preference){
-.ab-mascot:not(.ab-mascot--busy):not(.ab-mascot--speaking) .ab-mascot-sprite{animation:ab-expressions 9s steps(1,end) infinite}
-.ab-mascot--speaking:not(.ab-mascot--busy) .ab-mascot-sprite{animation:ab-talk .8s steps(1,end) infinite}
-@keyframes ab-expressions{0%,38%,42%,65%,82%,100%{background-position:0 0}39%,41%{background-position:50% 0}66%,71%{background-position:100% 100%}72%,76%{background-position:100% 0}77%,81%{background-position:50% 0}}
+.ab-mascot:not(.ab-mascot--busy):not(.ab-mascot--speaking) .ab-mascot-face{animation:ab-blink 8s steps(1,end) infinite}
+.ab-mascot--speaking:not(.ab-mascot--busy) .ab-mascot-face{animation:ab-talk .8s steps(1,end) infinite}
+@keyframes ab-blink{0%,95%,100%{background-position:0 0}96%,98%{background-position:50% 0}}
 @keyframes ab-talk{0%,55%{background-position:0 100%}25%,75%{background-position:50% 100%}45%,95%{background-position:0 0}}
 }
+.ab-hero{min-height:200px;grid-template-columns:minmax(0,1fr) 156px;grid-template-rows:1fr auto;padding:20px 24px;gap:12px 20px}
+.ab-hero h2{margin:0;font-size:clamp(22px,2vw,30px);line-height:1.2;letter-spacing:-.025em}.ab-hero-copy{align-self:center}
+.ab-hero-character{grid-row:1/3;grid-column:2}.ab-hero .ab-mascot--large{width:150px;height:150px}.ab-hero-character>.ab-mascot:last-child{display:inline-block;font-size:inherit}
+.ab-hero-input{grid-row:2;grid-column:1}.ab-hero-input input{font-size:15px}
+@media(min-width:1024px){.ac-home-page .ac-home-hero{align-items:stretch}.ab-home-intro{display:flex;flex-direction:column}.ab-hero-desktop{margin-top:auto;padding-top:28px}.ab-budget-desktop{display:flex}.ab-budget-desktop>[data-budget-form]{width:100%;height:100%}}
+@media(max-width:1023px){.ab-hero{height:290px;min-height:290px;padding:20px;grid-template-columns:minmax(0,1fr) 104px;grid-template-rows:1fr auto;gap:12px}.ab-hero h2{font-size:25px}.ab-hero-character{grid-row:1;grid-column:2}.ab-hero .ab-mascot--large{width:104px;height:104px}.ab-hero .ab-mascot-sprite{height:100%;margin-top:0}.ab-hero-input{grid-column:1/-1;grid-row:2}}
