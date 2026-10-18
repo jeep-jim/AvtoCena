@@ -58,7 +58,7 @@ test('research discovers the model and manufacturer sources without leaking visi
 test('vehicle specification question receives research before the very first model answer',async()=>{
  const state:any={files:new Map(),researchCalls:0};
  const a=await load('apps/web/lib/autobot/agent.ts',state,{
- calculation:`export const calculateForChat=async()=>{throw Error('calculation not requested')};`,
+ calculation:`export const calculateForChat=async()=>{throw Error('calculation not requested')};export const calculationReply=()=>'';`,
  route:`export async function GET(){throw Error('catalog must not run')}`,
  storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo',year:2022,market:'korea',trim:'Premium'});`,
  'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
@@ -105,5 +105,21 @@ test('chat calculation uses the production engine and keeps missing power missin
  scenario:`export const autocalcScenario=()=>{throw Error('manual not requested')}`
  });
  const r=await c.calculateForChat({id:'car',city:'Красноярск',draft:{powerHp:'160',unknown:'ignored'}});
- assert.equal(r.calculation.totalRub,2345678);assert.equal(state.seen.deliveryCity,'Красноярск');assert.equal(state.seen.powerHp,'160');assert.equal(state.seen.unknown,undefined);assert.equal(state.seen.power30MinKw,undefined);
+ assert.equal(r.calculation.totalRub,2345678);assert.match(c.calculationReply(r).replace(/\s/g,''),/2345678/);assert.equal(c.calculationReply({ok:false,error:'Нужна мощность'}),'Нужна мощность');assert.equal(state.seen.deliveryCity,'Красноярск');assert.equal(state.seen.powerHp,'160');assert.equal(state.seen.unknown,undefined);assert.equal(state.seen.power30MinKw,undefined);
+});
+
+test('successful calculator result is returned without another model generation',async()=>{
+ const a=await load('apps/web/lib/autobot/agent.ts',{files:new Map()},{
+ route:`export const GET=async()=>{throw Error('not used')};`,
+ storage:`export const getOffer=async()=>null;`,
+ 'offer-url':`export const offerRouteId=x=>x;export const offerPath=x=>'/cars/offer/'+x.id;`,
+ 'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
+ 'safe-public-pricing':`export const safePublicPricing=x=>x;`,
+ 'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
+ 'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
+ research:`export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
+ calculation:`export const calculateForChat=async()=>({ok:true,calculation:{totalRub:2413948}});export const calculationReply=r=>'Итого '+r.calculation.totalRub+' ₽';`
+ });
+ let calls=0;const result=await a.runPublicAutobot({text:'Посчитай по моим параметрам',path:'/autocalc'},new Request('https://avtocena.com/api/autobot'),async()=>{calls++;return {text:JSON.stringify({tool:'calculate',args:{title:'Toyota Corolla'}}),sources:[]};});
+ assert.equal(calls,1);assert.match(result.text,/2413948/);
 });

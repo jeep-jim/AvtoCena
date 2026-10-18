@@ -21,3 +21,11 @@ export async function calculateForChat(args:any){
  const result=await calculateOfferWithCustomerParametersDetailed(offer,parameters);
  return {...result,vehicle:{make:offer.make,model:offer.model,year:offer.year,market:offer.market},parameters,calculatedAt:new Date().toISOString(),label:'Расчёт по указанным данным; характеристики и условия требуют подтверждения. Не изменяет объявление.'};
 }
+
+export function calculationReply(result:any){
+ if(!result?.ok)return result?.error||'Для расчёта не хватает исходных данных.';
+ const c=result.calculation, money=(v:number)=>Math.round(v).toLocaleString('ru-RU')+' ₽';
+ const parts=[`${[result.vehicle?.make,result.vehicle?.model,result.vehicle?.year].filter(Boolean).join(' ')}: ${money(c.totalRub)} — расчёт по указанным данным.`,c.deliveryQuote?.city?`Город доставки: ${c.deliveryQuote.city}.`:'',c.currencyRate?`Курс ${c.currencyRate.currency}: ${c.currencyRate.effectiveRate} ₽, дата курса ${c.currencyRate.rateDate}.`:'',...((c.breakdown||[]).map((r:any)=>`${r.title}: ${money(r.amountRub)}.`))];
+ const warnings=[...new Set<string>(c.warnings||[])];if(warnings.length)parts.push('Условия расчёта:',...warnings);
+ parts.push('Характеристики и итоговые условия требуют подтверждения. [Открыть АвтоРасчёт](/autocalc)');return parts.filter(Boolean).join('\n');
+}
