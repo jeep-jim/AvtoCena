@@ -22,3 +22,19 @@ test('switch is checked by requested market; refusals stop without alternate rou
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async t=>{tables.push(t!);},reserve:async()=>{},endpoint:()=> 'http://78.46.90.228/api/',fetcher:async url=>{urls.push(String(url));return new Response('ban2 fixture');}});
  await assert.rejects(()=>client.read({table:'korea'},'203.0.113.1'),/visitor_restricted/);assert.ok(tables.every(t=>t==='korea'));assert.equal(urls.length,1);assert.ok(urls[0].startsWith('http://78.46.90.228/api/'));
 });
+
+test('second China feed enforces 15 million at seller and delivered stages without changing Che168',async()=>{
+ const {ajesChinaPriceAllowed,ajesChinaSourceCeiling}=await import('../apps/web/lib/catalog/ajes-price-policy');
+ const cn={sourceId:'ajes_china_feed',sellerPriceRub:15_000_000};
+ assert.equal(ajesChinaPriceAllowed(cn),true);
+ assert.equal(ajesChinaPriceAllowed({...cn,sellerPriceRub:15_000_001}),false);
+ assert.equal(ajesChinaPriceAllowed({...cn,sellerPriceRub:10_000_000,deliveredCalculationPreview:{totalRub:15_000_001}} as any),false);
+ assert.equal(ajesChinaPriceAllowed({...cn,totalRub:28_788_043}),false);
+ assert.equal(ajesChinaPriceAllowed({...cn,sourceId:'che168',totalRub:52_061_667}),true);
+ const ceiling=ajesChinaSourceCeiling(12.34);
+ assert.ok(ceiling*12.34<=15_000_000);assert.ok((ceiling+1)*12.34>15_000_000);
+ for(const aggregate of [undefined,'count','makes','models'] as const)assert.match(ajesQuery({table:'china',sourcePriceTo:ceiling,aggregate}).sql,new RegExp('finish<='+ceiling));
+ for(const value of [NaN,0,-1,Infinity])assert.throws(()=>ajesChinaSourceCeiling(value));
+ assert.throws(()=>ajesQuery({table:'china',sourcePriceTo:1.2}));
+ assert.throws(()=>ajesQuery({table:'korea',sourcePriceTo:123}));
+});

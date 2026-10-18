@@ -4,8 +4,8 @@ import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main' | 'korea' | 'china';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
-export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; frameNumber?:string; lotNumber?:string; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','frameNumber','lotNumber','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','frameNumber','lotNumber','sourcePriceTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < min || value > max) throw new AjesInputError();
@@ -35,6 +35,7 @@ export function ajesQuery(input: unknown) {
   const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+(stock?0:1))}`];
   if(!stock)where.push('auction_type!=1');
   if(stock)where.push('finish>0');
+  if(q.sourcePriceTo!==undefined){if(table!=='china')throw new AjesInputError();where.push(`finish<=${integer(q.sourcePriceTo,0,1,Number.MAX_SAFE_INTEGER)}`);}
   if(table==='korea'){const month=new Date(Date.now()+7*3600000).getUTCMonth()+1;where.push(`(year>${new Date().getUTCFullYear()-6} or month=0 or month is null or month>=${month})`);}
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
