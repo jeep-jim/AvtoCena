@@ -18,19 +18,19 @@ export function sourceUrl(value: unknown) {
   return url;
 }
 // Pin the validated address for every hop: redirects cannot reach internal services.
-export async function readSource(value: string, signal: AbortSignal, redirects=0,format:"html"|"json"="html",retry=0): Promise<{html:string;url:string}> {
+export async function readSource(value: string, signal: AbortSignal, redirects=0,format:"html"|"json"|"xml"|"document"="html",retry=0): Promise<{html:string;url:string}> {
   const url=sourceUrl(value);
   const addresses=await lookup(url.hostname,{all:true,family:4});
   signal.throwIfAborted();
   if (!addresses.length || addresses.some(x=>!publicIPv4(x.address))) throw Error('Этот адрес недоступен для загрузки');
   const response=await new Promise<{status:number;location?:string;html:string}>((resolve,reject)=>{
-    const req=request(url,{signal,family:4,headers:{'User-Agent':'AvtoCena/1.0 (+https://avtocena.com)','Accept':format==='json'?'application/json':'text/html,application/xhtml+xml','Accept-Encoding':'identity'},lookup:((_host:any,_options:any,callback:any)=>callback(null,addresses[0].address,4)) as any},res=>{
+    const req=request(url,{signal,family:4,headers:{'User-Agent':'AvtoCena/1.0 (+https://avtocena.com)','Accept':format==='json'?'application/json':format==='xml'?'application/rss+xml,application/xml,text/xml':format==='document'?'text/html,application/pdf':'text/html,application/xhtml+xml','Accept-Encoding':'identity'},lookup:((_host:any,_options:any,callback:any)=>callback(null,addresses[0].address,4)) as any},res=>{
       const status=res.statusCode || 0;
       if(status>=300&&status<400){res.resume();resolve({status,location:res.headers.location,html:''});return;}
-      if(status!==200 || !(format==='json'?/application\/json/i:/text\/html|application\/xhtml\+xml/i).test(String(res.headers['content-type']))){res.resume();reject(Error('Источник не предоставил страницу объявления'));return;}
+      if(status!==200 || !(format==='json'?/application\/json/i:format==='xml'?/(?:application|text)\/(?:rss\+)?xml/i:format==='document'?/text\/html|application\/(?:xhtml\+xml|pdf)/i:/text\/html|application\/xhtml\+xml/i).test(String(res.headers['content-type']))){res.resume();reject(Error('Источник не предоставил страницу объявления'));return;}
       let size=0;const chunks:Buffer[]=[];
       res.on('data',chunk=>{size+=chunk.length;if(size>2_000_000){res.destroy(Error('Страница слишком большая'));return;}chunks.push(chunk);});
-      res.on('error',reject);res.on('end',()=>resolve({status,html:decodeSourceBytes(Buffer.concat(chunks))}));
+      res.on('error',reject);res.on('end',()=>{const bytes=Buffer.concat(chunks);if(format==='document'&&/application\/pdf/i.test(String(res.headers['content-type']))){import('../autobot/pdf-source').then(m=>m.pdfSourceText(bytes,signal)).then(html=>resolve({status,html}),reject);}else resolve({status,html:decodeSourceBytes(bytes)});});
     });req.on('error',reject);req.end();
   }).catch(async error=>{
     // Retry a dropped connection once, within the original time budget. Never retry an HTTP refusal.

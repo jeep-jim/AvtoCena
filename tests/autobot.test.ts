@@ -58,6 +58,7 @@ test('research discovers the model and manufacturer sources without leaking visi
 test('vehicle specification question receives research before the very first model answer',async()=>{
  const state:any={files:new Map(),researchCalls:0};
  const a=await load('apps/web/lib/autobot/agent.ts',state,{
+ calculation:`export const calculateForChat=async()=>{throw Error('calculation not requested')};`,
  route:`export async function GET(){throw Error('catalog must not run')}`,
  storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo',year:2022,market:'korea',trim:'Premium'});`,
  'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
@@ -69,4 +70,40 @@ test('vehicle specification question receives research before the very first mod
  });
  const answer=await a.runPublicAutobot({text:'Какая у этого авто мощность?',path:'/cars/offer/nexo-2022'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('motor maximum 120 kW')));assert.ok(input[0].content.includes('Ответь на исходный вопрос сейчас'));assert.equal(input[0].role,'system');assert.ok(input.slice(1).every(m=>m.role!=='system'));assert.equal(input.at(-1).role,'user');return {text:JSON.stringify({reply:'Пиковая мощность 120 кВт. 30-минутная не подтверждена.'}),sources:[]}});
  assert.equal(state.researchCalls,1);assert.equal(answer.sources[0].url,'https://hyundai.com/spec');assert.match(answer.text,/120/);assert.equal(answer.cards.length,0);
+});
+
+
+test('tab session retains conversation/draft on reload; invalid state is discarded',async()=>{
+ const s=await import('../apps/web/lib/autobot/session');
+ const raw=s.serializeChatSession([{role:'user',text:'Мой город Омск'},{role:'assistant',text:'Учитываю Омск.'}],'Посчитай',true);
+ const restored=s.parseChatSession(raw);assert.equal(restored.messages[0].text,'Мой город Омск');assert.equal(restored.draft,'Посчитай');assert.equal(restored.opened,true);
+ assert.deepEqual(s.parseChatSession(null).messages,[]);assert.deepEqual(s.parseChatSession('{bad').messages,[]);
+ assert.equal(s.parseChatSession(s.serializeChatSession([], '', false)).messages.length,0);
+});
+test('service orientation includes actual registration and contact opens a form, not a false transfer',async()=>{
+ const s=await import('../apps/web/lib/autobot/service');
+ for(const q of ['где я?','гдлея','гделя','что это за сервис']){
+ const r=s.serviceAnswer(q);assert.ok(r,q);assert.match(r.text,/АвтоЦен/);assert.match(r.text,/\/login\?role=customer/);
+ }
+ const r=s.serviceAnswer('соедини меня со сотрудником');assert.deepEqual(r.actions,['contact']);assert.match(r.text,/отправьте заявку/);assert.doesNotMatch(r.text,/рабочий чат|уже соединил/);
+});
+test('web research reads discovered PDF and keeps 30-minute evidence distinct from peak power',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ const urls:string[]=[];const read=async(url:string,signal:any,redirects:any,format:string)=>{urls.push(url);if(format==='xml')return {url,html:'<rss><item><title>Type approval</title><link>https://manufacturer.example/certificate.pdf</link><description>certificate</description></item></rss>'};assert.equal(format,'document');return {url,html:'Model Fixture 2025. Peak power 120 kW. Maximum 30-minute power 45 kW. UNECE R85.'};};
+ const result=await r.discoverVehicleWeb({make:'Test',model:'Fixture',year:2025,topic:'30-minute'},AbortSignal.timeout(1000),read);
+ assert.equal(result.pages.length,1);assert.equal(result.pages[0].kind,'document');assert.match(result.pages[0].text,/30-minute power 45/);assert.ok(urls.some(x=>decodeURIComponent(x).includes('ОТТС')));
+ assert.deepEqual(r.webResults('<item><link>http://127.0.0.1/</link></item>'),[]);
+});
+test('chat calculation uses the production engine and keeps missing power missing',async()=>{
+ const state:any={files:new Map(),seen:null};
+ const c=await load('apps/web/lib/autobot/calculation.ts',state,{
+ 'offer-page-data':`export const getOfferForPage=async()=>({id:'car',make:'Toyota',year:2023,deliveryCity:'Омск'});`,
+ storage:`export const getOffer=async()=>null;`,
+ 'offer-parameter-draft':`export const offerParameterDraft=()=>({year:'2023',fuel:'petrol',engineCc:'1998',powerHp:'150'});`,
+ 'customer-parameters':`export const validateCustomerParameters=x=>x;`,
+ 'customs-pricing':`export const calculateOfferWithCustomerParametersDetailed=async(o,p)=>{globalThis.__ab.seen=p;return {ok:true,calculation:{totalRub:2345678}}};`,
+ scenario:`export const autocalcScenario=()=>{throw Error('manual not requested')}`
+ });
+ const r=await c.calculateForChat({id:'car',city:'Красноярск',draft:{powerHp:'160',unknown:'ignored'}});
+ assert.equal(r.calculation.totalRub,2345678);assert.equal(state.seen.deliveryCity,'Красноярск');assert.equal(state.seen.powerHp,'160');assert.equal(state.seen.unknown,undefined);assert.equal(state.seen.power30MinKw,undefined);
 });

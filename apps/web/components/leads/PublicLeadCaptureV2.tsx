@@ -384,6 +384,7 @@ export function PublicLeadCaptureV2() {
   const [request, setRequest] = useState<LeadRequest | null>(null);
 
   useEffect(() => { setRequest(null); }, [pathname]);
+  useEffect(()=>{const open=()=>setRequest({mode:'generic',source:'autobot_contact',car:''});window.addEventListener('autobot-contact',open);return()=>window.removeEventListener('autobot-contact',open);},[]);
   useEffect(() => {
     if (pathname !== "/autocalc") return;
     const click = (event: MouseEvent) => {
