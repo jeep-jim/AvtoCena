@@ -204,3 +204,13 @@ test('native search uses shared monthly budget and validated source citations',a
  await assert.rejects(p.regSearch([{role:'user',content:'Honda'}],AbortSignal.timeout(1000)));
  }finally{globalThis.fetch=old;}
 });
+
+test('native search evidence counts as found even when direct page reading fails',async()=>{
+ const state:any={files:new Map(),query:''};
+ const r=await load('apps/web/lib/autobot/research.ts',state,{
+ source:`export async function readSource(){throw Error('offline')}`,
+ provider:`export async function regSearch(input){globalThis.__ab.query=JSON.stringify(input);return {text:'Справочные характеристики Honda.',sources:[{title:'Honda',url:'https://www.honda.co.jp/spec/'}]};}`,
+ });
+ const result=await r.researchVehicle({make:'Honda',model:'Step Wagon',year:2015,vin:'PRIVATE-VIN'},AbortSignal.timeout(1000));
+ assert.equal(result.status,'found');assert.deepEqual(result.pages,[]);assert.equal(result.searchEvidence.sources.length,1);assert.ok(!state.query.includes('PRIVATE-VIN'));
+});
