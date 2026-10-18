@@ -54,3 +54,18 @@ test('China price ceiling can reuse a prior bounded page without reusing counts 
  assert.equal(await readUncappedChinaRows(old,read),null);
  assert.equal(ajesChinaPriceAllowed({sourceId:'ajes_china_feed',sellerPriceRub:52061667}),false);
 });
+
+test('confirmed supplier horsepower survives normalization and public safety checks',async()=>{
+ const {normalizeVehicleOfferSpecs}=await import('../apps/web/lib/catalog/spec-normalization');
+ const {safePublicPricing}=await import('../apps/web/lib/catalog/safe-public-pricing');
+ const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/specification-evidence-audit');
+ for(const power of ['100','150']){
+  const lot=ajesLot({...row,MARKA_NAME:'TOYOTA',MODEL_NAME:'COROLLA',FINISH:'108000',PW:power,TIME:'P'},'china',false)!;
+  const offer=ajesOffer(lot,{rateSource:'cbr',currency:'CNY',sourcePrice:108000,effectiveRate:12,rateDate:new Date().toISOString()} as any,new Date().toISOString());
+  const normalized=normalizeVehicleOfferSpecs(offer);
+  assert.equal(normalized.powerDataConfidence,'source_exact');
+  assert.equal(classifySpecificationEvidence(normalized,'powerHp').state,'exact');
+  assert.equal(safePublicPricing(normalized).powerHp,Number(power));
+  assert.equal(normalized.power30MinKw,undefined);
+ }
+});

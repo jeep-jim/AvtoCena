@@ -36,6 +36,7 @@ function ajesStockOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Currenc
  make:lot.make,model:lot.model,trim:lot.trim,year:lot.year,
  productionDate:lot.productionMonth&&lot.productionMonth>=1&&lot.productionMonth<=12?`${lot.year}-${String(lot.productionMonth).padStart(2,'0')}`:undefined,
  mileageKm:lot.mileageKm??undefined,engineCc:lot.engineCc||undefined,powerHp,fuel,
+ powerDataConfidence:powerHp?'source_exact':undefined,powerDataSource:powerHp?`ajes:${market}:${lot.id}:PW`:undefined,
  powertrainKind:lot.sourceFuel==='HE'?'series_hybrid':lot.sourceFuel==='E'?'electric':undefined,
  transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[lot.sourceTransmission.toUpperCase()],
  drive:({FF:'fwd',FR:'rwd',FWD:'fwd',RWD:'rwd',AWD:'awd','4WD':'awd',FULLTIME4WD:'awd'} as Record<string,string>)[lot.sourceDrive.toUpperCase()],
