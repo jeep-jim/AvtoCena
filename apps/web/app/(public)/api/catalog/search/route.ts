@@ -1,6 +1,6 @@
 import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
-import {AjesFilterUnavailable,AjesInputError} from '@/lib/catalog/ajes-query';
+import {ajesErrorResponse} from '@/lib/catalog/ajes-error-response';
 import {readAjesCatalogPage,readAjesCountSummary,withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { readCatalogMarketPage } from "@/lib/catalog/market-page";
 import { PUBLIC_CATALOG_MARKET_SET } from "@/lib/catalog/runtime-config";
@@ -29,7 +29,7 @@ export async function GET(request: Request) {
       const summary=p.get('countOnly')==='1'?await readAjesCountSummary(JSON.stringify(params)):null;
       const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params);
       return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30'}});
-    }catch(e){const invalid=e instanceof AjesInputError||e instanceof AjesFilterUnavailable;return NextResponse.json({ok:false,error:e instanceof AjesFilterUnavailable?'japan_filters_unavailable':invalid?'invalid_japan_query':'japan_search_unavailable'},{status:invalid?400:503,headers:{'Cache-Control':'no-store'}});}
+    }catch(e){const failure=ajesErrorResponse(e);return NextResponse.json(failure.body,{status:failure.status,headers:{'Cache-Control':'no-store'}});}
   }
   const query: Parameters<typeof searchOffers>[0] = {
     city: p.get("city") || undefined,

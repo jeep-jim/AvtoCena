@@ -48,3 +48,21 @@ test('display family resolves source generation names without losing exact selec
  assert.equal(resolveAjesModelNames('UNKNOWN',models),'UNKNOWN');
  assert.equal(resolveAjesModelNames('A5|S5 F5',models),'A5 F5|A5 B10|S5 F5');
 });
+
+test('release probe distinguishes missing visitor IP from every other failure without leaking details',async()=>{
+ const {ajesErrorResponse}=await import('../apps/web/lib/catalog/ajes-error-response');
+ const {AjesUnavailable}=await import('../apps/web/lib/catalog/ajes-client');
+ const response=ajesErrorResponse(new AjesUnavailable('client_ip_missing'));
+ assert.equal(response.status,503);assert.equal(response.body.reason,'client_ip_missing');assert.equal('total' in response.body,false);
+ for(const error of [new Error('PRIVATE_TOKEN https://private.example'),new AjesUnavailable('visitor_restricted'),new AjesUnavailable('PRIVATE_TOKEN')]){
+  const result=ajesErrorResponse(error);assert.notEqual(result.body.reason,'client_ip_missing');assert.ok(!JSON.stringify(result).includes('PRIVATE_TOKEN'));
+ }
+});
+
+test('loopback release probes never reach supplier or credentials without visitor IP',async()=>{
+ const {createAjesClient}=await import('../apps/web/lib/catalog/ajes-client');
+ let touched=0;const forbidden=async()=>{touched++;throw Error('unexpected dependency call');};
+ const client=createAjesClient({password:forbidden,assertEnabled:forbidden,reserve:forbidden,fetcher:forbidden});
+ for(const table of ['stats','korea','china'])await assert.rejects(client.read({table},''),/client_ip_missing/);
+ assert.equal(touched,0);
+});
