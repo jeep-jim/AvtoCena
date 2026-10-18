@@ -51,6 +51,18 @@ export function evidenceExcerpt(text:string){
  const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine/i.test(l)?lines.slice(Math.max(0,i-1),i+2):[]);
  return ([...new Set(relevant)].join('\n')+'\n'+text.slice(0,1500)).slice(0,6500);
 }
+
+export function variantEvidence(text:string,trim?:string){
+ const variant=trim?.match(/\b(\d{2})\s*(TFSI|TDI)\b/i);
+ if(!variant)return evidenceExcerpt(text);
+ const re=new RegExp('\\b'+variant[1]+'\\s*'+variant[2]+'\\b','gi');
+ const lines=[...text.matchAll(re)].flatMap(match=>{
+  let fragment=text.slice(match.index,match.index+220);const next=fragment.slice(match[0].length).search(/\b\d{2}\s*(?:TFSI|TDI)\b/i);if(next>=0)fragment=fragment.slice(0,match[0].length+next);
+  return /\d[\d., ]*\s*(?:kW|кВт|hp|PS)(?![\p{L}])/iu.test(fragment)?[fragment.replace(/\s+/g,' ')]:[];
+ });
+ return (lines.join('\n').slice(0,2800)+'\n'+evidenceExcerpt(text)).slice(0,6500);
+}
+
 export function googleResults(html:string){
  const rows:Array<{url:string;title:string;snippet:string}>=[];
  for(const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){
@@ -124,7 +136,7 @@ export async function discoverManufacturerCatalog(identity:Identity,signal:Abort
   const next=[...new Map(candidates.map(p=>[p.url,p])).values()].filter(p=>!visited.has(p.url)&&score(p)>-100).sort((a,b)=>score(b)-score(a))[0];if(!next)break;visited.add(next.url);
   try{const p=await readOfficial(next.url),text=researchText(p.html);if(!mentionsModel(text,identity.model))continue;
    const document=manufacturerDocument(p.url,identity.make);const title=document?decode(new URL(p.url).pathname.split('/').pop()||next.title).replace(/[_-]/g,' ').slice(0,160):researchText(p.html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||next.title);
-   pages.unshift({title,url:p.url,kind:document?'document':'manufacturer',text:((document?text.slice(0,600)+'\n':'')+evidenceExcerpt(text)).slice(0,6500)});
+   pages.unshift({title,url:p.url,kind:document?'document':'manufacturer',text:((document?text.slice(0,600)+'\n':'')+variantEvidence(text,identity.trim)).slice(0,6500)});
    if(document)break;candidates.push(...links(p.html,p.url));
   }catch{failures.push('Одна из технических страниц производителя недоступна.');}
  }
