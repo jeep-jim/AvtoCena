@@ -42,3 +42,31 @@ test('provider records actual tokens and rejects truncated answers; key never en
  globalThis.fetch=async()=>Response.json({choices:[{finish_reason:'length',message:{content:'Оборвано'}}]});await assert.rejects(p.regReply([{role:'user',content:'Машины'}],AbortSignal.timeout(1000)),/не завершён/);
  }finally{globalThis.fetch=old;}
 });
+
+test('research discovers the model and manufacturer sources without leaking visitor context',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ assert.equal(r.manufacturerLink('https://www.hyundai.com/spec','Hyundai'),true);
+ for(const u of ['http://hyundai.com/spec','https://hyundai.com.evil.test/spec','https://user:secret@hyundai.com/spec','https://hyundai.com/spec?token=secret','https://127.0.0.1/'])assert.equal(r.manufacturerLink(u,'Hyundai'),false);
+ const seen:string[]=[];
+ const read=async(url:string)=>{seen.push(url);if(url.includes('generator=search'))return {url,html:JSON.stringify({query:{pages:{1:{pageid:1,title:'Hyundai Nexo'}}}})};if(url.includes('action=parse'))return {url,html:JSON.stringify({parse:{text:{'*':'<h2>First generation 2018–2024</h2><table><tr><td>Power</td><td>120 kW</td></tr></table>'},externallinks:['https://hyundai.com/spec','https://hyundai.com.evil.test/spec']}})};return {url,html:'<title>Nexo specifications</title><p>Hyundai Nexo 120 kW</p>'};};
+ const data=await r.researchVehicle({make:'Hyundai',model:'Nexo',year:2022,market:'korea',trim:'Premium',vin:'PRIVATE-VIN'},AbortSignal.timeout(1000),read);
+ assert.equal(data.status,'found');assert.equal(data.pages.length,2);assert.equal(data.pages[0].kind,'reference');assert.equal(data.pages[1].kind,'manufacturer');assert.ok(data.pages[1].text.includes('120 kW'));assert.ok(!seen.join(' ').includes('PRIVATE-VIN'));assert.ok(!seen.some(u=>u.includes('evil.test')));
+ assert.equal(r.researchNeeded('Какая у этого авто мощность?',{make:'Hyundai'}),true);assert.equal(r.researchNeeded('Привет',{make:'Hyundai'}),false);
+ const failed=await r.researchVehicle({make:'Hyundai',model:'Nexo'},AbortSignal.timeout(1000),async()=>{throw Error('offline')});assert.equal(failed.status,'not_found');assert.deepEqual(failed.pages,[]);
+});
+
+test('vehicle specification question receives research before the very first model answer',async()=>{
+ const state:any={files:new Map(),researchCalls:0};
+ const a=await load('apps/web/lib/autobot/agent.ts',state,{
+ route:`export async function GET(){throw Error('catalog must not run')}`,
+ storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo',year:2022,market:'korea',trim:'Premium'});`,
+ 'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
+ 'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
+ 'safe-public-pricing':`export const safePublicPricing=x=>x;`,
+ 'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
+ 'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
+ research:`export const researchNeeded=(q,c)=>!!c;export const researchVehicle=async()=>{globalThis.__ab.researchCalls++;return {pages:[{title:'Manufacturer specification',url:'https://hyundai.com/spec',kind:'manufacturer',text:'Nexo motor maximum 120 kW; not certified 30-minute power'}]}};`
+ });
+ const answer=await a.runPublicAutobot({text:'Какая у этого авто мощность?',path:'/cars/offer/nexo-2022'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('motor maximum 120 kW')));assert.ok(input.some(m=>m.content.includes('Ответь на исходный вопрос сейчас')));return {text:JSON.stringify({reply:'Пиковая мощность 120 кВт. 30-минутная не подтверждена.'}),sources:[]}});
+ assert.equal(state.researchCalls,1);assert.equal(answer.sources[0].url,'https://hyundai.com/spec');assert.match(answer.text,/120/);assert.equal(answer.cards.length,0);
+});
