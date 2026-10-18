@@ -43,7 +43,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {result&&<div className="mt-8">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{sourceTotal&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={displayTotal}>· {ajesCountText(sourceTotal)}</span>}</h2>
  {result.filteredByPage&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Условия по цене с доставкой и кузову проверяются при загрузке автомобилей. Количество выше — до этой проверки. Если совпадений пока нет, загрузите следующую страницу.</p>}
- {(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показаны автомобили по последним доступным данным. Обновить полный список пока не удалось.</p>}
+ {(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показана доступная часть предложений.</p>}
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={!result.partial&&result.received===result.pageSize}/>
  </div>}
  </section>
