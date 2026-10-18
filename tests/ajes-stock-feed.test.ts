@@ -38,3 +38,19 @@ test('second China feed enforces 15 million at seller and delivered stages witho
  assert.throws(()=>ajesQuery({table:'china',sourcePriceTo:1.2}));
  assert.throws(()=>ajesQuery({table:'korea',sourcePriceTo:123}));
 });
+
+
+test('China price ceiling can reuse a prior bounded page without reusing counts or other filters',async()=>{
+ const {readUncappedChinaRows}=await import('../apps/web/lib/catalog/ajes-query-cache');
+ const {ajesChinaPriceAllowed}=await import('../apps/web/lib/catalog/ajes-price-policy');
+ const old=ajesQuery({table:'china',make:'BMW'}).sql;
+ const capped=ajesQuery({table:'china',make:'BMW',sourcePriceTo:1000000}).sql;
+ const value={items:[{table:'china',id:'old'}],observedAt:new Date().toISOString(),page:1,pageSize:24};
+ const read=async(sql:string)=>sql===old?value:null;
+ const result=await readUncappedChinaRows(capped,read);
+ assert.equal(result.partial,true);assert.equal(result.schemaVersion,0);assert.deepEqual(result.items,value.items);
+ assert.equal(await readUncappedChinaRows(ajesQuery({table:'china',aggregate:'count',sourcePriceTo:1000000}).sql,read),null);
+ assert.equal(await readUncappedChinaRows(ajesQuery({table:'china',make:'TOYOTA',sourcePriceTo:1000000}).sql,read),null);
+ assert.equal(await readUncappedChinaRows(old,read),null);
+ assert.equal(ajesChinaPriceAllowed({sourceId:'ajes_china_feed',sellerPriceRub:52061667}),false);
+});

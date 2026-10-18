@@ -33,3 +33,14 @@ export async function readExpandedJapanRows(sql:string,previous:string,read:(sql
  for(const key of new Set(candidates)){const value=await read(key);if(value)return {...value,partial:true};}
  return null;
 }
+
+/** Reuse a bounded previously viewed China page after introducing the price ceiling.
+ * Public mapping still applies the current RUB limit; this is never an exact count.
+ */
+export async function readUncappedChinaRows(sql:string,read:(sql:string)=>Promise<any|null>){
+ if(!sql.startsWith('select * from china '))return null;
+ const previous=sql.replace(/ and finish<=\d+/, '');
+ if(previous===sql)return null;
+ const value=await read(previous);
+ return value?{...value,schemaVersion:0,partial:true}:null;
+}
