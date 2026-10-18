@@ -99,28 +99,21 @@ for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/ca
   assert value.get('total',0)>0 and len(value.get('items',[]))>0
  else:assert b'</html>' in b and b'$RX(' not in b and len(b)>50000
  print(json.dumps({'prepared':path,'seconds':round(time.monotonic()-t,3),'bytes':len(b)}),flush=True)
-# AJES no longer returns a fabricated empty local inventory. Verify its explicit
-# unsupported-filter contract; loopback has no real visitor IP and must not query
-# the supplier with a substituted address. Existing market/HTML gates stay above.
-try:
- urllib.request.urlopen(base+'/api/catalog/search?market=japan&pageSize=24&budgetTo=3000000',timeout=30)
- raise AssertionError('unsupported Japan delivered-price filter accepted')
-except urllib.error.HTTPError as e:
- assert e.code==400
- value=json.load(e)
- assert value.get('ok') is False and value.get('error')=='japan_filters_unavailable' and 'total' not in value
-print(json.dumps({'japanUnsupportedFilter':'rejected_without_false_zero'}),flush=True)
-# The former Korea budget gate above explicitly tests the retained local source.
-# Live stock sources share the explicit unsupported delivered-price contract.
-for market in ['korea','china']:
+# Delivered-price filters are now supported. A loopback probe has no real visitor
+# IP and must fail at the source boundary, without any supplier request or fake zero.
+# Require the exact typed reason: generic 503, configuration and supplier failures
+# are NOT accepted by this release check. Keep all HTML/local price/auth gates above.
+for market in ['japan','korea','china']:
  try:
   urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source=ajes&budgetTo=3000000',timeout=30)
-  raise AssertionError('unsupported live stock delivered-price filter accepted')
+  raise AssertionError('live source accepted a request without a real visitor IP')
  except urllib.error.HTTPError as e:
-  assert e.code==400
   value=json.load(e)
-  assert value.get('ok') is False and value.get('error')=='japan_filters_unavailable' and 'total' not in value
- print(json.dumps({'market':market,'unsupportedFilter':'rejected_without_false_zero'}),flush=True)
+  assert e.code==503, (market,e.code)
+  assert value.get('ok') is False and value.get('error')=='japan_search_unavailable'
+  assert value.get('reason')=='client_ip_missing', (market,value.get('reason'))
+  assert 'total' not in value and 'items' not in value
+ print(json.dumps({'market':market,'missingVisitorIp':'rejected_without_supplier_request_or_false_zero'}),flush=True)
 # Admin resource data must never leak anonymously.
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
 except urllib.error.HTTPError as e:assert e.code in [401,403]
