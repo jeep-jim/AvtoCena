@@ -53,7 +53,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const [catalog, green, dealerData] = await Promise.all([
     readHomeCatalogSnapshot(10).then(value=>withAjesCount(value)).catch((error) => {
       console.error("home_initial_catalog_failed", error);
-      return { items: [], marketCounts: {}, total: 0, countIncomplete:true };
+      return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
     }),
     readGreenCorner().catch(() => null),
     readShowcase("dealer_topavto").then(async dealer => ({
@@ -84,6 +84,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
         initialMarketCounts={catalog.marketCounts}
         initialCount={catalog.total}
         initialCountIncomplete={catalog.countIncomplete}
+        initialMarketCountInfo={catalog.marketCountInfo}
       />
     </div>
     <style dangerouslySetInnerHTML={{ __html: "@media (min-width:1024px){.ac-budget-help{display:none!important}}" }} />

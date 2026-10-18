@@ -9,7 +9,7 @@ import { loadMoreGreenCorner } from "./green-corner-load-more-action";
 import { loadMoreCatalog } from "./catalog-load-more-action";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
-type Batch = {page: number; cards: ReactNode; count: number};
+type Batch = {hasMore?:boolean;page: number; cards: ReactNode; count: number};
 type Saved = {batches: Batch[]; total: number|null; scrollY: number; savedAt: number};
 // React nodes remain in this tab, never serialized into cookies or sent back to
 // the server. Returning from a detail page restores already fetched batches.
@@ -23,7 +23,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   const green = greenQuery !== undefined;
   const basePath = green ? "/cars/green" : "/cars";
   const key = JSON.stringify([dealer?.id,basePath, greenQuery, Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage]);
-  const [batches, setBatches] = useState<Batch[]>([{page: initialPage, cards: initialCards, count: initialCount}]);
+  const [batches, setBatches] = useState<Batch[]>([{page: initialPage, cards: initialCards, count: initialCount, hasMore:initialHasMore}]);
   const [total, setTotal] = useState(initialTotal);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -70,7 +70,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   const count = batches.reduce((sum, batch) => sum + batch.count, 0);
   const page = batches[batches.length - 1].page;
   fallbackQuery.set("page", String(page + 1));
-  const pageCount = total===null ? page+(batches.length===1 ? (initialHasMore?1:0) : (batches.at(-1)!.count===24?1:0)) : Math.ceil(total / 24);
+  const pageCount = total===null ? page+((batches.at(-1)!.hasMore??(batches.at(-1)!.count===24))?1:0) : Math.ceil(total / 24);
   const windowStart = Math.max(1, Math.min(page - 3, pageCount - 7));
   const numberedPages = [...new Set([1, ...Array.from({length:8},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
   function pageHref(target: number) {
@@ -88,7 +88,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     return promise;
   }
   useEffect(()=>{
-    if(!more||query.market==='japan')return;
+    if(!more||query.market==='japan'||query.market==='china'||query.market==='korea')return;
     // Prepare one batch while the visitor reads the visible cars. Do not
     // recursively prefetch the catalogue, or append until explicitly asked.
     const connection=(navigator as Navigator & {connection?:{saveData?:boolean;effectiveType?:string}}).connection;
@@ -102,7 +102,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     try {
       const result = await prepareNext();
       if (!mounted.current || activeKey.current !== key) return;
-      setBatches(current => [...current, {page: result.page, cards: result.cards, count: result.ids.length}]);
+      setBatches(current => [...current, {page: result.page, cards: result.cards, count: result.ids.length, hasMore:"hasMore" in result && typeof result.hasMore === "boolean" ? result.hasMore : undefined}]);
       setTotal(result.total);
     } catch {
       if (mounted.current && activeKey.current===key) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");

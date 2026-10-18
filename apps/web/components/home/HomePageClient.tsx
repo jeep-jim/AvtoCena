@@ -25,6 +25,8 @@ import { canonicalCatalogBrand } from "@/lib/catalog/brands";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
+import {ajesCountText,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
+
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
 type Props = {
@@ -37,6 +39,7 @@ type Props = {
   initialMarketCounts?: Record<string, number>;
   initialCount?: number;
   initialCountIncomplete?:boolean;
+  initialMarketCountInfo?:Record<string,AjesCountSummary|null>;
 };
 
 const budgets: Option[] = [
@@ -223,7 +226,8 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false }: Props) {
+export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false, initialMarketCountInfo={} }: Props) {
+  const [marketCountInfo,setMarketCountInfo]=useState(initialMarketCountInfo);
   const [mobileBudget,setMobileBudget]=useState(false);
   useEffect(()=>{const q=matchMedia('(max-width:1023px)');const sync=()=>setMobileBudget(q.matches);sync();q.addEventListener('change',sync);return()=>q.removeEventListener('change',sync);},[]);
 
@@ -250,6 +254,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
         (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });
         const incomingItems = [...unique.values()];
         setCountIncomplete(Boolean(catalogPayload?.countIncomplete));
+        setMarketCountInfo(catalogPayload?.marketCountInfo||{});
         const incomingCounts = catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts as Record<string, number> : {};
         // A current-read-model shard can briefly lag the immutable public manifest
         // during publication. Never replace a visible market with an empty/partial
@@ -312,7 +317,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
   if (year === "older") countParams.set("yearTo", "2017"); else if (year) countParams.set("yearFrom", year);
   if (powerLimited) countParams.set("powerTo", "160");
   if (electricOnly) countParams.set("fuel", "electric");
-  const { count, countError } = useHomeCatalogCount(countParams.toString(), catalogTotal);
+  const { count, countError,countText } = useHomeCatalogCount(countParams.toString(), catalogTotal);
 
   const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 10) }; }), [availableItems, catalogMarket, catalogMake]);
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setFuelItems(null); setMake(""); setModel(""); setBody(""); setMarket(""); setCatalogMake(""); setCatalogMarket(""); };
@@ -320,7 +325,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
   const modelSearch = <VehicleModelSearch value={model} make={make} placeholder="Модель" onValueChange={setModel} onMakeChange={setMake} onSubmit={submit} />;
 
   const budgetPanel = (<div id="form" data-budget-form className="ac-filter-panel relative flex min-h-0 flex-col overflow-hidden rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px] lg:overflow-visible">
-          <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{countError ? "Количество уточняется" : count === null ? "Считаем варианты" : `Нашли ${!countParams.size&&countIncomplete?"не менее ":""}${formatCatalogCount(count)} 🚗`}</span></div>
+          <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{countText ? countText : countError ? "Количество уточняется" : count === null ? "Считаем варианты" : `Нашли ${!countParams.size&&countIncomplete?"не менее ":""}${formatCatalogCount(count)} 🚗`}</span></div>
           <div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
           <div className="mt-2 flex flex-1 flex-col lg:mt-5">
             <h3 className="hidden text-lg font-black leading-tight md:text-xl lg:block">АвтоЦена — подбор автомобиля под ваш бюджет</h3>
@@ -368,7 +373,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
         </section>
       </div>
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black normal-case tracking-normal text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl">Авто под заказ</h2></div></div>
-        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { if(group.id === "japan")return !catalogMake && !electricOnly ? <div key="japan" className="space-y-8">{japanAuctions}<GreenCornerRail {...initialGreen} /></div> : null; const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span>{group.id!=="china"&&<span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span>}</h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section></div>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
+        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { if(group.id === "japan")return !catalogMake && !electricOnly ? <div key="japan" className="space-y-8">{japanAuctions}<GreenCornerRail {...initialGreen} /></div> : null; const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {(group.id==="china"||group.id==="korea"&&Object.prototype.hasOwnProperty.call(marketCountInfo,"korea")) ? (electricOnly ? `показано ${formatCatalogCount(group.total)}` : ajesCountText(marketCountInfo[group.id])) : formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section></div>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
       </section>
       <CurrencyRatesStrip rates={rates} variant="mobile" showHeading className="ac-home-bottom-rates mt-8 !px-4 !py-4 lg:hidden" />

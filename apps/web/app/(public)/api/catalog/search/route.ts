@@ -1,6 +1,7 @@
+import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import {AjesFilterUnavailable,AjesInputError} from '@/lib/catalog/ajes-query';
-import {readAjesCatalogPage,readAjesCount,withAjesCount} from '@/lib/catalog/ajes-catalog';
+import {readAjesCatalogPage,readAjesCountSummary,withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { readCatalogMarketPage } from "@/lib/catalog/market-page";
 import { PUBLIC_CATALOG_MARKET_SET } from "@/lib/catalog/runtime-config";
 import type { CatalogMarket } from "@/lib/catalog/types";
@@ -25,7 +26,8 @@ export async function GET(request: Request) {
   if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
     try{
       const params=Object.fromEntries(p);
-      const result=p.get('countOnly')==='1'?{total:await readAjesCount(JSON.stringify(params)),items:[]}:await readAjesCatalogPage(params);
+      const summary=p.get('countOnly')==='1'?await readAjesCountSummary(JSON.stringify(params)):null;
+      const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params);
       return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30'}});
     }catch(e){const invalid=e instanceof AjesInputError||e instanceof AjesFilterUnavailable;return NextResponse.json({ok:false,error:e instanceof AjesFilterUnavailable?'japan_filters_unavailable':invalid?'invalid_japan_query':'japan_search_unavailable'},{status:invalid?400:503,headers:{'Cache-Control':'no-store'}});}
   }
