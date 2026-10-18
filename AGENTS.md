@@ -53,3 +53,7 @@
 
 # Owner AJ System China price ceiling — 18.10.2026
 - The second China feed (`ajes_china_feed`) must not display offers above 15,000,000 RUB. This supersedes its earlier ranking-only policy. Apply the ceiling to seller price and calculated delivered previews; do not change Che168 collection or erase stored inventory. Unknown final delivered totals must remain explicitly incomplete.
+
+# Owner single-China update — 18.10.2026
+- China now uses only AJ System, including old source=existing catalog links. Disable paid Che168 collection through its saved owner switch; preserve records and credentials for the upcoming UAE supplier migration. Do not enable HTML reserves. Remove supplier tabs from public catalogs. Existing directives to retain the old China source for comparison are superseded.
+- UAE settings have not arrived. Do not repurpose the China endpoint or claim UAE is connected. Missing Korea specifications still require source evidence; never guess power.

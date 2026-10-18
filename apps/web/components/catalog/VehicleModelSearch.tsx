@@ -177,7 +177,7 @@ export function VehicleModelSearch({
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
   const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
-  const items=useMemo(()=>sourceSearch?sourceSearch(searchQuery,make):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems]);
+  const items=useMemo(()=>sourceSearch?(inventory||sourceSearch)(searchQuery,make):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -207,6 +207,18 @@ export function VehicleModelSearch({
       window.removeEventListener("keydown", escape);
     };
   }, [open]);
+
+  const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
+  useEffect(()=>{
+    if(!sourceItems)return;
+    setInventory(null);
+    if(!open||!['china','korea','japan'].includes(sourceMarket))return;
+    let cancelled=false;setInventoryLoading(true);setInventoryError(false);
+    loadModelSuggestions(true,{market:sourceMarket,make}).then(search=>{if(!cancelled)setInventory(()=>search);})
+      .catch(()=>{if(!cancelled)setInventoryError(true);})
+      .finally(()=>{if(!cancelled)setInventoryLoading(false);});
+    return()=>{cancelled=true;};
+  },[Boolean(sourceItems),sourceMarket,make,open,retry]);
 
   useEffect(()=>{
     if(sourceItems||!contextual||!open||directory)return;

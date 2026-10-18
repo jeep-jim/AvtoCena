@@ -104,6 +104,11 @@ jobs:
           export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
           npx tsx scripts/regcloud-verify-conditional-read.ts
           npx tsx scripts/regcloud-prepare-prices.mjs
+          node --import tsx --input-type=module <<'CUTOVER'
+          const module=await import('./apps/web/lib/catalog/china-feed-cutover.ts');
+          await (module.applyChinaFeedCutover||module.default.applyChinaFeedCutover)();
+          console.log('China supplier switch applied');
+          CUTOVER
       - name: Deploy with rollback and resource measurements
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}

@@ -1,4 +1,3 @@
-import {FeedSourceTabs} from './FeedSourceTabs';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {PublicHeader} from '@/components/layout/PublicHeader';
 import {CatalogCard} from './CatalogCard';
@@ -23,7 +22,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  const directory=await directoryPromise;
  // Count is independently verified; a partial or failed list must not erase it.
  const sourceTotal=await countPromise;
- const displayTotal=market==='china'?null:sourceTotal;
+ const displayTotal=market==='china'||result?.partial?null:sourceTotal;
  const makeDirectory=await makesPromise;
  const savedFacets=market==='japan'&&(!makeDirectory||!directory)?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
  const models=directory?.models||[...savedFacets.models,...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
@@ -33,7 +32,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
  {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
  <section className={embedded?'w-full py-5':'mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
- {market==='japan'?<JapanSectionTabs active="auction" params={initial}/>:<FeedSourceTabs market={market} active="ajes"/>}
+ {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
 
  <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто под заказ</h1>
