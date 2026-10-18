@@ -67,7 +67,7 @@ test('route rejects visitors, external staff, CSRF and unauthorized code or phra
  assert.equal(state.events.length,0);
 });
 test('completed stream required; HTTP 200 with failed, interrupted or incomplete stream never counts as answer',async()=>{
- const p=await load('apps/web/lib/team-assistant/provider.ts',{}),original=globalThis.fetch;
+ const p=await load('apps/web/lib/team-assistant/provider.ts',{files:new Map()}),original=globalThis.fetch;
  process.env.TEAM_ASSISTANT_RESPONSES_URL='https://provider.test/v1/responses';process.env.TEAM_ASSISTANT_ACCESS_TOKEN='fixture';process.env.TEAM_ASSISTANT_MODEL='fixture';
  const mock=(events:any[])=>{globalThis.fetch=async(_url,init)=>{const body=JSON.parse(init!.body as string);assert.equal(body.stream,true);assert.equal(body.store,false);return new Response(events.map(e=>'data: '+JSON.stringify(e)+'\n\n').join(''));};};
  try{

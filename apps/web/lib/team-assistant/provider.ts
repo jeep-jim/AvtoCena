@@ -1,8 +1,11 @@
+import {readAutobotConfig,configReady} from '../autobot/config';
+import {regReply} from '../autobot/provider';
 // No browser ChatGPT session, cookies, or automatic paid API fallback.
 // An explicitly provisioned, authorized Responses connection is required.
-export function providerStatus(){return Boolean(process.env.TEAM_ASSISTANT_RESPONSES_URL&&process.env.TEAM_ASSISTANT_ACCESS_TOKEN&&process.env.TEAM_ASSISTANT_MODEL);}
+export async function providerStatus(){return configReady(await readAutobotConfig())||Boolean(process.env.TEAM_ASSISTANT_RESPONSES_URL&&process.env.TEAM_ASSISTANT_ACCESS_TOKEN&&process.env.TEAM_ASSISTANT_MODEL);}
 export async function modelReply(input:unknown[],signal:AbortSignal){
- if(!providerStatus())throw Error('Подключение ChatGPT ещё не завершено. Обратитесь к владельцу.');
+ if(configReady(await readAutobotConfig()))return regReply(input as any[],signal);
+ if(!await providerStatus())throw Error('Подключение ChatGPT ещё не завершено. Обратитесь к владельцу.');
  const endpoint=new URL(process.env.TEAM_ASSISTANT_RESPONSES_URL!);
  if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password)throw Error('Проверьте подключение помощника.');
  const response=await fetch(endpoint,{method:'POST',redirect:'error',signal,headers:{'Content-Type':'application/json',Authorization:`Bearer ${process.env.TEAM_ASSISTANT_ACCESS_TOKEN}`},body:JSON.stringify({model:process.env.TEAM_ASSISTANT_MODEL,input,store:false,stream:true,...(process.env.TEAM_ASSISTANT_WEB_SEARCH==='1'?{tools:[{type:'web_search'}]}:{})})});

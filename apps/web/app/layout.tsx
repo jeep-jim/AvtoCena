@@ -292,6 +292,7 @@ html[data-theme="light"] .ac-public-legal-link:hover { color: #c91e2a; }
 }
 `;
 
+import {Autobot} from '@/components/autobot/Autobot';
 import {TeamAssistant} from '@/components/crm/assistant/TeamAssistant';
 export const dynamic = "force-dynamic";
 
@@ -316,6 +317,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <CurrencyChartEnhancer />
         <RoutePreloader />
         <TeamAssistant />
+        <Autobot />
       </body>
     </html>
   );

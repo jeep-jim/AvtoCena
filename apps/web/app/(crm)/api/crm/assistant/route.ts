@@ -16,7 +16,7 @@ const json=(value:unknown,status=200)=>Response.json(value,{status,headers});
 export async function GET(request:Request){
  const user=await getCurrentUser();if(!user)return json({error:'Войдите в аккаунт команды.'},401);
  if(!assistantAllowed(user))return json({error:'Помощник доступен только команде Топ Авто.'},403);
- try{const path=safePath(new URL(request.url).searchParams.get('path')||'/crm')||'/crm';const s=await readHistory(user.id);return json({userId:user.id,name:user.displayName,owner:isPlatformOwner(user),canCode:assistantCodeAllowed(user),canFill:canFillPath(user,path),connected:providerStatus(),codeConnected:codeConnectionReady(),messages:s.messages,revision:s.revision});}
+ try{const path=safePath(new URL(request.url).searchParams.get('path')||'/crm')||'/crm';const s=await readHistory(user.id);return json({userId:user.id,name:user.displayName,owner:isPlatformOwner(user),canCode:assistantCodeAllowed(user),canFill:canFillPath(user,path),connected:await providerStatus(),codeConnected:codeConnectionReady(),messages:s.messages,revision:s.revision});}
  catch{return json({error:'Не удалось открыть переписку. Попробуйте ещё раз.'},503);}
 }
 export async function POST(request:Request){
@@ -29,7 +29,7 @@ export async function POST(request:Request){
   if(!request.headers.get('content-type')?.startsWith('application/json'))return json({error:'Неверный формат запроса.'},400);
   const body=await readAssistantBody(request);
   if(!Number.isInteger(body.revision)||body.revision<0)throw Error('Откройте переписку заново.');
-  if(body.op==='message'&&!validChannel(body.browserChannel)&&!providerStatus())return json({error:'Подключение ChatGPT ещё не завершено. Владелец сможет включить ответы после авторизации.'},503);
+  if(body.op==='message'&&!validChannel(body.browserChannel)&&!await providerStatus())return json({error:'Подключение ChatGPT ещё не завершено. Владелец сможет включить ответы после авторизации.'},503);
   lease=await lockHistory(user.id,body.revision);
   if(body.op==='reset'){
    const state=await mutateHistory(user.id,s=>({...s,messages:[],revision:s.revision+1}));return json({messages:[],revision:state.revision});

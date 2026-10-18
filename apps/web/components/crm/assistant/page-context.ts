@@ -1,5 +1,5 @@
 import {cleanPhotos} from '../../../lib/team-assistant/media';
-import {privateField,safePath} from '../../../lib/team-assistant/policy';
+import {privateField,safePath} from '../../../lib/team-assistant/client-policy';
 import type {AssistantContext,AssistantAction} from '../../../lib/team-assistant/types';
 type Field=HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement;
 const visible=(e:HTMLElement)=>e.getClientRects().length>0&&getComputedStyle(e).visibility!=='hidden'&&!e.closest('[data-team-assistant], [inert], [data-assistant-private]');

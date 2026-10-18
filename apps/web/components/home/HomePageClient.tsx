@@ -1,4 +1,5 @@
 "use client";
+import {AutobotHero} from '../autobot/AutobotHero';
 import { useHomeCatalogCount } from "./useHomeCatalogCount";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 
@@ -223,6 +224,9 @@ function CatalogLoadingSkeleton() {
 }
 
 export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false }: Props) {
+  const [mobileBudget,setMobileBudget]=useState(false);
+  useEffect(()=>{const q=matchMedia('(max-width:1023px)');const sync=()=>setMobileBudget(q.matches);sync();q.addEventListener('change',sync);return()=>q.removeEventListener('change',sync);},[]);
+
   const router = useRouter();
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
@@ -315,12 +319,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
   const submit = () => { const params = new URLSearchParams(); if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budget", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric"); if (city) params.set("city", city); appendAttributionToSearchParams(params); router.push(`/cars${params.toString() ? `?${params}` : ""}`); };
   const modelSearch = <VehicleModelSearch value={model} make={make} placeholder="Модель" onValueChange={setModel} onMakeChange={setMake} onSubmit={submit} />;
 
-  return <main data-home-react-filters className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
-    <PublicHeader />
-    <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
-      <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
-        <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
-        <div id="form" className="ac-filter-panel relative flex min-h-0 flex-col overflow-hidden rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px] lg:overflow-visible">
+  const budgetPanel = (<div id="form" data-budget-form className="ac-filter-panel relative flex min-h-0 flex-col overflow-hidden rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px] lg:overflow-visible">
           <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{countError ? "Количество уточняется" : count === null ? "Считаем варианты" : `Нашли ${!countParams.size&&countIncomplete?"не менее ":""}${formatCatalogCount(count)} 🚗`}</span></div>
           <div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
           <div className="mt-2 flex flex-1 flex-col lg:mt-5">
@@ -332,7 +331,15 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
             {budget && <p className="mt-5 hidden text-sm font-black leading-6 text-white md:text-base md:leading-6 lg:block">Следующий шаг — менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p>}
             <div className="mt-3 grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-3 lg:hidden"><div className="ac-budget-mobile min-w-0"><MobileBudgetPicker value={budget} options={budgets} onChange={setBudget} /></div><button type="button" onClick={submit} className="avto-button h-14 min-w-0 rounded-2xl px-3 text-sm font-black">Узнать Цену Авто</button></div><div className="mt-auto hidden items-end gap-4 pt-5 lg:flex"><button type="button" onClick={submit} className="avto-button h-14 min-w-0 flex-1 rounded-2xl px-4 text-sm font-black md:text-base">Узнать Цену Авто</button></div>
           </div>
-        </div>
+        </div>);
+
+  return <main data-home-react-filters className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
+    <PublicHeader />
+    <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
+      <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
+        <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="ab-hero-desktop"><AutobotHero/></div></div>
+        <div className="ab-hero-mobile"><AutobotHero/></div>
+        <div className="ab-budget-desktop">{!mobileBudget&&budgetPanel}</div>
       </section>
       <div className="-mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
       {specialRail && <SpecialRail {...specialRail} desktopSplit/>}
@@ -366,6 +373,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
       </section>
       <CurrencyRatesStrip rates={rates} variant="mobile" showHeading className="ac-home-bottom-rates mt-8 !px-4 !py-4 lg:hidden" />
       <div data-ac-lead-host="home" style={{gridColumn: "1 / -1", width: "100%"}}><GenericLeadBanner kind="home" /></div>
+      <div className="ab-budget-bottom">{mobileBudget&&budgetPanel}</div>
       <CurrencyRatesStrip rates={rates} variant="desktop" className="ac-home-desktop-bottom-rates mt-8 hidden lg:block" />
     </div>
     {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black normal-case tracking-normal text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl">×</button></div><div className="mt-4 space-y-3 text-base font-medium leading-7 text-[var(--ac-muted)]"><p>АвтоЦена помогает быстро понять, какой автомобиль можно привезти под ваш бюджет. Укажите Ваш город и бюджет — система покажет подходящие варианты и актуальный расчёт.</p><p>После выбора менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" /></section></div> : null}
