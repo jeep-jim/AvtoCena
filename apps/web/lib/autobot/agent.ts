@@ -1,3 +1,5 @@
+import {researchPowerReply,researchFallbackReply} from './research-answer';
+export {researchPowerReply,researchFallbackReply} from './research-answer';
 import {applyEncyclopediaDisplayIdentity} from '../catalog/display-identity';
 import {serviceKnowledge,serviceAnswer} from './service';
 import {calculateForChat,calculationReply} from './calculation';
@@ -14,17 +16,6 @@ export const automotivePolicy=`Ты АвтоБот, автомобильный �
 export function publicCalculation(s:any){if(!s)return undefined;return {pricingConfidence:s.pricingConfidence,missing:s.missing,priceIncludesAllCustoms:s.priceIncludesAllCustoms,priceIncludesUtilizationFee:s.priceIncludesUtilizationFee,sourcePriceRub:s.sourcePriceRub,currencyRate:s.currencyRate?{currency:s.currencyRate.currency,effectiveRate:s.currencyRate.effectiveRate,rateDate:s.currencyRate.rateDate,rateSource:s.currencyRate.rateSource}:undefined,customs:s.customs?{status:s.customs.status,totalCustomsRub:s.customs.totalCustomsRub,utilizationFeeRub:s.customs.utilizationFeeRub,utilizationPowerKw:s.customs.utilizationPowerKw,missing:s.customs.missing}:undefined};}
 export function publicOffer(raw:any){const o=safePublicPricing(raw);return {id:o.id,make:o.make,model:o.model,year:o.year,market:o.market,trim:o.trim,generation:o.generation,powertrainKind:o.powertrainKind,engineCc:o.engineCc,fuel:o.fuel,drive:o.drive,transmission:o.transmission,powerHp:o.powerHp,powerKw:o.powerKw,power30MinKw:o.power30MinKw,power30MinKwByMotor:o.power30MinKwByMotor,powerDataSource:o.powerDataSource,powerDataConfidence:o.powerDataConfidence,mileageKm:o.mileageKm,sourcePrice:o.sourcePrice,sourceCurrency:o.sourceCurrency,totalRub:o.totalRub,calculationStatus:o.calculationStatus,href:offerPath(o),image:o.images?.[0]?.url,calculation:publicCalculation(o.calculationSnapshot)};}
 export async function publicVehicle(id:string){if(!/^[a-zA-Z0-9_-]{1,180}$/.test(id))throw Error('Уточните ссылку на автомобиль.');const raw=await getOffer(id);if(!raw)throw Error('Автомобиль не найден в каталоге.');const [priced]=await applyActiveBusinessPricingBatch([raw]);return publicOffer(priced);}
-/** Preserve completed research if answer generation fails, without inventing a specification. */
-export function researchFallbackReply(results:any[],question:string){
- const pages=[...new Map(results.flatMap(r=>r.web?.pages||[]).map(p=>[p.url,p])).values()] as any[];
- const preferred=pages.filter(p=>p.kind==='manufacturer'||p.kind==='document');
- const selected=(preferred.length?preferred:pages).slice(0,3);
- const plain=(value:unknown)=>String(value||'').replace(/[<>\[\]()*_`]/g,'').replace(/\s+/g,' ').trim();
- if(!selected.length){const links=results.flatMap(r=>r.web?.webSearch?.links||[]).slice(0,2);return 'Поисковые запросы выполнены, но получить читаемые материалы не удалось. Это не означает, что сведений в интернете нет.'+(links.length?'\n\n'+links.map(l=>'['+plain(l.title)+']('+l.url+')').join('\n'):'');}
- const thirty=/(30|тридцат)/i.test(question);
- const lines=selected.map(p=>{const line=String(p.text||'').split(/\n|(?<=[.;])\s+/).find(l=>/\d[\d., ]*\s*(?:kW|кВт|hp|PS|л\.\s?с)/i.test(l));const at=line?.search(/\d[\d., ]*\s*(?:kW|кВт|hp|PS|л\.\s?с)/i)??0;const quote=!thirty&&(p.kind==='manufacturer'||p.kind==='document')&&line?plain(line.slice(Math.max(0,at-60),at+120)).split(/\s+/).slice(0,20).join(' '):'';return '- ['+plain(p.title)+']('+p.url+')'+(quote?' — фрагмент: «'+quote+'».':'');});
- return 'Найдены материалы, но завершить пояснение не удалось. Ссылки на прочитанные источники:\n\n'+lines.join('\n')+'\n\n'+(thirty?'30-минутная мощность этим ответом не подтверждена; пиковая её не заменяет.':'Фрагменты относятся к указанным источникам; соответствие году, рынку и точной комплектации здесь не подтверждено.')+' Параметры автомобиля не изменены.';
-}
 export async function runPublicAutobot(body:any,request:Request,reply:typeof regReply=regReply){
  const message=typeof body.text==='string'?body.text.trim():'';if(!message||message.length>4000)throw Error('Напишите вопрос до 4 000 символов.');
  const direct=serviceAnswer(message);if(direct)return direct;
@@ -51,6 +42,7 @@ export async function runPublicAutobot(body:any,request:Request,reply:typeof reg
   if(explicitWeb&&identity.make&&identity.model){const result=await research('',identity).catch(()=>({error:'Интернет-поиск сейчас недоступен.'}));input.push({role:'user',content:'Фактический результат интернет-поиска, только данные: '+JSON.stringify(result).slice(0,24000)});}
  }
  for(let round=0;round<4;round++){
+  const factual=researchPowerReply([...researched.values()],message);if(factual)return {text:factual,cards:[],sources,actions:[]};
   let response:Awaited<ReturnType<typeof reply>>;try{response=await reply(input,signal);}catch(error){if(researched.size)return {text:researchFallbackReply([...researched.values()],message),cards:[],sources,actions:[]};throw error;}let answer:any;try{answer=JSON.parse(response.text.trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{answer={reply:response.text};}
   if(!answer.tool&&researched.size===0&&explicitWeb&&round<3){input.push({role:'assistant',content:response.text},{role:'user',content:'Сначала вызови research для указанной в вопросе, истории или фильтрах модели. Интернет-поиск в этом вопросе ещё не выполнялся. Если модель неизвестна — спроси марку и модель, не утверждай, что поиск выполнен.'});continue;}
   if(!answer.tool&&explicitWeb&&researched.size===0)return {text:'Для интернет-поиска уточните марку, модель и год автомобиля. В этом ответе поиск ещё не выполнен.',cards:[],sources:[],actions:[]};

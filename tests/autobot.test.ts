@@ -174,3 +174,18 @@ test('official model catalog reaches an archived body and its matching technical
  assert.equal(seen.length,5);assert.equal(result.pages[0].url,pdf);assert.match(result.pages[0].text,/195 kW/);assert.ok(!seen.some(u=>u.includes('evil.test')||u.includes('35-TDI')||u.includes('Sportback')));
  const other=await r.discoverManufacturerCatalog({make:'Toyota',model:'Corolla'},AbortSignal.timeout(1000),read);assert.equal(other.pages.length,0);assert.equal(seen.length,5);
 });
+test('power evidence selects the requested engine row and never treats consumption as power',async()=>{
+ const research=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ const text='Audi A5 Coupe until 2024\n35 TDI S tronic (120 kW) MHEV\n'+('Other text. '.repeat(300))+'\n45 TFSI quattro S tronic (195 kW) MHEV';
+ const focused=research.variantEvidence(text,'Coupe 45 TFSI quattro Premium');assert.match(focused.slice(0,100),/45 TFSI.*195 kW/);
+ const a=await import('../apps/web/lib/autobot/research-answer');
+ const evidence=(text:string)=>[{web:{pages:[{title:'Audi A5 Coupe until 2024',url:'https://www.audi.com/en/spec',kind:'manufacturer',text}]}}];
+ assert.match(a.researchPowerReply(evidence(focused),'Найди мощность 45 TFSI'),/195 кВт.*265 л.с./);
+ assert.equal(a.researchPowerReply(evidence('35 TDI 120 kW'),'Мощность 45 TFSI'),null);
+ assert.equal(a.researchPowerReply(evidence('45 TFSI consumption 15.7 kWh/100 km'),'Мощность 45 TFSI'),null);
+ assert.equal(a.researchPowerReply(evidence('45 TFSI 195 kW'),'30 минутная мощность 45 TFSI'),null);
+ assert.equal(a.researchPowerReply(evidence('45 TFSI 195 kW'),'Рассчитай 45 TFSI, мощность 195 кВт'),null);
+ assert.equal(a.researchPowerReply(evidence('45 TFSI 195 kW'),'Сравни мощность 45 TFSI и 40 TFSI'),null);
+ assert.match(a.researchPowerReply(evidence(research.variantEvidence('45 TFSI\nquattro S tronic\n195 kW','45 TFSI')),'Найди мощность 45 TFSI'),/195 кВт/);
+ assert.doesNotMatch(a.researchFallbackReply(evidence('35 TDI 120 kW\n45 TFSI 195 kW'),'Мощность 45 TFSI'),/120/);
+});
