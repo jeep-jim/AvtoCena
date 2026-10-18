@@ -12,11 +12,13 @@ async function main(){
  if(!isIP(ip)||ip!=='151.248.113.177')throw Error('server_ip_not_confirmed');
  stage='password';const password=await ajesPassword();if(!password)throw Error('not_configured');
  const storage=getJsonStorage();
- for(const market of ['japan','korea','china'] as const){
-  const table=market==='japan'?'stats':market;
+ for(const market of ['korea','china'] as const){
+  const table=market;
   stage=`${market}:switch`;await assertCollectionEnabled(`ajes_${market}_feed`);
   stage=`${market}:usage`;await reserveAjesRequest(storage,table);
-  const sql=`select * from ${table} limit 5`,endpoint='http://87.242.72.57/api/';
+  const sample=await storage.readJson<any>(`integrations/ajes/server-sample-${market}.json`,null);
+  const id=String(sample?.rows?.[0]?.ID||'');if(!/^[A-Za-z0-9_-]{1,64}$/.test(id))throw Error('sample_missing');
+  const sql=`select * from ${table} where id='${id}'`,endpoint='http://87.242.72.57/api/';
   const diagnostic={market,startedAt:new Date().toISOString(),finishedAt:'',clientIp:ip,sql,endpoint,requestStarted:false,httpStatus:null as number|null,providerCode:null as string|null,outcome:'pending'};
   let summary:Record<string,unknown>={market,table};
   try{
@@ -35,10 +37,10 @@ async function main(){
    let rows:unknown;try{rows=JSON.parse(text);}catch{throw Error('invalid_response');}
    if(!Array.isArray(rows)||rows.length>5||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw Error('invalid_response');
    const fields=[...new Set(rows.flatMap(r=>Object.keys(r)))].filter(k=>/^[a-zA-Z0-9_() *-]{1,64}$/.test(k)).slice(0,150);
-   const selected=['ID','MARKA_NAME','MODEL_NAME','YEAR','ENG_V','PW','TIME','FUEL','FINISH','PRICE','CURRENCY','KUZOV','MILEAGE','KPP','PRIV','STATUS'];
+   const selected=['MONTH','SERIAL','AUCTION_DATE','ID','MARKA_NAME','MODEL_NAME','YEAR','ENG_V','PW','TIME','FUEL','FINISH','PRICE','CURRENCY','KUZOV','MILEAGE','KPP','PRIV','STATUS'];
    const safeRows=rows.map(row=>Object.fromEntries(selected.filter(k=>Object.prototype.hasOwnProperty.call(row,k)).map(k=>[k,typeof row[k]==='string'?row[k].slice(0,256):typeof row[k]==='number'&&Number.isFinite(row[k])?row[k]:null])));
-   await storage.writeJson(`integrations/ajes/server-sample-${market}.json`,{market,observedAt:new Date().toISOString(),received:rows.length,fields,rows:safeRows});
-   summary={...summary,received:rows.length,fields,present:Object.fromEntries(selected.map(k=>[k,rows.filter(r=>r[k]!=null&&String(r[k]).trim()!=='').length]))};
+   await storage.writeJson(`integrations/ajes/detail-sample-${market}.json`,{market,observedAt:new Date().toISOString(),received:rows.length,fields,rows:safeRows});
+   summary={...summary,received:rows.length,fields,units:{fuel:[...new Set(rows.map(r=>String(r.TIME)).filter(v=>/^[A-Z]{1,3}$/.test(v)))],priceRange:rows.map(r=>Number(r.FINISH)).filter(Number.isFinite),engineRange:rows.map(r=>Number(r.ENG_V)).filter(Number.isFinite),powerSyntax:rows.map(r=>String(r.PW)).filter(v=>/^[0-9,. ]{0,30}$/.test(v)),imageHosts:[...new Set(rows.flatMap(r=>String(r.IMAGES||'').split('#').map(u=>{try{return new URL(u).hostname}catch{return ''}})))],infoKeys:rows.flatMap(r=>{try{return Object.keys(JSON.parse(r.INFO))}catch{return []}})},present:Object.fromEntries(selected.map(k=>[k,rows.filter(r=>r[k]!=null&&String(r[k]).trim()!=='').length]))};
    diagnostic.outcome=rows.length?'success':'empty';
   }catch(error){const message=error instanceof Error?error.message:'';diagnostic.outcome=/^(provider_restricted|invalid_response|response_too_large|http_[1-5]\d\d)$/.test(message)?message:'request_failed';}
   diagnostic.finishedAt=new Date().toISOString();
