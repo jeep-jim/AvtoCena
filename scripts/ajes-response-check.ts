@@ -1,24 +1,49 @@
 import {ajesPassword} from '../apps/web/lib/catalog/ajes-settings';
-import {createAjesClient,AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {getJsonStorage} from '../apps/web/lib/data';
 import {gunzipSync} from 'node:zlib';
 import {isIP} from 'node:net';
+// Supplier instruction 18 October: genuine server IP for server-origin diagnostics.
+// One Moscow request per table, no endpoint rotation or automatic retries.
 async function main(){
- const ip=process.env.AJES_DIAG_IP||'';if(!isIP(ip))throw Error();
- const client=createAjesClient({password:ajesPassword,assertEnabled:()=>assertCollectionEnabled('ajes_japan_feed'),reserve:t=>reserveAjesRequest(getJsonStorage(),t),fetcher:async(...args)=>{
-  const r=await fetch(...args),reader=r.clone().body!.getReader();const chunks:Uint8Array[]=[];let size=0;
-  while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>2*1024*1024){await reader.cancel();throw Error();}chunks.push(value);}
-  let b=Buffer.concat(chunks);const gzip=b[0]===31&&b[1]===139;if(gzip)b=gunzipSync(b,{maxOutputLength:2*1024*1024});
-  const s=b.toString('utf8');let value:unknown,validJson=false;try{value=JSON.parse(s);validJson=true;}catch{}
-  const marker=s.trimStart().match(/^bot(\d{0,3})(?=\s|$)/i);
-  console.log('AJES_RESPONSE_SHAPE',JSON.stringify({status:r.status,bytes:b.length,gzip,validJson,array:Array.isArray(value),rows:Array.isArray(value)?value.length:null,bom:s.charCodeAt(0)===65279,html:/^\s*<(?:!doctype|html)/i.test(s),bot:marker?'bot'+marker[1]:null,productionBotMatch:b.length<=256&&/^bot\d*\s/i.test(s)}));
-  return r;
- }});
- for(const [name,query]of [['minimal',{table:'stats',pageSize:1}],['catalog',{table:'stats',make:'HONDA',pageSize:24}]] as const){
-  try{const r=await client.read(query,ip);console.log('AJES_RESULT',JSON.stringify({name,ok:true,received:r.received,accepted:r.items.length,rejected:r.rejected}));}
-  catch(e){const allowed=['visitor_restricted','invalid_response','not_configured','client_ip_missing','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_invalid','quota_busy'];console.log('AJES_RESULT',JSON.stringify({name,ok:false,reason:e instanceof AjesUnavailable&&allowed.includes(e.reason)?e.reason:'check_failed'}));}
+ const ip=process.env.AJES_DIAG_IP||'';
+ if(!isIP(ip)||ip!=='151.248.113.177')throw Error('server_ip_not_confirmed');
+ const password=await ajesPassword();if(!password)throw Error('not_configured');
+ const storage=getJsonStorage();
+ for(const market of ['japan','korea','china'] as const){
+  const table=market==='japan'?'stats':market;
+  await assertCollectionEnabled(`ajes_${market}_feed`);
+  await reserveAjesRequest(storage,table);
+  const sql=`select * from ${table} limit 5`,endpoint='http://87.242.72.57/api/';
+  const diagnostic={market,startedAt:new Date().toISOString(),finishedAt:'',clientIp:ip,sql,endpoint,requestStarted:false,httpStatus:null as number|null,providerCode:null as string|null,outcome:'pending'};
+  let summary:Record<string,unknown>={market,table};
+  try{
+   const url=new URL(endpoint);url.search=new URLSearchParams({ip,json:'',code:password,sql}).toString();
+   diagnostic.requestStarted=true;
+   const response=await fetch(url,{redirect:'error',cache:'no-store',signal:AbortSignal.timeout(20000)});
+   diagnostic.httpStatus=response.status;
+   if(!response.ok){await response.body?.cancel();throw Error(`http_${response.status}`);}
+   const reader=response.body?.getReader();if(!reader)throw Error('invalid_response');
+   const chunks:Uint8Array[]=[];let size=0;
+   while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>2*1024*1024){await reader.cancel();throw Error('response_too_large');}chunks.push(value);}
+   const bytes=Buffer.concat(chunks),decoded=bytes[0]===31&&bytes[1]===139?gunzipSync(bytes,{maxOutputLength:2*1024*1024}):bytes;
+   const text=decoded.toString('utf8').replace(/^\uFEFF/,'');
+   const refusal=decoded.length<=256?text.match(/^\s*((?:bot|ban)\d*)(?:\s|$)/i):null;
+   if(refusal){diagnostic.providerCode=refusal[1].toLowerCase();throw Error('provider_restricted');}
+   let rows:unknown;try{rows=JSON.parse(text);}catch{throw Error('invalid_response');}
+   if(!Array.isArray(rows)||rows.length>5||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw Error('invalid_response');
+   const fields=[...new Set(rows.flatMap(r=>Object.keys(r)))].filter(k=>/^[a-zA-Z0-9_() *-]{1,64}$/.test(k)).slice(0,150);
+   const selected=['ID','MARKA_NAME','MODEL_NAME','YEAR','ENG_V','PW','TIME','FUEL','FINISH','PRICE','CURRENCY','KUZOV','MILEAGE','KPP','PRIV','STATUS'];
+   const safeRows=rows.map(row=>Object.fromEntries(selected.filter(k=>Object.prototype.hasOwnProperty.call(row,k)).map(k=>[k,typeof row[k]==='string'?row[k].slice(0,256):typeof row[k]==='number'&&Number.isFinite(row[k])?row[k]:null])));
+   await storage.writeJson(`integrations/ajes/server-sample-${market}.json`,{market,observedAt:new Date().toISOString(),received:rows.length,fields,rows:safeRows});
+   summary={...summary,received:rows.length,fields,present:Object.fromEntries(selected.map(k=>[k,rows.filter(r=>r[k]!=null&&String(r[k]).trim()!=='').length]))};
+   diagnostic.outcome=rows.length?'success':'empty';
+  }catch(error){const message=error instanceof Error?error.message:'';diagnostic.outcome=/^(provider_restricted|invalid_response|response_too_large|http_[1-5]\d\d)$/.test(message)?message:'request_failed';}
+  diagnostic.finishedAt=new Date().toISOString();
+  await storage.writeJson(`integrations/ajes/server-diagnostic-${market}.json`,diagnostic);
+  console.log('AJES_SERVER_CHECK',JSON.stringify({...summary,endpoint,httpStatus:diagnostic.httpStatus,providerCode:diagnostic.providerCode,outcome:diagnostic.outcome,startedAt:diagnostic.startedAt}));
+  if(diagnostic.providerCode)break;
  }
 }
-main().catch(()=>{console.log('AJES_CHECK_FAILED');process.exitCode=1;});
+main().catch(()=>{console.log('AJES_SERVER_CHECK_FAILED');process.exitCode=1;});

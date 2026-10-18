@@ -25,7 +25,7 @@ jobs:
           import {build} from 'esbuild';
           await build({entryPoints:['scripts/ajes-response-check.ts'],outfile:'/tmp/ajes-response-check.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
-      - name: Two bounded requests using the real diagnostic caller address
+      - name: Bounded requests using supplier-approved genuine server address
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
@@ -35,4 +35,4 @@ jobs:
           trap 'rm -f "$key_file" /tmp/ajes-response-check.cjs' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'set -- $SSH_CONNECTION; docker exec -i -e AJES_DIAG_IP="$1" avtocena-production node' < /tmp/ajes-response-check.cjs
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'set -- $SSH_CONNECTION; test "$3" = 151.248.113.177; docker exec -i -e AJES_DIAG_IP="$3" avtocena-production node' < /tmp/ajes-response-check.cjs
