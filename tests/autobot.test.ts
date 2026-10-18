@@ -182,6 +182,7 @@ test('power evidence selects the requested engine row and never treats consumpti
  const evidence=(text:string)=>[{web:{pages:[{title:'Audi A5 Coupe until 2024',url:'https://www.audi.com/en/spec',kind:'manufacturer',text}]}}];
  assert.match(a.researchPowerReply(evidence(focused),'Найди мощность 45 TFSI'),/195 кВт.*265 л.с./);
  assert.equal(a.researchPowerReply(evidence('35 TDI 120 kW'),'Мощность 45 TFSI'),null);
+ const thirdParty=evidence('45 TFSI 195 kW');thirdParty[0].web.pages[0].kind='document';assert.doesNotMatch(a.researchPowerReply(thirdParty,'Мощность 45 TFSI'),/официальн/);assert.match(a.researchPowerReply(thirdParty,'Мощность 45 TFSI'),/прочитанном документе/);
  assert.equal(a.researchPowerReply(evidence('45 TFSI consumption 15.7 kWh/100 km'),'Мощность 45 TFSI'),null);
  assert.equal(a.researchPowerReply(evidence('45 TFSI 195 kW'),'30 минутная мощность 45 TFSI'),null);
  assert.equal(a.researchPowerReply(evidence('45 TFSI 195 kW'),'Рассчитай 45 TFSI, мощность 195 кВт'),null);
