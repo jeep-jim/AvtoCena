@@ -8,7 +8,7 @@ const token=(s:string)=>s.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 const clean=(s:unknown)=>String(s||'').replace(/[<>\u0000-\u001f]/g,' ').replace(/\s+/g,' ').trim().slice(0,100);
 export function manufacturerLink(value:string,make:string){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!u.search&&!/\.(pdf|zip|jpg|png)$/i.test(u.pathname)&&(manufacturerDomains[token(make)]||[]).some(h=>u.hostname===h||u.hostname.endsWith('.'+h));}catch{return false;}}
 export function manufacturerDocument(value:string,make:string){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&/\.pdf$/i.test(u.pathname)&&(manufacturerDomains[token(make)]||[]).some(h=>u.hostname===h||u.hostname.endsWith('.'+h));}catch{return false;}}
-export function mentionsModel(text:string,model:string){const words=(s:string)=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();return (' '+words(text)+' ').includes(' '+words(model)+' ');}
+export function mentionsModel(text:string,model:string){const words=(s:string)=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').replace(/step\s*(?:wagon|wgn)/g,'stepwgn').trim();return (' '+words(text)+' ').includes(' '+words(model)+' ');}
 export function researchText(html:string){return html.replace(/<(script|style|nav|header|footer|aside)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<!--[\s\S]*?-->/g,' ').replace(/<\/(?:tr|p|div|h[1-6]|li)>/gi,'\n').replace(/<[^>]+>/g,' ').replace(/&#(\d+);/g,(_,n)=>Number(n)<0x110000?String.fromCodePoint(Number(n)):' ').replace(/&nbsp;|&#160;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim();}
 export function researchNeeded(question:string,car:any){return Boolean(car&&/(мощ|квт|л\.\s?с|двигател|топлив|привод|объ[её]м|характерист|параметр|найди|найти|интернет|гугл|google|поищи|не\s*заполн|30.?мин|power|specification)/i.test(question));}
 const cache=new Map<string,{until:number;result:any}>();
@@ -17,7 +17,7 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  const make=clean(identity.make),model=clean(identity.model);if(!make||!model)return {status:'unknown_identity',pages:[]};
  const key=JSON.stringify([make,model,identity.year,identity.market,identity.trim,identity.topic,identity.motorCodes,identity.engine]);const hit=cache.get(key);if(!identity.fresh&&read===readSource&&hit&&hit.until>Date.now())return hit.result;
  const pages:Page[]=[],failures:string[]=[];const budget=AbortSignal.any([signal,AbortSignal.timeout(40000)]);
- const nativeTask=read===readSource?regSearch([{role:'system',content:'Найди характеристики автомобиля в интернете. Отвечай по-русски кратко с источниками. Учитывай год, рынок и комплектацию. Предпочитай документы производителя. Если версии различаются, перечисли различия. Не подменяй 30-минутную мощность пиковой. Не выдумывай найденные данные.'},{role:'user',content:JSON.stringify({make,model,year:identity.year,market:identity.market,trim:identity.trim,topic:identity.topic,motorCodes:identity.motorCodes})}],budget).catch(()=>null):Promise.resolve(null);
+ const nativeTask=read===readSource?regSearch([{role:'system',content:'Найди характеристики автомобиля в интернете. Отвечай по-русски кратко с источниками. Добавь полные URL найденных источников прямо в текст обычными ссылками Markdown [название](https://...). Одних номеров [1] недостаточно. Не выдумывай URL. Учитывай год, рынок и комплектацию. Предпочитай документы производителя. Если версии различаются, перечисли различия. Не подменяй 30-минутную мощность пиковой. Не выдумывай найденные данные.'},{role:'user',content:JSON.stringify({make,model,year:identity.year,market:identity.market,trim:identity.trim,topic:identity.topic,motorCodes:identity.motorCodes})}],budget).catch(()=>null):Promise.resolve(null);
  const catalogTask=discoverManufacturerCatalog(identity,budget,read).catch(()=>({pages:[],failures:['Каталог производителя недоступен.']}));
  const discoveryTask=discoverVehicleWeb(identity,budget,read).catch(()=>({pages:[],failures:['Веб-поиск не завершён.'],engine:identity.engine||'bing'}));
  try{
@@ -39,8 +39,22 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  for(const p of discovery.pages.reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...discovery.failures);
  const catalog=await catalogTask;for(const p of [...catalog.pages].reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...catalog.failures);
  const native=await nativeTask;
- const searchEvidence=native?.sources?.length?{answer:native.text,sources:native.sources}:undefined;
- const result={searchEvidence,webSearch:{manufacturerReadPages:catalog.pages.length,engine:discovery.engine||identity.engine||'bing',readPages:discovery.pages.length,failures:discovery.failures,links:researchQueries(identity).map(q=>({title:'Поиск '+(identity.engine==='google'?'Google':'Bing'),url:(identity.engine==='google'?'https://www.google.com/search?':'https://www.bing.com/search?')+new URLSearchParams({q})}))},identity:{make,model,year:identity.year,market:identity.market,trim:identity.trim},checkedAt:new Date().toISOString(),status:pages.length||searchEvidence?'found':'not_found',pages,failures,scope:'Поиск по ограниченному набору запросов в выбранном поисковике, чтение найденных публичных страниц/PDF и справочных ссылок производителя. Непрочитанные документы не подтверждают параметры. Данные справочные; применимость к году, поколению, рынку и комплектации нужно проверять. Не считать максимальную мощность 30-минутной. Не менять карточку или расчёт.'};
+ const nativeSources=[...(native?.sources||[])];
+ if(native&&!nativeSources.length){
+  const verified=await Promise.allSettled((native.linkCandidates||[]).slice(0,3).map(async(link:any)=>{
+   const page=await read(link.url,AbortSignal.any([signal,AbortSignal.timeout(8000)]),0,/\.pdf(?:$|\?)/i.test(link.url)?'document':'html');
+   const text=researchText(page.html);
+   if(/access denied|verify you are human|just a moment|captcha/i.test(text.slice(0,1200))||!mentionsModel(text,model))throw Error('unverified_link');
+   return {title:link.title,url:page.url,kind:'web' as const,text:evidenceExcerpt(text)};
+  }));
+  for(const item of verified)if(item.status==='fulfilled'){
+   if(!pages.some(p=>p.url===item.value.url))pages.push(item.value);
+   nativeSources.push({title:item.value.title,url:item.value.url});
+  }
+ }
+ const searchEvidence=nativeSources.length?{answer:native!.text,sources:nativeSources}:undefined;
+ const generalReference=native&&!searchEvidence?{answer:native.text.replace(/\[[^\]]*\]\([^)]*\)|\[\d+\]/g,''),verified:false,note:'Справочная подсказка модели. Источники не подтверждены; не называй это проверенными данными или результатом чтения сайта.'}:undefined;
+ const result={searchEvidence,generalReference,webSearch:{manufacturerReadPages:catalog.pages.length,engine:discovery.engine||identity.engine||'bing',readPages:discovery.pages.length,failures:discovery.failures,links:researchQueries(identity).map(q=>({title:'Поиск '+(identity.engine==='google'?'Google':'Bing'),url:(identity.engine==='google'?'https://www.google.com/search?':'https://www.bing.com/search?')+new URLSearchParams({q})}))},identity:{make,model,year:identity.year,market:identity.market,trim:identity.trim},checkedAt:new Date().toISOString(),status:pages.length||searchEvidence?'found':'not_found',pages,failures,scope:'Поиск по ограниченному набору запросов в выбранном поисковике, чтение найденных публичных страниц/PDF и справочных ссылок производителя. Непрочитанные документы не подтверждают параметры. Данные справочные; применимость к году, поколению, рынку и комплектации нужно проверять. Не считать максимальную мощность 30-минутной. Не менять карточку или расчёт.'};
  if(read===readSource&&(pages.length||searchEvidence)){if(cache.size>=100)cache.delete(cache.keys().next().value);cache.set(key,{until:Date.now()+(pages.some(p=>p.kind!=='reference')?30*60000:60000),result});}return result;
 }
 

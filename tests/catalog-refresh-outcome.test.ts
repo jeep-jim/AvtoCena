@@ -51,3 +51,18 @@ test('verification requires active generation, matching count and the published 
    {manifest:{...args.manifest,markets:{china:{count:1}}}},{outcome:{...args.outcome,runId:'43'}},
    {checkpoint:{...args.checkpoint,sources:[{...paidSource,cursor:1}]}}])assert.throws(()=>verifyChe168Publication({...args,...patch}));
 });
+
+const dubiSource={sourceId:'dubicars_uae_exact',provider:'auto_api_dubicars',mode:'snapshot',stopReason:'source_finished',initialCursor:275554,cursor:287280,observations:26403,rejectedIdentity:0,snapshotStartedAt:now};
+const dubi={provider:'auto_api_dubicars',market:'uae',completed:true,completedAt:now,sources:[dubiSource]};
+test('Dubicars complete snapshot and caught-up changes accepts nonzero cursor',()=>{
+ assert.equal(refreshOutcome({market:'uae',now,intake:dubi,publication:{published:true,generationId:'new'}}).collectionComplete,true);
+});
+test('Dubicars completed delta accepts unchanged inventory but rejects incomplete or invalid streams',()=>{
+ const delta={...dubi,sources:[{...dubiSource,mode:'delta',stopReason:'source_changes_finished',observations:0}]};
+ assert.equal(refreshOutcome({market:'uae',now,intake:delta}).collectionComplete,true);
+ for(const bad of [{...dubi,completed:false},{...dubi,failure:'failed'},{...dubi,market:'china'},...[
+  {cursor:1},{rejectedIdentity:1},{observations:0},{mode:'unknown'},{stopReason:'collecting'},{initialCursor:-1}
+ ].map(patch=>({...dubi,sources:[{...dubiSource,...patch}]}))]){
+  assert.equal(refreshOutcome({market:'uae',now,intake:bad}).collectionComplete,false);
+ }
+});

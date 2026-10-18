@@ -1,6 +1,18 @@
 import {publishedIntakeCheckpoint} from './catalog-intake-checkpoint.mjs';
 const finished = new Set(['source_finished', 'source_cycle_finished']);
 export function sourceCollectionComplete(intake, source) {
+ if (source?.provider === 'auto_api_dubicars') {
+  if (intake?.provider !== 'auto_api_dubicars' || intake.market !== 'uae' || intake.completed !== true || intake.failure
+    || source.sourceId !== 'dubicars_uae_exact' || source.rejectedIdentity !== 0
+    || !Number.isSafeInteger(source.initialCursor) || source.initialCursor < 0
+    || !Number.isSafeInteger(source.cursor) || source.cursor < source.initialCursor
+    || !((source.mode === 'snapshot' && source.stopReason === 'source_finished' && source.observations > 0)
+      || (source.mode === 'delta' && source.stopReason === 'source_changes_finished' && Number.isFinite(Date.parse(source.snapshotStartedAt))))) return false;
+  try {
+   publishedIntakeCheckpoint({...intake,sources:[source]}, {published:true,generationId:'validation-only',market:'uae'});
+   return true;
+  } catch { return false; }
+ }
  if (source?.provider === 'auto_api_che168') {
   if (intake?.provider !== 'auto_api_che168' || intake.market !== 'china' || intake.completed !== true || intake.failure
     || source.sourceId !== 'autohome_used_china_open' || source.stopReason !== 'source_finished'
