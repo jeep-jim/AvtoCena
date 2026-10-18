@@ -214,3 +214,13 @@ test('native search evidence counts as found even when direct page reading fails
  const result=await r.researchVehicle({make:'Honda',model:'Step Wagon',year:2015,vin:'PRIVATE-VIN'},AbortSignal.timeout(1000));
  assert.equal(result.status,'found');assert.deepEqual(result.pages,[]);assert.equal(result.searchEvidence.sources.length,1);assert.ok(!state.query.includes('PRIVATE-VIN'));
 });
+
+test('search URLs in message text are read before becoming source evidence',async()=>{
+ const state:any={files:new Map()};
+ const r=await load('apps/web/lib/autobot/research.ts',state,{
+ source:`export async function readSource(url){if(url==='https://www.honda.co.jp/spec/')return {url,html:'<title>Honda StepWGN</title><p>Honda StepWGN 2015 150 PS petrol</p>'};throw Error('offline')}`,
+ provider:`export async function regSearch(){return {text:'Honda [spec](https://www.honda.co.jp/spec/)',sources:[],linkCandidates:[{title:'Honda',url:'https://www.honda.co.jp/spec/'},{title:'Unrelated',url:'https://example.com/'}]};}`,
+ });
+ const result=await r.researchVehicle({make:'Honda',model:'Step Wagon',year:2015},AbortSignal.timeout(1000));
+ assert.equal(result.status,'found');assert.equal(result.searchEvidence.sources.length,1);assert.equal(result.pages[0].url,'https://www.honda.co.jp/spec/');
+});
