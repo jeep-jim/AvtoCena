@@ -135,5 +135,22 @@ test('Google request parses real result links and reads pages instead of reusing
   requests.push(url);return {url,html:url.includes('google.com/search')?'<a href="https://www.audi.co.kr/a5"><h3>Audi A5</h3></a>':'Audi A5 Coupe 45 TFSI quattro. Model year 2023. Maximum power 195 kW.'};
  });
  assert.ok(requests.some(url=>url.includes('google.com/search')));assert.equal(result.pages.length,1);assert.equal(result.pages[0].kind,'manufacturer');assert.match(result.pages[0].text,/195 kW/);
- assert.ok(r.researchQueries({make:'Audi',model:'A5',year:2023,trim:'45 TFSI quattro Premium Coupe'})[1].includes('Audi A5 2023 характеристики'));
+ assert.ok(r.researchQueries({make:'Audi',model:'A5',year:2023,trim:'45 TFSI quattro Premium Coupe'})[1].includes('"Audi A5" 2023 характеристики'));
+});
+test('research prioritizes technical manufacturer PDFs and rejects brand-only results',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ const pdf='https://uploads.audi-mediacenter.com/technical-A5-2023.pdf?download=1';
+ assert.equal(r.manufacturerDocument(pdf,'Audi'),true);assert.equal(r.manufacturerDocument('https://audi.com.evil.test/A5.pdf','Audi'),false);
+ assert.equal(r.mentionsModel('Audi A50','A5'),false);assert.equal(r.mentionsModel('Audi A5 F5','A5'),true);
+ const formats:string[]=[];
+ const read=async(url:string,_signal:any,_redirects:any,format:string)=>{
+  if(format==='xml')return {url,html:'<rss><item><title>Audi homepage</title><link>https://www.audi.com/</link></item></rss>'};
+  if(url.includes('action=query'))return {url,html:JSON.stringify({query:{pages:{1:{pageid:1,title:'Audi A5'}}}})};
+  if(url.includes('action=parse'))return {url,html:JSON.stringify({parse:{text:{'*':'Audi A5 history'},externallinks:[pdf]}})};
+  if(url===pdf){formats.push(format);return {url,html:'Audi A5 Coupe 2023. Engine power 195 kW.'};}
+  return {url,html:'<p>Audi A5 available models</p><p>Welcome to Audi</p>'};
+ };
+ const result=await r.researchVehicle({make:'Audi',model:'A5',year:2023,trim:'Coupe'},AbortSignal.timeout(1000),read);
+ assert.deepEqual(formats,['document']);assert.ok(result.pages.some((p:any)=>p.url===pdf&&p.kind==='document'));assert.ok(!result.pages.some((p:any)=>p.url==='https://www.audi.com/'));
+ assert.match(r.researchQueries({make:'Audi',model:'A5',year:2023,market:'korea'})[0],/^"Audi A5" 2023 Korea/);
 });
