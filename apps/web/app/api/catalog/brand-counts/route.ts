@@ -1,3 +1,4 @@
+import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import {readAjesMakes} from '@/lib/catalog/ajes-catalog';
 import { cookies } from "next/headers";
 import { currentGreenCornerPrices, readGreenCorner } from "@/lib/catalog/green-corner";
@@ -28,7 +29,7 @@ export async function GET(request: Request) {
     for(const row of rows){counts[row.make]=(counts[row.make]||0)+1;const set=models.get(row.make)||new Set<string>();set.add(row.model);models.set(row.make,set);}
     return NextResponse.json({generationId:snapshot.updatedAt,counts,modelCounts:Object.fromEntries([...models].map(([make,set])=>[make,set.size]))});
   }
-  if(url.searchParams.get('market')==='japan'){
+  if(await usesAjesMarket(url.searchParams.get('market'),url.searchParams.get('source'))){
     try{
       const params={...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
       const result=await readAjesMakes(JSON.stringify(params)),counts:Record<string,number>={},modelCounts:Record<string,number>={};

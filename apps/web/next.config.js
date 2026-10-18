@@ -4,7 +4,8 @@ const path = require("path");
 const nextConfig = {
   output: "standalone",
   htmlLimitedBots: new RegExp(require("next/dist/shared/lib/router/utils/html-bots").HTML_LIMITED_BOT_UA_RE.source + "|TelegramBot|Viber|vkbot|MAX|TamTam|OdklBot|Pinterest|Snapchat", "i"),
-  serverExternalPackages: ["pdfkit", "heic-decode", "libheif-js"],
+  serverExternalPackages: ["pdfkit", "heic-decode", "libheif-js", "geoip-country"],
+  outputFileTracingIncludes: {"/*": ["../../node_modules/geoip-country/data/**/*"]},
   outputFileTracingRoot: path.join(__dirname, "../.."),
 
   experimental: {

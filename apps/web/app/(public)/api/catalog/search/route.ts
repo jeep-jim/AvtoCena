@@ -1,3 +1,4 @@
+import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import {AjesFilterUnavailable,AjesInputError} from '@/lib/catalog/ajes-query';
 import {readAjesCatalogPage,readAjesCount,withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { readCatalogMarketPage } from "@/lib/catalog/market-page";
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
-  if(p.get('market')==='japan'&&p.get('stock')!=='green'){
+  if(await usesAjesMarket(p.get('market'),p.get('source'))&&p.get('stock')!=='green'){
     try{
       const params=Object.fromEntries(p);
       const result=p.get('countOnly')==='1'?{total:await readAjesCount(JSON.stringify(params)),items:[]}:await readAjesCatalogPage(params);

@@ -20,6 +20,7 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
   if(offer.editorialSpecifications?.drive)add(basic,"Привод",catalogDriveName(offer.drive));
   if(offer.editorialSpecifications?.transmission)add(basic,"Коробка передач",catalogTransmissionName(offer.transmission));
   if(offer.color)add(basic,"Цвет",offer.color);
+  if(/^ajes_(?:korea|china)_feed$/.test(offer.sourceId)){add(basic,'VIN / номер кузова',offer.frameNumber);add(basic,'Номер объявления',offer.lotNumber);if(offer.drive)add(basic,'Привод',catalogDriveName(offer.drive));if(offer.transmission)add(basic,'Коробка передач',catalogTransmissionName(offer.transmission));add(basic,'Оснащение',offer.operational?.sourceEquipment);}
   if (basic.length) groups.push({ name: "Об автомобиле", items: basic });
   const verified: typeof basic = [];
   if (classifySpecificationEvidence(offer, "engineCc").state === "exact") add(verified, "Рабочий объём, см³", offer.engineCc);

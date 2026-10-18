@@ -101,7 +101,7 @@ test('supplier bot refusal never exposes echoed credentials or substitutes visit
 });
 test('gzip wrapper and already decoded fetch responses both work with bounded decompression',async()=>{
   for(const body of [gzipSync(JSON.stringify([row])),Buffer.from(JSON.stringify([row]))]){
-    const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async(url)=>{assert.equal(new URL(String(url)).pathname,'/gzip/');return new Response(body);}});
+    const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async(url)=>{assert.equal(new URL(String(url)).pathname,'/api/');return new Response(body);}});
     assert.equal((await client.read({id:'test123'},'127.0.0.1')).items.length,1);
   }
   const bomb=gzipSync(' '.repeat(3*1024*1024));

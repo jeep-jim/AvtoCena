@@ -1901,7 +1901,7 @@ export async function publishCurrentCatalogReadModels() {
   return writeCurrentCatalogReadModels(manifest.generationId, storedOffers, true);
 }
 export async function getOfferWithoutEditorial(id: string) {
-  if (/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id)) return (await import('./ajes-public')).getAjesOffer(id);
+  if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)) return (await import('./ajes-public')).getAjesOffer(id);
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   const readProjectionFallback = () => getOfferFromCurrentProjection(id);

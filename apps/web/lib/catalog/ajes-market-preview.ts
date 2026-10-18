@@ -11,7 +11,7 @@ export function ajesPreviewMarket(value:unknown):AjesPreviewMarket {
 }
 const fields=['ID','MARKA_NAME','MODEL_NAME','YEAR','ENG_V','PW','TIME','FUEL','FINISH','PRICE','CURRENCY','KUZOV','MILEAGE','KPP','PRIV','STATUS'];
 export type AjesMarketPreview={market:AjesPreviewMarket;observedAt:string;received:number;fields:string[];rows:Record<string,string|number|null>[]};
-type Dependencies={password:()=>Promise<string|undefined>;assertEnabled:(market:AjesPreviewMarket)=>Promise<void>;reserve:(market:AjesPreviewMarket)=>Promise<void>;read:(market:AjesPreviewMarket)=>Promise<AjesMarketPreview|null>;save:(market:AjesPreviewMarket,value:AjesMarketPreview)=>Promise<unknown>;saveDiagnostic?:(market:AjesPreviewMarket,value:AjesPreviewDiagnostic)=>Promise<unknown>;fetcher?:typeof fetch};
+type Dependencies={password:()=>Promise<string|undefined>;assertEnabled:(market:AjesPreviewMarket)=>Promise<void>;reserve:(market:AjesPreviewMarket)=>Promise<void>;read:(market:AjesPreviewMarket)=>Promise<AjesMarketPreview|null>;save:(market:AjesPreviewMarket,value:AjesMarketPreview)=>Promise<unknown>;saveDiagnostic?:(market:AjesPreviewMarket,value:AjesPreviewDiagnostic)=>Promise<unknown>;endpoint?:(ip:string)=>string;fetcher?:typeof fetch};
 /** Owner-only schema inspection; no publication, price conversion or invented units. */
 export function createAjesMarketPreview(deps:Dependencies){
  const failures=new Map<string,number>();
@@ -28,7 +28,7 @@ export function createAjesMarketPreview(deps:Dependencies){
   const key=market+'\0'+clientIp;
   const existing=pending.get(key);if(existing)return existing;
   const task=(async()=>{
-   const diagnostic:AjesPreviewDiagnostic={market,startedAt:new Date().toISOString(),finishedAt:'',clientIp,sql:`select * from ${market} limit 5`,endpoint:'http://87.242.72.57/gzip/',requestStarted:false,httpStatus:null,providerCode:null,outcome:'pending'};
+   const diagnostic:AjesPreviewDiagnostic={market,startedAt:new Date().toISOString(),finishedAt:'',clientIp,sql:`select * from ${market} limit 5`,endpoint:deps.endpoint?.(clientIp)||'http://87.242.72.57/api/',requestStarted:false,httpStatus:null,providerCode:null,outcome:'pending'};
    async function record(outcome:string){
     diagnostic.outcome=outcome;diagnostic.finishedAt=new Date().toISOString();
     // Private, owner-only last result. Never retain response bodies or credential-bearing URLs.
@@ -36,7 +36,7 @@ export function createAjesMarketPreview(deps:Dependencies){
    }
    try{
     await deps.assertEnabled(market);await deps.reserve(market);
-    const url=new URL('http://87.242.72.57/gzip/');
+    const url=new URL(diagnostic.endpoint);
     url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:`select * from ${market} limit 5`}).toString();
     diagnostic.requestStarted=true;
     const response=await (deps.fetcher||fetch)(url,{redirect:'error',cache:'no-store',signal:AbortSignal.timeout(20000)});
@@ -47,7 +47,7 @@ export function createAjesMarketPreview(deps:Dependencies){
     while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>2*1024*1024){await reader.cancel();throw Error('response_too_large');}chunks.push(value);}
     const bytes=Buffer.concat(chunks),decoded=bytes[0]===0x1f&&bytes[1]===0x8b?gunzipSync(bytes,{maxOutputLength:2*1024*1024}):bytes;
     const text=decoded.toString('utf8');
-    const bot=decoded.length<=256?text.match(/^\s*(bot\d*)(?:\s|$)/i):null;
+    const bot=decoded.length<=256?text.match(/^\s*((?:bot|ban)\d*)(?:\s|$)/i):null;
     if(bot){diagnostic.providerCode=bot[1].toLowerCase();throw Error('visitor_restricted');}
     let rows:unknown;try{rows=JSON.parse(text);}catch{throw Error('invalid_response');}
     if(!Array.isArray(rows)||rows.length>5||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw Error('invalid_response');

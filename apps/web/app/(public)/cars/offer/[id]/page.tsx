@@ -123,8 +123,8 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
   const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
   const otherMarkets = PUBLIC_CATALOG_MARKETS.filter(market => market !== current.market);
   // Bounded model queries stream behind the primary offer; failures stay isolated by market.
-  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'
-    ? readAjesPublic({table:'stats',make:params.make,model:params.model?(String(current.id).startsWith('ajes-stats-')?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
+  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'||(/^ajes-(?:korea|china)-/.test(String(current.id))&&params.market===current.market)
+    ? readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(String(current.id).startsWith('ajes-stats-')?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
     : searchOffers(params)).catch(error => {
     console.error("offer_similar_search_failed", error); return {items:[],total:0};
   });
@@ -140,11 +140,13 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
     greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
     price:applyActiveBusinessPricingBatch,renderable:isRenderableRelatedOffer,
   });
-  const japanTotal=current.market==='japan'?await readAjesCount().catch(()=>null):null;
-  const marketTotal=current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0)):Math.max(0,Number(marketResult.total||0));
+  const liveStock=/^ajes-(?:korea|china)-/.test(String(current.id));
+  const japanTotal=current.market==='japan'||liveStock?await readAjesCount(JSON.stringify({market:current.market})).catch(()=>null):null;
+  const marketTotal=liveStock?japanTotal:current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0)):Math.max(0,Number(marketResult.total||0));
   const modelParams = new URLSearchParams({market:String(current.market||""),make,model:familyModel});
   const marketParams = new URLSearchParams({market:String(current.market||"")});
   if(current.market==='japan')marketParams.set('stock','all');
+  if(/^ajes-(?:korea|china)-/.test(String(current.id))){marketParams.set('source','ajes');modelParams.set('source','ajes');}
   const marketLabel = String(presented.marketLabel || current.market || "рынка");
   const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={item} compact />)}</div>;
   return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>

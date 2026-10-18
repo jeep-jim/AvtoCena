@@ -6,7 +6,7 @@ import {ajesOffer,ajesOfferId} from './ajes-offer';
 import {convertToRub} from './rates';
 import type {ajesLot,AjesQuery} from './ajes-query';
 import {applyCatalogEditorial,editorialHidden,readCatalogEditorial} from './editorial';
-import {catalogHeavyVehicleExcluded} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
 export async function readAjesPublic(query:AjesQuery){
  const ip=(await headers()).get('x-real-ip')||'';
  const result=await ajesClient.read(query,ip).catch(error=>{
@@ -18,12 +18,12 @@ export async function readAjesPublic(query:AjesQuery){
  });
  const index=await readCatalogEditorial();
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
-  const rate=await convertToRub(lot.finalPriceJpy,'JPY');
+  const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
   const offer=ajesOffer(lot,rate,result.observedAt);
   return editorialHidden(offer,index)?null:applyCatalogEditorial(offer,index);
  }));
  const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;
- return {...publicResult,items:items.filter(offer=>offer&&!catalogHeavyVehicleExcluded(offer))};
+ return {...publicResult,items:items.filter(offer=>offer&&catalogInventoryAgeDecision(offer).eligible&&!catalogHeavyVehicleExcluded(offer))};
 }
-export async function getAjesOffer(id:string){if(!ajesOfferId(id))return null;const result=await readAjesPublic({table:'stats',id:id.slice('ajes-stats-'.length)});return result.items[0]||null;}
+export async function getAjesOffer(id:string){if(!ajesOfferId(id))return null;const match=id.match(/^ajes-(stats|korea|china)-(.+)$/)!;const result=await readAjesPublic({table:match[1] as 'stats'|'korea'|'china',id:match[2]});return result.items[0]||null;}

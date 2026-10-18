@@ -41,5 +41,8 @@
     "next": {
       "postcss": "8.5.28"
     }
+  },
+  "dependencies": {
+    "geoip-country": "^5.0.202610170130"
   }
 }

@@ -1,4 +1,5 @@
 import 'server-only';
+import {ajesEndpoint} from './ajes-routing';
 import {readAjesQueryCache,readExpandedJapanRows,saveAjesQueryCache} from './ajes-query-cache';
 import {ajesPassword} from './ajes-settings';
 import {getJsonStorage} from '../data';
@@ -32,8 +33,9 @@ async function readListedDetail(table:string,id:string){
 }
 export const ajesClient=createAjesClient({
   password:ajesPassword,
+  endpoint:ajesEndpoint,
   readListedDetail,
-  readSavedSearch:async input=>findSavedAjesSearch(input,await readSavedListIndex()),
+  readSavedSearch:async input=>input.table==='china'||input.table==='korea'?null:findSavedAjesSearch(input,await readSavedListIndex()),
   saveAggregateEvidence:(kind,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${kind}-last.json`,value),
   saveEvidence:(table,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${table}-last-detail.json`,value),
   // Bounded list and count pools; exact hashes prevent unrelated cache hits.
@@ -50,7 +52,7 @@ export const ajesClient=createAjesClient({
     return saved?{...saved,schemaVersion:0}:null;
   },
   saveQuery:(sql,value)=>saveAjesQueryCache(getJsonStorage(),sql,value),
-  assertEnabled:()=>assertCollectionEnabled('ajes_japan_feed'),
+  assertEnabled:table=>assertCollectionEnabled(`ajes_${table==='china'||table==='korea'?table:'japan'}_feed`),
   reserve:table=>reserveAjesRequest(getJsonStorage(),table),
   readDetail:(table,id)=>getJsonStorage().readJson(`catalog/partner-cache/ajes/${table}/${id}.json`,null),
   saveDetail:(table,id,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/${table}/${id}.json`,value),

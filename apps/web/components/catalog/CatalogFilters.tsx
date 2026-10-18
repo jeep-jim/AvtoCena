@@ -156,6 +156,7 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
 function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
+  if (draft.market === "korea" || draft.market === "china") {add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);}
   if (draft.market === "japan") { add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
   add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
@@ -295,10 +296,10 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
   return <>
     {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch multiple sourceItems={sourceModels} contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market==="japan"&&draft.stock==="green"?"green":draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
     <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 ${auctionResults?"lg:grid-cols-3":"lg:grid-cols-4"} ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
-    {auctionResults&&<div className="mt-2.5 grid gap-2.5 md:grid-cols-3"><label className="text-xs font-bold text-[var(--ac-muted)]">Код кузова<input name="chassis" value={draft.chassis} onChange={e=>setField('chassis',e.target.value.toUpperCase())} placeholder="Например, RK5" maxLength={80} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><label className="text-xs font-bold text-[var(--ac-muted)]">Номер лота<input name="lotNumber" value={draft.lotNumber} onChange={e=>setField('lotNumber',e.target.value.replace(/[^0-9]/g,''))} inputMode="numeric" maxLength={10} placeholder="Номер с торгов" className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><div className="self-end"><AuctionGradeSelect value={draft.auctionGrade} onChange={v=>setField('auctionGrade',v)}/></div></div>}
+    {auctionResults&&<div className="mt-2.5 grid gap-2.5 md:grid-cols-3"><label className="text-xs font-bold text-[var(--ac-muted)]">{draft.market==='japan'?'Код кузова':'VIN / номер кузова'}<input name={draft.market==='japan'?'chassis':'frameNumber'} value={draft.market==='japan'?draft.chassis:draft.frameNumber} onChange={e=>setField(draft.market==='japan'?'chassis':'frameNumber',e.target.value.toUpperCase())} placeholder={draft.market==='japan'?'Например, RK5':'Номер из объявления'} maxLength={80} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label><label className="text-xs font-bold text-[var(--ac-muted)]">Номер лота<input name="lotNumber" value={draft.lotNumber} onChange={e=>setField('lotNumber',e.target.value.replace(/[^0-9]/g,''))} inputMode="numeric" maxLength={10} placeholder={draft.market==='japan'?"Номер с торгов":"Номер объявления"} className="ac-filter-control mt-1 h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"/></label>{draft.market==='japan'&&<div className="self-end"><AuctionGradeSelect value={draft.auctionGrade} onChange={v=>setField('auctionGrade',v)}/></div>}</div>}
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 ${auctionResults?"xl:grid-cols-3":"xl:grid-cols-4"}`}>
-        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "japan" || auctionResults ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
+        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
         {!auctionResults&&<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
@@ -361,6 +362,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       const current=new URLSearchParams(window.location.search);if(current.get("selection")==="1")query.set("selection","1");
       const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) { const value=current.get(key); if(value)query.set(key,value); }
+      if(initial.source&&draft.market===initial.market)query.set('source',initial.source);
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
       const href=dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer);
       rememberFilterScroll(href);
@@ -418,7 +420,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes((m.value==="green"?"japan":m.value) as any)) : markets;
   const brandStatsContext = useMemo(() => {
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
-    return catalogQuery(contextDraft, "", "asc");
+    const params=new URLSearchParams(catalogQuery(contextDraft, '', 'asc'));if(initial.source&&draft.market===initial.market)params.set('source',initial.source);return params.toString();
   }, [draft]);
   const bodyOptions = useMemo(() => catalogFilterOptions(bodies, auctionResults ? [] : bodies.slice(1).map(option => option.value), draft.bodyType), [activeFacets, draft.bodyType,auctionResults]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
@@ -475,7 +477,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     // the full current draft instead of letting the old URL win that race.
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
     submitted.current = nextQuery;
-    const query = new URLSearchParams(nextQuery);
+    const query = new URLSearchParams(nextQuery);if(initial.source&&draft.market===initial.market)query.set('source',initial.source);
     if (city) query.set("city", city);
     const current = new URLSearchParams(window.location.search);if(current.get("selection")==="1")query.set("selection","1");
     for (const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) {
