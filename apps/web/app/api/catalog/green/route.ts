@@ -10,5 +10,5 @@ export async function GET(request:Request) {
  const snapshot=await readGreenCorner();
  const result=await readGreenCornerPage(snapshot.items,Object.fromEntries(url.searchParams),false);
  const items=result.items.map(publicGreenOffer);
- return NextResponse.json({items,total:result.total,page},{headers:{"Cache-Control":"private, no-store"}});
+ return NextResponse.json({ok:true,items:url.searchParams.get('countOnly')==='1'?[]:items,total:result.total,page,pageSize:24,hasMore:page*24<result.total},{headers:{"Cache-Control":"private, no-store"}});
 }

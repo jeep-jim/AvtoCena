@@ -311,7 +311,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 
 export function CatalogFilters({ initial, facets, resultCount, auctionResults=false }: { initial: Record<string, string>; facets?: Facets; resultCount?: number; auctionResults?:boolean }) {
   const dealer=useDealerBrowsing();
-  const sourceModels=auctionResults?facets?.models:undefined;
+  const sourceModels=auctionResults||initial.stock==="green"?facets?.models:undefined;
   const selectedCity=useSelectedCity();
   const router = useRouter();
   const [pending,startTransition]=useTransition();

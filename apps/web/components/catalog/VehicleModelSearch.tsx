@@ -209,16 +209,17 @@ export function VehicleModelSearch({
   }, [open]);
 
   const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
+  const sourceStock=new URLSearchParams(contextQuery||'').get('stock')||'';
   useEffect(()=>{
     if(!sourceItems)return;
     setInventory(null);
-    if(!open||!['china','korea','japan'].includes(sourceMarket))return;
+    if(!open||sourceStock==='green'||!['china','korea','japan'].includes(sourceMarket))return;
     let cancelled=false;setInventoryLoading(true);setInventoryError(false);
     loadModelSuggestions(true,{market:sourceMarket,make}).then(search=>{if(!cancelled)setInventory(()=>search);})
       .catch(()=>{if(!cancelled)setInventoryError(true);})
       .finally(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
-  },[Boolean(sourceItems),sourceMarket,make,open,retry]);
+  },[Boolean(sourceItems),sourceMarket,sourceStock,make,open,retry]);
 
   useEffect(()=>{
     if(sourceItems||!contextual||!open||directory)return;

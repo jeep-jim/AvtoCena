@@ -190,3 +190,17 @@ test('power evidence selects the requested engine row and never treats consumpti
  assert.match(a.researchPowerReply(evidence(research.variantEvidence('45 TFSI\nquattro S tronic\n195 kW','45 TFSI')),'Найди мощность 45 TFSI'),/195 кВт/);
  assert.doesNotMatch(a.researchFallbackReply(evidence('35 TDI 120 kW\n45 TFSI 195 kW'),'Мощность 45 TFSI'),/120/);
 });
+
+test('native search uses shared monthly budget and validated source citations',async()=>{
+ const state={files:new Map()},c=await load('apps/web/lib/autobot/config.ts',state);
+ await c.saveAutobotConfig({enabled:true,endpoint:'https://ai.reg.cloud/v1/chat/completions',model:'gpt-6-luna',token:'PRIVATE-KEY',inputRate:36,outputRate:180,monthlyLimit:3000});
+ const p=await load('apps/web/lib/autobot/provider.ts',state),old=globalThis.fetch;
+ try{
+ globalThis.fetch=async(url,init)=>{const body=JSON.parse(String(init?.body));assert.equal(body.model,'sonar');assert.ok(!String(init?.body).includes('PRIVATE-KEY'));return Response.json({usage:{prompt_tokens:100,completion_tokens:20},citations:['https://www.honda.co.jp/spec/','javascript:alert(1)'],search_results:[{title:'Honda',url:'https://www.honda.co.jp/spec/'}],choices:[{finish_reason:'stop',message:{content:'Справочное значение [1].'}}]});};
+ const result=await p.regSearch([{role:'user',content:'Honda specifications'}],AbortSignal.timeout(1000));
+ assert.equal(result.text,'Справочное значение [1](https://www.honda.co.jp/spec/).');assert.deepEqual(result.sources,[{title:'Honda',url:'https://www.honda.co.jp/spec/'}]);
+ const b=await load('apps/web/lib/autobot/budget.ts',state);assert.ok(Math.abs((await b.budgetStatus()).spent-10.0264816)<1e-7);
+ await c.saveAutobotConfig({...(await c.readAutobotConfig()),monthlyLimit:3});
+ await assert.rejects(p.regSearch([{role:'user',content:'Honda'}],AbortSignal.timeout(1000)));
+ }finally{globalThis.fetch=old;}
+});
