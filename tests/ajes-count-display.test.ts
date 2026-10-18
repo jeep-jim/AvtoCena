@@ -23,3 +23,18 @@ test('stock power selection uses numeric nonempty evidence in lists and aggregat
  assert.throws(()=>ajesCatalogQuery({market:'japan',powerTo:'160'}),AjesFilterUnavailable);
  assert.match(ajesQuery(ajesCatalogQuery({market:'china',sort:'mileage',page:'2',pageSize:'48'})).sql,/order by mileage asc, id asc limit 48,48/);
 });
+
+test('delivered budget never accepts seller-only or missing specifications',async()=>{
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const filter=ajesResultFilter({budget:'2000000',bodyType:'suv'});
+ const seller={market:'china',bodyType:'suv',catalogPricingMode:'seller',totalRub:1000000};
+ assert.equal(filter.matches(seller),false);
+ assert.equal(filter.matches({...seller,deliveredCalculationPreview:{totalRub:1900000}}),true);
+ assert.equal(filter.matches({...seller,deliveredCalculationPreview:{totalRub:2100000}}),false);
+ assert.equal(filter.matches({...seller,bodyType:'',deliveredCalculationPreview:{totalRub:1900000}}),false);
+ assert.equal(ajesResultFilter({budget:2000000,city:'Неизвестный город'}).matches({...seller,deliveredCalculationPreview:{totalRub:1900000}}),false);
+ assert.equal(ajesResultFilter({hasPrice:'no'}).matches(seller),true);
+ assert.throws(()=>ajesResultFilter({budgetFrom:200,budget:100}));
+ assert.throws(()=>ajesResultFilter({budget:'NaN'}));
+ assert.doesNotThrow(()=>ajesCatalogQuery({market:'china',budget:2000000,bodyType:'suv'}));
+});

@@ -55,7 +55,7 @@ const greenPreview = unstable_cache(async (offer: VehicleOffer, _revision: strin
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];
-  const generationId = offers.some(o=>o.market==="japan" && o.catalogPricingMode==="seller" && !isGreenCornerOffer(o)) ? await catalogGenerationId() : "";
+  const generationId = offers.some(o=>o.market==="japan" && o.catalogPricingMode==="seller" && !isGreenCornerOffer(o) && o.sourceId!=="ajes_japan_feed") ? await catalogGenerationId() : "";
   let cursor = 0;
   // Only visible cards, bounded storage/calculation concurrency, no browser fan-out.
   await Promise.all(Array.from({ length: Math.min(4, offers.length) }, async () => {
@@ -64,6 +64,13 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
       const offer = offers[index];
       if ((offer as any).savedCalculationPreview || offer.market !== "japan" || offer.catalogPricingMode !== "seller" || !offer.id) continue;
       try {
+        if(offer.sourceId==='ajes_japan_feed') {
+          // select * already supplied this record. Never refetch one detail per card.
+          const parameters=japanPreviewParameters(offer as VehicleOffer);
+          const fresh=await calculateOfferWithCustomerParametersDetailed(offer as VehicleOffer,parameters);
+          if(fresh.ok && Number(fresh.calculation.totalRub)>0)result[index]={...offer,japanDeliveredPreview:{totalRub:fresh.calculation.totalRub,currencyRate:fresh.calculation.currencyRate,deliveryPricingBasis:fresh.calculation.deliveryPricingBasis,engineCc:parameters.engineCc,estimated:true,japanExportRestriction:assessJapanExportRestriction(offer)}};
+          continue;
+        }
         if(isGreenCornerOffer(offer)) {
           const quote = await greenPreview(offer as VehicleOffer, JSON.stringify([configuration, new Date().toISOString().slice(0,10)]));
           if (quote) result[index] = {...offer, japanDeliveredPreview: quote};

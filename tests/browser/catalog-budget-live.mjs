@@ -14,9 +14,10 @@ assert.ok(ready,'exact production release required');
 const checks=[];
 for(const market of ['japan','korea'])for(let repeat=0;repeat<2;repeat++){
  const start=performance.now();const response=await fetch(`${origin}/api/catalog/search?market=${market}&budget=2000000&pageSize=24`);
- assert.ok(response.ok);const data=await response.json();assert.ok(data.total>0,`${market} must have budget matches`);
- for(const item of data.items){const price=item.japanDeliveredPreview?.totalRub || item.totalRub;assert.ok(price>0&&price<=2000000,`${item.id}: delivered price ${price}`);}
- checks.push({market,repeat,total:data.total,ms:Math.round(performance.now()-start),timing:response.headers.get('server-timing')});
+ assert.ok(response.ok);const data=await response.json();assert.equal(data.total,null,`${market}: do not claim an exact count before delivered-price checks`);
+ assert.equal(data.filteredByPage,true);assert.equal(data.countSummary?.upperBound,true);assert.ok(Number.isSafeInteger(data.countSummary.total)&&data.countSummary.total>=0);assert.equal(typeof data.hasMore,'boolean');
+ for(const item of data.items){const price=item.japanDeliveredPreview?.totalRub || item.deliveredCalculationPreview?.totalRub || item.totalRub;assert.ok(price>0&&price<=2000000,`${item.id}: delivered price ${price}`);}
+ checks.push({market,repeat,total:data.total,candidateUpperBound:data.countSummary.total,matchesOnPage:data.items.length,hasMore:data.hasMore,ms:Math.round(performance.now()-start),timing:response.headers.get('server-timing')});
 }
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
 try{

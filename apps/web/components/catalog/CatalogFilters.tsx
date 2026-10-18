@@ -300,7 +300,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 ${auctionResults?"xl:grid-cols-3":"xl:grid-cols-4"}`}>
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
-        {!auctionResults&&<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
+        {<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
       </div>
@@ -422,7 +422,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
     const params=new URLSearchParams(catalogQuery(contextDraft, '', 'asc'));if(initial.source&&draft.market===initial.market)params.set('source',initial.source);return params.toString();
   }, [draft]);
-  const bodyOptions = useMemo(() => catalogFilterOptions(bodies, auctionResults ? [] : bodies.slice(1).map(option => option.value), draft.bodyType), [activeFacets, draft.bodyType,auctionResults]);
+  const bodyOptions = useMemo(() => catalogFilterOptions(bodies, bodies.slice(1).map(option => option.value), draft.bodyType), [activeFacets, draft.bodyType,auctionResults]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
   const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission, draft.stock]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
