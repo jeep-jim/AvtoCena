@@ -1,3 +1,4 @@
+import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {publicationWithdrawn} from "./publication-policy";
 import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
@@ -162,6 +163,7 @@ export function credibleCatalogImages(images: CatalogImage[]) {
 }
 
 function sourcePriceOk(offer: VehicleOffer) {
+  if(isUnpricedDubicarsOffer(offer))return true;
   const price = Number(offer.sourcePrice || 0);
   return Number.isFinite(price) && price > 0 && clean(offer.sourceCurrency).length > 0;
 }
@@ -210,10 +212,12 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 // A fresh source's batch minimum must not retroactively invalidate retained
 // cards that already satisfy their own source's image contract.
 export function minimumPublicationImages(offer: VehicleOffer, freshMinimum: number, retained: boolean) {
+  if(isAllDubicarsOffer(offer))return 0;
   return Math.max(minimumImageCount(offer), retained ? 1 : freshMinimum);
 }
 
 function minimumImageCount(offer: VehicleOffer) {
+  if(isAllDubicarsOffer(offer))return 0;
   if (["jptrade_japan_stat", "proauctions_japan_stat"].includes(offer.sourceId)) return 2;
   if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
   const configuredValue = process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || process.env.CATALOG_MIN_IMAGES;
@@ -229,6 +233,7 @@ function minimumImageCount(offer: VehicleOffer) {
 }
 
 function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
+  if(isAllDubicarsOffer(offer)&&!offer.images?.length)return true;
   if (!REQUIRED_SOURCE_IDS.has(String(offer.sourceId || ""))) return true;
   const operational: any = offer.operational || {};
   const raw: any = operational.raw || {};
@@ -263,6 +268,7 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (catalogHeavyVehicleExcluded(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
+  if(isAllDubicarsOffer(offer)&&!offer.images?.length)return true;
   if (!checkGalleryCoherence) {
     return (offer.images || []).some((image) => {
       const url = String(image?.url || image?.objectKey || "");
@@ -313,6 +319,7 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
   if(publicationWithdrawn(offer))return false;
   if (reviewedCatalogGalleryHold(offer)) return false;
+  if(isUnpricedDubicarsOffer(offer))return Number(offer.cardProjectionVersion||0)>=3||isCrediblePublicOffer(offer);
   if (isSellerPricedOffer(offer)) return Number(offer.cardProjectionVersion || 0) >= 3 || isCrediblePublicOffer(offer);
   if (hasModificationSelection(offer)) return offer?.recoveryQualification?.status === "selection_required";
   if (Number(offer?.cardProjectionVersion || 0) >= 3) {

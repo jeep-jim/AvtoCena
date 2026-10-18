@@ -57,3 +57,6 @@
 # Owner single-China update — 18.10.2026
 - China now uses only AJ System, including old source=existing catalog links. Disable paid Che168 collection through its saved owner switch; preserve records and credentials for the upcoming UAE supplier migration. Do not enable HTML reserves. Remove supplier tabs from public catalogs. Existing directives to retain the old China source for comparison are superseded.
 - UAE settings have not arrived. Do not repurpose the China endpoint or claim UAE is connected. Missing Korea specifications still require source evidence; never guess power.
+
+# Owner Dubicars update — 18.10.2026
+- UAE Dubicars is now authorized through the purchased auto-api.com API. Publish its entire inventory without age, price, power, body or count filters. Keep identity, honest specifications, withdrawal, completed-sync and secret-storage safeguards. The new key belongs only in AUTO_API_DUBICARS_KEY, never in public source or logs.

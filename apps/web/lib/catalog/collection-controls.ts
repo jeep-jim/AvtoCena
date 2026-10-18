@@ -14,7 +14,7 @@ export function validateCollectionControls(value:unknown):CollectionControls {
     for(const id of Object.keys(defaults[scope])){
       const row=v[scope][id];
       // New feed controls default off without resetting any existing switch/history.
-      if(scope==='sources'&&['ajes_japan_feed','ajes_china_feed','ajes_korea_feed'].includes(id)&&!Object.prototype.hasOwnProperty.call(v[scope],id))continue;
+      if(scope==='sources'&&['ajes_japan_feed','ajes_china_feed','ajes_korea_feed','dubicars_feed'].includes(id)&&!Object.prototype.hasOwnProperty.call(v[scope],id))continue;
       if(!row || (typeof row.enabled!=='boolean' || [row.enabledAt,row.disabledAt].some(t=>t!==null&&!Number.isFinite(Date.parse(t)))))throw Error('invalid_collection_controls');
     }
   }

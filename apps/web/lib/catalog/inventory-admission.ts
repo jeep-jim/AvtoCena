@@ -1,3 +1,4 @@
+import {isAllDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Inventory policy approved 06.10.2026. Dates retain the source's precision. */
@@ -14,6 +15,7 @@ export function catalogInventoryDate(offer: any): string | undefined {
  }
 }
 export function catalogInventoryAgeDecision(offer:any,now=new Date()){
+ if(isAllDubicarsOffer(offer))return {eligible:true,basis:'owner_all_dubicars'};
  const today=new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
  const year=Number(offer.year),current=Number(today.slice(0,4));
  if(offer.market==='japan')return {eligible:Number.isInteger(year)&&year>=JAPAN_MIN_MODEL_YEAR&&year<=current+1,basis:'japan_2008'};
@@ -42,6 +44,7 @@ export function catalogGrossVehicleWeightKg(offer:any):number|undefined {
 }
 /** GVWR is the permitted loaded mass; curb weight is never a substitute. */
 export function catalogHeavyVehicleExcluded(offer:any){
+ if(isAllDubicarsOffer(offer))return false;
  if(knownHeavyVehicleFamily(offer.make,offer.model))return true;
  const snapshot=offer.operational?.sourceSpecifications;
  // Legacy paid replay rows may predate body normalization. Only use named,

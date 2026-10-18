@@ -1,9 +1,6 @@
 {
-  "operation": "all-market-continuations-20261007-0822",
-  "market": "uae",
-  "publishMarkets": [
-    "uae"
-  ],
-  "resetCursors": false,
-  "reason": "Owner requested independent full traversals. Resume safe published cursors, retain source observations and publish each slice. No price/power admission caps. Never cancel an active market."
+  "requestedAt": "2026-10-18T14:29:27.118466+00:00",
+  "reason": "Owner requested complete purchased Dubicars feed without inventory filters",
+  "resetCursors": true,
+  "dubicarsOnly": true
 }

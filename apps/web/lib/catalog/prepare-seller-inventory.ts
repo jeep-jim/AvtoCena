@@ -1,3 +1,4 @@
+import {isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {restoreProAuctionsPower} from "./proauctions-source-parameters";
 import {enrichEncarOfficialPower} from "./korea-official-power";
 import { enrichOfferWithSourceTableParameters } from "./source-table-displacement";
@@ -47,6 +48,7 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
       return calculated;
     }
   }
+  if(isUnpricedDubicarsOffer(original)){const unpriced=withoutDeliveredPrice(original);unpriced.calculationStatus='needs_data';return hasCredibleOfferContent(unpriced)?unpriced:null;}
   const rate = await convertToRub(original.sourcePrice, original.sourceCurrency);
   if (!rate || !["cbr","cbr_live"].includes(rate.rateSource)) return null;
   const date = Date.parse(rate.rateDate);

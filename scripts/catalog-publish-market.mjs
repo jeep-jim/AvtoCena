@@ -1,5 +1,6 @@
+import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy.ts';
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
-import {isCompletedChe168Delta} from './lib/auto-api-che168-client.mjs';
+import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -276,7 +277,7 @@ async function auditCandidate(sourceOffer) {
     if (!catalogOfferWithinRetention(sourceOffer)) return { offer: null, reason: "retention_expired" };
     let offer = normalizeVehicleOfferSpecs({ ...preserveCatalogOfferObservation(sourceOffer), status: market === "japan" ? "active" : sourceOffer.status, images: uniqueImages(sourceOffer.images) });
     if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
-    if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
+    if (!offer.operational?.sourceUrl || (!isUnpricedDubicarsOffer(offer)&&(!Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0))) return { offer: null, reason: "source" };
     if (offer.images.length < minimumPublicationImages(offer, minimumImagesPerOffer, retainedPublishedIds.has(offer.id))) return { offer: null, reason: "images" };
     if (sellerInventory) {
       const prepared = await prepareSellerInventory(sourceOffer,
@@ -328,7 +329,7 @@ const generation = await readGenerationFiles();
 logPublicationMemory("intake_loaded");
 // A failed/empty source collection is not a request to reinterpret all of the
 // market's existing immutable records as newly collected seller inventory.
-if (sellerInventory && !generation.offers.length && !generation.payloads.some(payload=>isCompletedChe168Delta(payload.report)) && process.env.CATALOG_REBALANCE_EXISTING !== "1") {
+if (sellerInventory && !generation.offers.length && !generation.payloads.some(payload=>(isCompletedChe168Delta(payload.report)||isCompletedDubicarsDelta(payload.report))) && process.env.CATALOG_REBALANCE_EXISTING !== "1") {
   await fs.writeFile(reportFile, JSON.stringify({market, published:false, previousManifestPreserved:true,
     skipped:true, reason:"no_fresh_source_offers", generationErrors:generation.errors},null,2));
   throw new Error(`catalog_no_fresh_source_offers:${market}`);
@@ -540,8 +541,8 @@ async function loadPreservedMarkets() {
     const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
     const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
       || String(offer?.market || "") !== otherMarket
-      || !isCatalogYearAllowed(offer?.year, otherMarket)
-      || !Array.isArray(offer?.images) || offer.images.length === 0);
+      || !(otherMarket==='uae'&&offer?.sourceId==='dubicars_uae_exact')&&!isCatalogYearAllowed(offer?.year, otherMarket)
+      || !Array.isArray(offer?.images) || (offer.images.length === 0&&!isAllDubicarsOffer(offer)));
     if (invalid.length) throw new Error(`catalog_preserved_public_gate_failed:${otherMarket}:${invalid.length}`);
     purgedForbiddenPublicByMarket[otherMarket] = forbidden.length;
     preservedByMarket[otherMarket] = preservedRows.length;
