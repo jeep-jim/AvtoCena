@@ -6,31 +6,34 @@ import {cache} from 'react';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
 import {readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
-import {readAjesPublic} from './ajes-public';
+import {ajesChinaPriceAllowed} from './ajes-price-policy';
+import {readAjesPublic,cappedAjesQuery} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 export const readAjesCount=cache(async(key='{}'):Promise<number>=>{
  const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
- const result=await ajesClient.read({...q,aggregate:'count'},(await headers()).get('x-real-ip')||'');
+ const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
  return result.total;
 });
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
 export const readAjesMakes=cache(async(key='{}')=>{
  const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
- return readAjesMakeDirectory(ajesClient,q,(await headers()).get('x-real-ip')||'');
+ return readAjesMakeDirectory(ajesClient,await cappedAjesQuery(q),(await headers()).get('x-real-ip')||'');
 });
 export async function readAjesDirectory(params:Record<string,unknown>={}){
  const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
  await assertCollectionEnabled(`ajes_${q.table==='china'||q.table==='korea'?q.table:'japan'}_feed`);
  const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
- return directories.get(key,()=>readAjesModelDirectory(ajesClient,q,ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
+ return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const query=ajesCatalogQuery(params);
  const [page,total]=await Promise.all([readAjesPublic(query),readAjesCount(JSON.stringify(params)).catch(()=>null)]);
- return {...page,total:page.partial?null:total,items:(query.table==='china'||query.table==='korea'?await applyActiveBusinessPricingBatch(page.items):page.items).map((v:any)=>publicOffer(v)),generationId:page.observedAt};
+ const priced=query.table==='china'||query.table==='korea'?await applyActiveBusinessPricingBatch(page.items):page.items;
+ const items=priced.filter(v=>v&&ajesChinaPriceAllowed(v));
+ return {...page,total:page.partial||query.table==='china'?null:total,items:items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean}>{

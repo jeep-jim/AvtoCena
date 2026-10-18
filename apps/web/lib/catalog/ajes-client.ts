@@ -126,7 +126,7 @@ export function createAjesClient(deps:Dependencies) {
             if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
           }
           if(usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes')&&recoverable){await deps.assertEnabled(query.table);return query.kind==='list'?remember({...saved,stale:true}):{...saved,stale:true};}
-          if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch&&((input as AjesQuery).chassis||(input as AjesQuery).frameNumber||(input as AjesQuery).lotNumber||(input as AjesQuery).make||(input as AjesQuery).model)){
+          if(query.kind==='list'&&query.page===1&&recoverable&&deps.readSavedSearch){
             let fallback:any=null;
             try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
             if(fallback?.partial&&fallback.items?.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}

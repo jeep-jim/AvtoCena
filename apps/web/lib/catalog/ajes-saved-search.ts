@@ -2,10 +2,10 @@ import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 
-/** Recover exact identities and model selections only, never turn a sample into the complete catalog. */
+/** Recover bounded saved Japan results, always labelled partial; never claim a complete catalog. */
 export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now()){
  const query=ajesQuery(input);
- if(query.kind!=='list'||query.table!=='stats'||query.page!==1||!(input.chassis||input.frameNumber||input.lotNumber||input.make||input.model))return null;
+ if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
  const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','sort','yearFrom','yearTo']);
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&input.sort!=='updatedAt')return null;
  const normalized=(v:unknown)=>String(v??'').trim().toUpperCase();

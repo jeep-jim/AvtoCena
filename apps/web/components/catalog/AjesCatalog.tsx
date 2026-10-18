@@ -22,7 +22,8 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Для этих результатов пока нельзя точно отобрать автомобили по цене с доставкой, мощности или типу кузова. Снимите эти условия; расчёт доступен в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  const directory=await directoryPromise;
  // Count is independently verified; a partial or failed list must not erase it.
- const displayTotal=await countPromise;
+ const sourceTotal=await countPromise;
+ const displayTotal=market==='china'?null:sourceTotal;
  const makeDirectory=await makesPromise;
  const savedFacets=market==='japan'&&(!makeDirectory||!directory)?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
  const models=directory?.models||[...savedFacets.models,...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];

@@ -50,3 +50,6 @@
 
 # Owner AJES local-limit update — 17.10.2026
 - The owner explicitly removed the application daily request ceiling (19000/19020). Retain separate usage telemetry for main/stats/china/korea without resetting history. This does not override supplier quotas/refusals, IP provenance, cache/concurrency bounds, collection switches or the prohibition on bulk copying. Do not report the local usage counter as a supplier-enforced quota.
+
+# Owner AJ System China price ceiling — 18.10.2026
+- The second China feed (`ajes_china_feed`) must not display offers above 15,000,000 RUB. This supersedes its earlier ranking-only policy. Apply the ceiling to seller price and calculated delivered previews; do not change Che168 collection or erase stored inventory. Unknown final delivered totals must remain explicitly incomplete.

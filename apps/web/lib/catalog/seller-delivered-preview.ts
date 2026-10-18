@@ -18,8 +18,13 @@ export async function attachSellerDeliveredPreviews<T extends Partial<VehicleOff
     const key=JSON.stringify([offer.id,offer.updatedAt,offer.sourcePrice,offer.sourceCurrency,offer.calculationSnapshot?.currencyRate,configuration,new Date().toISOString().slice(0,10)]);
     const quote=await quotes.get(key,async()=>{
      const {getOfferForPage}=await import("./offer-page-data");
-     const full=await getOfferForPage(offer.id!);
+     let full=await getOfferForPage(offer.id!);
      if(!full||full.market!==offer.market||full.sourcePrice!==offer.sourcePrice||full.sourceCurrency!==offer.sourceCurrency)return null;
+     if(full.sourceId==='ajes_korea_feed'||full.sourceId==='ajes_china_feed'){
+      const {enrichOfferWithKnowledgeCore}=await import('./knowledge-core');
+      const {normalizeVehicleOfferSpecs}=await import('./spec-normalization');
+      full=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(full)) as VehicleOffer;
+     }
      const parameters=validateCustomerParameters(offerParameterDraft(full));
      const calculated=await calculateOfferWithCustomerParametersDetailed(full,parameters);
      if(!calculated.ok||!(Number(calculated.calculation.totalRub)>0))return null;

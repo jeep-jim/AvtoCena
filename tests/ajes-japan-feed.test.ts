@@ -591,3 +591,17 @@ test('2008 expansion retains older SQL rows as partial without copying an old to
  assert.equal(await readExpandedJapanRows('select count(*) from stats where year>=2008','select count(*) from stats where year>=2008',read),null);
  assert.equal(reads.length,0);
 });
+
+test('unfiltered Japan first page recovers bounded saved lots honestly after one refusal',async()=>{
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const lot={id:'saved001',table:'stats',make:'TOYOTA',model:'COROLLA',year:2022,status:'Sold',finalPriceJpy:1000000,auctionDate:'2026-10-17'};
+ const snapshots={one:{items:[lot],observedAt:new Date().toISOString()}};
+ let requests=0;
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{requests++;return new Response('ban2 fixture');},readSavedSearch:async q=>findSavedAjesSearch(q,snapshots)});
+ const page=await client.read({table:'stats',page:1,pageSize:24},'203.0.113.1');
+ assert.equal(requests,1);assert.equal(page.partial,true);assert.equal(page.stale,true);assert.equal(page.total,undefined);assert.equal(page.items[0].id,lot.id);
+ assert.equal(findSavedAjesSearch({table:'stats',page:2},snapshots),null);
+ assert.equal(findSavedAjesSearch({table:'stats',fuel:'diesel'},snapshots),null);
+ assert.equal(findSavedAjesSearch({table:'korea'},snapshots),null);
+ assert.equal(findSavedAjesSearch({table:'stats'},{one:{...snapshots.one,observedAt:'2020-01-01'}}),null);
+});

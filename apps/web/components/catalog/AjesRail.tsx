@@ -1,5 +1,5 @@
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
-import {readAjesCount} from '@/lib/catalog/ajes-catalog';
+import {readAjesCount,readAjesCatalogPage} from '@/lib/catalog/ajes-catalog';
 import {formatCatalogCount} from '@/lib/catalog/count-format';
 import {readAjesPublic} from '@/lib/catalog/ajes-public';
 import {assertCollectionEnabled} from '@/lib/catalog/collection-controls';
@@ -11,14 +11,15 @@ export async function AjesRail({market='japan'}:{market?:'japan'|'china'|'korea'
  const label=market==='korea'?'Корея':market==='china'?'Китай':'Япония';const href=`/cars?market=${market}${market==='japan'?'':'&source=ajes'}`;
  try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return null;}
  const totalPromise=readAjesCount(JSON.stringify({market})).catch(()=>null);
- let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false;
- try{items=(await readAjesPublic({table:market==='japan'?'stats':market,pageSize:24})).items.slice(0,10);}catch{unavailable=true;}
- const total=await totalPromise;
+ let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false,partial=false;
+ try{const page=await readAjesCatalogPage({market});items=page.items.slice(0,10);partial=Boolean(page.partial);}catch{unavailable=true;}
+ const count=await totalPromise;const total=market==='china'?null:count;
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
    <h2 className="flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={total??undefined}>· {formatCatalogCount(total??NaN)}</span></h2>
    <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
+  {partial&&<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">Показаны ранее полученные автомобили. Полная выдача временно недоступна.</p>}
   {unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:auto-cols-auto md:grid-cols-5 md:overflow-visible md:pr-0">{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p className="text-sm text-[var(--ac-muted)]">Подходящих автомобилей пока нет.</p>}
  </section>;
 }
