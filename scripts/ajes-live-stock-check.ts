@@ -9,7 +9,7 @@ async function main(){
  const client=createAjesClient({fetcher:async(url,options)=>{const r=await fetch(url,options);if(!r.ok){const body=(await r.clone().text()).slice(0,4096);const unknown=body.match(/Unknown column ['`]?([A-Za-z_]+)/i);console.log('AJES_HTTP_DIAGNOSTIC',JSON.stringify({stage,status:r.status,unknownColumn:unknown?.[1]||null,sqlError:/sql|syntax|database/i.test(body)}));}return r;},password:ajesPassword,assertEnabled:t=>assertCollectionEnabled(`ajes_${t}_feed`),reserve:t=>reserveAjesRequest(getJsonStorage(),t)});
  for(const table of ['korea','china'] as const){
   stage=table+':count';const count=await client.read({table,aggregate:'count'},ip);
-  stage=table+':list';const list=await client.read({table,pageSize:2},ip);
+  console.log('AJES_FILTERED_COUNT',JSON.stringify({table,total:count.total}));stage=table+':list';const list=await client.read({table,pageSize:2},ip);
   stage=table+':makes';const makes=await client.read({table,aggregate:'makes'},ip);
   const detail=list.items[0]?await client.read({table,id:list.items[0].id},ip):null;
   console.log('AJES_STOCK_CONTRACT',JSON.stringify({table,total:count.total,listReceived:list.received,listAccepted:list.items.length,makeRows:makes.received,detailReceived:detail?.received,detailAccepted:detail?.items.length,detailFuel:detail?.items[0]?.sourceFuel,detailPower:detail?.items[0]?.sourcePower,detailImageCount:detail?.items[0]?.images.length}));

@@ -61,7 +61,7 @@ export function ajesQuery(input: unknown) {
   if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
   const sort=q.sort??'updatedAt';
   if(!['updatedAt','year','yearAsc','totalRub','totalRubDesc'].includes(sort))throw new AjesInputError();
-  const order=sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':"auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc";
+  const order=stock?(sort==='yearAsc'?'year asc':sort==='year'?'year desc':sort==='totalRub'?'finish asc':sort==='totalRubDesc'?'finish desc':'id desc'):sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':"auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc";
   return {table,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
 }
 
