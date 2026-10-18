@@ -6,15 +6,16 @@ import {gunzipSync} from 'node:zlib';
 import {isIP} from 'node:net';
 // Supplier instruction 18 October: genuine server IP for server-origin diagnostics.
 // One Moscow request per table, no endpoint rotation or automatic retries.
+let stage='start';
 async function main(){
  const ip=process.env.AJES_DIAG_IP||'';
  if(!isIP(ip)||ip!=='151.248.113.177')throw Error('server_ip_not_confirmed');
- const password=await ajesPassword();if(!password)throw Error('not_configured');
+ stage='password';const password=await ajesPassword();if(!password)throw Error('not_configured');
  const storage=getJsonStorage();
  for(const market of ['japan','korea','china'] as const){
   const table=market==='japan'?'stats':market;
-  await assertCollectionEnabled(`ajes_${market}_feed`);
-  await reserveAjesRequest(storage,table);
+  stage=`${market}:switch`;await assertCollectionEnabled(`ajes_${market}_feed`);
+  stage=`${market}:usage`;await reserveAjesRequest(storage,table);
   const sql=`select * from ${table} limit 5`,endpoint='http://87.242.72.57/api/';
   const diagnostic={market,startedAt:new Date().toISOString(),finishedAt:'',clientIp:ip,sql,endpoint,requestStarted:false,httpStatus:null as number|null,providerCode:null as string|null,outcome:'pending'};
   let summary:Record<string,unknown>={market,table};
@@ -46,4 +47,4 @@ async function main(){
   if(diagnostic.providerCode)break;
  }
 }
-main().catch(()=>{console.log('AJES_SERVER_CHECK_FAILED');process.exitCode=1;});
+main().catch(error=>{const reason=error instanceof Error?error.message:'';console.log('AJES_SERVER_CHECK_FAILED',JSON.stringify({stage,reason:['server_ip_not_confirmed','not_configured','ajes_configuration_unavailable','encryption_unavailable','collection_disabled','ajes_quota_invalid','ajes_quota_busy'].includes(reason)?reason:'internal_failure'}));process.exitCode=1;});
