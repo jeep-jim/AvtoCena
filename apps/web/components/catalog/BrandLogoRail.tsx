@@ -4,6 +4,7 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import Link from "next/link";
+import {brandContextQuery,brandSelectionQuery} from "@/lib/catalog/brand-navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
@@ -132,11 +133,13 @@ function BrandDirectoryTile({
 export function BrandLogoRail({
   brands,
   resultCount,
+  initial = {},
   directoryMode = false,
   showSearch = false,
 }: {
   brands: string[];
   resultCount?: number;
+  initial?: Record<string,string>;
   directoryMode?: boolean;
   showSearch?: boolean;
 }) {
@@ -144,7 +147,7 @@ export function BrandLogoRail({
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const searchParamsText = searchParams.toString();
+  const searchParamsText = brandContextQuery(searchParams.toString(),initial);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [brandCounts, setBrandCounts] = useState<Record<string, number>>({});
@@ -167,7 +170,8 @@ export function BrandLogoRail({
   ), [suppliedBrands]);
   const selectedBrands = useMemo(() => {
     if (homeBrandDirectory) return [] as string[];
-    const raw = searchParams.get("make") || searchParams.get("brand") || "";
+    const context = new URLSearchParams(searchParamsText);
+    const raw = context.get("make") || context.get("brand") || "";
     const map = new Map<string, string>();
     for (const value of raw.split(",").map((item) => canonicalCatalogBrand(item.trim())).filter(Boolean)) {
       const known = knownBrands.get(value.toLocaleLowerCase("en-US"));
@@ -259,13 +263,7 @@ export function BrandLogoRail({
   };
 
   const setCatalogBrands = (nextBrands: string[]) => {
-    const params = new URLSearchParams(window.location.search);
-    const ordered = [...new Set(nextBrands)].sort((a, b) => a.localeCompare(b, "ru"));
-    if (ordered.length) params.set("make", ordered.join(",")); else params.delete("make");
-    params.delete("brand");
-    params.delete("model");
-    params.delete("page");
-    const queryString = params.toString();
+    const queryString = brandSelectionQuery(searchParamsText,nextBrands);
     router.replace(dealerBrowsingHref(queryString ? `/cars?${queryString}` : "/cars",dealer), { scroll: false });
   };
 
@@ -273,7 +271,7 @@ export function BrandLogoRail({
 
   const hrefForBrand = (brand: string) => homeBrandDirectory
     ? `/cars/brand/${catalogBrandSlug(brand)}`
-    : dealerBrowsingHref(`/cars?make=${encodeURIComponent(brand)}`,dealer);
+    : dealerBrowsingHref(`/cars?${brandSelectionQuery(searchParamsText,selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))?selectedBrands.filter(item=>item.toLocaleLowerCase("en-US")!==brand.toLocaleLowerCase("en-US")):[...selectedBrands,brand])}`,dealer);
 
   const handleBrandClick = (brand: string, closeAfter = false) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (homeBrandDirectory) {

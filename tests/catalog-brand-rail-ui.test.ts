@@ -11,7 +11,7 @@ test("catalog brand directory keeps homepage navigation but supports catalog mul
   assert.match(rail, /homeBrandDirectory[\s\S]*\/cars\/brand\/\$\{catalogBrandSlug\(brand\)\}/);
   assert.match(rail, /selectedBrands/);
   assert.match(rail, /selectedBrandKeys/);
-  assert.match(rail, /ordered\.join\(","\)/);
+  assert.match(rail, /brandSelectionQuery/);
   assert.match(rail, /Очистить/);
   assert.match(rail, /aria-label="Выбрано">✓/);
   assert.match(filters, /splitMakeValues/);

@@ -38,7 +38,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто под заказ</h1>
  <p role="status" className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" data-catalog-result-count={displayTotal??undefined}><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{displayTotal!=null?`Найдено: ${formatCatalogCount(displayTotal!)}`:'Количество уточняется'}</p>
  <CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>
- {makes.length>0&&<BrandLogoRail brands={makes} resultCount={displayTotal??undefined}/>}
+ {makes.length>0&&<BrandLogoRail initial={initial} brands={makes} resultCount={displayTotal??undefined}/>}
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  {result&&<div className="mt-8">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{displayTotal!=null&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={displayTotal}>· {formatCatalogCount(displayTotal!)}</span>}</h2>
