@@ -1,0 +1,41 @@
+name: TEMP UAE rebuild watch
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-uae-run-watch.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect latest UAE rebuild and homepage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          api='https://api.github.com/repos/jeep-jim/AvtoCena'
+          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
+          echo '=== current UAE marker workflows ==='
+          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=9e739d3c30f31a96f7f3911ea702bc1aa54d680b&per_page=30" | jq '[.workflow_runs[]|{id,name,path,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
+          echo '=== homepage UAE block ==='
+          curl -L --retry 2 --max-time 60 -fsS 'https://avtocena.com/' -o home.html
+          python - <<'PY'
+          import re
+          s=open('home.html',encoding='utf-8',errors='ignore').read()
+          for title in ['Jeep Wrangler','Ford Everest','BMW 218','Honda CR-V']:
+              i=s.find(title)
+              if i>=0:
+                  print('\nTITLE', title)
+                  print(re.sub(r'<[^>]+>',' ',s[max(0,i-700):i+1800]).replace('\\u00a0',' ')[:2500])
+          PY
+          echo '=== production market API smoke ==='
+          for market in uae japan georgia; do
+            curl -L --retry 2 --max-time 45 -fsS "https://avtocena.com/api/catalog/search?market=$market&pageSize=12" -o "$market.json"
+            echo "$market $(jq -c '{total, sample:[.items[0:12][]|{id,make,model,year,totalRub,sourcePrice,sourceCurrency,calculationStatus,priceMode}]}' "$market.json")"
+          done
