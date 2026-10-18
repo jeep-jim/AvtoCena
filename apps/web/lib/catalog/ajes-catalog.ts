@@ -42,18 +42,24 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
   let enabled=true;try{await assertCollectionEnabled('ajes_japan_feed');}catch{enabled=false;}
   if(enabled)try{const total=await readAjesCount(JSON.stringify(params));result={...result,total:result.total+total,marketCounts:{...result.marketCounts,japan:(result.marketCounts?.japan||0)+total}};}catch{result={...result,countIncomplete:true};}
  }
- // Replace the active Korea source in overview totals, never add duplicate suppliers.
+ // China is now exclusively AJES. Its post-calculation ceiling means the
+ // upstream count cannot be presented as an exact delivered-price count.
+ if(!params.market&&value.marketCounts&&Object.prototype.hasOwnProperty.call(value.marketCounts,'china')){
+  result={...result,total:result.total-(value.marketCounts.china||0),marketCounts:{...result.marketCounts,china:0},countIncomplete:true};
+  if(Array.isArray((result as any).items))result={...result,items:(result as any).items.filter((v:any)=>v.market!=='china')} as typeof result;
+  if(Array.isArray((result as any).items))try{const page=await readAjesCatalogPage({market:'china'});const items=page.items.slice(0,10);result={...result,total:result.total+items.length,marketCounts:{...result.marketCounts,china:items.length},items:[...(result as any).items,...items]} as typeof result;}catch{/* No fallback to the retired supplier. */}
+ }
  if(!params.market&&value.marketCounts&&Object.prototype.hasOwnProperty.call(value.marketCounts,'korea')){
   let enabled=true;try{await assertCollectionEnabled('ajes_korea_feed');}catch{enabled=false;}
-  if(enabled)try{
-   const count=await readAjesCount(JSON.stringify({market:'korea'}));
-   let next={...result,total:result.total-(value.marketCounts.korea||0)+count,marketCounts:{...result.marketCounts,korea:count}};
-   if(Array.isArray((value as any).items)){
-    const page=await readAjesPublic({table:'korea',pageSize:10});
-    next={...next,items:[...(value as any).items.filter((v:any)=>v.market!=='korea'),...page.items]} as typeof next;
-   }
-   result=next;
-  }catch{result={...result,countIncomplete:true};}
+  if(enabled){
+   result={...result,total:result.total-(value.marketCounts.korea||0),marketCounts:{...result.marketCounts,korea:0}};
+   if(Array.isArray((result as any).items))result={...result,items:(result as any).items.filter((v:any)=>v.market!=='korea')} as typeof result;
+   try{
+    const count=await readAjesCount(JSON.stringify({market:'korea'}));
+    result={...result,total:result.total+count,marketCounts:{...result.marketCounts,korea:count}};
+    if(Array.isArray((result as any).items)){const page=await readAjesCatalogPage({market:'korea'});result={...result,items:[...(result as any).items,...page.items.slice(0,10)]} as typeof result;}
+   }catch{result={...result,countIncomplete:true};}
+  }
  }
  return result;
 }

@@ -1,0 +1,19 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {loadModelSuggestions} from '../apps/web/lib/catalog/model-suggestion-loader';
+test('supplier suggestions include models outside the visible page and share mobile/desktop requests',async()=>{
+ const original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async(url:any)=>{calls++;assert.match(String(url),/source-models\?market=china/);return Response.json({version:1,brands:[],models:Array.from({length:80},(_,i)=>['TEST','MODEL '+i,[],1])});};
+ try{
+  const [a,b]=await Promise.all([loadModelSuggestions(true,{market:'china',make:''}),loadModelSuggestions(true,{market:'china',make:''})]);
+  assert.equal(calls,1);assert.equal(a,b);assert.ok(a('MODEL 79','TEST').some(row=>row.model==='MODEL 79'));
+ }finally{globalThis.fetch=original;}
+});
+test('failed provider directory is evicted so explicit retry can recover',async()=>{
+ const original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async()=>++calls===1?new Response('',{status:503}):Response.json({version:1,brands:[],models:[['TEST','RECOVERED',[],1]]});
+ try{
+  await assert.rejects(loadModelSuggestions(true,{market:'korea',make:'TEST'}));
+  const search=await loadModelSuggestions(true,{market:'korea',make:'TEST'});assert.equal(calls,2);assert.equal(search('RECOVERED','TEST')[0].model,'RECOVERED');
+ }finally{globalThis.fetch=original;}
+});

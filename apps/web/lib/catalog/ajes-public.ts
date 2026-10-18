@@ -28,7 +28,11 @@ export async function readAjesPublic(query:AjesQuery){
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
-  const offer=ajesOffer(lot,rate,result.observedAt);
+  let offer=ajesOffer(lot,rate,result.observedAt);
+  if(lot.table==='china'||lot.table==='korea'){
+   const [{enrichOfferWithKnowledgeCore},{normalizeVehicleOfferSpecs}]=await Promise.all([import('./knowledge-core'),import('./spec-normalization')]);
+   offer=normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
+  }
   return editorialHidden(offer,index)?null:applyCatalogEditorial(offer,index);
  }));
  const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;

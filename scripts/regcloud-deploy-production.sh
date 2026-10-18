@@ -91,7 +91,7 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
-for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=korea&source=existing&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
+for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=korea&source=existing&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
