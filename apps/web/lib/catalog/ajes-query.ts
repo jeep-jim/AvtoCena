@@ -93,6 +93,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<(stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR) || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || (!stock&&number('AUCTION_TYPE')===1)) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
   if(knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME')))return null;
+  if(stock&&/^(?:sold|removed|withdrawn|deleted)$/i.test(text('STATUS')))return null;
   const finish=number('FINISH');
   if ((table==='stats' && !sold) || ((table==='stats'||stock)&&!finish)) return null;
   const urls=[...new Set(text('IMAGES').split('#').map(u=>ajesImageUrl(u,'original')).filter((u):u is string=>Boolean(u)))];

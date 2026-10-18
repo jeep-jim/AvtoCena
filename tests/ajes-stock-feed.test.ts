@@ -10,6 +10,7 @@ test('stock SQL uses own table, six-year policy and no Japanese auction columns'
  assert.throws(()=>ajesQuery({table:'korea',yearFrom:2008}));
 });
 test('stock mapping keeps exact units, VIN and first photograph; missing power remains missing',()=>{
+ assert.equal(ajesLot({...row,STATUS:'Sold'},'korea',true),null);
  const lot=ajesLot(row,'korea',true)!;assert.ok(lot);assert.equal(lot.images[0].role,'vehicle');assert.equal(lot.frameNumber,'TESTFRAME123');
  const offer=ajesOffer(lot,{rateSource:'cbr',currency:'KRW',sourcePrice:17400000,effectiveRate:0.06} as any,'2026-10-18T02:00:00Z');
  assert.equal(offer.sourcePrice,17400000);assert.equal(offer.sourceCurrency,'KRW');assert.equal(offer.sellerPriceRub,1044000);assert.equal(offer.fuel,'diesel');assert.equal(offer.powerHp,undefined);assert.equal(offer.totalRub,null);assert.equal(offer.status,'active');assert.equal(offer.images[0].role,'vehicle');assert.equal(offer.productionDate,`${row.YEAR}-10`);assert.ok(ajesOfferId(offer.id));assert.ok(ajesImageUrl(offer.images[0].url));
