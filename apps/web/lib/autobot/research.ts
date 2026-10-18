@@ -16,6 +16,7 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  const make=clean(identity.make),model=clean(identity.model);if(!make||!model)return {status:'unknown_identity',pages:[]};
  const key=JSON.stringify([make,model,identity.year,identity.market,identity.trim,identity.topic,identity.motorCodes,identity.engine]);const hit=cache.get(key);if(!identity.fresh&&read===readSource&&hit&&hit.until>Date.now())return hit.result;
  const pages:Page[]=[],failures:string[]=[];const budget=AbortSignal.any([signal,AbortSignal.timeout(40000)]);
+ const catalogTask=discoverManufacturerCatalog(identity,budget,read).catch(()=>({pages:[],failures:['Каталог производителя недоступен.']}));
  const discoveryTask=discoverVehicleWeb(identity,budget,read).catch(()=>({pages:[],failures:['Веб-поиск не завершён.'],engine:identity.engine||'bing'}));
  try{
   const query=new URLSearchParams({action:'query',generator:'search',gsrsearch:make+' '+model,gsrlimit:'2',prop:'info',inprop:'url',format:'json'});
@@ -34,7 +35,8 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  }catch{failures.push('Внешний источник сейчас недоступен.');}
  const discovery=await discoveryTask;
  for(const p of discovery.pages.reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...discovery.failures);
- const result={webSearch:{engine:discovery.engine||identity.engine||'bing',readPages:discovery.pages.length,failures:discovery.failures,links:researchQueries(identity).map(q=>({title:'Поиск '+(identity.engine==='google'?'Google':'Bing'),url:(identity.engine==='google'?'https://www.google.com/search?':'https://www.bing.com/search?')+new URLSearchParams({q})}))},identity:{make,model,year:identity.year,market:identity.market,trim:identity.trim},checkedAt:new Date().toISOString(),status:pages.length?'found':'not_found',pages,failures,scope:'Поиск по ограниченному набору запросов в выбранном поисковике, чтение найденных публичных страниц/PDF и справочных ссылок производителя. Непрочитанные документы не подтверждают параметры. Данные справочные; применимость к году, поколению, рынку и комплектации нужно проверять. Не считать максимальную мощность 30-минутной. Не менять карточку или расчёт.'};
+ const catalog=await catalogTask;for(const p of [...catalog.pages].reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...catalog.failures);
+ const result={webSearch:{manufacturerReadPages:catalog.pages.length,engine:discovery.engine||identity.engine||'bing',readPages:discovery.pages.length,failures:discovery.failures,links:researchQueries(identity).map(q=>({title:'Поиск '+(identity.engine==='google'?'Google':'Bing'),url:(identity.engine==='google'?'https://www.google.com/search?':'https://www.bing.com/search?')+new URLSearchParams({q})}))},identity:{make,model,year:identity.year,market:identity.market,trim:identity.trim},checkedAt:new Date().toISOString(),status:pages.length?'found':'not_found',pages,failures,scope:'Поиск по ограниченному набору запросов в выбранном поисковике, чтение найденных публичных страниц/PDF и справочных ссылок производителя. Непрочитанные документы не подтверждают параметры. Данные справочные; применимость к году, поколению, рынку и комплектации нужно проверять. Не считать максимальную мощность 30-минутной. Не менять карточку или расчёт.'};
  if(read===readSource&&pages.length){if(cache.size>=100)cache.delete(cache.keys().next().value);cache.set(key,{until:Date.now()+(pages.some(p=>p.kind!=='reference')?30*60000:60000),result});}return result;
 }
 
@@ -101,4 +103,30 @@ export async function discoverVehicleWeb(identity:Identity,signal:AbortSignal,re
  }));
  for(const r of fetched)if(r.status==='fulfilled')pages.push(r.value);else failures.push('Одна из найденных страниц не прочитана или не содержит указанную модель.');
  return {pages,failures,engine:usedEngine};
+}
+
+
+/** Follow observed official catalog links only: two indexes and at most three model/document pages. */
+export async function discoverManufacturerCatalog(identity:Identity,signal:AbortSignal,read=readSource){
+ const starts:Record<string,string[]>={audi:['https://www.audi.com/en/models-4','https://www.audi.com/en/previous-models-78']};
+ const seeds=starts[token(identity.make)];if(!seeds)return {pages:[] as Page[],failures:[] as string[]};
+ const pages:Page[]=[],failures:string[]=[],visited=new Set(seeds);
+ const decode=(s:string)=>{try{return decodeURIComponent(s);}catch{return s;}};
+ const links=(html:string,base:string)=>[...html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)].flatMap(m=>{
+  try{const url=new URL(m[1].replace(/&amp;/g,'&'),base).href;if(!manufacturerLink(url,identity.make)&&!manufacturerDocument(url,identity.make))return [];const title=researchText(m[2]);if(!mentionsModel(title+' '+decode(url),identity.model))return [];return [{url,title}];}catch{return [];}
+ });
+ const readOfficial=async(url:string)=>{const p=await read(url,AbortSignal.any([signal,AbortSignal.timeout(8000)]),0,manufacturerDocument(url,identity.make)?'document':'html');if(!manufacturerLink(p.url,identity.make)&&!manufacturerDocument(p.url,identity.make))throw Error('redirect');if(/access denied|verify you are human|just a moment|captcha/i.test(researchText(p.html).slice(0,1000)))throw Error('blocked');return p;};
+ const initial=await Promise.allSettled(seeds.map(readOfficial));let candidates:Array<{url:string;title:string}>=[];
+ for(const r of initial)if(r.status==='fulfilled')candidates.push(...links(r.value.html,r.value.url));else failures.push('Один из каталогов производителя недоступен.');
+ const terms:string[]=clean(identity.trim).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().match(/[a-z]+|\d+/g)||[];
+ const score=(p:{url:string;title:string})=>{const text=(p.title+' '+decode(p.url)).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),until=text.match(/until[\s-]*(20\d{2})/);if(until&&identity.year&&Number(until[1])<identity.year)return -1000;return (until&&identity.year?20:0)+terms.reduce((n,t)=>n+(mentionsModel(text,t)?10:0),0)+(manufacturerDocument(p.url,identity.make)?30:0)+(/technical|specification|data.sheet/.test(text)?15:0)-(/image|picture|video|gallery|album/.test(text)?100:0);};
+ for(let depth=0;depth<3&&!signal.aborted;depth++){
+  const next=[...new Map(candidates.map(p=>[p.url,p])).values()].filter(p=>!visited.has(p.url)&&score(p)>-100).sort((a,b)=>score(b)-score(a))[0];if(!next)break;visited.add(next.url);
+  try{const p=await readOfficial(next.url),text=researchText(p.html);if(!mentionsModel(text,identity.model))continue;
+   const document=manufacturerDocument(p.url,identity.make);const title=document?decode(new URL(p.url).pathname.split('/').pop()||next.title).replace(/[_-]/g,' ').slice(0,160):researchText(p.html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||next.title);
+   pages.unshift({title,url:p.url,kind:document?'document':'manufacturer',text:((document?text.slice(0,600)+'\n':'')+evidenceExcerpt(text)).slice(0,6500)});
+   if(document)break;candidates.push(...links(p.html,p.url));
+  }catch{failures.push('Одна из технических страниц производителя недоступна.');}
+ }
+ return {pages,failures};
 }
