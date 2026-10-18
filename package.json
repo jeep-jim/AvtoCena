@@ -40,6 +40,9 @@
   "overrides": {
     "next": {
       "postcss": "8.5.28"
+    },
+    "geoip-country": {
+      "ip-address": "10.7.4"
     }
   },
   "dependencies": {
