@@ -1,4 +1,4 @@
-/** A literal variant + power row in a read official source can be reported without generation. */
+/** A literal variant + power row in a read specification can be reported without generation. */
 export function researchPowerReply(results:any[],question:string){
  if(!/мощ|power/i.test(question)||/(30|тридцат|рассч|посчита|сравн|стоимост|бюджет|подбер)/i.test(question))return null;
  if(new Set((question.match(/\b\d{2}\s*(?:TFSI|TDI)\b/gi)||[]).map(s=>s.replace(/\s+/g,'').toUpperCase())).size!==1)return null;
@@ -13,7 +13,7 @@ export function researchPowerReply(results:any[],question:string){
    const value=Number(found[1].replace(',','.'));if(!(value>0&&value<=2500))continue;
    const power=/^(kW|кВт)$/i.test(found[2])?value+' кВт (≈'+Math.round(value*1.3596216173)+' л.с.)':value+' '+found[2];
    const title=String(page.title||'Спецификация производителя').replace(/[<>\[\]()*_`]/g,'');
-   return 'В [официальной спецификации]('+page.url+') для **'+variant[1]+' '+variant[2].toUpperCase()+'** указано **'+power+'**.\n\nИсточник: '+title+'. '+(result.web?.webSearch?.readPages===0?'Поисковая выдача не дала читаемых страниц; данные найдены в каталоге производителя. ':'')+'Это справочные данные источника. Применимость именно к указанному году, рынку и комплектации этим ответом не подтверждена. Параметры карточки не изменены.';
+   return 'В ['+(page.kind==='manufacturer'?'официальной спецификации':'прочитанном документе')+']('+page.url+') для **'+variant[1]+' '+variant[2].toUpperCase()+'** указано **'+power+'**.\n\nИсточник: '+title+'. '+(result.web?.webSearch?.readPages===0?'Поисковая выдача не дала читаемых страниц; данные найдены в каталоге производителя. ':'')+'Это справочные данные источника. Применимость именно к указанному году, рынку и комплектации этим ответом не подтверждена. Параметры карточки не изменены.';
   }
  }
  return null;
