@@ -1,1 +1,4 @@
-{"reason":"Remove measured accumulation of obsolete stopped application releases; keep live, two rollbacks and migration reserve","at":"2026-10-12T06:25:00Z"}
+{
+  "requestedAt": "2026-10-18T06:36:42.663624+00:00",
+  "reason": "Owner reports disk growth; remove only unreferenced avtocena images older than one day, preserve current and rollback containers"
+}

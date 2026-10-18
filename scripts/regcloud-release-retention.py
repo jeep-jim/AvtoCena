@@ -29,6 +29,20 @@ def eligible(c):
                     for m in c.get('Mounts', [])))
 
 
+def eligible_unused_image(image, referenced, now):
+    """Only old, named application images; never containers or data volumes."""
+    tags = image.get('RepoTags') or []
+    if image.get('Id') in referenced or not tags:
+        return False
+    if not all(re.fullmatch(r'avtocena-regcloud:[0-9a-f]{40}', t) for t in tags):
+        return False
+    try:
+        created = dt.datetime.fromisoformat(image['Created'].replace('Z', '+00:00'))
+        return created.tzinfo is not None and now - created >= dt.timedelta(days=1)
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--apply', action='store_true')
@@ -68,6 +82,24 @@ def main():
                 for tag in tags:
                     docker('image', 'rm', tag)
                     print('REMOVED_IMAGE', tag, flush=True)
+    # Older failed builds can have no container and were missed by rollback cleanup.
+    # Preparation/runtime locks prevent racing a deployment; retain a day as well.
+    now = dt.datetime.now(dt.timezone.utc)
+    referenced = {c['Image'] for c in inspect_containers()}
+    image_ids = sorted(set(docker('image', 'ls', '-q', '--no-trunc').split()))
+    for image_id in image_ids:
+        image = json.loads(docker('image', 'inspect', image_id))[0]
+        if not eligible_unused_image(image, referenced, now):
+            continue
+        print('UNUSED_OLD_APPLICATION_IMAGE', image['RepoTags'], flush=True)
+        if args.apply:
+            fresh = json.loads(docker('image', 'inspect', image_id))[0]
+            current_refs = {c['Image'] for c in inspect_containers()}
+            if not eligible_unused_image(fresh, current_refs, now):
+                raise RuntimeError('Image changed; refusing removal')
+            for tag in fresh['RepoTags']:
+                docker('image', 'rm', tag)
+                print('REMOVED_UNUSED_IMAGE', tag, flush=True)
     after = shutil.disk_usage('/')
     print('DISK_RESULT', json.dumps({'apply': args.apply, 'totalBytes': after.total,
           'usedBytes': after.used, 'freeBytes': after.free,
