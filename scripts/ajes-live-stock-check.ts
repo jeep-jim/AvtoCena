@@ -12,6 +12,15 @@ async function main(){
   console.log('AJES_FILTERED_COUNT',JSON.stringify({table,total:count.total}));stage=table+':list';const list=await client.read({table,pageSize:2},ip);
   stage=table+':makes';const makes=await client.read({table,aggregate:'makes'},ip);
   const detail=list.items[0]?await client.read({table,id:list.items[0].id},ip):null;
+  const first=list.items[0];
+  if(first){
+   stage=table+':model';const model=await client.read({table,make:first.make,model:first.model,pageSize:2},ip);
+   stage=table+':page2';const next=await client.read({table,page:2,pageSize:2},ip);
+   stage=table+':lot';const lot=/^\d{1,10}$/.test(first.lot)?await client.read({table,lotNumber:first.lot,pageSize:2},ip):null;
+   const frame=detail?.items[0]?.frameNumber;
+   stage=table+':frame';const exact=frame&&/^[A-Za-z0-9-]{1,80}$/.test(frame)?await client.read({table,frameNumber:frame,pageSize:2},ip):null;
+   console.log('AJES_STOCK_SEARCH',JSON.stringify({table,modelReceived:model.received,modelMatches:model.items.every((r:any)=>r.make===first.make&&r.model===first.model),nextPageReceived:next.received,pagesDisjoint:next.items.every((r:any)=>!list.items.some((v:any)=>v.id===r.id)),lotChecked:!!lot,lotReceived:lot?.received,lotMatches:lot?.items.every((r:any)=>r.lot===first.lot),frameChecked:!!exact,frameReceived:exact?.received,frameContainsOriginal:exact?.items.some((r:any)=>r.id===first.id)}));
+  }
   console.log('AJES_STOCK_CONTRACT',JSON.stringify({table,total:count.total,listReceived:list.received,listAccepted:list.items.length,makeRows:makes.received,detailReceived:detail?.received,detailAccepted:detail?.items.length,detailFuel:detail?.items[0]?.sourceFuel,detailPower:detail?.items[0]?.sourcePower,detailImageCount:detail?.items[0]?.images.length}));
  }
 }
