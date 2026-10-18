@@ -5,7 +5,7 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 async function load(entry:string,state:any,mocks:Record<string,string>={}){
  (globalThis as any).__ab=state;process.env.AUTH_SECRET='autobot-test-only';
- mocks={data:`const s=globalThis.__ab;export const readDataJson=async(k,f)=>s.files.get(k)??f;export const mutateDataJson=async(k,f,fn)=>{const n=fn(s.files.get(k)??f);s.files.set(k,n);return n;};`,...mocks};
+ mocks={'display-identity':`export const applyEncyclopediaDisplayIdentity=async x=>x;`,data:`const s=globalThis.__ab;export const readDataJson=async(k,f)=>s.files.get(k)??f;export const mutateDataJson=async(k,f,fn)=>{const n=fn(s.files.get(k)??f);s.files.set(k,n);return n;};`,...mocks};
  const b=await build({entryPoints:[entry],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'mocks',setup(b){b.onResolve({filter:/.*/},a=>{const n=a.path.split('/').at(-1)!;if(mocks[n])return {path:n,namespace:'mocks'};});b.onLoad({filter:/.*/,namespace:'mocks'},a=>({contents:mocks[a.path],loader:'js'}));}}]});const m={exports:{} as any};new Function('require','module','exports',b.outputFiles[0].text)(require,m,m.exports);return m.exports;
 }
 test('key encrypted at rest, redacted on reads, hostile endpoints rejected',async()=>{
@@ -60,13 +60,14 @@ test('vehicle specification question receives research before the very first mod
  const a=await load('apps/web/lib/autobot/agent.ts',state,{
  calculation:`export const calculateForChat=async()=>{throw Error('calculation not requested')};export const calculationReply=()=>'';`,
  route:`export async function GET(){throw Error('catalog must not run')}`,
- storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo',year:2022,market:'korea',trim:'Premium'});`,
+ storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo source generation',year:2022,market:'korea',trim:'Premium'});`,
  'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,
  'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
  'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
- research:`export const researchNeeded=(q,c)=>!!c;export const researchVehicle=async()=>{globalThis.__ab.researchCalls++;return {pages:[{title:'Manufacturer specification',url:'https://hyundai.com/spec',kind:'manufacturer',text:'Nexo motor maximum 120 kW; not certified 30-minute power'}]}};`
+ 'display-identity':`export const applyEncyclopediaDisplayIdentity=async x=>({...x,model:'Nexo'});`,
+ research:`export const researchNeeded=(q,c)=>!!c;export const researchVehicle=async identity=>{if(identity.model!=='Nexo')throw Error('source generation leaked into search');globalThis.__ab.researchCalls++;return {pages:[{title:'Manufacturer specification',url:'https://hyundai.com/spec',kind:'manufacturer',text:'Nexo motor maximum 120 kW; not certified 30-minute power'}]}};`
  });
  const answer=await a.runPublicAutobot({text:'Какая у этого авто мощность?',path:'/cars/offer/nexo-2022'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('motor maximum 120 kW')));assert.ok(input[0].content.includes('Ответь на исходный вопрос сейчас'));assert.equal(input[0].role,'system');assert.ok(input.slice(1).every(m=>m.role!=='system'));assert.equal(input.at(-1).role,'user');return {text:JSON.stringify({reply:'Пиковая мощность 120 кВт. 30-минутная не подтверждена.'}),sources:[]}});
  assert.equal(state.researchCalls,1);assert.equal(answer.sources[0].url,'https://hyundai.com/spec');assert.match(answer.text,/120/);assert.equal(answer.cards.length,0);
@@ -123,4 +124,16 @@ test('successful calculator result is returned without another model generation'
  });
  let calls=0;const result=await a.runPublicAutobot({text:'Посчитай по моим параметрам',path:'/autocalc'},new Request('https://avtocena.com/api/autobot'),async()=>{calls++;return {text:JSON.stringify({tool:'calculate',args:{title:'Toyota Corolla'}}),sources:[]};});
  assert.equal(calls,1);assert.match(result.text,/2413948/);
+});
+
+test('Google request parses real result links and reads pages instead of reusing an empty search',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ const links=r.googleResults('<a href="/url?q=https%3A%2F%2Fwww.audi.co.kr%2Fa5&amp;sa=U"><h3>Audi A5 specifications</h3></a><a href="https://www.google.com/help"><h3>Help</h3></a>');
+ assert.equal(links.length,1);assert.equal(links[0].url,'https://www.audi.co.kr/a5');
+ const requests:string[]=[];
+ const result=await r.discoverVehicleWeb({make:'Audi',model:'A5',year:2023,trim:'45 TFSI quattro Premium Coupe',engine:'google'},AbortSignal.timeout(1000),async(url:string)=>{
+  requests.push(url);return {url,html:url.includes('google.com/search')?'<a href="https://www.audi.co.kr/a5"><h3>Audi A5</h3></a>':'Audi A5 Coupe 45 TFSI quattro. Model year 2023. Maximum power 195 kW.'};
+ });
+ assert.ok(requests.some(url=>url.includes('google.com/search')));assert.equal(result.pages.length,1);assert.equal(result.pages[0].kind,'manufacturer');assert.match(result.pages[0].text,/195 kW/);
+ assert.ok(r.researchQueries({make:'Audi',model:'A5',year:2023,trim:'45 TFSI quattro Premium Coupe'})[1].includes('Audi A5 2023 характеристики'));
 });

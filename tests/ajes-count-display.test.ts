@@ -38,3 +38,13 @@ test('delivered budget never accepts seller-only or missing specifications',asyn
  assert.throws(()=>ajesResultFilter({budget:'NaN'}));
  assert.doesNotThrow(()=>ajesCatalogQuery({market:'china',budget:2000000,bodyType:'suv'}));
 });
+
+test('display family resolves source generation names without losing exact selections',async()=>{
+ const {resolveAjesModelNames}=await import('../apps/web/lib/catalog/ajes-model-resolution');
+ const models=['A5 F5','A5 B10','A50','S5 F5','A3','A3 8Y'].map(model=>({model}));
+ assert.equal(resolveAjesModelNames('A5',models),'A5 F5|A5 B10');
+ assert.equal(resolveAjesModelNames('A5 F5',models),'A5 F5');
+ assert.equal(resolveAjesModelNames('A3',models),'A3');
+ assert.equal(resolveAjesModelNames('UNKNOWN',models),'UNKNOWN');
+ assert.equal(resolveAjesModelNames('A5|S5 F5',models),'A5 F5|A5 B10|S5 F5');
+});
