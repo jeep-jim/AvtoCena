@@ -88,7 +88,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   const overviewEligible = !selectedMarket && !hasFilters && !customSort && requestedPage === 1;
   const japanAll = selectedMarket === "japan" && first(params.stock) === "all";
   // Stock and market snapshots are independent; start both storage reads together.
-  const greenRead = (!dealer||dealer.markets.includes("japan")) && (overviewEligible || japanAll) ? readGreenCorner().catch(()=>null) : Promise.resolve(null);
+  const greenRead = (!dealer||dealer.markets.includes("japan")) && (!selectedMarket || japanAll) ? readGreenCorner().catch(()=>null) : Promise.resolve(null);
   const overview = overviewEligible ? await readCatalogOverview().catch((error) => {
     console.error("catalog_overview_read_failed", error);
     return null;
@@ -99,7 +99,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   if (overview) {
     facets = overview.facets;
     groupedMarkets = await Promise.all(allowedMarkets.map(async (market) => {
-      if(liveMarket(market.id))return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
+      if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
       const snapshot = overview.markets[market.id] || { total: 0, items: [] };
       const snapshotCandidates = balanceBusinessRows((snapshot.items as any[]).filter(isRenderablePublicCatalogOffer));
       // The overview is a replaceable speed cache. If its compact showcase was
@@ -118,7 +118,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     [facets, groupedMarkets] = await Promise.all([
       selectedMarket ? readCatalogFacets({ ...common, market: selectedMarket }) : readGroupedCatalogFacets(common, markets.map(market=>market.id)),
       Promise.all(markets.map(async (market) => {
-        if(liveMarket(market.id))return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
+        if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
         const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
         const page = selectedMarket ? requestedPage : 1;
 
@@ -143,7 +143,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     ]);
   }
   const green = (!dealer||dealer.markets.includes("japan")) ? await greenRead : null;
-  const greenMatched = japanAll && green ? filterGreenCorner(await currentGreenCornerPrices(green.items),Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]))) : green?.items || [];
+  const greenMatched = (japanAll || !selectedMarket) && green ? filterGreenCorner(await currentGreenCornerPrices(green.items),Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]))) : green?.items || [];
   const greenItems = japanAll ? greenMatched.slice(0,10).map(publicGreenOffer) : await applyActiveBusinessPricingBatch(greenMatched.slice(0,10).map(publicGreenOffer));
   if (japanAll && green) {
     facets={...facets};
@@ -152,7 +152,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     const models=new Map([...(facets.models||[]),...stockFacets.models].map(row=>[`${row.make}:${row.model}`,row]));
     facets.models=[...models.values()];
   }
-  const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || (market.id === "japan" && overviewEligible));
+  const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || market.id === "japan");
   const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + (japanAll ? greenMatched.length : 0);
   const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?await withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id))};
   const {total,countIncomplete}=countSummary;
@@ -206,7 +206,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
       </p>
       <CatalogFilters initial={initial} facets={facets} resultCount={countIncomplete?undefined:total} />
       <div className="hidden lg:block"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <div key={market.id} className="min-w-0"><Suspense fallback={null}><AjesRail market={market.id as "china"|"korea"} params={params}/></Suspense></div> : market.id === "japan" ? (overviewEligible ? <div key="japan" className="min-w-0"><Suspense fallback={null}><AjesRail /></Suspense><GreenCornerRail items={greenItems} total={greenMatched.length} /></div> : null) : <div key={market.id} className="min-w-0"><section><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-5 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Подходящих предложений сейчас нет.</div>}</section></div>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <div key={market.id} className="min-w-0"><Suspense fallback={null}><AjesRail market={market.id as "china"|"korea"} params={params}/></Suspense></div> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={null}><AjesRail params={params}/></Suspense><GreenCornerRail items={greenItems} total={greenMatched.length} href={pageHref({...params,stock:"green",market:"japan"},1)} /></div> : <div key={market.id} className="min-w-0"><section><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-5 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Подходящих предложений сейчас нет.</div>}</section></div>)}</div>
       <CurrencyRatesStrip variant="mobile" className="mt-8 lg:hidden" />
     </section>
     <style dangerouslySetInnerHTML={{ __html: `

@@ -226,6 +226,7 @@ const ALIASES: Record<string, string> = {
   xiaomiauto: "Xiaomi",
   yashengauto: "Yasheng",
   ds: "DS",
+  benz: "Mercedes-Benz",
   mercedes: "Mercedes-Benz",
   mercedesbenz: "Mercedes-Benz",
   landrover: "Land Rover",

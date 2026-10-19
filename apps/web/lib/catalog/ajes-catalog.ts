@@ -1,3 +1,4 @@
+import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
 import {resolveAjesModelSelection} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
@@ -15,9 +16,17 @@ export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
 
+const sourceMakes=cache(async(table:any)=>{
+ await assertCollectionEnabled(`ajes_${table==='china'||table==='korea'?table:'japan'}_feed`);
+ return readAjesMakeDirectory(ajesClient,await cappedAjesQuery({table}),(await headers()).get('x-real-ip')||'');
+});
+async function resolveMake(query:ReturnType<typeof ajesCatalogQuery>){
+ if(query.make){try{const directory=await sourceMakes(query.table);query.make=resolveAjesMakeNames(query.make,directory.makes);}catch{/* Preserve direct queries and their saved results when the directory is unavailable. */}}
+ return query;
+}
 const resolvedCatalogQuery=cache(async(key:string)=>{
- const params=JSON.parse(key),query=ajesCatalogQuery(params);
- if(query.model&&query.make&&!query.make.includes(',')){
+ const params=JSON.parse(key),query=await resolveMake(ajesCatalogQuery(params));
+ if(query.model&&query.make){
   const directory=await readAjesDirectory({market:params.market,make:query.make});
   const selection=resolveAjesModelSelection(query.model,directory.models);
   delete query.model;Object.assign(query,selection);
@@ -34,11 +43,11 @@ export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary
 export const readAjesCount=cache(async(key='{}'):Promise<number> => (await readAjesCountSummary(key)).total);
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
 export const readAjesMakes=cache(async(key='{}')=>{
- const q=ajesCatalogQuery(JSON.parse(key));delete q.page;delete q.pageSize;delete q.sort;
+ const q=await resolveMake(ajesCatalogQuery(JSON.parse(key)));delete q.page;delete q.pageSize;delete q.sort;
  return readAjesMakeDirectory(ajesClient,await cappedAjesQuery(q),(await headers()).get('x-real-ip')||'');
 });
 export async function readAjesDirectory(params:Record<string,unknown>={}){
- const q=ajesCatalogQuery(params);delete q.page;delete q.pageSize;delete q.sort;
+ const q=await resolveMake(ajesCatalogQuery(params));delete q.page;delete q.pageSize;delete q.sort;
  await assertCollectionEnabled(`ajes_${q.table==='china'||q.table==='korea'?q.table:'japan'}_feed`);
  const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
  return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;

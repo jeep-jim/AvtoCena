@@ -23,3 +23,13 @@ test('empty supplier directory is a valid result, with no browser HTTP cache',as
  globalThis.fetch=async(_url,options)=>{calls++;assert.equal(options?.cache,'no-store');return Response.json({version:1,brands:[],models:[]});};
  try{const search=await loadModelSuggestions(false,{market:'china',make:'EMPTY'});assert.deepEqual(search('anything','EMPTY'),[]);assert.equal(calls,1);}finally{globalThis.fetch=original;}
 });
+
+test('canonical brands resolve to actual source names, including all Mercedes aliases',async()=>{
+ const {resolveAjesMakeNames}=await import('../apps/web/lib/catalog/ajes-make-resolution');
+ const names=[{make:'BENZ'},{make:'MERCEDES BENZ'},{make:'BMW'}];
+ assert.equal(resolveAjesMakeNames('Mercedes-Benz',names),'BENZ,MERCEDES BENZ');
+ assert.equal(resolveAjesMakeNames('벤츠',names),'BENZ,MERCEDES BENZ');
+ assert.equal(resolveAjesMakeNames('BMW',names),'BMW');
+ assert.equal(resolveAjesMakeNames('Unknown',names),'Unknown');
+ assert.equal(resolveAjesMakeNames('BMW,Mercedes-Benz',names),'BMW,BENZ,MERCEDES BENZ');
+});

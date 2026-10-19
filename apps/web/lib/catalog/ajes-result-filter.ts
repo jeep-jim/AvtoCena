@@ -7,11 +7,15 @@ export function ajesResultFilter(params:Record<string,unknown>){
  const amount=(v:unknown)=>{const s=scalar(v);if(!s)return undefined;const n=Number(s);if(!Number.isSafeInteger(n)||n<0)throw new AjesInputError();return n;};
  const from=amount(params.budgetFrom),to=amount(params.budgetTo||params.budget);
  if(from!==undefined&&to!==undefined&&from>to)throw new AjesInputError();
+ const powerFrom=amount(params.powerFrom),powerTo=amount(params.powerTo);
+ if(powerFrom!==undefined&&powerTo!==undefined&&powerFrom>powerTo)throw new AjesInputError();
+ const powerFilter=powerFrom!==undefined||powerTo!==undefined;
  const body=scalar(params.bodyType||params.body),hasPrice=scalar(params.hasPrice),city=scalar(params.city);
  if(body&&!['suv','offroad','sedan','hatchback','wagon','minivan','coupe','convertible','pickup','van'].includes(body))throw new AjesInputError();
  if(hasPrice&&!['yes','no'].includes(hasPrice))throw new AjesInputError();
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
- return {active:priceFilter||Boolean(body),priceFilter,matches(offer:any){
+ return {active:priceFilter||Boolean(body)||powerFilter,priceFilter,matches(offer:any){
+  if(powerFilter){const hp=Number(offer.powerHp);if(!Number.isFinite(hp)||hp<=0||(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo))return false;}
   if(body&&catalogBodyType(offer).toLowerCase()!==body.toLowerCase())return false;
   if(!priceFilter)return true;
   const cityPrice=city?priceCardForCity(offer,city):null;

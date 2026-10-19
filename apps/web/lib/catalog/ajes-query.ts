@@ -61,8 +61,8 @@ export function ajesQuery(input: unknown) {
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // Empty or malformed supplier values must never match a low-power filter.
-    where.push("pw regexp '^[0-9]+([.][0-9]+)?$'",`pw+0>=${low}`,`pw+0<=${high}`);
+    // Use the supplier's plain numeric comparison grammar. Validate normalized power again before display.
+    where.push(`pw>=${low}`,`pw<=${high}`);
   }
   if(q.aggregate!==undefined&&!['count','models','makes'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
