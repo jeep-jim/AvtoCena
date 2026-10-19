@@ -30,12 +30,12 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
-          release=be7e49b6d10eb752a33eb93171d5c6762b7318e2
+          release=6de99ab6a8486859dd40e1e43788d61a345e6626
           remote_dir="/opt/avtocena/releases/$release"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh "root@151.248.113.177:$remote_dir/"
           ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
-          release=be7e49b6d10eb752a33eb93171d5c6762b7318e2
+          release=6de99ab6a8486859dd40e1e43788d61a345e6626
           runtime="/opt/avtocena/releases/$release"
           test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
           calculator=$(python3 - "$runtime/runtime.env" <<'PY'

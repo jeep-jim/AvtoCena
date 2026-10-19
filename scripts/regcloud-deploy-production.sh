@@ -78,7 +78,7 @@ for attempt in $(seq 1 30); do
  sleep 1
 done
 python3 - "$port" "$release" <<'PY'
-import urllib.request,urllib.error,time,json,sys
+import urllib.request,urllib.error,time,json,sys,re
 base='http://127.0.0.1:'+sys.argv[1]
 for path in ['/api/health','/','/cars','/']:
  t=time.monotonic()
@@ -105,8 +105,15 @@ for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/ca
 # are NOT accepted by this release check. Keep all HTML/local price/auth gates above.
 for market in ['japan','korea','china']:
  try:
-  urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source=ajes&budgetTo=3000000',timeout=30)
-  raise AssertionError('live source accepted a request without a real visitor IP')
+  with urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source=ajes&budgetTo=3000000',timeout=30) as response:
+   value=json.load(response)
+  # China may use the owner-selected local Che168 catalog. AJES IDs must
+  # never pass this branch; its visitor-IP boundary remains mandatory.
+  assert market=='china', 'live source accepted a request without a real visitor IP'
+  assert value.get('ok') is True and value.get('total',0)>0 and value.get('items')
+  assert all(row.get('market')=='china' and re.fullmatch(r'[a-f0-9]{24}',str(row.get('id',''))) for row in value['items'])
+  print(json.dumps({'market':market,'localChe168Catalog':'nonempty_verified'}),flush=True)
+  continue
  except urllib.error.HTTPError as e:
   value=json.load(e)
   assert e.code==503, (market,e.code)
