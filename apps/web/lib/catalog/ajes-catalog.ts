@@ -28,7 +28,7 @@ const resolvedCatalogQuery=cache(async(key:string)=>{
  const params=JSON.parse(key),query=await resolveMake(ajesCatalogQuery(params));
  if(query.model&&query.make){
   const directory=await readAjesDirectory({market:params.market,make:query.make});
-  const selection=resolveAjesModelSelection(query.model,directory.models);
+  const selection=resolveAjesModelSelection(query.model,directory.models,query.make);
   delete query.model;Object.assign(query,selection);
  }
  return query;

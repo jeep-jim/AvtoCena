@@ -106,3 +106,11 @@ test('power search recovers only matching already received cars without requirin
  const result=findSavedAjesStockSearch({table:'china',make:'VOLKSWAGEN',powerTo:160,sort:'totalRub'},snapshots,now);
  assert.deepEqual(result?.items.map(x=>x.id),['ok']);assert.equal(result?.partial,true);assert.equal(result?.stale,true);assert.equal('total' in result!,false);
 });
+
+test('Honda selector aliases resolve to actual supplier names without changing other makes',async()=>{
+ const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
+ const names=[{model:'STEPWGN'},{model:'STEPWGN SPADA'},{model:'N-WGN'}];
+ assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'HONDA'),{model:'STEPWGN'});
+ assert.deepEqual(resolveAjesModelSelection('STEP WAGON SPADA',names,'Honda'),{model:'STEPWGN SPADA'});
+ assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'Other'),{model:'STEP WAGON'});
+});

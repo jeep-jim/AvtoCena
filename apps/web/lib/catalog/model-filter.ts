@@ -1,9 +1,9 @@
-import {internationalModel} from './international-model';
+import {modelSearchName} from './model-search-name';
 const wordCache=new Map<string,string[]>();
 function modelWords(make:unknown,input:unknown){
  const key=JSON.stringify([String(make??''),String(input??'')]);
  const cached=wordCache.get(key);if(cached)return cached;
- const words=internationalModel(make,input).normalize('NFKC').toLocaleLowerCase('ru-RU').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean);
+ const words=modelSearchName(make,input).normalize('NFKC').toLocaleLowerCase('ru-RU').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean);
  if(key.length<=1024){if(wordCache.size>=4096)wordCache.delete(wordCache.keys().next().value!);wordCache.set(key,words);}
  return words;
 }

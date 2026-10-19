@@ -87,7 +87,9 @@ export function OverlayBackHistory(){
   };
   const navigating=(event:Event)=>{
    const href=(event as CustomEvent<{href:string}>).detail?.href;
-   if(steps.length&&href&&new URL(href,location.origin).pathname===location.pathname)replacementUrl=location.href;
+   // The dealer's canonical profile can differ from the entry URL. Closing
+   // filters must not rewind into the cabinet while that route is still loading.
+   if(steps.length&&href&&new URL(href,location.origin).origin===location.origin)replacementUrl=location.href;
   };
   window.addEventListener('avtocena:catalog-navigation',navigating);
   const observer=new MutationObserver(sync);

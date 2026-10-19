@@ -5,7 +5,7 @@ import {DealerProfileContent} from '../../apps/web/components/dealers/DealerProf
 import {DealerBrowsingProvider} from '../../apps/web/components/dealers/DealerBrowsingContext';
 import {CatalogFilters} from '../../apps/web/components/catalog/CatalogFilters';
 import {useSelectedCity} from '../../apps/web/lib/location/selected-city';
-const dealer:any={id:'external',name:'Тестовая компания',href:'/test/dealer',markets:['china','japan'],logoLight:'',logoDark:'',preview:false};
+const dealer:any={id:'external',name:'Тестовая компания',href:new URLSearchParams(location.search).has('canonical')?'/test/canonical':'/test/dealer',markets:['china','japan'],logoLight:'',logoDark:'',preview:false};
 const profile:any={dealerId:'external',name:dealer.name,description:'Автомобили под заказ',banner:'',bannerMobile:'',extraBanners:[],logoLight:'',logoDark:'',headerIcon:'',profileEnabled:true,buyersEnabled:false,buyerPhotos:[],catalogMarkets:dealer.markets,specialHeading:'Предложения',offices:[],requisites:{legalName:'',inn:'',ogrn:'',kpp:'',legalAddress:''}};
 function Fixture(){
  const [initial,setInitial]=useState(()=>Object.fromEntries(new URLSearchParams(location.search)));const city=useSelectedCity();
