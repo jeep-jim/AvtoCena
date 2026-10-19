@@ -1,3 +1,4 @@
+import {filterSelections,matchesFilterSelection} from './filter-selections';
 import {AjesInputError} from './ajes-query';
 import {priceCardForCity} from './card-city-delivery';
 import {catalogBodyType} from './pickup-body';
@@ -11,12 +12,12 @@ export function ajesResultFilter(params:Record<string,unknown>){
  if(powerFrom!==undefined&&powerTo!==undefined&&powerFrom>powerTo)throw new AjesInputError();
  const powerFilter=powerFrom!==undefined||powerTo!==undefined;
  const body=scalar(params.bodyType||params.body),hasPrice=scalar(params.hasPrice),city=scalar(params.city);
- if(body&&!['suv','offroad','sedan','hatchback','wagon','minivan','coupe','convertible','pickup','van'].includes(body))throw new AjesInputError();
+ if(filterSelections(body).some(value=>!['suv','offroad','sedan','hatchback','wagon','minivan','coupe','convertible','pickup','van'].includes(value)))throw new AjesInputError();
  if(hasPrice&&!['yes','no'].includes(hasPrice))throw new AjesInputError();
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
  return {active:priceFilter||Boolean(body)||powerFilter,priceFilter,matches(offer:any){
   if(powerFilter){const hp=Number(offer.powerHp);if(!Number.isFinite(hp)||hp<=0||(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo))return false;}
-  if(body&&catalogBodyType(offer).toLowerCase()!==body.toLowerCase())return false;
+  if(!matchesFilterSelection(catalogBodyType(offer),body))return false;
   if(!priceFilter)return true;
   const cityPrice=city?priceCardForCity(offer,city):null;
   const priced=cityPrice?.offer||offer;

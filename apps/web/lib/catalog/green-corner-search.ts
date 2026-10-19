@@ -1,3 +1,4 @@
+import {matchesFilterSelection} from './filter-selections';
 import {catalogBodyType} from './pickup-body';
 import { matchesAuctionGrades } from "./auction-grade-filter";
 import { matchesCatalogModel } from "./model-filter";
@@ -46,7 +47,7 @@ export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
   if((number('budgetFrom')||number('budget')||number('budgetTo'))&&!range(greenCornerBudgetPrice(row,params.city),number('budgetFrom'),number('budget')||number('budgetTo')))return false;
   if(!matchesFuelFilter(row.fuel,params.fuel))return false;
   if(!matchesAuctionGrades(row.auctionGrade,params.auctionGrade))return false;
-  for(const key of ['transmission','drive','bodyType'] as const)if(params[key]&&lower(key==='bodyType'?catalogBodyType(row):row[key])!==lower(params[key]))return false;
+  for(const key of ['transmission','drive','bodyType'] as const)if(!matchesFilterSelection(key==='bodyType'?catalogBodyType(row):row[key],params[key]))return false;
   return true;
  });
  const price=(row:VehicleOffer)=>greenCornerBudgetPrice(row,params.city);
