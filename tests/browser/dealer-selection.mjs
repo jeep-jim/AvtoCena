@@ -116,6 +116,25 @@ try{for(const width of [390,1440]){
  assert.equal(await reloadedMulti.getByRole('button',{name:'Вариатор',exact:true}).count()>=1,true);
  if(width===390)await reloadedMulti.getByRole('button',{name:'Применить фильтры',exact:true}).click();
  await page.screenshot({path:`${out}/multiselect-${width}.png`});
+ // Green Corner's source gearbox codes cannot be reused as another market's types.
+ const switchForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
+ if(width===390)await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
+ else await switchForm.getByRole('button',{name:'Вариатор',exact:true}).and(switchForm.locator('.ac-filter-control')).click();
+ const marketInput=switchForm.locator('input[name="market"]');
+ const marketRoot=marketInput.locator('..');
+ await marketRoot.locator('button.ac-filter-control').click();
+ await marketRoot.getByRole('button',{name:'Япония · Зелёный угол',exact:true}).click();
+ await page.waitForFunction(()=>new URLSearchParams(location.search).get('stock')==='green');
+ assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
+ assert.equal(new URL(page.url()).searchParams.get('fuel'),'petrol|diesel');
+ assert.equal(new URL(page.url()).searchParams.get('bodyType'),'sedan|hatchback');
+ assert.equal(new URL(page.url()).searchParams.get('drive'),'fwd|awd');
+ await marketRoot.locator('button.ac-filter-control').click();
+ await marketRoot.getByRole('button',{name:'Китай',exact:true}).click();
+ await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='china');
+ assert.equal(new URL(page.url()).searchParams.has('transmission'),false);
+ assert.equal(new URL(page.url()).searchParams.get('selection'),'1');
+ if(width===390)await switchForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
  if(width===390){
   // Enter from the cabinet through the ID URL; filters target the canonical profile.
   await page.goto(origin+'/test/cabinet');

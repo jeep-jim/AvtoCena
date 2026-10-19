@@ -22,6 +22,7 @@ test('all AJES tables expand selected fuel, gearbox and drive into validated uni
   assert.match(sql,/time in \('P','D'\)/);assert.match(sql,/kpp in \('AT','CVT'\)/);assert.match(sql,/priv in \('FF','FWD','4WD','AWD','FULLTIME4WD'\)/);
   assert.throws(()=>ajesQuery({table,fuel:"petrol|x' OR 1=1"}));
  }
+ assert.throws(()=>ajesQuery({table:'china',transmission:'IAT'}),'source-specific Green code is not a normalized gearbox type');
  const filter=ajesResultFilter({bodyType:selection.bodyType});assert.equal(filter.matches(first),true);assert.equal(filter.matches(second),true);assert.equal(filter.matches({...first,bodyType:'coupe'}),false);
 });
 test('option lists retain separate selected values, scalar links and combined electric choices',()=>{
