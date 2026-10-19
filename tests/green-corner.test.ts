@@ -72,7 +72,7 @@ test("Green pays CIF at bank rate, taxes CIF at CBR rate, without duplicate logi
  const markets=JSON.parse(fs.readFileSync("data/markets/markets.json","utf8"));
  const today=new Date().toISOString();
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED="true";resetCatalogRateCache();
- const read=mock.method(LocalJsonStorage.prototype,"readJsonWithMeta",async(key:string)=>({found:true,value:key==="fees/exchange-rates.json"?{updatedAt:today,JPY:{cbrRate:66,nominal:100,rateDate:today,rateSource:"cbr"},EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:"cbr"},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:"cbr"}}:key==="markets/markets.json"?markets:{}}));
+ const read=mock.method(LocalJsonStorage.prototype,"readJsonWithMeta",async(key:string)=>({found:true,value:key==="catalog-editorial/current.json"?{revision:"0",entries:{}}:key==="fees/exchange-rates.json"?{updatedAt:today,JPY:{cbrRate:66,nominal:100,rateDate:today,rateSource:"cbr"},EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:"cbr"},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:"cbr"}}:key==="markets/markets.json"?markets:{}}));
  try {
   const input={...normalizeGreenCorner(row,rate,now),greenCornerLogistics:createGreenCornerLogistics(rate)};
   const before=JSON.stringify(input);
