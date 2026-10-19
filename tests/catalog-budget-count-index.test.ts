@@ -4,10 +4,10 @@ import {buildBudgetCountIndex,countBudgetIndex,matchingBudgetIndex,isBudgetCount
 import {publicProductionYears} from '../apps/web/lib/catalog/public-year-range';
 import {splitAutoCalcIdentity} from '../apps/web/lib/autocalc/identity';
 import {priceCardForCity} from '../apps/web/lib/catalog/card-city-delivery';
-test('public identity keeps numeric models and never offers pre-2010 years',()=>{
+test('public identity keeps numeric models and never offers pre-2008 years',()=>{
  assert.deepEqual(splitAutoCalcIdentity('Peugeot 2008'),{make:'Peugeot',model:'2008'});
  assert.deepEqual(splitAutoCalcIdentity('Vito'),{make:'',model:'Vito'});
- assert.equal(Math.min(...publicProductionYears(new Date('2026-09-27'))),2010);
+ assert.equal(Math.min(...publicProductionYears(new Date('2026-09-27'))),2008);
 });
 test('compact budget index preserves city delivery rounding, source data and missing price semantics',()=>{
  const row:any={id:'a',market:'korea',make:'Hyundai',model:'Tucson',year:2021,totalRub:2000000,cardImageUrl:'not-copied',calculationSnapshot:{deliveryPricingBasis:{subtotalRub:1800000,deliveryRub:100000,percents:[3,2]}}};
