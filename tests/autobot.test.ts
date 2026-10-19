@@ -236,7 +236,7 @@ test('chat form preserves known values, rubles, and edits across tab restoration
 
 test('a requested chat calculation form is structured and keeps history values',async()=>{
  const a=await load('apps/web/lib/autobot/agent.ts',{files:new Map()},{
- route:`export const GET=async()=>{throw Error('not used')};`,storage:`export const getOffer=async()=>null;`,
+ route:`export const GET=async()=>{throw Error('not used')};`,storage:`export const getOffer=async()=>({id:'current',make:'Volkswagen',model:'Golf',year:2025,powerHp:200,sourceCurrency:'EUR',sourcePrice:30000,market:'europe'});`,
  'offer-url':`export const offerRouteId=x=>x;export const offerPath=x=>'/cars/offer/'+x.id;`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
@@ -245,7 +245,7 @@ test('a requested chat calculation form is structured and keeps history values',
  });
  const data={make:'Honda',model:'Fit',market:'japan',city:'Кемерово',currency:'RUB',price:1000,draft:{year:2023}};
  for(const tool of ['calculation_form','calculate']){
-  const result=await a.runPublicAutobot({text:'Дай форму расчёта',history:[{role:'user',text:'Honda Fit 2023, Япония, 1000 рублей, Кемерово'}],path:'/cars'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('1000 рублей')));return {text:JSON.stringify({tool,args:data}),sources:[]};});
+  const result=await a.runPublicAutobot({text:'Дай форму расчёта',history:[{role:'user',text:'Honda Fit 2023, Япония, 1000 рублей, Кемерово'}],path:'/cars/offer/current'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('1000 рублей')));return {text:JSON.stringify({tool,args:data}),sources:[]};});
   assert.equal(result.calculationForm?.make,'Honda');assert.equal(result.calculationForm?.currency,'RUB');assert.equal(result.calculationForm?.price,'1000');assert.equal(result.calculationForm?.draft?.year,'2023');assert.equal(result.calculationForm?.draft?.powerHp,undefined);
  }
 });

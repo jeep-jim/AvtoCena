@@ -26,7 +26,7 @@ async function resolveMake(query:ReturnType<typeof ajesCatalogQuery>){
 }
 const resolvedCatalogQuery=cache(async(key:string)=>{
  const params=JSON.parse(key),query=await resolveMake(ajesCatalogQuery(params));
- if(query.model&&query.make&&!query.make.includes(',')){
+ if(query.model&&query.make){
   const directory=await readAjesDirectory({market:params.market,make:query.make});
   const selection=resolveAjesModelSelection(query.model,directory.models);
   delete query.model;Object.assign(query,selection);

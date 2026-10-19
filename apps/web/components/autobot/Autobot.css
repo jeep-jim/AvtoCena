@@ -48,9 +48,9 @@
 .ab-panel .ta-compose form:focus-within{border-color:var(--ta-border);box-shadow:none}
 .ab-panel .ta-message a{color:#318ce7;text-decoration:underline;text-underline-offset:3px}
 .ab-car-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0 4px}
-.ab-car-questions button{display:flex;align-items:flex-start;gap:8px;min-height:68px;padding:12px;border:1px solid var(--ta-border);border-radius:14px;text-align:left;background:var(--ta-surface);color:var(--ta-text);font-size:12px;line-height:1.4}
-.ab-car-questions button>svg{flex:none;color:var(--ta-muted);margin-top:1px}.ab-car-questions button>span:first-of-type{flex:1}.ab-car-questions button>span:last-child{color:var(--ta-muted)}
-.ab-car-questions button:hover{border-color:#318ce7}.ab-car-questions button:focus-visible{outline:2px solid #318ce7;outline-offset:2px}
+.ab-car-questions button{display:flex;align-items:flex-start;gap:8px;min-height:68px;padding:12px;border:0;border-radius:14px;text-align:left;background:var(--ta-surface);color:var(--ta-text);font-size:12px;line-height:1.4}
+.ab-car-questions button>span{flex:1}
+.ab-car-questions button:hover{background:var(--ta-bg)}.ab-car-questions button:focus-visible{outline:2px solid #318ce7;outline-offset:2px}
 @media(max-width:360px){.ab-car-questions{grid-template-columns:1fr}}
 
 .ab-settings-main{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}.ab-settings .ab-new-chat{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 10px;border:1px solid var(--ta-border);border-radius:10px;color:var(--ta-text);background:transparent;font:inherit;cursor:pointer}.ab-settings .ab-new-chat:disabled{opacity:.5;cursor:default}
@@ -61,3 +61,7 @@
 .ab-inline-calculation input,.ab-inline-calculation select{max-width:100%;color:var(--ac-text);font-size:16px}
 .ab-inline-calculation input:focus,.ab-inline-calculation select:focus{outline:none;box-shadow:none}
 .ab-inline-calculation .ac-autocalc-parameters{margin-top:16px}
+
+.ab-panel .ta-suggestions button{border:0;background:var(--ta-surface)}
+
+.ab-car-questions button:last-child:nth-child(3){grid-column:1 / -1}
