@@ -26,23 +26,23 @@ function inspect(value:unknown){
 async function main(){
  const storage=getJsonStorage(),ip=process.env.AJES_DIAG_IP;
  if(ip!=='151.248.113.177')throw Error('server_ip_not_confirmed');
- const targets:Array<{market:'china'|'korea'|'stats';id:string;ajax?:boolean}>=[{market:'korea',id:'6bucknsm0H1rhz'}];
+ const targets:Array<{market:'china'|'korea'|'stats';id:string;ajax?:boolean}>=[];
  for(const token of ['AME39AhA3_nkA0rT','GgabHBpFJ9vgLYJ0']){
   const share:any=await storage.readJson('public-share-links/'+token.slice(0,2)+'/'+token+'.json',null);
   if(!share?.path){console.log('PRICE_SHARE',JSON.stringify({token,found:false}));continue;}
   const u=new URL(share.path,'https://avtocena.com'),slug=u.pathname.split('/').at(-1)||'',id=slug.includes('--')?slug.split('--').at(-1)!:slug;
-  const version=u.searchParams.get('calculation');if(version&&/^[a-f0-9-]{36}$/.test(version)){const record:any=await storage.readJson('offer-calculation-scenarios/'+createHash('sha256').update(id).digest('hex')+'/'+version+'.json',null); console.log('PRICE_ARCHIVE',JSON.stringify({id,found:!!record,savedAt:record?.savedAt,draft:record?.draft,calculation:record?.calculation}));}
+  const version=u.searchParams.get('calculation');if(version&&/^[a-f0-9-]{36}$/.test(version)){const record:any=await storage.readJson('offer-calculation-scenarios/'+createHash('sha256').update(id).digest('hex')+'/'+version+'.json',null); console.log('PRICE_ARCHIVE',JSON.stringify({id,found:!!record,savedAt:record?.savedAt,currencyRate:record?.calculation?.currencyRate,totalRub:record?.calculation?.totalRub}));}
   console.log('PRICE_SHARE',JSON.stringify({token,found:true,offerId:id,calculation:u.searchParams.get('calculation')}));
   if(/^ajes-china-[A-Za-z0-9_-]+$/.test(id)){
    const sourceId=id.slice('ajes-china-'.length);
    const cached:any=await storage.readJson('catalog/partner-cache/ajes/china/'+sourceId+'.json',null),lot=cached?.items?.[0];
-   console.log('PRICE_SAVED',JSON.stringify({offerId:id,found:!!lot,observedAt:cached?.observedAt,price:lot?.sourcePrice,currency:lot?.currency,make:lot?.make,model:lot?.model,year:lot?.year}));
-   targets.push({market:'china',id:sourceId});
+   console.log('PRICE_SAVED',JSON.stringify({offerId:id,found:!!lot,observedAt:cached?.observedAt,price:lot?.sourcePrice,currency:lot?.currency,make:lot?.make,model:lot?.model,year:lot?.year,originalLot:lot?.lot,sourceTemplate:lot?.status,mileage:lot?.mileageKm,trim:lot?.trim,technical:{power:lot?.sourcePower,engine:lot?.engineCc,fuel:lot?.sourceFuel}}));
+   // Exact China response was already inspected; use its retained technical fields here.
   }
  }
  const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled('ajes_'+(t==='stats'?'japan':t)+'_feed'),reserve:t=>reserveAjesRequest(storage,t)});
- const japan=await client.read({table:'stats',pageSize:1},ip);if(japan.items[0])targets.push({market:'stats',id:japan.items[0].id});
- targets.push({market:'korea',id:'6bucknsm0H1rhz',ajax:true});
+ const korea=await client.read({table:'korea',fuel:'petrol',pageSize:2},ip);
+ for(const lot of korea.items){console.log('KOREA_LIST_FIELDS',JSON.stringify({id:lot.id,make:lot.make,model:lot.model,year:lot.year,engineCc:lot.engineCc,power:lot.sourcePower,fuel:lot.sourceFuel,transmission:lot.sourceTransmission,drive:lot.sourceDrive,productionMonth:lot.productionMonth}));targets.push({market:'korea',id:lot.id,ajax:true});}
  const password=await ajesPassword();if(!password)throw Error('not_configured');
  for(const {market,id,ajax} of targets){
   await assertCollectionEnabled('ajes_'+(market==='stats'?'japan':market)+'_feed');await reserveAjesRequest(storage,market);
@@ -59,7 +59,7 @@ async function main(){
   const fields=Object.keys(row).filter(k=>/^[A-Za-z0-9_]{1,64}$/.test(k));
   const linkFields=Object.fromEntries(fields.filter(k=>k!=='IMAGES').map(k=>[k,inspect(row[k])]).filter(([k,v])=>k==='INFO'||(v as any).links.length));
   const prices=Object.fromEntries(['FINISH','START','PRICE','AVG_PRICE'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,/^\d+(?:\.\d+)?$/.test(String(row[k]))?Number(row[k]):null]));
-  const technical=Object.fromEntries(['YEAR','MONTH','ENG_V','PW','TIME','FUEL','KPP','KPP_TYPE','PRIV','MILEAGE','GRADE','KUZOV'].map(k=>[k,typeof row[k]==='string'?row[k].slice(0,200):typeof row[k]==='number'?row[k]:null]));
+  const technical=Object.fromEntries(['LOT','YEAR','MONTH','ENG_V','PW','TIME','FUEL','KPP','KPP_TYPE','PRIV','MILEAGE','GRADE','KUZOV'].map(k=>[k,typeof row[k]==='string'?row[k].slice(0,200):typeof row[k]==='number'?row[k]:null]));
   const status=String(row.STATUS||'');let sourceUrl:string|undefined;try{const u=new URL(decode(status));if(/(^|\.)(encar\.com|che168\.com)$/.test(u.hostname)&&!u.username&&!u.password&&![...u.searchParams.keys()].some(k=>/code|token|password|key/i.test(k)))sourceUrl=u.href;}catch{}
   let infoSummary:any={};try{const info=JSON.parse(String(row.INFO||''));infoSummary={keys:Object.keys(info).slice(0,100),numeric:Object.fromEntries(Object.entries(info).filter(([k,v])=>/power|engine|fuel|cc|kw|hp|year|month|body|drive|transmission|출력|배기|연료|马力|功率|排量/i.test(k)&& (typeof v==='number'||typeof v==='string'&&v.length<100)))};}catch{const info=decode(String(row.INFO||'')).replace(/<[^>]*>/g,' ');infoSummary={technicalSnippets:info.match(/(?:horsepower|power|engine|fuel|출력|배기량|연료|马力|功率|排量)[^<>\r\n]{0,80}/gi)?.slice(0,15)||[]};}
   console.log('EXACT_SOURCE_CHECK',JSON.stringify({market,id,ajax:!!ajax,fields,prices,technical,sourceUrl,linkFields,infoSummary}));
