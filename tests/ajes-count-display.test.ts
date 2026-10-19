@@ -10,7 +10,7 @@ test('independent counts retain zero, unavailable and stale semantics',()=>{
  assert.equal(ajesCountText(null),'Количество уточняется');
  assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · по последним данным');
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
- assert.equal(ajesCountText({...fresh,upperBound:true}),'147\u00a0867 в каталоге');
+ assert.equal(ajesCountText({...fresh,upperBound:true}),'147\u00a0867');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);
 });
 test('stock power selection uses numeric nonempty evidence in lists and aggregates',()=>{
@@ -80,4 +80,15 @@ test('exact Korea/China filters recover only matching saved cards when the sourc
  const china={...q,table:'china' as const,sourcePriceTo:100000};
  assert.equal(findSavedAjesStockSearch(china,{one:{...saved,items:[{...lot,table:'china',sourcePrice:100001}]}},now),null);
  assert.ok(findSavedAjesStockSearch(china,{one:{...saved,items:[{...lot,table:'china',sourcePrice:100000}]}},now));
+});
+
+
+test('large families keep every source generation and never match A50 or S5',async()=>{
+ const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
+ const selection=resolveAjesModelSelection('A5|S5 F5',Array.from({length:40},(_,i)=>({model:'A5 G'+i})).concat([{model:'S5 F5'},{model:'A50'}]));
+ assert.deepEqual(selection,{model:'S5 F5',modelFamilies:'A5'});
+ const sql=ajesQuery({table:'korea',...selection}).sql;
+ assert.match(sql,/\(model_name='S5 F5' or model_name like 'A5 %'\)/);
+ assert.throws(()=>ajesQuery({table:'korea',modelFamilies:"A5%' OR 1=1"}));
+ assert.deepEqual(resolveAjesModelSelection('A5',[{model:'A5'},{model:'A5 F5'}]),{model:'A5'});
 });

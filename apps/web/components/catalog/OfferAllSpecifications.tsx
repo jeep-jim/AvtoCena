@@ -24,6 +24,6 @@ export function OfferAllSpecifications({ snapshot, groups = snapshot?.groups || 
     {unresolved.length ? <details className={styles.unresolved}><summary>Данные требуют уточнения ({unresolved.length})</summary><p>Источник передал неполное название или текст без подтверждённого перевода. Оригинальные сведения:</p><dl className={styles.rows}>{unresolved.map((item,i)=><div key={i} className={styles.row}><dt>{item.label||item.name}</dt><dd>{item.displayValue||"Не указано"}</dd></div>)}</dl></details> : null}
    </section>;
   })}
-  {sourceUrl && /^https?:\/\//i.test(sourceUrl) ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[#ef3340] underline underline-offset-4">Открыть объявление источника ↗</a> : null}
+  {sourceUrl && /^https?:\/\//i.test(sourceUrl) ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[#318ce7] underline underline-offset-4">Открыть объявление источника ↗</a> : null}
  </section>;
 }

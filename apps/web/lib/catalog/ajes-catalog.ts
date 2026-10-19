@@ -1,5 +1,5 @@
 import 'server-only';
-import {resolveAjesModelNames} from './ajes-model-resolution';
+import {resolveAjesModelSelection} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {assertCollectionEnabled} from './collection-controls';
@@ -19,7 +19,8 @@ const resolvedCatalogQuery=cache(async(key:string)=>{
  const params=JSON.parse(key),query=ajesCatalogQuery(params);
  if(query.model&&query.make&&!query.make.includes(',')){
   const directory=await readAjesDirectory({market:params.market,make:query.make});
-  query.model=resolveAjesModelNames(query.model,directory.models);
+  const selection=resolveAjesModelSelection(query.model,directory.models);
+  delete query.model;Object.assign(query,selection);
  }
  return query;
 });
