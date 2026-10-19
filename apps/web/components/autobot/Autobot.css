@@ -55,3 +55,9 @@
 
 .ab-settings-main{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}.ab-settings .ab-new-chat{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 10px;border:1px solid var(--ta-border);border-radius:10px;color:var(--ta-text);background:transparent;font:inherit;cursor:pointer}.ab-settings .ab-new-chat:disabled{opacity:.5;cursor:default}
 .ab-panel .ta-toolbar button{display:inline-flex;align-items:center;justify-content:center}
+
+.ab-panel .ab-form-message{width:100%;max-width:100%;min-width:0}
+.ab-inline-calculation{min-width:0;margin-top:16px;white-space:normal}
+.ab-inline-calculation input,.ab-inline-calculation select{max-width:100%;color:var(--ac-text);font-size:16px}
+.ab-inline-calculation input:focus,.ab-inline-calculation select:focus{outline:none;box-shadow:none}
+.ab-inline-calculation .ac-autocalc-parameters{margin-top:16px}

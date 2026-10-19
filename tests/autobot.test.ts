@@ -58,7 +58,7 @@ test('research discovers the model and manufacturer sources without leaking visi
 test('vehicle specification question receives research before the very first model answer',async()=>{
  const state:any={files:new Map(),researchCalls:0};
  const a=await load('apps/web/lib/autobot/agent.ts',state,{
- calculation:`export const calculateForChat=async()=>{throw Error('calculation not requested')};export const calculationReply=()=>'';`,
+ calculation:`export const normalizeCalculationArgs=x=>x;export const calculateForChat=async()=>{throw Error('calculation not requested')};export const calculationReply=()=>'';`,
  route:`export async function GET(){throw Error('catalog must not run')}`,
  storage:`export const getOffer=async()=>({id:'nexo-2022',make:'Hyundai',model:'Nexo source generation',year:2022,market:'korea',trim:'Premium'});`,
  'offer-url':`export const offerRouteId=()=> 'nexo-2022';export const offerPath=()=>'/cars/offer/nexo-2022';`,
@@ -125,7 +125,7 @@ test('successful calculator result is returned without another model generation'
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
  'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
  research:`export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
- calculation:`export const calculateForChat=async()=>({ok:true,calculation:{totalRub:2413948}});export const calculationReply=r=>'Итого '+r.calculation.totalRub+' ₽';`
+ calculation:`export const normalizeCalculationArgs=x=>x;export const calculateForChat=async()=>({ok:true,calculation:{totalRub:2413948}});export const calculationReply=r=>'Итого '+r.calculation.totalRub+' ₽';`
  });
  let calls=0;const result=await a.runPublicAutobot({text:'Посчитай по моим параметрам',path:'/autocalc'},new Request('https://avtocena.com/api/autobot'),async()=>{calls++;return {text:JSON.stringify({tool:'calculate',args:{title:'Toyota Corolla'}}),sources:[]};});
  assert.equal(calls,1);assert.match(result.text,/2413948/);
@@ -223,4 +223,29 @@ test('search URLs in message text are read before becoming source evidence',asyn
  });
  const result=await r.researchVehicle({make:'Honda',model:'Step Wagon',year:2015},AbortSignal.timeout(1000));
  assert.equal(result.status,'found');assert.equal(result.searchEvidence.sources.length,1);assert.equal(result.pages[0].url,'https://www.honda.co.jp/spec/');
+});
+
+test('chat form preserves known values, rubles, and edits across tab restoration',async()=>{
+ const {calculationFormSeed}=await import('../apps/web/lib/autocalc/form-state');
+ const {parseChatSession,serializeChatSession}=await import('../apps/web/lib/autobot/session');
+ const seed=calculationFormSeed({make:'Honda',model:'Fit',market:'japan',currency:'RUB',price:1000,city:'Кемерово',draft:{year:2023,powerHp:110,secret:'private'},url:'javascript:alert(1)',token:'private'});
+ assert.equal(seed.price,'1000');assert.equal(seed.currency,'RUB');assert.equal(seed.url,undefined);assert.equal(seed.draft?.secret,undefined);
+ const restored=parseChatSession(serializeChatSession([{role:'assistant',text:'Форма',calculationForm:seed}],'',true));
+ assert.deepEqual(restored.messages[0].calculationForm,seed);
+});
+
+test('a requested chat calculation form is structured and keeps history values',async()=>{
+ const a=await load('apps/web/lib/autobot/agent.ts',{files:new Map()},{
+ route:`export const GET=async()=>{throw Error('not used')};`,storage:`export const getOffer=async()=>null;`,
+ 'offer-url':`export const offerRouteId=x=>x;export const offerPath=x=>'/cars/offer/'+x.id;`,
+ 'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,'safe-public-pricing':`export const safePublicPricing=x=>x;`,
+ 'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
+ research:`export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
+ calculation:`export const normalizeCalculationArgs=x=>x;export const calculateForChat=async()=>({ok:false});export const calculationReply=()=>'';`
+ });
+ const data={make:'Honda',model:'Fit',market:'japan',city:'Кемерово',currency:'RUB',price:1000,draft:{year:2023}};
+ for(const tool of ['calculation_form','calculate']){
+  const result=await a.runPublicAutobot({text:'Дай форму расчёта',history:[{role:'user',text:'Honda Fit 2023, Япония, 1000 рублей, Кемерово'}],path:'/cars'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('1000 рублей')));return {text:JSON.stringify({tool,args:data}),sources:[]};});
+  assert.equal(result.calculationForm?.make,'Honda');assert.equal(result.calculationForm?.currency,'RUB');assert.equal(result.calculationForm?.price,'1000');assert.equal(result.calculationForm?.draft?.year,'2023');assert.equal(result.calculationForm?.draft?.powerHp,undefined);
+ }
 });
