@@ -46,7 +46,7 @@ try{
    assert.equal(await heading.getByRole('button',{name:'Применить фильтры',exact:true}).innerText(),'ОК');
    await page.screenshot({path:`${out}/sheet-${width}-${theme}.png`});
   }
-  const market=scope.locator('input[name="market"]').locator('..');await market.locator(':scope > button').click();await market.getByRole('button',{name:'Зелёный угол',exact:true}).click();
+  const market=scope.locator('input[name="market"]').locator('..');await market.locator(':scope > button').click();await market.getByRole('button',{name:'Япония · Зелёный угол',exact:true}).click();
   await page.waitForFunction(()=>location.pathname==='/cars/green');
   const query=new URL(page.url()).searchParams;assert.equal(query.get('market'),'japan');assert.equal(query.get('stock'),'green');assert.equal(query.get('model'),'Corolla Cross');assert.equal(query.get('yearFrom'),'2024');assert.equal(query.get('mileageTo'),'9000');
   if(width<1024)await scope.getByRole('button',{name:'Применить фильтры',exact:true}).click();

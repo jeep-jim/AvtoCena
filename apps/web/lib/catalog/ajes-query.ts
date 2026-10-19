@@ -4,8 +4,8 @@ import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main' | 'korea' | 'china';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
-export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'|'mileage'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {table?: AjesTable; aggregate?: 'count'|'models'|'makes'; sort?: 'updatedAt'|'year'|'yearAsc'|'totalRub'|'totalRubDesc'|'mileage'; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['aggregate','sort','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < min || value > max) throw new AjesInputError();
@@ -27,7 +27,7 @@ export function ajesQuery(input: unknown) {
     return {table, kind:'detail' as const, sql:`select * from ${table} where id='${q.id}'`, id:q.id, page:1, pageSize:1};
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
-  const makes=values(q.make,','),models=values(q.model,'|');
+  const makes=values(q.make,','),models=values(q.model,'|'),families=values(q.modelFamilies,'|');
   const stock=table==='korea'||table==='china',minYear=stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR;
   const yearFrom=integer(q.yearFrom,minYear,minYear,2100), yearTo=integer(q.yearTo,2100,minYear,2100);
   if (yearFrom>yearTo) throw new AjesInputError();
@@ -40,7 +40,9 @@ export function ajesQuery(input: unknown) {
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
   where.push(heavyVehicleSqlExclusion());
-  for(const [column,parts] of [['marka_name',makes],['model_name',models]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
+  for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
+  const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];
+  if(modelClauses.length)where.push('('+modelClauses.join(' or ')+')');
   const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const codes=map[value];if(!codes)throw new AjesInputError();where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
   coded(q.fuel,'time',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
