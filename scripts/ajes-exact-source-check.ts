@@ -9,7 +9,9 @@ async function main(){
  const health=await body('https://avtocena.com/api/health');let h:any;try{h=JSON.parse(health.text);}catch{throw Error('health_invalid');}
  console.log('RELEASE_HEALTH',JSON.stringify({status:health.status,ok:h.ok,releaseSha:h.releaseSha,calculationVersion:h.calculationVersion}));
  if(h.releaseSha!=="df3af1702e21514fd0f2ff4a72cb085d3aff7d27")throw Error('release_not_active');
- const page=await body('https://avtocena.com/s/GgabHBpFJ9vgLYJ0');
+ const share:any=await getJsonStorage().readJson('public-share-links/Gg/GgabHBpFJ9vgLYJ0.json',null);
+ if(!share?.path||!/^\/cars\/offer\/[A-Za-z0-9_-]+\?/.test(share.path))throw Error('page_not_verified');
+ const page=await body('https://avtocena.com'+share.path);
  const details=[...page.text.matchAll(/<details\b[\s\S]*?<\/details>/gi)].map(m=>m[0]);
  const source=details.find(s=>s.includes('ac-offer-updated')&&s.includes('https://m.che168.com/cardetail/index?infoid=59163228'));
  console.log('HAVAL_LIVE_PAGE',JSON.stringify({status:page.status,hasHaval:/HAVAL|Haval/.test(page.text),originalSourceInExistingDisclosure:!!source,sourcePlaceholderVisible:/href="[^"]*\{LOT\}/.test(page.text),hasEngineModel:page.text.includes('GW4G15M'),hasSourceSpecs:page.text.includes('Характеристики из объявления'),priceAttribute:page.text.match(/data-offer-price-rub="([0-9]+)"/)?.[1]}));
