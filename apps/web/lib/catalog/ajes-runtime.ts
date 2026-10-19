@@ -1,6 +1,6 @@
 import 'server-only';
 import {ajesEndpoint} from './ajes-routing';
-import {readAjesQueryCache,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache} from './ajes-query-cache';
+import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache} from './ajes-query-cache';
 import {ajesPassword} from './ajes-settings';
 import {getJsonStorage} from '../data';
 import {assertCollectionEnabled} from './collection-controls';
@@ -44,6 +44,7 @@ export const ajesClient=createAjesClient({
     const current=await read(sql);if(current)return current;
     // Carry only rows across this selection fix, never an inaccurate old count.
     if(!sql.startsWith('select * from'))return null;
+    const priorTrucks=await readPreviousTruckPolicyRows(sql,read);if(priorTrucks)return priorTrucks;
     const china=await readUncappedChinaRows(sql,read);if(china)return china;
     const previous=sql.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(true)).replace("auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc",'auction_date desc');
     let saved=previous!==sql?await read(previous):null;

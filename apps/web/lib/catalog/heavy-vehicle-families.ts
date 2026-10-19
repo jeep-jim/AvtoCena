@@ -28,8 +28,9 @@ export function knownHeavyVehicleFamily(make:unknown,model:unknown){
   name===family||[' ','-','/'].some(separator=>name.startsWith(family+separator))));
 }
 /** Fixed identifiers only; same family boundary as the local guard. */
-export function heavyVehicleSqlExclusion(legacyCache=false){
- return heavyVehicleFamilies.filter(group=>!legacyCache||group.make!=='TOYOTA').map(group=>`not (marka_name='${group.make}' and (${group.models.flatMap(model=>[
+export function heavyVehicleSqlExclusion(legacyCache=false,beforeLightTrucks=false){
+ const light=new Set<string>(beforeLightTrucks?['ELF','CANTER','DUTRO']:[]);
+ return heavyVehicleFamilies.filter(group=>!legacyCache||group.make!=='TOYOTA').map(group=>`not (marka_name='${group.make}' and (${group.models.filter(model=>!light.has(model)).flatMap(model=>[
   `model_name='${model}'`,...[' ','-','/'].map(separator=>`model_name like '${model}${separator}%'`),
  ]).join(' or ')}))`).join(' and ');
 }

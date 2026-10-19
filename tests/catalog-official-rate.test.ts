@@ -22,7 +22,8 @@ test('seller conversion uses exact official quote/nominal even when cached effec
   }
   assert.equal((await convertToRub(57800,'CNY'))?.sourcePriceRub,722211);
   resetCatalogRateCache();
-  globalThis.fetch=async()=>new Response('<ValCurs Date="20.10.2026"><Valute><CharCode>CNY</CharCode><Nominal>1</Nominal><Value>12,50</Value></Valute></ValCurs>');
+  const tomorrow=new Date(Date.now()+86400000).toISOString().slice(0,10).split('-').reverse().join('.');
+  globalThis.fetch=async()=>new Response(`<ValCurs Date="${tomorrow}"><Valute><CharCode>CNY</CharCode><Nominal>1</Nominal><Value>12,50</Value></Valute></ValCurs>`);
   const live=await convertToRub(57800,'CNY',{preferLive:true});
   assert.equal(live?.rateSource,'cbr_live');assert.equal(live?.sourcePriceRub,722500);assert.equal(live?.effectiveRate,12.5);
  }finally{

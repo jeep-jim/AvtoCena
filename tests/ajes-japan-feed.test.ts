@@ -617,3 +617,14 @@ test('explicit trucks are excluded across markets, including saved and Dubicars 
  }
  assert.equal(catalogHeavyVehicleExcluded({market:'uae',sourceId:'dubicars_feed',make:'ISUZU',model:'ELF'}),true);
 });
+
+test('truck policy change retains old viewed rows only as a partial refresh/failure fallback, never an old count',async()=>{
+ const {readPreviousTruckPolicyRows}=await import('../apps/web/lib/catalog/ajes-query-cache');
+ const query=ajesQuery({table:'stats'}).sql;
+ const previous=query.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,true));
+ const saved={schemaVersion:2,items:[{make:'ISUZU',model:'ELF Key'},{make:'TOYOTA',model:'PRIUS'}]};
+ const value=await readPreviousTruckPolicyRows(query,async key=>key===previous?saved:null);
+ assert.equal(value.schemaVersion,0);assert.equal(value.partial,true);
+ assert.deepEqual(value.items.filter((r:any)=>!catalogHeavyVehicleExcluded(r)),[{make:'TOYOTA',model:'PRIUS'}]);
+ let calls=0;assert.equal(await readPreviousTruckPolicyRows(ajesQuery({aggregate:'count'}).sql,async()=>{calls++;return saved;}),null);assert.equal(calls,0);
+});

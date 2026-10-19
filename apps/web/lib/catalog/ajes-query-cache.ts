@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
 import {ajesQuery} from './ajes-query';
 
 type Store={readJson:(key:string,fallback:null)=>Promise<any>;writeJson:(key:string,value:any)=>Promise<unknown>};
@@ -43,4 +44,18 @@ export async function readUncappedChinaRows(sql:string,read:(sql:string)=>Promis
  if(previous===sql)return null;
  const value=await read(previous);
  return value?{...value,schemaVersion:0,partial:true}:null;
+}
+
+/** Old viewed rows remain a partial failure fallback; never reuse their old counts. */
+export async function readPreviousTruckPolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
+ if(!sql.startsWith('select * from'))return null;
+ const current=heavyVehicleSqlExclusion();
+ if(!sql.includes(current))return null;
+ for(const legacy of [false,true]){
+  const previous=sql.replace(current,heavyVehicleSqlExclusion(legacy,true));
+  if(previous===sql)continue;
+  const value=await read(previous);
+  if(value)return {...value,schemaVersion:0,partial:true};
+ }
+ return null;
 }
