@@ -1,9 +1,6 @@
 name: Public page — bounded error check
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/public-page-error-check.yml']
 permissions:
   contents: read
 jobs:
