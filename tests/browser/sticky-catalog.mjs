@@ -74,7 +74,7 @@ try{
    await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
    const emptySheet=page.locator('.ac-mobile-filter-sheet');
    assert.equal(await emptySheet.getByRole('button',{name:'Закрыть',exact:true}).innerText(),'×');
-   await emptySheet.getByRole('checkbox',{name:'Дешевле',exact:true}).check();
+   await emptySheet.getByRole('button',{name:'Дешевле',exact:true}).click();
    await emptySheet.getByRole('button',{name:'Применить фильтры',exact:true}).click();
    await page.waitForFunction(()=>new URLSearchParams(location.search).get('sort')==='totalRub');
    assert.equal(await page.locator('.ac-mobile-filter-sheet').count(),0);
