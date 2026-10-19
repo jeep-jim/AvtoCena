@@ -153,7 +153,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     facets.models=[...models.values()];
   }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || market.id === "japan");
-  const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + (japanAll ? greenMatched.length : 0);
+  const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + ((japanAll || !selectedMarket) ? greenMatched.length : 0);
   const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?await withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id))};
   const {total,countIncomplete}=countSummary;
 

@@ -76,3 +76,6 @@
 
 # Owner Dubicars displacement update — 19.10.2026
 - Supplier confirmed displacement is in litres; owner explicitly requests using it for UAE automatic calculations. Convert supplied litres to engineCc (×1000), retain the raw value and unit provenance, and restore missing volumes from saved paid-feed labels. Preserve existing exact/manual values, calculation rules, other markets and missing-power safeguards. Legacy documented integer cc remains supported. This supersedes treating paid-feed litre values as unusable for calculation.
+
+# Owner daily continuity — 19.10.2026
+- Every work session must append results under the actual Asia/Krasnoyarsk calendar date in roadmap.md. Start a new dated entry when the date changes; preserve all prior history, commits/releases, verification evidence and unfinished items. This is a task log and knowledge recovery record, not a claim of a database backup.

@@ -82,8 +82,8 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
         initialCity={fromQuery || fromCookie}
         initialOffers={pricedItems}
         initialMarketCounts={catalog.marketCounts}
-        initialCount={catalog.total}
-        initialCountIncomplete={catalog.countIncomplete}
+        initialCount={catalog.total + (green?.items.length || 0)}
+        initialCountIncomplete={catalog.countIncomplete || !green}
         initialMarketCountInfo={catalog.marketCountInfo}
       />
     </div>

@@ -1,3 +1,4 @@
+import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
 import {GET as greenSearch} from "@/app/api/catalog/green/route";
 import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
@@ -66,7 +67,12 @@ export async function GET(request: Request) {
     return NextResponse.json({ok:true,...result}, {headers:{"Cache-Control":"public, max-age=30, s-maxage=30", "Server-Timing":`catalog-page;dur=${(performance.now()-started).toFixed(1)}`}});
   }
   if (p.get("countOnly") === "1") {
-    const result = await withAjesCount(await countCatalogOffers(query),query);
+    let result = await withAjesCount(await countCatalogOffers(query),query);
+    if(!query.market){
+      const green=await readGreenCorner().catch(()=>null);
+      const greenTotal=green?(await readGreenCornerPage(green.items,{...Object.fromEntries(p),page:"1"})).total:0;
+      result={...result,total:result.total+greenTotal,countIncomplete:result.countIncomplete||!green};
+    }
     return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
   }
   const [result, facets, rateExtras] = await Promise.all([

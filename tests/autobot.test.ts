@@ -272,3 +272,13 @@ test('paid discovery is reserved for missing topic evidence, not every read spec
  assert.equal(r.hasUsefulReadEvidence('30-minute',page('Peak power 120 kW')),false);
  assert.equal(r.hasUsefulReadEvidence('30-minute',page('30-minute power 45 kW')),true);
 });
+
+test('automatic electrified research asks only for missing source specifications',async()=>{
+ const {missingElectrifiedSpecifications,automaticResearchQuestion}=await import('../apps/web/lib/autobot/missing-specifications');
+ assert.deepEqual(missingElectrifiedSpecifications({fuel:'petrol'}),[]);
+ assert.deepEqual(missingElectrifiedSpecifications({fuel:'electric',power30MinKw:80}),[]);
+ assert.equal(missingElectrifiedSpecifications({fuel:'electric',powerKw:300}).length,1);
+ assert.deepEqual(missingElectrifiedSpecifications({fuel:'electric',power30MinKwByMotor:[40,60]}),[]);
+ const gaps=missingElectrifiedSpecifications({fuel:'hybrid',engineCc:1498,icePowerKw:100});
+ assert.equal(gaps.length,1);assert.match(automaticResearchQuestion(gaps),/30-минутная мощность/);
+});

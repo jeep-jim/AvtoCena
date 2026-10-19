@@ -74,6 +74,20 @@ try{
  await phone.waitForFunction(()=>{try{return JSON.parse(sessionStorage.getItem('avtocena.autobot.tab.v1')||'{}').messages?.some(m=>m.calculationForm?.city==='Омск');}catch{return false;}});
  await phone.reload();const restoredForm=phone.getByRole('region',{name:'Расчёт автомобиля в чате'});await restoredForm.waitFor();
  assert.equal(await restoredForm.getByLabel('Валюта',{exact:true}).inputValue(),'RUB');await restoredForm.getByRole('button',{name:'Выбрать город. Сейчас: Омск',exact:true}).waitFor();
+
+ // A mobile launcher moves only after holding and stays below the header.
+ await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();
+ const fab=phone.getByRole('button',{name:'Открыть АвтоБота',exact:true});const start=await fab.boundingBox();
+ await phone.mouse.move(start.x+28,start.y+28);await phone.mouse.down();await phone.waitForTimeout(400);await phone.mouse.move(45,110,{steps:8});await phone.mouse.up();
+ assert.equal(await phone.locator('dialog.ab-panel').count(),0);const moved=await fab.boundingBox();assert.ok(moved.y<150&&moved.x<40);
+ await phone.reload();const retained=await fab.boundingBox();assert.ok(Math.abs(retained.y-moved.y)<2);await fab.tap();await phone.locator('dialog.ab-panel').waitFor();
+ // Opening an electrified offer researches missing values once per tab/page.
+ await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();
+ await phone.goto('https://autobot.test/cars/offer/test-hybrid');
+ await phone.evaluate(()=>{const main=document.createElement('main');main.dataset.autobotMissing=JSON.stringify(['сертифицированная 30-минутная мощность электромоторов']);document.body.append(main);});
+ formMode=false;const beforeAuto=sendCount;await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await phone.getByText('Ответ на первое нажатие',{exact:true}).last().waitFor();assert.equal(sendCount,beforeAuto+1);
+ const widths=await phone.locator('.ab-car-questions button').evaluateAll(els=>els.map(el=>({width:el.getBoundingClientRect().width,parent:el.parentElement.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));assert.ok(widths.length);assert.ok(widths.every(x=>Math.abs(x.width-x.parent)<1&&x.height<60));
+ await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await phone.waitForTimeout(300);assert.equal(sendCount,beforeAuto+1);
  await mobile.close();
  console.log('PASS: reload retains messages and draft, request retains history, new conversation clears, new tab starts empty');
 }finally{await browser.close();}

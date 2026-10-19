@@ -5,7 +5,7 @@ import {runPublicAutobot} from '@/lib/autobot/agent';
 export const dynamic='force-dynamic';export const runtime='nodejs';
 const headers={'Cache-Control':'private, no-store'};
 const limits=new Map<string,{count:number;until:number;busy:boolean}>();
-export async function GET(){try{return Response.json({connected:configReady(await readAutobotConfig())},{headers});}catch{return Response.json({connected:false},{headers});}}
+export async function GET(){try{return Response.json({connected:configReady(await readAutobotConfig())},{headers});}catch{return Response.json({connected:null},{status:503,headers});}}
 export async function POST(request:Request){
  const origin=request.headers.get('origin');if(!origin||!['https://avtocena.com','https://www.avtocena.com',new URL(request.url).origin].includes(origin)||request.headers.get('sec-fetch-site')==='cross-site')return Response.json({error:'Откройте чат на сайте АвтоЦена.'},{status:403,headers});
  const now=Date.now();for(const [k,v] of limits)if(v.until<now&&!v.busy)limits.delete(k);
