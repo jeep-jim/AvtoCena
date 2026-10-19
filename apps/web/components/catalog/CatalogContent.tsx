@@ -63,8 +63,8 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
 
 export async function CatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
   if(first(params.stock)==="green"&&(!dealer||dealer.markets.includes("japan")))return <GreenCornerCatalog params={{...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),dealer:dealer?.id}} embedded={embedded}/>;
-  const liveKorea=await usesAjesMarket('korea');
-  const liveMarket=(id:string)=>id==='china'||id==='korea'&&liveKorea;
+  const [liveChina,liveKorea]=await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]);
+  const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
   const allowedMarkets=dealer?marketOrder.filter(m=>dealer.markets.includes(m.id)):marketOrder;
   if(dealer&&!allowedMarkets.length)return <p className="py-10 text-[var(--ac-muted)]">Компания пока не указала направления доставки.</p>;
   if ((!dealer||dealer.markets.includes(first(params.market) as any)) && await usesAjesMarket(first(params.market),first(params.source))) return <AjesCatalog params={params} embedded={embedded}/>;

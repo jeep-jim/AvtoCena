@@ -78,9 +78,9 @@ export async function GET(request: Request) {
   if (facets) extras.facets = facets;
   if (rateExtras) Object.assign(extras, rateExtras);
   const readMs = performance.now() - started;
-  // Cross-market local search must not resurrect the retired China supplier.
+  // Exclude the local China inventory only while the live supplier is selected.
   // AJES is paginated separately by market; do not invent a combined count.
-  const crossMarket=!query.market;
+  const crossMarket=!query.market&&await usesAjesMarket('china');
   const candidates=crossMarket?result.items.filter(offer=>offer.market!=='china'):result.items;
   const items = await applyActiveBusinessPricingBatch(candidates);
   const pricingMs = performance.now() - started - readMs;
