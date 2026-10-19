@@ -10,7 +10,14 @@ export function manufacturerLink(value:string,make:string){try{const u=new URL(v
 export function manufacturerDocument(value:string,make:string){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&/\.pdf$/i.test(u.pathname)&&(manufacturerDomains[token(make)]||[]).some(h=>u.hostname===h||u.hostname.endsWith('.'+h));}catch{return false;}}
 export function mentionsModel(text:string,model:string){const words=(s:string)=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').replace(/step\s*(?:wagon|wgn)/g,'stepwgn').trim();return (' '+words(text)+' ').includes(' '+words(model)+' ');}
 export function researchText(html:string){return html.replace(/<(script|style|nav|header|footer|aside)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<!--[\s\S]*?-->/g,' ').replace(/<\/(?:tr|p|div|h[1-6]|li)>/gi,'\n').replace(/<[^>]+>/g,' ').replace(/&#(\d+);/g,(_,n)=>Number(n)<0x110000?String.fromCodePoint(Number(n)):' ').replace(/&nbsp;|&#160;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/[ \t]+/g,' ').replace(/\n\s*\n/g,'\n').trim();}
-export function researchNeeded(question:string,car:any){return Boolean(car&&/(мощ|квт|л\.\s?с|двигател|топлив|привод|объ[её]м|характерист|параметр|найди|найти|интернет|гугл|google|поищи|не\s*заполн|30.?мин|power|specification)/i.test(question));}
+export function researchTopic(question:string){
+ if(/(?:30|тридцат).{0,18}(?:мин|мощ)|30-minute/i.test(question))return '30-minute';
+ if(/расход|потребл|экономич|consumption|economy|WLTP|WLTC|JC08|л\s*\/\s*100|км\s*\/\s*л/i.test(question))return 'consumption';
+ if(/клиренс|габарит|размер|длин[аыу]|ширин|высот|багажник|мест|масса|вес|dimensions|clearance/i.test(question))return 'dimensions';
+ if(/разгон|скорост|динамик|acceleration|speed/i.test(question))return 'performance';
+ return 'specifications';
+}
+export function researchNeeded(question:string,car:any){return Boolean(car&&(researchTopic(question)!=='specifications'||/(мощ|квт|л\.\s?с|двигател|топлив|привод|объ[её]м|характерист|параметр|найди|найти|интернет|гугл|google|поищи|не\s*заполн|30.?мин|power|specification)/i.test(question)));}
 const cache=new Map<string,{until:number;result:any}>();
 /** Read-only, on-demand discovery. Queries contain model identity only, never VINs or chat history. */
 export async function researchVehicle(identity:Identity,signal:AbortSignal,read=readSource){
@@ -66,7 +73,7 @@ export function webResults(xml:string){
  });
 }
 export function evidenceExcerpt(text:string){
- const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine/i.test(l)?lines.slice(Math.max(0,i-1),i+2):[]);
+ const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine|consumption|economy|WLTC|WLTP|JC08|km\/l|l\/100|расход|потребл|燃費|dimensions|clearance|клиренс|багажник|разгон/i.test(l)?lines.slice(Math.max(0,i-1),i+2):[]);
  return ([...new Set(relevant)].join('\n')+'\n'+text.slice(0,1500)).slice(0,6500);
 }
 
@@ -95,6 +102,9 @@ export function researchQueries(identity:Identity){
  const family='"'+[clean(identity.make),clean(identity.model)].filter(Boolean).join(' ').replace(/"/g,'')+'"';
  const market=({korea:'Korea',china:'China',japan:'Japan',uae:'UAE',europe:'Europe'} as Record<string,string>)[identity.market||''];
  const base=[family,identity.year,market,clean(identity.trim),clean(identity.motorCodes)].filter(Boolean).join(' ');
+ if(identity.topic==='consumption')return [base+' fuel consumption WLTC WLTP km/L L/100km',base+(identity.market==='japan'?' 燃費 WLTC カタログ':' расход топлива цикл')];
+ if(identity.topic==='dimensions')return [base+' dimensions ground clearance boot capacity',base+' размеры клиренс багажник'];
+ if(identity.topic==='performance')return [base+' acceleration top speed specifications',base+' разгон максимальная скорость'];
  return identity.topic==='30-minute'?[base+' 30 minute power UNECE R85 certificate',family+' 30 минутная мощность ОТТС']:[base+' technical specifications',family+' '+(identity.year||'')+' характеристики мощность'];
 }
 export async function discoverVehicleWeb(identity:Identity,signal:AbortSignal,read=readSource){

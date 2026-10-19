@@ -67,7 +67,7 @@ test('vehicle specification question receives research before the very first mod
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
  'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
  'display-identity':`export const applyEncyclopediaDisplayIdentity=async x=>({...x,model:'Nexo'});`,
- research:`export const researchNeeded=(q,c)=>!!c;export const researchVehicle=async identity=>{if(identity.model!=='Nexo')throw Error('source generation leaked into search');globalThis.__ab.researchCalls++;return {pages:[{title:'Manufacturer specification',url:'https://hyundai.com/spec',kind:'manufacturer',text:'Nexo motor maximum 120 kW; not certified 30-minute power'}]}};`
+ research:`export const researchTopic=()=> 'specifications';export const researchNeeded=(q,c)=>!!c;export const researchVehicle=async identity=>{if(identity.model!=='Nexo')throw Error('source generation leaked into search');globalThis.__ab.researchCalls++;return {pages:[{title:'Manufacturer specification',url:'https://hyundai.com/spec',kind:'manufacturer',text:'Nexo motor maximum 120 kW; not certified 30-minute power'}]}};`
  });
  const answer=await a.runPublicAutobot({text:'Какая у этого авто мощность?',path:'/cars/offer/nexo-2022'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('motor maximum 120 kW')));assert.ok(input[0].content.includes('Ответь на исходный вопрос сейчас'));assert.equal(input[0].role,'system');assert.ok(input.slice(1).every(m=>m.role!=='system'));assert.equal(input.at(-1).role,'user');return {text:JSON.stringify({reply:'Пиковая мощность 120 кВт. 30-минутная не подтверждена.'}),sources:[]}});
  assert.equal(state.researchCalls,1);assert.equal(answer.sources[0].url,'https://hyundai.com/spec');assert.match(answer.text,/120/);assert.equal(answer.cards.length,0);
@@ -124,7 +124,7 @@ test('successful calculator result is returned without another model generation'
  'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,
  'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
- research:`export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
+ research:`export const researchTopic=()=> 'specifications';export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
  calculation:`export const normalizeCalculationArgs=x=>x;export const calculateForChat=async()=>({ok:true,calculation:{totalRub:2413948}});export const calculationReply=r=>'Итого '+r.calculation.totalRub+' ₽';`
  });
  let calls=0;const result=await a.runPublicAutobot({text:'Посчитай по моим параметрам',path:'/autocalc'},new Request('https://avtocena.com/api/autobot'),async()=>{calls++;return {text:JSON.stringify({tool:'calculate',args:{title:'Toyota Corolla'}}),sources:[]};});
@@ -240,7 +240,7 @@ test('a requested chat calculation form is structured and keeps history values',
  'offer-url':`export const offerRouteId=x=>x;export const offerPath=x=>'/cars/offer/'+x.id;`,
  'live-business-pricing':`export const applyActiveBusinessPricingBatch=async x=>x;`,'safe-public-pricing':`export const safePublicPricing=x=>x;`,
  'vehicle-knowledge':`export const findVehicleModel=async()=>null;export const findVehicleVariant=async()=>null;`,'power-reference':`export const findCertifiedPowerReference=async()=>null;`,
- research:`export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
+ research:`export const researchTopic=()=> 'specifications';export const researchNeeded=()=>false;export const researchVehicle=async()=>({pages:[]});`,
  calculation:`export const normalizeCalculationArgs=x=>x;export const calculateForChat=async()=>({ok:false});export const calculationReply=()=>'';`
  });
  const data={make:'Honda',model:'Fit',market:'japan',city:'Кемерово',currency:'RUB',price:1000,draft:{year:2023}};
@@ -248,4 +248,17 @@ test('a requested chat calculation form is structured and keeps history values',
   const result=await a.runPublicAutobot({text:'Дай форму расчёта',history:[{role:'user',text:'Honda Fit 2023, Япония, 1000 рублей, Кемерово'}],path:'/cars/offer/current'},new Request('https://avtocena.com/api/autobot'),async(input:any[])=>{assert.ok(input.some(m=>m.content.includes('1000 рублей')));return {text:JSON.stringify({tool,args:data}),sources:[]};});
   assert.equal(result.calculationForm?.make,'Honda');assert.equal(result.calculationForm?.currency,'RUB');assert.equal(result.calculationForm?.price,'1000');assert.equal(result.calculationForm?.draft?.year,'2023');assert.equal(result.calculationForm?.draft?.powerHp,undefined);
  }
+});
+
+test('fuel economy and other missing parameters trigger topic-specific research',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ for(const question of ['Какой расход топлива у этого автомобиля?','А сколько он потребляет?','Какой клиренс?','Объём багажника','Разгон до 100?'])assert.equal(r.researchNeeded(question,{make:'Toyota',model:'Yaris'}),true,question);
+ assert.equal(r.researchNeeded('Какой расход?',null),false);
+ assert.equal(r.researchNeeded('Из чего складывается цена?',{make:'Toyota'}),false);
+ assert.equal(r.researchTopic('Какая 30-минутная мощность?'),'30-minute');
+ const queries=r.researchQueries({make:'Toyota',model:'Yaris',year:2024,market:'japan',trim:'G AWD 4WD',topic:r.researchTopic('Какой расход топлива?')});
+ assert.ok(queries.every(q=>q.includes('G AWD 4WD')&&q.includes('2024')));
+ assert.match(queries.join(' '),/WLTC/);
+ const text='Toyota Yaris catalog\n'+'Introduction '.repeat(400)+'\nG AWD 4WD fuel consumption WLTC 19.2 km/L\nConditions vary.';
+ assert.match(r.evidenceExcerpt(text).slice(0,1800),/19.2 km\/L/);
 });
