@@ -44,7 +44,6 @@ export function catalogGrossVehicleWeightKg(offer:any):number|undefined {
 }
 /** GVWR is the permitted loaded mass; curb weight is never a substitute. */
 export function catalogHeavyVehicleExcluded(offer:any){
- if(isAllDubicarsOffer(offer))return false;
  if(knownHeavyVehicleFamily(offer.make,offer.model))return true;
  const snapshot=offer.operational?.sourceSpecifications;
  // Legacy paid replay rows may predate body normalization. Only use named,
@@ -57,6 +56,11 @@ export function catalogHeavyVehicleExcluded(offer:any){
  if(/forklift|excavator|bulldozer|tractor|machinery|погрузчик|экскаватор|трактор|工程机械/i.test(text))return true;
  const category=String(offer.vehicleCategory||'').toUpperCase();
  const commercial=/\b(?:truck|lorry|bus|minibus|coach|canter|fighter|dutro|forward|giga|elf|profia|pick[ -]?up)\b|пикап|皮卡|грузов|автобус|货车|卡车|轻卡|微卡|客车|巴士|轻客/i.test(text)||/^N[123]|^M[23]/.test(category);
+ // Owner excludes trucks even when the feed omits GVWR or reports <=3500 kg.
+ // Pickup bodies and passenger/light vans are not trucks merely by category N1.
+ const pickup=/\bpick[ -]?up\b|пикап|皮卡/i.test(text);
+ if(!pickup&&(/\b(?:truck|lorry)\b|грузов|货车|卡车|轻卡|微卡/i.test(text)||/^N[23]G?$/.test(category)))return true;
+ if(isAllDubicarsOffer(offer))return false;
  const mass=Number(catalogGrossVehicleWeightKg(offer));
  if(/^(?:N[23]|M3)G?$/.test(category))return true;
  return commercial&&Number.isFinite(mass)&&mass>3500;

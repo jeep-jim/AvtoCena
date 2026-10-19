@@ -20,11 +20,11 @@ test('all non-Japan markets expire by exact day, source month or year without in
  assert.equal(age({market:'japan',year:2008},now).eligible,true);
  assert.equal(age({market:'japan',year:2007},now).eligible,false);
 });
-test('heavy commercial scope uses gross mass, keeps light trucks and missing editable mass',()=>{
- assert.equal(heavy({bodyType:'truck',grossVehicleWeightKg:3500}),false);
+test('trucks are excluded without mass, while passenger vehicles remain eligible',()=>{
+ assert.equal(heavy({bodyType:'truck',grossVehicleWeightKg:3500}),true);
  assert.equal(heavy({bodyType:'bus',grossVehicleWeightKg:3501}),true);
  assert.equal(heavy({vehicleCategory:'N2'}),true);
- assert.equal(heavy({bodyType:'truck',curbWeightKg:3600}),false);
+ assert.equal(heavy({bodyType:'truck',curbWeightKg:3600}),true);
  assert.equal(heavy({make:'Rolls Royce',bodyType:'SUV',grossVehicleWeightKg:3700}),false);
  assert.equal(heavy({model:'Excavator'}),true);
 });
@@ -47,7 +47,7 @@ test('display prefers all affordable stock before luxury, then low power; luxury
 
 
 test('gross mass uses listing-bound labelled kg, never curb mass or another listing',()=>{
- const row:any={bodyType:'truck',sourceId:'test',sourceOfferId:'a',operational:{sourceSpecifications:{sourceId:'test',sourceOfferId:'a',groups:[{items:[{name:'Gross vehicle weight (kg)',value:'7,500'}]}]}}};
+ const row:any={bodyType:'bus',sourceId:'test',sourceOfferId:'a',operational:{sourceSpecifications:{sourceId:'test',sourceOfferId:'a',groups:[{items:[{name:'Gross vehicle weight (kg)',value:'7,500'}]}]}}};
  assert.equal(heavy(row),true);
  row.operational.sourceSpecifications.groups[0].items[0].name='Curb weight (kg)';
  assert.equal(heavy(row),false);

@@ -65,3 +65,8 @@
 
 # Owner Dubicars update — 18.10.2026
 - UAE Dubicars is now authorized through the purchased auto-api.com API. Publish its entire inventory without age, price, power, body or count filters. Keep identity, honest specifications, withdrawal, completed-sync and secret-storage safeguards. The new key belongs only in AUTO_API_DUBICARS_KEY, never in public source or logs.
+
+# Owner corrections — 19.10.2026, 12:20 Asia/Krasnoyarsk
+- Exclude trucks from all markets, including light/mixed-weight truck families Elf, Canter and Dutro even when gross mass is absent or <=3500 kg. This supersedes their previous exception and the Dubicars truck allowance. Do not classify pickups or passenger/light vans as trucks solely from N1 or a generic van label.
+- China domestic delivery starts in Ussuriysk: Ussuriysk to Ussuriysk is 0 RUB. Use the same origin for route distance, display and calculation. Preserve separately configured international logistics and commercial city anchors.
+- Seller prices use the official CBR quote divided by its nominal. Do not use a cached effective rate with a spread; exchange reserves remain separate expenses. Verify source/feed differences by exact listing identity and timestamps, never guess a replacement price.

@@ -201,11 +201,9 @@ export async function convertToRub(
     const cbrRate = Number(structured.cbrRate ?? structured.value);
     const nominal = Number(structured.nominal || 1);
     if (cbrRate > 0 && nominal > 0) {
-      const canonicalRate = cbrRate / nominal;
-      const storedEffectiveRate = Number(structured.effectiveRate || 0);
-      const storedRateIsConsistent = storedEffectiveRate > 0
-        && Math.abs(storedEffectiveRate - canonicalRate) / canonicalRate <= 0.05;
-      const effectiveRate = storedRateIsConsistent ? storedEffectiveRate : canonicalRate;
+      // A cached effectiveRate must never add a spread to the published quote.
+      // Exchange reserves belong to the existing separate cost breakdown.
+      const effectiveRate = cbrRate / nominal;
       const source = String(structured.rateSource || "cbr");
       return {
         currency: code,

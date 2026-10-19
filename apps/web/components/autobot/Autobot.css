@@ -67,3 +67,6 @@
 .ab-car-questions button:last-child:nth-child(3){grid-column:1 / -1}
 .ab-panel .ab-inline-calculation button{min-height:44px}
 .ab-panel .ab-inline-calculation button[data-autocalc-primary]{width:100%;min-height:48px;background:#e32c39;color:#fff;font-weight:700}
+
+/* Keep the desktop heading on one line and align the form with the mascot base. */
+@media(min-width:1024px){.ab-hero{grid-template-rows:74px 48px;align-content:center}.ab-hero h2{white-space:nowrap;font-size:clamp(16px,1.45vw,24px)}}

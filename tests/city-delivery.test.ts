@@ -39,11 +39,11 @@ test('API parameters retain city but cannot inject a delivery amount',()=>{
  assert.equal((result as any).cityDeliveryRub,undefined);
 });
 
-test('Ussuriysk delivery preserves tariffs with market-specific origin labels',()=>{
+test('Ussuriysk is free for China and remains intercity delivery for Japan and Korea',()=>{
  for(const market of ['korea','china','japan']) {
   const quote=quoteCityDelivery(' г. Уссурийск ',market);
   assert.equal(quote.status,'estimated');assert.equal(quote.origin,market === 'china' ? 'Уссурийск' : 'Владивосток');
-  assert.equal(quote.amountRub,15000);assert.match(deliveryDescription(quote),/15\s000/);
+  assert.equal(quote.amountRub,market==='china'?0:15000);assert.match(deliveryDescription(quote),market==='china'?/Междугородняя доставка не требуется/:/15\s000/);
  }
  const config=resolveCatalogMarketConfig('korea',{percentExpenses:[]}).config;
  const calculate=(city:string)=>calculateAvtocenaFromBusinessConfig({marketId:'korea',marketConfig:config,sourcePriceRub:1000000,customsRub:500000,cityDeliveryRub:quoteCityDelivery(city,'korea').amountRub,deliveryCity:city});
@@ -87,7 +87,7 @@ test('each western market starts at its own entry city and retains the same tari
 
 
 test('Gorno-Altaysk uses the existing kilometre formula for all six markets',()=>{
- for(const [market,origin,distance,amount] of [['japan','Владивосток',6100,130000],['china','Уссурийск',6100,130000],['korea','Владивосток',6100,130000],['georgia','Минеральные Воды',4300,95000],['uae','Астрахань',4100,90000],['europe','Санкт-Петербург',4400,95000]] as const){
+ for(const [market,origin,distance,amount] of [['japan','Владивосток',6100,130000],['china','Уссурийск',6000,130000],['korea','Владивосток',6100,130000],['georgia','Минеральные Воды',4300,95000],['uae','Астрахань',4100,90000],['europe','Санкт-Петербург',4400,95000]] as const){
   const q=quoteCityDelivery(' г. Горно-Алтайск ',market);
   assert.equal(q.status,'estimated');assert.equal(q.origin,origin);assert.equal(q.distanceKm,distance);assert.equal(q.amountRub,amount);
   const config=resolveCatalogMarketConfig(market,{percentExpenses:[]}).config;
@@ -101,4 +101,17 @@ test('saved public previews follow global city, including originally seller-pric
  const saved={market:'korea',catalogPricingMode:'seller',totalRub:1813104,savedCalculationPreview:{version:'saved'},calculationSnapshot:{deliveryPricingBasis:{subtotalRub:1785657,deliveryRub:0,percents:[]}}};
  assert.equal(priceCardForCity(saved,'Новокузнецк').offer.totalRub,1933104);
  assert.equal(priceCardForCity(saved,'').offer.totalRub,1813104);
+});
+
+test('China origin is consistent for implicit/explicit routes and old delivery is removed from the calculation',()=>{
+ for(const city of ['Уссурийск','Владивосток','Чита','Москва','Новокузнецк']){
+  assert.deepEqual(quoteCityDelivery(city,'china'),quoteCityDelivery(city,'china','Уссурийск'));
+ }
+ assert.equal(quoteCityDelivery('Уссурийск','china').distanceKm,0);
+ assert.equal(quoteCityDelivery('Владивосток','china').amountRub,15000);
+ const old={market:'china',totalRub:1515000,calculationSnapshot:{deliveryPricingBasis:{subtotalRub:1515000,deliveryRub:15000,percents:[]}}};
+ assert.equal(priceCardForCity(old,'Уссурийск').offer.totalRub,1500000);
+ const config=resolveCatalogMarketConfig('china',{percentExpenses:[{id:'fee',title:'fee',percent:1}]}).config;
+ const calc=(city:string)=>calculateAvtocenaFromBusinessConfig({marketId:'china',marketConfig:config,sourcePriceRub:1000000,customsRub:500000,cityDeliveryRub:quoteCityDelivery(city,'china').amountRub,deliveryCity:city});
+ assert.equal(calc('Уссурийск').totalRub,calc('').totalRub);
 });

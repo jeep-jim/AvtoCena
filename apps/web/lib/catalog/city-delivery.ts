@@ -2,7 +2,7 @@
  * Rounded planning distances, NOT measured navigation routes or carrier quotes.
  * Novokuznetsk is a commercial anchor, not a regression from kilometres.
  * Edit this versioned table when actual carrier tariffs become available. */
-export const DELIVERY_TARIFF_VERSION = "market-origins-20261001-v4";
+export const DELIVERY_TARIFF_VERSION = "market-origins-20261019-v5";
 const routes: Record<string, [string, number, number?]> = {
  "владивосток": ["Владивосток", 0, 0],
  // Yandex Maps route checked 2026-09-28: 97–101 km, rounded for this
@@ -66,11 +66,6 @@ export function quoteCityDelivery(value: unknown, market?: string, originCity?: 
   if(!Object.hasOwn(originMarket,source))return {...quoteCityDelivery(value,market),origin:source,amountRub:0,distanceKm:null,status:"needs_quote" as const};
   const quote=quoteCityDelivery(value,originMarket[source]);
   if(source===quote.city)return {...quote,origin:source,amountRub:0,distanceKm:0,status:"estimated" as const};
-  if(source==='Уссурийск'&&quote.distanceKm!==null){
-   const distanceKm=Math.abs(quote.distanceKm-100);
-   const anchor=['Новосибирск','Новокузнецк'].includes(quote.city);
-   return {...quote,origin:source,distanceKm,amountRub:anchor?quote.amountRub:Math.max(15000,Math.round((130000*distanceKm/6000)/5000)*5000)};
-  }
   return {...quote,origin:source};
  }
  const city = normalizeDeliveryCity(value);
@@ -82,9 +77,9 @@ export function quoteCityDelivery(value: unknown, market?: string, originCity?: 
  const route = Object.hasOwn(routes,key) ? routes[key] : undefined;
  if (!route) return {...base,status:"needs_quote" as const};
  const [canonical,legacyDistance,override] = route;
- const distanceKm = entry ? westernRoutes[key]?.[entry.column] : legacyDistance;
+ const distanceKm = entry ? westernRoutes[key]?.[entry.column] : market === 'china' ? Math.abs(legacyDistance - 100) : legacyDistance;
  if (distanceKm == null) return {...base,status:"needs_quote" as const};
- const amountRub = distanceKm === 0 ? 0 : (!entry ? override : undefined) ?? Math.max(15000, Math.round((130000 * distanceKm / 6000) / 5000) * 5000);
+ const amountRub = distanceKm === 0 ? 0 : (!entry && override && override > 0 ? override : undefined) ?? Math.max(15000, Math.round((130000 * distanceKm / 6000) / 5000) * 5000);
  return {...base,city:canonical,distanceKm,amountRub,status:"estimated" as const};
 }
 export function deliveryDescription(quote: ReturnType<typeof quoteCityDelivery>) {

@@ -31,17 +31,17 @@ test('model directory reads beyond the supplier 500-row cap and detects repeated
 });
 
 test('confirmed heavy families are excluded without fabricating a listing mass',()=>{
- for(const [make,model] of [['HINO','RANGER'],['HINO','SEREGA'],['HINO','SELEGA HYBRID'],['ISUZU','GIGA'],['ISUZU','FORWARD'],['ISUZU','ERGA'],['MITSUBISHI','ROSA'],['FUSO','FIGHTER'],['UD TRUCKS','QUON'],['NISSAN DIESEL','CONDOR']]){
+ for(const [make,model] of [['ISUZU','ELF'],['ISUZU','ELF Key'],['MITSUBISHI','CANTER'],['HINO','DUTRO'],['HINO','RANGER'],['HINO','SEREGA'],['HINO','SELEGA HYBRID'],['ISUZU','GIGA'],['ISUZU','FORWARD'],['ISUZU','ERGA'],['MITSUBISHI','ROSA'],['FUSO','FIGHTER'],['UD TRUCKS','QUON'],['NISSAN DIESEL','CONDOR']]){
   const offer={make,model};
   assert.equal(catalogHeavyVehicleExcluded(offer),true);
   for(const detail of [false,true])assert.equal(ajesLot({...row,MARKA_NAME:make,MODEL_NAME:model},'stats',detail),null);
  }
- // Same model word from another make, passenger cars, kei and mixed-weight trucks survive.
- for(const [make,model] of [['FORD','RANGER'],['LAND ROVER','RANGE ROVER'],['TOYOTA','HIACE'],['SUZUKI','CARRY'],['HINO','DUTRO'],['ISUZU','ELF'],['ISUZU','GALAXY']]){
+ // Same model word from another make, passenger cars, kei passenger models and pickups survive.
+ for(const [make,model] of [['FORD','RANGER'],['LAND ROVER','RANGE ROVER'],['TOYOTA','HIACE'],['SUZUKI','CARRY'],['ISUZU','GALAXY']]){
   assert.equal(catalogHeavyVehicleExcluded({make,model}),false);
   assert.ok(ajesLot({...row,MARKA_NAME:make,MODEL_NAME:model},'stats',false));
  }
- assert.equal(catalogHeavyVehicleExcluded({make:'ISUZU',model:'ELF',grossVehicleWeightKg:3500}),false);
+ assert.equal(catalogHeavyVehicleExcluded({make:'ISUZU',model:'ELF',grossVehicleWeightKg:3500}),true);
  assert.equal(catalogHeavyVehicleExcluded({make:'ISUZU',model:'ELF',grossVehicleWeightKg:3501}),true);
 });
 test('lists, counts and model directories apply identical heavy-family SQL before pagination',()=>{
@@ -606,4 +606,14 @@ test('unfiltered Japan first page recovers bounded saved lots honestly after one
  assert.equal(findSavedAjesSearch({table:'stats',fuel:'diesel'},snapshots),null);
  assert.equal(findSavedAjesSearch({table:'korea'},snapshots),null);
  assert.equal(findSavedAjesSearch({table:'stats'},{one:{...snapshots.one,observedAt:'2020-01-01'}}),null);
+});
+
+test('explicit trucks are excluded across markets, including saved and Dubicars offers, without excluding pickups',()=>{
+ for(const market of ['japan','korea','china','europe','uae','georgia']){
+  assert.equal(catalogHeavyVehicleExcluded({market,make:'ISUZU',model:'ELF Key'}),true);
+  assert.equal(catalogHeavyVehicleExcluded({market,make:'TEST',model:'MODEL',bodyType:'truck',grossVehicleWeightKg:3000}),true);
+  assert.equal(catalogHeavyVehicleExcluded({market,make:'FORD',model:'RANGER',bodyType:'pickup',vehicleCategory:'N1'}),false);
+  assert.equal(catalogHeavyVehicleExcluded({market,make:'TOYOTA',model:'HIACE',bodyType:'van'}),false);
+ }
+ assert.equal(catalogHeavyVehicleExcluded({market:'uae',sourceId:'dubicars_feed',make:'ISUZU',model:'ELF'}),true);
 });

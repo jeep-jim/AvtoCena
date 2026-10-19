@@ -3,17 +3,17 @@
  * Hino Selega: Securities_Report_for_the_Fiscal_Year_Ended_March_31_2009.pdf
  * Isuzu: https://www.isuzu.co.jp/world/company/history.html and report_2010.pdf
  * SEREGA is the supplier's spelling of SELEGA, observed in the owner's lot.
- * Do not add mixed-weight light trucks (Elf, Canter, Dutro) or blanket makes.
+ * Owner update 19.10.2026 excludes light trucks too (Elf, Canter, Dutro); never blanket makes.
  */
-const fusoModels=['FIGHTER','SUPER GREAT','SUPERGREAT','AERO QUEEN','AERO ACE','ROSA'] as const;
+const fusoModels=['CANTER','FIGHTER','SUPER GREAT','SUPERGREAT','AERO QUEEN','AERO ACE','ROSA'] as const;
 // Fuso: mitsubishi-fuso.com/en/product/fighter/ and fuso.com.au/range/bus/standard/25-seat/
 // UD: udtrucks.com/china/about-us/innovation/product-history/1975
 export const heavyVehicleFamilies = [
   // Toyota official Coaster bus/Big Van specification: GVW exceeds 3500 kg.
   // https://toyota.jp/pages/contents/coaster/004_b_022/pdf/spec/coaster_bigvan_spec_201608.pdf
   {make:'TOYOTA',models:['COASTER']},
-  {make:'HINO',models:['RANGER','PROFIA','SELEGA','SEREGA']},
-  {make:'ISUZU',models:['FORWARD','GIGA','GALA','ERGA']},
+  {make:'HINO',models:['DUTRO','RANGER','PROFIA','SELEGA','SEREGA']},
+  {make:'ISUZU',models:['ELF','FORWARD','GIGA','GALA','ERGA']},
   {make:'MITSUBISHI',models:fusoModels},
   {make:'MITSUBISHI FUSO',models:fusoModels},
   {make:'FUSO',models:fusoModels},

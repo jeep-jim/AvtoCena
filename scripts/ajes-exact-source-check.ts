@@ -1,7 +1,6 @@
 import {getJsonStorage} from '../apps/web/lib/data';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesPassword} from '../apps/web/lib/catalog/ajes-settings';
-import {ajesEndpoint} from '../apps/web/lib/catalog/ajes-routing';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {convertToRub} from '../apps/web/lib/catalog/rates';
@@ -12,11 +11,11 @@ async function main(){
  const old=saved?.items?.[0];
  console.log('PRICE_CACHE',JSON.stringify({id,observedAt:saved?.observedAt,price:old?.sourcePrice,lot:old?.lot,currency:old?.currency}));
  // No application cache readers or writers: a single genuine exact-ID supplier request.
- const client=createAjesClient({password:ajesPassword,endpoint:ajesEndpoint,assertEnabled:t=>assertCollectionEnabled('ajes_'+t+'_feed'),reserve:t=>reserveAjesRequest(storage,t)});
+ const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled('ajes_'+t+'_feed'),reserve:t=>reserveAjesRequest(storage,t)});
  try {
   const fresh=await client.read({table:'china',id},ip),lot=fresh.items[0];
   console.log('PRICE_FRESH',JSON.stringify({observedAt:fresh.observedAt,id:lot?.id,lot:lot?.lot,price:lot?.sourcePrice,currency:lot?.currency,stale:fresh.stale,sameAsCache:lot?.sourcePrice===old?.sourcePrice}));
- } catch(e:any){console.log('PRICE_FRESH_FAILED',/^[a-z_0-9]+$/.test(e?.reason)?e.reason:'request_failed');}
+ } catch(e:any){console.log('PRICE_FRESH_FAILED',typeof e?.reason==='string'&&/^[a-z_0-9]+$/.test(e.reason)?e.reason:'local_or_request_failed');}
  const stored:any=await storage.readJson('fees/exchange-rates.json',null);
  for(const currency of ['CNY','KRW','JPY','USD','EUR','AED']){
   const raw=Array.isArray(stored?.rates)?stored.rates.find((x:any)=>x.currency===currency):stored?.[currency];
@@ -33,6 +32,6 @@ async function main(){
   const priceFields=[...html.matchAll(/["'](price|salePrice|sellPrice|dealerPrice|referencePrice|Price|SalePrice|SellPrice)["']\s*:\s*["']?(\d+(?:\.\d+)?)/g)].map(m=>({field:m[1],value:m[2]})).slice(0,20);
   const priceLabels=[...html.matchAll(/(?:售价|报价|价格)[^<>]{0,25}\d+(?:\.\d+)?\s*万/g)].map(m=>m[0]).slice(0,5);
   console.log('ORIGINAL_PAGE',JSON.stringify({status:response.status,bytes,finalHost:new URL(response.url).hostname,identityMention:html.includes('59163228'),challenge:/captcha|验证|访问异常|verify/i.test(html),priceFields,priceLabels}));
- }catch{console.log('ORIGINAL_PAGE',JSON.stringify({accessible:false,reason:'request_failed'}));}
+ }catch(e:any){console.log('ORIGINAL_PAGE',JSON.stringify({accessible:false,reason:'request_failed',code:typeof e?.cause?.code==='string'&&/^[A-Z_0-9]+$/.test(e.cause.code)?e.cause.code:undefined}));}
 }
 main().catch(()=>{console.log('PRICE_CHAIN_FAILED');process.exitCode=1;});
