@@ -103,6 +103,7 @@ try{for(const width of [390,1440]){
   for(const name of names)await multiForm.getByRole('button',{name,exact:true}).click();
   await page.waitForFunction(([key,value])=>new URLSearchParams(location.search).get(key)===value,[key,values]);
   for(const name of names)assert.equal(await multiForm.getByRole('button',{name,exact:true}).getAttribute('aria-pressed'),'true');
+  await multiForm.getByRole('button',{name:names.join(', '),exact:true}).click();
  }
  if(width===390)await multiForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
  await page.reload();await page.locator('#catalog').waitFor();
