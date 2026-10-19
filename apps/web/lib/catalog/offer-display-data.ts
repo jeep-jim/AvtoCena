@@ -1,5 +1,7 @@
 import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {cache} from 'react';
+import {restoreDubicarsDisplacement} from './dubicars-displacement';
+import {prepareSellerInventory} from './prepare-seller-inventory';
 import {safePublicPricing} from './safe-public-pricing';
 import {enrichOfferWithSourceTableParameters} from './source-table-displacement';
 import {restoreProAuctionsPower} from './proauctions-source-parameters';
@@ -18,7 +20,13 @@ import type {VehicleOffer} from './types';
 // One request-local calculation feeds the visible page and link metadata.
 export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeRequestedPowerHp=0,modificationId='')=>{
   const editorial=await readCatalogEditorial();
-  const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(restoreProAuctionsPower(applyCatalogEditorial(storedOffer,editorial))));
+  const sourceOffer = enrichOfferWithSourceTableParameters(restoreProAuctionsPower(applyCatalogEditorial(storedOffer,editorial)));
+  const restoredOffer = restoreDubicarsDisplacement(sourceOffer);
+  let safeOffer = safePublicPricing(restoredOffer);
+  // Reconsider the old seller-only state when the paid source supplies the missing volume.
+  if (restoredOffer !== sourceOffer && !hasModificationSelection(safeOffer)) {
+    safeOffer = await prepareSellerInventory(safeOffer) || safeOffer;
+  }
   const offer = safeOffer.editorialPriceKey || safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
 
   const sellerPricing = isSellerPricedOffer(offer);

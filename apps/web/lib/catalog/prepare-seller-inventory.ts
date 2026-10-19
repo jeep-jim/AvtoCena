@@ -1,3 +1,4 @@
+import {restoreDubicarsDisplacement} from './dubicars-displacement';
 import {isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {restoreProAuctionsPower} from "./proauctions-source-parameters";
 import {enrichEncarOfficialPower} from "./korea-official-power";
@@ -17,6 +18,7 @@ import { combustionPowerMismatch } from './combustion-power-consistency';
 
 /** Modern adapter evidence is authoritative; legacy replay must not erase it. */
 export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
+  input = restoreDubicarsDisplacement(input);
   const op:any=input.operational || {};
   const semantic=op.semanticEvidence || {};
   const sourceBound=op.exactDetail === true || (op.detailIdentityVerified === true && op.fieldIdentityVerified === true);

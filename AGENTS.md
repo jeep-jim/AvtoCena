@@ -73,3 +73,6 @@
 
 # Owner China supplier return — 19.10.2026
 - Owner has renewed auto-api.com Che168, disabled AJ System China and enabled che168_feed in CRM. China catalog routing, overview and counts must respect this current choice, including bookmarked source URLs. This supersedes the 18.10 single-AJES-China instruction. Preserve the calculation engine, private credentials, collection/publication guards and disabled HTML reserves.
+
+# Owner Dubicars displacement update — 19.10.2026
+- Supplier confirmed displacement is in litres; owner explicitly requests using it for UAE automatic calculations. Convert supplied litres to engineCc (×1000), retain the raw value and unit provenance, and restore missing volumes from saved paid-feed labels. Preserve existing exact/manual values, calculation rules, other markets and missing-power safeguards. Legacy documented integer cc remains supported. This supersedes treating paid-feed litre values as unusable for calculation.

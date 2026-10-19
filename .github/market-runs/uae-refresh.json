@@ -1,6 +1,6 @@
 {
-  "requestedAt": "2026-10-18T14:29:27.118466+00:00",
-  "reason": "Owner requested complete purchased Dubicars feed without inventory filters",
-  "resetCursors": true,
+  "requestedAt": "2026-10-19T10:29:43.829584+00:00",
+  "reason": "Restore supplier-confirmed engine displacement and recalculate UAE inventory without resetting delta cursor",
+  "resetCursors": false,
   "dubicarsOnly": true
 }

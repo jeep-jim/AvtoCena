@@ -1,3 +1,4 @@
+import {dubicarsDisplacement} from './dubicars-displacement';
 import {stableOfferId} from './storage';
 import {canonicalizeSemanticSourceFields} from './powertrain-safety';
 import type {VehicleOffer} from './types';
@@ -17,10 +18,9 @@ export function normalizeAutoApiDubicars(row:any,observedAt=new Date().toISOStri
  }))].slice(0,30).map(url=>({id:'',url,objectKey:'',checksum:'',size:0,mimeType:'image/jpeg'}));
  const fields=canonicalizeSemanticSourceFields({fuel:text(d.engine_type),bodyType:text(d.body_type),transmission:text(d.transmission_type),drive:text(d.drive_type)});
  const kind=fields.fuel==='electric'?'electric':fields.fuel==='hybrid'?'other_hybrid':fields.fuel?'combustion':'unknown';
- // Live payload uses rounded litres (3.5), unlike the documentation's 6200cc
- // example. Preserve the source label; never manufacture exact customs cc.
- const displacement=positive(d.displacement),engineCc=displacement&&displacement>=100&&Number.isInteger(displacement)?displacement:undefined;
+ // Use the supplier-confirmed unit, preserving the original value and unit.
+ const displacement=fields.fuel==='electric'?undefined:dubicarsDisplacement(d.displacement),engineCc=displacement?.cc;
  const price=positive(d.price),title=[text(d.mark),text(d.model),text(d.configuration),text(d.complectation)].filter(Boolean).join(' ');
  return {id:stableOfferId(AUTO_API_DUBICARS_SOURCE,id),sourceId:AUTO_API_DUBICARS_SOURCE,sourceOfferId:id,market:'uae',offerType:'fixed',status:'active',catalogKind:'listing',make:text(d.mark),model:text(d.model),trim:text(d.configuration)||text(d.complectation)||undefined,sourceTitle:title,year,...fields,powertrainKind:kind,engineCc,mileageKm:/^\d+$/.test(text(d.km_age))?Number(d.km_age):undefined,sourcePrice:price,sourceCurrency:'AED',priceMode:'fixed',images,totalRub:null,calculationStatus:'needs_data',firstSeenAt:observedAt,updatedAt:observedAt,
- operational:{sourceUrl:u.origin+u.pathname,sourceVenueName:'DubiCars',sourceTitle:title,provider:'auto-api.com',exactDetail:true,detailIdentityVerified:true,fieldIdentityVerified:true,photoIdentityVerified:images.length>0,exactPhotos:images.length>0,galleryVerified:images.length>0,galleryImageCount:images.length,lastSeenAt:observedAt,sourceDisplacementLabel:text(d.displacement),semanticEvidence:{year:evidence('year',year),fuel:evidence('engine_type',fields.fuel),engineCc:evidence('displacement_cc',engineCc),powerHp:evidence('power',undefined),certifiedPower:evidence('certified_30min_power',undefined)}}};
+ operational:{sourceUrl:u.origin+u.pathname,sourceVenueName:'DubiCars',sourceTitle:title,provider:'auto-api.com',exactDetail:true,detailIdentityVerified:true,fieldIdentityVerified:true,photoIdentityVerified:images.length>0,exactPhotos:images.length>0,galleryVerified:images.length>0,galleryImageCount:images.length,lastSeenAt:observedAt,sourceDisplacementLabel:text(d.displacement),semanticEvidence:{year:evidence('year',year),fuel:evidence('engine_type',fields.fuel),engineCc:displacement?{source:displacement.source,status:'exact',value:engineCc,rawValue:displacement.raw,sourceUnit:displacement.unit}:evidence('displacement',undefined),powerHp:evidence('power',undefined),certifiedPower:evidence('certified_30min_power',undefined)}}};
 }

@@ -1,3 +1,4 @@
+import {restoreDubicarsDisplacement} from './dubicars-displacement';
 import { applyEncyclopediaDisplayIdentity } from "./display-identity";
 import { applyActiveBusinessPricing } from "./live-business-pricing";
 import { calculateOfferWithRussiaCustoms } from "./customs-pricing";
@@ -64,7 +65,7 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
   // Repair only retained, source-proven bucket boundaries before any variant
   // matching or customs calculation. This makes the frozen public generation
   // safe immediately, without mutating Object Storage while parsers are paused.
-  const sourceSanitized = sanitizeDubizzleStoredRangeMetrics(input);
+  const sourceSanitized = restoreDubicarsDisplacement(sanitizeDubizzleStoredRangeMetrics(input));
   const enriched = sanitizeDubizzleStoredRangeMetrics(await enrichOfferWithKnowledgeCore(sourceSanitized));
   const text = vehicleKnowledgeToken([
     enriched.make,
