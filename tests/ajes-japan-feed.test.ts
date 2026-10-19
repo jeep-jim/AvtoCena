@@ -438,8 +438,9 @@ test('cold detail recovery checks saved list identity and age and never masks id
  for(const bad of [{...saved,items:[{...saved.items[0],id:'wrong'}]},{...saved,observedAt:new Date(Date.now()-8*86400000).toISOString()}])await assert.rejects(()=>createAjesClient({...deps,readListedDetail:async()=>bad}).read({id:row.ID},'127.0.0.1'),/quota_exhausted/);
  await assert.rejects(()=>createAjesClient({...deps,reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify([{...row,ID:'wrong'}]))}).read({id:row.ID},'127.0.0.1'),/identity_mismatch/);
 });
-test('default order does not promote known electric or hybrid lots, explicit price sort is unchanged',()=>{
- assert.match(ajesQuery({}).sql,/case when time in \('E','H','HE'\) then 1 else 0 end asc/);
+test('default Japan order uses plain supplier sort columns, explicit price sort is unchanged',()=>{
+ assert.match(ajesQuery({}).sql,/order by auction_date desc, id asc/);
+ assert.doesNotMatch(ajesQuery({}).sql,/case when/);
  assert.match(ajesQuery({sort:'totalRub'}).sql,/order by finish asc, auction_date desc, id asc/);
 });
 
