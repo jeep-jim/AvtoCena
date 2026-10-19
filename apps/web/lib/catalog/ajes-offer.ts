@@ -1,3 +1,4 @@
+import {ajesOriginalListingUrl} from './ajes-source-url';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import type {VehicleOffer} from './types';
 import type {CurrencyRateSnapshot} from './rates';
@@ -44,6 +45,6 @@ function ajesStockOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Currenc
  sourcePrice:lot.sourcePrice,sourceCurrency:currency,priceMode:'fixed',catalogPricingMode:'seller',sellerPriceRub,totalRub:null,calculationStatus:'needs_data',
  calculationSnapshot:{currencyRate:rate,sourcePriceRub:sellerPriceRub,pricingConfidence:'unavailable'},
  images:lot.images.map((img,i)=>({id:`ajes-${market}-${lot.id}-${i}`,url:img.url.replace(/^https:\/\/(?:7\.tru\.ru|[78]\.ajes\.com)\//,'https://9.ajes.com/'),role:'vehicle',objectKey:'',size:0,checksum:'',mimeType:''})),firstSeenAt:observedAt,updatedAt:observedAt,
- operational:{chassisCode:lot.chassisCode,sourceEquipment:lot.equipment,semanticEvidence:{...(lot.engineCc&&lot.engineCc>0?{engineCc:{status:'exact',value:lot.engineCc,source:`ajes:${market}:${lot.id}:ENG_V`,rawValues:[String(lot.engineCc)]}}:{}),...(powerHp?{powerHp:{status:'exact',value:powerHp,source:`ajes:${market}:${lot.id}:PW`,rawValues:[lot.sourcePower]}}:{}),...(fuel?{fuel:{status:'exact',value:fuel,source:`ajes:${market}:${lot.id}:TIME`,rawValues:[lot.sourceFuel]}}:{})},raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel,sourceDrive:lot.sourceDrive,sourceTransmission:lot.sourceTransmission}},
+ operational:{sourceUrl:ajesOriginalListingUrl(lot.status,market,lot.lot),chassisCode:lot.chassisCode,sourceEquipment:lot.equipment,semanticEvidence:{...(lot.engineCc&&lot.engineCc>0?{engineCc:{status:'exact',value:lot.engineCc,source:`ajes:${market}:${lot.id}:ENG_V`,rawValues:[String(lot.engineCc)]}}:{}),...(powerHp?{powerHp:{status:'exact',value:powerHp,source:`ajes:${market}:${lot.id}:PW`,rawValues:[lot.sourcePower]}}:{}),...(fuel?{fuel:{status:'exact',value:fuel,source:`ajes:${market}:${lot.id}:TIME`,rawValues:[lot.sourceFuel]}}:{})},raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel,sourceDrive:lot.sourceDrive,sourceTransmission:lot.sourceTransmission}},
  };
 }
