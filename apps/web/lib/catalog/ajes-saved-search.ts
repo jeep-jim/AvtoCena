@@ -44,22 +44,23 @@ export function savedAjesFacets(snapshots:Record<string,any>,now=Date.now()){
  * No supplier calls or total-count claim; admission and delivered filters run downstream. */
 export function findSavedAjesStockSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now()){
  const query=ajesQuery(input);
- if(query.kind!=='list'||!['korea','china'].includes(query.table)||query.page!==1||!input.make||!input.model)return null;
- const supported=new Set(['table','page','pageSize','make','model','sort','yearFrom','yearTo','sourcePriceTo']);
- if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&input.sort!=='updatedAt')return null;
+ if(query.kind!=='list'||!['korea','china'].includes(query.table)||query.page!==1||!input.make)return null;
+ const supported=new Set(['table','page','pageSize','make','model','sort','yearFrom','yearTo','sourcePriceTo','powerFrom','powerTo']);
+ if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&!['updatedAt','totalRub','totalRubDesc'].includes(input.sort))return null;
  const norm=(value:unknown)=>String(value??'').trim().toUpperCase();
- const makes=input.make.split(',').map(norm),models=input.model.split('|').map(norm),year=new Date(now).getUTCFullYear();
+ const makes=input.make.split(',').map(norm),models=input.model?.split('|').map(norm),year=new Date(now).getUTCFullYear();
  const matches=Object.values(snapshots).filter(saved=>{
   const lot=saved?.items?.[0],age=now-Date.parse(saved?.observedAt||'');
   return age>=0&&age<7*86400000&&lot?.table===query.table&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')
    &&Number.isInteger(lot.year)&&lot.year>=year-6&&lot.year<=year&&Number.isFinite(lot.sourcePrice)&&lot.sourcePrice>0
    &&! /^(sold|removed|withdrawn|deleted)$/i.test(lot.status||'')&&!knownHeavyVehicleFamily(lot.make,lot.model)
-   &&makes.includes(norm(lot.make))&&models.includes(norm(lot.model))
+   &&makes.includes(norm(lot.make))&&(!models||models.includes(norm(lot.model)))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
-   &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo);
+   &&(input.sourcePriceTo===undefined||lot.sourcePrice<=input.sourcePriceTo)
+   &&((input.powerFrom===undefined&&input.powerTo===undefined)||(/^\d+(?:\.\d+)?$/.test(String(lot.sourcePower||''))&&Number(lot.sourcePower)>0&&(input.powerFrom===undefined||Number(lot.sourcePower)>=input.powerFrom)&&(input.powerTo===undefined||Number(lot.sourcePower)<=input.powerTo)));
  });
  const unique=[...new Map(matches.map(saved=>[saved.items[0].id,saved])).values()];
- unique.sort((a,b)=>String(b.items[0].id).localeCompare(String(a.items[0].id)));
+ unique.sort((a,b)=>(input.sort==='totalRub'?a.items[0].sourcePrice-b.items[0].sourcePrice:input.sort==='totalRubDesc'?b.items[0].sourcePrice-a.items[0].sourcePrice:0)||String(b.items[0].id).localeCompare(String(a.items[0].id)));
  const selected=unique.slice(0,query.pageSize);if(!selected.length)return null;
  return {schemaVersion:2,items:selected.map(s=>s.items[0]),page:1,pageSize:query.pageSize,received:selected.length,rejected:0,
   observedAt:selected.map(s=>s.observedAt).sort()[0],partial:true,stale:true};

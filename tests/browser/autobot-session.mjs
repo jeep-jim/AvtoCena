@@ -2,9 +2,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
+import postcss from 'postcss';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||createRequire(import.meta.url).resolve('playwright'));
 const out='/tmp/avtocena-autobot-session';fs.mkdirSync(out,{recursive:true});
 await build({stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {Autobot} from './apps/web/components/autobot/Autobot';createRoot(document.getElementById('root')).render(<Autobot/>);`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,external:['/autobot/*'],platform:'browser',jsx:'automatic',outfile:out+'/app.js',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'navigation',setup(b){b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({resolveDir:process.cwd(),contents:a.path==='next/link'?`import React from 'react';export default function Link({children,...props}){return React.createElement('a',props,children);}`:`export const usePathname=()=>location.pathname;export const useRouter=()=>({push:()=>{},back:()=>{},refresh:()=>{}});`}));}}]});
+const utilities=await postcss([tailwindcss({content:['apps/web/components/autocalc/AutoCalcPage.tsx','apps/web/components/home/CitySelector.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/autocalc/KnowledgeSuggestions.tsx']}),autoprefixer]).process('@tailwind base;@tailwind components;@tailwind utilities;:root{--ac-surface:#202b38;--ac-surface-2:#2c3849;--ac-border:#ffffff22;--ac-text:#fff;--ac-muted:#abb5c3}',{from:undefined});
+fs.writeFileSync(out+'/app.css',utilities.css+'\n'+fs.readFileSync(out+'/app.css','utf8'));
 const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox']});
 try{
  const context=await browser.newContext();let sent;let sendCount=0;let formMode=false;let calculationBody;

@@ -65,3 +65,5 @@
 .ab-panel .ta-suggestions button{border:0;background:var(--ta-surface)}
 
 .ab-car-questions button:last-child:nth-child(3){grid-column:1 / -1}
+.ab-panel .ab-inline-calculation button{min-height:44px}
+.ab-panel .ab-inline-calculation button[data-autocalc-primary]{width:100%;min-height:48px;background:#e32c39;color:#fff;font-weight:700}

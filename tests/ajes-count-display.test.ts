@@ -17,7 +17,7 @@ test('stock power selection uses numeric nonempty evidence in lists and aggregat
  for(const market of ['china','korea'])for(const aggregate of [undefined,'count','models'] as const){
   const q=ajesCatalogQuery({market,powerFrom:'100',powerTo:'160',pageSize:'48'});
   const sql=ajesQuery({...q,aggregate}).sql;
-  assert.match(sql,/pw regexp/);assert.match(sql,/pw\+0>=100/);assert.match(sql,/pw\+0<=160/);
+  assert.doesNotMatch(sql,/regexp|pw\+0/);assert.match(sql,/pw>=100/);assert.match(sql,/pw<=160/);
  }
  for(const p of [{powerTo:'-1'},{powerFrom:'200',powerTo:'100'},{powerTo:'Infinity'}])assert.throws(()=>ajesQuery(ajesCatalogQuery({market:'china',...p})));
  assert.throws(()=>ajesCatalogQuery({market:'japan',powerTo:'160'}),AjesFilterUnavailable);
@@ -91,4 +91,18 @@ test('large families keep every source generation and never match A50 or S5',asy
  assert.match(sql,/\(model_name='S5 F5' or model_name like 'A5 %'\)/);
  assert.throws(()=>ajesQuery({table:'korea',modelFamilies:"A5%' OR 1=1"}));
  assert.deepEqual(resolveAjesModelSelection('A5',[{model:'A5'},{model:'A5 F5'}]),{model:'A5'});
+});
+
+test('power results keep the source 111 hp match and reject empty, malformed and over-limit power',async()=>{
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const filter=ajesResultFilter({powerTo:'160'});
+ assert.equal(filter.matches({powerHp:111}),true);assert.equal(filter.matches({powerHp:160}),true);
+ for(const powerHp of [undefined,null,'',0,200,'111,200','unknown'])assert.equal(filter.matches({powerHp}),false);
+});
+test('power search recovers only matching already received cars without requiring a model',async()=>{
+ const {findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const now=Date.now(),observedAt=new Date(now-1000).toISOString();
+ const snapshots=Object.fromEntries([['ok','111',100],['too','200',200],['missing','',300],['malformed','111,200',400],['wrong','111',500]].map(([id,power,price])=>[id,{observedAt,items:[{id,table:'china',make:id==='wrong'?'Toyota':'Volkswagen',model:'SANTANA',year:new Date().getUTCFullYear(),sourcePrice:price,sourcePower:power}]}]));
+ const result=findSavedAjesStockSearch({table:'china',make:'VOLKSWAGEN',powerTo:160,sort:'totalRub'},snapshots,now);
+ assert.deepEqual(result?.items.map(x=>x.id),['ok']);assert.equal(result?.partial,true);assert.equal(result?.stale,true);assert.equal('total' in result!,false);
 });

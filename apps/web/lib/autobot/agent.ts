@@ -21,6 +21,7 @@ export function publicOffer(raw:any){const o=safePublicPricing(raw);return {id:o
 export async function publicVehicle(id:string){if(!/^[a-zA-Z0-9_-]{1,180}$/.test(id))throw Error('Уточните ссылку на автомобиль.');const raw=await getOffer(id);if(!raw)throw Error('Автомобиль не найден в каталоге.');const [priced]=await applyActiveBusinessPricingBatch([raw]);return publicOffer(priced);}
 export async function runPublicAutobot(body:any,request:Request,reply:typeof regReply=regReply){
  const message=typeof body.text==='string'?body.text.trim():'';if(!message||message.length>4000)throw Error('Напишите вопрос до 4 000 символов.');
+ const wantsForm=/форм[ауые]|выпадающ/iu.test(message)&&/расч[её]т|заполн|калькулятор/iu.test(message);
  const direct=serviceAnswer(message);if(direct)return direct;
  const history=Array.isArray(body.history)?body.history.slice(-12).filter((m:any)=>['user','assistant'].includes(m.role)&&typeof m.text==='string').map((m:any)=>({role:m.role,content:m.text.slice(0,1200)})):[];
  const path=typeof body.path==='string'&&/^\/(?!\/)[^\\<>]*$/.test(body.path)&&!/^\/(?:crm|account|partner|login)(?:[/?]|$)/.test(body.path)?body.path.slice(0,600):'/';
@@ -55,14 +56,15 @@ export async function runPublicAutobot(body:any,request:Request,reply:typeof reg
  for(let round=0;round<4;round++){
   const factual=researchPowerReply([...researched.values()],message);if(factual)return {text:factual,cards:[],sources,actions:[]};
   let response:Awaited<ReturnType<typeof reply>>;try{response=await reply(input,signal);}catch(error){if(researched.size)return {text:researchFallbackReply([...researched.values()],message),cards:[],sources,actions:[]};throw error;}let answer:any;try{answer=JSON.parse(response.text.trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{answer={reply:response.text};}
-  if(!answer.tool&&/форм[ауые]|выпадающ/iu.test(message)&&/расч[её]т|заполн|калькулятор/iu.test(message)&&round<3){input.push({role:'assistant',content:response.text},{role:'user',content:'Покажи форму через calculation_form сейчас. В args сохрани уже известные из истории данные; неизвестные оставь пустыми.'});continue;}
+  if(!answer.tool&&wantsForm&&round<3){input.push({role:'assistant',content:response.text},{role:'user',content:'Покажи форму через calculation_form сейчас. В args сохрани уже известные из истории данные; неизвестные оставь пустыми.'});continue;}
   if(!answer.tool&&researched.size===0&&explicitWeb&&round<3){input.push({role:'assistant',content:response.text},{role:'user',content:'Сначала вызови research для указанной в вопросе, истории или фильтрах модели. Интернет-поиск в этом вопросе ещё не выполнялся. Если модель неизвестна — спроси марку и модель, не утверждай, что поиск выполнен.'});continue;}
   if(!answer.tool&&explicitWeb&&researched.size===0)return {text:'Для интернет-поиска уточните марку, модель и год автомобиля. В этом ответе поиск ещё не выполнен.',cards:[],sources:[],actions:[]};
+  if(!answer.tool&&wantsForm)return {text:'Заполните недостающие параметры — расчёт появится прямо здесь.',calculationForm:formFor({},current),cards:[],sources:[],actions:[]};
   if(!answer.tool)return {text:publicAnswerText(String(answer.reply||'Уточните автомобиль и вопрос.')).slice(0,12000),cards:cards.slice(0,5),sources,actions:Array.isArray(answer.actions)?answer.actions.filter((x:any)=>x==='contact'):[]};
   if(round===3)throw Error('Уточните одну модель или один вопрос, чтобы я смог ответить точнее.');
   let data:any;try{
    if(answer.tool==='research'){const id=String(answer.args?.id||(!answer.args?.make?current?.id:'')||'');if(id&&!/^[a-zA-Z0-9_-]{1,180}$/.test(id))throw Error('Уточните автомобиль.');data=await research(id,answer.args);
-   }else if(answer.tool==='calculation_form'){
+   }else if((answer.tool==='calculation_form'||answer.tool==='calculate'&&wantsForm)){
     return {text:'Заполните недостающие параметры — расчёт появится прямо здесь.',calculationForm:formFor(answer.args,current),cards:[],sources,actions:[]};
    }else if(answer.tool==='calculate'){
     const args={...answer.args,id:answer.args?.id||(!answer.args?.title&&!answer.args?.make&&!answer.args?.model?current?.id:undefined)};
