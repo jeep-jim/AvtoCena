@@ -25,6 +25,7 @@ test('explicit values, other sources and electric engines are unchanged',()=>{
 import {prepareSellerInventory} from '../apps/web/lib/catalog/prepare-seller-inventory';
 import {LocalJsonStorage} from '../apps/web/lib/data';
 import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
+import {compactPublicStorageOffer,searchProjectionFromOffer} from '../apps/web/lib/catalog/storage';
 test('saved paid UAE seller offer recalculates with complete evidence and stays incomplete without power',async()=>{
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();
  const now=new Date().toISOString();
@@ -32,7 +33,25 @@ test('saved paid UAE seller offer recalculates with complete evidence and stays 
  try {
   const input:any={...jac(),year:2022,status:'active',powerHp:147,powerDataConfidence:'source_exact',powerDataSource:'source_listing',catalogPricingMode:'seller',sellerPriceRub:1425000,images:[],operational:{...jac().operational,sourceUrl:'https://www.dubicars.com/jac-js4-952829.html',semanticEvidence:Object.fromEntries(Object.entries({year:2022,fuel:'petrol',powertrainKind:'combustion',powerHp:147}).map(([key,value])=>[key,{source:'source_listing',status:'exact',value}]))}};
   const result=await prepareSellerInventory(input);assert.ok(result);assert.equal(result.engineCc,1500);assert.ok(Number(result.totalRub)>1425000,JSON.stringify(result));assert.equal(result.catalogPricingMode,undefined);
+  // The publisher also replays retained seller rows. Both JAC examples must
+  // carry the calculated amount through storage into the catalog preview.
+  for(const specimen of [
+   {id:input.id,model:'JS4',year:2025,sourcePrice:57000,powerHp:147,label:'1.5',cc:1500},
+   {id:'ab48d48542ae0cdc8df6a6c5',model:'S3 Plus',year:2023,sourcePrice:42000,powerHp:118,label:'1.6',cc:1600},
+  ])for(const preservePublishedPrice of [false,true]){
+   const candidate={...input,...specimen,operational:{...input.operational,sourceDisplacementLabel:specimen.label,semanticEvidence:{...input.operational.semanticEvidence,year:{source:'source_listing',status:'exact',value:specimen.year},powerHp:{source:'source_listing',status:'exact',value:specimen.powerHp}}}};
+   const prepared=await prepareSellerInventory(candidate,{preservePublishedPrice});assert.ok(prepared);
+   const preview=searchProjectionFromOffer(compactPublicStorageOffer(prepared));
+   assert.equal(preview.engineCc,specimen.cc);
+   assert.equal(preview.catalogPricingMode,undefined);
+   assert.ok(Number(preview.totalRub)>specimen.sourcePrice*25);
+   assert.equal(preview.totalRub,prepared.totalRub);
+   assert.equal(preview.publicVisibleRub,prepared.totalRub);
+  }
   delete input.powerHp;delete input.powerDataConfidence;delete input.powerDataSource;delete input.operational.semanticEvidence.powerHp;
   const incomplete=await prepareSellerInventory(input);assert.ok(incomplete);assert.equal(incomplete.engineCc,1500);assert.equal(incomplete.powerHp,undefined);assert.equal(incomplete.totalRub,null);assert.equal(incomplete.catalogPricingMode,'seller');
+  const pendingPreview=searchProjectionFromOffer(compactPublicStorageOffer(incomplete));
+  assert.equal(pendingPreview.catalogPricingMode,'seller');
+  assert.equal(pendingPreview.engineCc,1500);
  }finally{read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
