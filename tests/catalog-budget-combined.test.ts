@@ -37,7 +37,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   assert.equal(reads.some(key=>key.includes('/projection/')||key.includes('/budget-cards-')),false,'missing landings use compact eligibility without card downloads');
   for(const filterVersion of [1,undefined] as const){
    index.filterVersion=filterVersion;
-   for(const params of [{budgetTo:1710000,yearFrom:2022},{budgetTo:1710000,yearFrom:2022,mileageTo:50000},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol'},{budgetTo:100000,yearFrom:2022,mileageTo:50000}]){
+   for(const params of [{budgetTo:1710000,yearFrom:2022},{budgetTo:1710000,yearFrom:2022,mileageTo:50000},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol'},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol|diesel',transmission:'automatic|cvt',drive:'fwd|awd',bodyType:'sedan|hatchback'},{budgetTo:100000,yearFrom:2022,mileageTo:50000}]){
    resetCatalogReadCachesForTests();reads.length=0;
    const expected=rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).map(row=>row.id).sort();
    const [results,count,facets,brands]=await Promise.all([searchOffers(params),countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);

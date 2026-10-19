@@ -1,3 +1,4 @@
+import {matchesFilterSelection} from './filter-selections';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
@@ -833,9 +834,9 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     if (params.powerTo && utilizationPowerHp > params.powerTo + 0.01) return false;
   }
   if (!matchesFuelFilter(row.fuel, params.fuel)) return false;
-  if (params.bodyType && lower(catalogBodyType(row)) !== lower(params.bodyType)) return false;
-  if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;
-  if (params.drive && lower(row.drive) !== lower(params.drive)) return false;
+  if (!matchesFilterSelection(catalogBodyType(row),params.bodyType)) return false;
+  if (!matchesFilterSelection(row.transmission,params.transmission)) return false;
+  if (!matchesFilterSelection(row.drive,params.drive)) return false;
   if (!matchesAuctionGrades(row.auctionGrade, params.auctionGrade)) return false;
   if (params.auctionDateFrom && (!row.auctionDate || String(row.auctionDate) < params.auctionDateFrom)) return false;
   if (params.auctionDateTo && (!row.auctionDate || String(row.auctionDate) > params.auctionDateTo)) return false;
@@ -2098,9 +2099,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
    eligible.has(row[5].id) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
-   && (!params.bodyType || same(catalogBodyType(row[5]),params.bodyType))
-   && (!params.transmission || same(row[5].transmission,params.transmission))
-   && (!params.drive || same(row[5].drive,params.drive)) &&
+   && matchesFilterSelection(catalogBodyType(row[5]),params.bodyType)
+   && matchesFilterSelection(row[5].transmission,params.transmission)
+   && matchesFilterSelection(row[5].drive,params.drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
   if(hasBudget && index.version===3){

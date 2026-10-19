@@ -1,3 +1,4 @@
+import {filterSelections} from './filter-selections';
 export type CatalogFilterOption = { value: string; label: string };
 
 function clean(value: unknown) {
@@ -10,10 +11,8 @@ export function catalogFilterOptions(
   selected = "",
 ) {
   const allowed = new Set(availableValues.map(clean));
-  if (selected) allowed.add(clean(selected));
+  for(const value of filterSelections(selected))allowed.add(clean(value));
   const visible = options.slice(1).filter((option) => allowed.has(clean(option.value)));
-  if (selected && !visible.some((option) => clean(option.value) === clean(selected))) {
-    visible.push({ value: selected, label: clean(selected).replace(/\[object Object\]/gi, "") || "Без названия" });
-  }
+  for(const value of filterSelections(selected))if(!visible.some(option=>clean(option.value)===clean(value)))visible.push({value,label:clean(value).replace(/\[object Object\]/gi, "")||"Без названия"});
   return [options[0], ...visible];
 }

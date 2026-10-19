@@ -90,6 +90,32 @@ try{for(const width of [390,1440]){
  await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&city=Казань',pending:true,filtersOpen:false}})));await send.waitFor();await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.match(shares.at(-1).path,/make=Honda/);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('city'),'Казань');
  // Changing the selection during preparation must never send the old selection.
  delay=400;await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&yearFrom=2024',pending:false,filtersOpen:false}})));await send.click();await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Audi&yearFrom=2025',pending:false,filtersOpen:false}})));await page.getByText('Параметры изменились — поделитесь новой подборкой').waitFor();assert.equal(await page.evaluate(()=>window.calls.length),2);delay=0;
+ // Categorical multiselection survives navigation, deselection and URL reload.
+ await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
+ const multiForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
+ for(const [placeholder,names,key,values] of [
+  ['Любая трансмиссия',['Автомат','Вариатор'],'transmission','automatic|cvt'],
+  ['Любое топливо',['Бензин','Дизель'],'fuel','petrol|diesel'],
+  ['Любой кузов',['Седан','Хэтчбек'],'bodyType','sedan|hatchback'],
+  ['Любой привод',['Передний','Полный'],'drive','fwd|awd']
+ ]){
+  await multiForm.getByRole('button',{name:placeholder,exact:true}).click();
+  for(const name of names)await multiForm.getByRole('button',{name,exact:true}).click();
+  await page.waitForFunction(([key,value])=>new URLSearchParams(location.search).get(key)===value,[key,values]);
+  for(const name of names)assert.equal(await multiForm.getByRole('button',{name,exact:true}).getAttribute('aria-pressed'),'true');
+  await multiForm.getByRole('button',{name:names.join(', '),exact:true}).click();
+ }
+ if(width===390)await multiForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ await page.reload();await page.locator('#catalog').waitFor();
+ for(const [key,value] of [['transmission','automatic|cvt'],['fuel','petrol|diesel'],['bodyType','sedan|hatchback'],['drive','fwd|awd']])assert.equal(new URL(page.url()).searchParams.get(key),value);
+ await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
+ const reloadedMulti=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
+ await reloadedMulti.getByRole('button',{name:'Автомат, Вариатор',exact:true}).click();
+ await reloadedMulti.getByRole('button',{name:'Автомат',exact:true}).click();
+ await page.waitForFunction(()=>new URLSearchParams(location.search).get('transmission')==='cvt');
+ assert.equal(await reloadedMulti.getByRole('button',{name:'Вариатор',exact:true}).count()>=1,true);
+ if(width===390)await reloadedMulti.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+ await page.screenshot({path:`${out}/multiselect-${width}.png`});
  if(width===390){
   // Enter from the cabinet through the ID URL; filters target the canonical profile.
   await page.goto(origin+'/test/cabinet');

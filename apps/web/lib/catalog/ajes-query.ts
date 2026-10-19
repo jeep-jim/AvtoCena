@@ -43,7 +43,7 @@ export function ajesQuery(input: unknown) {
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];
   if(modelClauses.length)where.push('('+modelClauses.join(' or ')+')');
-  const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const codes=map[value];if(!codes)throw new AjesInputError();where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
+  const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const selected=value.split('|');if(selected.length>20||selected.some(v=>!map[v]))throw new AjesInputError();const codes=[...new Set(selected.flatMap(v=>map[v]))];where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
   coded(q.fuel,'time',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
   coded(q.drive,'priv',{fwd:['FF','FWD'],rwd:['FR','RWD'],awd:['4WD','AWD','FULLTIME4WD']});
