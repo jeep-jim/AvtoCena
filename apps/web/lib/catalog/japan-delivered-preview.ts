@@ -1,3 +1,4 @@
+import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {withCurrentDepositCosts} from "./deposit-cost-projection";
 import {isGreenCornerOffer} from "./green-corner-contract";
 import { assessJapanExportRestriction } from "./japan-export-restriction";
@@ -97,23 +98,24 @@ export async function japanSearchContext(generationId:string){
   const { getEffectiveMarketVersion } = await import("../effective-market-settings");
   // Inputs remain independently refreshable every minute. Only exact unchanged
   // input/rate/settings/day/calculator combinations retain expensive quotes.
-  const [index,configuration,rates]=await Promise.all([readJapanPreviewInputs(),getEffectiveMarketVersion("japan"),catalogRateFingerprintInputs()]);
+  const [index,configuration,rates,editorial]=await Promise.all([readJapanPreviewInputs(),getEffectiveMarketVersion("japan"),catalogRateFingerprintInputs(),readCatalogEditorial()]);
   if(index?.version!==1 || index.generationId!==generationId)return null;
-  return {index,key:japanQuoteCacheKey(index,configuration,rates,calculationCacheVersion(),new Date().toISOString().slice(0,10))};
+  return {index,editorial,key:japanQuoteCacheKey(index,configuration,rates,calculationCacheVersion()+editorial.revision,new Date().toISOString().slice(0,10))};
 }
 export async function japanSearchQuotes(generationId: string) {
   const context=await japanSearchContext(generationId);
   if(!context)return {};
-  const {index,key}=context;
+  const {index,key,editorial}=context;
   return searchQuotes.get(key,async()=>{
     const quotes:Record<string,any>={};
     const entries=Object.entries(index.entries);
     for(let start=0;start<entries.length;start+=64){
       await Promise.all(entries.slice(start,start+64).map(async([id,entry])=>{
         if(!entry.parameters)return;
-        const result=await calculateOfferWithCustomerParametersDetailed(entry.offer as VehicleOffer,entry.parameters);
+        const offer=applyCatalogEditorial(entry.offer as VehicleOffer,editorial);
+        const result=await calculateOfferWithCustomerParametersDetailed(offer,entry.parameters);
         if(result.ok && Number(result.calculation.totalRub)>0) quotes[id]={
-          updatedAt:entry.updatedAt,sourcePrice:entry.sourcePrice,sourceCurrency:entry.sourceCurrency,
+          updatedAt:entry.updatedAt,sourcePrice:offer.sourcePrice,sourceCurrency:offer.sourceCurrency,
           totalRub:result.calculation.totalRub,currencyRate:result.calculation.currencyRate,deliveryPricingBasis:result.calculation.deliveryPricingBasis,
           engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction};
       }));

@@ -773,6 +773,7 @@ async function readCurrentOfferShard(id: string) {
   return shard;
 }
 export async function getOfferFromCurrentShard(id: string) {
+  if(/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id))return (await import('./ajes-public')).getAjesOffer(id,{editorial:false});
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
@@ -1980,7 +1981,7 @@ async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:s
  return result;
 }
 async function currentBudgetBlock(generationId:string,version:1|2|3,block:number){
- return liveBudgetBlockCache.get(`${generationId}:v${version}:${block}`,async()=>{
+ return liveBudgetBlockCache.get(`${generationId}:v${version}:${block}:${editorialRevision()}`,async()=>{
   const part=await budgetCardCache.get(`${generationId}:v${version}:${block}`,()=>readIndex(generationId,`budget-cards-v${version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
   if(part.generationId!==generationId)return null;
   const priced=await currentSearchPrices(prepareCatalogProjectionRows(part.items),generationId);
@@ -2050,13 +2051,13 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
  if(market==='japan'){
   const {japanSearchContext}=await import('./japan-delivered-preview');
   const context=await japanSearchContext(index.generationId);
-  if(context)return japanBudgetReplayCache.get(`${index.generationId}:${context.key}:${displayPrices}`,async()=>{
+  if(context)return japanBudgetReplayCache.get(`${index.generationId}:${context.key}:${displayPrices}:${editorialRevision()}`,async()=>{
    const rows=await load();
    if((await japanSearchContext(index.generationId))?.key!==context.key)throw Error('japan_quote_context_changed');
    return rows;
   });
  }
- return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}`,load);
+ return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}:${editorialRevision()}`,load);
 }
 const budgetEligibility=new BudgetEligibilityCache();
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4});

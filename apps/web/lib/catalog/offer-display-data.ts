@@ -18,8 +18,8 @@ import type {VehicleOffer} from './types';
 // One request-local calculation feeds the visible page and link metadata.
 export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeRequestedPowerHp=0,modificationId='')=>{
   const editorial=await readCatalogEditorial();
-  const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(restoreProAuctionsPower(storedOffer)));
-  const offer = safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
+  const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(restoreProAuctionsPower(applyCatalogEditorial(storedOffer,editorial))));
+  const offer = safeOffer.editorialPriceKey || safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
 
   const sellerPricing = isSellerPricedOffer(offer);
   const selectionRequired = hasModificationSelection(offer);

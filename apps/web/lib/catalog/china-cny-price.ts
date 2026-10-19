@@ -46,7 +46,7 @@ export function chinaCnyConversion(price:number,usd:CurrencyRateSnapshot|null,cn
  return {sourceCurrency:'USD',sourcePrice:price,sourcePriceCny:price*usd!.effectiveRate/cny!.effectiveRate,usdRub:usd!.effectiveRate,cnyRub:cny!.effectiveRate,rateDate:usd!.rateDate};
 }
 function key(offer:Partial<VehicleOffer>){return createHash('sha256').update(JSON.stringify([offer.id,offer.sourcePrice])).digest('hex');}
-function eligible(offer:Partial<VehicleOffer>){return offer.market==='china' && offer.sourceCurrency==='USD' && Number(offer.sourcePrice)>0 && Boolean(offer.id);}
+function eligible(offer:Partial<VehicleOffer>){return !offer.editorialPriceKey && offer.market==='china' && offer.sourceCurrency==='USD' && Number(offer.sourcePrice)>0 && Boolean(offer.id);}
 /** Lock the CNY equivalent once per source price. Subsequent FX changes use CNY,
  * not a daily USD->CNY round trip. Original API amounts remain in raw evidence.
  * Batch storage avoids a separate object read/write for every catalog card.

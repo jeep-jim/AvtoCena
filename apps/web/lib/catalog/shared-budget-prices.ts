@@ -1,3 +1,4 @@
+import {readCatalogEditorial} from './editorial';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {getJsonStorage} from '../data';
@@ -20,12 +21,13 @@ export function calculationCacheVersion(){
 // exact path until those authorities have a separate versioned contract.
 export async function budgetPricingFingerprint(market:string):Promise<string|null> {
  if(!markets.has(market))return null;
- const [rates,configured,anchors]=await Promise.all([
+ const [rates,configured,anchors,editorial]=await Promise.all([
   catalogRateFingerprintInputs(),getEffectiveMarketVersion(market),
-  market==='china'?chinaCnyPriceFingerprint():null,
+  market==='china'?chinaCnyPriceFingerprint():null,readCatalogEditorial(),
  ]);
  return hash({schema:1,release:calculationCacheVersion(),market,
   utcDay:new Date().toISOString().slice(0,10),rates,configured,
+  editorialPrices:Object.values(editorial.entries).filter(entry=>entry.market===market&&entry.sellerPrice).map(entry=>[entry.id,entry.sellerPrice]),
   resolved:resolveCatalogMarketConfig(market as CatalogMarket,configured),anchors});
 }
 

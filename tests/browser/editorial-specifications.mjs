@@ -18,10 +18,17 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try{for(const width of [390,1440])for(const theme of ['light','dark']){
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();let payload,fail=false;
  await page.route('**/api/catalog/offer/fixture/editorial',async route=>{payload=route.request().postDataJSON();await route.fulfill({status:fail?409:200,json:fail?{error:'Объявление уже изменено другим сотрудником.'}:{entry:{...payload,version:'saved'}}});});
+ await page.route('**/api/site-media/*',route=>route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="navy"/></svg>'}));
  await page.goto(`http://127.0.0.1:${server.address().port}`);await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();
  await page.route('**/api/crm/catalog/photos',async route=>{assert.equal(route.request().postDataJSON().url,'https://example.com/car.jpg');await route.fulfill({json:{id:'a'.repeat(64),url:'/api/site-media/'+'a'.repeat(64)}});});
  const form=page.getByRole('form',{name:'Редактирование объявления',exact:true});
+ assert.equal(await form.getByLabel('Цена продавца',{exact:true}).inputValue(),'57800');
+ await form.getByLabel('Цена продавца',{exact:true}).fill('53 800,50');await form.getByLabel('Валюта',{exact:true}).selectOption('CNY');
+ await form.getByLabel('Цена продавца',{exact:true}).scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/${width}-${theme}-price.png`});
+ await form.getByRole('button',{name:'Удалить фото 1',exact:true}).click();
+ assert.equal(await form.getByRole('button',{name:'Удалить фото 1',exact:true}).isDisabled(),true);
+
  await form.getByLabel('Кузов',{exact:true}).selectOption('suv');await form.getByLabel('Привод',{exact:true}).selectOption('awd');await form.getByLabel('Коробка передач',{exact:true}).selectOption('cvt');await form.getByRole('button',{name:'Цвет',exact:true}).click();
  const colors=page.getByRole('dialog',{name:'Цвет автомобиля',exact:true});
  await colors.getByRole('button',{name:'Синий',exact:true}).click();
@@ -37,13 +44,18 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).count(),1);
  assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).evaluate(el=>Boolean(el.closest('header'))),true);
  await form.getByRole('button',{name:'Добавить по ссылке',exact:true}).click();await form.getByLabel('Ссылка на фотографию',{exact:true}).fill('https://example.com/car.jpg');await form.getByRole('button',{name:'Добавить фото',exact:true}).click();await form.getByRole('button',{name:'Сделать фото 1 обложкой',exact:true}).waitFor();
+ await form.getByRole('button',{name:'Удалить фото 1',exact:true}).click();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await form.getByRole('button',{name:'Удалить фото 1',exact:true}).scrollIntoViewIfNeeded();
  await page.screenshot({path:`${out}/${width}-${theme}.png`});
  await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.waitFor({state:'hidden'});
+ assert.deepEqual(payload.sellerPrice,{amount:53800.5,currency:'CNY'});
  assert.deepEqual(payload.specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Мой синий (#123456)'});assert.deepEqual(payload.photos,['/api/site-media/'+'a'.repeat(64)]);assert.equal(payload.year,undefined);assert.equal(payload.powerHp,undefined);
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
+ assert.equal(await form.getByLabel('Цена продавца',{exact:true}).inputValue(),'53800.5');
+ await form.getByRole('button',{name:'Вернуть цену из источника',exact:true}).click();
  await form.getByLabel('Кузов',{exact:true}).selectOption('');await form.getByRole('button',{name:'Цвет',exact:true}).click();await colors.getByRole('button',{name:'Вернуть цвет продавца',exact:true}).click();fail=true;
- await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.getByRole('alert').waitFor();assert.equal(await form.isVisible(),true);assert.equal(payload.version,'saved');assert.equal(payload.specifications.bodyType,'');
+ await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.getByRole('alert').waitFor();assert.equal(await form.isVisible(),true);assert.equal(payload.sellerPrice,null);assert.equal(payload.version,'saved');assert.equal(payload.specifications.bodyType,'');
  await page.getByRole('button',{name:'Закрыть редактирование объявления',exact:true}).click();await form.waitFor({state:'hidden'});await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
  console.log(JSON.stringify({width,theme,saved:true,conflictRetainsForm:true,closeDiscardsUnsaved:true,saveInHeader:true}));await context.close();
 }}finally{await browser.close();server.close();}

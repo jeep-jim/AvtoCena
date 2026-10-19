@@ -1,3 +1,4 @@
+import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {youngImportIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice,withChinaCnyPrices} from "./china-cny-price";
 import {isGreenCornerOffer} from "./green-corner-contract";
@@ -189,9 +190,21 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
   } as T;
 }
 
+async function repriceEditorialOffer<T extends Partial<VehicleOffer>>(offer:T):Promise<T>{
+ if(!offer.editorialPriceKey||offer.catalogPricingMode==='seller'||Number(offer.totalRub)>0)return offer;
+ const {calculateOfferWithRussiaCustoms}=await import('./customs-pricing');
+ // Compact rows lack engine inputs. Only manually edited rows need a detail read.
+ const full=offer.id&&(offer as any).cardProjectionVersion
+  ? await (await import('./storage')).getOfferFromCurrentShard(offer.id) : null;
+ const result=await calculateOfferWithRussiaCustoms({...full,...offer} as VehicleOffer);
+ return {...result,...((offer as any).cardProjectionVersion?{publicVisibleRub:result.totalRub||undefined}: {})} as T;
+}
+
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
-  offer=await withChinaCnyPrice(offer);
+  const editorial=await readCatalogEditorial();
+  offer=offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer;
+  offer=await repriceEditorialOffer(await withChinaCnyPrice(offer));
   const rated = await attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer)));
   const configured = await getEffectiveMarketVersion(String(rated.market));
   const repriced = repriceOfferWithBusinessConfig(rated, configured);
@@ -201,7 +214,9 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 /** Shared price replay for selectors and visible cards; no display-identity or saved-draft reads. */
 export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean}={}): Promise<T[]> {
   if (!offers.length) return offers;
-  offers=await withChinaCnyPrices(offers,options);
+  const editorial=await readCatalogEditorial();
+  offers=offers.map(offer=>offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer);
+  offers=await Promise.all((await withChinaCnyPrices(offers,options)).map(repriceEditorialOffer));
   const [markets, ratedOffers] = await Promise.all([
     getEffectiveMarketsWithDefaults(),
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),

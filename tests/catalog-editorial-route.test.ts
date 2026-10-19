@@ -22,8 +22,9 @@ test('editorial API rejects unauthorized writes, foreign origins, missing photos
   state.actor=owner;assert.equal(state.writes,0);
   assert.equal((await save({photos:['/api/site-media/'+'a'.repeat(64)]})).status,400);assert.equal(state.writes,0);
   assert.equal((await save({photos:['https://evil.example/foreign.jpg']})).status,400);
-  const response=await save({photos:['https://example.com/car-b.jpg','https://example.com/car-a.jpg']});assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
-  const saved=(await response.json()).entry;assert.equal(state.index.entries.one.status,'hidden');assert.deepEqual(saved.photos,['https://example.com/car-b.jpg','https://example.com/car-a.jpg']);
+  assert.equal((await save({sellerPrice:{amount:-1,currency:'CNY'}})).status,400);
+  const response=await save({sellerPrice:{amount:57800,currency:'CNY'},photos:['https://example.com/car-b.jpg','https://example.com/car-a.jpg']});assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+  const saved=(await response.json()).entry;assert.deepEqual(saved.sellerPrice,{amount:57800,currency:'CNY'});assert.equal(state.index.entries.one.status,'hidden');assert.deepEqual(saved.photos,['https://example.com/car-b.jpg','https://example.com/car-a.jpg']);
   assert.equal((await save()).status,409,'stale editor cannot overwrite');
   state.offer=null;
   assert.equal((await save({version:saved.version,status:'visible'})).status,409,'withdrawn source is not resurrected');

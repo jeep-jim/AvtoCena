@@ -1,3 +1,4 @@
+import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {isGreenCornerOffer} from "./green-corner-contract";
 import {getSavedOfferCalculation} from "./saved-offer-calculation";
 import {getJsonStorage,mutateDataJson,readDataJson} from "../data";
@@ -45,6 +46,7 @@ export async function rebuildSavedPreviewIndex():Promise<Index> {
 }
 const refreshedEntries=new DetailReadCache<Entry|null>({maxEntries:512,maxBytes:4*1024*1024,ttlMs:60000,concurrency:4});
 export async function readSavedPreviewIndex(requestedIds?:string[]) {
+ const editorial=await readCatalogEditorial();
  const index=await cache.get("current",()=>readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}}));
  const ids=[...new Set(requestedIds||Object.keys(index.entries))].filter(id=>index.entries[id]);
  const entries:Record<string,Entry>={};
@@ -55,9 +57,10 @@ export async function readSavedPreviewIndex(requestedIds?:string[]) {
   await Promise.all(Array.from({length:Math.min(4,ids.length)},async()=>{
    while(cursor<ids.length){
     const id=ids[cursor++],original=index.entries[id];
-    const entry=await refreshedEntries.get(id+':'+original.savedAt,async()=>{
-     const offer=/^green-\d+$/.test(id)?await getGreenCornerOffer(id):await getOfferFromCurrentShard(id);
-     if(!offer)return null;
+    const entry=await refreshedEntries.get(id+':'+original.savedAt+':'+editorial.revision,async()=>{
+     const source=/^green-\d+$/.test(id)?await getGreenCornerOffer(id):await getOfferFromCurrentShard(id);
+     if(!source)return null;
+     const offer=applyCatalogEditorial(source,editorial);
      const record=await getSavedOfferCalculation(offer);
      return record?savedPreviewEntry(record,offer):null;
     });

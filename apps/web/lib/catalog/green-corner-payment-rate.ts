@@ -1,9 +1,11 @@
+import {convertToRub} from './rates';
 import type { CurrencyRateSnapshot } from './rates';
 import type { VehicleOffer } from './types';
 let cached: Promise<{sell:number;nominal:number;fetchedAt:string}|null> | undefined;
 let expires = 0;
 // Public quote used by Akebono itself; this is not a direct ATB API.
 export async function greenCornerPaymentRate(offer:VehicleOffer):Promise<CurrencyRateSnapshot|null> {
+ if(offer.editorialPriceKey&&offer.sourceCurrency!=='JPY')return convertToRub(offer.sourcePrice,offer.sourceCurrency);
  const now=Date.now();
  if (!process.env.CATALOG_LIVE_RATE_DISABLED && (!cached || now>=expires)) {
   expires=now+15*60_000;

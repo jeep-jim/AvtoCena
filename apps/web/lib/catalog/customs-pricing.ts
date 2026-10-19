@@ -1,3 +1,4 @@
+import {applyCatalogEditorialPrice,readCatalogEditorial} from './editorial';
 import {youngImportIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice} from "./china-cny-price";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
@@ -174,6 +175,7 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 }
 
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false, userParameters = false): Promise<VehicleOffer> {
+  input=applyCatalogEditorialPrice(input,await readCatalogEditorial());
   input=await withChinaCnyPrice(input);
   const coreEnriched = resolvedModification ? input : await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
   const representativePowerHp = String(coreEnriched.powerDataSource || "").startsWith("vehicle-model-representative:")
@@ -436,7 +438,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   if (greenCorner) {
     const line=calculation.snapshot.breakdown?.find((line:any)=>line.id==='car');
-    if(line) line.title=`Инвойс (CIF) · ${offer.sourcePrice.toLocaleString('ru-RU')} JPY`;
+    if(line) line.title=`Инвойс (CIF) · ${offer.sourcePrice.toLocaleString('ru-RU')} ${offer.sourceCurrency}`;
   }
   const powerEstimated = Boolean(powerScenario) || ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
   const customsAssumed = customs.personalUseAssumed || customs.vehicleCategoryAssumed;

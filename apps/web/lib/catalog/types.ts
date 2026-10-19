@@ -33,6 +33,7 @@ export type VehicleOffer = {
   deliveryCity?: string;
   catalogPricingMode?: "seller";
   sellerPriceRub?: number;
+  editorialPriceKey?: string;
   id: string;
   sourceId: string;
   sourceOfferId: string;
