@@ -434,7 +434,9 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission, draft.stock]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
-  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => key==="market"?{...current,market:value==="green"?"japan":value,stock:value==="green"?"green":"",auctionGrade:""}:{...current,[key]:value});
+  // Green stock gearbox codes are source-specific (for example FAT/IAT);
+  // do not reinterpret them as AT/CVT when the user changes source type.
+  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => key==="market"?{...current,market:value==="green"?"japan":value,stock:value==="green"?"green":"",auctionGrade:"",...((current.stock==="green")!==(value==="green")?{transmission:""}:{})}:{...current,[key]:value});
   useEffect(() => {
     if (!draft.make) return;
     const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
