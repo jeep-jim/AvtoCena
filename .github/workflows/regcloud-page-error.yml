@@ -1,0 +1,34 @@
+name: Regcloud — inspect page errors
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-page-error.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read bounded error categories without customer data
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,collections,json; s=sys.stdin.read(); print("ERROR_CATEGORIES",json.dumps(collections.Counter(re.findall(r"(?:Error: |code: [\"\x27])([a-zA-Z][a-zA-Z0-9_]{3,80})",s)))); print("DIGESTS",json.dumps(collections.Counter(re.findall(r"digest: [\"\x27]([0-9]{4,20})",s)))); print("COUNTS",{p:s.count(p) for p in ["TypeError","object_storage_response_timeout","home_initial_catalog_failed","home_initial_pricing_failed","green_invalid_snapshot","ETIMEDOUT","ECONNRESET","fetch failed","Failed to find Server Action","ChunkLoadError"]})'
+          docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
+          REMOTE
