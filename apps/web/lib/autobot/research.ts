@@ -73,7 +73,7 @@ export function webResults(xml:string){
  });
 }
 export function evidenceExcerpt(text:string){
- const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine|consumption|economy|WLTC|WLTP|JC08|km\/l|l\/100|расход|потребл|燃費|dimensions|clearance|клиренс|багажник|разгон/i.test(l)?lines.slice(Math.max(0,i-1),i+2):[]);
+ const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine|consumption|economy|WLTC|WLTP|JC08|km\/l|l\/100|расход|потребл|燃費|dimensions|clearance|клиренс|багажник|разгон/i.test(l)?[...(i>0?[lines[i-1].slice(-240)]:[]),l,...(i+1<lines.length?[lines[i+1].slice(0,240)]:[])]:[]);
  return ([...new Set(relevant)].join('\n')+'\n'+text.slice(0,1500)).slice(0,6500);
 }
 
