@@ -7,6 +7,11 @@
 - Use sentence case for interface headings, labels and buttons: capitalize the first letter, without all-caps styling or decorative wide letter spacing. Preserve proper names, acronyms, currency codes and user-entered text.
 - When editing a page, check adjacent visible copy as well. Do not claim that every page is free of technical wording without actually checking it.
 
+# Owner interface correction — 19.10.2026
+
+- Before changing an existing interface, read the relevant roadmap entries and inspect the working reference. Preserve established wording, order and control locations unless the owner requests a change. Europe is the catalog layout reference.
+- Original listing links belong in the existing offer information/specification disclosures. Do not duplicate them under the vehicle title.
+
 # Daily work log
 
 - Before starting work, read the latest entries in `roadmap.md` and the relevant section for the current task. Keep this rule across sessions.

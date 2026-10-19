@@ -52,3 +52,6 @@
 .ab-car-questions button>svg{flex:none;color:var(--ta-muted);margin-top:1px}.ab-car-questions button>span:first-of-type{flex:1}.ab-car-questions button>span:last-child{color:var(--ta-muted)}
 .ab-car-questions button:hover{border-color:#318ce7}.ab-car-questions button:focus-visible{outline:2px solid #318ce7;outline-offset:2px}
 @media(max-width:360px){.ab-car-questions{grid-template-columns:1fr}}
+
+.ab-settings-main{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}.ab-settings .ab-new-chat{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:8px 10px;border:1px solid var(--ta-border);border-radius:10px;color:var(--ta-text);background:transparent;font:inherit;cursor:pointer}.ab-settings .ab-new-chat:disabled{opacity:.5;cursor:default}
+.ab-panel .ta-toolbar button{display:inline-flex;align-items:center;justify-content:center}
