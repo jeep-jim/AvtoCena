@@ -1,0 +1,38 @@
+name: Public page — bounded error check
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/public-page-error-check.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read redacted exception fingerprints
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,re,json,collections
+          r=subprocess.run(['docker','logs','--since','2h','--tail','6000','avtocena-production'],capture_output=True,text=True)
+          text=r.stdout+r.stderr
+          patterns=['object_storage_response_timeout','client_ip_missing','visitor_restricted','MODULE_NOT_FOUND','ChunkLoadError','Loading chunk','Failed to find Server Action','ECONNRESET','ETIMEDOUT','fetch failed','TypeError','ReferenceError','SyntaxError','ENOENT','heap out of memory','NEXT_REDIRECT']
+          print('PUBLIC_ERROR_COUNTS',json.dumps({p:text.count(p) for p in patterns}))
+          print('PUBLIC_ERROR_DIGESTS',json.dumps(dict(collections.Counter(re.findall(r"digest: ['\"]([0-9]{1,20})",text)))))
+          print('PUBLIC_ERROR_PROPERTIES',json.dumps(dict(collections.Counter(re.findall(r"Cannot read properties of (?:undefined|null) \(reading ['\"]([a-zA-Z_$][a-zA-Z0-9_$]{0,50})",text)))))
+          print('PUBLIC_ERROR_FRAMES',json.dumps(dict(collections.Counter(re.findall(r'(/app/apps/web/\.next/server/[^\s:()]{1,180}:[0-9]+:[0-9]+)',text)))))
+          print('PUBLIC_ERROR_CODES',json.dumps(dict(collections.Counter(re.findall(r"code: ['\"]([A-Z_]{2,40})",text)))))
+          PY
