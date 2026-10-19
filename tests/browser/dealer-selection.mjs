@@ -90,6 +90,24 @@ try{for(const width of [390,1440]){
  await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&city=Казань',pending:true,filtersOpen:false}})));await send.waitFor();await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.match(shares.at(-1).path,/make=Honda/);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('city'),'Казань');
  // Changing the selection during preparation must never send the old selection.
  delay=400;await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&yearFrom=2024',pending:false,filtersOpen:false}})));await send.click();await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Audi&yearFrom=2025',pending:false,filtersOpen:false}})));await page.getByText('Параметры изменились — поделитесь новой подборкой').waitFor();assert.equal(await page.evaluate(()=>window.calls.length),2);delay=0;
+ if(width===390){
+  // Enter from the cabinet through the ID URL; filters target the canonical profile.
+  await page.goto(origin+'/test/cabinet');
+  await page.evaluate(()=>{history.pushState({},'', '/test/dealer?canonical=1&make=Audi&selection=1#catalog');});
+  await page.reload();await page.locator('#catalog').waitFor();
+  await page.evaluate(()=>{window.fixtureDelay=700;window.scrollTo(0,900);});
+  await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
+  const canonicalForm=page.getByRole('dialog',{name:'Фильтры каталога'});await canonicalForm.waitFor();
+  await canonicalForm.getByRole('textbox',{name:'Цена: до',exact:true}).fill('2700000');
+  await page.waitForTimeout(240); // navigation intent sent, delayed route still pending
+  await canonicalForm.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  await page.waitForURL('**/test/canonical?**');
+  await page.waitForTimeout(800);
+  assert.equal(new URL(page.url()).pathname,'/test/canonical');
+  assert.equal(new URL(page.url()).searchParams.get('budget'),'2700000');
+  assert.equal(new URL(page.url()).searchParams.get('selection'),'1');
+  await page.screenshot({path:`${out}/canonical-selection.png`});
+ }
  await page.goto(origin+'/test/dealer?visitor=1&make=Audi&city=Новокузнецк&selection=1#catalog');await page.locator('#catalog').waitFor();assert.equal(await send.count(),0);assert.equal(await page.locator('[data-city]').textContent(),'Новокузнецк');assert.ok((await page.evaluate(()=>document.cookie)).includes(encodeURIComponent('Москва')));assert.deepEqual(errors,[]);console.log(`${width}: share, filters, city, anchor, dismissal, stale request and visitor visibility OK`);
  }catch(error){await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error(await page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,body:document.body.style.cssText,restoration:history.scrollRestoration})));console.error((await page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}
 }}finally{await browser.close();server.close();}
