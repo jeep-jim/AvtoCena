@@ -262,3 +262,13 @@ test('fuel economy and other missing parameters trigger topic-specific research'
  const text='Toyota Yaris catalog\n'+'Introduction '.repeat(400)+'\nG AWD 4WD fuel consumption WLTC 19.2 km/L\nConditions vary.';
  assert.match(r.evidenceExcerpt(text).slice(0,1800),/19.2 km\/L/);
 });
+
+test('paid discovery is reserved for missing topic evidence, not every read specification',async()=>{
+ const r=await load('apps/web/lib/autobot/research.ts',{files:new Map()},{source:`export async function readSource(){throw Error('not injected')}`});
+ const page=(text:string,kind='manufacturer')=>[{kind,text}];
+ assert.equal(r.hasUsefulReadEvidence('consumption',page('Yaris WLTC 19.2 km/L')),true);
+ assert.equal(r.hasUsefulReadEvidence('consumption',page('Yaris maximum power 88 kW')),false);
+ assert.equal(r.hasUsefulReadEvidence('consumption',page('Yaris WLTC 19.2 km/L','reference')),false);
+ assert.equal(r.hasUsefulReadEvidence('30-minute',page('Peak power 120 kW')),false);
+ assert.equal(r.hasUsefulReadEvidence('30-minute',page('30-minute power 45 kW')),true);
+});

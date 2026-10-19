@@ -24,7 +24,7 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  const make=clean(identity.make),model=clean(identity.model);if(!make||!model)return {status:'unknown_identity',pages:[]};
  const key=JSON.stringify([make,model,identity.year,identity.market,identity.trim,identity.topic,identity.motorCodes,identity.engine]);const hit=cache.get(key);if(!identity.fresh&&read===readSource&&hit&&hit.until>Date.now())return hit.result;
  const pages:Page[]=[],failures:string[]=[];const budget=AbortSignal.any([signal,AbortSignal.timeout(40000)]);
- const nativeTask=read===readSource?regSearch([{role:'system',content:'Найди характеристики автомобиля в интернете. Отвечай по-русски кратко с источниками. Добавь полные URL найденных источников прямо в текст обычными ссылками Markdown [название](https://...). Одних номеров [1] недостаточно. Не выдумывай URL. Учитывай год, рынок и комплектацию. Предпочитай документы производителя. Если версии различаются, перечисли различия. Не подменяй 30-минутную мощность пиковой. Не выдумывай найденные данные.'},{role:'user',content:JSON.stringify({make,model,year:identity.year,market:identity.market,trim:identity.trim,topic:identity.topic,motorCodes:identity.motorCodes})}],budget).catch(()=>null):Promise.resolve(null);
+ const nativeTask=()=>read===readSource?regSearch([{role:'system',content:'Найди характеристики автомобиля в интернете. Отвечай по-русски кратко с источниками. Добавь полные URL найденных источников прямо в текст обычными ссылками Markdown [название](https://...). Одних номеров [1] недостаточно. Не выдумывай URL. Учитывай год, рынок и комплектацию. Предпочитай документы производителя. Если версии различаются, перечисли различия. Не подменяй 30-минутную мощность пиковой. Не выдумывай найденные данные.'},{role:'user',content:JSON.stringify({make,model,year:identity.year,market:identity.market,trim:identity.trim,topic:identity.topic,motorCodes:identity.motorCodes})}],AbortSignal.any([signal,AbortSignal.timeout(30000)])).catch(()=>null):Promise.resolve(null);
  const catalogTask=discoverManufacturerCatalog(identity,budget,read).catch(()=>({pages:[],failures:['Каталог производителя недоступен.']}));
  const discoveryTask=discoverVehicleWeb(identity,budget,read).catch(()=>({pages:[],failures:['Веб-поиск не завершён.'],engine:identity.engine||'bing'}));
  try{
@@ -45,7 +45,7 @@ export async function researchVehicle(identity:Identity,signal:AbortSignal,read=
  const discovery=await discoveryTask;
  for(const p of discovery.pages.reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...discovery.failures);
  const catalog=await catalogTask;for(const p of [...catalog.pages].reverse())if(!pages.some(x=>x.url===p.url))pages.unshift(p);failures.push(...catalog.failures);
- const native=await nativeTask;
+ const native=hasUsefulReadEvidence(identity.topic,pages)?null:await nativeTask();
  const nativeSources=[...(native?.sources||[])];
  if(native&&!nativeSources.length){
   const verified=await Promise.allSettled((native.linkCandidates||[]).slice(0,3).map(async(link:any)=>{
@@ -73,7 +73,7 @@ export function webResults(xml:string){
  });
 }
 export function evidenceExcerpt(text:string){
- const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine|consumption|economy|WLTC|WLTP|JC08|km\/l|l\/100|расход|потребл|燃費|dimensions|clearance|клиренс|багажник|разгон/i.test(l)?[...(i>0?[lines[i-1].slice(-240)]:[]),l,...(i+1<lines.length?[lines[i+1].slice(0,240)]:[])]:[]);
+ const lines=text.split(/\n|(?<=[.;])\s+/);const relevant=lines.flatMap((l,i)=>/30.?min|30.?мин|тридцат|maximum continuous|номинальн|длительн|power|мощност|kW|кВт|двигател|motor|engine|consumption|economy|WLTC|WLTP|JC08|km\/l|l\/100|расход|потребл|燃費|dimensions|clearance|клиренс|багажник|разгон/i.test(l)?[l.slice(0,1200),...(i>0?[lines[i-1].slice(-240)]:[]),...(i+1<lines.length?[lines[i+1].slice(0,240)]:[])]:[]);
  return ([...new Set(relevant)].join('\n')+'\n'+text.slice(0,1500)).slice(0,6500);
 }
 
@@ -169,4 +169,14 @@ export async function discoverManufacturerCatalog(identity:Identity,signal:Abort
   }catch{failures.push('Одна из технических страниц производителя недоступна.');}
  }
  return {pages,failures};
+}
+
+/** Paid discovery is a fallback when readable non-encyclopedic sources lack the requested topic. */
+export function hasUsefulReadEvidence(topic:string|undefined,pages:Array<{kind:string;text:string}>){
+ const markers=topic==='consumption'?/\d[\d.,]*\s*(?:km\s*\/\s*l|l\s*\/\s*100\s*km|mpg|км\s*\/\s*л|л\s*\/\s*100|кВт.?ч\s*\/\s*100)|(?:WLTC|WLTP|JC08|燃費|расход|consumption).{0,100}\d/iu
+ :topic==='dimensions'?/(?:clearance|dimensions|клиренс|багажник|ширина|длина|height|width|length).{0,80}\d/iu
+ :topic==='performance'?/(?:acceleration|top speed|разгон|максимальная скорость).{0,80}\d/iu
+ :topic==='30-minute'?/(?:30.?min|30.?мин|тридцат).{0,80}\d[\d., ]*\s*(?:kW|кВт)/iu
+ :/\d[\d., ]*\s*(?:kW|кВт|hp|PS|л\.\s?с)(?![\p{L}])/iu;
+ return pages.some(p=>p.kind!=='reference'&&markers.test(p.text));
 }
