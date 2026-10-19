@@ -23,7 +23,7 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import {build} from 'esbuild';
-          await build({entryPoints:['scripts/ajes-model-directory-check.ts'],outfile:'/tmp/ajes-model-directory-check.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          await build({entryPoints:['scripts/ajes-model-directory-check.ts'],outfile:'/tmp/ajes-model-directory-check.cjs',bundle:true,platform:'node',format:'cjs',external:['next/*'],plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
       - name: Bounded requests using supplier-approved genuine server address
         env:
