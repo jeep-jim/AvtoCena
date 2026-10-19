@@ -228,8 +228,6 @@ function CatalogLoadingSkeleton() {
 
 export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount, initialCountIncomplete=false, initialMarketCountInfo={} }: Props) {
   const [marketCountInfo,setMarketCountInfo]=useState(initialMarketCountInfo);
-  const [mobileBudget,setMobileBudget]=useState(false);
-  useEffect(()=>{const q=matchMedia('(max-width:1023px)');const sync=()=>setMobileBudget(q.matches);sync();q.addEventListener('change',sync);return()=>q.removeEventListener('change',sync);},[]);
 
   const router = useRouter();
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
@@ -343,8 +341,7 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
       <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
         <div className="ab-home-intro"><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="ab-hero-desktop"><AutobotHero/></div></div>
-        <div className="ab-hero-mobile"><AutobotHero/></div>
-        <div className="ab-budget-desktop">{!mobileBudget&&budgetPanel}</div>
+        <div className="ab-budget-desktop">{budgetPanel}</div>
       </section>
       <div className="-mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
       {specialRail && <SpecialRail {...specialRail} desktopSplit/>}
@@ -378,7 +375,6 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
       </section>
       <CurrencyRatesStrip rates={rates} variant="mobile" showHeading className="ac-home-bottom-rates mt-8 !px-4 !py-4 lg:hidden" />
       <div data-ac-lead-host="home" style={{gridColumn: "1 / -1", width: "100%"}}><GenericLeadBanner kind="home" /></div>
-      <div className="ab-budget-bottom">{mobileBudget&&budgetPanel}</div>
       <CurrencyRatesStrip rates={rates} variant="desktop" className="ac-home-desktop-bottom-rates mt-8 hidden lg:block" />
     </div>
     {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black normal-case tracking-normal text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl">×</button></div><div className="mt-4 space-y-3 text-base font-medium leading-7 text-[var(--ac-muted)]"><p>АвтоЦена помогает быстро понять, какой автомобиль можно привезти под ваш бюджет. Укажите Ваш город и бюджет — система покажет подходящие варианты и актуальный расчёт.</p><p>После выбора менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" /></section></div> : null}

@@ -10,7 +10,7 @@ test('independent counts retain zero, unavailable and stale semantics',()=>{
  assert.equal(ajesCountText(null),'Количество уточняется');
  assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · по последним данным');
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
- assert.equal(ajesCountText({...fresh,upperBound:true}),'147\u00a0867');
+ assert.equal(ajesCountText({...fresh,upperBound:true}),'до 147\u00a0867');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);
 });
 test('stock power selection uses numeric nonempty evidence in lists and aggregates',()=>{

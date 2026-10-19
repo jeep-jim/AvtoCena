@@ -8,6 +8,6 @@ export function brandSelectionQuery(context:string,brands:string[]){
  const params=new URLSearchParams(context);
  const ordered=[...new Set(brands)].sort((a,b)=>a.localeCompare(b,'ru'));
  if(ordered.length)params.set('make',ordered.join(','));else params.delete('make');
- for(const key of ['brand','model','page'])params.delete(key);
+ for(const key of ['brand','model','page','after'])params.delete(key);
  return params.toString();
 }

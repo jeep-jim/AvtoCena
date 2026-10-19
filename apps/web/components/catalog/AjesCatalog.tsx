@@ -21,7 +21,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  const directory=await directoryPromise;
  // Count is independently verified; a partial or failed list must not erase it.
- const sourceTotal=await countPromise;
+ const sourceTotal=result?.countSummary??await countPromise;
  const displayTotal=exactAjesCount(sourceTotal);
  const makeDirectory=await makesPromise;
  const savedFacets=market==='japan'&&(!makeDirectory||!directory)?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
@@ -42,9 +42,10 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  {result&&<div className="mt-8 md:mt-9">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{sourceTotal&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={displayTotal}>· {ajesCountText(sourceTotal)}</span>}</h2>
- {result.filteredByPage&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Условия по цене с доставкой и кузову проверяются при загрузке автомобилей. Количество выше — до этой проверки. Если совпадений пока нет, загрузите следующую страницу.</p>}
+ {result.filteredByPage&&result.total===null&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показываем автомобили, подходящие под выбранные условия. Точное количество уточняется по мере загрузки.</p>}
+ {result.interrupted&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Часть автомобилей пока не удалось загрузить. Найденные варианты сохранены; продолжить можно кнопкой «Показать ещё».</p>}
  {market!=='japan'&&(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показана доступная часть предложений.</p>}
- <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={!result.partial&&result.received===result.pageSize}/>
+ <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor}/>
  </div>}
  </section>
  <style dangerouslySetInnerHTML={{__html:'html body .ac-catalog-page.ac-ajes-catalog{background:var(--ac-page-bg)!important;background-image:none!important}'}}/>

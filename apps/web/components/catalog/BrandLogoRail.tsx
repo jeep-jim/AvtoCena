@@ -183,7 +183,7 @@ export function BrandLogoRail({
   const countQuery = useMemo(() => {
     if (homeBrandDirectory) return "";
     const params = new URLSearchParams(searchParamsText);
-    for (const key of ["make", "brand", "model", "page", "sort", "advanced"]) params.delete(key);
+    for (const key of ["make", "brand", "model", "page", "after", "sort", "advanced"]) params.delete(key);
     return params.toString();
   }, [homeBrandDirectory, searchParamsText]);
   const normalizedCounts = useMemo(() => {

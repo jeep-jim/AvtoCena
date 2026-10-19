@@ -1,3 +1,4 @@
+import {readFilteredAjesPage} from './ajes-filtered-page';
 import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
 import {resolveAjesModelSelection} from './ajes-model-resolution';
@@ -55,10 +56,28 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
 export async function readAjesCatalogPage(params:Record<string,unknown>){
  const filter=ajesResultFilter(params);
  const query=await resolvedCatalogQuery(JSON.stringify(params));
- const [page,total]=await Promise.all([readAjesPublic(query),readAjesCountSummary(JSON.stringify(params)).catch(()=>null)]);
- const priced=query.table==='china'||query.table==='korea'||filter.priceFilter?await applyActiveBusinessPricingBatch(page.items):page.items;
- const items=priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v));
- return {...page,filteredByPage:filter.active,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:items.map((v:any)=>publicOffer(v)),generationId:page.observedAt};
+ const startedAt=Date.now();
+ const totalPromise=readAjesCountSummary(JSON.stringify(params)).catch(()=>null);
+ const read=async(sourcePage:number)=>{
+  const page=await readAjesPublic({...query,page:sourcePage});
+  const priced=query.table==='china'||query.table==='korea'||filter.priceFilter?await applyActiveBusinessPricingBatch(page.items):page.items;
+  return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
+ };
+ const firstPromise=params.after?null:read(query.page||1);
+ // Unfiltered markets retain direct numbered pagination. Filtered pages need
+ // a continuation because a supplier page is not a page of matching cars.
+ if(query.table!=='china'&&!filter.active){
+  const [page,total]=await Promise.all([firstPromise??read(query.page||1),totalPromise]);
+  return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:page.items.map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
+ }
+ const [initialPage,total]=await Promise.all([firstPromise,totalPromise]);
+ // Reuse the first read only when it is the requested continuation's source page.
+ let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
+ const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
+  read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
+ const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
+ const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
+ return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:page.items.map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
