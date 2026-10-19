@@ -32,7 +32,7 @@ async function main(){
  const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled('ajes_'+t+'_feed'),reserve:t=>reserveAjesRequest(store,t)});
  let stop=false;
  for(const market of ['china','korea']){
-  const candidates=[...all.values()].filter(l=>l.table===market&&ajesOriginalListingUrl(l.status,market,l.lot)),chosen:any[]=[];const makes=new Set();
+  let candidates=[...all.values()].filter(l=>l.table===market);if(!candidates.length){const page=await client.read({table:market,pageSize:12},ip);candidates=page.items.map(l=>({...l,savedAt:page.observedAt}));}const chosen:any[]=[];const makes=new Set();
   for(const l of candidates)if(!makes.has(l.make)&&chosen.length<4){chosen.push(l);makes.add(l.make);}
   for(const l of candidates)if(chosen.length<4&&!chosen.some(x=>x.id===l.id))chosen.push(l);
   console.log('AUDIT_SELECTION',JSON.stringify({market,available:candidates.length,selected:chosen.length}));
