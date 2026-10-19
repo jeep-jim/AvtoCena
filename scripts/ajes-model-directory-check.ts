@@ -12,10 +12,15 @@ async function main(){
  const ip=process.env.AJES_DIAG_IP;if(ip!=='151.248.113.177')throw Error('diagnostic_address_invalid');
  const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled(`ajes_${t==='main'||t==='stats'?'japan':t}_feed`),reserve:t=>reserveAjesRequest(getJsonStorage(),t)});
  const rate=await convertToRub(1,'CNY');if(!rate)throw Error('rate_unavailable');
- // Two bounded reads after the Japan sort fix; stop on the first refusal.
- for(const query of [{table:'stats' as const,make:'HONDA',model:'STEPWGN',pageSize:5},{table:'korea' as const,make:'MERCEDES BENZ',powerTo:160,pageSize:5}]){
+ // Three bounded reads: actual Japan model spelling, its page, Korea source power.
+ const directory=await client.read({table:'stats',make:'HONDA',aggregate:'models'},ip);
+ const models=(directory.models||[]).filter((x:any)=>/STEP/i.test(x.model));
+ console.log('FILTER_JAPAN_MODELS',JSON.stringify({received:directory.received,models}));
+ const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
+ const selection=resolveAjesModelSelection('STEP WAGON',directory.models||[],'HONDA');
+ for(const query of [{table:'stats' as const,make:'HONDA',...selection,pageSize:5},{table:'korea' as const,make:'MERCEDES BENZ',pageSize:5}]){
   const page=await client.read(query,ip);
-  console.log('FILTER_SOURCE_RESULT',JSON.stringify({table:query.table,received:page.received,accepted:page.items.length,powers:page.items.map((x:any)=>x.sourcePower),mileage:page.items.map((x:any)=>x.mileageKm),years:page.items.map((x:any)=>x.year)}));
+  console.log('FILTER_SOURCE_RESULT',JSON.stringify({table:query.table,received:page.received,accepted:page.items.length,powers:page.items.map((x:any)=>x.sourcePower),models:page.items.map((x:any)=>x.model),years:page.items.map((x:any)=>x.year)}));
  }
 
 }
