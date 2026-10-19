@@ -1,3 +1,4 @@
+import {ajesSourceDetails,ajesDetailValues} from './ajes-source-details';
 import {ajesOriginalListingUrl} from './ajes-source-url';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import type {VehicleOffer} from './types';
@@ -29,22 +30,25 @@ export function ajesOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Curre
 function ajesStockOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:CurrencyRateSnapshot,observedAt:string):VehicleOffer {
  const market=lot.table==='korea'?'korea':'china',currency=market==='korea'?'KRW':'CNY';
  if(!lot.sourcePrice||rate.currency!==currency||rate.sourcePrice!==lot.sourcePrice||!['cbr','cbr_live'].includes(rate.rateSource)||!(rate.effectiveRate>0))throw Error('ajes_invalid_offer');
- const fuel=({P:'petrol',D:'diesel',E:'electric',H:'hybrid',HE:'hybrid',L:'lpg',C:'cng'} as Record<string,string>)[lot.sourceFuel.toUpperCase()];
+ const details=lot.sourceDetails||ajesSourceDetails(lot.info),extra=ajesDetailValues(details),sourceUrl=ajesOriginalListingUrl(lot.status,market,lot.lot);
+ const engineCc=lot.engineCc||extra.engineCc;
+ const fuel=({P:'petrol',D:'diesel',E:'electric',H:'hybrid',HE:'hybrid',L:'lpg',C:'cng'} as Record<string,string>)[lot.sourceFuel.toUpperCase()]||extra.fuel;
  const hp=/^\d+(?:\.\d+)?$/.test(lot.sourcePower)?Number(lot.sourcePower):undefined;
- const powerHp=hp&&hp>0&&hp<=2500?hp:undefined;
+ const powerHp=hp&&hp>0&&hp<=2500?hp:!lot.sourcePower.trim()?extra.horsepower:undefined;
+ const powerField=hp?'PW':'INFO:Maximum horsepower (Ps)',engineField=lot.engineCc?'ENG_V':'INFO:Displacement (mL)',fuelField=({P:1,D:1,E:1,H:1,HE:1,L:1,C:1} as Record<string,number>)[lot.sourceFuel.toUpperCase()]?(lot.sourceFuelField||'TIME'):'INFO:fuel form';
  const sellerPriceRub=Math.round(lot.sourcePrice*rate.effectiveRate),sourceId=`ajes_${market}_feed`;
  return {id:`ajes-${market}-${lot.id}`,sourceId,sourceOfferId:lot.id,market,offerType:'fixed',status:'active',catalogKind:'listing',
  make:lot.make,model:lot.model,trim:lot.trim,year:lot.year,
  productionDate:lot.productionMonth&&lot.productionMonth>=1&&lot.productionMonth<=12?`${lot.year}-${String(lot.productionMonth).padStart(2,'0')}`:undefined,
- mileageKm:lot.mileageKm??undefined,engineCc:lot.engineCc||undefined,powerHp,fuel,
- powerDataConfidence:powerHp?'source_exact':undefined,powerDataSource:powerHp?`ajes:${market}:${lot.id}:PW`:undefined,
- powertrainKind:lot.sourceFuel==='HE'?'series_hybrid':lot.sourceFuel==='E'?'electric':undefined,
- transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[lot.sourceTransmission.toUpperCase()],
- drive:({FF:'fwd',FR:'rwd',FWD:'fwd',RWD:'rwd',AWD:'awd','4WD':'awd',FULLTIME4WD:'awd'} as Record<string,string>)[lot.sourceDrive.toUpperCase()],
+ mileageKm:lot.mileageKm??undefined,engineCc:engineCc||undefined,powerHp,fuel,bodyType:extra.bodyType,
+ powerDataConfidence:powerHp?'source_exact':undefined,powerDataSource:powerHp?`ajes:${market}:${lot.id}:${powerField}`:undefined,
+ powertrainKind:lot.sourceFuel==='HE'?'series_hybrid':fuel==='electric'?'electric':undefined,
+ transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[lot.sourceTransmission.toUpperCase()]||extra.transmission,
+ drive:({FF:'fwd',FR:'rwd',FWD:'fwd',RWD:'rwd',AWD:'awd','4WD':'awd',FULLTIME4WD:'awd'} as Record<string,string>)[lot.sourceDrive.toUpperCase()]||extra.drive,
  color:lot.color,frameNumber:lot.frameNumber,lotNumber:lot.lot,
  sourcePrice:lot.sourcePrice,sourceCurrency:currency,priceMode:'fixed',catalogPricingMode:'seller',sellerPriceRub,totalRub:null,calculationStatus:'needs_data',
  calculationSnapshot:{currencyRate:rate,sourcePriceRub:sellerPriceRub,pricingConfidence:'unavailable'},
  images:lot.images.map((img,i)=>({id:`ajes-${market}-${lot.id}-${i}`,url:img.url.replace(/^https:\/\/(?:7\.tru\.ru|[78]\.ajes\.com)\//,'https://9.ajes.com/'),role:'vehicle',objectKey:'',size:0,checksum:'',mimeType:''})),firstSeenAt:observedAt,updatedAt:observedAt,
- operational:{sourceUrl:ajesOriginalListingUrl(lot.status,market,lot.lot),chassisCode:lot.chassisCode,sourceEquipment:lot.equipment,semanticEvidence:{...(lot.engineCc&&lot.engineCc>0?{engineCc:{status:'exact',value:lot.engineCc,source:`ajes:${market}:${lot.id}:ENG_V`,rawValues:[String(lot.engineCc)]}}:{}),...(powerHp?{powerHp:{status:'exact',value:powerHp,source:`ajes:${market}:${lot.id}:PW`,rawValues:[lot.sourcePower]}}:{}),...(fuel?{fuel:{status:'exact',value:fuel,source:`ajes:${market}:${lot.id}:TIME`,rawValues:[lot.sourceFuel]}}:{})},raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel,sourceDrive:lot.sourceDrive,sourceTransmission:lot.sourceTransmission}},
+ operational:{sourceUrl,sourceDate:lot.sourceDate,sourceSpecifications:details.groups.length?{version:1,sourceId,sourceOfferId:lot.id,specificationId:`ajes:${market}:${lot.id}:INFO`,sourceUrl:sourceUrl||'',capturedAt:observedAt,groups:details.groups}:undefined,chassisCode:lot.chassisCode,sourceEquipment:lot.equipment,semanticEvidence:{...(engineCc&&engineCc>0?{engineCc:{status:'exact',value:engineCc,source:`ajes:${market}:${lot.id}:${engineField}`,rawValues:[String(engineCc)]}}:{}),...(powerHp?{powerHp:{status:'exact',value:powerHp,source:`ajes:${market}:${lot.id}:${powerField}`,rawValues:[lot.sourcePower||String(powerHp)]}}:{}),...(fuel?{fuel:{status:'exact',value:fuel,source:`ajes:${market}:${lot.id}:${fuelField}`,rawValues:[fuelField.startsWith('INFO:')?String(details.fields['fuel form']?.[0]||''):lot.sourceFuel]}}:{})},raw:{sourcePower:lot.sourcePower,sourceFuel:lot.sourceFuel,sourceDrive:lot.sourceDrive,sourceTransmission:lot.sourceTransmission}},
  };
 }

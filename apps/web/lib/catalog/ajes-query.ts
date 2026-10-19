@@ -1,3 +1,4 @@
+import {ajesSourceDetails} from './ajes-source-details';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {parseEngineCc} from './engine-input';
 import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
@@ -115,6 +116,8 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
     // Ambiguous PW/PRIV remain source evidence, not invented specifications.
     sourcePower:text('PW'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('TIME')||text('FUEL'),sourceFuelField:text('TIME')?'TIME':text('FUEL')?'FUEL':undefined,
     info:detail?text('INFO'):undefined,
+    sourceDate:stock?text('MONTH'):undefined,
+    sourceDetails:stock?ajesSourceDetails(text('INFO')):undefined,
     images:urls.map((url,i)=>({url:ajesImageUrl(url,'medium')!,thumbnailUrl:ajesImageUrl(url,'small')!,originalUrl:url,role:!stock&&detail&&i===0?'auction_sheet':'vehicle'})),
   };
 }
