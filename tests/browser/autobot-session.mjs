@@ -18,7 +18,7 @@ try{
  await page.getByLabel('Сообщение АвтоБоту').fill('Мой город Омск');await page.getByRole('button',{name:'Отправить вопрос'}).click();await page.getByText('Город — Омск.',{exact:true}).waitFor();
  await page.getByLabel('Сообщение АвтоБоту').fill('Сколько стоит');await page.reload();await page.getByText('Город — Омск.',{exact:true}).waitFor();assert.equal(await page.getByLabel('Сообщение АвтоБоту').inputValue(),'Сколько стоит');
  await page.getByRole('button',{name:'Отправить вопрос'}).click();await page.getByRole('button',{name:'Отправить вопрос'}).waitFor();assert.ok(sent.history.some(m=>m.text==='Мой город Омск'));
- await page.getByRole('button',{name:'Новый разговор'}).click();assert.equal(await page.getByText('Город — Омск.',{exact:true}).count(),0);await page.reload();assert.equal(await page.getByText('Город — Омск.',{exact:true}).count(),0);
+ await page.getByRole('button',{name:'Настройки АвтоБота',exact:true}).click();await page.getByRole('button',{name:'Новый чат',exact:true}).click();assert.equal(await page.getByText('Город — Омск.',{exact:true}).count(),0);await page.reload();assert.equal(await page.getByText('Город — Омск.',{exact:true}).count(),0);
  await page.close();const fresh=await context.newPage();await fresh.goto('https://autobot.test/cars');assert.equal(await fresh.evaluate(()=>sessionStorage.getItem('avtocena.autobot.tab.v1')?.includes('Омск')||false),false);
  // A card offers four direct questions; used questions stay consumed after reload.
  await fresh.goto('https://autobot.test/cars/offer/test-car');await fresh.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
@@ -42,6 +42,14 @@ try{
  await phone.getByLabel('Сообщение АвтоБоту').fill('Какой расход?');const before=sendCount;
  await phone.getByRole('button',{name:'Отправить вопрос'}).tap();await phone.getByText('Ответ на первое нажатие',{exact:true}).waitFor();
  assert.equal(sendCount,before+1);assert.equal(await phone.getByLabel('Сообщение АвтоБоту').evaluate(e=>e===document.activeElement),false);
+ assert.equal(await phone.locator('.ta-header').getByRole('button',{name:'Новый чат',exact:true}).count(),0);
+ assert.equal(await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).isVisible(),true);
+ await phone.getByRole('button',{name:'Настройки АвтоБота',exact:true}).tap();
+ await phone.getByRole('button',{name:'Новый чат',exact:true}).tap();
+ assert.equal(await phone.getByText('Ответ на первое нажатие',{exact:true}).count(),0);
+ assert.equal(await phone.getByLabel('Сообщение АвтоБоту').inputValue(),'');
+ assert.equal(await phone.locator('.ab-car-questions button').count(),4);
+ assert.equal(await phone.locator('.ab-settings').count(),0);
  await mobile.close();
  console.log('PASS: reload retains messages and draft, request retains history, new conversation clears, new tab starts empty');
 }finally{await browser.close();}
