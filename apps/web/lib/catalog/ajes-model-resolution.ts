@@ -16,6 +16,8 @@ export function resolveAjesModelNames(selected:string,models:Array<{model:string
 
 /** Large source families use a bounded prefix condition instead of dropping their members. */
 export function resolveAjesModelSelection(selected:string,models:Array<{model:string}>):{model?:string;modelFamilies?:string}{
+ const expanded=resolveAjesModelNames(selected,models);
+ if(expanded!==selected)return {model:expanded};
  const names=[...new Set(models.map(x=>x.model.trim()).filter(Boolean))];
  const key=(s:string)=>s.normalize('NFKC').trim().toUpperCase().replace(/\s+/g,' ');
  const exact:string[]=[],families:string[]=[];
