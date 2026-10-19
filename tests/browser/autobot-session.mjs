@@ -71,6 +71,7 @@ try{
  assert.equal(await picker.evaluate(el=>Boolean(el.closest('dialog.ab-panel'))),true);
  await picker.getByLabel('Поиск города').fill('Омск');await picker.getByRole('button',{name:'Выбрать город',exact:true}).tap();
  await form.getByRole('button',{name:'Выбрать город. Сейчас: Омск',exact:true}).waitFor();
+ await phone.waitForFunction(()=>{try{return JSON.parse(sessionStorage.getItem('avtocena.autobot.tab.v1')||'{}').messages?.some(m=>m.calculationForm?.city==='Омск');}catch{return false;}});
  await phone.reload();const restoredForm=phone.getByRole('region',{name:'Расчёт автомобиля в чате'});await restoredForm.waitFor();
  assert.equal(await restoredForm.getByLabel('Валюта',{exact:true}).inputValue(),'RUB');await restoredForm.getByRole('button',{name:'Выбрать город. Сейчас: Омск',exact:true}).waitFor();
  await mobile.close();
