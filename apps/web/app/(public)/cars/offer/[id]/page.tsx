@@ -1,3 +1,5 @@
+import {SupplierUnavailableOffer} from '@/components/catalog/SupplierUnavailableOffer';
+import {readOfferDetailForPage} from '@/lib/catalog/offer-page-data';
 import {missingElectrifiedSpecifications} from '@/lib/autobot/missing-specifications';
 import {ajesPowerEstimateHp} from '@/lib/catalog/ajes-power-estimate';
 import {readAjesPublic} from '@/lib/catalog/ajes-public';
@@ -246,7 +248,9 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  let storedOffer = await getOfferDetailRecord(id);
+  const detail = await readOfferDetailForPage(id);
+  if(detail.unavailable)return <SupplierUnavailableOffer/>;
+  let storedOffer = detail.offer;
   const editorialPreview = query.edit === "1" && canEditCatalog(await getCurrentUser());
   if(!storedOffer && editorialPreview){
     const source=await getEditorialSourceOffer(id);

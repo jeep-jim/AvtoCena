@@ -3,7 +3,7 @@ import {offerParameterDraft} from './offer-parameter-draft';
 import {sharedOfferScenario} from './shared-offer-scenario';
 import {encodeShareDraft,decodeShareDraft} from './offer-share';
 import type {Metadata} from 'next';
-import {getOfferDetailRecord} from './offer-page-data';
+import {readOfferDetailForPage} from './offer-page-data';
 import {getSavedOfferCalculation} from './saved-offer-calculation';
 import {directOfferScenario} from './yandex-direct-scenario';
 import {resolveOfferDisplay} from './offer-display-data';
@@ -31,7 +31,7 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
   const title=offerShareTitle({title:specialTitle(offer),year:offer.year,engineCc:offer.engineCc,fuel:offer.fuel,totalRub:calculation.totalRub});
   return metadata(q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title,`${calculation.city?'Доставка: '+calculation.city+'. ':''}Фотографии, комплектация и условия покупки — в карточке автомобиля.`,absoluteAvtocenaUrl(`/cars/offer/${id}`),offer.photos.slice(0,3).map(p=>absoluteAvtocenaUrl(p.url)),!q.preview);
  }
- const stored=await getOfferDetailRecord(id);
+ const {offer:stored}=await readOfferDetailForPage(id);
  if(!stored)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:true}};
  const power=Number(q.powerHp||0);const safePower=Number.isFinite(power)&&power>=20&&power<=2500?Math.round(power):0;
  const [display,saved,client]=await Promise.all([resolveOfferDisplay(stored,safePower,q.modificationId||''),getSavedOfferCalculation(stored),q.calculation?getSavedOfferCalculation(stored,q.calculation):Promise.resolve(null)]);

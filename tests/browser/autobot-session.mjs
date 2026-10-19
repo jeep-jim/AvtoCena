@@ -85,7 +85,7 @@ try{
  await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();
  await phone.goto('https://autobot.test/cars/offer/test-hybrid');
  await phone.evaluate(()=>{const main=document.createElement('main');main.dataset.autobotMissing=JSON.stringify(['сертифицированная 30-минутная мощность электромоторов']);document.body.append(main);});
- formMode=false;const beforeAuto=sendCount;await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await phone.getByText('Ответ на первое нажатие',{exact:true}).last().waitFor();assert.equal(sendCount,beforeAuto+1);
+ formMode=false;const beforeAuto=sendCount;const autoRequest=phone.waitForRequest(r=>r.url().endsWith('/api/autobot')&&r.method()==='POST');await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await autoRequest;await phone.locator('.ab-thinking').waitFor({state:'hidden'});assert.equal(sendCount,beforeAuto+1);
  const widths=await phone.locator('.ab-car-questions button').evaluateAll(els=>els.map(el=>({width:el.getBoundingClientRect().width,parent:el.parentElement.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));assert.ok(widths.length);assert.ok(widths.every(x=>Math.abs(x.width-x.parent)<1&&x.height<60));
  await phone.getByRole('button',{name:'Закрыть АвтоБота',exact:true}).click();await phone.getByRole('button',{name:'Открыть АвтоБота',exact:true}).tap();await phone.waitForTimeout(300);assert.equal(sendCount,beforeAuto+1);
  await mobile.close();

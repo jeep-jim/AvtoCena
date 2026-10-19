@@ -1,11 +1,24 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect,useState,useRef } from "react";
 
-export default function PublicError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+import {claimPageRecovery} from '@/lib/public-page-recovery';
+
+export default function PublicError({ error,reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  const [recovering,setRecovering]=useState(false);
+  const pending=useRef(false);
   useEffect(() => {
-    // Technical details stay in server and monitoring logs, never in the customer UI.
-  }, []);
+    try{if(!pending.current&&!claimPageRecovery(sessionStorage,location.pathname+location.search,error.digest||error.name))return;}catch{return;}
+    pending.current=true;
+    setRecovering(true);
+    const timer=setTimeout(()=>{
+      pending.current=false;
+      if(/ChunkLoadError|Loading chunk|Failed to fetch dynamically imported module/i.test(error.message))window.location.reload();
+      else {setRecovering(false);reset();}
+    },600);
+    return()=>clearTimeout(timer);
+  },[error,reset]);
+  if(recovering)return <main className="ac-page-copy min-h-[55vh] px-4 py-24 text-center"><p role="status">Восстанавливаем страницу…</p></main>;
 
   return <main className="ac-page-copy min-h-screen bg-[#07080d] px-4 py-24 text-center text-white">
     <section className="mx-auto max-w-xl rounded-[2rem] bg-[var(--ac-surface,#12151d)] p-7 md:p-10">

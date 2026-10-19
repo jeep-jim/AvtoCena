@@ -1,3 +1,4 @@
+import {AjesUnavailable} from './ajes-client';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./editorial";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
@@ -47,3 +48,9 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
   const editorial=await readCatalogEditorial();
   return storedOffer&&!editorialHidden(storedOffer,editorial)?applyCatalogEditorial(storedOffer,editorial):null;
 });
+
+/** Never treat a provider refusal as a sold car or an application-wide crash. */
+export async function readOfferDetailForPage(id:string){
+ try{return {offer:await getOfferDetailRecord(id),unavailable:false};}
+ catch(error){if(error instanceof AjesUnavailable)return {offer:null,unavailable:true};throw error;}
+}

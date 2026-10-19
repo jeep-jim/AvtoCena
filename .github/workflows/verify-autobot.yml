@@ -16,7 +16,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/autobot.test.ts tests/autocalc-route.test.ts tests/autocalc-enrichment.test.ts tests/ajes-model-loader.test.ts tests/catalog-japan-filter-rail.test.ts tests/ajes-count-display.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/autobot.test.ts tests/autocalc-route.test.ts tests/autocalc-enrichment.test.ts tests/ajes-model-loader.test.ts tests/catalog-japan-filter-rail.test.ts tests/ajes-count-display.test.ts tests/public-page-recovery.test.ts tests/catalog-home-count.test.ts
       - run: npm run typecheck
       - run: npm install --prefix "$RUNNER_TEMP/autobot-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Verify tab lifetime in Chromium
