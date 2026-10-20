@@ -17,7 +17,7 @@ if(!live){
   b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-fixture'}));
   b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?`const router={prefetch(){},push(url){history.pushState(null,'',url);window.__lastFilterUrl=url;},replace(url){history.replaceState(null,'',url);window.__lastFilterUrl=url;}};export const useRouter=()=>router;export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);`:`import React from 'react';export default function Link({children,...props}){delete props.prefetch;return React.createElement('a',props,children);}`,resolveDir:process.cwd()}));
  }};
- for(const mode of ['fixture','baseline'])await build({entryPoints:['tests/browser/catalog-sidebar-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/${mode}.js`,tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"'},plugins:[next,...(mode==='baseline'?[{name:'without-new-style',setup(b){b.onLoad({filter:/MobileCatalogDropdowns\.css$/},()=>({contents:'',loader:'css'}));}}]:[])]});
+ for(const mode of ['fixture','baseline'])await build({entryPoints:['tests/browser/catalog-sidebar-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/${mode}.js`,tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[next,...(mode==='baseline'?[{name:'without-new-style',setup(b){b.onLoad({filter:/MobileCatalogDropdowns\.css$/},()=>({contents:'',loader:'css'}));}}]:[])]});
  const sources=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'].map(file=>({file,text:fs.readFileSync(file,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
@@ -42,7 +42,7 @@ try{
  for(const width of [390,1280,1600]){
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
  await page.route('**/api/catalog/brand-counts**',route=>route.fulfill({json:{counts:{Toyota:10,BMW:8}}}));
- await page.goto(origin+'/cars');await page.waitForTimeout(1000);
+ const errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('PAGE_ERROR',String(e));});await page.goto(origin+'/cars');await page.waitForTimeout(1000);assert.deepEqual(errors,[]);
  const sidebar=page.locator('.ac-catalog-sidebar');
  assert.deepEqual(await page.locator('.ac-brand-rail a').allTextContents(),['Toyota']);
  if(width>=1024){
