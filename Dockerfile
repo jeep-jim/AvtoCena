@@ -12,6 +12,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
+# Historical reference inputs are archived to object storage before activation.
+# Keep compiled runtime dictionaries and the small master model directory.
+RUN node -e "const fs=require('fs');for(const root of ['data','apps/web/.next/standalone/data'])for(const name of ['denominator','generated'])fs.rmSync(root+'/catalog/knowledge-source-snapshots/'+name,{recursive:true,force:true})"
 
 FROM node:22-alpine AS runner
 RUN apk add --no-cache ffmpeg

@@ -101,6 +101,7 @@ jobs:
             await new Promise(resolve=>setTimeout(resolve,30_000));
           }
           WAIT
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/archive-runtime-reference-sources.mjs
           export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
           npx tsx scripts/regcloud-verify-conditional-read.ts
           npx tsx scripts/regcloud-prepare-prices.mjs
