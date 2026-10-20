@@ -1,3 +1,7 @@
+import {newerKoreaDetail} from './ajes-korea-detail-cache';
+import {DetailReadCache} from './detail-read-cache';
+import {getJsonStorage} from '../data';
+const openedKoreaDetails=new DetailReadCache<any>({maxEntries:100,maxBytes:4*1024*1024,ttlMs:15000,concurrency:4});
 import 'server-only';
 import {ajesChinaPriceAllowed,ajesChinaSourceCeiling} from './ajes-price-policy';
 import {headers} from 'next/headers';
@@ -26,6 +30,10 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
  });
  const index=await readCatalogEditorial();
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
+  if(lot.table==='korea'&&!query.id){
+   const saved=await openedKoreaDetails.get(lot.id,()=>getJsonStorage().readJson('catalog/partner-cache/ajes/korea/'+lot.id+'.json',null)).catch(()=>null);
+   lot=newerKoreaDetail(lot,result.observedAt,saved);
+  }
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
   let offer=ajesOffer(lot,rate,result.observedAt);

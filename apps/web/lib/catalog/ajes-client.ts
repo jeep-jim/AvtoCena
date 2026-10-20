@@ -42,11 +42,11 @@ export function createAjesClient(deps:Dependencies) {
           &&saved.page===query.page&&saved.pageSize===query.pageSize
           &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));
-        const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||saved?.schemaVersion===2;
+        const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||saved?.schemaVersion===2&&(query.table!=='korea'||query.kind!=='detail'||saved?.fullInformation===true);
         if(usable&&currentSchema&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
-        url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
-        const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
+        url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
+        const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
@@ -87,7 +87,7 @@ export function createAjesClient(deps:Dependencies) {
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
-          const result={schemaVersion:2,stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
+          const result={schemaVersion:2,...(query.table==='korea'&&query.kind==='detail'?{fullInformation:true}:{}),stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
           if(query.kind==='detail'&&items.length===1){
             const row=rows[0];

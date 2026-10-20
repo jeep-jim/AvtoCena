@@ -69,3 +69,14 @@ test('confirmed supplier horsepower survives normalization and public safety che
   assert.equal(normalized.power30MinKw,undefined);
  }
 });
+
+
+test('Korean detail requests full supplier information and does not accept a recent short detail as complete',async()=>{
+ const lot=ajesLot(row,'korea',true)!;let request='',saved:any;
+ const short={schemaVersion:2,items:[lot],page:1,pageSize:1,observedAt:new Date().toISOString()};
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>short,saveDetail:async(_t,_id,value)=>{saved=value;},fetcher:async url=>{request=String(url);return Response.json([{...row,PW:'150',ENG_V:'1968'}]);}});
+ const result=await client.read({table:'korea',id:row.ID},'203.0.113.45');
+ assert.equal(new URL(request).searchParams.has('ajax'),true);assert.equal(result.items[0].sourcePower,'150');assert.equal(result.items[0].engineCc,1968);assert.equal(saved.fullInformation,true);
+ const cached=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>saved,fetcher:async()=>{throw Error('unexpected_request');}});
+ assert.equal((await cached.read({table:'korea',id:row.ID},'203.0.113.45')).items[0].sourcePower,'150');
+});
