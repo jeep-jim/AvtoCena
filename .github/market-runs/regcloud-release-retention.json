@@ -1,4 +1,1 @@
-{
-  "requestedAt": "2026-10-18T06:36:42.663624+00:00",
-  "reason": "Owner reports disk growth; remove only unreferenced avtocena images older than one day, preserve current and rollback containers"
-}
+{"requestedAt":"2026-10-20T01:57:07.212Z","reason":"Production release blocked by disk-space preflight; run existing safe retention"}
