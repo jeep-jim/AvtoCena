@@ -110,7 +110,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
       <div className="ac-list-identity"><strong>{o.title}</strong><span>{priceLabel} · {o.marketLabel}</span>{o.auctionDate&&<small>Аукцион · {String(o.auctionDate).slice(0,10)}</small>}</div>
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel}</span><small>{o.operational?.chassisCode||o.chassisCode||o.bodyLabel||"Кузов уточняется"}</small></div>
       <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel}</small></div>
-      <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span>{o.auctionGrade&&<small>Оценка <b>{o.auctionGrade}</b></small>}</div>
+      <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
       <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
     </IntentPrefetchLink><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
   </article>;

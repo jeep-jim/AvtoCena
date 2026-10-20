@@ -35,9 +35,9 @@
 .ac-list-photo{position:relative;width:100px;height:76px;border-radius:10px;overflow:hidden;background:var(--ac-surface-2)}
 .ac-list-photo img{width:100%;height:100%;object-fit:cover}
 .ac-catalog-list-link>div{min-width:0}
-.ac-catalog-list-link span,.ac-catalog-list-link small{display:block}
+.ac-catalog-list-link>div:not(.ac-list-price)>span,.ac-catalog-list-link>div:not(.ac-list-price)>small{display:block}
 .ac-catalog-list-link strong{font-size:14px;line-height:1.25;display:block}
-.ac-catalog-list-link span{font-size:12px}
+.ac-catalog-list-link>div:not(.ac-list-price)>span{font-size:12px}
 .ac-catalog-list-link small,.ac-list-identity>span{font-size:11px;color:var(--ac-muted);margin-top:5px}
 .ac-list-mileage b{display:inline-block;padding:2px 6px;border-radius:5px;background:var(--ac-surface-3);color:var(--ac-text)}
 .ac-list-favorite{position:absolute;right:7px;top:10px;width:30px;height:30px;color:#ff353d}
