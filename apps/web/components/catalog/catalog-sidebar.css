@@ -111,3 +111,6 @@ html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-c
 html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox:checked::after{content:"✓";color:#fff;-webkit-text-fill-color:#fff;font-size:14px;font-weight:900}
 
 @media(max-width:1023px){html body .ac-mobile-filter-sheet :is(.ac-power-limit,.ac-electric-filter){border-radius:13px!important}}
+
+/* Keep the owner reference: readable title above the small red explanation. */
+.ac-power-limit .ac-power-copy>span:first-child{color:var(--ac-text)}
