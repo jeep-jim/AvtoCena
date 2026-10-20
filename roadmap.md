@@ -10576,3 +10576,6 @@ f4ce0ce8e4538a8a48536261; 40ad045ea30099449f264f50; 5bdd09933bffcf82db6a0bcb; 82
 
 
 20.10.2026 09:24 Asia/Krasnoyarsk: verify39358620159 SUCCESS:25 тестов, browser sticky/right placement/no horizontal overflow на390/1280/1600px. verify39358620068 SUCCESS: model search controls desktop/mobile in both themes. Повторный TypeScript success. Ограниченная публичная проверка до публикации: China Hyundai Verna —14совпадений, UAE JAC JS4 —19, Europe Mercedes-Benz CLA —601, Georgia Subaru Xv —33; Japan NISSAN NOTE выдаёт минимум1результат, точный total=null. Korea запрос503, причина ещё не классифицирована; отсутствие инвентаря не заявляется. Запускается согласованная публикация; успешная установка пока не заявляется.
+
+
+20.10.2026: просмотр сохранённого browser screenshot выявил слишком низкую сортировку в узкой колонке — добавлены два ряда и minimum36px. Для объединённого справочника выбранной марки timeout согласован с supplier directory30s. Публичная Korea503 расшифрована: reason=visitor_restricted; IP-ограничения не обходились. Сборка39358780937 выполняется; в последовательную очередь направлен финальный выпуск с этими двумя уточнениями. Предыдущие результаты проверки сохранены, завершение установки ещё ожидается.

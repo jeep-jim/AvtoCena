@@ -10,6 +10,8 @@
  .ac-catalog-sidebar .ac-advanced-select-row,
  .ac-catalog-sidebar .ac-range-fields-shell>.grid{grid-template-columns:minmax(0,1fr)!important}
  .ac-catalog-sidebar .ac-filter-settings{display:none!important}
+ .ac-catalog-sidebar .ac-sort-control{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:auto!important}
+ .ac-catalog-sidebar .ac-sort-control button{min-height:36px}
  .ac-catalog-results .ac-catalog-market-rail{grid-template-columns:repeat(3,minmax(0,1fr))!important}
  .ac-catalog-results [data-catalog-batch]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
  body:has(.ac-catalog-layout) .ac-catalog-sticky{display:none}

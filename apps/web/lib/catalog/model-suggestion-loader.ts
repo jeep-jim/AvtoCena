@@ -11,7 +11,7 @@ export function loadModelSuggestions(inventory = false, source?: {market:string;
   const cached = requests.get(url);
   if (cached && cached.expires > Date.now()) return cached.promise;
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), source ? 30_000 : 12_000);
+  const timeout = setTimeout(() => controller.abort(), source || inventory && make ? 30_000 : 12_000);
   const promise = fetch(url, {cache: inventory || source ? 'no-store' : 'force-cache', signal: controller.signal})
     .then(async response => {
       if (!response.ok) throw Error('directory_unavailable');
