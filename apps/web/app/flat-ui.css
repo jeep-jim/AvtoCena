@@ -112,7 +112,7 @@ html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-status{b
 
 /* Ряд автомобилей не должен образовывать общую подложку вокруг карточек. */
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-home-market-rail,
-html:not([data-theme="light"]):not([data-theme="light"]) body .ac-catalog-market-rail,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-catalog-market-rail:not([data-catalog-view="list"] *),
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-result-rail{background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important}
 
 /* Демо CRM и авторизованная CRM получают ту же тёмную систему поверхностей. */
