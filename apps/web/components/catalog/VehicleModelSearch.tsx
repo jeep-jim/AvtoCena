@@ -172,12 +172,20 @@ export function VehicleModelSearch({
   const [remoteItems, setItems] = useState<ModelSuggestion[]>([]);
   const [directory,setDirectory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
   const [inventory,setInventory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
+  const [supplierLoading,setSupplierLoading]=useState(0);
+  const [supplierError,setSupplierError]=useState(false);
+  const [supplierSearches,setSupplierSearches]=useState<Array<ReturnType<typeof createModelSuggestionSearch>>>([]);
+  const [visibleCount,setVisibleCount]=useState(60);
   const [inventoryError,setInventoryError]=useState(false);
   const [inventoryLoading,setInventoryLoading]=useState(false);
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
   const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
-  const items=useMemo(()=>sourceSearch?(inventory||sourceSearch)(searchQuery,make):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems]);
+  const items=useMemo(()=>{
+    const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],sourceSearch(searchQuery,make),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
+    return mergeModelSuggestions(supplierSearches.flatMap(search=>search(searchQuery,make)),local,searchQuery);
+  },[sourceSearch,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches]);
+  useEffect(()=>setVisibleCount(60),[searchQuery,make]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -224,15 +232,16 @@ export function VehicleModelSearch({
   const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
   const sourceStock=new URLSearchParams(contextQuery||'').get('stock')||'';
   useEffect(()=>{
-    if(!sourceItems)return;
-    setInventory(null);
-    if(!open||sourceStock==='green'||!['china','korea','japan'].includes(sourceMarket))return;
-    let cancelled=false;setInventoryLoading(true);setInventoryError(false);
-    loadModelSuggestions(true,{market:sourceMarket,make}).then(search=>{if(!cancelled)setInventory(()=>search);})
-      .catch(()=>{if(!cancelled)setInventoryError(true);})
-      .finally(()=>{if(!cancelled)setInventoryLoading(false);});
+    setSupplierSearches([]);setSupplierError(false);setSupplierLoading(0);
+    if(!contextual||!open||sourceStock==='green')return;
+    const markets=sourceMarket?(['korea','japan'].includes(sourceMarket)?[sourceMarket]:sourceItems&&sourceMarket==='china'?['china']:[]):make?['korea','japan']:[];
+    let cancelled=false;setSupplierLoading(markets.length);
+    // Each directory can extend the picker immediately, independently of peers.
+    for(const market of markets)loadModelSuggestions(true,{market,make}).then(search=>{
+      if(!cancelled)setSupplierSearches(current=>[...current,search]);
+    }).catch(()=>{if(!cancelled)setSupplierError(true);}).finally(()=>{if(!cancelled)setSupplierLoading(count=>Math.max(0,count-1));});
     return()=>{cancelled=true;};
-  },[Boolean(sourceItems),sourceMarket,sourceStock,make,open,retry]);
+  },[Boolean(sourceItems),contextual,sourceMarket,sourceStock,make,open,retry]);
 
   useEffect(()=>{
     if(sourceItems||!contextual||!open||directory)return;
@@ -250,11 +259,11 @@ export function VehicleModelSearch({
       .finally(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
   },[sourceItems,contextual,open,retry,make,sourceMarket]);
-  const searching = loading || (contextual && inventoryLoading);
-  const suggestionError = directoryError || inventoryError;
+  const searching = loading || (contextual && (inventoryLoading || supplierLoading>0));
+  const suggestionError = directoryError || inventoryError || supplierError;
 
   const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
-  const canSearch = Boolean(clean(make) || compact(searchQuery).length >= 2);
+  const canSearch = Boolean(!clean(searchQuery) || clean(make) || compact(searchQuery).length >= 2);
   useEffect(() => {
     if(sourceItems||contextual)return;
     if (!open || !canSearch) {
@@ -348,7 +357,7 @@ export function VehicleModelSearch({
       <div className={`ac-hide-scrollbar min-h-0 overflow-y-auto overscroll-contain ${mobile?"flex-1":"max-h-[min(18rem,35dvh)]"}`}>
         {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
         {canSearch && searching && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
-        {canSearch && items.length ? items.map((item) => <button
+        {canSearch && items.length ? items.slice(0,visibleCount).map((item) => <button
           key={item.id || `${item.make}:${item.model}`}
           type="button"
           onPointerDown={(event) => event.preventDefault()}
@@ -359,6 +368,7 @@ export function VehicleModelSearch({
           <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
           {multiple ? <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm" style={{ background: selectedModels.includes(item.model) ? "#ff353d" : "var(--ac-surface-3)", border: selectedModels.includes(item.model) ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: selectedModels.includes(item.model) ? "#fff" : "transparent" }}>✓</span> : <span className="shrink-0 opacity-70">↵</span>}
         </button>) : null}
+        {items.length>visibleCount?<button type="button" className="min-h-11 w-full px-3 py-3 text-sm font-bold" onPointerDown={event=>event.preventDefault()} onClick={()=>setVisibleCount(count=>count+60)}>Показать ещё · {items.length-visibleCount}</button>:null}
         {contextual&&suggestionError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить все модели. Повторить</button>:null}
         {canSearch && !searching && !suggestionError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
       </div>

@@ -31,6 +31,8 @@ const resolvedCatalogQuery=cache(async(key:string)=>{
   const directory=await readAjesDirectory({market:params.market,make:query.make});
   const selection=resolveAjesModelSelection(query.model,directory.models,query.make);
   delete query.model;Object.assign(query,selection);
+ }else if(query.model){
+  query.modelFamilies=query.model;
  }
  return query;
 });

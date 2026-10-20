@@ -1,3 +1,7 @@
+import {Suspense} from 'react';
+import {BrandPreviewProvider,BrandPreviewUpdate} from '@/components/catalog/BrandPreviewContext';
+import {AjesRail,readAjesRailData} from '@/components/catalog/AjesRail';
+import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import { PageLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -8,13 +12,12 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { autocatalogCoverUrl, readAutocatalogCoverIndex } from "@/lib/catalog/autocatalog-publication";
-import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
+import { resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
-import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { readCatalogBrandModelCounts, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
-import { vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -42,68 +45,19 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) notFound();
 
-  const [facets, models, publishedCovers] = await Promise.all([
-    readCatalogFacets(),
+  const [counts, models, publishedCovers] = await Promise.all([
+    readCatalogBrandModelCounts(brand.name),
     readBrandModelDirectory(brand.name),
     readAutocatalogCoverIndex(),
   ]);
-  const rawMakes = [...new Set([
-    brand.name,
-    ...(facets.makes || []).filter((make) => catalogBrandMatches(brand, make)),
-  ])];
-  // One global first page made the brand page look as if a brand existed only
-  // on the freshest one or two markets. Read a bounded preview and an exact
-  // total for every market so the market badges, section counts and cards all
-  // describe the same inventory.
-  const marketResults = await Promise.all(MARKET_ORDER.map(async (market) => {
-    const parts = await Promise.all(rawMakes.map(async (make) => ({
-      make,
-      result: await searchOffers({ market, make, pageSize: 12, sort: "updatedAt" }),
-    })));
-    const marketOffers = new Map<string, any>();
-    for (const part of parts) {
-      for (const offer of (part.result.items || []) as any[]) {
-        if (isRenderablePublicCatalogOffer(offer as any)) marketOffers.set(String(offer.id), offer);
-      }
-    }
-    return {
-      market,
-      total: parts.reduce((sum, part) => sum + Number(part.result.total || 0), 0),
-      offers: [...marketOffers.values()].slice(0, 12),
-    };
-  }));
-  const uniqueOffers = new Map<string, any>();
-  for (const group of marketResults) {
-    for (const offer of group.offers) uniqueOffers.set(String(offer.id), offer);
-  }
-  const offers = [...uniqueOffers.values()];
-  const modelByAlias = new Map<string, string | null>();
-  for (const model of models) {
-    for (const value of [model.model, ...(model.aliases || [])]) {
-      const key = vehicleKnowledgeCompact(value);
-      if (!key) continue;
-      const current = modelByAlias.get(key);
-      modelByAlias.set(key, current && current !== model.id ? null : model.id);
-    }
-  }
-  const previewByModel = new Map<string, string>();
-  for (const offer of offers) {
-    const modelId = modelByAlias.get(vehicleKnowledgeCompact(offer.model));
-    const previewUrl = String(offer.images?.[0]?.url || offer.cardImageUrl || "");
-    if (modelId && previewUrl && !previewByModel.has(modelId)) previewByModel.set(modelId, previewUrl);
-  }
   const saleModels = models.filter((model) => model.count > 0);
   const modelsWithPreviews = saleModels.map((model) => {
     const published = publishedCovers.get(model.id);
-    return { ...model, previewUrl: (published ? autocatalogCoverUrl(published) : undefined) || previewByModel.get(model.id) };
+    return { ...model, previewUrl: (published ? autocatalogCoverUrl(published) : undefined) };
   });
-  const catalogMakes = rawMakes.join(",");
-  const totalOffers = marketResults.reduce((sum, group) => sum + group.total, 0);
-  const grouped = marketResults.filter((group) => group.total > 0 && group.offers.length > 0);
-
-  const fallbackResult = offers.length ? null : await searchOffers({ pageSize: 16, sort: "updatedAt" });
-  const similar = (fallbackResult?.items || []).filter((offer: any) => isRenderablePublicCatalogOffer(offer)).slice(0, 12);
-  const availableMarkets = grouped.map((group) => group.market);
+  const catalogMakes = brand.name;
+  const totalOffers = counts.models.reduce((sum,model)=>sum+model.count,0);
+  const availableMarkets = MARKET_ORDER.filter(market=>counts.models.some(model=>model.marketCounts[market]>0));
 
   return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -131,33 +85,9 @@ export default async function BrandLandingPage({ params }: PageProps) {
         </div>
       </header>
 
-      <BrandModelDirectory brand={brand.name} brandSlug={brand.slug} models={modelsWithPreviews} />
+      <BrandPreviewProvider><BrandModelDirectory brand={brand.name} brandSlug={brand.slug} models={modelsWithPreviews} />
 
-      {grouped.length ? <div className="mt-9 space-y-12">
-        {grouped.map((group) => {
-          const label = CATALOG_MARKET_LABELS[group.market];
-          return <section key={group.market}>
-            <div className="flex items-end justify-between gap-3">
-              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.total.toLocaleString("ru-RU")}</span></h2>
-              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMakes)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
-            </div>
-            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
-              {group.offers.slice(0, 12).map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}
-            </div>
-          </section>;
-        })}
-      </div> : <section className="mt-9 grid gap-5 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-8">
-        <div className="min-w-0">
-          <h2 className="text-2xl font-black md:text-4xl">Подберём {brand.name} под ваш бюджет</h2>
-          <p className="mt-3 max-w-3xl font-medium leading-7 text-[var(--ac-muted)]">Сейчас готовых предложений этой марки нет. Выберите модель выше или оставьте заявку — менеджер найдёт подходящие автомобили и подготовит расчёт под ключ.</p>
-        </div>
-        <Link href="/#form" className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black md:justify-self-end">Запросить подбор {brand.name}</Link>
-      </section>}
-
-      {!offers.length && similar.length ? <section className="mt-12">
-        <div className="flex items-end justify-between gap-3"><h2 className="text-3xl font-black md:text-4xl">Похожие варианты</h2><Link href="/cars" className="ac-market-all-link text-sm font-black">Весь каталог →</Link></div>
-        <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{similar.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div>
-      </section> : null}
+      <div className="mt-9 space-y-12">{MARKET_ORDER.map(market=><Suspense key={market} fallback={<p role="status" className="text-sm text-[var(--ac-muted)]">Загружаем предложения · {CATALOG_MARKET_LABELS[market]}</p>}><BrandMarketOffers market={market} make={catalogMakes}/></Suspense>)}</div></BrandPreviewProvider>
 
       <section className="mt-12 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:p-8">
         <h2 className="text-2xl font-black md:text-3xl">Как заказать {brand.name}</h2>
@@ -166,4 +96,23 @@ export default async function BrandLandingPage({ params }: PageProps) {
       <PageLeadBanner kind="brand" car={brand.name} />
     </section>
   </main>;
+}
+
+async function BrandMarketOffers({market,make}:{market:CatalogMarket;make:string}){
+  if(await usesAjesMarket(market)){
+    const sourceMarket=market as 'japan'|'china'|'korea';
+    const result=await readAjesRailData(sourceMarket,{make});
+    return <><BrandPreviewUpdate rows={result.items.flatMap((offer:any)=>{const url=offer.images?.[0]?.url;return url?[{model:offer.model,url}]:[];})}/><AjesRail market={sourceMarket} params={{make}} prepared={Promise.resolve(result)}/></>;
+  }
+  const result=await searchOffers({market,make,pageSize:12,sort:'updatedAt'});
+  const offers=result.items.filter(offer=>isRenderablePublicCatalogOffer(offer));
+  if(!offers.length)return null;
+  return <section>
+    <BrandPreviewUpdate rows={offers.flatMap(offer=>{const url=offer.images?.[0]?.url;return url?[{model:offer.model,url}]:[];})}/>
+    <div className="flex items-end justify-between gap-3">
+      <h2 className="flex items-center gap-2 text-3xl font-black"><CatalogMarketFlag market={market} className="h-5 w-7"/>{CATALOG_MARKET_LABELS[market]}<span className="text-base text-[var(--ac-muted)]">· {result.total.toLocaleString('ru-RU')}</span></h2>
+      <Link href={`/cars?market=${market}&make=${encodeURIComponent(make)}`} className="ac-market-all-link text-sm font-black">Все →</Link>
+    </div>
+    <div className="mt-5 grid grid-cols-2 gap-2.5 md:grid-cols-3 xl:grid-cols-4">{offers.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense/>)}</div>
+  </section>;
 }

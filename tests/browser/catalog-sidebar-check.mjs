@@ -85,7 +85,7 @@ try{
  const sidebar=page.locator('.ac-catalog-sidebar');
  assert.deepEqual(await page.locator('.ac-brand-rail a').allTextContents(),['Toyota']);
  if(width>=1024){
- const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox(),h=await page.locator('.ac-catalog-heading').boundingBox();assert.ok(b.x>r.x+r.width-2);assert.ok(b.y<=h.y+1,'sidebar starts with the heading');
+ const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox(),h=await page.locator('.ac-catalog-heading').boundingBox();assert.ok(b.x+b.width<=r.x,'filters remain left of results');assert.ok(b.y<=h.y+1,'sidebar starts with the heading');
  assert.equal(await sidebar.evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
  assert.equal(await page.getByRole('button',{name:/Выбрать город. Сейчас/}).count(),0);
  assert.equal(await sidebar.getByRole('button',{name:'Убрать Кроссовер',exact:true}).count(),0);
@@ -158,5 +158,21 @@ try{
  await page.locator('.ac-catalog-card').first().waitFor();assert.equal(await page.locator('.ac-catalog-card').count(),6);
  await page.screenshot({path:out+'/sidebar-'+width+'.png'});
  if(width>=1024){await page.locator('.ac-catalog-selection').getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForTimeout(200);assert.equal(await page.locator('.ac-catalog-selection .ac-filter-chip').count(),0);}console.log('SIDEBAR_OK',width);await context.close();
+ }
+ for(const width of [390,1440]){
+  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
+  const directory={version:1,brands:[],models:Array.from({length:180},(_,i)=>['Toyota','Version '+String(i).padStart(3,'0'),[],1])};
+  await page.route('**/model-directory.*.json',route=>route.fulfill({json:directory}));
+  await page.route('**/api/catalog/**',route=>route.fulfill({json:route.request().url().includes('models?')?{version:1,brands:[],models:[]}:route.request().url().includes('brand-counts')?{counts:{Toyota:180},modelCounts:{Toyota:180}}:{ok:true,colors:[]}}));
+  await page.goto(origin+'/cars');
+  const scope=width<1024?await openSheet(page):page.locator('.ac-catalog-sidebar');
+  await scope.getByRole('searchbox',{name:'Модель автомобиля',exact:true}).click();
+  const picker=width<1024?page.getByRole('dialog',{name:'Выбор моделей'}):scope;
+  await picker.getByRole('button',{name:/Показать ещё/}).click();
+  await picker.getByRole('button',{name:/Показать ещё/}).click();
+  await picker.getByRole('button',{name:'Version 179 Toyota',exact:true}).click();
+  assert.equal(await scope.locator('input[name=model]').inputValue(),'Version 179');
+  console.log('ALL_MODELS_SELECTABLE',width,180);
+  await context.close();
  }
 }finally{await browser.close();server?.close();}

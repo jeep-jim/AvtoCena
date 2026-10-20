@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import {readAjesDirectory} from '@/lib/catalog/ajes-catalog';
 import {readGreenCorner} from '@/lib/catalog/green-corner';
 import { readCatalogFacets, readCatalogDirectoryCountRows } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
@@ -77,16 +76,10 @@ export async function GET(request: Request) {
   // Names only from the current published summary, never raw offers or prices.
   // This supplements the build-time dictionary after any market feed refresh.
   if (url.searchParams.get("scope") === "inventory") {
-    const rows = await readCatalogDirectoryCountRows();
-    const green = await readGreenCorner();
-    rows.push(...green.items.map(row=>({make:row.make,model:row.model,count:1})));
-    // Read only bounded name/count directories for the selected make, never offers.
-    // The paid source switches and real visitor-IP checks stay in readAjesDirectory.
-    const make=clean(url.searchParams.get('make')).slice(0,160);
-    if(make&&!url.searchParams.get('market')){
-      const sources=await Promise.allSettled(['korea','japan'].map(market=>readAjesDirectory({market,make})));
-      for(const source of sources)if(source.status==='fulfilled')rows.push(...source.value.models.map(row=>({make:row.make,model:row.model,count:row.total})));
-    }
+    const [publishedRows, green] = await Promise.all([readCatalogDirectoryCountRows(), readGreenCorner()]);
+    const rows = [...publishedRows, ...green.items.map(row=>({make:row.make,model:row.model,count:1}))];
+    // Paid-source directories arrive independently in the browser. A slow supplier
+    // must not hold back names already available in our published inventory.
     const models = [...new Map(rows.filter(row => row.count > 0 && row.make && row.model)
       .map(row => [`${compact(row.make)}:${compact(row.model)}`, [row.make, row.model, [], 1]])).values()];
     return NextResponse.json({version: 1, models, brands: []}, {headers: {"Cache-Control": "no-store"}});

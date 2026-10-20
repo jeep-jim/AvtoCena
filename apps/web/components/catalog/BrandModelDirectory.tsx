@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import {useBrandPreviews} from "./BrandPreviewContext";
 import { useMemo, useState } from "react";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 
@@ -54,6 +55,7 @@ export function BrandModelDirectory({
   brandSlug: string;
   models: BrandModelLink[];
 }) {
+  const previews=useBrandPreviews();
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
   const normalizedQuery = searchable(query);
@@ -106,6 +108,7 @@ export function BrandModelDirectory({
 
     {filtered.length ? <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
       {filtered.map((model) => {
+        const previewUrl=model.previewUrl||previews.find(row=>[model.model,...(model.aliases||[])].some(name=>searchable(name)===searchable(row.model)))?.url;
         return <article
           key={model.id}
           className="overflow-hidden rounded-2xl bg-[var(--ac-surface-2)] transition"
@@ -115,7 +118,7 @@ export function BrandModelDirectory({
             className="group block w-full text-left transition hover:bg-[var(--ac-surface-3)]"
           >
             <span className="relative flex h-24 items-center justify-center overflow-hidden bg-[var(--ac-surface)] sm:h-28">
-              {model.previewUrl ? <img src={model.previewUrl} alt={`${brand} ${model.model}`} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.025]" /> : <BrandLogoVisual brand={brand} className="!h-12 !w-24 opacity-55" />}
+              {previewUrl ? <img src={previewUrl} alt={`${brand} ${model.model}`} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.025]" /> : <BrandLogoVisual brand={brand} className="!h-12 !w-24 opacity-55" />}
               {model.count > 0 ? <span className="absolute right-2 top-2 rounded-full bg-black/65 px-2 py-1 text-[9px] font-black text-white">{model.count} в продаже</span> : null}
             </span>
             <span className="flex min-h-14 items-center justify-between gap-2 px-3 py-2.5">

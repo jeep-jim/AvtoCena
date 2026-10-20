@@ -157,8 +157,8 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || liveMarket(market.id) || market.id === "japan");
   const localTotal=groupedMarkets.reduce((sum, market) => sum + market.total, 0) + ((japanAll || !selectedMarket) ? greenMatched.length : 0);
-  const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?await withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id))};
-  const {total,countIncomplete}=countSummary;
+  const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan')};
+  const total=localTotal,countIncomplete=overviewEligible||groupedMarkets.some(m=>liveMarket(m.id)||m.id==='japan');
 
   const initialKeys = ["color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
@@ -206,7 +206,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
       </div>
       <p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={countIncomplete?undefined:total}>
         <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span>
-        <span>{<>Найдено: {countIncomplete?"не менее ":""}<span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></>}</span>
+        <Suspense fallback={<CatalogCountLabel total={total} countIncomplete={countIncomplete}/>}><ResolvedCatalogCount summary={countSummary}/></Suspense>
       </p>
       </>}>
       <div className="hidden lg:block"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>
@@ -224,4 +224,11 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
       }
     ` }} />
   </Container>;
+}
+
+function CatalogCountLabel({total,countIncomplete}:{total:number;countIncomplete?:boolean}){
+ return <span>Найдено: {countIncomplete?'не менее ':''}<span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></span>;
+}
+async function ResolvedCatalogCount({summary}:{summary:{total:number;countIncomplete?:boolean}|Promise<{total:number;countIncomplete?:boolean}>}){
+ return <CatalogCountLabel {...await summary}/>;
 }

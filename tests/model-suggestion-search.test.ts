@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createModelSuggestionSearch,type ModelSearchData} from '../apps/web/lib/catalog/model-suggestion-search';
+import {mergeModelSuggestions,createModelSuggestionSearch,type ModelSearchData} from '../apps/web/lib/catalog/model-suggestion-search';
 const data:ModelSearchData={version:1,brands:[['Toyota',['Тойота']],['BMW',[]],['Peugeot',[]]],models:[['Toyota','Corolla',[],1],['Toyota','Corolla Cross',[],1],['Toyota','Corolla Cross AWD',[],0],['Toyota','Camry',[],1],['BMW','X5',[],1],['BMW','X3',[],1],['Peugeot','2008',[],1],['Peugeot','208',[],1]]};
 const search=createModelSuggestionSearch(data);
 test('single-letter model names remain searchable within a selected make',()=>{
@@ -18,7 +18,7 @@ test('brand scope, short identities and numeric model names stay distinct',()=>{
  assert.equal(search('Corolla Z','BMW').length,0);assert.equal(search('unrelated').length,0);
  assert.equal(search('BMW X5')[0].model,'X5');assert.ok(!search('BMW X5').some(m=>m.model==='X3'));
  assert.equal(search('2008')[0].model,'2008');assert.equal(search('208')[0].model,'208');
- assert.ok(search('Тойота').every(m=>m.make==='Toyota'));assert.ok(search('','Toyota').length>0);assert.equal(search('').length,0);
+ assert.ok(search('Тойота').every(m=>m.make==='Toyota'));assert.ok(search('','Toyota').length>0);assert.equal(search('').length,data.models.length);
 });
 
 test('current feed identities extend the dictionary without duplicates or cross-brand leakage',async()=>{
@@ -53,4 +53,18 @@ test('substring matches survive competing prefixes and spaced model identities',
  assert.ok(find('rolla').some(row=>row.model==='Corolla'));
  assert.equal(find('A 6','Audi')[0].model,'A6');
  assert.equal(find('А6','Audi')[0].model,'A6');
+});
+
+ test('opening and searching the picker retain every model beyond the old fifty-row limit',()=>{
+ const rows=Array.from({length:180},(_,i)=>['Toyota','Corolla '+i,[],1] as [string,string,string[],number]);
+ const find=createModelSuggestionSearch({version:1,brands:[],models:rows});
+ assert.equal(find('','Toyota').length,180);
+ assert.equal(find('Corolla','Toyota').length,180);
+ assert.equal(find('').length,180);
+ assert.equal(mergeModelSuggestions(find('Corolla'),[], 'Corolla').length,180);
+ });
+
+test('source brand aliases remain visible under their canonical selected make',()=>{
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['BENZ','C-CLASS',[],1],['MERCEDES BENZ','E-CLASS',[],1],['BMW','X5',[],1]]});
+ assert.equal(find('','Mercedes-Benz').length,2);
 });

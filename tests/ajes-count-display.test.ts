@@ -44,7 +44,7 @@ test('display family resolves source generation names without losing exact selec
  const models=['A5 F5','A5 B10','A50','S5 F5','A3','A3 8Y'].map(model=>({model}));
  assert.equal(resolveAjesModelNames('A5',models),'A5 F5|A5 B10');
  assert.equal(resolveAjesModelNames('A5 F5',models),'A5 F5');
- assert.equal(resolveAjesModelNames('A3',models),'A3');
+ assert.equal(resolveAjesModelNames('A3',models),'A3|A3 8Y');
  assert.equal(resolveAjesModelNames('UNKNOWN',models),'UNKNOWN');
  assert.equal(resolveAjesModelNames('A5|S5 F5',models),'A5 F5|A5 B10|S5 F5');
 });
@@ -90,7 +90,7 @@ test('large families keep every source generation and never match A50 or S5',asy
  const sql=ajesQuery({table:'korea',...selection}).sql;
  assert.match(sql,/\(model_name='S5 F5' or model_name like 'A5 %'\)/);
  assert.throws(()=>ajesQuery({table:'korea',modelFamilies:"A5%' OR 1=1"}));
- assert.deepEqual(resolveAjesModelSelection('A5',[{model:'A5'},{model:'A5 F5'}]),{model:'A5'});
+ assert.deepEqual(resolveAjesModelSelection('A5',[{model:'A5'},{model:'A5 F5'}]),{model:'A5|A5 F5'});
 });
 
 test('power results keep the source 111 hp match and reject empty, malformed and over-limit power',async()=>{
@@ -110,7 +110,12 @@ test('power search recovers only matching already received cars without requirin
 test('Honda selector aliases resolve to actual supplier names without changing other makes',async()=>{
  const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
  const names=[{model:'STEPWGN'},{model:'STEPWGN SPADA'},{model:'N-WGN'}];
- assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'HONDA'),{model:'STEPWGN'});
+ assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'HONDA'),{model:'STEPWGN|STEPWGN SPADA'});
  assert.deepEqual(resolveAjesModelSelection('STEP WAGON SPADA',names,'Honda'),{model:'STEPWGN SPADA'});
  assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'Other'),{model:'STEP WAGON'});
+});
+
+test('exact base Corolla does not hide other Corollas in supplier search',async()=>{
+ const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
+ assert.deepEqual(resolveAjesModelSelection('Corolla',[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'COROLLA FIELDER'},{model:'CAMRY'}]),{model:'COROLLA|COROLLA CROSS|COROLLA FIELDER'});
 });
