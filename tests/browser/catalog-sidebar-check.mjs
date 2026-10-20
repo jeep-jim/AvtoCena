@@ -74,6 +74,16 @@ try{
  if(width>=1024){
    assert.equal(await sidebar.getByRole('button',{name:'Дешевле',exact:true}).count(),1);
    assert.equal(await page.locator('.ac-catalog-selection .ac-sort-control').count(),0);
+   const range=sidebar.getByRole('button',{name:'Выбрать значение: Объём двигателя: от',exact:true});
+   await range.evaluate(el=>{const side=el.closest('.ac-catalog-sidebar');side.scrollTop+=el.getBoundingClientRect().bottom-side.getBoundingClientRect().bottom+8;});
+   await range.click();
+   const menu=sidebar.locator('.ac-range-value-menu.is-open');
+   await menu.waitFor();
+   const geometry=await menu.evaluate(el=>{const r=el.getBoundingClientRect(),s=el.closest('.ac-catalog-sidebar').getBoundingClientRect();return {top:r.top,bottom:r.bottom,sideTop:s.top,sideBottom:s.bottom,up:el.classList.contains('is-up')};});
+   assert.ok(geometry.up,JSON.stringify(geometry));
+   assert.ok(geometry.top>=geometry.sideTop-1&&geometry.bottom<=geometry.sideBottom+1,JSON.stringify(geometry));
+   await range.click();
+
  }
 
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'list stays inside viewport');
