@@ -1,3 +1,4 @@
+import {readAjesCatalogPage} from '@/lib/catalog/ajes-catalog';
 import {GreenCornerRail} from '@/components/catalog/GreenCornerRail';
 import {readGreenCorner,publicGreenOffer} from '@/lib/catalog/green-corner';
 import {formatCatalogCount} from '@/lib/catalog/count-format';
@@ -12,7 +13,7 @@ import {isRenderableRelatedOffer} from '@/lib/catalog/related-offer-selection';
 export async function DealerOfferMarkets({markets}:{markets:DealerMarket[]}){
  const greenRead=markets.includes("japan")?readGreenCorner().catch(()=>null):Promise.resolve(null);
  const groups=await Promise.all(DEALER_MARKETS.filter(m=>markets.includes(m.id)).map(async market=>{
-  try{const result=await searchOffers({market:market.id,pageSize:12,sort:'updatedAt'});const candidates=balanceBusinessRows(result.items.filter(isRenderableRelatedOffer)).slice(0,4);const rows=await applyActiveBusinessPricingBatch(candidates);return {...market,total:result.total,items:rows};}
+  try{const result=market.id==='korea'?await readAjesCatalogPage({market:'korea',pageSize:12,sort:'updatedAt'}):await searchOffers({market:market.id,pageSize:12,sort:'updatedAt'});const candidates=balanceBusinessRows(result.items.filter(isRenderableRelatedOffer)).slice(0,4);const rows=await applyActiveBusinessPricingBatch(candidates);return {...market,total:result.total,items:rows};}
   catch(error){console.error('dealer_related_market_failed',market.id,error);return {...market,total:null,items:[]};}
  }));
  const green=await greenRead;

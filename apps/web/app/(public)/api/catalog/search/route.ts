@@ -36,7 +36,7 @@ export async function GET(request: Request) {
   }
   const query: Parameters<typeof searchOffers>[0] = {
     city: p.get("city") || undefined,
-    market: p.get("market") || undefined,
+    market: p.get("market") === "any" ? undefined : p.get("market") || undefined,
     make: p.get("make") || p.get("brand") || undefined,
     model: p.get("model") || undefined,
     hasPrice: p.get("hasPrice") || undefined,
