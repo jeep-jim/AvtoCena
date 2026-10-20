@@ -102,3 +102,5 @@
 
 /* Mobile catalog has one presentation: cards, without an empty toolbar. */
 @media(max-width:1023px){.ac-catalog-toolbar{display:none}}
+
+.ac-catalog-results>.grid>div:empty{display:none}

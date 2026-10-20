@@ -599,6 +599,7 @@ export function resetCatalogReadCachesForTests() {
   editorialLandingCache.clear();
   editorialSummaryCache.clear();
   filteredSearchCache.clear();
+  filteredFacetCache.clear();
   catalogCountCache.clear();
   budgetMarketDirectoryCache.clear();
   compressedBudgetDirectoryCache.clear();
@@ -1261,7 +1262,15 @@ function withEditorialFacetOptions(facets:CatalogFacets,market?:string):CatalogF
  return {...facets,bodyTypes:values('bodyType',facets.bodyTypes),drives:values('drive',facets.drives),transmissions:values('transmission',facets.transmissions)};
 }
 let budgetFacetCache=new WeakMap<BudgetCountIndex["rows"],CatalogFacets>();
+const filteredFacetCache=new DetailReadCache<CatalogFacets>({maxEntries:48,maxBytes:4*1024*1024,ttlMs:30_000,concurrency:6});
 async function readCatalogFacetsEditorial(input: CatalogSearchParams = {}): Promise<CatalogFacets> {
+  const manifest=await readManifest();
+  const {sort:_sort,page:_page,pageSize:_size,...filters}=input;
+  const params=filters.budgetFrom||filters.budgetTo||filters.hasPrice?filters:{...filters,city:undefined};
+  const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(params).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
+  return filteredFacetCache.get(key,()=>readCatalogFacetsUncached(params));
+}
+async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promise<CatalogFacets> {
   // Ordering and pagination cannot change available filter values. In particular,
   // a sort-only request should reuse the prepared market facets.
   const {sort:_sort,page:_page,pageSize:_pageSize,...filters}=input;

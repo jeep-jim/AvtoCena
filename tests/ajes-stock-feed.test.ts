@@ -7,7 +7,7 @@ const row={ID:'fixture001',MARKA_NAME:'HYUNDAI',MODEL_NAME:'TUCSON',YEAR:String(
 test('stock SQL uses own table, six-year policy and no Japanese auction columns',()=>{
  for(const market of ['korea','china'] as const){const q=ajesQuery(ajesCatalogQuery({market,make:'HYUNDAI',model:'TUCSON',lotNumber:'00012'}));assert.match(q.sql,new RegExp('from '+market));assert.match(q.sql,/lot='00012'/);assert.doesNotMatch(q.sql,/auction_type|status='Sold'/);assert.match(q.sql,/finish>0/);assert.match(q.sql,new RegExp('year>='+ (new Date().getUTCFullYear()-6)));}
  assert.throws(()=>ajesQuery({table:'china',make:"x' OR 1=1"}));
- assert.throws(()=>ajesQuery({table:'korea',yearFrom:2008}));
+ assert.match(ajesQuery({table:'korea',yearFrom:2008}).sql,new RegExp('year>='+(new Date().getUTCFullYear()-6)));
 });
 test('stock mapping keeps exact units, VIN and first photograph; missing power remains missing',()=>{
  assert.equal(ajesLot({...row,STATUS:'Sold'},'korea',true),null);

@@ -30,9 +30,13 @@ export function ajesQuery(input: unknown) {
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
   const makes=values(q.make,','),models=values(q.model,'|'),families=values(q.modelFamilies,'|');
   const stock=table==='korea'||table==='china',minYear=stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR;
-  const yearFrom=integer(q.yearFrom,minYear,minYear,2100), yearTo=integer(q.yearTo,2100,minYear,2100);
-  if (yearFrom>yearTo) throw new AjesInputError();
+  const requestedYearFrom=integer(q.yearFrom,1900,1900,2100), yearTo=integer(q.yearTo,2100,1900,2100);
+  if (requestedYearFrom>yearTo) throw new AjesInputError();
+  // A shared catalog range may begin before this market's admission floor.
+  // Intersect it with policy; a disjoint range is a valid empty query.
+  const yearFrom=Math.max(minYear,requestedYearFrom);
   const page=integer(q.page,1,1,1000000), pageSize=integer(q.pageSize,24,1,48);
+  const empty=yearFrom>Math.min(yearTo,new Date().getUTCFullYear()+(stock?0:1));
   const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+(stock?0:1))}`];
   if(!stock)where.push('auction_type!=1');
   if(stock)where.push('finish>0');
@@ -66,13 +70,13 @@ export function ajesQuery(input: unknown) {
     where.push(`pw>=${low}`,`pw<=${high}`);
   }
   if(q.aggregate!==undefined&&!['count','models','makes'].includes(q.aggregate))throw new AjesInputError();
-  if(q.aggregate==='count')return {table,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
-  if(q.aggregate==='makes')return {table,kind:'makes' as const,sql:`select marka_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name order by marka_name limit ${(page-1)*500},500`,page,pageSize:500};
-  if(q.aggregate==='models')return {table,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
+  if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
+  if(q.aggregate==='makes')return {table,empty,kind:'makes' as const,sql:`select marka_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name order by marka_name limit ${(page-1)*500},500`,page,pageSize:500};
+  if(q.aggregate==='models')return {table,empty,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
   const sort=q.sort??'updatedAt';
   if(!['updatedAt','year','yearAsc','totalRub','totalRubDesc','mileage'].includes(sort))throw new AjesInputError();
   const order=sort==='mileage'?'mileage asc':stock?(sort==='yearAsc'?'year asc':sort==='year'?'year desc':sort==='totalRub'?'finish asc':sort==='totalRubDesc'?'finish desc':'id desc'):sort==='totalRub'?'finish asc, auction_date desc':sort==='totalRubDesc'?'finish desc, auction_date desc':sort==='yearAsc'?'year asc, auction_date desc':sort==='year'?'year desc, auction_date desc':'auction_date desc';
-  return {table,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
+  return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
 }
 
 /** Provider uses &w=320 even when no question mark is present. Never download images here. */

@@ -52,7 +52,7 @@ test('lists, counts and model directories apply identical heavy-family SQL befor
 });
 
 test('query grammar rejects SQL/unknown fields and bounds pages, ages and table',()=>{
-  for(const input of [{sql:'select * from stats'},{table:'stats;drop'},{id:"x' or 1=1"},{make:"TOYOTA'"},{model:'x\\y'},{page:-1},{pageSize:10000},{yearFrom:2007},{yearFrom:2025,yearTo:2020},{id:'ok',make:'TOYOTA'},{budgetTo:2000000}])assert.throws(()=>ajesQuery(input));
+  for(const input of [{sql:'select * from stats'},{table:'stats;drop'},{id:"x' or 1=1"},{make:"TOYOTA'"},{model:'x\\y'},{page:-1},{pageSize:10000},{yearFrom:1899},{yearFrom:2025,yearTo:2020},{id:'ok',make:'TOYOTA'},{budgetTo:2000000}])assert.throws(()=>ajesQuery(input));
   const q=ajesQuery({make:'Toyota',model:'C-HR',page:2,pageSize:24});
   assert.match(q.sql,/status='Sold' and finish>0/);assert.match(q.sql,/auction_type!=1/);assert.match(q.sql,/limit 24,24$/);assert.match(q.sql,/marka_name='TOYOTA'/);
   assert.equal(ajesQuery({id:'abc',table:'stats'}).sql,"select * from stats where id='abc'");
@@ -627,4 +627,31 @@ test('truck policy change retains old viewed rows only as a partial refresh/fail
  assert.equal(value.schemaVersion,0);assert.equal(value.partial,true);
  assert.deepEqual(value.items.filter((r:any)=>!catalogHeavyVehicleExcluded(r)),[{make:'TOYOTA',model:'PRIUS'}]);
  let calls=0;assert.equal(await readPreviousTruckPolicyRows(ajesQuery({aggregate:'count'}).sql,async()=>{calls++;return saved;}),null);assert.equal(calls,0);
+});
+
+
+test('shared year range intersects each market policy without rejecting older lower bounds',()=>{
+ for(const table of ['stats','main','korea','china'] as const){
+   const floor=table==='stats'||table==='main'?2008:new Date().getUTCFullYear()-6;
+   assert.equal(ajesQuery({table,yearFrom:2007}).sql,ajesQuery({table}).sql);
+   assert.match(ajesQuery({table,yearFrom:2007,yearTo:2007}).sql,new RegExp('year>='+floor+' and year<=2007'));
+   assert.match(ajesQuery({table,yearFrom:2022,yearTo:2024}).sql,/year>=2022 and year<=2024/);
+   assert.throws(()=>ajesQuery({table,yearFrom:2024,yearTo:2022}));
+   for(const yearFrom of [1899,2101,2007.5,NaN])assert.throws(()=>ajesQuery({table,yearFrom}));
+ }
+});
+
+
+test('disjoint year ranges return exact empty results without provider I/O and retain access checks',async()=>{
+ let calls=0,enabled=true;
+ const client=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{calls++;},fetcher:async()=>{throw Error('unexpected provider call');}});
+ for(const table of ['stats','main','korea','china'] as const){
+  for(const aggregate of [undefined,'count','makes','models'] as const){
+   const result=await client.read({table,yearTo:2007,...(aggregate?{aggregate}:{})},'127.0.0.1');
+   assert.deepEqual(result.items,[]);assert.equal(result.total,0);assert.equal(result.stale,false);
+  }
+ }
+ assert.equal(calls,0);
+ await assert.rejects(()=>client.read({yearTo:2007},''),/client_ip_missing/);
+ enabled=false;await assert.rejects(()=>client.read({yearTo:2007},'127.0.0.1'),/disabled/);
 });

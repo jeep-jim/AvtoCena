@@ -30,6 +30,9 @@ export function createAjesClient(deps:Dependencies) {
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
       const password=await deps.password();
       if(!password)throw new AjesUnavailable('not_configured');
+      // A valid year interval outside admission policy is known empty, not a failure.
+      // Retain visitor and owner-switch checks even when no supplier request is needed.
+      if(query.kind!=='detail'&&query.empty)return {schemaVersion:2,items:[],total:0,models:query.kind==='models'?[]:undefined,makes:query.kind==='makes'?[]:undefined,page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:new Date().toISOString()};
       const visitorKey=clientIp+"\0"+query.sql;
       const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes')?':count':'');
       return cache.get(query.sql,()=>visitorCache.get(visitorKey,async()=>{

@@ -25,7 +25,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  const sourceTotal=result?.countSummary??await countPromise;
  const displayTotal=exactAjesCount(sourceTotal);
  const makeDirectory=await makesPromise;
- const savedFacets=market==='japan'&&(!makeDirectory||!directory)?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
+ const savedFacets=market==='japan'&&(!makeDirectory||(Boolean(initial.make)&&!directory))?await readSavedAjesFacets().catch(()=>({makes:[],models:[]})):{makes:[],models:[]};
  const models=directory?.models||[...savedFacets.models,...new Map((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
  const makes=[...new Set([...(makeDirectory?.makes.map(m=>m.make)||savedFacets.makes),...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
  const facets={makes,models,markets:[market],bodyTypes:[],fuels:['petrol','diesel','hybrid','electric','lpg'],transmissions:['automatic','manual','cvt','dct'],drives:['fwd','rwd','awd']};
@@ -47,6 +47,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {result.filteredByPage&&result.total===null&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показываем автомобили, подходящие под выбранные условия. Точное количество уточняется по мере загрузки.</p>}
  {result.interrupted&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Часть автомобилей пока не удалось загрузить. Найденные варианты сохранены; продолжить можно кнопкой «Показать ещё».</p>}
  {market!=='japan'&&(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показана доступная часть предложений.</p>}
+ {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor}/>
  </div>}
 </CatalogSidebar>
