@@ -18,7 +18,7 @@ const nextConfig = {
       {source:"/model-directory.:hash.json",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
       {source: "/:path*", headers: [{key:"X-Content-Type-Options",value:"nosniff"},{key:"Referrer-Policy",value:"strict-origin-when-cross-origin"}]},
       ...["/crm/:path*", "/login"].map(source => ({source, headers: [{key:"X-Frame-Options",value:"DENY"},{key:"Content-Security-Policy",value:"frame-ancestors 'none'; object-src 'none'; base-uri 'self'"}]})),
-      ...["/crm/:path*", "/api/crm/:path*", "/api/leads", "/api/auth/:path*", "/login"].map(source => ({ source, headers: [{key: "X-Robots-Tag", value: "noindex, nofollow, noarchive"}] })),
+      ...["/cars/30sec", "/api/power30", "/crm/:path*", "/api/crm/:path*", "/api/leads", "/api/auth/:path*", "/login"].map(source => ({ source, headers: [{key: "X-Robots-Tag", value: "noindex, nofollow, noarchive"}] })),
       {
         source: "/login",
         headers: [
