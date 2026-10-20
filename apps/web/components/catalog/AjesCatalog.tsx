@@ -1,3 +1,5 @@
+import {Suspense} from 'react';
+import {KoreaExistingMatches} from './KoreaExistingMatches';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {PublicHeader} from '@/components/layout/PublicHeader';
 import {CatalogCard} from './CatalogCard';
@@ -39,6 +41,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <p role="status" className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" data-catalog-result-count={displayTotal??undefined}><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span><span>Найдено: {ajesCountText(sourceTotal)}</span></p>
  <CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>
  {makes.length>0&&<BrandLogoRail initial={initial} brands={makes} resultCount={displayTotal??undefined}/>}
+ {market==='korea'&&<Suspense fallback={null}><KoreaExistingMatches params={initial}/></Suspense>}
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  {result&&<div className="mt-8 md:mt-9">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{sourceTotal&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={displayTotal}>· {ajesCountText(sourceTotal)}</span>}</h2>
