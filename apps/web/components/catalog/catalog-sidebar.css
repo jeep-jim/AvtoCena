@@ -29,8 +29,8 @@
 .ac-catalog-view-toggle{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--ac-surface-2);margin-left:auto}
 .ac-catalog-view-toggle button{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:9px;font-size:12px;font-weight:800;color:var(--ac-muted)}
 .ac-catalog-view-toggle button[aria-pressed=true]{background:var(--ac-text);color:var(--ac-page-bg)}
-[data-catalog-view=list] .ac-catalog-market-rail,[data-catalog-view=list] [data-catalog-batch]{display:grid;grid-template-columns:minmax(0,1fr)!important;grid-auto-flow:row;grid-auto-columns:auto;margin-right:0;padding-right:0;gap:8px;overflow:visible}
-.ac-catalog-list-row{position:relative;min-width:0;border:1px solid var(--ac-border);background:var(--ac-surface);border-radius:16px;color:var(--ac-text)}
+[data-catalog-view=list] .ac-catalog-market-rail,[data-catalog-view=list] [data-catalog-batch]{display:grid;grid-template-columns:minmax(0,1fr)!important;grid-auto-flow:row;grid-auto-columns:auto;margin-right:0;padding-right:0;gap:0;overflow:visible;background:var(--ac-surface);border:1px solid var(--ac-border);border-radius:12px}
+.ac-catalog-list-row{position:relative;min-width:0;border:0;border-bottom:1px solid var(--ac-border);background:transparent;border-radius:0;color:var(--ac-text)}
 .ac-catalog-list-link{display:grid;grid-template-columns:100px minmax(140px,1.4fr) minmax(85px,.8fr) minmax(100px,1fr) minmax(90px,.8fr) minmax(150px,1.2fr);align-items:center;gap:14px;padding:14px 44px 14px 14px}
 .ac-list-photo{position:relative;width:100px;height:76px;border-radius:10px;overflow:hidden;background:var(--ac-surface-2)}
 .ac-list-photo img{width:100%;height:100%;object-fit:cover}
@@ -47,7 +47,7 @@
  .ac-catalog-selection,.ac-catalog-selection:has(.ac-filter-chip){position:static;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0;flex:1;min-width:0}
  .ac-toolbar-sort{flex:1;min-width:260px;max-width:380px}
  .ac-toolbar-sort .ac-sort-control{min-height:36px;border-radius:10px}
- .ac-catalog-sidebar .ac-sidebar-sort{display:none}
+ .ac-catalog-sidebar .ac-sidebar-sort{display:block}
 }
 @media(min-width:1024px) and (max-width:1399px){
  .ac-catalog-list-link{grid-template-columns:86px minmax(120px,1.3fr) minmax(86px,.8fr) minmax(140px,1fr);gap:10px}
@@ -83,3 +83,11 @@
  .ac-catalog-sidebar .ac-power-limit>span:last-of-type>span{display:block}
  .ac-catalog-sidebar .ac-power-limit>span:last-of-type>span:last-child{font-size:9px;margin-top:2px}
 }
+
+.ac-catalog-card,.ac-catalog-list-row{isolation:isolate;z-index:0}
+.ac-chassis-copy button{font-size:11px;text-decoration:underline;text-underline-offset:3px;color:var(--ac-text);padding:4px 0;text-align:left}
+.ac-chassis-copy small:empty{display:none}
+.ac-catalog-sidebar .ac-filter-dropdown.is-up{top:auto!important;bottom:calc(100% + 7px)!important}
+
+[data-catalog-view=list] [data-catalog-batch]{margin-bottom:0;border-radius:0;border-bottom:0}
+[data-catalog-view=list] [data-catalog-batch]:first-child{border-radius:12px 12px 0 0}

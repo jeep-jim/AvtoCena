@@ -88,8 +88,8 @@ function closeRangeMenus(except?: HTMLElement) {
 }
 
 function positionRangeMenu(menu: HTMLElement) {
-  const sheet = menu.closest<HTMLElement>(".ac-mobile-filter-sheet");
-  if (!sheet || !window.matchMedia("(max-width: 1023px)").matches) {
+  const sheet = menu.closest<HTMLElement>(".ac-mobile-filter-sheet, .ac-catalog-sidebar");
+  if (!sheet) {
     menu.classList.remove("is-up");
     setImportant(menu, "max-height", "220px");
     return;
@@ -355,6 +355,20 @@ export function CatalogFilterUiEnhancer() {
       decorateRangeControls();
       decorateFieldStates();
       ensureClearControls();
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        document.querySelectorAll<HTMLElement>(".ac-catalog-sidebar .ac-filter-dropdown").forEach(menu=>{
+          if (!menu.getClientRects().length) return;
+          const sidebar=menu.closest<HTMLElement>(".ac-catalog-sidebar")!;
+          const bounds=sidebar.getBoundingClientRect();
+          const anchor=menu.parentElement!.getBoundingClientRect();
+          const below=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-anchor.bottom-8);
+          const above=Math.max(0,anchor.top-Math.max(bounds.top,0)-8);
+          const up=below<Math.min(300,menu.scrollHeight)&&above>below;
+          menu.classList.toggle("is-up",up);
+          setImportant(menu,"max-height",`${Math.min(400,up?above:below)}px`);
+          setImportant(menu,"overflow-y","auto");
+        });
+      }
     };
     const requestRefresh = () => {
       if (frame) return;
@@ -368,7 +382,8 @@ export function CatalogFilterUiEnhancer() {
 
     const closeOnSheetScroll = (event: Event) => {
       const target = event.target;
-      if (target instanceof Element && target.closest(".ac-mobile-filter-sheet") && !target.closest(".ac-range-value-menu")) closeRangeMenus();
+      requestRefresh();
+      if (target instanceof Element && target.closest(".ac-mobile-filter-sheet, .ac-catalog-sidebar") && !target.closest(".ac-range-value-menu")) closeRangeMenus();
     };
     const closeOnViewportChange = () => closeRangeMenus();
     document.addEventListener("scroll", closeOnSheetScroll, { capture: true, passive: true });

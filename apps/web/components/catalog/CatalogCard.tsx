@@ -1,4 +1,5 @@
 "use client";
+import {useState} from "react";
 import {useCatalogView} from "./CatalogSelectionContext";
 import {publicationWithdrawn} from "@/lib/catalog/publication-policy";
 import {chinaCardVariant} from "@/lib/catalog/china-card-variant";
@@ -26,6 +27,14 @@ import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { IntentPrefetchLink } from "@/components/catalog/IntentPrefetchLink";
+
+function ChassisCopy({code}:{code:string}) {
+  const [status,setStatus]=useState("");
+  return <span className="ac-chassis-copy"><button type="button" aria-label={`Скопировать код кузова ${code}`} onClick={async()=>{
+    try { await navigator.clipboard.writeText(code); setStatus("Скопировано"); }
+    catch { setStatus("Не удалось скопировать"); }
+  }}>{code} <span aria-hidden="true">⧉</span></button><small role="status">{status}</small></span>;
+}
 
 function MileageIcon({ dense = false }: { dense?: boolean }) {
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 17a7 7 0 1 1 14 0" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /><path d="M12 17l3.4-4.1" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /><path d="M6.5 17h11" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>;
@@ -105,14 +114,14 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
 
   if(publicationWithdrawn(offer))return null;
   if(view==="list") return <article className="ac-catalog-list-row" data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
-    <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-catalog-list-link">
-      <div className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</div>
-      <div className="ac-list-identity"><strong>{o.title}</strong><span>{priceLabel} · {o.marketLabel}</span>{o.auctionDate&&<small>Аукцион · {String(o.auctionDate).slice(0,10)}</small>}</div>
-      <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel}</span><small>{o.operational?.chassisCode||o.chassisCode||o.bodyLabel||"Кузов уточняется"}</small></div>
+    <div className="ac-catalog-list-link">
+      <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</IntentPrefetchLink>
+      <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{priceLabel} · {o.marketLabel}</span>{o.auctionDate&&<small>Аукцион · {String(o.auctionDate).slice(0,10)}</small>}</div>
+      <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel||"Кузов уточняется"}</small>}</div>
       <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel}</small></div>
       <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
       <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
-    </IntentPrefetchLink><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
+    </div><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
   </article>;
   return (
     <article data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">

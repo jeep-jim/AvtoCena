@@ -58,7 +58,7 @@ try {
   // Multi-select deliberately stays open; close it before using controls underneath.
   await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
   assert.equal(await modelTrigger.getAttribute('aria-expanded'),'false');
-  const sortScope=width<1024?scope:page.locator('.ac-catalog-selection');
+  const sortScope=scope;
   for(const [label,value] of [['Дешевле','totalRub'],['Дороже','totalRubDesc'],['Новые','year'],['Ранние','yearAsc']]) {
    const button=sortScope.getByRole('button',{name:label,exact:true});await button.click();
    assert.equal(await button.getAttribute('aria-pressed'),'true');

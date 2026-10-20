@@ -64,6 +64,18 @@ try{
  await page.locator('.ac-catalog-list-row').first().waitFor();assert.equal(await page.locator('.ac-catalog-list-row').count(),6);
  assert.equal(await page.getByText('Лот 12345',{exact:true}).count(),6);
  assert.equal(await page.locator('.ac-list-price').count(),6);
+ await context.grantPermissions(['clipboard-read','clipboard-write']);
+ await page.getByRole('button',{name:'Скопировать код кузова DBA-L175S',exact:true}).first().click();
+ assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'DBA-L175S');
+ assert.equal(await page.locator('.ac-catalog-list-row').first().evaluate(el=>getComputedStyle(el).borderRadius),'0px');
+ assert.equal(await page.locator('.ac-catalog-list-row').first().evaluate(el=>getComputedStyle(el).isolation),'isolate');
+ const rows=await page.locator('.ac-catalog-list-row').evaluateAll(els=>els.map(el=>({top:el.getBoundingClientRect().top,bottom:el.getBoundingClientRect().bottom})));
+ assert.ok(Math.abs(rows[1].top-rows[0].bottom)<2,'list rows touch with a divider');
+ if(width>=1024){
+   assert.equal(await sidebar.getByRole('button',{name:'Дешевле',exact:true}).count(),1);
+   assert.equal(await page.locator('.ac-catalog-selection .ac-sort-control').count(),0);
+ }
+
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'list stays inside viewport');
  await page.screenshot({path:out+'/list-'+width+'.png'});
  await page.reload();await page.waitForTimeout(500);
