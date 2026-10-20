@@ -150,6 +150,7 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
   const marketParams = new URLSearchParams({market:String(current.market||"")});
   if(current.market==='japan')marketParams.set('stock','all');
   if(/^ajes-(?:korea|china)-/.test(String(current.id))){marketParams.set('source','ajes');modelParams.set('source','ajes');}
+  else if(current.market==='korea'){marketParams.set('source','existing');modelParams.set('source','existing');}
   const marketLabel = String(presented.marketLabel || current.market || "рынка");
   const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={item} compact />)}</div>;
   return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>

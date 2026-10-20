@@ -45,3 +45,16 @@ test('unpriced and unphotographed Dubicars survive publication and card projecti
  assert.equal(projectionCanRenderCard(searchProjectionFromOffer(prepared)),true);
  assert.equal(isPublicOffer(prepared),true);
 });
+
+
+test('named paid-feed Horsepower survives normalization without becoming 30-minute power',()=>{
+ for(const fields of [{Horsepower:'147 HP'},{extra_prep:{Horsepower:'147'}},{extra_prep:JSON.stringify({horsepower:147})},{power_hp:147}]){
+  const offer=normalizeAutoApiDubicars({...row(),data:{...row().data,...fields}})!;
+  assert.equal(offer.powerHp,147);assert.equal(offer.powerDataConfidence,'source_exact');
+  assert.equal(offer.operational?.semanticEvidence?.powerHp.status,'exact');
+  assert.equal(offer.power30MinKw,undefined);
+ }
+ for(const fields of [{Horsepower:'100-200 HP'},{Horsepower:'110 kW'},{Horsepower:0},{Horsepower:147,extra_prep:{Horsepower:150}},{power:147}]){
+  assert.equal(normalizeAutoApiDubicars({...row(),data:{...row().data,...fields}})!.powerHp,undefined);
+ }
+});
