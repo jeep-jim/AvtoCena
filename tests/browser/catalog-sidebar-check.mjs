@@ -97,7 +97,8 @@ try{
  assert.ok(brandSearch.x>=menuBounds.x&&brandSearch.x+brandSearch.width<=menuBounds.x+menuBounds.width,'whole search field is visible');
  await page.keyboard.press('Escape');
 
- assert.equal(await page.getByRole('button',{name:/Выбрать город. Сейчас/}).count(),0);
+ assert.equal(await sidebar.getByRole('button',{name:/Выбрать город. Сейчас/}).count(),1);
+ assert.equal(await sidebar.locator('.ac-catalog-filter-panel .ac-filter-control').first().getAttribute('aria-haspopup'),'dialog');
  assert.equal(await sidebar.getByRole('button',{name:'Убрать Кроссовер',exact:true}).count(),0);
  assert.equal(await page.locator('.ac-catalog-selection').getByRole('button',{name:'Убрать Кроссовер',exact:true}).isVisible(),true);
  await page.evaluate(()=>scrollTo(0,500));await page.waitForTimeout(100);const a=await sidebar.boundingBox();assert.ok(Math.abs(a.y-88)<2,JSON.stringify(a));
@@ -178,6 +179,15 @@ try{
   await page.route('**/api/catalog/**',route=>route.fulfill({json:route.request().url().includes('models?')?{version:1,brands:[],models:[]}:route.request().url().includes('brand-counts')?{counts:{Toyota:180},modelCounts:{Toyota:180}}:{ok:true,colors:[]}}));
   await page.goto(origin+'/cars');
   const scope=width<1024?await openSheet(page):page.locator('.ac-catalog-sidebar');
+  const city=scope.getByRole('button',{name:/Выбрать город. Сейчас/});
+  const cityBox=await city.boundingBox(),brandBox=await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).boundingBox();
+  assert.ok(cityBox.y<brandBox.y,'City comes before brand/model');
+  assert.equal(await city.locator('svg').first().evaluate(el=>getComputedStyle(el).color),'rgb(255, 53, 61)');
+  await city.click();await page.getByRole('dialog',{name:'Выбор города',exact:true}).getByRole('button',{name:'Москва',exact:true}).click();
+  assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Москва');
+  assert.equal(new URL(page.url()).searchParams.get('city'),'Москва');
+  assert.equal(new URL(page.url()).searchParams.get('bodyType'),'suv','City retains current filters');
+  assert.ok(await city.textContent().then(text=>text.includes('Москва')));
   await scope.getByRole('searchbox',{name:'Модель автомобиля',exact:true}).click();
   const picker=width<1024?page.getByRole('dialog',{name:'Выбор моделей'}):scope;
   await picker.getByRole('button',{name:/Показать ещё/}).click();

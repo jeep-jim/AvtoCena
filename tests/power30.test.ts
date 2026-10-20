@@ -35,3 +35,10 @@ test('documented value separate; conflicting total, estimates and UAE not promot
  assert.equal(power30FromOffer(offer({power30MinKw:60,powerDataConfidence:'estimated',powerDataSource:'estimate'})).certified,undefined);
  const uae=power30FromOffer(offer({market:'uae',power30MinKw:60}));assert.equal(uae.inputs.peak,'');assert.equal(uae.certified,undefined);
 });
+
+test('hybrid subtype resolves only from explicit listing-bound energy type',()=>{
+ const snapshot:any={sourceId:'test',sourceOfferId:'123',groups:[{name:'基本参数',items:[{name:'能源类型',value:'油电混合'}]}]};
+ const hybrid=offer({fuel:'hybrid',powertrainKind:'other_hybrid',operational:{sourceSpecifications:snapshot}});
+ assert.equal(power30FromOffer(hybrid).inputs.kind,'HEV');
+ snapshot.groups[0].items.push({name:'能源类型',value:'插电式混合动力'});assert.equal(power30FromOffer(hybrid).inputs.kind,'unknown');
+});

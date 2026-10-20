@@ -16,7 +16,7 @@ export function power30Kind(offer:Partial<VehicleOffer>):Power30Kind {
   return "unknown";
 }
 export function power30FromOffer(offer:VehicleOffer):Power30Car {
-  const kind = power30Kind(offer);
+  let kind = power30Kind(offer);
   const result:Power30Car = {id:offer.id,title:[catalogOfferTitle(offer),offer.year||""].filter(Boolean).join(" · "),href:offerPath(offer),inputs:{...emptyPower30Inputs,kind},inputSources:{},notes:[]};
   if (kind !== "unknown") result.inputSources.kind = "Тип силовой установки из карточки";
   if (offer.market === "uae") {result.notes.push("Для автомобилей из ОАЭ мощность вводится вручную: данные объявления требуют проверки.");return result;}
@@ -33,6 +33,11 @@ export function power30FromOffer(offer:VehicleOffer):Power30Car {
   }
   const snapshot=offer.operational?.sourceSpecifications;
   if (snapshot?.sourceId === offer.sourceId && snapshot.sourceOfferId === offer.sourceOfferId) {
+    if(kind === "unknown") {
+      const types:Record<string,Power30Kind>={"油电混合":"HEV","插电式混合动力":"PHEV","插电式混合动力车":"PHEV","纯电动":"BEV","mild hybrid":"MHEV","plug-in hybrid":"PHEV","full hybrid":"HEV"};
+      const found=[...new Set(snapshot.groups.flatMap(group=>group.items.filter(item=>/^(能源类型|тип гибрида|hybrid type)$/i.test(item.name.trim())).map(item=>types[item.value.trim().toLowerCase()]).filter(Boolean)))];
+      if(found.length===1){kind=found[0];result.inputs.kind=kind;result.inputSources.kind="Тип силовой установки из технических характеристик объявления";}
+    }
     // Read only explicitly named, listing-bound electric specifications, never system/ICE power.
     const candidates:Record<string,number[]>={peak:[],torque:[],rpm:[],voltage:[]};
     for (const group of snapshot.groups) for (const item of group.items) {
