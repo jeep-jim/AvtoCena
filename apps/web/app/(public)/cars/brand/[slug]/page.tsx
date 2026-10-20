@@ -85,7 +85,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
         </div>
       </header>
 
-      <BrandPreviewProvider><BrandModelDirectory brand={brand.name} brandSlug={brand.slug} models={modelsWithPreviews} />
+      <BrandPreviewProvider key={brand.slug}><BrandModelDirectory brand={brand.name} brandSlug={brand.slug} models={modelsWithPreviews} />
 
       <div className="mt-9 space-y-12">{MARKET_ORDER.map(market=><Suspense key={market} fallback={<p role="status" className="text-sm text-[var(--ac-muted)]">Загружаем предложения · {CATALOG_MARKET_LABELS[market]}</p>}><BrandMarketOffers market={market} make={catalogMakes}/></Suspense>)}</div></BrandPreviewProvider>
 

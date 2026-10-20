@@ -94,3 +94,8 @@
 
 # Owner next model year — 20.10.2026
 - The manual parameter form must calculate a new car selected as next model year (2027 during 2026). Keep the selected year; use an explicit new-vehicle scenario without fabricating a manufacturing date or shifting the import/tariff year. Explicit future production dates and years beyond next year remain invalid. Feed rows do not automatically gain this manual scenario.
+
+# Owner catalog discovery/layout — 20.10.2026
+- Desktop catalog filters belong on the left, without a filled outer panel, separated from results by a vertical rule. Preserve the mobile sheet and compact sort button. This supersedes the earlier right-sidebar placement.
+- Opening model selection must expose the complete available directory, with incremental rendering allowed but no silent fifty-model cap. Base-model discovery includes its variants even when an exact base record exists; exact technical identity for calculations remains separate.
+- The existing autocatalog is the intended future editable knowledge core. Do not automatically promote feed observations to verified specifications or fill missing 30-minute power without evidence. The owner requested search/layout first and encyclopedia population in a subsequent stage.
