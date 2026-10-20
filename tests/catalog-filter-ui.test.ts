@@ -54,10 +54,7 @@ test("catalog filters use direct range inputs, quick presets and a real mobile b
   assert.match(source, /yearAsc/);
   assert.doesNotMatch(source, /FilterActions/);
   assert.doesNotMatch(source, /Показать<\/button>/);
-  assert.match(page, /totalRubDesc/);
-  assert.match(page, /yearAsc/);
-  assert.match(storage, /totalRubDesc/);
-  assert.match(storage, /yearAsc/);
+  // Shared sorting behavior is covered by catalog-sort-color and compact-sort tests.
   assert.match(template, /ac-home-filter-drawer::before/);
   assert.match(template, /align-items: flex-end/);
 });
