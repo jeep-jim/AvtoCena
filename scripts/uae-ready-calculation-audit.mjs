@@ -4,6 +4,8 @@ import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {getOfferFromCurrentShard} from '../apps/web/lib/catalog/storage.ts';
 import {prepareSellerInventory,inventorySourceEvidence} from '../apps/web/lib/catalog/prepare-seller-inventory.ts';
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit.ts';
+import {specificationEvidenceComplete,unprovenEnginePrecision} from '../apps/web/lib/catalog/modification-matching.ts';
+import {calculateOfferWithVerifiedSpecifications} from '../apps/web/lib/catalog/customs-pricing.ts';
 const storage=getJsonStorage(),before=await storage.readJson('catalog/manifest.json',null);
 const projection=await storage.readJson('catalog/public/projection/uae.json',null);
 if(!before?.generationId||projection?.generationId!==before.generationId)throw Error('generation_mismatch');
@@ -21,6 +23,11 @@ for(const row of pending){
    const evidence=inventorySourceEvidence(offer);
    const missing=['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(k=>({field:k,...classifySpecificationEvidence(evidence,k)})).filter(x=>!['exact','not_applicable'].includes(x.state));
    const reason=missing.length?missing.map(x=>x.field+':'+x.reason).sort().join('|'):!(Number(offer.sourcePrice)>0)?'source_price_missing':'calculation_not_ready';
+   if(reason==='calculation_not_ready'){
+    const complete=specificationEvidenceComplete(evidence);
+    const calculated=complete?await calculateOfferWithVerifiedSpecifications(evidence,true):null;
+    console.log('UAE_PENDING_DIAGNOSTIC',JSON.stringify({id:offer.id,make:offer.make,model:offer.model,complete,unprovenEnginePrecision:unprovenEnginePrecision(evidence),status:calculated?.calculationStatus,missing:calculated?.calculationSnapshot?.customs?.missing,totalRub:calculated?.totalRub,sourcePrice:offer.sourcePrice,sourceCurrency:offer.sourceCurrency}));
+   }
    reasons[reason]=(reasons[reason]||0)+1;
    console.log('UAE_PENDING_KNOWN_SPECS',JSON.stringify({id:offer.id,reason}));
   }
