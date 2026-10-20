@@ -57,7 +57,7 @@ try{
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.evaluate(()=>scrollTo(0,0));
  await page.getByRole('button',{name:'Список',exact:true}).click();
- assert.equal(await page.locator('.ac-catalog-list-row').count(),6);
+ await page.locator('.ac-catalog-list-row').first().waitFor();assert.equal(await page.locator('.ac-catalog-list-row').count(),6);
  assert.equal(await page.getByText('Лот 12345',{exact:true}).count(),6);
  assert.equal(await page.locator('.ac-list-price').count(),6);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'list stays inside viewport');
@@ -65,7 +65,7 @@ try{
  await page.reload();await page.waitForTimeout(500);
  assert.equal(await page.getByRole('button',{name:'Список',exact:true}).getAttribute('aria-pressed'),'true');
  await page.getByRole('button',{name:'Плитка',exact:true}).click();
- assert.equal(await page.locator('.ac-catalog-card').count(),6);
+ await page.locator('.ac-catalog-card').first().waitFor();assert.equal(await page.locator('.ac-catalog-card').count(),6);
  await page.screenshot({path:out+'/sidebar-'+width+'.png'});
  if(width>=1024){await page.locator('.ac-catalog-selection').getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForTimeout(200);assert.equal(await page.locator('.ac-catalog-selection .ac-filter-chip').count(),0);}console.log('SIDEBAR_OK',width);await context.close();
  }
