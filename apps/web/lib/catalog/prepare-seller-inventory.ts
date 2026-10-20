@@ -1,4 +1,4 @@
-import {restoreDubicarsDisplacement} from './dubicars-displacement';
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {restoreProAuctionsPower} from "./proauctions-source-parameters";
 import {enrichEncarOfficialPower} from "./korea-official-power";
@@ -18,7 +18,8 @@ import { combustionPowerMismatch } from './combustion-power-consistency';
 
 /** Modern adapter evidence is authoritative; legacy replay must not erase it. */
 export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
-  input = restoreDubicarsDisplacement(input);
+  input = applyUaeManualSpecifications(input);
+  if(input.market==='uae')return input;
   const op:any=input.operational || {};
   const semantic=op.semanticEvidence || {};
   const sourceBound=op.exactDetail === true || (op.detailIdentityVerified === true && op.fieldIdentityVerified === true);
@@ -30,6 +31,7 @@ export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
 }
 
 export async function prepareSellerInventory(input: VehicleOffer, options: { preservePublishedPrice?: boolean } = {}): Promise<VehicleOffer | null> {
+  input=applyUaeManualSpecifications(input);
   if (!sourceInventoryInScope(input)) return null;
   if (isJapanAuctionOffer(input) && !japanAuctionSoldPriceVerified(input)) return null;
   // A published quote is already complete. Its compact record intentionally
@@ -42,7 +44,7 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
     if (!combustionPowerMismatch(repriced)) return repriced;
   }
   const source = enrichEncarOfficialPower(enrichOfferWithSourceTableParameters(inventorySourceEvidence(input)));
-  const original = await enrichOfferWithKnowledgeCore(source);
+  const original = input.market==='uae'?applyUaeManualSpecifications(source):await enrichOfferWithKnowledgeCore(source);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated) && !combustionPowerMismatch(calculated)) {

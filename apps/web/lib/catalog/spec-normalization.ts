@@ -1,4 +1,4 @@
-import {restoreDubicarsDisplacement} from './dubicars-displacement';
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {internationalModel} from './international-model';
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
@@ -311,7 +311,7 @@ function normalizedCurrency(offer: Partial<VehicleOffer>) {
 }
 
 export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offer: T): T {
-  offer = restoreDubicarsDisplacement(offer);
+  if(offer.market==='uae')return applyUaeManualSpecifications(offer);
   const primary = primaryText(offer);
   const full = allText(offer);
   const canonicalFuel = canonicalSourceFuel(offer.fuel) || offer.fuel;

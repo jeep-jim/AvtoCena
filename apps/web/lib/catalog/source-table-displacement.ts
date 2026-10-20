@@ -1,7 +1,9 @@
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import type { VehicleOffer } from './types';
 
 /** Recover exact displacement from a retained, listing-bound engine table. */
 export function enrichOfferWithSourceTableDisplacement<T extends VehicleOffer>(offer:T):T {
+  if(offer.market==='uae')return applyUaeManualSpecifications(offer);
   if (Number(offer.engineCc) > 0 || offer.fuel === 'electric' || offer.powertrainKind === 'electric') return offer;
   const snapshot=offer.operational?.sourceSpecifications;
   const semantic:any=offer.operational?.semanticEvidence || {};

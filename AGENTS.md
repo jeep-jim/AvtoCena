@@ -87,3 +87,7 @@
 
 # Owner data storage policy — 20.10.2026
 - Use the configured REG object storage (owner-stated capacity 1000 GB) for durable application data, uploaded media and archives. Keep the server disk for runtime, bounded caches/logs and limited deployment rollback copies. Do not introduce local bulk feed/archive copies. Preserve storage credentials, existing object keys and publication guards; running Docker layers require local disk and must be bounded through safe retention.
+
+# Owner UAE manual specifications — 20.10.2026
+- UAE seller/feed horsepower and displacement are untrusted and must not populate catalog specifications or automatic customs calculations. This supersedes the 19.10 supplier-displacement instruction. Apply to new intake and already retained UAE records/projections; do not restore values from titles, source tables or stored feed labels.
+- Show seller price until parameters are manually supplied. Preserve separate employee-saved calculations and existing manual input/save flow. Other markets and source inventory controls remain unchanged.

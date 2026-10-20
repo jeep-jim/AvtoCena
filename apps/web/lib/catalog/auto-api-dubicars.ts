@@ -1,5 +1,3 @@
-import {dubicarsDisplacement} from './dubicars-displacement';
-import {dubicarsHorsepower} from './dubicars-horsepower';
 import {stableOfferId} from './storage';
 import {canonicalizeSemanticSourceFields} from './powertrain-safety';
 import type {VehicleOffer} from './types';
@@ -19,10 +17,8 @@ export function normalizeAutoApiDubicars(row:any,observedAt=new Date().toISOStri
  }))].slice(0,30).map(url=>({id:'',url,objectKey:'',checksum:'',size:0,mimeType:'image/jpeg'}));
  const fields=canonicalizeSemanticSourceFields({fuel:text(d.engine_type),bodyType:text(d.body_type),transmission:text(d.transmission_type),drive:text(d.drive_type)});
  const kind=fields.fuel==='electric'?'electric':fields.fuel==='hybrid'?'other_hybrid':fields.fuel?'combustion':'unknown';
- // Use the supplier-confirmed unit, preserving the original value and unit.
- const displacement=fields.fuel==='electric'?undefined:dubicarsDisplacement(d.displacement),engineCc=displacement?.cc;
- const horsepower=dubicarsHorsepower(d);
+ // Owner 20.10.2026: seller power and displacement must not enter catalog specifications.
  const price=positive(d.price),title=[text(d.mark),text(d.model),text(d.configuration),text(d.complectation)].filter(Boolean).join(' ');
- return {id:stableOfferId(AUTO_API_DUBICARS_SOURCE,id),sourceId:AUTO_API_DUBICARS_SOURCE,sourceOfferId:id,market:'uae',offerType:'fixed',status:'active',catalogKind:'listing',make:text(d.mark),model:text(d.model),trim:text(d.configuration)||text(d.complectation)||undefined,sourceTitle:title,year,...fields,powertrainKind:kind,engineCc,powerHp:horsepower?.hp,powerDataConfidence:horsepower?'source_exact':undefined,powerDataSource:horsepower?.source,mileageKm:/^\d+$/.test(text(d.km_age))?Number(d.km_age):undefined,sourcePrice:price,sourceCurrency:'AED',priceMode:'fixed',images,totalRub:null,calculationStatus:'needs_data',firstSeenAt:observedAt,updatedAt:observedAt,
- operational:{sourceUrl:u.origin+u.pathname,sourceVenueName:'DubiCars',sourceTitle:title,provider:'auto-api.com',exactDetail:true,detailIdentityVerified:true,fieldIdentityVerified:true,photoIdentityVerified:images.length>0,exactPhotos:images.length>0,galleryVerified:images.length>0,galleryImageCount:images.length,lastSeenAt:observedAt,sourceDisplacementLabel:text(d.displacement),semanticEvidence:{year:evidence('year',year),fuel:evidence('engine_type',fields.fuel),engineCc:displacement?{source:displacement.source,status:'exact',value:engineCc,rawValue:displacement.raw,sourceUnit:displacement.unit}:evidence('displacement',undefined),powerHp:horsepower?{source:horsepower.source,status:'exact',value:horsepower.hp,rawValue:horsepower.raw,sourceUnit:horsepower.unit}:evidence('power',undefined),certifiedPower:evidence('certified_30min_power',undefined)}}};
+ return {id:stableOfferId(AUTO_API_DUBICARS_SOURCE,id),sourceId:AUTO_API_DUBICARS_SOURCE,sourceOfferId:id,market:'uae',offerType:'fixed',status:'active',catalogKind:'listing',make:text(d.mark),model:text(d.model),trim:text(d.configuration)||text(d.complectation)||undefined,sourceTitle:title,year,...fields,powertrainKind:kind,mileageKm:/^\d+$/.test(text(d.km_age))?Number(d.km_age):undefined,sourcePrice:price,sourceCurrency:'AED',priceMode:'fixed',images,totalRub:null,calculationStatus:'needs_data',firstSeenAt:observedAt,updatedAt:observedAt,
+ operational:{sourceUrl:u.origin+u.pathname,sourceVenueName:'DubiCars',sourceTitle:title,provider:'auto-api.com',exactDetail:true,detailIdentityVerified:true,fieldIdentityVerified:true,photoIdentityVerified:images.length>0,exactPhotos:images.length>0,galleryVerified:images.length>0,galleryImageCount:images.length,lastSeenAt:observedAt,semanticEvidence:{year:evidence('year',year),fuel:evidence('engine_type',fields.fuel),engineCc:evidence('manual_engine_cc',undefined),powerHp:evidence('manual_power_hp',undefined),certifiedPower:evidence('certified_30min_power',undefined)}}};
 }

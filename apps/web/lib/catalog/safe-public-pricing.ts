@@ -1,4 +1,4 @@
-import {restoreDubicarsDisplacement} from './dubicars-displacement';
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import { restoreSourceModelName } from "./source-model-name";
 import {isGreenCornerOffer} from "./green-corner-contract";
 import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
@@ -10,7 +10,8 @@ import { auditedQuoteRejections } from './audited-quote-quarantine';
 
 /** Reuse only a bound, dated CBR conversion; never substitute a delivered quote. */
 export function safePublicPricing<T extends Record<string, any>>(input: T): T {
-  input = restoreDubicarsDisplacement(restoreSourceModelName(withoutRetiredExportCharge(input)));
+  input = applyUaeManualSpecifications(restoreSourceModelName(withoutRetiredExportCharge(input)));
+  if(input.market==='uae')return input;
   const namedKind = namedElectrifiedPowertrainKind(input);
   const powertrainMismatch = Boolean(namedKind && input.powertrainKind === 'combustion');
   const sanity = catalogPowerSanity(input);

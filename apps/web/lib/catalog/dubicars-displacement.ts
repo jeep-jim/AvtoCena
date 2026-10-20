@@ -9,13 +9,5 @@ export function dubicarsDisplacement(value: unknown) {
  if(cc<100||cc>10000||!Number.isInteger(cc))return undefined;
  return {cc,raw,unit:litres?'L':'cm3',source:litres?'auto_api_dubicars:displacement_litres':'auto_api_dubicars:displacement_cc'};
 }
-/** Upgrade only missing values from this paid feed; keep exact/manual values. */
-export function restoreDubicarsDisplacement<T extends Record<string,any>>(offer:T):T {
- if(offer.market!=='uae'||offer.sourceId!=='dubicars_uae_exact'||offer.operational?.provider!=='auto-api.com'
-  ||Number(offer.engineCc)>0||offer.fuel==='electric'||offer.powertrainKind==='electric')return offer;
- const value=dubicarsDisplacement(offer.operational?.sourceDisplacementLabel);
- if(!value)return offer;
- return {...offer,engineCc:value.cc,totalRub:null,calculationStatus:'needs_data',calculationSnapshot:undefined,
-  operational:{...offer.operational,semanticEvidence:{...offer.operational?.semanticEvidence,
-   engineCc:{source:value.source,status:'exact',value:value.cc,rawValue:value.raw,sourceUnit:value.unit}}}};
-}
+/** Retained compatibility export; source restoration is disabled by owner policy. */
+export {applyUaeManualSpecifications as restoreDubicarsDisplacement} from './uae-manual-specifications';

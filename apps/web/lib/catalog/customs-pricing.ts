@@ -1,3 +1,4 @@
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {applyCatalogEditorialPrice,readCatalogEditorial} from './editorial';
 import {youngImportIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice} from "./china-cny-price";
@@ -177,6 +178,11 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false, userParameters = false): Promise<VehicleOffer> {
   input=applyCatalogEditorialPrice(input,await readCatalogEditorial());
   input=await withChinaCnyPrice(input);
+  if(input.market==='uae'&&!userParameters){
+    const safe=applyUaeManualSpecifications(input);
+    const rate=await convertToRub(safe.sourcePrice,safe.sourceCurrency);
+    return applyUaeManualSpecifications({...safe,calculationSnapshot:{currencyRate:rate||undefined}});
+  }
   const coreEnriched = resolvedModification ? input : await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
   const representativePowerHp = String(coreEnriched.powerDataSource || "").startsWith("vehicle-model-representative:")
     ? positive(coreEnriched.powerHp)
@@ -540,6 +546,7 @@ export async function calculateOfferWithPreliminaryPowerPricing(input: VehicleOf
 
 /** Ephemeral scenario: validated customer inputs never become catalog evidence. */
 export async function calculateCustomerParameterScenario(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+  input=applyUaeManualSpecifications(input);
   const scenario: VehicleOffer = { ...withoutDeliveredPrice(input), ...parameters,
     catalogPricingMode: undefined, sellerPriceRub: undefined, modificationSelection: undefined, recoveryQualification: undefined,
     powerDataConfidence: "estimated", powerDataSource: "customer_input",

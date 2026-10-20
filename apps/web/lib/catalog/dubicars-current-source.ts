@@ -1,3 +1,4 @@
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {assertCollectionEnabled} from './collection-controls';
 import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { CATALOG_BRANDS } from "./brands";
@@ -507,7 +508,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
       normalized.utilizationPowerKw = undefined;
     }
     if (row.specificationGroups) captureSourceTable(normalized,row.specificationGroups,"listing_fields");
-    return normalized;
+    return applyUaeManualSpecifications(normalized);
   }
 
   async refreshOffer(offer: VehicleOffer): Promise<VehicleOffer> {

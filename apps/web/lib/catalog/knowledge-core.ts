@@ -1,3 +1,4 @@
+import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import fs from "node:fs/promises";
 import path from "node:path";
 import { getDataRoot } from "../data";
@@ -386,6 +387,7 @@ export function sanitizeLegacyKnowledgeSpecifications<T extends VehicleOffer>(of
 }
 
 export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer: T): Promise<T> {
+  if(offer.market==='uae')return applyUaeManualSpecifications(offer);
   offer = sanitizeLegacyKnowledgeSpecifications(offer);
   const index = await readKnowledgeCoreIndex();
   let current: VehicleOffer = offer;

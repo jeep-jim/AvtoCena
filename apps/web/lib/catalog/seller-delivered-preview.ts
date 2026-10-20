@@ -13,7 +13,7 @@ export async function attachSellerDeliveredPreviews<T extends Partial<VehicleOff
  await Promise.all(Array.from({length:Math.min(6,offers.length)},async()=>{
   while(cursor<offers.length){
    const i=cursor++,offer=offers[i] as T & {savedCalculationPreview?:unknown};
-   if(!offer.id||offer.market==="japan"||offer.catalogPricingMode!=="seller"||offer.savedCalculationPreview)continue;
+   if(!offer.id||(offer.market==="japan"||offer.market==="uae")||offer.catalogPricingMode!=="seller"||offer.savedCalculationPreview)continue;
    try{
     const key=JSON.stringify([offer.id,offer.updatedAt,offer.sourcePrice,offer.sourceCurrency,offer.calculationSnapshot?.currencyRate,configuration,new Date().toISOString().slice(0,10)]);
     const quote=await quotes.get(key,async()=>{

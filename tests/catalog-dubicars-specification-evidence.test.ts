@@ -70,10 +70,10 @@ test("DubiCars promotes exact values only from the bounded specification block",
   const offer = source.normalizeOffer(row);
   assert.ok(offer);
   assert.equal(offer.calculationStatus, "needs_data");
-  assert.equal(offer.powerDataConfidence, "source_exact");
+  assert.equal(offer.powerDataConfidence, undefined);
   assert.equal(classifySpecificationEvidence(offer, "fuelPowertrain").state, "exact");
-  assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "exact");
-  assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "missing");
+  assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "missing");
 });
 
 test("DubiCars ranges, unknown fuel, and implausible power stay non-exact", () => {
@@ -209,8 +209,8 @@ test("DubiCars refreshOffer requests only the saved fixed-ID URL and returns exa
     assert.deepEqual(base, before);
     assert.equal(refreshed.sourceOfferId, "1000265");
     assert.equal(refreshed.sourcePrice, 145_000);
-    assert.equal(refreshed.engineCc, 2494);
-    assert.equal(refreshed.powerHp, 181);
+    assert.equal(refreshed.engineCc, undefined);
+    assert.equal(refreshed.powerHp, undefined);
     assert.equal(refreshed.images.length, 5);
     assert.equal(refreshed.operational?.detailIdentityVerified, true);
   } finally {
