@@ -82,7 +82,7 @@ export async function GET(request: Request) {
     // Read only bounded name/count directories for the selected make, never offers.
     // The paid source switches and real visitor-IP checks stay in readAjesDirectory.
     const make=clean(url.searchParams.get('make')).slice(0,160);
-    if(make){
+    if(make&&!url.searchParams.get('market')){
       const sources=await Promise.allSettled(['korea','japan'].map(market=>readAjesDirectory({market,make})));
       for(const source of sources)if(source.status==='fulfilled')rows.push(...source.value.models.map(row=>({make:row.make,model:row.model,count:row.total})));
     }

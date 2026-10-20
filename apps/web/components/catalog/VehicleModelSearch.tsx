@@ -232,11 +232,11 @@ export function VehicleModelSearch({
     if(sourceItems||!contextual||!open)return;
     let cancelled=false;setInventoryLoading(true);setInventoryError(false);
     setInventory(null);
-    loadModelSuggestions(true,undefined,make).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
+    loadModelSuggestions(true,undefined,make,sourceMarket).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
       .catch(()=>{if(!cancelled)setInventoryError(true);})
       .finally(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
-  },[sourceItems,contextual,open,retry,make]);
+  },[sourceItems,contextual,open,retry,make,sourceMarket]);
   const searching = loading || (contextual && inventoryLoading);
   const suggestionError = directoryError || inventoryError;
 
