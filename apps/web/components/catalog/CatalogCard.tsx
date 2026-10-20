@@ -1,4 +1,5 @@
 "use client";
+import {useCatalogView} from "./CatalogSelectionContext";
 import {publicationWithdrawn} from "@/lib/catalog/publication-policy";
 import {chinaCardVariant} from "@/lib/catalog/china-card-variant";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
@@ -47,6 +48,7 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
   const dealer=useDealerBrowsing();
+  const view=useCatalogView();
   const candidatePreview = useSavedCalculationPreview(offer);
   const savedPreview = savedCalculationPreviewRub(candidatePreview) ? candidatePreview : undefined;
   offer = {...offer,savedCalculationPreview:savedPreview};
@@ -102,6 +104,16 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const engineLabel = previewEngineCc ? `${previewEngineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
 
   if(publicationWithdrawn(offer))return null;
+  if(view==="list") return <article className="ac-catalog-list-row" data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
+    <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-catalog-list-link">
+      <div className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</div>
+      <div className="ac-list-identity"><strong>{o.title}</strong><span>{priceLabel} · {o.marketLabel}</span>{o.auctionDate&&<small>Аукцион · {String(o.auctionDate).slice(0,10)}</small>}</div>
+      <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel}</span><small>{o.operational?.chassisCode||o.chassisCode||o.bodyLabel||"Кузов уточняется"}</small></div>
+      <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel}</small></div>
+      <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span>{o.auctionGrade&&<small>Оценка <b>{o.auctionGrade}</b></small>}</div>
+      <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
+    </IntentPrefetchLink><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
+  </article>;
   return (
     <article data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">

@@ -44,7 +44,7 @@ function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?
 }
 
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
-const OVERVIEW_CARDS = 10;
+const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 24;
 const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
 type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number };
@@ -145,7 +145,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   }
   const green = (!dealer||dealer.markets.includes("japan")) ? await greenRead : null;
   const greenMatched = (japanAll || !selectedMarket) && green ? filterGreenCorner(await currentGreenCornerPrices(green.items),Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]))) : green?.items || [];
-  const greenItems = japanAll ? greenMatched.slice(0,10).map(publicGreenOffer) : await applyActiveBusinessPricingBatch(greenMatched.slice(0,10).map(publicGreenOffer));
+  const greenItems = japanAll ? greenMatched.slice(0,6).map(publicGreenOffer) : await applyActiveBusinessPricingBatch(greenMatched.slice(0,6).map(publicGreenOffer));
   if (japanAll && green) {
     facets={...facets};
     const stockFacets=greenCornerFacets(green.items);

@@ -16,7 +16,7 @@ export async function AjesRail({market='japan',params={}}:{market?:'japan'|'chin
  const query={...params,market};
  const totalPromise=readAjesCountSummary(JSON.stringify(query)).catch(()=>null);
  let items:Awaited<ReturnType<typeof readAjesPublic>>['items']=[],unavailable=false,unsupported=false,partial=false,stale=false,filteredByPage=false,hasMore=false;
- try{const page=await readAjesCatalogPage(query);items=page.items.slice(0,10);partial=Boolean(page.partial);stale=Boolean(page.stale);filteredByPage=page.filteredByPage;hasMore=page.hasMore;}catch(error){unavailable=true;unsupported=error instanceof AjesFilterUnavailable;}
+ try{const page=await readAjesCatalogPage(query);items=page.items.slice(0,6);partial=Boolean(page.partial);stale=Boolean(page.stale);filteredByPage=page.filteredByPage;hasMore=page.hasMore;}catch(error){unavailable=true;unsupported=error instanceof AjesFilterUnavailable;}
  const count=await totalPromise;const total=exactAjesCount(count);
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">

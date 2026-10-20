@@ -15,7 +15,7 @@ let server,origin=live;
 if(!live){
  const next={name:'isolated-next-navigation',setup(b){
   b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-fixture'}));
-  b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?`const router={push(url){history.pushState(null,'',url);window.__lastFilterUrl=url;},replace(url){history.replaceState(null,'',url);window.__lastFilterUrl=url;}};export const useRouter=()=>router;export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);`:`import React from 'react';export default function Link({children,...props}){delete props.prefetch;return React.createElement('a',props,children);}`,resolveDir:process.cwd()}));
+  b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?`const router={prefetch(){},push(url){history.pushState(null,'',url);window.__lastFilterUrl=url;},replace(url){history.replaceState(null,'',url);window.__lastFilterUrl=url;}};export const useRouter=()=>router;export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);`:`import React from 'react';export default function Link({children,...props}){delete props.prefetch;return React.createElement('a',props,children);}`,resolveDir:process.cwd()}));
  }};
  for(const mode of ['fixture','baseline'])await build({entryPoints:['tests/browser/catalog-sidebar-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/${mode}.js`,tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"'},plugins:[next,...(mode==='baseline'?[{name:'without-new-style',setup(b){b.onLoad({filter:/MobileCatalogDropdowns\.css$/},()=>({contents:'',loader:'css'}));}}]:[])]});
  const sources=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'].map(file=>({file,text:fs.readFileSync(file,'utf8')}));
@@ -55,6 +55,17 @@ try{
  assert.equal(await page.locator('.ac-catalog-filter-panel').isVisible(),true);
  }else assert.equal(await page.locator('.ac-filter-more-button').isVisible(),true);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.evaluate(()=>scrollTo(0,0));
+ await page.getByRole('button',{name:'Список',exact:true}).click();
+ assert.equal(await page.locator('.ac-catalog-list-row').count(),6);
+ assert.equal(await page.getByText('Лот 12345',{exact:true}).count(),6);
+ assert.equal(await page.locator('.ac-list-price').count(),6);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'list stays inside viewport');
+ await page.screenshot({path:out+'/list-'+width+'.png'});
+ await page.reload();await page.waitForTimeout(500);
+ assert.equal(await page.getByRole('button',{name:'Список',exact:true}).getAttribute('aria-pressed'),'true');
+ await page.getByRole('button',{name:'Плитка',exact:true}).click();
+ assert.equal(await page.locator('.ac-catalog-card').count(),6);
  await page.screenshot({path:out+'/sidebar-'+width+'.png'});
  if(width>=1024){await page.locator('.ac-catalog-selection').getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForTimeout(200);assert.equal(await page.locator('.ac-catalog-selection .ac-filter-chip').count(),0);}console.log('SIDEBAR_OK',width);await context.close();
  }
