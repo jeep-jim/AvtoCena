@@ -58,17 +58,18 @@ try {
   // Multi-select deliberately stays open; close it before using controls underneath.
   await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
   assert.equal(await modelTrigger.getAttribute('aria-expanded'),'false');
+  const sortScope=width<1024?scope:page.locator('.ac-catalog-selection');
   for(const [label,value] of [['Дешевле','totalRub'],['Дороже','totalRubDesc'],['Новые','year'],['Ранние','yearAsc']]) {
-   const button=scope.getByRole('button',{name:label,exact:true});await button.click();
+   const button=sortScope.getByRole('button',{name:label,exact:true});await button.click();
    assert.equal(await button.getAttribute('aria-pressed'),'true');
    assert.equal(await button.evaluate(el=>el.scrollWidth<=el.clientWidth),true,'sort label fits its button');
    assert.equal(await scope.locator('input[name="sort"]').inputValue(),value);
    // The active background transitions for 160 ms; assert the settled style.
    await page.waitForFunction(()=>[...document.querySelectorAll('.ac-sort-control button[aria-pressed="true"]')].every(el=>getComputedStyle(el).backgroundColor==='rgb(255, 53, 61)'),null,{timeout:5000});
    assert.equal(await button.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
-   assert.equal(await scope.locator('.ac-sort-control button[aria-pressed="true"]').count(),1);
+   assert.equal(await sortScope.locator('.ac-sort-control button[aria-pressed="true"]').count(),1);
   }
-  await scope.getByRole('button',{name:'Ранние',exact:true}).click();
+  await sortScope.getByRole('button',{name:'Ранние',exact:true}).click();
   assert.equal(await scope.locator('input[name="sort"]').inputValue(),'');
   const city=width<1024?scope:page;
   await city.getByRole('button',{name:/Выбрать город. Сейчас/}).click();await page.getByRole('button',{name:'Новосибирск',exact:true}).click();
