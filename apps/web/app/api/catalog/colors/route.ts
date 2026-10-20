@@ -20,5 +20,5 @@ export async function GET(request:Request){
   }catch{partial=true;return [];}
  }));
  if(!market){try{parts.push((await readGreenCorner()).items.map(row=>colorName(row.color)).filter(Boolean));}catch{partial=true;}}
- return NextResponse.json({ok:true,colors:[...new Set(parts.flat())].sort((a,b)=>a.localeCompare(b,'ru')),partial},{headers:{'Cache-Control':'private, max-age=30'}});
+ return NextResponse.json({ok:true,colors:[...new Set(parts.flat())].filter(color=>color&&!/^[-–—\s]+$/.test(color)).sort((a,b)=>a.localeCompare(b,'ru')),partial},{headers:{'Cache-Control':'private, max-age=30'}});
 }

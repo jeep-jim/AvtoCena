@@ -18,9 +18,9 @@ if(!live){
   b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?`const router={prefetch(){},push(url){history.pushState(null,'',url);window.__lastFilterUrl=url;},replace(url){history.replaceState(null,'',url);window.__lastFilterUrl=url;}};export const useRouter=()=>router;export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);`:`import React from 'react';export default function Link({children,...props}){delete props.prefetch;return React.createElement('a',props,children);}`,resolveDir:process.cwd()}));
  }};
  for(const mode of ['fixture','baseline'])await build({entryPoints:['tests/browser/catalog-sidebar-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/${mode}.js`,tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[next,...(mode==='baseline'?[{name:'without-new-style',setup(b){b.onLoad({filter:/MobileCatalogDropdowns\.css$/},()=>({contents:'',loader:'css'}));}}]:[])]});
- const sources=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'].map(file=>({file,text:fs.readFileSync(file,'utf8')}));
+ const sources=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx','apps/web/components/layout/RoutePreloader.tsx'].map(file=>({file,text:fs.readFileSync(file,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
- const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
+ const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes|publicLayoutFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
  const css=await postcss([tailwindcss({content:['apps/web/components/home/**/*.tsx','apps/web/components/dealers/**/*.tsx','apps/web/components/ui/**/*.tsx','apps/web/components/catalog/**/*.{ts,tsx}','tests/browser/catalog-sidebar-fixture.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
  server=http.createServer((req,res)=>{const u=new URL(req.url,'http://fixture');if(u.pathname==='/cars'||u.pathname==='/'){
@@ -68,6 +68,8 @@ async function verifyControls(page,scope){
   assert.deepEqual(fields[0],fields[1],theme+' quick fields match');
   assert.deepEqual(fields[0],fields[2],theme+' quick fields match dropdown');
   const checks=await scope.locator('.ac-power-limit input[type=checkbox],.ac-electric-filter input[type=checkbox]').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {width:s.width,height:s.height,border:s.border,background:s.backgroundColor,radius:s.borderRadius};}));
+  const copy=await scope.locator('.ac-power-copy').evaluate(el=>{const r=el.getBoundingClientRect(),label=el.closest('label').getBoundingClientRect();return {width:r.width,bottom:r.bottom,labelBottom:label.bottom,color:getComputedStyle(el).color};});
+  assert.ok(copy.width>80,'power label must not inherit the old fake checkbox width');assert.ok(copy.bottom<=copy.labelBottom+1,'power text stays within its field');assert.notEqual(copy.color,'rgba(0, 0, 0, 0)');
   assert.equal(checks.length,2);assert.deepEqual(checks[0],checks[1],theme+' checkboxes match');
  }
 }

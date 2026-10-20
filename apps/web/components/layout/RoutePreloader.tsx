@@ -83,7 +83,7 @@ html[data-theme="light"] .ac-results-edit-form .ac-filter-control{
 .ac-power-limit{padding-right:56px!important}
 .ac-results-edit-form .ac-power-limit{padding-right:16px!important}
 .ac-electric-filter>span:first-of-type,
-.ac-power-limit>span:first-of-type,
+.ac-power-limit>span:first-of-type:not(.ac-power-copy),
 .ac-filter-checkbox-mark{
   display:flex!important;
   width:24px!important;
@@ -102,7 +102,7 @@ html[data-theme="light"] .ac-results-edit-form .ac-filter-control{
   line-height:1!important;
 }
 html[data-theme="light"] .ac-electric-filter>span:first-of-type,
-html[data-theme="light"] .ac-power-limit>span:first-of-type,
+html[data-theme="light"] .ac-power-limit>span:first-of-type:not(.ac-power-copy),
 html[data-theme="light"] .ac-filter-checkbox-mark{
   border-color:rgba(35,42,55,.18)!important;
   background:transparent!important;
@@ -221,7 +221,7 @@ html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[a
     padding-left:16px!important;
   }
   html body .ac-electric-filter>span:first-of-type,
-  html body .ac-power-limit>span:first-of-type{
+  html body .ac-power-limit>span:first-of-type:not(.ac-power-copy){
     width:24px!important;
     height:24px!important;
     min-width:24px!important;
