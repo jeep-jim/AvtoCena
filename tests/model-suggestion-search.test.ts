@@ -68,3 +68,17 @@ test('source brand aliases remain visible under their canonical selected make',(
  const find=createModelSuggestionSearch({version:1,brands:[],models:[['BENZ','C-CLASS',[],1],['MERCEDES BENZ','E-CLASS',[],1],['BMW','X5',[],1]]});
  assert.equal(find('','Mercedes-Benz').length,2);
 });
+
+test('placeholder models are omitted without corrupting search indexes or Japanese brand scope',()=>{
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['トヨタ','※',[],0],['トヨタ','Corolla',[],0],['スバル','Forester',[],0],['Toyota','---',[],0]]});
+ assert.deepEqual(find('','Toyota').map(row=>row.model),['Corolla']);
+ assert.equal(find('Forester')[0].model,'Forester');
+ assert.equal(find('').length,2);
+ assert.equal(mergeModelSuggestions([{make:'Toyota',model:'※',aliases:[]}],find(''), '').length,2);
+});
+
+test('unreviewed localized document headings do not enter the public dictionary; live models remain selectable',()=>{
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['BMW','3.「CO2排出量」については',[],0],['Toyota','カローラ',[],1],['Toyota','Corolla',[],1]]});
+ assert.equal(find('').length,2);
+ assert.equal(find('','Toyota').length,2);
+});

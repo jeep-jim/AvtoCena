@@ -134,7 +134,6 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
 export class AjesFilterUnavailable extends Error {constructor(){super('ajes_filter_unavailable');}}
 const first=(v:unknown)=>Array.isArray(v)?String(v[0]??''):v==null?'':String(v);
 export function ajesCatalogQuery(params:Record<string,unknown>):AjesQuery {
- if(params.market!=='china'&&params.market!=='korea'&&(first(params.powerFrom)||first(params.powerTo)))throw new AjesFilterUnavailable();
  if((params.market==='korea'||params.market==='china')&&first(params.frameNumber))throw new AjesFilterUnavailable();
  const q:AjesQuery={table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',page:1,pageSize:24};
  for(const k of ['make','model','color','fuel','transmission','drive','auctionGrade','chassis','frameNumber','lotNumber'] as const){const v=first(params[k]);if(v)q[k]=v;}

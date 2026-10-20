@@ -236,7 +236,7 @@ test('shared Japan query keeps chassis and leading-zero lot through a page reque
  assert.equal(q.chassis,'JF2');assert.equal(q.lotNumber,'001234');assert.equal(q.page,2);assert.equal(q.engineFrom,660);
  const sql=ajesQuery(q).sql;assert.ok(sql.includes("kuzov='JF2'"));assert.ok(sql.includes("lot='001234'"));assert.ok(sql.endsWith('limit 24,24'));
  assert.deepEqual(ajesCatalogQuery({...input,budget:'2000000'}),q);
- assert.throws(()=>ajesCatalogQuery({...input,powerTo:'160'}),AjesFilterUnavailable);
+ assert.equal(ajesCatalogQuery({...input,powerTo:'160'}).powerTo,160);
 });
 
 

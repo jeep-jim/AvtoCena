@@ -13,10 +13,15 @@ function* compileSearch(data:ModelSearchData){
  const rows:{make:string;model:string;aliases:string[];canonical:number;brand:string;names:string[]}[]=[];
  for(let i=0;i<data.models.length;i++){
   const [make,model,aliases,canonical]=data.models[i];
+  // Source-master contains unreviewed document headings as well as model names.
+  // Localized observations remain in knowledge storage; live inventory (canonical=1)
+  // is always searchable and is not subject to this directory-only display guard.
+  if(!suggestionKey(model)||(!canonical&&/[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/u.test(model)))continue;
+  const index=rows.length;
   const row={make,model,aliases,canonical,brand:brandKey(make),names:[...new Set([model,...aliases].map(suggestionKey).filter(Boolean))]};rows.push(row);
   const keys=new Set<string>();for(const name of row.names)for(let n=0;n<name.length-1;n++)keys.add(name.slice(n,n+2));
-  for(const key of keys){const list=fragmentRows.get(key)||[];list.push(i);fragmentRows.set(key,list);}
-  const list=makeRows.get(row.brand)||[];list.push(i);makeRows.set(row.brand,list);
+  for(const key of keys){const list=fragmentRows.get(key)||[];list.push(index);fragmentRows.set(key,list);}
+  const list=makeRows.get(row.brand)||[];list.push(index);makeRows.set(row.brand,list);
   if(i%200===199)yield;
  }
  const brandEntries=[...brandAliases].sort((a,b)=>b[0].length-a[0].length);
@@ -59,6 +64,7 @@ export async function prepareModelSuggestionSearch(data:ModelSearchData){const c
 export function mergeModelSuggestions(inventory:ModelSuggestion[], directory:ModelSuggestion[], query:string):ModelSuggestion[]{
  const merged=new Map<string,ModelSuggestion>();
  for(const row of [...directory,...inventory]){
+  if(!suggestionKey(row.model))continue;
   const key=`${suggestionKey(row.make)}:${suggestionKey(row.model)}`;
   const previous=merged.get(key);
   merged.set(key,{...row,aliases:[...new Set([...(previous?.aliases||[]),...row.aliases])]});

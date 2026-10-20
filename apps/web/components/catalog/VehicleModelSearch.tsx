@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal, flushSync } from "react-dom";
 import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection} from "@/lib/catalog/model-suggestion-search";
+import {canonicalCatalogBrand} from "@/lib/catalog/brands";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 
 type ModelSuggestion = {
@@ -365,7 +366,7 @@ export function VehicleModelSearch({
           aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}
           className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
         >
-          <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
+          <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{canonicalCatalogBrand(item.make)}</span> : null}</span>
           {multiple ? <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm" style={{ background: selectedModels.includes(item.model) ? "#ff353d" : "var(--ac-surface-3)", border: selectedModels.includes(item.model) ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: selectedModels.includes(item.model) ? "#fff" : "transparent" }}>✓</span> : <span className="shrink-0 opacity-70">↵</span>}
         </button>) : null}
         {items.length>visibleCount?<button type="button" className="min-h-11 w-full px-3 py-3 text-sm font-bold" onPointerDown={event=>event.preventDefault()} onClick={()=>setVisibleCount(count=>count+60)}>Показать ещё · {items.length-visibleCount}</button>:null}

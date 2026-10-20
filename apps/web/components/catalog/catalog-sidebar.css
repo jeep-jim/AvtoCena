@@ -94,7 +94,10 @@
 @media(min-width:1024px){
  .ac-catalog-page .ac-catalog-sidebar .ac-catalog-filter-panel .ac-sort-control{height:auto!important;min-height:0!important}
  .ac-catalog-page .ac-catalog-sidebar .ac-catalog-filter-panel .ac-sort-control>button{height:36px!important;min-height:36px!important}
- .ac-catalog-sidebar .ac-filter-dropdown{min-width:240px;max-width:calc(100vw - 64px);left:auto;right:0}
+ html body .ac-catalog-sidebar .ac-filter-dropdown{box-sizing:border-box;width:100%!important;min-width:0!important;max-width:100%!important;left:0!important;right:0!important;display:flex;flex-direction:column;overflow:hidden!important}
+ .ac-catalog-sidebar .ac-filter-dropdown>*{min-width:0;flex-shrink:0}
+ .ac-catalog-sidebar .ac-filter-dropdown>.ac-hide-scrollbar{min-height:0;flex:1 1 auto;overflow-y:auto}
+ .ac-catalog-sidebar .ac-filter-dropdown .ac-filter-option{min-width:0;max-width:100%;white-space:normal}
 }
 .ac-chassis-copy button{display:inline-flex;align-items:center;gap:4px}
 .ac-chassis-copy small{display:block}

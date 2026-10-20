@@ -20,7 +20,7 @@ test('stock power selection uses numeric nonempty evidence in lists and aggregat
   assert.doesNotMatch(sql,/regexp|pw\+0/);assert.match(sql,/pw>=100/);assert.match(sql,/pw<=160/);
  }
  for(const p of [{powerTo:'-1'},{powerFrom:'200',powerTo:'100'},{powerTo:'Infinity'}])assert.throws(()=>ajesQuery(ajesCatalogQuery({market:'china',...p})));
- assert.throws(()=>ajesCatalogQuery({market:'japan',powerTo:'160'}),AjesFilterUnavailable);
+ assert.match(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw<=160/);
  assert.match(ajesQuery(ajesCatalogQuery({market:'china',sort:'mileage',page:'2',pageSize:'48'})).sql,/order by mileage asc, id asc limit 48,48/);
 });
 
@@ -119,3 +119,15 @@ test('exact base Corolla does not hide other Corollas in supplier search',async(
  const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
  assert.deepEqual(resolveAjesModelSelection('Corolla',[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'COROLLA FIELDER'},{model:'CAMRY'}]),{model:'COROLLA|COROLLA CROSS|COROLLA FIELDER'});
 });
+
+ test('Japan power discovery checks every supplier alternative without assigning exact power',async()=>{
+ const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const filter=ajesResultFilter({powerTo:'160'});
+ for(const [sourcePower,expected] of [['79,98',true],['160',true],['160,200',false],['200,150',false],['',false],['0,98',false],['79,bad',false],['150,2501',false]] as const){
+  const offer={sourceId:'ajes_japan_feed',operational:{raw:{sourcePower}}};
+  assert.equal(filter.matches(offer),expected,sourcePower);
+  assert.equal('powerHp' in offer,false);
+ }
+ assert.equal(filter.matches({sourceId:'ajes_korea_feed',operational:{raw:{sourcePower:'150'}}}),false);
+ assert.equal(ajesResultFilter({powerFrom:'100',powerTo:'160'}).matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'79,150'}}}),false);
+ });

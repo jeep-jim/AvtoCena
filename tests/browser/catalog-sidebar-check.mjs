@@ -87,6 +87,16 @@ try{
  if(width>=1024){
  const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox(),h=await page.locator('.ac-catalog-heading').boundingBox();assert.ok(b.x+b.width<=r.x,'filters remain left of results');assert.ok(b.y<=h.y+1,'sidebar starts with the heading');
  assert.equal(await sidebar.evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
+ await sidebar.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
+ await page.waitForTimeout(150);
+ const brandMenu=sidebar.locator('.ac-filter-dropdown');
+ const menuBounds=await brandMenu.boundingBox();
+ assert.ok(menuBounds.x>=b.x&&menuBounds.x+menuBounds.width<=b.x+b.width,'make menu stays inside sidebar');
+ assert.equal(await brandMenu.evaluate(el=>el.scrollWidth<=el.clientWidth+1),true,'make menu has no horizontal clipping');
+ const brandSearch=await brandMenu.locator('input').boundingBox();
+ assert.ok(brandSearch.x>=menuBounds.x&&brandSearch.x+brandSearch.width<=menuBounds.x+menuBounds.width,'whole search field is visible');
+ await page.keyboard.press('Escape');
+
  assert.equal(await page.getByRole('button',{name:/Выбрать город. Сейчас/}).count(),0);
  assert.equal(await sidebar.getByRole('button',{name:'Убрать Кроссовер',exact:true}).count(),0);
  assert.equal(await page.locator('.ac-catalog-selection').getByRole('button',{name:'Убрать Кроссовер',exact:true}).isVisible(),true);

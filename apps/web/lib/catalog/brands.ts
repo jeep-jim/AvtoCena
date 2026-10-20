@@ -135,6 +135,9 @@ export const CATALOG_BRANDS: CatalogBrand[] = CATALOG_BRAND_NAMES
   .sort((left, right) => left.name.localeCompare(right.name, "en"));
 
 const LOCALIZED_ALIASES: Record<string, string> = {
+  "トヨタ": "Toyota", "レクサス": "Lexus", "日産": "Nissan", "ニッサン": "Nissan",
+  "ホンダ": "Honda", "マツダ": "Mazda", "三菱": "Mitsubishi", "ミツビシ": "Mitsubishi",
+  "スバル": "Subaru", "スズキ": "Suzuki", "ダイハツ": "Daihatsu", "いすゞ": "Isuzu", "光岡": "Mitsuoka",
   "기아": "Kia",
   "현대": "Hyundai",
   "쉐보레(GM대우)": "Chevrolet",

@@ -366,7 +366,7 @@ export function CatalogFilterUiEnhancer() {
           const up=below<Math.min(400,menu.scrollHeight)&&above>below;
           menu.classList.toggle("is-up",up);
           setImportant(menu,"max-height",`${Math.min(400,up?above:below)}px`);
-          setImportant(menu,"overflow-y","auto");
+          setImportant(menu,"overflow-y",menu.querySelector(":scope > .ac-hide-scrollbar")?"hidden":"auto");
         });
       }
     };

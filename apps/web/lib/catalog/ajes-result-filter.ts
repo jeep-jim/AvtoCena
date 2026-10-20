@@ -1,3 +1,4 @@
+import {ajesPowerFilterValues} from './ajes-power-estimate';
 import {matchesCatalogColor} from './catalog-color-index';
 import {filterSelections,matchesFilterSelection} from './filter-selections';
 import {AjesInputError} from './ajes-query';
@@ -18,7 +19,11 @@ export function ajesResultFilter(params:Record<string,unknown>){
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
  return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color),priceFilter,matches(offer:any){
   if(!matchesCatalogColor(offer,scalar(params.color)))return false;
-  if(powerFilter){const hp=Number(offer.powerHp);if(!Number.isFinite(hp)||hp<=0||(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo))return false;}
+  if(powerFilter){
+   const exact=Number(offer.powerHp);
+   const values=Number.isFinite(exact)&&exact>0?[exact]:ajesPowerFilterValues(offer);
+   if(!values.length||values.some(hp=>(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo)))return false;
+  }
   if(!matchesFilterSelection(catalogBodyType(offer),body))return false;
   if(!priceFilter)return true;
   const cityPrice=city?priceCardForCity(offer,city):null;
