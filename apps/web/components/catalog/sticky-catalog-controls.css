@@ -14,3 +14,12 @@
 @media(max-width:1023px){.ac-catalog-sticky-inner{padding:7px 12px;gap:6px}.ac-catalog-sticky-chips{gap:6px}.ac-catalog-sticky-icon{width:38px;height:38px}}
 
 .ac-catalog-sticky-chips>button{flex:none;white-space:nowrap}
+
+.ac-sort-mobile-icon{display:none}
+@media(max-width:1023px){
+ .ac-catalog-sticky-sort{width:38px;flex:none}
+ .ac-catalog-sticky-sort .ac-sort-select>button{width:38px;height:38px;min-height:38px;padding:0;gap:0;justify-content:center;border-radius:12px}
+ .ac-catalog-sticky-sort .ac-sort-title,.ac-catalog-sticky-sort .ac-sort-chevron{display:none}
+ .ac-catalog-sticky-sort .ac-sort-mobile-icon{display:block;flex:none}
+ .ac-catalog-sticky-sort .ac-filter-dropdown{left:auto;right:0;width:280px;max-width:calc(100vw - 68px)}
+}
