@@ -201,7 +201,7 @@ export function BrandLogoRail({
     return result;
   }, [brandCounts, knownBrands]);
   const activeBrands = useMemo(() => {
-    if (directoryMode) return suppliedBrands;
+    if (!homeBrandDirectory || directoryMode) return suppliedBrands;
     // Once live counts arrive, they become the source of truth on both /cars and
     // the homepage. This removes old knowledge-only brands with no live cars.
     if (countStatus === "ready") {
@@ -217,7 +217,7 @@ export function BrandLogoRail({
       if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
     return [...map.values()].sort(compareBrands);
-  }, [brands, countStatus, directoryMode, knownBrands, normalizedCounts, suppliedBrands]);
+  }, [brands, countStatus, directoryMode, homeBrandDirectory, knownBrands, normalizedCounts, suppliedBrands]);
   const orderedBrands = activeBrands;
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
@@ -227,6 +227,7 @@ export function BrandLogoRail({
 
 
   useEffect(() => {
+    if(!homeBrandDirectory&&!open)return;
     let cancelled = false;
     setCountStatus("loading");
     loadBrandCounts(countQuery)
@@ -241,7 +242,7 @@ export function BrandLogoRail({
         setCountStatus("error");
       });
     return () => { cancelled = true; };
-  }, [countQuery]);
+  }, [countQuery,homeBrandDirectory,open]);
 
   useEffect(() => {
     const rail = railRef.current;

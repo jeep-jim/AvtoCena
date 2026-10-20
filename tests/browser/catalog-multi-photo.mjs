@@ -45,19 +45,19 @@ try {
   await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
   await scope.getByPlaceholder('Найти марку').fill('Toyota');assert.equal(await scope.getByPlaceholder('Найти марку').evaluate(el=>el===document.activeElement),true);await scope.locator('[data-facet-value="Toyota"]').click();await scope.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await scope.locator('[data-facet-value="Kia"]').click();
   assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
-  await scope.getByRole('searchbox',{name:'Модель автомобиля'}).fill('Yaris');
-  await scope.getByRole('button',{name:/Yaris L/}).click();
-  if(width===1440)await page.waitForTimeout(250); // The first model request has been submitted.
-  const modelInput=scope.getByRole('searchbox',{name:'Модель автомобиля'});
-  assert.equal(await modelInput.inputValue(),'Yaris L, ');
+  const modelTrigger=scope.getByRole('searchbox',{name:'Модель автомобиля'});if(width<1024)await modelTrigger.click();
+  const modelScope=width<1024?page.getByRole('dialog',{name:'Выбор моделей'}):scope;const modelInput=width<1024?modelScope.getByRole('searchbox',{name:'Поиск модели'}):modelTrigger;
+  await modelInput.fill('Yaris');await modelScope.getByRole('button',{name:/Yaris L/}).click();
+  if(width===1440)await page.waitForTimeout(250);
+  assert.equal(await modelInput.inputValue(),width<1024?'':'Yaris L, ');
   await modelInput.fill('');
   assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris L','erasing search keeps the selected model');
-  await modelInput.fill('Yaris L, KX1');await scope.getByRole('button',{name:/KX1/}).click();
+  await modelInput.fill(width<1024?'KX1':'Yaris L, KX1');await modelScope.getByRole('button',{name:/KX1/}).click();
   if(width===1440){await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture-server',{detail:'/cars?make=Toyota,Kia&model=Yaris%20L'})));await page.waitForTimeout(30);}
   assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris L|KX1');assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
   // Multi-select deliberately stays open; close it before using controls underneath.
-  await scope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
-  assert.equal(await modelInput.getAttribute('aria-expanded'),'false');
+  await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
+  assert.equal(await modelTrigger.getAttribute('aria-expanded'),'false');
   for(const [label,value] of [['Дешевле','totalRub'],['Дороже','totalRubDesc'],['Новые','year'],['Ранние','yearAsc']]) {
    const button=scope.getByRole('button',{name:label,exact:true});await button.click();
    assert.equal(await button.getAttribute('aria-pressed'),'true');

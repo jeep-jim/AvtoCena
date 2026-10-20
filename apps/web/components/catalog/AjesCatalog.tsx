@@ -17,7 +17,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));const market=initial.market==='china'?'china':initial.market==='korea'?'korea':'japan';const label=market==='china'?'Китай':market==='korea'?'Корея':'Япония';initial.market=market;if(market!=='japan')initial.source='ajes';if(!initial.make&&initial.brand)initial.make=initial.brand;
  let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
  const countPromise=readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
- const makesPromise=readAjesMakes(JSON.stringify({market})).catch(()=>null);
+ const makesPromise=readAjesMakes(JSON.stringify(initial)).catch(()=>null);
  const directoryPromise=initial.make?readAjesDirectory({market,make:initial.make}).catch(()=>null):Promise.resolve(null);
  try{result=await readAjesCatalogPage(initial);}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  const directory=await directoryPromise;
@@ -40,7 +40,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":"Каталог автомобилей"}</h1>
  <p role="status" className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" data-catalog-result-count={displayTotal??undefined}><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span><span>Найдено: {ajesCountText(sourceTotal)}</span></p>
  </>}>
- {makes.length>0&&<BrandLogoRail initial={initial} brands={makes} resultCount={displayTotal??undefined}/>}
+ {makes.length>0&&<BrandLogoRail initial={initial} brands={makes.filter(make=>(!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))&&((makeDirectory?.makes||[]).some(row=>row.make===make&&row.total>0)||(result?.items||[]).some(row=>row.make===make)))} resultCount={displayTotal??undefined}/>}
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  {result&&<div className="mt-8 md:mt-9">
  <h2 className="mb-4 flex items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{sourceTotal&&<span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={displayTotal}>· {ajesCountText(sourceTotal)}</span>}</h2>

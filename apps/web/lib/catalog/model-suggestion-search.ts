@@ -7,13 +7,13 @@ function* compileSearch(data:ModelSearchData){
  const brandAliases=new Map<string,string>();
  for(const [make] of data.models)brandAliases.set(suggestionKey(make),suggestionKey(make));
  for(const [make,aliases] of data.brands)for(const alias of [make,...aliases])brandAliases.set(suggestionKey(alias),suggestionKey(make));
- const prefixRows=new Map<string,number[]>(),makeRows=new Map<string,number[]>();
+ const fragmentRows=new Map<string,number[]>(),makeRows=new Map<string,number[]>();
  const rows:{make:string;model:string;aliases:string[];canonical:number;brand:string;names:string[]}[]=[];
  for(let i=0;i<data.models.length;i++){
   const [make,model,aliases,canonical]=data.models[i];
   const row={make,model,aliases,canonical,brand:suggestionKey(make),names:[...new Set([model,...aliases].map(suggestionKey).filter(Boolean))]};rows.push(row);
-  const keys=new Set<string>();for(const name of row.names)for(const token of name.split(' '))for(let n=2;n<=Math.min(24,token.length);n++)keys.add(token.slice(0,n));
-  for(const key of keys){const list=prefixRows.get(key)||[];list.push(i);prefixRows.set(key,list);}
+  const keys=new Set<string>();for(const name of row.names)for(let n=0;n<name.length-1;n++)keys.add(name.slice(n,n+2));
+  for(const key of keys){const list=fragmentRows.get(key)||[];list.push(i);fragmentRows.set(key,list);}
   const list=makeRows.get(row.brand)||[];list.push(i);makeRows.set(row.brand,list);
   if(i%200===199)yield;
  }
@@ -29,13 +29,13 @@ function* compileSearch(data:ModelSearchData){
   if(q.length<2&&q&&!brands.size)return [];
   const tokens=q.split(' ').filter(Boolean),significant=tokens.filter(t=>t.length>=4);
   const results:{row:typeof rows[number];score:number;related:boolean}[]=[];
-  const candidates=q?(prefixRows.get(tokens[0].slice(0,24))||rows.flatMap((row,index)=>row.names.some(name=>name.includes(tokens[0]))?[index]:[])):[...brands].flatMap(brand=>makeRows.get(brand)||[]);
+  const candidates=brands.size?[...brands].flatMap(brand=>makeRows.get(brand)||[]):q?(tokens[0].length>=2?fragmentRows.get(tokens[0].slice(0,2))||[]:rows.flatMap((row,index)=>row.names.some(name=>name.includes(tokens[0]))?[index]:[])):[];
   for(const index of candidates){const row=rows[index];
    if(brands.size&&!brands.has(row.brand))continue;
    let score=q?0:100,related=false;
    for(const name of row.names){
     let rank=0;
-    if(name===q)rank=1000;
+    if(name===q||(q&&name.replace(/\s/g,'')===q.replace(/\s/g,'')))rank=1000;
     else if(q&&name.startsWith(q))rank=900;
     else if(q&&name.includes(q))rank=800;
     else if(tokens.length>1&&tokens.every(t=>name.split(' ').some(n=>n.startsWith(t))))rank=700;

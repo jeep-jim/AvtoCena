@@ -42,30 +42,28 @@ try {
   await page.goto(`${origin}/cars?theme=${theme}`);
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
-  const input=scope.getByRole('searchbox',{name:'Модель автомобиля'});
-  await input.fill('Королла');
-  await scope.getByRole('button',{name:/Corolla/}).waitFor();
-  await scope.getByRole('button',{name:'Применить',exact:true}).click();
-  assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');
-  assert.equal(await input.getAttribute('aria-expanded'),'false');
-  await input.fill('Camry');await input.press('Enter');
-  assert.equal(await scope.locator('input[name=model]').inputValue(),'Camry');
-  assert.equal(await input.getAttribute('aria-expanded'),'false');
-  await input.fill('Unknown model');await input.press('Enter');
-  assert.equal(await scope.locator('input[name=model]').inputValue(),'Unknown model');
-  await input.fill('Corolla');await scope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
-  assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');
-  assert.equal(await input.getAttribute('aria-expanded'),'false');
-  await input.fill('Camry');
+  const trigger=scope.getByRole('searchbox',{name:'Модель автомобиля'});
+  async function enter(text){if(width<1024){await trigger.click();const dialog=page.getByRole('dialog',{name:'Выбор моделей'});await dialog.getByRole('searchbox',{name:'Поиск модели'}).fill(text);return dialog;}await trigger.fill(text);return scope;}
+  let modelScope=await enter('Королла');
+  await modelScope.getByRole('button',{name:/Corolla/}).waitFor();
   if(width<1024){
-   const button=scope.getByRole('button',{name:'Показать автомобили',exact:true});
-   const bounds=await button.boundingBox();assert.ok(bounds&&bounds.y>=0&&bounds.y+bounds.height<=844,'apply is in viewport');
-   await page.screenshot({path:`${out}/${width}-${theme}.png`});
-   await button.click();await scope.waitFor({state:'detached'});
-  }else{
-   await scope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
-   await page.screenshot({path:`${out}/${width}-${theme}.png`});
+    await page.evaluate(()=>{Object.defineProperty(window.visualViewport,'height',{configurable:true,get:()=>410});Object.defineProperty(window.visualViewport,'offsetTop',{configurable:true,get:()=>30});window.visualViewport.dispatchEvent(new Event('resize'));});
+    await page.waitForTimeout(50);
+    const box=await modelScope.boundingBox(),apply=await modelScope.getByRole('button',{name:'Применить',exact:true}).boundingBox();
+    assert.ok(box.y>=30&&box.y+box.height<=440,'model dialog above simulated keyboard');assert.ok(apply.y+apply.height<=440,'apply visible above keyboard');
   }
+  await modelScope.getByRole('button',{name:'Применить',exact:true}).click();
+  assert.equal(await scope.locator('input[name=model]').inputValue(),'Corolla');
+  assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+  modelScope=await enter('Camry');await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
+  assert.equal(await scope.locator('input[name=model]').inputValue(),width<1024?'Corolla|Camry':'Camry');
+  assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+  if(width<1024){
+    modelScope=await enter('');await modelScope.getByRole('button',{name:'Убрать модель Corolla',exact:true}).click();
+    await modelScope.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
+    const button=scope.getByRole('button',{name:'Показать автомобили',exact:true});await button.click();await scope.waitFor({state:'detached'});
+  }
+  await page.screenshot({path:`${out}/${width}-${theme}.png`});
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Camry');
   assert.deepEqual(errors,[]);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   console.log(JSON.stringify({width,theme,passed:true}));await context.close();

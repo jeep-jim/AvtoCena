@@ -41,8 +41,10 @@ async function menuGeometry(page,root,menu,expectedWidth){const r=await root.bou
 try{
  for(const width of [390,1280,1600]){
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
+ await page.route('**/api/catalog/brand-counts**',route=>route.fulfill({json:{counts:{Toyota:10,BMW:8}}}));
  await page.goto(origin+'/cars');await page.waitForTimeout(1000);
  const sidebar=page.locator('.ac-catalog-sidebar');
+ assert.deepEqual(await page.locator('.ac-brand-rail a').allTextContents(),['Toyota']);
  if(width>=1024){
  const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox(),h=await page.locator('.ac-catalog-heading').boundingBox();assert.ok(b.x>r.x+r.width-2);assert.ok(b.y<=h.y+1,'sidebar starts with the heading');
  assert.equal(await sidebar.evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');

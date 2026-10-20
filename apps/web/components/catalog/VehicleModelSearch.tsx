@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection} from "@/lib/catalog/model-suggestion-search";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 
@@ -182,23 +182,36 @@ export function VehicleModelSearch({
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
+  const dialogInput=useRef<HTMLInputElement>(null),dialog=useRef<HTMLDivElement>(null);
+  const [mobile,setMobile]=useState(false);
+  const [viewport,setViewport]=useState<{top:number;height:number}|null>(null);
+  const closeRef=useRef(()=>{});
+  useEffect(()=>{const media=window.matchMedia('(max-width:1023px)');const sync=()=>setMobile(media.matches&&contextual&&multiple);sync();media.addEventListener('change',sync);return()=>media.removeEventListener('change',sync);},[contextual,multiple]);
+  useEffect(()=>{
+    if(!open||!mobile)return;
+    const previous=document.body.style.overflow;document.body.style.overflow='hidden';
+    const update=()=>{const v=window.visualViewport;setViewport({top:v?.offsetTop||0,height:v?.height||window.innerHeight});};
+    const keydown=(event:KeyboardEvent)=>{if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();closeRef.current();}if(event.key==='Tab'){const controls=dialog.current?.querySelectorAll<HTMLElement>('button:not(:disabled),input');const first=controls?.[0],last=controls?.[controls.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}};
+    update();window.visualViewport?.addEventListener('resize',update);window.visualViewport?.addEventListener('scroll',update);window.addEventListener('resize',update);window.addEventListener('keydown',keydown,true);
+    return()=>{document.body.style.overflow=previous;window.visualViewport?.removeEventListener('resize',update);window.visualViewport?.removeEventListener('scroll',update);window.removeEventListener('resize',update);window.removeEventListener('keydown',keydown,true);};
+  },[open,mobile]);
   const submitRef = useRef(onSubmit);
 
   useCatalogFilterDependentUi(contextual);
   useLayoutEffect(() => { submitRef.current = onSubmit; }, [onSubmit]);
   useEffect(() => { if (!multiple) setQuery(value || ""); }, [value, multiple]);
   useEffect(() => {
-    if (multiple && document.activeElement !== input.current) setQuery(value.split("|").filter(Boolean).join(", "));
-  }, [value, multiple]);
+    if (multiple && document.activeElement !== input.current && document.activeElement !== dialogInput.current && !(mobile&&open)) setQuery(value.split("|").filter(Boolean).join(", "));
+  }, [value, multiple, mobile, open]);
   const selectedModels = value.split("|").map(clean).filter(Boolean);
 
   useEffect(() => {
     if (!open) return;
     const outside = (event: PointerEvent) => {
-      if (!root.current?.contains(event.target as Node)) setOpen(false);
+      if (!root.current?.contains(event.target as Node) && !dialog.current?.contains(event.target as Node)) { if(mobile)closeRef.current();else setOpen(false); }
     };
     const escape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape"&&!mobile) setOpen(false);
     };
     document.addEventListener("pointerdown", outside);
     window.addEventListener("keydown", escape);
@@ -206,7 +219,7 @@ export function VehicleModelSearch({
       document.removeEventListener("pointerdown", outside);
       window.removeEventListener("keydown", escape);
     };
-  }, [open]);
+  }, [open,mobile]);
 
   const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
   const sourceStock=new URLSearchParams(contextQuery||'').get('stock')||'';
@@ -280,9 +293,9 @@ export function VehicleModelSearch({
       const next = selectedModels.includes(item.model) ? selectedModels.filter(model => model !== item.model) : [...selectedModels, item.model];
       onValueChange?.(next.join("|"));
       if (!make) onMakeChange?.(item.make);
-      setQuery(next.length ? `${next.join(", ")}, ` : "");
+      setQuery(mobile ? "" : next.length ? `${next.join(", ")}, ` : "");
       setOpen(true);
-      input.current?.focus();
+      (mobile?dialogInput:input).current?.focus({preventScroll:true});
       return root.current?.closest("form") || null;
     }
     setQuery(item.model);
@@ -313,12 +326,44 @@ export function VehicleModelSearch({
   };
 
   const applyTypedModel = () => {
-    const next = typedModelSelection(query, items, multiple);
+    const typed=typedModelSelection(query, items, multiple);
+    const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
     onValueChange?.(next);
     setQuery(multiple ? next.split("|").join(", ") : next);
     setOpen(false);
-    input.current?.blur();
+    input.current?.blur();dialogInput.current?.blur();
   };
+  closeRef.current=applyTypedModel;
+
+  const options=<>
+
+
+      <div className="flex shrink-0 items-center justify-between gap-2 px-2 pb-2">
+        <span className="text-sm font-bold">Модель автомобиля</span>
+        <button type="button" aria-label="Закрыть список моделей" className="min-h-11 rounded-xl px-3 text-sm font-bold" onPointerDown={event=>event.preventDefault()} onClick={applyTypedModel}>Готово ×</button>
+      </div>
+      {mobile&&<input ref={dialogInput} autoFocus type="search" aria-label="Поиск модели" value={query} autoComplete="off" spellCheck={false} enterKeyHint="done" placeholder="Начните вводить модель" className="my-2 h-12 w-full shrink-0 rounded-xl bg-[var(--ac-surface-2)] px-3 text-base font-bold outline-none" onChange={event=>setQuery(event.target.value)} onKeyDown={event=>{if(event.key==='Enter'){event.preventDefault();applyTypedModel();}}}/>}
+      {mobile&&multiple&&selectedModels.length>0&&<div className="ac-hide-scrollbar flex shrink-0 gap-2 overflow-x-auto pb-2"><button type="button" onPointerDown={event=>event.preventDefault()} onClick={()=>{onValueChange?.("");setQuery("");}} className="shrink-0 rounded-full px-3 py-2 text-xs font-bold">Очистить</button>{selectedModels.map(model=><button key={model} type="button" aria-label={`Убрать модель ${model}`} onPointerDown={event=>event.preventDefault()} onClick={()=>onValueChange?.(selectedModels.filter(value=>value!==model).join("|"))} className="shrink-0 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-bold">{model} ×</button>)}</div>}
+      {multiple && !mobile && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Выберите модели или введите название и нажмите «Применить»</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
+      <div className={`ac-hide-scrollbar min-h-0 overflow-y-auto overscroll-contain ${mobile?"flex-1":"max-h-[min(18rem,35dvh)]"}`}>
+        {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
+        {canSearch && searching && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
+        {canSearch && items.length ? items.map((item) => <button
+          key={item.id || `${item.make}:${item.model}`}
+          type="button"
+          onPointerDown={(event) => event.preventDefault()}
+          onClick={() => choose(item)}
+          aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}
+          className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
+        >
+          <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
+          {multiple ? <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm" style={{ background: selectedModels.includes(item.model) ? "#ff353d" : "var(--ac-surface-3)", border: selectedModels.includes(item.model) ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: selectedModels.includes(item.model) ? "#fff" : "transparent" }}>✓</span> : <span className="shrink-0 opacity-70">↵</span>}
+        </button>) : null}
+        {contextual&&suggestionError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить все модели. Повторить</button>:null}
+        {canSearch && !searching && !suggestionError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
+      </div>
+      <button type="button" onPointerDown={event=>event.preventDefault()} onClick={applyTypedModel} className="mt-2 min-h-11 shrink-0 w-full rounded-xl bg-red-500 px-4 text-sm font-bold text-white">Применить</button>
+  </>;
 
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[235]" : "z-0"} ${className}`}>
     {multiple && <input type="hidden" name="model" value={value} />}
@@ -330,9 +375,11 @@ export function VehicleModelSearch({
       placeholder={placeholder}
       autoComplete="off"
       spellCheck={false}
-      onFocus={() => setOpen(true)}
+      readOnly={mobile}
+      onClick={()=>{if(mobile){if(multiple)setQuery("");setOpen(true);}}}
+      onFocus={() => {if(mobile&&multiple)setQuery("");setOpen(true);}}
       onBlur={(event) => {
-        if (multiple && !root.current?.contains(event.relatedTarget as Node)) applyTypedModel();
+        if (!mobile && multiple && !root.current?.contains(event.relatedTarget as Node)) applyTypedModel();
       }}
       onChange={(event) => {
         setQuery(event.target.value);
@@ -352,30 +399,7 @@ export function VehicleModelSearch({
       aria-expanded={open}
       aria-autocomplete="list"
     />
-    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
-      <div className="flex items-center justify-between gap-2 px-2 pb-2">
-        <span className="text-sm font-bold">Модель автомобиля</span>
-        <button type="button" aria-label="Закрыть список моделей" className="min-h-11 rounded-xl px-3 text-sm font-bold" onClick={applyTypedModel}>Скрыть ×</button>
-      </div>
-      {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Выберите модели или введите название и нажмите «Применить»</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
-      <div className="ac-hide-scrollbar max-h-[min(18rem,35dvh)] overflow-y-auto overscroll-contain">
-        {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
-        {canSearch && searching && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
-        {canSearch && items.length ? items.map((item) => <button
-          key={item.id || `${item.make}:${item.model}`}
-          type="button"
-          onPointerDown={(event) => event.preventDefault()}
-          onClick={() => choose(item)}
-          aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}
-          className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
-        >
-          <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
-          {multiple ? <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm" style={{ background: selectedModels.includes(item.model) ? "#ff353d" : "var(--ac-surface-3)", border: selectedModels.includes(item.model) ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: selectedModels.includes(item.model) ? "#fff" : "transparent" }}>✓</span> : <span className="shrink-0 opacity-70">↵</span>}
-        </button>) : null}
-        {contextual&&suggestionError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить все модели. Повторить</button>:null}
-        {canSearch && !searching && !suggestionError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
-      </div>
-      <button type="button" onClick={applyTypedModel} className="mt-2 min-h-11 w-full rounded-xl bg-red-500 px-4 text-sm font-bold text-white">Применить</button>
-    </div> : null}
+    {open&&!mobile?<div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">{options}</div>:null}
+    {open&&mobile?createPortal(<div data-model-picker className="fixed inset-x-0 z-[25000] flex items-start justify-center bg-black/65 p-2 backdrop-blur-md" style={{top:viewport?.top||0,height:viewport?.height||'100dvh'}} onMouseDown={event=>event.stopPropagation()} onClick={event=>{event.stopPropagation();if(event.target===event.currentTarget)applyTypedModel();}}><div ref={dialog} role="dialog" aria-modal="true" aria-label="Выбор моделей" className="flex max-h-full w-full max-w-[560px] flex-col overflow-hidden rounded-3xl bg-[var(--ac-surface)] p-3 text-[var(--ac-text)]">{options}</div></div>,document.body):null}
   </div>;
 }

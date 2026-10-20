@@ -47,3 +47,10 @@ test('typed selections preserve the request instead of picking an unrelated firs
  assert.equal(typedModelSelection('Unknown model',[],true),'Unknown model');
  assert.equal(typedModelSelection('',search('','Toyota'),true),'');
 });
+
+test('substring matches survive competing prefixes and spaced model identities',()=>{
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['Toyota','Corolla',[],1],['Other','Rolla',[],1],['Audi','A6',[],1],['Audi','A6L',[],1]]});
+ assert.ok(find('rolla').some(row=>row.model==='Corolla'));
+ assert.equal(find('A 6','Audi')[0].model,'A6');
+ assert.equal(find('А6','Audi')[0].model,'A6');
+});
