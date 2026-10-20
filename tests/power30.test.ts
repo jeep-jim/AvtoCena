@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {estimatePower30,power30OfferId,emptyPower30Inputs} from '../apps/web/lib/power30/calculator';
+import {estimatePower30,power30OfferId,emptyPower30Inputs,emptyThermalInputs} from '../apps/web/lib/power30/calculator';
 import {power30FromOffer} from '../apps/web/lib/power30/offer';
 import type {VehicleOffer} from '../apps/web/lib/catalog/types';
 const offer=(patch:Partial<VehicleOffer>={})=>({id:'abc',sourceId:'test',sourceOfferId:'123',make:'Example',model:'EV',year:2024,market:'china',fuel:'electric',powertrainKind:'electric',powerKw:150,powerDataConfidence:'source_exact',operational:{},...patch}) as VehicleOffer;
@@ -8,11 +8,29 @@ test('owned listing URLs: readable, legacy and auction IDs; reject SSRF and trav
  for(const [url,id] of [['https://avtocena.com/cars/offer/abc','abc'],['https://www.avtocena.com/cars/offer/model-2024--ajes-stats-123?x=1','ajes-stats-123']])assert.equal(power30OfferId(url),id);
  for(const url of ['https://avtocena.com.evil.test/cars/offer/a','https://avtocena.com@evil.test/cars/offer/a','https://avtocena.com:444/cars/offer/a','file:///cars/offer/a','https://avtocena.com/cars','https://avtocena.com/cars/offer/%2e%2e%2fsecret','https://avtocena.com/cars/offer/%00','https://avtocena.com/cars/offer/a/more',null])assert.throws(()=>power30OfferId(url));
 });
-test('original heuristic coefficients and optional corrections remain explicit',()=>{
- for(const [kind,peak,kw] of [['BEV','100',75],['PHEV','100',65],['HEV','100',50],['MHEV','5',1],['MHEV','10',4]] as const)assert.equal(estimatePower30({...emptyPower30Inputs,kind,peak}).kw,kw);
- assert.equal(estimatePower30({...emptyPower30Inputs,kind:'BEV',peak:'100',voltage:'400'}).kw,80);
- assert.equal(estimatePower30({...emptyPower30Inputs,kind:'BEV',peak:'100',torque:'1',rpm:'1'}).ratio,.75*.85);
- for(const patch of [{peak:'NaN'},{peak:'-1'},{peak:'2001'},{voltage:'Infinity'},{torque:'-2'},{kind:'ICE'},{kind:'unknown'}])assert.throws(()=>estimatePower30({...emptyPower30Inputs,kind:'BEV',peak:'100',...patch} as any));
+const physics={efficiency:'90',current:'300',resistance:'0.02',capacity:'20',coolant:'40',initial:'40',limit:'120',controller:'120',usableEnergy:''};
+const input={...emptyPower30Inputs,kind:'BEV' as const,peak:'120',voltage:'400'};
+test('thermal scenario matches independently integrated heat balance at 30 minutes',()=>{
+ const result=estimatePower30(input,physics);assert.equal(result.limiting,'Нагрев за 30 минут');
+ let temperature=40;const dt=.01;
+ for(let time=0;time<1800;time+=dt)temperature+=(result.kw*1000*(1/.9-1)-(temperature-40)/.02)/20000*dt;
+ assert.ok(Math.abs(temperature-120)<.01);assert.ok(Math.abs(result.endTemperature-120)<1e-9);
+ assert.ok(estimatePower30(input,{...physics,initial:'80'}).kw<result.kw,'hot start reduces margin');
+ assert.ok(estimatePower30(input,{...physics,resistance:'0.01'}).kw>result.kw,'better heat transfer raises sustainable output');
+ assert.ok(estimatePower30(input,{...physics,capacity:'100'}).kw>result.kw,'thermal mass raises transient margin');
+});
+test('electrical/controller/peak caps and battery duration stay separate',()=>{
+ const electrical=estimatePower30(input,{...physics,current:'10'});assert.equal(electrical.kw,3.6);
+ const controller=estimatePower30(input,{...physics,controller:'5'});assert.equal(controller.kw,5);
+ const peak=estimatePower30({...input,peak:'4'},physics);assert.equal(peak.kw,4);
+ const energy=estimatePower30(input,{...physics,usableEnergy:'1'});assert.ok(energy.kw>1.8);assert.equal(energy.vehicleKw,1.8);
+ const a=estimatePower30(input,physics),b=estimatePower30({...input,torque:'900',rpm:'20000'},physics);assert.equal(a.kw,b.kw,'unpaired maxima never change output');
+ assert.equal(estimatePower30({...input,kind:'HEV'},{...physics,usableEnergy:'1'}).energyKw,undefined);
+});
+test('missing or invalid physical inputs never fabricate a point estimate',()=>{
+ assert.throws(()=>estimatePower30(input,emptyThermalInputs),/не хватает/);
+ for(const patch of [{efficiency:'100'},{resistance:'0'},{capacity:'NaN'},{initial:'120'},{initial:'30'},{limit:'39'},{current:'-1'}])assert.throws(()=>estimatePower30(input,{...physics,...patch}));
+ assert.throws(()=>estimatePower30({...input,kind:'ICE'},physics));
 });
 test('BEV loads peak but not imaginary 30-minute power',()=>{
  const result=power30FromOffer(offer());assert.equal(result.inputs.peak,'150');assert.equal(result.certified,undefined);
@@ -41,4 +59,10 @@ test('hybrid subtype resolves only from explicit listing-bound energy type',()=>
  const hybrid=offer({fuel:'hybrid',powertrainKind:'other_hybrid',operational:{sourceSpecifications:snapshot}});
  assert.equal(power30FromOffer(hybrid).inputs.kind,'HEV');
  snapshot.groups[0].items.push({name:'能源类型',value:'插电式混合动力'});assert.equal(power30FromOffer(hybrid).inputs.kind,'unknown');
+});
+
+test('owner 54 kW is scoped to the exact Q05 listing and never certified',()=>{
+ const q=offer({id:'d9781a818d5cc8520fea2bfd',make:'Changan',model:'Q05',year:2026,powerKw:120});
+ const result=power30FromOffer(q);assert.equal(result.reported?.kw,54);assert.equal(result.certified,undefined);
+ for(const patch of [{id:'another-q05'},{powerKw:158},{year:2025},{powertrainKind:'other_hybrid',fuel:'hybrid'},{market:'uae'}])assert.equal(power30FromOffer({...q,...patch} as VehicleOffer).reported,undefined);
 });

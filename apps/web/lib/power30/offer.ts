@@ -38,6 +38,13 @@ export function power30FromOffer(offer:VehicleOffer):Power30Car {
       const found=[...new Set(snapshot.groups.flatMap(group=>group.items.filter(item=>/^(能源类型|тип гибрида|hybrid type)$/i.test(item.name.trim())).map(item=>types[item.value.trim().toLowerCase()]).filter(Boolean)))];
       if(found.length===1){kind=found[0];result.inputs.kind=kind;result.inputSources.kind="Тип силовой установки из технических характеристик объявления";}
     }
+    const rows=snapshot.groups.flatMap(group=>group.items);
+    const uniqueText=(pattern:RegExp)=>{const values=[...new Set(rows.filter(item=>pattern.test(item.name.trim())).map(item=>item.value.trim()).filter(value=>value && !["-","—"].includes(value)))];return values.length===1?values[0]:undefined;};
+    const battery=uniqueText(/^(?:电池能量|battery capacity|ёмкость батареи)(?:\s*[（(]?(?:kwh|квт[·⋅]?ч)[）)]?)?$/i);
+    const batteryMatch=battery?.match(/^(\d+(?:[.,]\d+)?)\s*(?:kwh|квт[·⋅]?ч)?$/i);
+    const motor=uniqueText(/^(?:电机类型|motor type|тип электродвигателя)$/i);
+    const motorNames:Record<string,string>={"永磁/同步":"Синхронный, постоянные магниты","永磁/同步电动机":"Синхронный, постоянные магниты","交流/异步":"Асинхронный"};
+    result.technical={batteryKwh:batteryMatch?positive(Number(batteryMatch[1].replace(",",".")),1000):undefined,motorType:motor?(motorNames[motor]||(/^[\x00-\x7Fа-яёА-ЯЁ ,/()-]+$/.test(motor)?motor:undefined)):undefined};
     // Read only explicitly named, listing-bound electric specifications, never system/ICE power.
     const candidates:Record<string,number[]>={peak:[],torque:[],rpm:[],voltage:[]};
     for (const group of snapshot.groups) for (const item of group.items) {
@@ -60,5 +67,10 @@ export function power30FromOffer(offer:VehicleOffer):Power30Car {
   if(kind==="ICE") result.notes.push("У автомобиля с ДВС без тягового электромотора 30-минутная электрическая мощность не применяется.");
   else if(!result.inputs.peak) result.notes.push("Пиковая мощность именно тяговых электромоторов не найдена. Общую мощность гибрида и мощность ДВС подставлять нельзя.");
   if(kind==="unknown") result.notes.push("Уточните тип силовой установки: в карточке он указан недостаточно подробно.");
+  // Owner observation is scoped to this exact public listing, never promoted to
+  // the certified registry and never used to set customs/vehicle specifications.
+  if(offer.id==="d9781a818d5cc8520fea2bfd" && offer.make.toLowerCase()==="changan" && offer.model.toLowerCase()==="q05" && offer.year===2026 && result.inputs.kind==="BEV" && Math.abs(Number(result.inputs.peak)-120)<.2){
+    result.reported={kw:54,peakKw:120,source:"Указано владельцем сайта; подтверждающий документ ещё не проверен",recordedAt:"2026-10-20"};
+  }
   return result;
 }
