@@ -60,10 +60,28 @@ try{
  }else assert.equal(await page.locator('.ac-filter-more-button').isVisible(),true);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.evaluate(()=>scrollTo(0,0));
+ if(width<1024){
+   await page.evaluate(()=>localStorage.setItem('ac-catalog-view','list'));
+   await page.reload();await page.locator('.ac-catalog-card').first().waitFor();
+   assert.equal(await page.locator('.ac-catalog-toolbar').isVisible(),false);
+   assert.equal(await page.locator('.ac-catalog-list-row').count(),0);
+   assert.equal(await page.locator('.ac-catalog-card').count(),6);
+   assert.equal(await page.locator('[data-catalog-view]').getAttribute('data-catalog-view'),'grid');
+   await page.screenshot({path:out+'/sidebar-'+width+'.png'});
+   console.log('MOBILE_GRID_ONLY_OK',width);await context.close();continue;
+ }
  await page.getByRole('button',{name:'Список',exact:true}).click();
  await page.locator('.ac-catalog-list-row').first().waitFor();assert.equal(await page.locator('.ac-catalog-list-row').count(),6);
  assert.equal(await page.getByText('Лот 12345',{exact:true}).count(),6);
  assert.equal(await page.locator('.ac-list-price').count(),6);
+ for(const theme of ['light','dark']){
+   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+   const surface=await page.locator('.ac-catalog-market-rail').first().evaluate(el=>{const s=getComputedStyle(el);return {background:s.backgroundColor,border:s.borderTopWidth,page:s.getPropertyValue('--ac-page-bg').trim()};});
+   assert.notEqual(surface.background,'rgba(0, 0, 0, 0)',theme+' list container must be visible');
+   assert.equal(surface.border,'1px',theme+' list container has an outline');
+   await page.screenshot({path:out+'/list-'+theme+'-'+width+'.png'});
+ }
+
  await context.grantPermissions(['clipboard-read','clipboard-write']);
  await page.getByRole('button',{name:'Скопировать код кузова DBA-L175S',exact:true}).first().click();
  assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'DBA-L175S');
@@ -92,6 +110,13 @@ try{
  await page.screenshot({path:out+'/list-'+width+'.png'});
  await page.reload();await page.waitForTimeout(500);
  assert.equal(await page.getByRole('button',{name:'Список',exact:true}).getAttribute('aria-pressed'),'true');
+ await page.setViewportSize({width:390,height:900});
+ await page.locator('.ac-catalog-card').first().waitFor();
+ assert.equal(await page.locator('.ac-catalog-toolbar').isVisible(),false);
+ assert.equal(await page.locator('.ac-catalog-list-row').count(),0);
+ assert.equal(await page.evaluate(()=>localStorage.getItem('ac-catalog-view')),'list');
+ await page.setViewportSize({width,height:900});
+ await page.locator('.ac-catalog-list-row').first().waitFor();
  await page.getByRole('button',{name:'Плитка',exact:true}).click();
  await page.locator('.ac-catalog-card').first().waitFor();assert.equal(await page.locator('.ac-catalog-card').count(),6);
  await page.screenshot({path:out+'/sidebar-'+width+'.png'});
