@@ -131,6 +131,8 @@ try{
  assert.ok(Math.abs(rows[1].top-rows[0].bottom)<2,'list rows touch with a divider');
  if(width>=1024){
    await verifyControls(page,sidebar);
+   // Return the sticky containing block to the viewport after the shorter list view.
+   await page.evaluate(()=>scrollTo(0,0));await page.waitForTimeout(150);
    const range=sidebar.getByRole('button',{name:'Выбрать значение: Объём двигателя: от',exact:true});
    await range.evaluate(el=>{const side=el.closest('.ac-catalog-sidebar');side.scrollTop+=el.getBoundingClientRect().bottom-side.getBoundingClientRect().bottom+8;});
    await range.click();
