@@ -432,7 +432,13 @@ export class ObjectJsonStorage implements JsonStorage {
 }
 
 let singleton: JsonStorage | null = null;
-export function getJsonStorage() { if (singleton) return singleton; singleton = (process.env.JSON_STORAGE_DRIVER === "object" ? new ObjectJsonStorage() : new LocalJsonStorage()); return singleton; }
+export function getJsonStorage() {
+  // Installed releases must never silently persist customer data on the host.
+  if (process.env.NODE_ENV === "production" && process.env.AVTOCENA_RELEASE_SHA && process.env.JSON_STORAGE_DRIVER !== "object") throw new Error("production_object_storage_required");
+  if (singleton) return singleton;
+  singleton = (process.env.JSON_STORAGE_DRIVER === "object" ? new ObjectJsonStorage() : new LocalJsonStorage());
+  return singleton;
+}
 export function resetJsonStorageForTests() { singleton = null; }
 export function generateId(prefix: string) { return `${prefix}_${crypto.randomUUID()}`; }
 

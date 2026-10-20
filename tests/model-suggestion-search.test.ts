@@ -3,6 +3,11 @@ import assert from 'node:assert/strict';
 import {createModelSuggestionSearch,type ModelSearchData} from '../apps/web/lib/catalog/model-suggestion-search';
 const data:ModelSearchData={version:1,brands:[['Toyota',['Тойота']],['BMW',[]],['Peugeot',[]]],models:[['Toyota','Corolla',[],1],['Toyota','Corolla Cross',[],1],['Toyota','Corolla Cross AWD',[],0],['Toyota','Camry',[],1],['BMW','X5',[],1],['BMW','X3',[],1],['Peugeot','2008',[],1],['Peugeot','208',[],1]]};
 const search=createModelSuggestionSearch(data);
+test('single-letter model names remain searchable within a selected make',()=>{
+ const find=createModelSuggestionSearch({version:1,brands:[],models:[['GAC','S',[],1],['GAC','S7',[],1]]});
+ assert.equal(find('S','GAC')[0].model,'S');
+ assert.deepEqual(find('S'),[]);
+});
 test('incomplete trim query recalls Corolla Cross and marks related suggestions',()=>{
  for(const q of ['Corolla Z','Королла Z','Toyota Corolla Z']){const result=search(q);assert.ok(result.some(m=>m.model==='Corolla Cross'&&m.related));assert.ok(!result.some(m=>m.model==='Camry'));}
  assert.equal(search('Королла Кросс')[0].model,'Corolla Cross');

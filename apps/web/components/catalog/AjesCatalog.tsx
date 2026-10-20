@@ -1,3 +1,4 @@
+import {CatalogSidebar} from './CatalogSidebar';
 import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {PublicHeader} from '@/components/layout/PublicHeader';
 import {CatalogCard} from './CatalogCard';
@@ -37,7 +38,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":"Каталог автомобилей"}</h1>
  <p role="status" className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" data-catalog-result-count={displayTotal??undefined}><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span><span>Найдено: {ajesCountText(sourceTotal)}</span></p>
- <CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>
+ <CatalogSidebar filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>}>
  {makes.length>0&&<BrandLogoRail initial={initial} brands={makes} resultCount={displayTotal??undefined}/>}
  {error&&<p role="status" className="my-6 rounded-2xl bg-[var(--ac-surface)] p-5">{error} <Link className="underline" href={`/cars?market=${market}&source=ajes`}>Сбросить условия</Link></p>}
  {result&&<div className="mt-8 md:mt-9">
@@ -47,6 +48,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {market!=='japan'&&(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показана доступная часть предложений.</p>}
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor}/>
  </div>}
+</CatalogSidebar>
  </section>
  <style dangerouslySetInnerHTML={{__html:'html body .ac-catalog-page.ac-ajes-catalog{background:var(--ac-page-bg)!important;background-image:none!important}'}}/>
  </Container>;

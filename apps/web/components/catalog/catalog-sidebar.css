@@ -1,0 +1,17 @@
+.ac-catalog-results{min-width:0}
+@media(min-width:1024px){
+ .ac-catalog-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start;margin-top:24px}
+ .ac-catalog-sidebar{grid-column:2;grid-row:1;position:sticky;top:88px;min-width:0;max-height:calc(100dvh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+ .ac-catalog-sidebar-inner{padding:16px;border-radius:20px;background:var(--ac-surface)}
+ .ac-catalog-results{grid-column:1;grid-row:1}
+ .ac-catalog-sidebar .ac-catalog-filter-panel{margin-top:16px}
+ .ac-catalog-sidebar .ac-catalog-filter-panel>.grid,
+ .ac-catalog-sidebar .ac-catalog-filter-panel .ac-primary-lower-grid,
+ .ac-catalog-sidebar .ac-advanced-select-row,
+ .ac-catalog-sidebar .ac-range-fields-shell>.grid{grid-template-columns:minmax(0,1fr)!important}
+ .ac-catalog-sidebar .ac-filter-settings{display:none!important}
+ .ac-catalog-results .ac-catalog-market-rail{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .ac-catalog-results [data-catalog-batch]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ body:has(.ac-catalog-layout) .ac-catalog-sticky{display:none}
+}
+@media(min-width:1440px){.ac-catalog-layout{grid-template-columns:minmax(0,1fr) 340px;gap:32px}}

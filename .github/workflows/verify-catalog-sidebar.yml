@@ -1,0 +1,31 @@
+name: Verify catalog sidebar and search
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tests/browser/catalog-sidebar-check.mjs', 'apps/web/components/catalog/catalog-sidebar.css']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/model-suggestion-search.test.ts tests/catalog-filter-search.test.ts tests/green-corner-filters.test.ts tests/ajes-filtered-page.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/sidebar-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/sidebar-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-sidebar-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-sidebar-check
+          path: artifacts/mobile-filter-local-chromium/

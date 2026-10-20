@@ -1,3 +1,4 @@
+import {CatalogSidebar} from './CatalogSidebar';
 import {DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
 import {resolveDealerBrowsingContext} from "@/lib/dealers/resolve-browsing-context";
 import {redirect} from "next/navigation";
@@ -30,9 +31,10 @@ export async function GreenCornerCatalog({params:input,embedded=false}:{params:R
   <h1 className="ac-green-heading mt-8 text-4xl font-black md:text-6xl">Зелёный угол</h1>
   <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукционе.</p>
   </div><GreenCornerDeliveryBanner /></div>
-  <CatalogFilters initial={initial} facets={result.facets} resultCount={result.total} />
+  <CatalogSidebar filters={<CatalogFilters initial={initial} facets={result.facets} resultCount={result.total} />}>
   <p className="mt-5 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" data-catalog-result-count={result.total}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span>Найдено: {result.total.toLocaleString("ru-RU")}</span></p>
   <div className="mt-5"><CatalogLoadMore key={`${JSON.stringify(initial)}:${page}`} query={{}} greenQuery={initial} initialPage={page} initialTotal={result.total} initialCount={items.length} initialCards={items.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense />)} /></div>
   {!items.length?<p className="py-8">Подходящих автомобилей пока нет.</p>:null}
+</CatalogSidebar>
  </div></Container></DealerBrowsingProvider>;
 }

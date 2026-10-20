@@ -91,7 +91,7 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
-for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=korea&source=existing&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
+for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/cars?sort=totalRub','/cars?sort=totalRubDesc']:
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
@@ -103,9 +103,9 @@ for path in ['/cars?market=korea','/cars?market=japan','/cars?market=china','/ca
 # IP and must fail at the source boundary, without any supplier request or fake zero.
 # Require the exact typed reason: generic 503, configuration and supplier failures
 # are NOT accepted by this release check. Keep all HTML/local price/auth gates above.
-for market in ['japan','korea','china']:
+for market, source in [('japan','ajes'),('korea','ajes'),('korea','existing'),('china','ajes')]:
  try:
-  with urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source=ajes&budgetTo=3000000',timeout=30) as response:
+  with urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source='+source+'&budgetTo=3000000',timeout=30) as response:
    value=json.load(response)
   # China may use the owner-selected local Che168 catalog. AJES IDs must
   # never pass this branch; its visitor-IP boundary remains mandatory.

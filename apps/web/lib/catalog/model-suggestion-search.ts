@@ -26,7 +26,7 @@ function* compileSearch(data:ModelSearchData){
   for(const [alias,brand] of brandEntries)if(raw.startsWith(alias+' ')){if(!brands.size)brands.add(brand);q=raw.slice(alias.length+1);break;}
   if(brandAliases.has(raw)&&!brands.size){brands.add(brandAliases.get(raw)!);q='';}
   if(!q&&!brands.size)return [];
-  if(q.length<2&&q)return [];
+  if(q.length<2&&q&&!brands.size)return [];
   const tokens=q.split(' ').filter(Boolean),significant=tokens.filter(t=>t.length>=4);
   const results:{row:typeof rows[number];score:number;related:boolean}[]=[];
   const candidates=q?(prefixRows.get(tokens[0].slice(0,24))||rows.flatMap((row,index)=>row.names.some(name=>name.includes(tokens[0]))?[index]:[])):[...brands].flatMap(brand=>makeRows.get(brand)||[]);

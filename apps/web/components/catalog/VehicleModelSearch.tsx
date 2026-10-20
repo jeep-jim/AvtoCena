@@ -231,11 +231,12 @@ export function VehicleModelSearch({
   useEffect(()=>{
     if(sourceItems||!contextual||!open)return;
     let cancelled=false;setInventoryLoading(true);setInventoryError(false);
-    loadModelSuggestions(true).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
+    setInventory(null);
+    loadModelSuggestions(true,undefined,make).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
       .catch(()=>{if(!cancelled)setInventoryError(true);})
       .finally(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
-  },[sourceItems,contextual,open,retry]);
+  },[sourceItems,contextual,open,retry,make]);
   const searching = loading || (contextual && inventoryLoading);
   const suggestionError = directoryError || inventoryError;
 

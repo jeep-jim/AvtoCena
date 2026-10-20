@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import {readAjesDirectory} from '@/lib/catalog/ajes-catalog';
+import {readGreenCorner} from '@/lib/catalog/green-corner';
 import { readCatalogFacets, readCatalogDirectoryCountRows } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
 import { effectiveCatalogEncyclopediaIdentityMode } from "@/lib/catalog/encyclopedia-identity-runtime";
@@ -75,6 +77,15 @@ export async function GET(request: Request) {
   // This supplements the build-time dictionary after any market feed refresh.
   if (url.searchParams.get("scope") === "inventory") {
     const rows = await readCatalogDirectoryCountRows();
+    const green = await readGreenCorner();
+    rows.push(...green.items.map(row=>({make:row.make,model:row.model,count:1})));
+    // Read only bounded name/count directories for the selected make, never offers.
+    // The paid source switches and real visitor-IP checks stay in readAjesDirectory.
+    const make=clean(url.searchParams.get('make')).slice(0,160);
+    if(make){
+      const sources=await Promise.allSettled(['korea','japan'].map(market=>readAjesDirectory({market,make})));
+      for(const source of sources)if(source.status==='fulfilled')rows.push(...source.value.models.map(row=>({make:row.make,model:row.model,count:row.total})));
+    }
     const models = [...new Map(rows.filter(row => row.count > 0 && row.make && row.model)
       .map(row => [`${compact(row.make)}:${compact(row.model)}`, [row.make, row.model, [], 1]])).values()];
     return NextResponse.json({version: 1, models, brands: []}, {headers: {"Cache-Control": "no-store"}});
