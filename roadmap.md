@@ -10504,3 +10504,5 @@ HTML рабочей главной подтвердил заголовки:Ко�
 20.10.2026: запущена точечная дополнительная диагностика семи calculation_not_ready в том же ручном workflow: проверяет precision gate и причины отказа штатного калькулятора; каталог и исходные характеристики не изменяет. Результат ожидается.
 
 20.10.2026: диагностика run 39352148845 success: у двух Hilux не определена vehicle_category. У пяти других кандидатов прямой калькулятор возвращает estimated, однако prepareSellerInventory их не выпускает; нельзя считать их полностью проверенными. Запущено уточнение scope/content/power consistency gates, без изменения фактов и публикации неподтверждённых итогов.
+
+20.10.2026: run 39352409445 success, пять кандидатов проходят scope/content/power consistency, но их prepareSellerInventory не принимает. Гипотеза о флаге seller не доказана; код расчёта не менялся. Запущена проверка полного enrichment pipeline и точного specification/economic rejection. Два Hilux: vehicle_category. Остальные 53: certified_30min_power_missing.

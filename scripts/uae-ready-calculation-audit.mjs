@@ -9,6 +9,10 @@ import {calculateOfferWithVerifiedSpecifications} from '../apps/web/lib/catalog/
 import {sourceInventoryInScope} from '../apps/web/lib/catalog/source-inventory-scope.ts';
 import {hasCredibleOfferContent} from '../apps/web/lib/catalog/offer-quality.ts';
 import {combustionPowerMismatch} from '../apps/web/lib/catalog/combustion-power-consistency.ts';
+import {catalogOfferVisibleRub,catalogRequiredSpecificationRejectionReason,catalogPublicEconomicRejectionReason} from '../apps/web/lib/catalog/public-priority.ts';
+import {enrichOfferWithKnowledgeCore} from '../apps/web/lib/catalog/knowledge-core.ts';
+import {enrichOfferWithSourceTableParameters} from '../apps/web/lib/catalog/source-table-displacement.ts';
+import {enrichEncarOfficialPower} from '../apps/web/lib/catalog/korea-official-power.ts';
 const storage=getJsonStorage(),before=await storage.readJson('catalog/manifest.json',null);
 const projection=await storage.readJson('catalog/public/projection/uae.json',null);
 if(!before?.generationId||projection?.generationId!==before.generationId)throw Error('generation_mismatch');
@@ -27,9 +31,10 @@ for(const row of pending){
    const missing=['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(k=>({field:k,...classifySpecificationEvidence(evidence,k)})).filter(x=>!['exact','not_applicable'].includes(x.state));
    const reason=missing.length?missing.map(x=>x.field+':'+x.reason).sort().join('|'):!(Number(offer.sourcePrice)>0)?'source_price_missing':'calculation_not_ready';
    if(reason==='calculation_not_ready'){
-    const complete=specificationEvidenceComplete(evidence);
-    const calculated=complete?await calculateOfferWithVerifiedSpecifications(evidence,true):null;
-    console.log('UAE_PENDING_DIAGNOSTIC',JSON.stringify({id:offer.id,make:offer.make,model:offer.model,complete,inScope:sourceInventoryInScope(offer),credible:calculated?hasCredibleOfferContent(calculated):null,powerMismatch:calculated?combustionPowerMismatch(calculated):null,preparedNull:prepared===null,unprovenEnginePrecision:unprovenEnginePrecision(evidence),status:calculated?.calculationStatus,missing:calculated?.calculationSnapshot?.customs?.missing,totalRub:calculated?.totalRub,sourcePrice:offer.sourcePrice,sourceCurrency:offer.sourceCurrency}));
+    const enriched=await enrichOfferWithKnowledgeCore(enrichEncarOfficialPower(enrichOfferWithSourceTableParameters(evidence)));
+    const complete=specificationEvidenceComplete(enriched);
+    const calculated=complete?await calculateOfferWithVerifiedSpecifications(enriched,true):null;
+    console.log('UAE_PENDING_DIAGNOSTIC',JSON.stringify({id:offer.id,make:offer.make,model:offer.model,complete,enrichedFields:['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(k=>({field:k,...classifySpecificationEvidence(enriched,k)})),visibleRub:calculated?catalogOfferVisibleRub(calculated):null,specificationRejection:calculated?catalogRequiredSpecificationRejectionReason(calculated):null,economicRejection:calculated?catalogPublicEconomicRejectionReason(calculated):null,pricingMode:calculated?.catalogPricingMode,customsStatus:calculated?.calculationSnapshot?.customs?.status,breakdown:calculated?.calculationSnapshot?.breakdown?.map(x=>({id:x.id,amountRub:x.amountRub})),inScope:sourceInventoryInScope(offer),credible:calculated?hasCredibleOfferContent(calculated):null,powerMismatch:calculated?combustionPowerMismatch(calculated):null,preparedNull:prepared===null,unprovenEnginePrecision:unprovenEnginePrecision(evidence),status:calculated?.calculationStatus,missing:calculated?.calculationSnapshot?.customs?.missing,totalRub:calculated?.totalRub,sourcePrice:offer.sourcePrice,sourceCurrency:offer.sourceCurrency}));
    }
    reasons[reason]=(reasons[reason]||0)+1;
    console.log('UAE_PENDING_KNOWN_SPECS',JSON.stringify({id:offer.id,reason}));
