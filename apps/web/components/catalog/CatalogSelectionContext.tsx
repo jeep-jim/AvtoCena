@@ -1,5 +1,5 @@
 'use client';
-import {createContext,useContext,useMemo,useState,useEffect,type ReactNode} from 'react';
+import {createContext,useContext,useState,useEffect,type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
 type SelectionContext={target:HTMLDivElement|null;setTarget:(target:HTMLDivElement|null)=>void;view:"grid"|"list";setView:(view:"grid"|"list")=>void};
 const Context=createContext<SelectionContext|null>(null);
@@ -8,8 +8,16 @@ export function CatalogSelectionProvider({children}:{children:ReactNode}){
  const [view,setView]=useState<"grid"|"list">("grid");
  useEffect(()=>{try{if(localStorage.getItem("ac-catalog-view")==="list")setView("list");}catch{}},[]);
  const chooseView=(next:"grid"|"list")=>{setView(next);try{localStorage.setItem("ac-catalog-view",next);}catch{}};
- const value={target,setTarget,view,setView:chooseView};
- return <Context.Provider value={value}><div className="ac-catalog-view" data-catalog-view={view}>{children}</div></Context.Provider>;
+ const [desktop,setDesktop]=useState(false);
+ useEffect(()=>{
+  const media=window.matchMedia("(min-width:1024px)");
+  const sync=()=>setDesktop(media.matches);
+  sync();media.addEventListener("change",sync);
+  return ()=>media.removeEventListener("change",sync);
+ },[]);
+ const effectiveView=desktop?view:"grid";
+ const value={target,setTarget,view:effectiveView,setView:chooseView};
+ return <Context.Provider value={value}><div className="ac-catalog-view" data-catalog-view={effectiveView}>{children}</div></Context.Provider>;
 }
 export function CatalogSelectionOutlet(){
  const context=useContext(Context);
