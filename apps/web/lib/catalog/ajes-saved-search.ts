@@ -1,3 +1,4 @@
+import {ajesPowerFilterValues} from './ajes-power-estimate';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
@@ -6,7 +7,7 @@ import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
 export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now()){
  const query=ajesQuery(input);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
- const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','sort','yearFrom','yearTo']);
+ const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','sort','yearFrom','yearTo','powerFrom','powerTo']);
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&input.sort!=='updatedAt')return null;
  const normalized=(v:unknown)=>String(v??'').trim().toUpperCase();
  const makes=input.make?.split(',').map(normalized),models=input.model?.split('|').map(normalized);
@@ -14,6 +15,10 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
   const age=now-Date.parse(saved?.observedAt||''),lot=saved?.items?.[0];
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1
    &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!knownHeavyVehicleFamily(lot.make,lot.model)
+   &&((input.powerFrom===undefined&&input.powerTo===undefined)||(()=>{
+    const values=ajesPowerFilterValues({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:lot.sourcePower}}});
+    return values.length>0&&values.every(hp=>(input.powerFrom===undefined||hp>=input.powerFrom)&&(input.powerTo===undefined||hp<=input.powerTo));
+   })())
    &&(!makes||makes.includes(normalized(lot.make)))&&(!models||models.includes(normalized(lot.model)))
    &&(input.yearFrom===undefined||lot.year>=input.yearFrom)&&(input.yearTo===undefined||lot.year<=input.yearTo)
    &&(!input.chassis||normalized(lot.chassisCode)===normalized(input.chassis))

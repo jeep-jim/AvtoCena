@@ -131,3 +131,16 @@ test('exact base Corolla does not hide other Corollas in supplier search',async(
  assert.equal(filter.matches({sourceId:'ajes_korea_feed',operational:{raw:{sourcePower:'150'}}}),false);
  assert.equal(ajesResultFilter({powerFrom:'100',powerTo:'160'}).matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'79,150'}}}),false);
  });
+
+test('Japan power selection recovers only matching bounded saved results after supplier refusal',async()=>{
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const now=Date.now(),observedAt=new Date(now-1000).toISOString();
+ const snapshots=Object.fromEntries([['ok','79,98'],['limit','160'],['too','150,200'],['missing',''],['bad','150,bad']].map(([id,sourcePower])=>[id,{observedAt,items:[{id,table:'stats',make:'TOYOTA',model:'TEST',year:2023,status:'Sold',finalPriceJpy:1000000,sourcePower}]}]));
+ const result=findSavedAjesSearch({table:'stats',powerTo:160},snapshots,now);
+ assert.deepEqual(result?.items.map(x=>x.id),['limit','ok']);
+ assert.equal(result?.partial,true);assert.equal(result?.stale,true);assert.equal('total' in result!,false);
+ assert.equal(findSavedAjesSearch({table:'stats',powerFrom:100,powerTo:159},snapshots,now),null);
+ assert.equal(findSavedAjesSearch({table:'stats',powerTo:160,page:2},snapshots,now),null);
+ assert.equal(findSavedAjesSearch({table:'stats',powerTo:160,fuel:'diesel'},snapshots,now),null);
+ assert.equal(findSavedAjesSearch({table:'stats',powerTo:160},snapshots,now+8*86400000),null);
+});

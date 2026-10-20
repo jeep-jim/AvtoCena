@@ -48,7 +48,7 @@ export async function AjesCatalog({params,embedded=false}:{params:Params;embedde
  {market==='japan'&&(initial.powerFrom||initial.powerTo)&&<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{JAPAN_POWER_FILTER_NOTICE}</p>}
  {result.filteredByPage&&result.total===null&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показываем автомобили, подходящие под выбранные условия. Точное количество уточняется по мере загрузки.</p>}
  {result.interrupted&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Часть автомобилей пока не удалось загрузить. Найденные варианты сохранены; продолжить можно кнопкой «Показать ещё».</p>}
- {market!=='japan'&&(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показана доступная часть предложений.</p>}
+ {(result.partial||result.stale)&&<p role="status" className="mb-4 text-sm text-[var(--ac-muted)]">Показана доступная часть предложений.</p>}
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
  <CatalogLoadMore key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor}/>
  </div>}
