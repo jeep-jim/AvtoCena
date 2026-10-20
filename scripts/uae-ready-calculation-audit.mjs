@@ -6,6 +6,9 @@ import {prepareSellerInventory,inventorySourceEvidence} from '../apps/web/lib/ca
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit.ts';
 import {specificationEvidenceComplete,unprovenEnginePrecision} from '../apps/web/lib/catalog/modification-matching.ts';
 import {calculateOfferWithVerifiedSpecifications} from '../apps/web/lib/catalog/customs-pricing.ts';
+import {sourceInventoryInScope} from '../apps/web/lib/catalog/source-inventory-scope.ts';
+import {hasCredibleOfferContent} from '../apps/web/lib/catalog/offer-quality.ts';
+import {combustionPowerMismatch} from '../apps/web/lib/catalog/combustion-power-consistency.ts';
 const storage=getJsonStorage(),before=await storage.readJson('catalog/manifest.json',null);
 const projection=await storage.readJson('catalog/public/projection/uae.json',null);
 if(!before?.generationId||projection?.generationId!==before.generationId)throw Error('generation_mismatch');
@@ -26,7 +29,7 @@ for(const row of pending){
    if(reason==='calculation_not_ready'){
     const complete=specificationEvidenceComplete(evidence);
     const calculated=complete?await calculateOfferWithVerifiedSpecifications(evidence,true):null;
-    console.log('UAE_PENDING_DIAGNOSTIC',JSON.stringify({id:offer.id,make:offer.make,model:offer.model,complete,unprovenEnginePrecision:unprovenEnginePrecision(evidence),status:calculated?.calculationStatus,missing:calculated?.calculationSnapshot?.customs?.missing,totalRub:calculated?.totalRub,sourcePrice:offer.sourcePrice,sourceCurrency:offer.sourceCurrency}));
+    console.log('UAE_PENDING_DIAGNOSTIC',JSON.stringify({id:offer.id,make:offer.make,model:offer.model,complete,inScope:sourceInventoryInScope(offer),credible:calculated?hasCredibleOfferContent(calculated):null,powerMismatch:calculated?combustionPowerMismatch(calculated):null,preparedNull:prepared===null,unprovenEnginePrecision:unprovenEnginePrecision(evidence),status:calculated?.calculationStatus,missing:calculated?.calculationSnapshot?.customs?.missing,totalRub:calculated?.totalRub,sourcePrice:offer.sourcePrice,sourceCurrency:offer.sourceCurrency}));
    }
    reasons[reason]=(reasons[reason]||0)+1;
    console.log('UAE_PENDING_KNOWN_SPECS',JSON.stringify({id:offer.id,reason}));
