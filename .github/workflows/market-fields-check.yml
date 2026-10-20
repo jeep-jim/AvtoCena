@@ -1,12 +1,15 @@
 name: Market source fields — manual check
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/market-fields-check.json']
 permissions:
   contents: read
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@v4
