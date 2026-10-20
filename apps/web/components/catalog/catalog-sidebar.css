@@ -91,3 +91,11 @@
 
 [data-catalog-view=list] [data-catalog-batch]{margin-bottom:0;border-radius:0;border-bottom:0}
 [data-catalog-view=list] [data-catalog-batch]:first-child{border-radius:12px 12px 0 0}
+
+@media(min-width:1024px){
+ .ac-catalog-page .ac-catalog-sidebar .ac-catalog-filter-panel .ac-sort-control{height:auto!important;min-height:0!important}
+ .ac-catalog-page .ac-catalog-sidebar .ac-catalog-filter-panel .ac-sort-control>button{height:36px!important;min-height:36px!important}
+ .ac-catalog-sidebar .ac-filter-dropdown{min-width:240px;max-width:calc(100vw - 64px);left:auto;right:0}
+}
+.ac-chassis-copy button{display:inline-flex;align-items:center;gap:4px}
+.ac-chassis-copy small{display:block}

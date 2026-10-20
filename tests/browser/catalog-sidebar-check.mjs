@@ -74,6 +74,8 @@ try{
  if(width>=1024){
    assert.equal(await sidebar.getByRole('button',{name:'Дешевле',exact:true}).count(),1);
    assert.equal(await page.locator('.ac-catalog-selection .ac-sort-control').count(),0);
+   const sortBounds=await sidebar.locator('.ac-sort-control').evaluate(el=>{const r=el.getBoundingClientRect();return [...el.querySelectorAll('button')].map(b=>{const q=b.getBoundingClientRect();return {bottom:q.bottom,parentBottom:r.bottom,height:q.height};});});
+   assert.equal(sortBounds.length,4);assert.ok(sortBounds.every(b=>b.bottom<=b.parentBottom+1&&b.height<=38),JSON.stringify(sortBounds));
    const range=sidebar.getByRole('button',{name:'Выбрать значение: Объём двигателя: от',exact:true});
    await range.evaluate(el=>{const side=el.closest('.ac-catalog-sidebar');side.scrollTop+=el.getBoundingClientRect().bottom-side.getBoundingClientRect().bottom+8;});
    await range.click();

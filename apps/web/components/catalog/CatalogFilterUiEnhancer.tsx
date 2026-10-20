@@ -363,7 +363,7 @@ export function CatalogFilterUiEnhancer() {
           const anchor=menu.parentElement!.getBoundingClientRect();
           const below=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-anchor.bottom-8);
           const above=Math.max(0,anchor.top-Math.max(bounds.top,0)-8);
-          const up=below<Math.min(300,menu.scrollHeight)&&above>below;
+          const up=below<Math.min(400,menu.scrollHeight)&&above>below;
           menu.classList.toggle("is-up",up);
           setImportant(menu,"max-height",`${Math.min(400,up?above:below)}px`);
           setImportant(menu,"overflow-y","auto");

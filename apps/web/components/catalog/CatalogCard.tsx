@@ -33,7 +33,7 @@ function ChassisCopy({code}:{code:string}) {
   return <span className="ac-chassis-copy"><button type="button" aria-label={`Скопировать код кузова ${code}`} onClick={async()=>{
     try { await navigator.clipboard.writeText(code); setStatus("Скопировано"); }
     catch { setStatus("Не удалось скопировать"); }
-  }}>{code} <span aria-hidden="true">⧉</span></button><small role="status">{status}</small></span>;
+  }}>{code} <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V4H4v11h4"/></svg></button><small role="status">{status}</small></span>;
 }
 
 function MileageIcon({ dense = false }: { dense?: boolean }) {
