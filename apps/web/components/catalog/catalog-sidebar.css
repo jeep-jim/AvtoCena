@@ -99,3 +99,6 @@
 }
 .ac-chassis-copy button{display:inline-flex;align-items:center;gap:4px}
 .ac-chassis-copy small{display:block}
+
+/* Mobile catalog has one presentation: cards, without an empty toolbar. */
+@media(max-width:1023px){.ac-catalog-toolbar{display:none}}
