@@ -29,6 +29,21 @@ def eligible(c):
                     for m in c.get('Mounts', [])))
 
 
+def eligible_old_release(c, now):
+    """Abandoned deployment candidates also pin images; retain one day of evidence."""
+    name = c['Name'].lstrip('/')
+    if not re.fullmatch(r'avtocena-release-[0-9a-f]{12}(?:-failed-[0-9]+)?', name):
+        return False
+    # Reuse the exact label, stopped-state and read-only-mount safeguards.
+    if not eligible(dict(c, Name='/avtocena-before-' + '0' * 12)):
+        return False
+    try:
+        finished = dt.datetime.fromisoformat(c['State']['FinishedAt'].replace('Z', '+00:00'))
+        return finished.tzinfo is not None and now - finished >= dt.timedelta(days=1)
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
 def eligible_unused_image(image, referenced, now):
     """Only old, named application images; never containers or data volumes."""
     tags = image.get('RepoTags') or []
@@ -59,7 +74,10 @@ def main():
         raise RuntimeError('Expected running production; refusing cleanup')
     backups = sorted((c for c in containers if eligible(c)),
                      key=lambda c: c['State']['FinishedAt'], reverse=True)
-    remove = backups[2:]
+    now = dt.datetime.now(dt.timezone.utc)
+    # Only clean abandoned candidates when two actual rollback containers exist.
+    abandoned = [c for c in containers if eligible_old_release(c, now)] if len(backups) >= 2 else []
+    remove = backups[2:] + abandoned
     print('RETAIN_ROLLBACKS', [c['Name'] for c in backups[:2]], flush=True)
     print('REMOVE_STOPPED_COPIES', [c['Name'] for c in remove], flush=True)
     before = shutil.disk_usage('/')
@@ -68,7 +86,7 @@ def main():
         if args.apply:
             # Recheck state and mounts immediately before non-forced removal.
             fresh = json.loads(docker('inspect', c['Id']))[0]
-            if not eligible(fresh):
+            if not (eligible(fresh) or eligible_old_release(fresh, now)):
                 raise RuntimeError('Container changed; refusing removal')
             docker('rm', c['Id'])
             removed_images.add(c['Image'])

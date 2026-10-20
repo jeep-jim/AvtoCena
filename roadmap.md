@@ -10558,3 +10558,6 @@ f4ce0ce8e4538a8a48536261; 40ad045ea30099449f264f50; 5bdd09933bffcf82db6a0bcb; 82
 
 
 20.10.2026 09:00 Asia/Krasnoyarsk: штатная очистка 39356255019 успешна, но кандидатов нет: свободно 5 824 032 768 байт из 102 916 472 832 (занято 94,3%). /api/health ok=true, production 3fd22f57. Запущен штатный read-only disk audit для определения причины; новые установки не запущены.
+
+
+20.10.2026 09:04 Asia/Krasnoyarsk: disk audit 39356600149: Docker images 94.02GB, 19 images/14 referenced; 18 containers, only production running; logs102MB, /opt9.6MB. Причина: старые stopped avtocena-release-* удерживают образы и не попадали под очистку avtocena-before-*. Расширена штатная очистка только на остановленные candidates старше суток с production-label и прежней строгой проверкой read-only mounts; требуется наличие двух rollback-контейнеров. Сохраняются live+2rollback, тома не удаляются, force/prune отсутствуют. Два локальных теста защит успешны. Запущена очистка с новым правилом; результат ещё ожидается.

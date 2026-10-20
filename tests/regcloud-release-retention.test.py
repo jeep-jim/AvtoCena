@@ -9,6 +9,26 @@ spec.loader.exec_module(retention)
 
 
 class ImageRetentionTest(unittest.TestCase):
+    def test_abandoned_candidate_guards(self):
+        now = dt.datetime(2026, 10, 20, tzinfo=dt.timezone.utc)
+        c = {'Name': '/avtocena-release-' + 'a' * 12,
+             'State': {'Status': 'exited', 'FinishedAt': '2026-10-18T00:00:00Z'},
+             'Config': {'Labels': {'avtocena.role': 'production'}},
+             'Mounts': [{'Type': 'bind', 'RW': False, 'Source': '/opt/avtocena/metrics',
+                         'Destination': '/run/avtocena-metrics'}]}
+        self.assertTrue(retention.eligible_old_release(c, now))
+        self.assertTrue(retention.eligible_old_release(dict(c, Name=c['Name'] + '-failed-123'), now))
+        for changed in ({'Name': '/avtocena-production'}, {'Name': '/avtocena-staging'},
+                        {'Name': '/avtocena-before-' + 'b' * 12},
+                        {'Config': {'Labels': {}}},
+                        {'State': {'Status': 'running', 'FinishedAt': '2026-10-18T00:00:00Z'}},
+                        {'State': {'Status': 'exited', 'FinishedAt': now.isoformat()}},
+                        {'State': {'Status': 'exited', 'FinishedAt': 'invalid'}},
+                        {'Mounts': [{'Type': 'volume', 'RW': True}]},
+                        {'Mounts': [dict(c['Mounts'][0], RW=True)]}):
+            with self.subTest(changed=changed):
+                self.assertFalse(retention.eligible_old_release(dict(c, **changed), now))
+
     def test_only_old_unreferenced_application_images(self):
         now = dt.datetime(2026, 10, 18, tzinfo=dt.timezone.utc)
         tag = 'avtocena-regcloud:' + 'a' * 40
