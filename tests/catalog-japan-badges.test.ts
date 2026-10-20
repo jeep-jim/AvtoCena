@@ -72,3 +72,11 @@ test("electrified Japan labels survive missing subtype, volume and legacy proven
  const hybrid=vehicle({fuel:"hybrid",powertrainKind:"other_hybrid"});hybrid.engineCc=660;
  assert.equal(assessJapanExportRestriction(hybrid)?.reason,"hybrid");
 });
+
+
+test("public preview retains source chassis code and lot without private frame or operational data", () => {
+ const dto:any=publicOffer(vehicle({lotNumber:"2014",frameNumber:"PRIVATE-FRAME",vin:"PRIVATE-VIN",operational:{chassisCode:"DBA-L175S",raw:{secret:"PRIVATE"}}} as any));
+ assert.equal(dto.chassisCode,"DBA-L175S");assert.equal(dto.lotNumber,"2014");
+ for(const key of ["frameNumber","vin","operational"])assert.equal(key in dto,false);
+ assert.equal((publicOffer(vehicle()) as any).chassisCode,undefined);
+});
