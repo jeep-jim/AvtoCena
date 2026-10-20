@@ -2433,7 +2433,7 @@ async function searchOffersEditorial(params: CatalogSearchParams, internalPageLi
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
-  if(params.market === "japan")return {generationId:await catalogGenerationId(),total:0,page:Math.max(1,Number(params.page||1)),pageSize:Math.min(internalPageLimit,Number(params.pageSize||24)),items:[],usedIndexShards:[]};
+  if(params.market === "japan" || params.market === "korea")return {generationId:await catalogGenerationId(),total:0,page:Math.max(1,Number(params.page||1)),pageSize:Math.min(internalPageLimit,Number(params.pageSize||24)),items:[],usedIndexShards:[]};
   const budgetResult=await searchBudgetIndex(params,internalPageLimit);
   if(budgetResult)return budgetResult;
   return searchOffersWithoutBudgetIndexForTests(params,internalPageLimit);

@@ -52,3 +52,8 @@ test('Japanese sold lots with missing fuel still appear as same-model recommenda
  const groups=await select({current,modelRows:[current,other],renderable:isRenderableRelatedOffer});
  assert.deepEqual(groups.sameModel.map(r=>r.id),['ajes-stats-other']);
 });
+
+
+test('retired Korean parser inventory never appears as paid-feed recommendations',()=>{
+ for(const sourceId of ['encar_direct','kcar'])assert.equal(isRenderableRelatedOffer({market:'korea',sourceId,cardProjectionVersion:3,publicSpecificationVerified:true,publicVisibleRub:1000000,totalRub:1000000,calculationStatus:'estimated'}),false);
+});

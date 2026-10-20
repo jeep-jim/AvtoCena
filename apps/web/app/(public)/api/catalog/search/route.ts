@@ -86,8 +86,9 @@ export async function GET(request: Request) {
   const readMs = performance.now() - started;
   // Exclude the local China inventory only while the live supplier is selected.
   // AJES is paginated separately by market; do not invent a combined count.
-  const crossMarket=!query.market&&await usesAjesMarket('china');
-  const candidates=crossMarket?result.items.filter(offer=>offer.market!=='china'):result.items;
+  const crossMarket=!query.market;
+  const liveChina=crossMarket&&await usesAjesMarket('china');
+  const candidates=crossMarket?result.items.filter(offer=>offer.market!=='korea'&&(!liveChina||offer.market!=='china')):result.items;
   const items = await applyActiveBusinessPricingBatch(candidates);
   const pricingMs = performance.now() - started - readMs;
   return NextResponse.json({ ok: true, ...result, ...(crossMarket?{total:null,partial:true,countIncomplete:true}:{}), items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });

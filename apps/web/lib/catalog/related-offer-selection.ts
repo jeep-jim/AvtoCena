@@ -58,6 +58,7 @@ export async function selectRelatedOfferGroups({current,modelRows,marketRows,cro
 
 /** Stock rows come from the independently validated Green Corner snapshot, not auction projections. */
 export function isRenderableRelatedOffer(offer:any) {
+  if(offer?.market==='korea'&&offer?.sourceId!=='ajes_korea_feed')return false;
   if(/^ajes-(?:korea|china)-/.test(String(offer?.id))&&offer.sourceId===`ajes_${offer.market}_feed`)return offer.status==='active'&&isSellerPricedOffer(offer)&&!catalogHeavyVehicleExcluded(offer)&&offer.images?.some((image:any)=>ajesImageUrl(image.url));
   if(offer?.sourceId==='ajes_japan_feed'&&ajesOfferId(String(offer.id))&&offer.market==='japan')return offer.status==='sold'&&japanAuctionSoldPriceVerified(offer)&&isSellerPricedOffer(offer)&&!catalogHeavyVehicleExcluded(offer)&&Number(offer.year)>=JAPAN_MIN_MODEL_YEAR&&Number(offer.year)<=new Date().getUTCFullYear()+1&&offer.images?.some((image:any)=>image.role!=='auction_sheet'&&ajesImageUrl(image.url));
   if(isGreenCornerOffer(offer)) return isSellerPricedOffer(offer)

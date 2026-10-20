@@ -126,7 +126,7 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
   const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
   const otherMarkets = PUBLIC_CATALOG_MARKETS.filter(market => market !== current.market);
   // Bounded model queries stream behind the primary offer; failures stay isolated by market.
-  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'||(/^ajes-(?:korea|china)-/.test(String(current.id))&&params.market===current.market)
+  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => (params.market==='japan'||params.market==='korea'||(/^ajes-(?:korea|china)-/.test(String(current.id))&&params.market===current.market)
     ? readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(/^ajes-(?:stats|korea|china)-/.test(String(current.id))?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
     : searchOffers(params)).catch(error => {
     console.error("offer_similar_search_failed", error); return {items:[],total:0};
@@ -150,7 +150,6 @@ async function SimilarOffers({ current, markets }: { current: any; markets?:stri
   const marketParams = new URLSearchParams({market:String(current.market||"")});
   if(current.market==='japan')marketParams.set('stock','all');
   if(/^ajes-(?:korea|china)-/.test(String(current.id))){marketParams.set('source','ajes');modelParams.set('source','ajes');}
-  else if(current.market==='korea'){marketParams.set('source','existing');modelParams.set('source','existing');}
   const marketLabel = String(presented.marketLabel || current.market || "рынка");
   const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={item} compact />)}</div>;
   return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>
@@ -263,6 +262,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
+  if(storedOffer.market==='korea' && storedOffer.sourceId!=='ajes_korea_feed') permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
   const canonicalPath = offerPath(storedOffer);
   if (`/cars/offer/${encodeURIComponent(routeId)}` !== canonicalPath && `/cars/offer/${routeId}` !== canonicalPath) {
     const preserved = new URLSearchParams();

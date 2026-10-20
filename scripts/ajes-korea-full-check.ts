@@ -8,7 +8,10 @@ async function main(){
  const ip=process.env.AJES_DIAG_IP;if(ip!=='151.248.113.177')throw Error('address');
  const storage=getJsonStorage();
  const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled(`ajes_${t}_feed`),reserve:t=>reserveAjesRequest(storage,t)});
- const page=await client.read({table:'korea',make:'AUDI',model:'A6',pageSize:3},ip),lot=page.items[0];
+ const total=await client.read({table:'korea',aggregate:'count'},ip);
+ const powered=await client.read({table:'korea',aggregate:'count',powerFrom:1},ip);
+ console.log('KOREA_POWER_COUNTS',JSON.stringify({at:new Date().toISOString(),total:total.total,positivePw:powered.total}));
+ const page=await client.read({table:'korea',id:'6cyeERjzLgmBr4'},ip),lot=page.items[0];
  if(!lot){console.log('KOREA_FULL_CHECK',JSON.stringify({sampleFound:false}));return;}
  await assertCollectionEnabled('ajes_korea_feed');await reserveAjesRequest(storage,'korea');
  const password=await ajesPassword();if(!password)throw Error('not_configured');

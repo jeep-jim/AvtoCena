@@ -79,3 +79,8 @@
 
 # Owner daily continuity — 19.10.2026
 - Every work session must append results under the actual Asia/Krasnoyarsk calendar date in roadmap.md. Start a new dated entry when the date changes; preserve all prior history, commits/releases, verification evidence and unfinished items. This is a task log and knowledge recovery record, not a claim of a database backup.
+
+
+# Owner sole paid-feed policy — 20.10.2026
+- Korea uses only the purchased Encar feed sold by Mikhail (internal sourceId ajes_korea_feed). Japan uses his paid feed; China and UAE use AutoAPI. Do not supplement Korean search, recommendations or counts with historical Encar/KCar parser inventory, including source=existing bookmarks. Keep archives without presenting them as current paid-feed cars. European, Georgian and Green Corner collectors remain in their existing state.
+- Fix missing Korean calculation specifications within the purchased feed contract. Do not infer horsepower from engine displacement, model name or another listing; preserve supplier restrictions and exact identity.
