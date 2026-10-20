@@ -26,6 +26,7 @@ jobs:
           await build({entryPoints:['scripts/market-fields-check.ts'],outfile:'/tmp/market-fields-check.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
       - name: Bounded requests using supplier-approved genuine server address
+        if: github.event_name == 'workflow_dispatch'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
