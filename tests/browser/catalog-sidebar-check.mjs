@@ -41,15 +41,27 @@ async function menuGeometry(page,root,menu,expectedWidth){const r=await root.bou
 async function verifyControls(page,scope){
  const sort=scope.locator('.ac-sort-select');
  assert.equal(await sort.locator('input[name="sort"]').inputValue(),'');
- for(const [value,label] of [['totalRub','Сначала дешевле'],['totalRubDesc','Сначала дороже'],['year','Сначала новые'],['yearAsc','Сначала старые'],['','Без сортировки']]){
-  await sort.locator(':scope > button').click();
+ await sort.locator(':scope > button').click();
+ for(const [value,label] of [['totalRub','Сначала дешевле'],['totalRubDesc','Сначала дороже'],['year','Сначала новые'],['yearAsc','Сначала старые'],['mileage','Меньше пробег'],['mileageDesc','Больше пробег']]){
+  await sort.getByRole('button',{name:'Без сортировки',exact:true}).click();
   await sort.getByRole('button',{name:label,exact:true}).click();
   assert.equal(await sort.locator('input[name="sort"]').inputValue(),value);
-  assert.equal(await sort.locator('.ac-filter-dropdown').count(),0);
-  assert.equal(await sort.locator(':scope > button').innerText(),label);
  }
- await sort.locator(':scope > button').click();await page.keyboard.press('Escape');
- assert.equal(await sort.locator('.ac-filter-dropdown').count(),0);
+ await sort.getByRole('button',{name:'Без сортировки',exact:true}).click();
+ await sort.getByRole('button',{name:'Сначала дешевле',exact:true}).click();
+ await sort.getByRole('button',{name:'Меньше пробег',exact:true}).click();
+ assert.equal(await sort.locator('input[name="sort"]').inputValue(),'totalRub,mileage');
+ await sort.getByRole('button',{name:'Сначала дороже',exact:true}).click();
+ assert.equal(await sort.locator('input[name="sort"]').inputValue(),'totalRubDesc,mileage');
+ await sort.getByRole('button',{name:'Без сортировки',exact:true}).click();
+ await page.keyboard.press('Escape');assert.equal(await sort.locator('.ac-filter-dropdown').count(),0);
+ const color=scope.locator('.ac-color-select');
+ await color.locator(':scope > button').click();
+ await color.getByRole('button',{name:'Белый',exact:true}).click();
+ assert.equal(await color.locator('input[name="color"]').inputValue(),'Белый');
+ assert.equal(await color.locator(':scope > button span[aria-hidden]').count(),1);
+ await color.locator(':scope > button').click();await color.getByRole('button',{name:'Любой цвет',exact:true}).click();
+ assert.equal(await color.locator('input[name="color"]').inputValue(),'');
  for(const theme of ['light','dark']){
   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
   const fields=await scope.locator('.ac-power-limit,.ac-electric-filter,.ac-sort-select > button').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {radius:s.borderRadius,background:s.backgroundColor,border:s.borderTopColor,height:el.getBoundingClientRect().height};}));
@@ -62,6 +74,7 @@ async function verifyControls(page,scope){
 try{
  for(const width of [390,1280,1600]){
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
+ await page.route('**/api/catalog/colors**',route=>route.fulfill({json:{ok:true,colors:['Белый','Чёрный','Особый'],partial:false}}));
  await page.route('**/api/catalog/brand-counts**',route=>route.fulfill({json:{counts:{Toyota:10,BMW:8}}}));
  const errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('PAGE_ERROR',String(e));});await page.goto(origin+'/cars');await page.waitForTimeout(1000);assert.deepEqual(errors,[]);
  const sidebar=page.locator('.ac-catalog-sidebar');

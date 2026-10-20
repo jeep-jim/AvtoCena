@@ -1,3 +1,4 @@
+import {normalizedCatalogSort} from '@/lib/catalog/catalog-sort';
 import {CatalogSidebar} from './CatalogSidebar';
 import {GreenCornerCatalog} from "./GreenCornerCatalog";
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
@@ -46,12 +47,11 @@ function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 24;
-const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
 type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number };
 
 function requestedSort(value?: string | string[]) {
   const sort = first(value);
-  return SUPPORTED_SORTS.has(sort) ? sort : "updatedAt";
+  return normalizedCatalogSort(sort) || "updatedAt";
 }
 
 function pageHref(params: Record<string, string | string[] | undefined>, page: number) {
@@ -76,13 +76,13 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   const customSort = selectedSort !== "updatedAt";
   const requestedPage = Math.max(1, Math.floor(Number(first(params.page)) || 1));
   const common = {
-    city: first(params.city),
+    color:first(params.color), city: first(params.city),
     make: first(params.make) || first(params.brand), model: first(params.model), budgetFrom: numeric(params.budgetFrom), budgetTo: numeric(params.budget) || numeric(params.budgetTo), hasPrice: first(params.hasPrice),
     yearFrom: numeric(params.yearFrom), yearTo: numeric(params.yearTo), mileageFrom: numeric(params.mileageFrom), mileageTo: numeric(params.mileageTo), engineFrom: parseEngineCc(first(params.engineFrom)), engineTo: parseEngineCc(first(params.engineTo)), powerFrom: numeric(params.powerFrom), powerTo: numeric(params.powerTo),
     auctionGrade: selectedMarket === "japan" ? first(params.auctionGrade) : undefined,
     fuel: first(params.fuel), transmission: first(params.transmission), drive: first(params.drive), bodyType: first(params.bodyType), sort: selectedSort,
   };
-  const hasFilters = Boolean(common.make || common.model || common.budgetFrom || common.budgetTo || common.hasPrice
+  const hasFilters = Boolean(common.color || common.make || common.model || common.budgetFrom || common.budgetTo || common.hasPrice
     || common.yearFrom || common.yearTo || common.mileageFrom || common.mileageTo || common.engineFrom || common.engineTo
     || common.auctionGrade || common.powerFrom || common.powerTo || common.fuel || common.transmission || common.drive || common.bodyType);
   const markets = selectedMarket ? allowedMarkets.filter((item) => item.id === selectedMarket) : allowedMarkets;
@@ -160,7 +160,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   const countSummary=overviewEligible&&(!dealer||dealer.markets.includes('japan'))?await withAjesCount({total:localTotal,marketCounts:Object.fromEntries(groupedMarkets.map(m=>[m.id,m.total]))}):{total:localTotal,countIncomplete:groupedMarkets.some(m=>liveMarket(m.id))};
   const {total,countIncomplete}=countSummary;
 
-  const initialKeys = ["source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
+  const initialKeys = ["color","source", "stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   initial.market=selectedMarket;
   const brandNames = facets.makes || [];

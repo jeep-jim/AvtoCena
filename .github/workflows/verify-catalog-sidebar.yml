@@ -19,7 +19,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/model-suggestion-search.test.ts tests/catalog-filter-search.test.ts tests/green-corner-filters.test.ts tests/ajes-filtered-page.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/model-suggestion-search.test.ts tests/catalog-filter-search.test.ts tests/green-corner-filters.test.ts tests/ajes-filtered-page.test.ts tests/catalog-sort-color.test.ts tests/catalog-compact-sort.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/sidebar-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/sidebar-browser/node_modules/playwright/index.mjs

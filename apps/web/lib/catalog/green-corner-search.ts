@@ -1,3 +1,5 @@
+import {matchesCatalogColor} from './catalog-color-index';
+import {parseCatalogSort,compareCatalogTerms} from './catalog-sort';
 import {matchesFilterSelection} from './filter-selections';
 import {catalogBodyType} from './pickup-body';
 import { matchesAuctionGrades } from "./auction-grade-filter";
@@ -12,7 +14,7 @@ export type GreenFilters = Record<string,string|undefined>;
 export function greenCornerNeedsFullPricing(params:GreenFilters) {
  // Price predicates and price sorting need exact calculations for all candidates.
  // Ordinary pagination needs only the 24 visible current calculations.
- return Boolean(params.budgetFrom||params.budgetTo||params.budget||params.sort==='totalRub'||params.sort==='totalRubDesc');
+ return Boolean(params.budgetFrom||params.budgetTo||params.budget||parseCatalogSort(params.sort)?.some(term=>term.startsWith('totalRub')));
 }
 export async function greenCornerPageSelection(items:VehicleOffer[],params:GreenFilters,
  price:(items:VehicleOffer[])=>Promise<VehicleOffer[]>,clampPage=true) {
@@ -38,6 +40,7 @@ export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
  const number=(key:string)=>{const n=Number(params[key]);return Number.isFinite(n)&&n>0?n:undefined;};
  const range=(value:number|undefined,from:number|undefined,to:number|undefined)=>!from&&!to || value!=null&&Number.isFinite(value)&&(!from||value>=from)&&(!to||value<=to);
  const rows=items.filter(row=>{
+  if(!matchesCatalogColor(row,params.color))return false;
   if(params.q&&!lower(`${row.make} ${row.model} ${row.year}`).includes(lower(params.q)))return false;
   if(params.make&&!params.make.split(',').some(make=>lower(make)===lower(row.make)))return false;
   if(params.model&&!matchesCatalogModel(row.model,params.model,row.make))return false;
@@ -51,8 +54,8 @@ export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
   return true;
  });
  const price=(row:VehicleOffer)=>greenCornerBudgetPrice(row,params.city);
- const sortPrice=(a:VehicleOffer,b:VehicleOffer)=>{const x=price(a),y=price(b);return x==null?(y==null?0:1):y==null?-1:params.sort==='totalRubDesc'?y-x:x-y;};
- return rows.sort((a,b)=>params.sort==='totalRub'||params.sort==='totalRubDesc'?sortPrice(a,b):params.sort==='yearAsc'?a.year-b.year:params.sort==='mileage'?(a.mileageKm??Infinity)-(b.mileageKm??Infinity):b.year-a.year||a.id.localeCompare(b.id));
+ const terms=parseCatalogSort(params.sort)||[];
+ return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row)||0)||a.id.localeCompare(b.id):b.year-a.year||a.id.localeCompare(b.id));
 }
 export function greenCornerFacets(items:VehicleOffer[]) {
  const values=(key:keyof VehicleOffer)=>[...new Set(items.map(row=>String(row[key]??'')).filter(Boolean))];

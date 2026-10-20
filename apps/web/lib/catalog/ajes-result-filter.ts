@@ -1,3 +1,4 @@
+import {matchesCatalogColor} from './catalog-color-index';
 import {filterSelections,matchesFilterSelection} from './filter-selections';
 import {AjesInputError} from './ajes-query';
 import {priceCardForCity} from './card-city-delivery';
@@ -15,7 +16,8 @@ export function ajesResultFilter(params:Record<string,unknown>){
  if(filterSelections(body).some(value=>!['suv','offroad','sedan','hatchback','wagon','minivan','coupe','convertible','pickup','van'].includes(value)))throw new AjesInputError();
  if(hasPrice&&!['yes','no'].includes(hasPrice))throw new AjesInputError();
  const priceFilter=from!==undefined||to!==undefined||Boolean(hasPrice);
- return {active:priceFilter||Boolean(body)||powerFilter,priceFilter,matches(offer:any){
+ return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color),priceFilter,matches(offer:any){
+  if(!matchesCatalogColor(offer,scalar(params.color)))return false;
   if(powerFilter){const hp=Number(offer.powerHp);if(!Number.isFinite(hp)||hp<=0||(powerFrom!==undefined&&hp<powerFrom)||(powerTo!==undefined&&hp>powerTo))return false;}
   if(!matchesFilterSelection(catalogBodyType(offer),body))return false;
   if(!priceFilter)return true;

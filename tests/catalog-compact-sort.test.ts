@@ -5,12 +5,14 @@ import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index'
 import {searchOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
 import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-settings';
+import {compareCatalogTerms,parseCatalogSort} from '../apps/web/lib/catalog/catalog-sort';
 import {sortCatalogRows} from '../apps/web/lib/catalog/market-page';
 
 test('compact sorting keeps exact order, shares direction price reads and bounds concurrent blocks',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
  const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined} as any);
+ rows.forEach((row:any,i:number)=>{row.color=i%2?'black':'white';row.mileageKm=i===1?0:i===2?undefined:(60-i)*100;});
  const generationId='compact-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])));
  const storage=getJsonStorage(),original=storage.readJsonWithMeta,reads:string[]=[];let active=0,peak=0;
  storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
@@ -18,6 +20,7 @@ test('compact sorting keeps exact order, shares direction price reads and bounds
   if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
   else if(key==='fees/exchange-rates.json')value={};
   else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
+  else if(key.endsWith('/colors-v1.json'))value={generationId,rows:rows.map((r:any)=>[r.id,r.market,r.color])};
   else if(key.endsWith('/budget-count-v3.json'))return {found:false,value:fallback};
   else if(key.endsWith('/budget-count-v2.json'))value=index;
   else if(key.includes('/budget-cards-v2/')){active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,2));active--;const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:rows.slice(block*10,block*10+10)};}
@@ -28,6 +31,15 @@ test('compact sorting keeps exact order, shares direction price reads and bounds
  try{
   resetCatalogReadCachesForTests();
   for(const sort of ['year','yearAsc'] as const){const r=await searchOffers({fuel:'petrol',sort,pageSize:8});const years=r.items.map(x=>x.year);assert.deepEqual(years,[...years].sort((a,b)=>sort==='year'?b-a:a-b));assert.equal(r.total,61);}
+  for(const sort of ['year,mileage','mileageDesc,yearAsc','totalRub,mileage']){
+   const result=await searchOffers({fuel:'petrol',sort,page:2,pageSize:8});
+   const expected=[...rows].sort((a,b)=>compareCatalogTerms(a,b,parseCatalogSort(sort)!,r=>Number(r.totalRub))||a.id.localeCompare(b.id)).slice(8,16);
+   assert.deepEqual(result.items.map(r=>r.id),expected.map(r=>r.id),'compound order before pagination: '+sort);
+  }
+  const white=await searchOffers({color:'Белый',fuel:'petrol',sort:'mileage',pageSize:8});
+  assert.equal(white.total,31);assert.ok(white.items.every((r:any)=>r.color==='white'));
+  const black=await searchOffers({color:'Чёрный',fuel:'petrol',sort:'mileage',pageSize:8});
+  assert.equal(black.total,30);assert.equal(black.items[0].mileageKm,0);
   resetCatalogReadCachesForTests();reads.length=0;peak=0;
   const ascending=await searchOffers({fuel:'petrol',sort:'totalRub',pageSize:8});
   assert.deepEqual(ascending.items.map(x=>x.id),Array.from({length:8},(_,i)=>`car-${i}`));

@@ -1,3 +1,4 @@
+import {parseCatalogSort,compareCatalogTerms} from './catalog-sort';
 import {hasModificationSelection} from "./modification-contract";
 import {priceCardForCity} from "./card-city-delivery";
 import {readCatalogEditorial} from "./editorial";
@@ -56,23 +57,8 @@ export function sortCatalogRows(rows: any[], sort: string, city?: string) {
   const sorted = [...rows];
   const values=new Map<any,number>();
   const price=(row:any)=>{if(!values.has(row)){const offer=city?priceCardForCity(row,city).offer:row;values.set(row,hasModificationSelection(row)?0:Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub||(offer.catalogPricingMode==="seller"?offer.sellerPriceRub:0))||0);}return values.get(row)!;};
-  if (sort === "totalRub") return sorted.sort((left, right) => {
-    const a = price(left) || Number.POSITIVE_INFINITY;
-    const b = price(right) || Number.POSITIVE_INFINITY;
-    return a - b || businessOrder(left, right);
-  });
-  if (sort === "totalRubDesc") return sorted.sort((left, right) => {
-    const a = price(left);
-    const b = price(right);
-    return (b || Number.NEGATIVE_INFINITY) - (a || Number.NEGATIVE_INFINITY) || businessOrder(left, right);
-  });
-  if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
-  if (sort === "yearAsc") return sorted.sort((left, right) => Number(left?.year || 0) - Number(right?.year || 0) || businessOrder(left, right));
-  if (sort === "mileage") return sorted.sort((left, right) => {
-    const a = Number(left?.mileageKm || 0) || Number.POSITIVE_INFINITY;
-    const b = Number(right?.mileageKm || 0) || Number.POSITIVE_INFINITY;
-    return a - b || businessOrder(left, right);
-  });
+  const terms=parseCatalogSort(sort)||[];
+  if(terms.length)return sorted.sort((a,b)=>compareCatalogTerms(a,b,terms,price)||String(a.id||'').localeCompare(String(b.id||'')));
   return sorted.sort(businessOrder);
 }
 

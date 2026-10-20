@@ -51,7 +51,7 @@ export async function GET(request: Request) {
     budgetTo: positiveNumber(url, "budgetTo") || positiveNumber(url, "budget"),
     yearFrom: positiveNumber(url, "yearFrom"),
     yearTo: positiveNumber(url, "yearTo"),
-    mileageFrom: positiveNumber(url, "mileageFrom"),
+    color:url.searchParams.get("color")||undefined, mileageFrom: positiveNumber(url, "mileageFrom"),
     mileageTo: positiveNumber(url, "mileageTo"),
     engineFrom: positiveNumber(url, "engineFrom"),
     engineTo: positiveNumber(url, "engineTo"),

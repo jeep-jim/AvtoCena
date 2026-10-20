@@ -1,4 +1,7 @@
 "use client";
+import {CatalogColorSelect} from "./CatalogColorSelect";
+import {CatalogSortSelect} from "./CatalogSortSelect";
+import {normalizedCatalogSort} from "@/lib/catalog/catalog-sort";
 import {filterSelections} from '@/lib/catalog/filter-selections';
 import {JAPAN_MIN_MODEL_YEAR} from "@/lib/catalog/japan-year-policy";
 import {rememberFilterScroll,restoreFilterScroll} from "@/lib/catalog/filter-scroll";
@@ -32,9 +35,10 @@ import { auctionGradeSelections } from "@/lib/catalog/auction-grade-filter";
 
 type Option = { value: string; label: string };
 type Facets = { makes: string[]; models: Array<{ make: string; model: string; aliases?: string[] }>; markets?: string[]; bodyTypes?: string[]; fuels?: string[]; transmissions?: string[]; drives?: string[] };
-type SortKey = "" | "totalRub" | "year";
+type SortKey = string;
 type SortDir = "asc" | "desc";
 type FilterDraft = {
+  color: string;
   make: string;
   model: string;
   market: string;
@@ -144,6 +148,7 @@ function optionLabel(options: Option[], value: string) { return filterSelections
 function formatNumber(value: number) { return new Intl.NumberFormat("ru-RU").format(Math.round(value)); }
 function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
+    color: initial.color || "",
     stock: initial.stock || "",
     chassis:initial.chassis||"",frameNumber:initial.frameNumber||"",lotNumber:initial.lotNumber||"",
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
@@ -158,13 +163,13 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
   if (sort === "totalRub") return { key: "totalRub", direction: "asc" };
   if (sort === "yearAsc") return { key: "year", direction: "asc" };
   if (sort === "year") return { key: "year", direction: "desc" };
-  return { key: "", direction: "asc" };
+  return { key: normalizedCatalogSort(sort), direction: "asc" };
 }
 function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
   if (draft.market === "japan") { add("chassis",draft.chassis);add("frameNumber",draft.frameNumber);add("lotNumber",draft.lotNumber);add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
-  add("make", draft.make); add("model", draft.model); add("market", draft.market);
+  add("color", draft.color); add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
   add("budgetFrom", draft.budgetFrom); add("budget", draft.budget);
@@ -178,7 +183,7 @@ function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortD
 function sortParam(key: SortKey, direction: SortDir) {
   if (key === "totalRub") return direction === "desc" ? "totalRubDesc" : "totalRub";
   if (key === "year") return direction === "asc" ? "yearAsc" : "year";
-  return "";
+  return normalizedCatalogSort(key);
 }
 
 async function loadElectricFacets(fuel: string) {
@@ -216,8 +221,7 @@ function PowerLimitCheckbox({ checked, onChange, sourcePower=false }: { sourcePo
 }
 
 function SortControl({ sortKey, direction, onChange, hidePrice=false }: { hidePrice?:boolean; sortKey: SortKey; direction: SortDir; onChange: (key: SortKey, direction: SortDir) => void }) {
-  const options = [{value:"",label:"Без сортировки"}, {value:"totalRub",label:"Сначала дешевле"}, {value:"totalRubDesc",label:"Сначала дороже"}, {value:"year",label:"Сначала новые"}, {value:"yearAsc",label:"Сначала старые"}];
-  return <SimpleSelect name="sort" value={sortParam(sortKey,direction)} options={options.filter(item=>!hidePrice||!item.value.startsWith("totalRub"))} placeholder="Без сортировки" className="ac-sort-select" onChange={value=>{const next=initialSort(value);onChange(next.key,next.direction);}} />;
+  return <CatalogSortSelect value={sortParam(sortKey,direction)} hidePrice={hidePrice} onChange={value=>{const next=initialSort(value);onChange(next.key,next.direction);}} />;
 }
 
 function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step, unit = "", format = formatNumber, onChange }: { title: string; fromName: string; toName: string; fromValue: string; toValue: string; min: number; max: number; step: number; unit?: string; format?: (value: number) => string; onChange: (from: string, to: string) => void }) {
@@ -305,6 +309,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
       </div>
     </div>
+    <div className="mt-2.5"><CatalogColorSelect value={draft.color} market={draft.market} stock={draft.stock} onChange={value=>setField("color",value)}/></div>
   </>;
 }
 
@@ -322,7 +327,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const [sortKey, setSortKey] = useState<SortKey>(initialSortState.key);
   const [sortDirection, setSortDirection] = useState<SortDir>(initialSortState.direction);
   const [electricFacets, setElectricFacets] = useState<Facets | null>(null);
-  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.frameNumber || initial.chassis || initial.lotNumber || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
+  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.color || initial.frameNumber || initial.chassis || initial.lotNumber || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
   const acknowledgedQuery = useRef(catalogQuery(draftFromInitial(initial), initialSortState.key, initialSortState.direction));
@@ -440,6 +445,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
+    if(draft.color) rows.push({key:"color",label:`Цвет: ${draft.color}`});
     if(draft.market==='japan'&&draft.frameNumber)rows.push({key:'frameNumber',label:`Номер кузова ${draft.frameNumber}`});
     if(draft.market==='japan'&&draft.chassis)rows.push({key:'chassis',label:`Кузов ${draft.chassis}`});
     if(draft.market==='japan'&&draft.lotNumber)rows.push({key:'lotNumber',label:`Лот ${draft.lotNumber}`});

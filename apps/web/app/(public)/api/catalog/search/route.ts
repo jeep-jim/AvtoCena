@@ -35,7 +35,7 @@ export async function GET(request: Request) {
     }catch(e){const failure=ajesErrorResponse(e);return NextResponse.json(failure.body,{status:failure.status,headers:{'Cache-Control':'no-store'}});}
   }
   const query: Parameters<typeof searchOffers>[0] = {
-    city: p.get("city") || undefined,
+    color:p.get("color")||undefined, city: p.get("city") || undefined,
     market: p.get("market") === "any" ? undefined : p.get("market") || undefined,
     make: p.get("make") || p.get("brand") || undefined,
     model: p.get("model") || undefined,

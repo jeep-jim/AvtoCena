@@ -1,3 +1,5 @@
+import {buildCatalogColorIndex,withCatalogColorFilter,matchesCatalogColor} from './catalog-color-index';
+import {parseCatalogSort,compareCatalogTerms,compareSortNumbers,sortNumber} from './catalog-sort';
 import {matchesFilterSelection} from './filter-selections';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
@@ -198,7 +200,7 @@ export type CatalogSearchProjection = {
   catalogKind?: VehicleOffer["catalogKind"];
   catalogPricingMode?: "seller"; sellerPriceRub?: number;
   id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
-  fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
+  color?: string; fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
   trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
   powerDataConfidence?: string; powerDataSource?: string; transportToBorderRub?: number;
   japanExportRestriction?: VehicleOffer["japanExportRestriction"];
@@ -433,7 +435,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     inventorySourceDate:catalogInventoryDate(offer),grossVehicleWeightKg:catalogGrossVehicleWeightKg(offer),vehicleCategory:offer.vehicleCategory,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
-    totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: catalogBodyType(offer),
+    totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, color:cleanFacet(offer.color), fuel: cleanFacet(offer.fuel), bodyType: catalogBodyType(offer),
     transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), japanExportRestriction: assessJapanExportRestriction(offer), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
@@ -835,6 +837,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     if (params.powerFrom && utilizationPowerHp < params.powerFrom) return false;
     if (params.powerTo && utilizationPowerHp > params.powerTo + 0.01) return false;
   }
+  if (!matchesCatalogColor(row, params.color)) return false;
   if (!matchesFuelFilter(row.fuel, params.fuel)) return false;
   if (!matchesFilterSelection(catalogBodyType(row),params.bodyType)) return false;
   if (!matchesFilterSelection(row.transmission,params.transmission)) return false;
@@ -862,13 +865,9 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
   const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub || (priced.catalogPricingMode==="seller"?priced.sellerPriceRub:0)); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
-  return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
-    : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
-      : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
-        : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
-      : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
-        : displayOrder(a,b) || Number(Number(b.totalRub) > 0) - Number(Number(a.totalRub) > 0)
-          || freshness(b) - freshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+  const terms=parseCatalogSort(sort)||[];
+  return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(Number(b.totalRub)>0)-Number(Number(a.totalRub)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
   const groups = new Map<string, CatalogSearchProjection[]>();
@@ -1296,7 +1295,7 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi
     const manifest = await readManifest();
     return { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
   }
-  const hasFilters = Boolean(params.make || params.model || params.hasPrice
+  const hasFilters = Boolean(params.color || params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
@@ -1666,6 +1665,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   throw new StorageConflictError();
 }
 export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}) {
+  await writeJsonAtomic(generationPath(generationId,'indexes/colors-v1.json'),buildCatalogColorIndex(generationId,offers));
   // Public search and facets use compact current projections. Only the market
   // shard is still read by the homepage; the thousands of per-value shards that
   // used to be written here were dead data duplicated in every generation.
@@ -2072,7 +2072,7 @@ const budgetEligibility=new BudgetEligibilityCache();
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
- const metadataFields=['make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
+ const metadataFields=['color','make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
  const metadataQuery=(hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  if((params.make || params.model) && (!params.sort || params.sort==="updatedAt"))return null;
  if(!hasBudget && !metadataQuery)return null;
@@ -2106,7 +2106,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
   let candidates=sourceRows.map(editedRow).filter(row=>
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
-   eligible.has(row[5].id) &&
+   eligible.has(row[5].id) && matchesCatalogColor({...row[5],market:row[0]},params.color) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
    && matchesFilterSelection(catalogBodyType(row[5]),params.bodyType)
@@ -2170,13 +2170,13 @@ type CompactSelection={generationId:string;cardVersion:1|2|3;rows:BudgetCountInd
 let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{prices?:Promise<Float64Array|null>;orders:Map<string,Uint32Array>}>();
 async function searchSortedBudgetSelection(selected:CompactSelection,params:CatalogSearchParams,internalPageLimit:number){
  const mode=params.sort||"year";
- if(!["year","yearAsc","totalRub","totalRubDesc","mileage"].includes(mode))return null;
+ const terms=parseCatalogSort(mode);if(!terms?.length)return null;
  let cache=compactSortCache.get(selected.rows);
  if(!cache){cache={orders:new Map()};compactSortCache.set(selected.rows,cache);}
  let order=cache.orders.get(mode);
  if(!order){
   let keys:Float64Array;
-  if(mode.startsWith("totalRub")){
+  if(terms.some(term=>term.startsWith("totalRub"))){
    if(!cache.prices)cache.prices=(async()=>{
     const values=new Float64Array(selected.rows.length);values.fill(NaN);
     // V3 already has bounded price-only replay and a validated shared snapshot.
@@ -2220,14 +2220,14 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
     return incomplete||seen!==selected.rows.length?null:values;
    })().catch(error=>{cache!.prices=undefined;throw error;});
    const prices=await cache.prices;if(!prices)return null;keys=prices;
-  }else keys=Float64Array.from(selected.rows,row=>Number(mode==='mileage'?row[5].mileageKm:row[5].year)||NaN);
-  const descending=mode==='year'||mode==='totalRubDesc';
+  }else keys=new Float64Array(0);
   order=Uint32Array.from(selected.rows,(_,index)=>index);
   order.sort((a,b)=>{
-   const x=keys[a],y=keys[b];
-   if(!Number.isFinite(x))return Number.isFinite(y)?1:a-b;
-   if(!Number.isFinite(y))return -1;
-   return (descending?y-x:x-y)||a-b;
+   for(const term of terms){
+    const value=(index:number)=>term.startsWith('totalRub')?keys[index]:term.startsWith('mileage')?sortNumber(selected.rows[index][5].mileageKm,true):sortNumber(selected.rows[index][5].year);
+    const delta=compareSortNumbers(value(a),value(b),term);if(delta)return delta;
+   }
+   return selected.rows[a][5].id.localeCompare(selected.rows[b][5].id);
   });
   cache.orders.set(mode,order);
  }
@@ -2449,7 +2449,7 @@ async function searchOffersUncached(params: CatalogSearchParams, internalPageLim
 }
 /** Read-only parity check against the existing projection search. */
 async function searchOffersWithoutBudgetIndexForTestsEditorial(params:CatalogSearchParams,internalPageLimit=48){
-  if (params.budgetFrom || params.budgetTo || params.hasPrice || params.sort?.startsWith("totalRub") || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo))) {
+  if (params.budgetFrom || params.budgetTo || params.hasPrice || parseCatalogSort(params.sort)?.some(term=>term.startsWith("totalRub")) || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo))) {
     const {generationId,rows}=await currentProjectionRows(params);
     const prepared=await currentSearchPrices(rows,generationId);
     const modelKeys=await projectionModelKeys(params);
@@ -2474,7 +2474,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     const manifest = await readManifest();
     return { generationId: manifest.generationId, total: 0, page, pageSize, items: [], usedIndexShards: [] };
   }
-  const needsProjection = Boolean((params.market && params.market !== "any") || params.make || params.model || params.hasPrice
+  const needsProjection = Boolean(params.color || (params.market && params.market !== "any") || params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo
     || params.engineFrom || params.engineTo || params.powerFrom || params.powerTo || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo
     || params.fuel || params.bodyType || params.transmission || params.drive
@@ -2834,15 +2834,15 @@ export async function getUnavailableOffer(id: string): Promise<UnavailableOffer 
   return offer ? unavailableOfferRecord(offer) : null;
 }
 
-export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48){return withCatalogEditorial(()=>searchOffersEditorial(params,internalPageLimit));}
+export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit)));}
 
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){return withCatalogEditorial(()=>searchOffersWithoutBudgetIndexForTestsEditorial(params,internalPageLimit));}
 
-export async function countCatalogOffers(params: CatalogSearchParams){return withCatalogEditorial(()=>countCatalogOffersEditorial(params));}
+export async function countCatalogOffers(params: CatalogSearchParams){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>countCatalogOffersEditorial(params)));}
 
-export async function readCatalogFacets(params: CatalogSearchParams = {}){return withCatalogEditorial(()=>readCatalogFacetsEditorial(params));}
+export async function readCatalogFacets(params: CatalogSearchParams = {}){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogFacetsEditorial(params)));}
 
-export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){return withCatalogEditorial(()=>readCatalogBrandCountsEditorial(params));}
+export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogBrandCountsEditorial(params)));}
 
 export async function readCatalogBrandModelCounts(make: string){return withCatalogEditorial(()=>readCatalogBrandModelCountsEditorial(make));}
 

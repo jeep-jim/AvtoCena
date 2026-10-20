@@ -47,6 +47,7 @@ function mergeSuggestions(primary: ModelSuggestion[], catalog: ModelSuggestion[]
 function contextualFilters(searchParams: URLSearchParams, make: string, includeModel: boolean) {
   const budgetTo = positiveNumber(searchParams.get("budgetTo")) || positiveNumber(searchParams.get("budget"));
   return {
+    color: clean(searchParams.get("color")) || undefined,
     market: clean(searchParams.get("market")) || undefined,
     make: make || undefined,
     model: includeModel ? clean(searchParams.get("model")) || undefined : undefined,
