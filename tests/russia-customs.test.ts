@@ -364,3 +364,17 @@ test("uses the indexed 2026 customs-clearance tiers", () => {
   assert.equal(customsClearanceFeeRub(2_000_000), 13_541);
   assert.equal(customsClearanceFeeRub(11_000_000), 73_860);
 });
+
+test('explicit next-model-year scenario calculates as new without inventing a production date',()=>{
+ const base={customsValueRub:2_000_000,eurRateRub:100,engineCc:1500,powerHp:150,fuel:'petrol',importedAt:new Date('2026-10-20T00:00:00Z')};
+ const scenario=calculateRussiaCustomsForIndividual({...base,year:2027,newModelYearScenario:true});
+ const current=calculateRussiaCustomsForIndividual({...base,year:2026});
+ assert.equal(scenario.status,'ready');assert.equal(scenario.ageBand,'up_to_3_years');assert.equal(scenario.ageMonths,0);
+ assert.equal(scenario.productionReferenceDate,undefined);assert.equal(scenario.productionReferenceBasis,'new_model_year_scenario');
+ assert.equal(scenario.totalCustomsRub,current.totalCustomsRub);assert.ok(scenario.warnings.some(w=>w.includes('модельный год')));
+ for(const patch of [{year:2027},{year:2028,newModelYearScenario:true},{year:2027,productionDate:'2027-01',newModelYearScenario:true}]){
+  const blocked=calculateRussiaCustomsForIndividual({...base,...patch});assert.equal(blocked.status,'needs_data');assert.ok(blocked.missing.includes('production_date'));
+ }
+ const n1=calculateRussiaCustomsForIndividual({...base,year:2027,newModelYearScenario:true,vehicleCategory:'N1',grossVehicleWeightKg:2300});
+ assert.equal(n1.status,'ready');assert.equal(n1.productionReferenceDate,undefined);assert.equal(n1.ageMonths,0);
+});

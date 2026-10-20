@@ -10,9 +10,11 @@ import {
 } from "./russiaCustoms";
 
 export type RussiaVehicleCategory = "M1" | "N1" | "unknown";
-export type ProductionReferenceBasis = "exact_date" | "month_midpoint" | "year_midpoint";
+export type ProductionReferenceBasis = "exact_date" | "month_midpoint" | "year_midpoint" | "new_model_year_scenario";
 
 export type RussiaCustomsV2Input = RussiaCustomsInput & {
+  /** Explicit manual scenario for a new vehicle of the next model year, without a production date. */
+  newModelYearScenario?: boolean;
   vehicleCategory?: RussiaVehicleCategory;
   tnVedCode?: string;
   grossVehicleWeightKg?: number;
@@ -81,6 +83,17 @@ export function legalProductionReference(input: Pick<RussiaCustomsV2Input, "prod
   const year = Number(input.year || text.match(/\b(?:19|20)\d{2}\b/)?.[0]);
   if (Number.isInteger(year) && year >= 1900) return { year, month: 7, day: 1, basis: "year_midpoint" };
   return null;
+}
+
+function calculationProductionReference(input: RussiaCustomsV2Input, importedAt: Date): DateParts | null {
+  if(input.newModelYearScenario && !input.productionDate && input.year === importedAt.getUTCFullYear()+1){
+    // A zero-age scenario reference, never exposed as the actual manufacturing date.
+    return {year:importedAt.getUTCFullYear(),month:importedAt.getUTCMonth()+1,day:importedAt.getUTCDate(),basis:'new_model_year_scenario'};
+  }
+  return legalProductionReference(input);
+}
+function modelYearScenarioWarning(year: number | undefined) {
+  return `${year} указан как модельный год: расчёт выполнен как для нового автомобиля по ставкам на дату расчёта. Фактическую дату выпуска уточните по документам.`;
 }
 
 function utcDateOnly(value: Date) {
@@ -213,7 +226,7 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
     );
   }
 
-  const reference = legalProductionReference(input);
+  const reference = calculationProductionReference(input,importedAt);
   if (!reference || !Number.isFinite(importedAt.getTime()) || utcDateOnly(importedAt) < referenceTimestamp(reference)) return blockedCategoryResult(input,"M1","production_date","Дата выпуска должна быть не позже даты ввоза.",personalUseAssumed);
   if (importedAt.getUTCFullYear() !== 2026) return blockedCategoryResult(input,"M1","tariff_year","Для выбранного года ввоза нужны ставки этого года; таблица расчёта действует в 2026 году.",personalUseAssumed);
   const legalBand = reference ? legalVehicleAgeBand(reference, importedAt) : undefined;
@@ -234,7 +247,8 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
 
   const result = calculateLegacyRussiaCustomsForIndividual(legacyInput);
   const warnings = [...result.warnings];
-  if (reference && reference.basis !== "exact_date") warnings.push(reference.basis === "month_midpoint"
+  if(reference?.basis === "new_model_year_scenario") warnings.push(modelYearScenarioWarning(input.year));
+  else if (reference && reference.basis !== "exact_date") warnings.push(reference.basis === "month_midpoint"
     ? "День выпуска неизвестен: для расчёта принято 15-е число указанного месяца. Уточните день перед переходом возрастной границы."
     : "Месяц выпуска неизвестен: для расчёта принято 1 июля указанного года. Уточните дату перед переходом возрастной границы.");
   if (category.assumed) warnings.push(
@@ -255,7 +269,7 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
       ageBand: legalBand,
       ageEstimated: reference.basis !== "exact_date",
       possibleAgeBands: legalBand ? [legalBand] : [],
-      productionReferenceDate: `${reference.year}-${pad(reference.month)}-${pad(reference.day)}`,
+      productionReferenceDate: reference.basis === "new_model_year_scenario" ? undefined : `${reference.year}-${pad(reference.month)}-${pad(reference.day)}`,
       productionReferenceBasis: reference.basis,
     } : {}),
     warnings,
@@ -270,7 +284,7 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
  */
 function calculateN1Customs(input: RussiaCustomsV2Input): RussiaCustomsV2Result {
   const date = input.importedAt || new Date();
-  const reference = legalProductionReference(input);
+  const reference = calculationProductionReference(input,date);
   const mass = positive(input.grossVehicleWeightKg);
   const value = positive(input.customsValueRub);
   const eur = positive(input.eurRateRub);
@@ -330,10 +344,10 @@ function calculateN1Customs(input: RussiaCustomsV2Input): RussiaCustomsV2Result 
   return {...base, status:"ready", missing:[], tariffCode,
     ageMonths:completedLegalMonths(reference,date),ageBand:legalVehicleAgeBand(reference,date),
     ageEstimated:reference.basis !== "exact_date", productionReferenceBasis:reference.basis,
-    productionReferenceDate:`${reference.year}-${pad(reference.month)}-${pad(reference.day)}`,
+    productionReferenceDate:reference.basis === "new_model_year_scenario" ? undefined : `${reference.year}-${pad(reference.month)}-${pad(reference.day)}`,
     importDutyRub,vatRub,exciseRub:0,utilizationCoefficient,utilizationFeeRub,knownCustomsRub,
     totalCustomsRub:knownCustomsRub + utilizationFeeRub,
-    warnings:["Расчёт N1 по стандартному тарифу 8704 для прямого ввоза в РФ; категория, масса и классификация должны соответствовать документам автомобиля."],
+    warnings:[...(reference.basis === "new_model_year_scenario" ? [modelYearScenarioWarning(input.year)] : []),"Расчёт N1 по стандартному тарифу 8704 для прямого ввоза в РФ; категория, масса и классификация должны соответствовать документам автомобиля."],
     breakdown:[
       {id:"customs-clearance",title:"Таможенный сбор за оформление",amountRub:clearance},
       {id:"import-duty",title:"Ввозная пошлина N1",amountRub:importDutyRub,note:`ТН ВЭД ${tariffCode}; ${rate*100}%${minimumEuroPerCc ? `; минимум ${minimumEuroPerCc} €/см³` : ""}`},

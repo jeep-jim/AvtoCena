@@ -91,3 +91,6 @@
 # Owner UAE manual specifications — 20.10.2026
 - UAE seller/feed horsepower and displacement are untrusted and must not populate catalog specifications or automatic customs calculations. This supersedes the 19.10 supplier-displacement instruction. Apply to new intake and already retained UAE records/projections; do not restore values from titles, source tables or stored feed labels.
 - Show seller price until parameters are manually supplied. Preserve separate employee-saved calculations and existing manual input/save flow. Other markets and source inventory controls remain unchanged.
+
+# Owner next model year — 20.10.2026
+- The manual parameter form must calculate a new car selected as next model year (2027 during 2026). Keep the selected year; use an explicit new-vehicle scenario without fabricating a manufacturing date or shifting the import/tariff year. Explicit future production dates and years beyond next year remain invalid. Feed rows do not automatically gain this manual scenario.

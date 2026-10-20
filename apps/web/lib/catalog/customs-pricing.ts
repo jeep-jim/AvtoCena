@@ -323,6 +323,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   }
   const motor30MinKnown = documentedMotorPower(offer) > 0 || (userParameters && positive(offer.power30MinKw) > 0);
   const customsInput = {
+    newModelYearScenario: userParameters && !offer.productionDate,
     customsValueRub,
     importedAt: userParameters && offer.customsCalculationDate ? new Date(`${offer.customsCalculationDate}T00:00:00Z`) : undefined,
     eurRateRub: Number(eurRate.effectiveRate || 0),

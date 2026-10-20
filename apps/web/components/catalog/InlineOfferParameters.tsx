@@ -227,6 +227,7 @@ export function InlineOfferParameters({estimatedPowerHp,initialCurrencyRate,copy
   </details> : null}
   {!showCalculation ? originalBreakdown : null}
   {estimatedPowerActive ? <p className="mt-3 text-xs text-[var(--ac-muted)]" data-power-estimate-note>Для предварительного расчёта выбрано первое значение мощности: {estimatedPowerHp} л.с. Проверьте его по документам или измените вручную.</p> : null}
+  {result?.customs?.productionReferenceBasis==="new_model_year_scenario"?<p className="mt-3 text-xs text-[var(--ac-muted)]">{draft.year} — модельный год. Расчёт как для нового автомобиля; дату выпуска уточните по документам.</p>:null}
   <OfferParameterEditors draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
   {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
   {copyOffer ? <OfferCopyButton offerId={offerId} title={copyOffer.title} mileageKm={copyOffer.mileageKm} draft={draft} pending={pending || saving}/> : null}
@@ -253,6 +254,7 @@ export function OfferParameterEditors({draft,change,showCommercial=false,isPicku
  const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string,caption?:string)=><Field missing={missingFields.has(key)} label={label} caption={caption} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
  const hybridQuery=draft.fuel==="electric"?electricResearchQuery(researchContext,draft.year||""):hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
  const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric"?"Алиса покажи 30-минутную мощность":"Алиса покажи тип гибрида и мощность"} compact/>;
+ const currentYear=new Date().getUTCFullYear();
  const yearOptions=publicProductionYears();
  return <div className="ac-inline-parameters">
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
@@ -266,6 +268,7 @@ export function OfferParameterEditors({draft,change,showCommercial=false,isPicku
     </div>
     <p className={editorStyles.note}>Вверху — выпуск авто по документам. Ниже — дата, на которую считаем его возраст.</p>
     <details className={editorStyles.help}><summary>Как учитывается дата</summary><p>Без даты расчёт на сегодня. Для M1: до 3 лет включительно, свыше 3 до 5 включительно, старше 5. Если день неизвестен — 15-е число; если месяц неизвестен — 1 июля.</p></details>
+    {Number(draft.year)===currentYear+1&&!draft.productionMonth?<p className="mt-2 text-xs text-[var(--ac-muted)]">{draft.year} — модельный год. Расчёт как для нового автомобиля; дату выпуска уточните по документам.</p>:null}
    </Tile>
    <Tile missing={missingFields.has("engineCc")} label="Объём двигателя" value={draft.fuel==="electric"?"Без ДВС":draft.engineCc?`${Number(draft.engineCc).toLocaleString("ru-RU")} см³`:"Указать объём"} icon={<EngineIcon/>}>
     {draft.fuel==="electric"?<p className="text-xs">Для электромобиля объём ДВС не требуется.</p>:field("engineCc","Объём, см³",[660,998,1197,1498,1598,1998,2498,2998],300,10000)}

@@ -56,6 +56,8 @@ test('paid UAE stays seller-priced through retained rows and compact projections
   assert.equal(automatic.totalRub,null);assert.equal(automatic.engineCc,undefined);assert.equal(automatic.powerHp,undefined);
   const manual=await calculateCustomerParameterScenario(input,{year:2022,engineCc:1500,powerHp:147,powerKw:147/1.35962,fuel:'petrol',powertrainKind:'combustion'});
   assert.equal(manual.engineCc,1500);assert.equal(manual.powerHp,147);assert.ok(Number(manual.totalRub)>1425000,JSON.stringify(manual.calculationSnapshot));
+  const nextYear=await calculateCustomerParameterScenario(input,{year:2027,engineCc:1500,powerHp:147,powerKw:147/1.35962,fuel:'petrol',powertrainKind:'combustion'});
+  assert.ok(Number(nextYear.totalRub)>1425000,JSON.stringify(nextYear.calculationSnapshot));assert.equal(nextYear.year,2027);assert.equal(nextYear.calculationSnapshot?.customs?.productionReferenceDate,undefined);assert.equal(nextYear.calculationSnapshot?.customs?.productionReferenceBasis,'new_model_year_scenario');
   const incompleteManual=await calculateCustomerParameterScenario({...input,engineCc:1500},{year:2022,fuel:'petrol',powertrainKind:'combustion'});
   assert.equal(incompleteManual.engineCc,undefined);assert.equal(incompleteManual.powerHp,undefined);assert.equal(incompleteManual.totalRub,null);
   const {offerParameterDraft}=await import('../apps/web/lib/catalog/offer-parameter-draft');
