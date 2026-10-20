@@ -8,7 +8,7 @@ async function main(){
  const ip=process.env.AJES_DIAG_IP;if(ip!=='151.248.113.177')throw Error('address');
  const storage=getJsonStorage();
  const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled(`ajes_${t}_feed`),reserve:t=>reserveAjesRequest(storage,t)});
- const page=await client.read({table:'korea',make:'GENESIS',model:'GV80',pageSize:1},ip),lot=page.items[0];
+ const page=await client.read({table:'korea',make:'AUDI',model:'A6',pageSize:3},ip),lot=page.items[0];
  if(!lot){console.log('KOREA_FULL_CHECK',JSON.stringify({sampleFound:false}));return;}
  await assertCollectionEnabled('ajes_korea_feed');await reserveAjesRequest(storage,'korea');
  const password=await ajesPassword();if(!password)throw Error('not_configured');
@@ -23,6 +23,9 @@ async function main(){
  const row=Array.isArray(body)?body[0]:body;
  const identity=String(row?.ID||'')===lot.id;
  const technical=identity?Object.fromEntries(['PW','ENG_V','TIME','KPP','PRIV'].map(k=>[k,typeof row?.[k]==='string'?row[k].slice(0,60):typeof row?.[k]==='number'?row[k]:null])):{};
- console.log('KOREA_FULL_CHECK',JSON.stringify({sampleFound:true,listPower:lot.sourcePower,json:true,bytes,identity,fields:row&&typeof row==='object'?Object.keys(row).filter(k=>/^[A-Za-z0-9_]{1,40}$/.test(k)).slice(0,60):[],technical}));
+ console.log('KOREA_FULL_CHECK',JSON.stringify({at:new Date().toISOString(),id:lot.id,list:page.items.map(x=>({id:x.id,power:x.sourcePower,engineCc:x.engineCc})),json:true,bytes,identity,fields:row&&typeof row==='object'?Object.keys(row).filter(k=>/^[A-Za-z0-9_]{1,40}$/.test(k)).slice(0,100):[],technical,infoLength:typeof row?.INFO==='string'?row.INFO.length:0}));
+ const scan=(value:any,path='',depth=0):any[]=>{if(depth>5||!value||typeof value!=='object')return [];return Object.entries(value).slice(0,150).flatMap(([k,v])=>/power|horse|출력|마력|^pw$|^ps$|^kw$/i.test(k)&&['string','number'].includes(typeof v)?[{field:path+k,value:String(v).slice(0,100)}]:scan(v,path+k+'.',depth+1));};
+ if(identity)console.log('KOREA_NAMED_POWER',JSON.stringify(scan(row)));
+
 }
 main().catch(e=>{const reason=String(e?.reason||e?.message||'local_failure');console.log('KOREA_FULL_CHECK_FAILED',/^[a-z_0-9]+$/.test(reason)?reason:'local_failure');process.exitCode=1;});
