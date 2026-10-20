@@ -25,13 +25,14 @@ export async function GreenCornerCatalog({params:input,embedded=false}:{params:R
  const page=result.page;
  const items=result.items.map(publicGreenOffer);
 
- return <DealerBrowsingProvider dealer={dealer}><Container className="ac-catalog-page ac-page-copy min-h-screen bg-[#07080d] text-white">{!embedded&&<PublicHeader backHref="/cars" backLabel="Каталог" />}<div className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
+ return <DealerBrowsingProvider dealer={dealer}><Container className="ac-catalog-page ac-page-copy min-h-screen bg-[#07080d] text-white">{!embedded&&<PublicHeader backHref="/cars" backLabel="Каталог" />}<div className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
+  <CatalogSidebar filters={<CatalogFilters initial={initial} facets={result.facets} resultCount={result.total} />} header={<>
   <div className="ac-green-intro"><div>
   <JapanSectionTabs active="green" params={initial} />
   <h1 className="ac-green-heading mt-8 text-4xl font-black md:text-6xl">Зелёный угол</h1>
   <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукционе.</p>
   </div><GreenCornerDeliveryBanner /></div>
-  <CatalogSidebar filters={<CatalogFilters initial={initial} facets={result.facets} resultCount={result.total} />}>
+  </>}>
   <p className="mt-5 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" data-catalog-result-count={result.total}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span>Найдено: {result.total.toLocaleString("ru-RU")}</span></p>
   <div className="mt-5"><CatalogLoadMore key={`${JSON.stringify(initial)}:${page}`} query={{}} greenQuery={initial} initialPage={page} initialTotal={result.total} initialCount={items.length} initialCards={items.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense />)} /></div>
   {!items.length?<p className="py-8">Подходящих автомобилей пока нет.</p>:null}

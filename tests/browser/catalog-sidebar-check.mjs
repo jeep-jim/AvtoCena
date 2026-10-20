@@ -44,11 +44,16 @@ try{
  await page.goto(origin+'/cars');await page.waitForTimeout(1000);
  const sidebar=page.locator('.ac-catalog-sidebar');
  if(width>=1024){
- const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox();assert.ok(b.x>r.x+r.width-2);
+ const b=await sidebar.boundingBox(),r=await page.locator('.ac-catalog-results').boundingBox(),h=await page.locator('.ac-catalog-heading').boundingBox();assert.ok(b.x>r.x+r.width-2);assert.ok(b.y<=h.y+1,'sidebar starts with the heading');
+ assert.equal(await sidebar.evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
+ assert.equal(await page.getByRole('button',{name:/Выбрать город. Сейчас/}).count(),0);
+ assert.equal(await sidebar.getByRole('button',{name:'Убрать Кроссовер',exact:true}).count(),0);
+ assert.equal(await page.locator('.ac-catalog-selection').getByRole('button',{name:'Убрать Кроссовер',exact:true}).isVisible(),true);
  await page.evaluate(()=>scrollTo(0,500));await page.waitForTimeout(100);const a=await sidebar.boundingBox();assert.ok(Math.abs(a.y-88)<2,JSON.stringify(a));
  assert.equal(await page.locator('.ac-catalog-filter-panel').isVisible(),true);
  }else assert.equal(await page.locator('.ac-filter-more-button').isVisible(),true);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
- await page.screenshot({path:out+'/sidebar-'+width+'.png'});console.log('SIDEBAR_OK',width);await context.close();
+ await page.screenshot({path:out+'/sidebar-'+width+'.png'});
+ if(width>=1024){await page.locator('.ac-catalog-selection').getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForTimeout(200);assert.equal(await page.locator('.ac-catalog-selection .ac-filter-chip').count(),0);}console.log('SIDEBAR_OK',width);await context.close();
  }
 }finally{await browser.close();server?.close();}

@@ -218,7 +218,7 @@ function decorateRangeControls() {
 }
 
 function decorateFieldStates() {
-  document.querySelectorAll<HTMLElement>(".ac-catalog-filter-panel, .ac-mobile-filter-sheet").forEach((scope) => {
+  document.querySelectorAll<HTMLElement>(".ac-catalog-filter-panel, .ac-mobile-filter-sheet, .ac-catalog-selection").forEach((scope) => {
     scope.querySelectorAll<HTMLInputElement>('input[type="hidden"][name]').forEach((hidden) => {
       if (hidden.name === "sort") return;
       const parent = hidden.parentElement;
@@ -243,12 +243,12 @@ function decorateFieldStates() {
 }
 
 function clearCatalogFilters() {
-  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".ac-catalog-filter-panel .ac-filter-chip"));
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".ac-catalog-filter-panel .ac-filter-chip, .ac-catalog-selection .ac-filter-chip"));
   buttons.forEach((button) => button.click());
 }
 
 function activeChipCount() {
-  return document.querySelectorAll(".ac-catalog-filter-panel .ac-filter-chip").length;
+  return document.querySelectorAll(".ac-catalog-filter-panel .ac-filter-chip, .ac-catalog-selection .ac-filter-chip").length;
 }
 
 function makeClearButton(className: string) {
@@ -278,7 +278,7 @@ function updateMobileCloseAction(sheet: HTMLElement) {
 
 function ensureClearControls() {
   const chipCount = activeChipCount();
-  const desktop = document.querySelector<HTMLElement>(".ac-catalog-filter-panel");
+  const desktop = document.querySelector<HTMLElement>(".ac-catalog-selection") || document.querySelector<HTMLElement>(".ac-catalog-filter-panel");
   if (desktop) {
     let clear = desktop.querySelector<HTMLButtonElement>(":scope > .ac-filter-clear--desktop");
     if (!clear) {
@@ -381,8 +381,8 @@ export function CatalogFilterUiEnhancer() {
       // Observe mounts, but ignore unrelated card/image/loading mutations.
       if (records.some(record => {
         const target = record.target instanceof Element ? record.target : record.target.parentElement;
-        if (target?.closest(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")) return true;
-        return Array.from(record.addedNodes).some(node => node instanceof Element && (node.matches(".ac-catalog-filter-panel, .ac-mobile-filter-sheet") || node.querySelector(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")));
+        if (target?.closest(".ac-catalog-filter-panel, .ac-mobile-filter-sheet, .ac-catalog-selection")) return true;
+        return Array.from(record.addedNodes).some(node => node instanceof Element && (node.matches(".ac-catalog-filter-panel, .ac-mobile-filter-sheet, .ac-catalog-selection") || node.querySelector(".ac-catalog-filter-panel, .ac-mobile-filter-sheet, .ac-catalog-selection")));
       })) requestRefresh();
     });
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["data-year-min"] });

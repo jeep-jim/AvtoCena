@@ -4,6 +4,7 @@ import {JAPAN_MIN_MODEL_YEAR} from "@/lib/catalog/japan-year-policy";
 import {rememberFilterScroll,restoreFilterScroll} from "@/lib/catalog/filter-scroll";
 import {SELECTION_EVENT,OPEN_SELECTION_FILTERS} from "@/lib/dealers/selection-share";
 import {SelectedFilterChip} from "./SelectedFilterChip";
+import {CatalogDesktopSelection} from "./CatalogSelectionContext";
 import {StickyCatalogControls} from "./StickyCatalogControls";
 import {createPortal} from "react-dom";
 import {CatalogMarketFlag} from "./CatalogMarketFlag";
@@ -504,7 +505,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   };
 
   return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
-    <div className="mt-3 hidden lg:block"><CatalogCityFilter onChange={changeCity} /></div>
+    {dealer?.preview&&<div className="mb-3 hidden lg:block"><CatalogCityFilter onChange={changeCity} /></div>}
     <form aria-busy={pending} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
@@ -518,7 +519,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
         <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
       <section className="ac-advanced-fields mt-3"><AdvancedFields sourceModels={sourceModels} auctionResults={auctionResults} draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includeFuel /></section>
-      <FilterChips chips={chips} onRemove={removeFilter} />
+      <CatalogDesktopSelection><FilterChips chips={chips} onRemove={removeFilter} /></CatalogDesktopSelection>
     </form>
 
     <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
@@ -529,7 +530,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? "Обновляем…" : typeof resultCount === "number" ? `Найдено: ${resultCount.toLocaleString("ru-RU")}` : "Каталог"}</span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl ${chips.length || sortKey ? "ac-mobile-apply" : ""}`} aria-label={chips.length || sortKey ? "Применить фильтры" : "Закрыть"}>{chips.length || sortKey ? "ОК" : "×"}</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
-        <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
+        {dealer?.preview&&<section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl hidePrice={false} sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} />{(!auctionResults||draft.market==="china"||draft.market==="korea")&&<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields sourceModels={sourceModels} auctionResults={auctionResults} draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel /></section>
