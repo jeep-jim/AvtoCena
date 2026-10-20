@@ -71,6 +71,9 @@ async function verifyControls(page,scope){
   const copy=await scope.locator('.ac-power-copy').evaluate(el=>{const r=el.getBoundingClientRect(),label=el.closest('label').getBoundingClientRect();return {width:r.width,bottom:r.bottom,labelBottom:label.bottom,color:getComputedStyle(el).color};});
   assert.ok(copy.width>80,'power label must not inherit the old fake checkbox width');assert.ok(copy.bottom<=copy.labelBottom+1,'power text stays within its field');assert.notEqual(copy.color,'rgba(0, 0, 0, 0)');
   assert.equal(checks.length,2);assert.deepEqual(checks[0],checks[1],theme+' checkboxes match');
+  const power=scope.locator('.ac-power-limit input[type=checkbox]');await power.check();
+  assert.equal(await scope.locator('.ac-power-copy').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)',theme+' checked power must not paint its text as a checkbox');
+  await power.uncheck();
  }
 }
 try{

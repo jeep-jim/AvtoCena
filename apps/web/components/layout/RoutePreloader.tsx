@@ -122,7 +122,7 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   background:#05070b!important;
   clip-path:polygon(58% 0,8% 56%,43% 56%,28% 100%,92% 39%,57% 39%)!important;
 }
-.ac-power-limit:has(input:checked)>span:first-of-type{
+.ac-power-limit:has(input:checked)>span:first-of-type:not(.ac-power-copy){
   border-color:#ff353d!important;
   background:#ff353d!important;
   color:#fff!important;
