@@ -30,6 +30,7 @@ try{
   await page.getByRole('button',{name:'Рассчитать оценку',exact:true}).click();await page.getByText('≈ 150 кВт',{exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}.png`,fullPage:true});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'No horizontal clipping');
+  assert.equal(await page.locator('main').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(25, 24, 45)','Reference background survives site light theme');
   await url.fill('https://avtocena.com/cars/offer/ice');assert.equal(await page.getByText('≈ 150 кВт',{exact:true}).count(),0);await page.getByRole('button',{name:'Загрузить',exact:true}).click();await page.getByText('Для ДВС без тягового электромотора этот показатель не применяется.',{exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Рассчитать оценку',exact:true}).count(),0);
   await url.fill('https://avtocena.com/cars/offer/missing');await page.getByRole('button',{name:'Загрузить',exact:true}).click();await page.getByRole('alert').waitFor();assert.equal(await page.getByRole('img').count(),0);
   await url.fill('https://avtocena.com/cars/offer/slow');await page.getByRole('button',{name:'Загрузить',exact:true}).click();await url.fill('https://avtocena.com/cars/offer/missing');await page.getByRole('button',{name:'Загрузить',exact:true}).click();await page.getByRole('alert').waitFor();await page.waitForTimeout(600);assert.equal(await page.getByText('≈ 112,5 кВт',{exact:true}).count(),0,'Late response cannot restore previous car');
