@@ -64,7 +64,7 @@ async function verifyControls(page,scope){
  assert.equal(await color.locator('input[name="color"]').inputValue(),'');
  for(const theme of ['light','dark']){
   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
-  const fields=await scope.locator('.ac-power-limit,.ac-electric-filter,.ac-sort-select > button').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {radius:s.borderRadius,background:s.backgroundColor,border:s.borderTopColor,height:el.getBoundingClientRect().height};}));
+  const fields=await scope.locator('.ac-power-limit,.ac-electric-filter,.ac-sort-select > button').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {radius:s.borderRadius,background:s.backgroundColor,border:s.borderTopWidth==='0px'?'none':s.borderTopColor,borderWidth:s.borderTopWidth,height:el.getBoundingClientRect().height};}));
   assert.deepEqual(fields[0],fields[1],theme+' quick fields match');
   assert.deepEqual(fields[0],fields[2],theme+' quick fields match dropdown');
   const checks=await scope.locator('.ac-power-limit input[type=checkbox],.ac-electric-filter input[type=checkbox]').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {width:s.width,height:s.height,border:s.border,background:s.backgroundColor,radius:s.borderRadius};}));
