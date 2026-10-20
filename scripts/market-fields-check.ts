@@ -8,8 +8,11 @@ async function main(){
  const ip=process.env.AJES_DIAG_IP;if(ip!=='151.248.113.177')throw Error('address');
  const storage=getJsonStorage();
  const client=createAjesClient({password:ajesPassword,assertEnabled:t=>assertCollectionEnabled(`ajes_${t}_feed`),reserve:t=>reserveAjesRequest(storage,t)});
+ const count=await client.read({table:'korea',aggregate:'count'},ip);
+ const next=await client.read({table:'korea',page:2,pageSize:24},ip);
+ console.log('KOREA_PAGINATION',JSON.stringify({total:count.total,observedAt:count.observedAt,page:next.page,received:next.received,rejected:next.rejected,ids:next.items.slice(0,3).map((v:any)=>v.id),withPower:next.items.filter((v:any)=>Number(v.sourcePower)>0).length}));
  for(const market of ['korea'] as const){
- const page=await client.read({table:market,make:'AUDI',model:'A6',pageSize:3},ip),lot=page.items[0];
+ const page=await client.read({table:market,id:'6cyeERjzLgmBr4'},ip),lot=page.items[0];
  if(!lot){console.log('MARKET_FIELDS_CHECK',JSON.stringify({sampleFound:false}));return;}
  await assertCollectionEnabled(`ajes_${market}_feed`);await reserveAjesRequest(storage,market);
  const password=await ajesPassword();if(!password)throw Error('not_configured');
