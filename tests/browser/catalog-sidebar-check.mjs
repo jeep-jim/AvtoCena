@@ -38,6 +38,27 @@ async function contextFor(width){const c=await browser.newContext({viewport:{wid
 async function openSheet(page){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();const sheet=page.locator('.ac-mobile-filter-sheet');await sheet.waitFor();if(!live){assert.equal(await sheet.evaluate(el=>el.parentElement.parentElement===document.body),true,'filter must escape dealer stacking contexts');assert.equal(await page.evaluate(()=>[20,innerHeight-20].every(y=>document.elementFromPoint(innerWidth/2,y)?.closest('.ac-mobile-filter-backdrop'))),true,'filter overlay must cover header and bottom dock');}await page.waitForTimeout(350);const headingColor=await sheet.locator('.ac-mobile-filter-header [role="status"]').evaluate(el=>getComputedStyle(el).color);if(await page.evaluate(()=>document.documentElement.dataset.theme==='light'))assert.notEqual(headingColor,'rgb(255, 255, 255)','light filter heading must remain readable outside page wrapper');if(!page.url().includes('baseline=1'))assert.equal(await page.locator('.ac-notice-stack').isVisible(),false,'notices must not cover the modal filter controls');return sheet;}
 async function positions(scope){return scope.locator('.ac-filter-control,.ac-sort-control,.ac-range-card').evaluateAll(els=>els.filter(el=>el.getClientRects().length>0).map(el=>{const s=el.closest('.ac-mobile-filter-sheet')?.querySelector(':scope > .ac-hide-scrollbar');const r=el.getBoundingClientRect();return [Math.round(r.x),Math.round(r.y+(s?.scrollTop||0)),Math.round(r.width),Math.round(r.height)];}));}
 async function menuGeometry(page,root,menu,expectedWidth){const r=await root.boundingBox(),m=await menu.boundingBox();assert.ok(r&&m);assert.equal(await menu.evaluate(el=>getComputedStyle(el).position),'absolute');assert.ok(Math.abs(m.width-expectedWidth)<3,`width ${JSON.stringify({r,m,expectedWidth})}`);assert.ok(m.x>=-1&&m.x+m.width<=page.viewportSize().width+1);assert.ok(m.y>=r.y+r.height&&m.y-r.y-r.height<=13);return {width:m.width,height:m.height,gap:m.y-r.y-r.height};}
+async function verifyControls(page,scope){
+ const sort=scope.locator('.ac-sort-select');
+ assert.equal(await sort.locator('input[name="sort"]').inputValue(),'');
+ for(const [value,label] of [['totalRub','Сначала дешевле'],['totalRubDesc','Сначала дороже'],['year','Сначала новые'],['yearAsc','Сначала старые'],['','Без сортировки']]){
+  await sort.locator(':scope > button').click();
+  await sort.getByRole('button',{name:label,exact:true}).click();
+  assert.equal(await sort.locator('input[name="sort"]').inputValue(),value);
+  assert.equal(await sort.locator('.ac-filter-dropdown').count(),0);
+  assert.equal(await sort.locator(':scope > button').innerText(),label);
+ }
+ await sort.locator(':scope > button').click();await page.keyboard.press('Escape');
+ assert.equal(await sort.locator('.ac-filter-dropdown').count(),0);
+ for(const theme of ['light','dark']){
+  await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+  const fields=await scope.locator('.ac-power-limit,.ac-electric-filter,.ac-sort-select > button').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {radius:s.borderRadius,background:s.backgroundColor,border:s.borderTopColor,height:el.getBoundingClientRect().height};}));
+  assert.deepEqual(fields[0],fields[1],theme+' quick fields match');
+  assert.deepEqual(fields[0],fields[2],theme+' quick fields match dropdown');
+  const checks=await scope.locator('.ac-power-limit input[type=checkbox],.ac-electric-filter input[type=checkbox]').evaluateAll(els=>els.map(el=>{const s=getComputedStyle(el);return {width:s.width,height:s.height,border:s.border,background:s.backgroundColor,radius:s.borderRadius};}));
+  assert.equal(checks.length,2);assert.deepEqual(checks[0],checks[1],theme+' checkboxes match');
+ }
+}
 try{
  for(const width of [390,1280,1600]){
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
@@ -68,6 +89,7 @@ try{
    assert.equal(await page.locator('.ac-catalog-card').count(),6);
    assert.equal(await page.locator('[data-catalog-view]').getAttribute('data-catalog-view'),'grid');
    await page.screenshot({path:out+'/sidebar-'+width+'.png'});
+   const sheet=await openSheet(page);await verifyControls(page,sheet);await page.screenshot({path:out+'/controls-mobile.png'});
    console.log('MOBILE_GRID_ONLY_OK',width);await context.close();continue;
  }
  await page.getByRole('button',{name:'Список',exact:true}).click();
@@ -90,10 +112,7 @@ try{
  const rows=await page.locator('.ac-catalog-list-row').evaluateAll(els=>els.map(el=>({top:el.getBoundingClientRect().top,bottom:el.getBoundingClientRect().bottom})));
  assert.ok(Math.abs(rows[1].top-rows[0].bottom)<2,'list rows touch with a divider');
  if(width>=1024){
-   assert.equal(await sidebar.getByRole('button',{name:'Дешевле',exact:true}).count(),1);
-   assert.equal(await page.locator('.ac-catalog-selection .ac-sort-control').count(),0);
-   const sortBounds=await sidebar.locator('.ac-sort-control').evaluate(el=>{const r=el.getBoundingClientRect();return [...el.querySelectorAll('button')].map(b=>{const q=b.getBoundingClientRect();return {bottom:q.bottom,parentBottom:r.bottom,height:q.height};});});
-   assert.equal(sortBounds.length,4);assert.ok(sortBounds.every(b=>b.bottom<=b.parentBottom+1&&b.height<=38),JSON.stringify(sortBounds));
+   await verifyControls(page,sidebar);
    const range=sidebar.getByRole('button',{name:'Выбрать значение: Объём двигателя: от',exact:true});
    await range.evaluate(el=>{const side=el.closest('.ac-catalog-sidebar');side.scrollTop+=el.getBoundingClientRect().bottom-side.getBoundingClientRect().bottom+8;});
    await range.click();

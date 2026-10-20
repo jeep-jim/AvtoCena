@@ -78,10 +78,9 @@
  .ac-catalog-sidebar .ac-electric-filter>label,
  .ac-catalog-sidebar .ac-electric-filter>button{height:38px!important;min-height:38px!important}
  .ac-catalog-sidebar .ac-power-limit{padding-left:12px;padding-right:40px;gap:8px;line-height:1.1}
- .ac-catalog-sidebar .ac-power-limit>span:first-of-type{width:20px;height:20px}
- .ac-catalog-sidebar .ac-power-limit>span:last-of-type{display:block}
- .ac-catalog-sidebar .ac-power-limit>span:last-of-type>span{display:block}
- .ac-catalog-sidebar .ac-power-limit>span:last-of-type>span:last-child{font-size:9px;margin-top:2px}
+ .ac-catalog-sidebar .ac-power-limit>.ac-power-copy{display:block}
+ .ac-catalog-sidebar .ac-power-limit>.ac-power-copy>span{display:block}
+ .ac-catalog-sidebar .ac-power-limit>.ac-power-copy>span:last-child{font-size:9px;margin-top:2px}
 }
 
 .ac-catalog-card,.ac-catalog-list-row{isolation:isolate;z-index:0}
@@ -104,3 +103,11 @@
 @media(max-width:1023px){.ac-catalog-toolbar{display:none}}
 
 .ac-catalog-results>.grid>div:empty{display:none}
+
+/* Quick filters use the same field geometry and one checkbox in both themes. */
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) :is(.ac-power-limit,.ac-electric-filter){border-radius:10px!important;padding-left:16px;gap:12px;color:var(--ac-muted)}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox{appearance:none;width:24px;height:24px;min-width:24px;flex:0 0 24px;border-radius:8px;border:1px solid var(--ac-border);background:transparent;display:grid;place-content:center;cursor:pointer}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox:checked{background:#ff353d;border-color:#ff353d}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox:checked::after{content:"✓";color:#fff;-webkit-text-fill-color:#fff;font-size:14px;font-weight:900}
+
+@media(max-width:1023px){html body .ac-mobile-filter-sheet :is(.ac-power-limit,.ac-electric-filter){border-radius:15px!important}}
