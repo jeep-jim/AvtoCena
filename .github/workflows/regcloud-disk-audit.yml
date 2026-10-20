@@ -28,6 +28,7 @@ jobs:
           ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
           df -B1 /
+          docker exec avtocena-production node -e 'const e=process.env; console.log("STORAGE_ROUTING", JSON.stringify({driver:e.JSON_STORAGE_DRIVER,regObjectEndpoint:e.YC_OBJECT_STORAGE_ENDPOINT==="https://s3.regru.cloud",bucketConfigured:!!e.YC_OBJECT_STORAGE_BUCKET,prefixConfigured:!!e.YC_OBJECT_STORAGE_PREFIX}));'
           lsblk -b -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT
           du -x -B1 -d1 /var /opt /tmp /root 2>/dev/null | sort -n
           docker system df
