@@ -25,4 +25,5 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          AUTO_API_DUBICARS_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY }}
         run: node --import tsx scripts/uae-volume-coverage-audit.mjs

@@ -24,6 +24,19 @@ const ids=[...new Set(['cb659e39eaf16e5dae6a8c36','ab48d48542ae0cdc8df6a6c5',...
 for(const id of ids){
  const offer=await getOfferFromCurrentShard(id);if(!offer){console.log('UAE_VOLUME_DETAIL_MISSING',id);continue;}
  const restored=restoreDubicarsDisplacement(offer),preview=projection.items.find(x=>x.id===id);
+ if(!(Number(offer.engineCc)>0)&&offer.sourceId==='dubicars_uae_exact'&&/^\d+$/.test(String(offer.sourceOfferId))){
+  const {assertCollectionEnabled}=await import('../apps/web/lib/catalog/collection-controls.ts');
+  const {normalizeAutoApiDubicars}=await import('../apps/web/lib/catalog/auto-api-dubicars.ts');
+  await assertCollectionEnabled('dubicars_feed');
+  const url=new URL('https://api1.auto-api.com/api/v2/dubicars/offer');
+  url.search=new URLSearchParams({api_key:process.env.AUTO_API_DUBICARS_KEY||'',inner_id:String(offer.sourceOfferId)}).toString();
+  const response=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(30000)});
+  if(!response.ok)throw Error('supplier_http_'+response.status);
+  const raw=await response.json(),d=raw.data||raw.result?.data||raw.result||raw;
+  if(String(d.inner_id)!==String(offer.sourceOfferId))throw Error('source_identity_mismatch');
+  const normalized=normalizeAutoApiDubicars({inner_id:String(offer.sourceOfferId),data:d});
+  console.log('UAE_MISSING_VOLUME_FRESH',JSON.stringify({id,inner_id:offer.sourceOfferId,fieldPresent:Object.hasOwn(d,'displacement'),displacement:d.displacement??null,normalizedEngineCc:normalized?.engineCc??null}));
+ }
  const evidence=Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(k=>{const v=classifySpecificationEvidence(restored,k);return [k,v];}));
  console.log('UAE_VOLUME_PAIR',JSON.stringify({id,source:offer.sourceId,make:offer.make,model:offer.model,rawDisplacement:offer.operational?.sourceDisplacementLabel??null,storedEngineCc:offer.engineCc??null,restoredEngineCc:restored.engineCc??null,previewEngineCc:preview?.engineCc??null,detailTotal:offer.totalRub??null,previewTotal:preview?.totalRub??null,mode:preview?.catalogPricingMode??null,evidence}));
 }
