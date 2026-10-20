@@ -53,6 +53,10 @@ try{
  assert.equal(await page.locator('.ac-catalog-selection').getByRole('button',{name:'Убрать Кроссовер',exact:true}).isVisible(),true);
  await page.evaluate(()=>scrollTo(0,500));await page.waitForTimeout(100);const a=await sidebar.boundingBox();assert.ok(Math.abs(a.y-88)<2,JSON.stringify(a));
  assert.equal(await page.locator('.ac-catalog-filter-panel').isVisible(),true);
+ const toolbar=page.locator('.ac-catalog-toolbar');assert.ok(Math.abs((await toolbar.boundingBox()).y-64)<2,'toolbar joins header without a gap');
+ assert.notEqual(await toolbar.evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
+ const toggle=await page.locator('.ac-catalog-view-toggle').boundingBox(),selection=await page.locator('.ac-catalog-selection').boundingBox();assert.ok(toggle.x<selection.x,'view controls are on the left');
+ const controls=await sidebar.locator('.ac-catalog-filter-panel .ac-filter-control').evaluateAll(els=>els.filter(el=>el.getClientRects().length).map(el=>el.getBoundingClientRect().height));assert.ok(controls.every(height=>height<=39),JSON.stringify(controls));
  }else assert.equal(await page.locator('.ac-filter-more-button').isVisible(),true);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.evaluate(()=>scrollTo(0,0));

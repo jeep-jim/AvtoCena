@@ -68,3 +68,18 @@
  .ac-list-price{grid-column:1 / -1;text-align:left}
  .ac-catalog-list-link small{margin-top:0}
 }
+/* Keep results covered up to the 64px public/dealer header. */
+@media(min-width:1024px){
+ .ac-catalog-toolbar{top:64px;background:var(--ac-page-bg,#1a2029)!important;isolation:isolate;box-shadow:0 1px 0 var(--ac-border)}
+ .ac-catalog-view-toggle{order:-1;margin-left:0;flex-shrink:0}
+ .ac-catalog-sidebar .ac-catalog-filter-panel .ac-filter-control,
+ .ac-catalog-sidebar .ac-catalog-filter-panel input[type=search],
+ .ac-catalog-sidebar .ac-catalog-filter-panel .ac-japan-badge{height:38px!important;min-height:38px!important;border-radius:10px}
+ .ac-catalog-sidebar .ac-electric-filter>label,
+ .ac-catalog-sidebar .ac-electric-filter>button{height:38px!important;min-height:38px!important}
+ .ac-catalog-sidebar .ac-power-limit{padding-left:12px;padding-right:40px;gap:8px;line-height:1.1}
+ .ac-catalog-sidebar .ac-power-limit>span:first-of-type{width:20px;height:20px}
+ .ac-catalog-sidebar .ac-power-limit>span:last-of-type{display:block}
+ .ac-catalog-sidebar .ac-power-limit>span:last-of-type>span{display:block}
+ .ac-catalog-sidebar .ac-power-limit>span:last-of-type>span:last-child{font-size:9px;margin-top:2px}
+}
