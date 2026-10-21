@@ -41,3 +41,11 @@ test('input validation and Excel export keep unknowns empty and neutralize formu
  assert.equal(cleanVariant({power30MinKw:'54,5'}).power30MinKw,54.5);assert.equal(csvCell('=HYPERLINK("x")'),'"\'=HYPERLINK(""x"")"');
  const b=createSnapshotBuilder(at);b.add(car);const csv=modelCsv([...b.models.values()][0]);assert.ok(csv.includes('Toyota'));assert.ok(!csv.includes('undefined'));assert.ok(csv.includes(';"";'));
 });
+
+test('mixed source spelling gives one fuel filter and correct Russian counts',async()=>{
+ const {displayValue,fuelFilterKey,counted}=await import('../apps/web/lib/encyclopedia/schema');
+ const {summarize}=await import('../apps/web/lib/encyclopedia/records');
+ assert.equal(displayValue('Petrol'),'Бензин');assert.equal(displayValue('Electric'),'Электро');assert.equal(displayValue('other_hybrid'),'Гибрид');
+ assert.equal(fuelFilterKey('Petrol hybrid'),'hybrid');assert.equal(counted(191,'make'),'191 марка');assert.equal(counted(33,'variant'),'33 модификации');
+ const b=createSnapshotBuilder(at);b.add({...car,fuel:'Electric',powerHp:200});b.add({...car,fuel:'electric',powerHp:201});const summary=summarize([...b.models.values()][0],'test');assert.deepEqual(summary.fuels,['electric']);assert.equal(summary.needs30,2);
+});

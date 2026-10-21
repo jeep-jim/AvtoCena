@@ -1,12 +1,20 @@
-import {getJsonStorage} from '../apps/web/lib/data.ts';
+import fs from 'node:fs/promises';
+import {getJsonStorage,mutateDataJson} from '../apps/web/lib/data.ts';
 import {catalogGenerationId,readCurrentPublicCatalogProjection} from '../apps/web/lib/catalog/storage.ts';
 import {readEncyclopediaIdentityResolver} from '../apps/web/lib/catalog/encyclopedia-identity-data.ts';
 import {readEncyclopediaKnowledgeVariants} from '../apps/web/lib/catalog/encyclopedia.ts';
 import {createSnapshotBuilder,publishSnapshot} from '../apps/web/lib/encyclopedia/snapshot.ts';
-import {modelId,MANIFEST} from '../apps/web/lib/encyclopedia/records.ts';
+import {modelId,MANIFEST,summarize} from '../apps/web/lib/encyclopedia/records.ts';
 import {ajesDetailValues,ajesSourceDetails} from '../apps/web/lib/catalog/ajes-source-details.ts';
 import {catalogVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 const storage=getJsonStorage();if(storage.driver!=='object')throw Error('durable_object_storage_required');
+const marker=JSON.parse(await fs.readFile('.github/market-runs/encyclopedia-snapshot.json','utf8'));
+if(marker.operation==='refresh-summary-labels'){
+ const manifest=await storage.readJson(MANIFEST,null);if(!manifest)throw Error('encyclopedia_missing');const refreshed=new Map();
+ for(let start=0;start<manifest.models.length;start+=8)await Promise.all(manifest.models.slice(start,start+8).map(async old=>{const record=await storage.readJson(old.key,null);if(!record||record.revision!==old.revision)throw Error('encyclopedia_revision_mismatch');refreshed.set(old.id,summarize(record,old.key));}));
+ const next=await mutateDataJson(MANIFEST,null,current=>{if(!current)throw Error('encyclopedia_missing');return {...current,models:current.models.map(row=>refreshed.get(row.id)?.revision===row.revision?refreshed.get(row.id):row)};});
+ console.log(JSON.stringify({summariesRefreshed:next.models.length,recordsUnchanged:true}));process.exit(0);
+}
 if(await storage.readJson(MANIFEST,null)){console.log(JSON.stringify({alreadyCreated:true,unchanged:true}));process.exit(0);}
 const at=new Date().toISOString(),generationId=await catalogGenerationId();
 const [projection,resolver]=await Promise.all([readCurrentPublicCatalogProjection(),readEncyclopediaIdentityResolver()]);
