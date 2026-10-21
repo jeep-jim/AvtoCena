@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T04:25:50.600396+07:00",
+  "updatedAt": "2026-10-22T04:27:59.912942+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -936,7 +936,31 @@
         2020
       ],
       "variants": 99,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 16,
+      "checkedAt": "2026-10-22T04:27:59.912942+07:00",
+      "researchedYears": [
+        2024,
+        2023
+      ],
+      "searchAttemptedYears": [
+        2024,
+        2023,
+        2022,
+        2021
+      ],
+      "pendingYears": [
+        2026,
+        2025,
+        2022,
+        2021,
+        2020
+      ],
+      "retryYears": [
+        2024,
+        2023
+      ],
+      "nextAction": "Продолжить A4L2026/2025/2022/2021/2020:66 строк ещё не исследованы полностью.2023/2024 сохранены16/112,17 пропусков и пробелы вretry-2026-10-22-audi-a4l.json. ЗатемAudi A5 по алфавиту."
     },
     {
       "id": "8cf3dbb7884fe919bce44c62",

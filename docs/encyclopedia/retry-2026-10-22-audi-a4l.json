@@ -1,0 +1,323 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T04:27:59.912942+07:00",
+  "models": [
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "make": "Audi",
+      "model": "A4L",
+      "records": [
+        {
+          "variantId": "d9b4e543268b7b17f1d98d18",
+          "year": 2023,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "bd41972055a41863f9618407",
+          "year": 2023,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "31b91dee2144445f4b9edda9",
+          "year": 2023,
+          "reason": "year_token_requires_identity_review"
+        },
+        {
+          "variantId": "5e5e974f5237ceffcc05e7f3",
+          "year": 2023,
+          "reason": "exact_trim_not_in_MY2023_Q3_source"
+        },
+        {
+          "variantId": "6a79483cea47312825dbcc31",
+          "year": 2023,
+          "reason": "exact_trim_not_in_MY2023_Q3_source"
+        },
+        {
+          "variantId": "985605c9ac6d661c5afbf9fe",
+          "year": 2023,
+          "reason": "year_token_requires_identity_review"
+        },
+        {
+          "variantId": "25620f7129a6ac85c0d9fe31",
+          "year": 2023,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "5481701750371dd3f93c5a14",
+          "year": 2024,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "f7dcbdbca8aa140b906df14b",
+          "year": 2024,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "ce8f13e394dca239c7005104",
+          "year": 2024,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "276c77843ba82208567f81df",
+          "year": 2024,
+          "reason": "exact_trim_not_in_MY2024_Q3_source"
+        },
+        {
+          "variantId": "15f4b19ebed3ad1b7928a691",
+          "year": 2024,
+          "reason": "year_token_requires_identity_review"
+        },
+        {
+          "variantId": "6a706259365c04692d406b7d",
+          "year": 2024,
+          "reason": "exact_trim_not_in_MY2024_Q3_source"
+        },
+        {
+          "variantId": "7b37be5072664c27976b69e6",
+          "year": 2024,
+          "reason": "incomplete_technical_identity"
+        },
+        {
+          "variantId": "28b80e19e1667a64ce7e1ba4",
+          "year": 2024,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "af0f29151fd053a7c01d529f",
+          "year": 2024,
+          "reason": "exact_trim_not_in_MY2024_Q3_source"
+        },
+        {
+          "variantId": "b23e050488ea770e8833f082",
+          "year": 2024,
+          "reason": "protected_reference_or_missing_trim"
+        }
+      ],
+      "confirmedFieldGaps": [
+        {
+          "variantId": "bd04c622dfdee0f4c07118c2",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "620c485a746f06b5dcfec5ea",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "140f4b6791bcb3e407f8f629",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "e8d385e77e7bd154192a2c31",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "773d61f3033bb03d69a28625",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "86b4c57b4d7da690eb2d9f6f",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "00b4bd66d1a6f5fee2a48981",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "947388c1c81b76123a37d71d",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "f022836e78b2aa0183b5e577",
+          "year": 2023,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "bc34140dd1e1c732c919e09a",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "e169fc8b1b72f0dd9f5f67e4",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "e982e696dc2b0d0e016357ba",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "9332863d4e3e4639a3b23c5f",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "f520492fa8f1039a803ed6ba",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "e35007d5448f8b5938f367ee",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        },
+        {
+          "variantId": "24708f6f85a17ed88113efb7",
+          "year": 2024,
+          "unconfirmedFields": [
+            "fuel",
+            "powertrainKind",
+            "engineCode",
+            "power30MinKw",
+            "bodyType",
+            "trim"
+          ],
+          "detail": "Подтверждены только7 полей партии. Исходное английское название сохранено; полного подтверждения строки нет."
+        }
+      ]
+    }
+  ],
+  "untouchedVariants": 83,
+  "retryAfterInspectedYears": 17,
+  "unresearchedVariants": 66,
+  "unresearchedYears": [
+    2026,
+    2025,
+    2022,
+    2021,
+    2020
+  ],
+  "sourceNotes": [
+    "Официальные заводские PDF: MY2023 редакция2023.Q3 страница11; MY2024 редакция2023.Q4 страница13. МощностьДВС и полная разрешённая масса не смешаны с30-минутной мощностью/снаряжённой массой. PS пересчитаны из кВт; формула в источнике каждого поля.",
+    "Все99 строк получены через публичныйAPI. Точные партии составлены только для2023/2024; остальные66 строк требуют дальнейшего исследования. В2025 встречаются названия2023; годы не подменять.",
+    "2026: найден официальный PDF серии 2-million vehicles / 2 миллиона автомобилей в /pdf/202601/a4/; полное открытие дало ошибку. Нужна проверка года и точного названия. Исходный перевод 200 0k Units требует исправления по подтверждённому соответствию."
+  ]
+}
