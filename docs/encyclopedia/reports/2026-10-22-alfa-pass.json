@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+  "make": "Alfa Romeo",
+  "reviewedModels": 10,
+  "inspectedVariants": 470,
+  "savedVariants": 114,
+  "confirmedFieldAssertions": 862,
+  "untouchedVariants": 356,
+  "batches": [
+    {
+      "batch": "research-2026-10-22-alfa-first",
+      "commit": "70e0b427824639dd830b51a8460fc06570ec3ae8",
+      "workflowRun": 39650737605,
+      "job": 119398069133,
+      "status": "success",
+      "variants": 19,
+      "confirmedFieldAssertions": 156,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-first-readback.json",
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-alfa-first-apply.json"
+    },
+    {
+      "batch": "research-2026-10-22-alfa-junior",
+      "commit": "44d47f3e4cfd2fef1af8c675ace802bc9ee03845",
+      "workflowRun": 39651744169,
+      "job": 119401571356,
+      "status": "success",
+      "variants": 15,
+      "confirmedFieldAssertions": 111,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-alfa-junior-readback.json",
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-alfa-junior-apply.json"
+    },
+    {
+      "batch": "research-2026-10-22-stelvio",
+      "commit": "5b8ac3898886b710b19ccccbf0c5a17ea7b8a089",
+      "workflowRun": 39652800552,
+      "job": 119405223296,
+      "status": "success",
+      "variants": 40,
+      "confirmedFieldAssertions": 304,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-stelvio-readback.json",
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-stelvio-apply.json"
+    },
+    {
+      "batch": "research-2026-10-22-tonale",
+      "commit": "bf168d62c392820f91e71205d82220cebfad081f",
+      "workflowRun": 39653918094,
+      "job": 119409054270,
+      "status": "success",
+      "variants": 40,
+      "confirmedFieldAssertions": 291,
+      "readbackReport": "docs/encyclopedia/reports/2026-10-22-tonale-readback.json",
+      "applyReport": "docs/encyclopedia/reports/2026-10-22-tonale-apply.json"
+    }
+  ],
+  "nextNewGroup": {
+    "make": "Alpina",
+    "models": [
+      "D3",
+      "D5"
+    ]
+  },
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+  "integration": {
+    "status": "not_implemented",
+    "visitorRequestSearchOrSyncAdded": false,
+    "calculationEngineChanged": false,
+    "appDeploymentPerformed": false
+  },
+  "notes": [
+    "Counts include confirmation of existing observed values and corrections; they are not counts of newly filled blanks.",
+    "All114 modified variants remain review, not fully verified.",
+    "No paid feeds, collectors or market publication were changed."
+  ]
+}

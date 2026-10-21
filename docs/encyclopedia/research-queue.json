@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T00:03:52.236914+07:00",
+  "updatedAt": "2026-10-22T01:36:38.003919+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -291,7 +291,11 @@
         2017
       ],
       "variants": 4,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "37c5ad68b7ae5208ef5fb83b",
@@ -302,7 +306,11 @@
         2009
       ],
       "variants": 2,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "80bec9eb3050622a66840bcc",
@@ -312,7 +320,11 @@
         2010
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "296965c95e42800c757012ac",
@@ -330,7 +342,11 @@
         2018
       ],
       "variants": 132,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 16,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "cb49c6bb46e8dd8caf106b34",
@@ -346,7 +362,11 @@
         2013
       ],
       "variants": 31,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "76763ca9fc792df61980328c",
@@ -358,7 +378,11 @@
         2024
       ],
       "variants": 28,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 14,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "81a4b290257d227a5fd86ee6",
@@ -369,7 +393,11 @@
         2012
       ],
       "variants": 2,
-      "status": "pending"
+      "status": "needs_exact_variant_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "d9d48f8457c33f7e466d6c6e",
@@ -381,7 +409,11 @@
         1998
       ],
       "variants": 3,
-      "status": "pending"
+      "status": "needs_exact_variant_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "0d734c400f4417df7f272d30",
@@ -399,7 +431,11 @@
         2018
       ],
       "variants": 158,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 40,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "cff3b237a2a26a9e00708f89",
@@ -413,7 +449,11 @@
         2022
       ],
       "variants": 109,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 40,
+      "checkedAt": "2026-10-22T01:36:38.003919+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alfa.json",
+      "nextAction": "Retry exact variant identity, historical years, missing field sources and certification; full row remains unverified"
     },
     {
       "id": "5dfcc65f1b57038636b1cce6",
