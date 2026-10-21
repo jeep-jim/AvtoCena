@@ -40,7 +40,7 @@ await build({
     },
   ],
 });
-const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx']})]).process(['globals.css','catalog-ui.css','select-controls.css','public-polish.css','flat-ui.css','public-regression-fixes.css'].map(f=>fs.readFileSync('apps/web/app/'+f,'utf8')).join('\n')+'\n@tailwind base;@tailwind components;@tailwind utilities;', {from:undefined});
+const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx']})]).process(['globals.css','catalog-ui.css','select-controls.css','public-polish.css','flat-ui.css','public-regression-fixes.css','public-price-sheet-fix.css','catalog-filter-compact.css'].map(f=>fs.readFileSync('apps/web/app/'+f,'utf8')).join('\n')+'\n@tailwind base;@tailwind components;@tailwind utilities;', {from:undefined});
 let shares=[];let delay=0;
 const server=http.createServer(async(req,res)=>{
  if(req.url==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}
