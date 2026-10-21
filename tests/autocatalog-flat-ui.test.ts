@@ -25,5 +25,6 @@ test("search and alphabet stay sticky while letter groups are no longer giant co
 test("permanent encyclopedia does not disappear with live inventory",()=>{
  assert.match(page,/readEncyclopedia/);
  assert.doesNotMatch(page,/readAutocatalogCounts|brand\.offerCount > 0/);
- assert.match(page,/ac-ency-layout/);
+ assert.ok(page.indexOf('<DirectoryFilters') < page.indexOf('className="ac-ency-results"'),'filters precede the full-width directory');
+ assert.doesNotMatch(page,/ac-ency-layout/);
 });

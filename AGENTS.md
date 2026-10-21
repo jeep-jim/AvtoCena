@@ -115,3 +115,9 @@
 - Brand, model and year accordions open independently and remain open when other rows are used. Respect the public template's data-ac-preserve-open convention. Within a selected make show all matching models, a model alphabet and a back-to-makes action.
 
 - Owner clarification21.10.2026: reuse the actual catalog SVG chevrons, view icons and breadcrumb component in the encyclopedia. No text-glyph arrows. View icons and alphabet stay on one row (alphabet scrolls horizontally on narrow screens); active controls use the catalog bright red#ff353d, not the light theme burgundy --ac-accent. Inactive alphabet buttons are white in the light theme.
+
+
+# Owner full-width encyclopedia redesign — 21.10.2026
+- Latest instruction supersedes encyclopedia sidebar placement and horizontal alphabet scrolling: filters belong across the top, add-model action on the left, directory content uses the full width. No horizontal scrolling in the alphabet, tables or editor; wrap controls/values and stack cells on narrow screens.
+- Eliminate accumulating nesting indentation. Brand/model disclosures remain independent on the same left/right boundaries. Select years in a wrapping row within the model workspace. Use compact primary columns and full-width expandable details/inline editing, retaining every technical field, provenance/status and revision protection.
+- Reuse existing catalog breadcrumbs, SVG arrows, view icons and theme colors. Keep the view icons immediately left of the wrapping alphabet, active bright red and inactive white in light theme. No invented backgrounds, introductory explanations, exports or country navigation.
