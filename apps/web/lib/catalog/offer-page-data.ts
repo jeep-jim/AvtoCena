@@ -1,3 +1,4 @@
+import {CollectionDisabledError} from './collection-controls';
 import {AjesUnavailable} from './ajes-client';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./editorial";
 import { cache } from "react";
@@ -52,5 +53,5 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
 /** Never treat a provider refusal as a sold car or an application-wide crash. */
 export async function readOfferDetailForPage(id:string){
  try{return {offer:await getOfferDetailRecord(id),unavailable:false};}
- catch(error){if(error instanceof AjesUnavailable)return {offer:null,unavailable:true};throw error;}
+ catch(error){if(error instanceof CollectionDisabledError)return {offer:null,unavailable:true,disabled:true as const};if(error instanceof AjesUnavailable)return {offer:null,unavailable:true};throw error;}
 }

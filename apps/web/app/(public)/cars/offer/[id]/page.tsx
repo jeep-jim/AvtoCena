@@ -249,7 +249,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
   const detail = await readOfferDetailForPage(id);
-  if(detail.unavailable)return <SupplierUnavailableOffer/>;
+  if(detail.unavailable)return <SupplierUnavailableOffer disabled={'disabled' in detail&&detail.disabled}/>;
   let storedOffer = detail.offer;
   const editorialPreview = query.edit === "1" && canEditCatalog(await getCurrentUser());
   if(!storedOffer && editorialPreview){

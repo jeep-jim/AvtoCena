@@ -14,13 +14,15 @@ test('supplier refusal stays local to the offer; unexpected errors still surface
  const mocks:any={
   'react':`export const cache=f=>f;`,
   'next/cache':`export const unstable_cache=f=>f;`,
+  './collection-controls':`export class CollectionDisabledError extends Error{}`,
   './ajes-client':`export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason}}`,
   './editorial':`export const readCatalogEditorial=async()=>({});export const editorialHidden=()=>false;export const applyCatalogEditorial=x=>x;`,
-  './storage':`import {AjesUnavailable} from './ajes-client';export const getOfferWithoutEditorial=async()=>{if(globalThis.__pageFailure==='supplier')throw new AjesUnavailable('visitor_restricted');if(globalThis.__pageFailure==='unexpected')throw Error('unexpected');return {id:'ajes-stats-123'}};export const getOfferFromCurrentShard=async()=>null;export const getOfferFromCurrentProjection=async()=>null;export const isJapanCatalogOfferId=()=>false;`
+  './storage':`import {CollectionDisabledError} from './collection-controls';import {AjesUnavailable} from './ajes-client';export const getOfferWithoutEditorial=async()=>{if(globalThis.__pageFailure==='disabled')throw new CollectionDisabledError();if(globalThis.__pageFailure==='supplier')throw new AjesUnavailable('visitor_restricted');if(globalThis.__pageFailure==='unexpected')throw Error('unexpected');return {id:'ajes-stats-123'}};export const getOfferFromCurrentShard=async()=>null;export const getOfferFromCurrentProjection=async()=>null;export const isJapanCatalogOfferId=()=>false;`
  };
  const bundle=await build({entryPoints:['apps/web/lib/catalog/offer-page-data.ts'],bundle:true,platform:'node',format:'cjs',write:false,plugins:[{name:'mocks',setup(b){b.onResolve({filter:/.*/},a=>mocks[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path]}));}}]});
  const m={exports:{} as any};new Function('require','module','exports',bundle.outputFiles[0].text)(createRequire(import.meta.url),m,m.exports);
  (globalThis as any).__pageFailure='supplier';assert.deepEqual(await m.exports.readOfferDetailForPage('ajes-stats-123'),{offer:null,unavailable:true});
+ (globalThis as any).__pageFailure='disabled';assert.deepEqual(await m.exports.readOfferDetailForPage('ajes-china-123'),{offer:null,unavailable:true,disabled:true});
  (globalThis as any).__pageFailure='unexpected';await assert.rejects(m.exports.readOfferDetailForPage('ajes-stats-123'),/unexpected/);
  delete (globalThis as any).__pageFailure;assert.equal((await m.exports.readOfferDetailForPage('ajes-stats-123')).offer.id,'ajes-stats-123');
 });
