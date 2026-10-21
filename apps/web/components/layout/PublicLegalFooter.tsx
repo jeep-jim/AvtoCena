@@ -1,6 +1,6 @@
 "use client";
 import {GameButtons} from '../games/GamesHub';
-import {BookOpen} from "lucide-react";
+import {BrandMarkMono} from "../brand/BrandMarkMono";
 
 import {enablePageAnalytics,setAnalyticsChoice} from "@/lib/privacy-consent";
 import { AutoCalcButton } from "../autocalc/AutoCalcButton";
@@ -99,7 +99,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
             <div aria-label="Инструменты АвтоЦены" className="ac-public-footer-tools mt-4 grid grid-cols-2 gap-2 [&>button]:justify-center [&>button]:rounded-xl [&>button]:border [&>button]:border-[var(--ac-border)] [&>button]:px-2 [&>button]:whitespace-nowrap [&>button]:text-xs sm:[&>button]:text-sm [&>button:hover]:bg-[var(--ac-surface-2)]">
               <PageQrButton key={pathname} />
               <span className="ac-footer-global-calculator"><AutoCalcButton /></span>
-              {knowledgeEnabled?<Link href="/knowledge" className="ac-footer-dealer-knowledge"><BookOpen size={18}/>База знаний</Link>:<button type="button" disabled className="ac-footer-dealer-knowledge" title="База знаний скоро появится"><BookOpen size={18}/>База знаний</button>}
+              <Link href="/" className="ac-footer-dealer-home"><BrandMarkMono/>АвтоЦена</Link>
             </div>
 
             <GameButtons/><div className="ac-public-footer-affiliates mt-4 grid gap-2">
@@ -158,12 +158,12 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
       </footer>
 
       <style>{`
-.ac-footer-global-calculator{display:contents}.ac-footer-global-calculator>button{justify-content:center;border:1px solid var(--ac-border);border-radius:12px;padding:0 8px;white-space:nowrap;font-size:12px}.ac-footer-global-calculator>button:hover{background:var(--ac-surface-2)}@media(min-width:640px){.ac-footer-global-calculator>button{font-size:14px}}.ac-footer-dealer-knowledge{display:none!important}
+.ac-footer-global-calculator{display:contents}.ac-footer-global-calculator>button{justify-content:center;border:1px solid var(--ac-border);border-radius:12px;padding:0 8px;white-space:nowrap;font-size:12px}.ac-footer-global-calculator>button:hover{background:var(--ac-surface-2)}@media(min-width:640px){.ac-footer-global-calculator>button{font-size:14px}}.ac-footer-dealer-home{display:none!important}
 body:has([data-dealer-context]) .ac-footer-global-calculator,body:has(.dealer-profile) .ac-footer-global-calculator{display:none!important}
-body:has([data-dealer-context]) .ac-footer-dealer-knowledge,body:has(.dealer-profile) .ac-footer-dealer-knowledge{display:flex!important;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ac-border);border-radius:12px;min-height:44px;padding:8px;font-size:12px;font-weight:700}
+body:has([data-dealer-context]) .ac-footer-dealer-home,body:has(.dealer-profile) .ac-footer-dealer-home{display:flex!important;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ac-border);border-radius:12px;min-height:44px;padding:8px;font-size:12px;font-weight:700}
 body:has([data-dealer-context]) .ac-public-legal-footer,body:has(.dealer-profile) .ac-public-legal-footer{color:var(--ac-muted)}
-body:has([data-dealer-context]) .ac-footer-dealer-knowledge,body:has(.dealer-profile) .ac-footer-dealer-knowledge{color:var(--ac-text)}
-.ac-footer-dealer-knowledge:disabled{opacity:.5;cursor:not-allowed}
+body:has([data-dealer-context]) .ac-footer-dealer-home,body:has(.dealer-profile) .ac-footer-dealer-home{color:var(--ac-text)}
+.ac-footer-dealer-home:disabled{opacity:.5;cursor:not-allowed}
 body:has([data-dealer-context]) .ac-public-footer-navigation,body:has(.dealer-profile) .ac-public-footer-navigation{display:block;padding:0!important}
 body:has([data-dealer-context]) .ac-public-footer-navigation>div,body:has(.dealer-profile) .ac-public-footer-navigation>div{max-width:none}
 body:has([data-dealer-context]) .ac-public-footer-tools,body:has(.dealer-profile) .ac-public-footer-tools{margin:0!important;max-width:380px;padding:12px 0!important}

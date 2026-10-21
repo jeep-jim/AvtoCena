@@ -1,13 +1,18 @@
 "use client";
-import {createContext,useContext,type ReactNode, type ComponentProps} from 'react';
+import {createContext,useContext,useMemo,type ReactNode, type ComponentProps} from 'react';
 import Link from 'next/link';
+import {usePathname} from 'next/navigation';
 import {Star,Car,Images,MapPin,MessageCircle} from 'lucide-react';
 import {dealerBrowsingHref,type DealerBrowsingContext} from '@/lib/dealers/browsing-context';
 const Context=createContext<DealerBrowsingContext|null>(null);
 export const useDealerBrowsing=()=>useContext(Context);
 export function DealerLink({href,...props}:ComponentProps<typeof Link>){const dealer=useDealerBrowsing();return <Link {...props} href={typeof href==='string'?dealerBrowsingHref(href,dealer):href}/>;}
 export function DealerBrowsingProvider({dealer,children,profile=false}:{dealer:DealerBrowsingContext|null;children:ReactNode;profile?:boolean}){
- return <Context.Provider value={dealer}><div data-dealer-context={dealer?.id}>{children}</div>{dealer&&!profile&&<nav className="dealer-context-dock" aria-label="Быстрое меню дилера">{[{label:'Каталог',icon:Car,href:dealer.href},{label:'Медиа',icon:Images,href:dealer.href+'#photos'},{label:'Адреса',icon:MapPin,href:dealer.href+'#about'},{label:'Отзывы',icon:Star,href:dealer.href+'#reviews'},{label:'Заявка',icon:MessageCircle,href:dealerBrowsingHref('/request',dealer)}].map(item=><Link key={item.label} href={item.href}><item.icon size={22}/><span>{item.label}</span></Link>)}</nav>}
+ const pathname=usePathname();
+ // Both the ID and friendly route render this server-authorized profile.
+ // Keep its current route while filtering so React preserves the whole page.
+ const current=useMemo(()=>dealer&&profile&&pathname?{...dealer,href:pathname+(dealer.preview?'?preview=1':'')}:dealer,[dealer,profile,pathname]);
+ return <Context.Provider value={current}><div data-dealer-context={dealer?.id}>{children}</div>{dealer&&!profile&&<nav className="dealer-context-dock" aria-label="Быстрое меню дилера">{[{label:'Каталог',icon:Car,href:dealer.href},{label:'Медиа',icon:Images,href:dealer.href+'#photos'},{label:'Адреса',icon:MapPin,href:dealer.href+'#about'},{label:'Отзывы',icon:Star,href:dealer.href+'#reviews'},{label:'Заявка',icon:MessageCircle,href:dealerBrowsingHref('/request',dealer)}].map(item=><Link key={item.label} href={item.href}><item.icon size={22}/><span>{item.label}</span></Link>)}</nav>}
  {dealer&&<style>{`
  body:has([data-dealer-context]) .ac-public-footer-operator,body:has([data-dealer-context]) .ac-public-footer-navigation>nav,body:has([data-dealer-context]) .ac-public-footer-navigation>div>:not(.ac-public-footer-tools){display:none!important}
  .dealer-context-dock{display:none;color:var(--ac-text)}.dealer-context-dock>a{color:inherit}

@@ -1,4 +1,6 @@
 "use client";
+import Link from 'next/link';
+import {OPEN_SELECTION_PANEL} from '@/lib/dealers/selection-share';
 import {NotificationReply} from './NotificationReply';
 import {BirthdayCelebration} from './BirthdayCelebration';
 import type {BirthdayCelebration as Birthday} from '../../lib/crm-birthday-celebrations';
@@ -196,7 +198,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       {crm?<form onSubmit={event=>{event.preventDefault();const form=event.currentTarget;put(soundKey,"0");void unsubscribeStaffPush(userId).finally(()=>form.submit());}} action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
       <CrmPushControl userId={userId}/>
       </div>
-      {canCreateSelection&&<a className="ac-staff-selection" href="/dealers/dealer_topavto?selection=1&filters=1#catalog"><Share2 size={18}/>Подборка для клиента</a>}
+      {canCreateSelection&&<Link className="ac-staff-selection" href="/dealers/dealer_topavto?selection=1&filters=1#catalog" onClick={event=>{if(document.querySelector('[data-dealer-context="dealer_topavto"] .dealer-profile')){event.preventDefault();window.dispatchEvent(new CustomEvent(OPEN_SELECTION_PANEL,{detail:{dealerId:'dealer_topavto'}}));}setMenuOpen(false);}}><Share2 size={18}/>Подборка для клиента</Link>}
     </div>
     {!notificationsOpen&&hasAlert?<div role="status" className="ac-staff-notice">
       <button type="button" className="ac-staff-notice-close" aria-label="Закрыть и остановить звук" onClick={dismissAlert}><X size={20}/></button>

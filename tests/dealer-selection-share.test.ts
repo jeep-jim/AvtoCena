@@ -78,3 +78,16 @@ test('custom selection title survives storage and changes link identity; blank k
  assert.equal(cleanShareTarget(path,false,'я'.repeat(200)).version,2);
  assert.equal(cleanShareTarget('/cars/offer/car',false,'not a car title').version,1);
 });
+
+ test('shared selection retains white Audi filters and ordered sorting through short-link storage',async()=>{
+ const filters=new URLSearchParams({make:'Audi',market:'china',color:'white',bodyType:'hatchback',yearFrom:'2023',yearTo:'2024',powerTo:'160',city:'Новокузнецк',sort:'mileage,year,totalRub'});
+ const target=cleanShareTarget(selectionTarget('dealer_topavto',filters.toString()),false);
+ const records=new Map();const storage:any={readJson:async(k:string,f:any)=>records.get(k)??f,writeJson:async(k:string,v:any)=>records.set(k,v)};
+ const short=await createShortShare(target,storage);const restored=await readShortShare(short.slice(3),storage);assert.ok(restored);
+ const actual=new URL(restored.path,'https://avtocena.com').searchParams;
+ for(const [key,value] of filters)assert.equal(actual.get(key),value,key);
+ const withoutColor=new URLSearchParams(filters);withoutColor.delete('color');
+ assert.notEqual(await createShortShare(cleanShareTarget(selectionTarget('dealer_topavto',withoutColor.toString()),false),storage),short);
+ assert.equal(selectionQuery(new URLSearchParams('sort=mileageDesc')).get('sort'),'mileageDesc');
+ for(const sort of ['mileage,unknown','year,yearAsc','totalRub,totalRubDesc','mileage,year,totalRub,yearAsc'])assert.throws(()=>selectionQuery(new URLSearchParams({sort})));
+ });
