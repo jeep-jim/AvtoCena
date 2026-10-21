@@ -11,7 +11,7 @@ import {ajesOffer,ajesOfferId} from './ajes-offer';
 import {convertToRub} from './rates';
 import type {ajesLot,AjesQuery} from './ajes-query';
 import {applyCatalogEditorial,editorialHidden,readCatalogEditorial} from './editorial';
-import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
 export async function cappedAjesQuery(query:AjesQuery):Promise<AjesQuery>{
  if(query.table!=='china'||query.id)return query;
  const rate=await convertToRub(1,'CNY');
@@ -44,6 +44,6 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   return options.editorial===false?offer:editorialHidden(offer,index)?null:applyCatalogEditorial(offer,index);
  }));
  const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;
- return {...publicResult,items:items.filter(offer=>offer&&ajesChinaPriceAllowed(offer)&&catalogInventoryAgeDecision(offer).eligible&&!catalogHeavyVehicleExcluded(offer))};
+ return {...publicResult,items:items.filter(offer=>offer&&ajesChinaPriceAllowed(offer)&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer))};
 }
 export async function getAjesOffer(id:string,options:{editorial?:boolean}={}){if(!ajesOfferId(id))return null;const match=id.match(/^ajes-(stats|korea|china)-(.+)$/)!;const result=await readAjesPublic({table:match[1] as 'stats'|'korea'|'china',id:match[2]},options);return result.items[0]||null;}

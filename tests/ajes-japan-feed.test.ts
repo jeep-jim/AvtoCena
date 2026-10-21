@@ -655,3 +655,9 @@ test('disjoint year ranges return exact empty results without provider I/O and r
  await assert.rejects(()=>client.read({yearTo:2007},''),/client_ip_missing/);
  enabled=false;await assert.rejects(()=>client.read({yearTo:2007},'127.0.0.1'),/disabled/);
 });
+
+test('motorcycles are excluded before supplier pagination and from cached lots',()=>{
+ for(const aggregate of [undefined,'count','models','makes'] as const){const query=ajesQuery({make:'YAMAHA',...(aggregate?{aggregate}:{})});assert.match(JSON.stringify(query),/marka_name not in .*YAMAHA/);}
+ assert.equal(ajesLot({...row,MARKA_NAME:'YAMAHA',MODEL_NAME:'OTHER',GRADE:'Star -400'},'stats',false),null);
+ assert.ok(ajesLot({...row,MARKA_NAME:'HONDA',MODEL_NAME:'FIT'},'stats',false));
+});

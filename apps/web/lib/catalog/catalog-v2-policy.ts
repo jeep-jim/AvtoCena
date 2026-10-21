@@ -1,6 +1,6 @@
 import {isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {compareCatalogDisplayOrder} from './display-order';
-import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
 import { chinaInventoryAgeDecision, catalogHardPriceCap } from "./china-owner-policy";
 import { enforceCatalogModelYearQuota, isCatalogCombustionLowPower, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
@@ -71,7 +71,7 @@ export function isCatalogLowPowerOffer(offer: Partial<VehicleOffer>, options: Ca
 export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY): CatalogV2Classification {
   if (!offer.id || !offer.make || !offer.model || !offer.market) return { tier: "rejected", eligible: false, reason: "identity" };
   const year = number(offer.year), ageYears = currentAge(year), powerHp = number(offer.powerHp), totalRub = number(offer.totalRub), popularity = popularityDecile(offer);
-  if (!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer)) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
+  if (!catalogInventoryAgeDecision(offer).eligible || catalogVehicleExcluded(offer)) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if(isUnpricedDubicarsOffer(offer))return {tier:"recent",eligible:true,reason:"market_year_eligible",ageYears,powerHp,totalRub,popularityDecile:popularity};
   if (!hasExplicitSourcePrice(offer)) return { tier: "rejected", eligible: false, reason: REQUEST_PRICE.test(priceText(offer)) ? "price_on_request" : "source_price_missing", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan" && isJapanAuctionOffer(offer)) {

@@ -1,6 +1,7 @@
 import type { DealerMarket } from './catalog-markets';
 export type DealerBrowsingContext = {id:string;name:string;headerIcon?:string;logoLight:string;logoDark:string;href:string;preview:boolean;markets:DealerMarket[]};
-export function dealerBrowsingHref(href:string, dealer:DealerBrowsingContext|null):string {
+export function dealerBrowsingHref(href:string, dealer:DealerBrowsingContext|null,city=""):string {
+ if(city&&href.startsWith("/")&&!href.startsWith("//")){const u=new URL(href,"https://avtocena.com");if((u.pathname.startsWith("/cars")||u.pathname==="/request")&&!u.searchParams.has("city")){u.searchParams.set("city",city);href=u.pathname+u.search+u.hash;}}
  if(!dealer || !href.startsWith('/') || href.startsWith('//'))return href;
  const url=new URL(href,'https://avtocena.com');
  if(url.pathname==='/cars'||url.pathname==='/cars/green') {

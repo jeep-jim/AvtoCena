@@ -1,12 +1,13 @@
 "use client";
 import {createContext,useContext,useMemo,type ReactNode, type ComponentProps} from 'react';
 import Link from 'next/link';
+import {useSelectedCity} from '@/lib/location/selected-city';
 import {usePathname} from 'next/navigation';
 import {Star,Car,Images,MapPin,MessageCircle} from 'lucide-react';
 import {dealerBrowsingHref,type DealerBrowsingContext} from '@/lib/dealers/browsing-context';
 const Context=createContext<DealerBrowsingContext|null>(null);
 export const useDealerBrowsing=()=>useContext(Context);
-export function DealerLink({href,...props}:ComponentProps<typeof Link>){const dealer=useDealerBrowsing();return <Link {...props} href={typeof href==='string'?dealerBrowsingHref(href,dealer):href}/>;}
+export function DealerLink({href,...props}:ComponentProps<typeof Link>){const dealer=useDealerBrowsing();const city=useSelectedCity();return <Link {...props} href={typeof href==='string'?dealerBrowsingHref(href,dealer,city):href}/>;}
 export function DealerBrowsingProvider({dealer,children,profile=false}:{dealer:DealerBrowsingContext|null;children:ReactNode;profile?:boolean}){
  const pathname=usePathname();
  // Both the ID and friendly route render this server-authorized profile.

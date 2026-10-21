@@ -1,7 +1,7 @@
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {publicationWithdrawn} from "./publication-policy";
-import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { hasModificationSelection } from "./modification-contract";
 import { reviewedCatalogGalleryHold } from "./source-gallery-review";
@@ -266,7 +266,7 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
   if (!catalogInventoryAgeDecision(offer).eligible) return false;
   if (!isCatalogKnownBodySemanticValid(offer) || !isCatalogKnownK9EngineSemanticValid(offer)) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
-  if (catalogHeavyVehicleExcluded(offer)) return false;
+  if (catalogVehicleExcluded(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   if(isAllDubicarsOffer(offer)&&!offer.images?.length)return true;
   if (!checkGalleryCoherence) {
@@ -317,7 +317,7 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
  * quality checks against a compact card row.
  */
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
-  if(publicationWithdrawn(offer))return false;
+  if(publicationWithdrawn(offer)||catalogVehicleExcluded(offer))return false;
   if (reviewedCatalogGalleryHold(offer)) return false;
   if(isUnpricedDubicarsOffer(offer))return Number(offer.cardProjectionVersion||0)>=3||isCrediblePublicOffer(offer);
   if (isSellerPricedOffer(offer)) return Number(offer.cardProjectionVersion || 0) >= 3 || isCrediblePublicOffer(offer);

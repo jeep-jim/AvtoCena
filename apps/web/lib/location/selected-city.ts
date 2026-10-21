@@ -22,9 +22,23 @@ function subscribe(notify:()=>void) {
 }
 export function useSelectedCity() { return useSyncExternalStore(subscribe,readSelectedCity,()=>""); }
 
-export function persistCity(city: string) {
+export function storeSelectedCity(city: string) {
   try { localStorage.setItem("avtocena_city", city); } catch {}
   document.cookie = `avtocena_city=${encodeURIComponent(city)}; Max-Age=15552000; Path=/; SameSite=Lax`;
+}
+
+/** A shared selection explicitly replaces the visitor’s previous delivery city. */
+export function adoptSelectionCity(search: string) {
+ const query=new URLSearchParams(search);
+ const city=query.get("city")?.trim();
+ if(query.get("selection")!=="1"||!city||city.length>300||/[<>\u0000-\u001f\u007f]/.test(city))return false;
+ storeSelectedCity(city);
+ window.dispatchEvent(new Event(CITY_CHANGED_EVENT));
+ return true;
+}
+
+export function persistCity(city: string) {
+  storeSelectedCity(city);
   const url = new URL(window.location.href);
   if (city) url.searchParams.set("city", city); else url.searchParams.delete("city");
   window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);

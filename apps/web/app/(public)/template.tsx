@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import {adoptSelectionCity} from "@/lib/location/selected-city";
 import { LeadCaptureInteractionEnhancer } from "@/components/leads/LeadCaptureInteractionEnhancer";
 import { PublicLeadCaptureV2 } from "@/components/leads/PublicLeadCaptureV2";
 import { PublicLeadCaptureStyles } from "@/components/leads/PublicLeadCaptureStyles";
@@ -165,6 +166,7 @@ html:not([data-theme="light"]) body .ac-partner-page {
 `;
 
 export default function PublicTemplate({ children }: { children: ReactNode }) {
+  useEffect(()=>{adoptSelectionCity(window.location.search);},[]);
   useEffect(() => {
     const closeOpenDetails = (target?: EventTarget | null) => {
       const node = target instanceof Node ? target : null;

@@ -1,3 +1,4 @@
+import {motorcycleExcluded} from './motorcycle-policy';
 import {isAllDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
@@ -65,3 +66,6 @@ export function catalogHeavyVehicleExcluded(offer:any){
  if(/^(?:N[23]|M3)G?$/.test(category))return true;
  return commercial&&Number.isFinite(mass)&&mass>3500;
 }
+
+/** Shared display guard, including retained projections and disabled archive reads. */
+export function catalogVehicleExcluded(offer:any){return motorcycleExcluded(offer)||catalogHeavyVehicleExcluded(offer);}

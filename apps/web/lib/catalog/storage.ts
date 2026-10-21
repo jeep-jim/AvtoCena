@@ -10,7 +10,7 @@ import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudge
 import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache} from './shared-budget-prices';
-import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
@@ -459,7 +459,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
   if(publicationWithdrawn(row))return false;
-  if(!catalogInventoryAgeDecision(row).eligible || catalogHeavyVehicleExcluded(row)) return false;
+  if(!catalogInventoryAgeDecision(row).eligible || catalogVehicleExcluded(row)) return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
@@ -485,7 +485,7 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
     const row = preparedProjectionRows.get(input);
     if(row){
       let admission=projectionAdmissionCache.get(row);
-      if(!admission||admission.day!==day){admission={day,eligible:catalogInventoryAgeDecision(row,now).eligible&&!catalogHeavyVehicleExcluded(row)};projectionAdmissionCache.set(row,admission);}
+      if(!admission||admission.day!==day){admission={day,eligible:catalogInventoryAgeDecision(row,now).eligible&&!catalogVehicleExcluded(row)};projectionAdmissionCache.set(row,admission);}
       if(admission.eligible&&!editorialHidden(row))visible.push(applyCatalogEditorialSpecifications(row));
     }
   }
@@ -493,7 +493,7 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
   if(publicationWithdrawn(offer))return false;
-  if(!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer))return false;
+  if(!catalogInventoryAgeDecision(offer).eligible || catalogVehicleExcluded(offer))return false;
   if (isConfirmedSourceWithdrawn(offer) || isReviewedSourceDuplicate(offer)) return false;
   offer = safePublicPricing(offer);
   return isUnpricedDubicarsOffer(offer) || isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
@@ -560,7 +560,7 @@ export async function getOfferFromCurrentProjection(id: string) {
   }
   if (projection.generationId !== manifest.generationId) return null;
   const row = (projection.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market));
-  return row && !isConfirmedSourceWithdrawn(row) && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row) ? offerDetailFromProjection(row) : null;
+  return row && !isConfirmedSourceWithdrawn(row) && catalogInventoryAgeDecision(row).eligible && !catalogVehicleExcluded(row) ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
@@ -780,7 +780,7 @@ export async function getOfferFromCurrentShard(id: string) {
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
-  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market) && !isConfirmedSourceWithdrawn(item) && catalogInventoryAgeDecision(item).eligible && !catalogHeavyVehicleExcluded(item)) || null;
+  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market) && !isConfirmedSourceWithdrawn(item) && catalogInventoryAgeDecision(item).eligible && !catalogVehicleExcluded(item)) || null;
 }
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
@@ -1924,7 +1924,7 @@ export async function getOfferWithoutEditorial(id: string) {
     // Regional cards navigate to a soft 404. If a shard is incomplete, fall
     // through to the immutable generation index instead of returning early.
     const currentOffer = (current.items || []).find((item) => item.id === id);
-    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return isConfirmedSourceWithdrawn(currentOffer) || !catalogInventoryAgeDecision(currentOffer).eligible || catalogHeavyVehicleExcluded(currentOffer) ? null : currentOffer;
+    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return isConfirmedSourceWithdrawn(currentOffer) || !catalogInventoryAgeDecision(currentOffer).eligible || catalogVehicleExcluded(currentOffer) ? null : currentOffer;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
@@ -1950,7 +1950,7 @@ export async function getOfferWithoutEditorial(id: string) {
   const chunk = await chunkPromise;
   // Generation chunks are also immutable, already-filtered public storage.
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
-  return offer ? (isConfirmedSourceWithdrawn(offer) || !catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer) ? null : offer) : readProjectionFallback();
+  return offer ? (isConfirmedSourceWithdrawn(offer) || !catalogInventoryAgeDecision(offer).eligible || catalogVehicleExcluded(offer) ? null : offer) : readProjectionFallback();
 }
 const BUDGET_CARD_BLOCK_SIZE=256;
 const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({sizeOf:jsonReadByteLength, maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
@@ -2101,7 +2101,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const eligibilityContext=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
   const eligible=budgetEligibility.get(index,eligibilityContext,original=>{
    const row=editedRow(original);
-   return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogHeavyVehicleExcluded(row[5]);
+   return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogVehicleExcluded(row[5]);
   });
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
   let candidates=sourceRows.map(editedRow).filter(row=>
