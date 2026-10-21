@@ -92,7 +92,7 @@ try{
  const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
  await page.route('**/api/catalog/colors**',route=>route.fulfill({json:{ok:true,colors:['Белый','Чёрный','Особый'],partial:false}}));
  await page.route('**/api/catalog/brand-counts**',route=>route.fulfill({json:{counts:{Toyota:10,BMW:8}}}));
- const errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('PAGE_ERROR',String(e));});await page.goto(origin+'/cars');await page.waitForTimeout(1000);assert.deepEqual(errors,[]);
+ const errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('PAGE_ERROR',String(e));});await page.goto(origin+'/cars');await page.waitForTimeout(500);assert.equal(await page.locator('.ac-brand-rail a').count(),1,'unselected rail remains visible');await page.goto(origin+'/cars?make=Toyota');await page.waitForTimeout(1000);assert.deepEqual(errors,[]);
  const sidebar=page.locator('.ac-catalog-sidebar');
  assert.equal(await page.locator('.ac-brand-rail a').count(),0,'selected makes hide the duplicate brand rail');
  if(width>=1024){
