@@ -1,4 +1,5 @@
 "use client";
+import {CatalogChevron as Chevron} from "./CatalogChevron";
 import {CatalogColorSelect} from "./CatalogColorSelect";
 import {CatalogSortSelect} from "./CatalogSortSelect";
 import {normalizedCatalogSort} from "@/lib/catalog/catalog-sort";
@@ -68,7 +69,7 @@ function clean(value: string) { return String(value || "").replace(/\s+/g, " ").
 function splitMakeValues(value: string) { return [...new Set(String(value || "").split(",").map(clean).filter(Boolean))]; }
 function joinMakeValues(values: string[]) { return [...new Set(values.map(clean).filter(Boolean))].join(","); }
 function label(value: string) { return clean(value).replace(/\[object Object\]/gi, "") || "Без названия"; }
-function Chevron({ open = false }: { open?: boolean }) { return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
+
 function SlidersIcon() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7H20M4 17H20M8 4V10M16 14V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="8" cy="7" r="2" fill="currentColor" /><circle cx="16" cy="17" r="2" fill="currentColor" /></svg>; }
 
 

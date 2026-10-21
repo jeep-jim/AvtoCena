@@ -113,3 +113,5 @@
 - Encyclopedia discovery is country-independent: no market filters or country-bound make/model identity. Keep provenance internally and exact technical differences, without exposing markets as encyclopedia navigation.
 - Use existing catalog theme tokens and standard page styling. Compact text-first list/grid controls are icons to the left of the alphabet; add-model action belongs below reset in the left sidebar. No introductory explanations or download actions.
 - Brand, model and year accordions open independently and remain open when other rows are used. Respect the public template's data-ac-preserve-open convention. Within a selected make show all matching models, a model alphabet and a back-to-makes action.
+
+- Owner clarification21.10.2026: reuse the actual catalog SVG chevrons, view icons and breadcrumb component in the encyclopedia. No text-glyph arrows. View icons and alphabet stay on one row (alphabet scrolls horizontally on narrow screens); active controls use the catalog bright red#ff353d, not the light theme burgundy --ac-accent. Inactive alphabet buttons are white in the light theme.
