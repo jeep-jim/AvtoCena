@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T06:32:53+07:00",
+  "scope": "Audi A5L, A5L Sportback, A6, A6 C8, A6 C9, A6L; only this pass; previous A5 and earlier passes excluded",
+  "variants": 750,
+  "confirmedFields": 6630,
+  "changes": {
+    "confirmedExisting": 5066,
+    "filledEmpty": 787,
+    "correctedOrNormalizedObserved": 777,
+    "translatedTrimNames": 30
+  },
+  "byModel": {
+    "A5L": {
+      "variants": 14,
+      "fields": 105
+    },
+    "A5L Sportback": {
+      "variants": 15,
+      "fields": 149
+    },
+    "A6": {
+      "variants": 703,
+      "fields": 6251
+    },
+    "A6 C9": {
+      "variants": 1,
+      "fields": 7
+    },
+    "A6L": {
+      "variants": 17,
+      "fields": 118
+    }
+  },
+  "byModelYear": {
+    "A5L 2026": {
+      "variants": 9,
+      "fields": 69
+    },
+    "A5L 2025": {
+      "variants": 5,
+      "fields": 36
+    },
+    "A5L Sportback 2026": {
+      "variants": 15,
+      "fields": 149
+    },
+    "A6 2026": {
+      "variants": 49,
+      "fields": 490
+    },
+    "A6 2025": {
+      "variants": 50,
+      "fields": 445
+    },
+    "A6 2024": {
+      "variants": 53,
+      "fields": 482
+    },
+    "A6 2023": {
+      "variants": 222,
+      "fields": 1943
+    },
+    "A6 2022": {
+      "variants": 202,
+      "fields": 1767
+    },
+    "A6 2021": {
+      "variants": 120,
+      "fields": 1062
+    },
+    "A6 2020": {
+      "variants": 7,
+      "fields": 62
+    },
+    "A6 C9 2026": {
+      "variants": 1,
+      "fields": 7
+    },
+    "A6L 2026": {
+      "variants": 7,
+      "fields": 56
+    },
+    "A6L 2025": {
+      "variants": 10,
+      "fields": 62
+    }
+  },
+  "fieldCounts": {
+    "engineCc": 750,
+    "powerKw": 749,
+    "powerHp": 750,
+    "icePowerKw": 749,
+    "drive": 592,
+    "transmission": 750,
+    "grossVehicleWeightKg": 118,
+    "trim": 30,
+    "fuel": 719,
+    "powertrainKind": 719,
+    "bodyType": 704
+  },
+  "readVariants": 1635,
+  "untouchedVariants": 885,
+  "retryVariants": 768,
+  "pendingResearchVariants": 117,
+  "batches": [
+    {
+      "stem": "2026-10-22-audi-a5l-exact",
+      "sha": "67d195ae09cc01098d9ca270761e14e219e35f55",
+      "run": 39690598995,
+      "job": 119535541833,
+      "variants": 29,
+      "fields": 254
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2026-c9",
+      "sha": "c0b3ac4669939a35b582fae79874a41596877d58",
+      "run": 39690964297,
+      "job": 119536742660,
+      "variants": 49,
+      "fields": 490
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2025-c8-1",
+      "sha": "24dead1052ac54453cbec75a3f735291f90a1d37",
+      "run": 39691320856,
+      "job": 119537924359,
+      "variants": 50,
+      "fields": 445
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2024-c8-1",
+      "sha": "b789d61da4e06db14b111a3167bf5b02a654ee31",
+      "run": 39691518391,
+      "job": 119538578935,
+      "variants": 53,
+      "fields": 482
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2023-history-1",
+      "sha": "dc4094a8d8fb61d0f54544888c2f0cbea22dbaae",
+      "run": 39691854586,
+      "job": 119539693458,
+      "variants": 64,
+      "fields": 558
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2023-history-2",
+      "sha": "32d0436b13ab0b925b9d3d89e2091592b23f96f3",
+      "run": 39691996205,
+      "job": 119540161792,
+      "variants": 64,
+      "fields": 549
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2023-history-3",
+      "sha": "d5fa4cdb9971a9e1c19aae2d00061bab6a399d21",
+      "run": 39692290209,
+      "job": 119541126279,
+      "variants": 64,
+      "fields": 566
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2023-history-4",
+      "sha": "66528b38c4dae685fa31bb0fe14a11e4318a2fb8",
+      "run": 39692428401,
+      "job": 119541589393,
+      "variants": 30,
+      "fields": 270
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2022-history-1",
+      "sha": "4243d43187b22115465cec19b2b5fb9585763335",
+      "run": 39692603264,
+      "job": 119542175857,
+      "variants": 64,
+      "fields": 561
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2022-history-2",
+      "sha": "e14e18b8a8143dbda174fc3d106cde88b54730e0",
+      "run": 39692738365,
+      "job": 119542632086,
+      "variants": 64,
+      "fields": 541
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2022-history-3",
+      "sha": "75b03b0aeede6fb5cdd7863f64bf59a8cb272bc3",
+      "run": 39692880695,
+      "job": 119543106495,
+      "variants": 64,
+      "fields": 575
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2022-history-4",
+      "sha": "fbbef9f8ac6714095b80d72683c785b3fc4dbe21",
+      "run": 39693019882,
+      "job": 119543567872,
+      "variants": 10,
+      "fields": 90
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2021-history-1",
+      "sha": "cc066bcb8fda8cb9791a65463ab7f0dcb21eaf93",
+      "run": 39693243130,
+      "job": 119544303393,
+      "variants": 64,
+      "fields": 561
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2021-history-2",
+      "sha": "062d591d9dcfb03b53f6e3bd1dc9b59713302abb",
+      "run": 39693421747,
+      "job": 119544896149,
+      "variants": 56,
+      "fields": 501
+    },
+    {
+      "stem": "2026-10-22-audi-a6-2020-history-1",
+      "sha": "8fbdb5ef9f0fb43a570458d7154fc22366281a6a",
+      "run": 39693554307,
+      "job": 119545344273,
+      "variants": 7,
+      "fields": 62
+    },
+    {
+      "stem": "2026-10-22-audi-a6-c9-local",
+      "sha": "0f3f27f4fcfa7500f46eaa64d9d8e3d56073473c",
+      "run": 39693687233,
+      "job": 119545794566,
+      "variants": 1,
+      "fields": 7
+    },
+    {
+      "stem": "2026-10-22-audi-a6l-2025-2026-exact",
+      "sha": "453949350fc61f8a3a6d3ef8af91da40f68f09fc",
+      "run": 39693818919,
+      "job": 119546238003,
+      "variants": 17,
+      "fields": 118
+    }
+  ],
+  "retryFile": "docs/encyclopedia/retry-2026-10-22-audi-a5l-a6.json",
+  "nextGroups": [
+    "Audi A6L 2024/2023/2022/2021/2020 (117 pending)",
+    "Audi A6L e-tron"
+  ],
+  "integration": "not_implemented",
+  "fullEncyclopediaComplete": false,
+  "checkpointRechecked": {
+    "commit": "85abbbb59a356064328c8fe13dbd64fc97bef43a",
+    "workflow": 39636456279,
+    "conclusion": "success"
+  },
+  "verification": "All batches applied with zero skips; all patch values, field evidence, source batch and review status independently re-read through public encyclopedia API."
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T05:23:29.142352+07:00",
+  "updatedAt": "2026-10-22T06:32:53+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -1049,7 +1049,23 @@
         2025
       ],
       "variants": 20,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 14,
+      "checkedAt": "2026-10-22T06:32:53+07:00",
+      "researchedYears": [
+        2026,
+        2025
+      ],
+      "searchAttemptedYears": [
+        2026,
+        2025
+      ],
+      "pendingYears": [],
+      "retryYears": [
+        2026,
+        2025
+      ],
+      "nextAction": "14 модификаций/105 полевых подтверждений сохранены и прочитаны. Пропуски и неподтверждённые поля: retry-2026-10-22-audi-a5l-a6.json. Не повторять применённые партии. Продолжить A6L2024/2023/2022/2021/2020 (117 строк pending), затем A6L e-tron по алфавиту; пропуски искать отдельно."
     },
     {
       "id": "47f57970b91ad3f3a25ad452",
@@ -1060,7 +1076,22 @@
         2025
       ],
       "variants": 27,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 15,
+      "checkedAt": "2026-10-22T06:32:53+07:00",
+      "researchedYears": [
+        2026
+      ],
+      "searchAttemptedYears": [
+        2026,
+        2025
+      ],
+      "pendingYears": [],
+      "retryYears": [
+        2026,
+        2025
+      ],
+      "nextAction": "15 модификаций/149 полевых подтверждений сохранены и прочитаны. Пропуски и неподтверждённые поля: retry-2026-10-22-audi-a5l-a6.json. Не повторять применённые партии. Продолжить A6L2024/2023/2022/2021/2020 (117 строк pending), затем A6L e-tron по алфавиту; пропуски искать отдельно."
     },
     {
       "id": "00624e6c77b6541109a32d66",
@@ -1080,7 +1111,46 @@
         2015
       ],
       "variants": 1410,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 703,
+      "checkedAt": "2026-10-22T06:32:53+07:00",
+      "researchedYears": [
+        2026,
+        2025,
+        2024,
+        2023,
+        2022,
+        2021,
+        2020
+      ],
+      "searchAttemptedYears": [
+        2026,
+        2025,
+        2024,
+        2023,
+        2022,
+        2021,
+        2020,
+        2019,
+        2017,
+        2016,
+        2015
+      ],
+      "pendingYears": [],
+      "retryYears": [
+        2026,
+        2025,
+        2024,
+        2023,
+        2022,
+        2021,
+        2020,
+        2019,
+        2017,
+        2016,
+        2015
+      ],
+      "nextAction": "703 модификаций/6251 полевых подтверждений сохранены и прочитаны. Пропуски и неподтверждённые поля: retry-2026-10-22-audi-a5l-a6.json. Не повторять применённые партии. Продолжить A6L2024/2023/2022/2021/2020 (117 строк pending), затем A6L e-tron по алфавиту; пропуски искать отдельно."
     },
     {
       "id": "e7971f4a2a2b6386355f3176",
@@ -1092,7 +1162,22 @@
         2020
       ],
       "variants": 6,
-      "status": "pending"
+      "status": "needs_exact_variant_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T06:32:53+07:00",
+      "researchedYears": [],
+      "searchAttemptedYears": [
+        2022,
+        2021,
+        2020
+      ],
+      "pendingYears": [],
+      "retryYears": [
+        2022,
+        2021,
+        2020
+      ],
+      "nextAction": "0 модификаций/0 полевых подтверждений сохранены и прочитаны. Пропуски и неподтверждённые поля: retry-2026-10-22-audi-a5l-a6.json. Не повторять применённые партии. Продолжить A6L2024/2023/2022/2021/2020 (117 строк pending), затем A6L e-tron по алфавиту; пропуски искать отдельно."
     },
     {
       "id": "2228ea4b3a958f9db1a95edf",
@@ -1102,7 +1187,20 @@
         2026
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T06:32:53+07:00",
+      "researchedYears": [
+        2026
+      ],
+      "searchAttemptedYears": [
+        2026
+      ],
+      "pendingYears": [],
+      "retryYears": [
+        2026
+      ],
+      "nextAction": "1 модификаций/7 полевых подтверждений сохранены и прочитаны. Пропуски и неподтверждённые поля: retry-2026-10-22-audi-a5l-a6.json. Не повторять применённые партии. Продолжить A6L2024/2023/2022/2021/2020 (117 строк pending), затем A6L e-tron по алфавиту; пропуски искать отдельно."
     },
     {
       "id": "e43873f0a3de40762a376dff",
@@ -1118,7 +1216,29 @@
         2020
       ],
       "variants": 171,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 17,
+      "checkedAt": "2026-10-22T06:32:53+07:00",
+      "researchedYears": [
+        2026,
+        2025
+      ],
+      "searchAttemptedYears": [
+        2026,
+        2025
+      ],
+      "pendingYears": [
+        2024,
+        2023,
+        2022,
+        2021,
+        2020
+      ],
+      "retryYears": [
+        2026,
+        2025
+      ],
+      "nextAction": "17 модификаций/118 полевых подтверждений сохранены и прочитаны. Пропуски и неподтверждённые поля: retry-2026-10-22-audi-a5l-a6.json. Не повторять применённые партии. Продолжить A6L2024/2023/2022/2021/2020 (117 строк pending), затем A6L e-tron по алфавиту; пропуски искать отдельно."
     },
     {
       "id": "649dd3ac3d5c169544a23005",
