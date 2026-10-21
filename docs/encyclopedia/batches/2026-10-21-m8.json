@@ -1,0 +1,2105 @@
+{
+  "version": 1,
+  "id": "research-2026-10-21-m8",
+  "entries": [
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "0bcf30e916d79ee1fedfb2ce",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Max+版 53.4kWh 6座版 (896线激光雷达）",
+      "expectedDigest": "9af9b0f60da1812208fbfd8baca3e89e423918ed60b700145f1bd8fc8bdc4d52",
+      "patch": {
+        "trim": "2025 EREV Max+ 53.4kWh 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "487867bffc38c59eec0dbd96",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Max+版 53.4kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "901edda9e588f27a7837caee95a50f512e1dd8559ff90c08bcc950b72b2cba30",
+      "patch": {
+        "trim": "2025 EREV Max+ 53.4kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "f85304f2d66e02e422c6647d",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Max+版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "91acc30cf0cdf0cb85ffba55a9e3860561909c7db46fcd269d57590b4e1ba2bc",
+      "patch": {
+        "trim": "2025 EREV Max+ 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a68711124774577a9c26fcf8",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Ultra版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "80b0f9626ccc9b0cd0186542019a20e79efc96dd6b11f99cffcdd7f6d0134744",
+      "patch": {
+        "trim": "2025 EREV Ultra 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "603b0287305f4cbc6365990e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Ultra版 53.4kWh 6座版 (896线激光雷达）",
+      "expectedDigest": "08e73e5ff18d02c3f19b58357c3b82ca8ecf8462bd9150a1e1c25cef34ebee43",
+      "patch": {
+        "trim": "2025 EREV Ultra 53.4kWh 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6bcf3e4bc2e9275c8176d93c",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Max版 37kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "5e1774bfab583e47f3efa1990bd508e2ad1baa09720ef1f8e815ecf9568a5174",
+      "patch": {
+        "trim": "2025 EREV Max 37kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 5 мест, последовательный гибрид, полный привод, батарея 37 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "e8ac76acd0f405a20849470b",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Max版 37kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "1b0ee7a195cd618be6714dc62cd0f4861edf76da7cc055c2364a53cbe567e97d",
+      "patch": {
+        "trim": "2025 EREV Max 37kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 6 мест, последовательный гибрид, полный привод, батарея 37 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "94292f4d13a7c3a887288663",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Ultra 六座四驱版 (192线激光雷达）",
+      "expectedDigest": "d9d3f0a0a3e0ebd0eb1be3bdf668ace9d6a3b80a13f09562f968b0d6cdb3f6b2",
+      "patch": {
+        "trim": "2025 EV Ultra 6-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "15dd52a5734447c38853ded4",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 五座四驱版 (192线激光雷达）",
+      "expectedDigest": "a41e6db665e8b712b2a06362202105579d211c1ebd31cfe22b1d1651a1053436",
+      "patch": {
+        "trim": "2025 EV Max+ 5-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "b43de740195fbfb379299014",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 六座四驱版 (192线激光雷达）",
+      "expectedDigest": "ceee62a5fd97dd42a3166b96048c36ea57f0bb7ebd5e32c9957b0a94d9f8ff48",
+      "patch": {
+        "trim": "2025 EV Max+ 6-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "91a33628284043391fe4d7f7",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Ultra 五座四驱版 (192线激光雷达）",
+      "expectedDigest": "e293ed0e8f5c4112711119dac6a85d841985cf229760bbadd5efcb84006d9b24",
+      "patch": {
+        "trim": "2025 EV Ultra 5-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "7438b0e82a0a8d9ae980c394",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Ultra 五座四驱版 (896线激光雷达）",
+      "expectedDigest": "ff5b038bd93e99140bdd33601151c97eeae58a7f1f3e2f09519732b9f20dc33c",
+      "patch": {
+        "trim": "2025 EV Ultra 5-seat AWD LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "975ffe4c1857ed05444b970d",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 五座四驱版 (896线激光雷达）",
+      "expectedDigest": "bde05829c0ac2458a077375bd175f00132dc6c56294838b18e6ba39d27f8350e",
+      "patch": {
+        "trim": "2025 EV Max+ 5-seat AWD LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2fbba4d8425ebe20f1459a1c",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 六座长续航版 (192线激光雷达）",
+      "expectedDigest": "f4686b8855cd45ace879bc205e62994b128f341300d94ac6f72d46ba92f974bf",
+      "patch": {
+        "trim": "2025 EV Max+ 6-seat Long Range LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, задний привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковая мощность единственного мотора 227 кВт.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2e204bc26050e23d1e268f05",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 五座长续航版 (192线激光雷达）",
+      "expectedDigest": "e29480e8c6c0e0a7c5e0d75f7ef3be9a695402c671cba57117f46a4acc9bae5c",
+      "patch": {
+        "trim": "2025 EV Max+ 5-seat Long Range LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, электрическая версия, задний привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковая мощность единственного мотора 227 кВт.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "72d2af7ed20dd40bef38b097",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 六座长续航版 (896线激光雷达）",
+      "expectedDigest": "2a523a127fa7057c4056c04669e3f97a7abf2f23ad3b08c7a669524c6a31638f",
+      "patch": {
+        "trim": "2025 EV Max+ 6-seat Long Range LiDAR 896",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, задний привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 896. Пиковая мощность единственного мотора 227 кВт.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "851dbd2349c34c909e45fc5f",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Ultra版 53.4kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "c4aa0178aa2404cce717d31082f0fa7878d45cdc3ac5a1902c90003523354663",
+      "patch": {
+        "trim": "2025 EREV Ultra 53.4kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "1ecc857cdc269ed98d93d1cf",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Ultra版 53.4kWh 5座版 (896线激光雷达）",
+      "expectedDigest": "e3c1957aa8afab42e5f8304460ab4ba4258af3e908b01bc9a94f28d15f476eee",
+      "patch": {
+        "trim": "2025 EREV Ultra 53.4kWh 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "8dd99bcaaf34579077f104fb",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 增程 Max+版 53.4kWh 5座版 (896线激光雷达）",
+      "expectedDigest": "4688492b6727cd1170df1f8cb9e0f3dc3d4ebee638e752b3d6c542c441a9d039",
+      "patch": {
+        "trim": "2025 EREV Max+ 53.4kWh 5-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T",
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "1809dd1134400443df4ba508",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 六座四驱版 (896线激光雷达）",
+      "expectedDigest": "98d94401d7207d7030ded856842585032b6083f8b30a251522d6950e116f9ff1",
+      "patch": {
+        "trim": "2025 EV Max+ 6-seat AWD LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "9c5fd9704733fdc9647e2aac",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Ultra 六座四驱版 (896线激光雷达）",
+      "expectedDigest": "31576d6979a19e340e36d3508836c5b66475d10a9e78479a06ee9530ed668011",
+      "patch": {
+        "trim": "2025 EV Ultra 6-seat AWD LiDAR 896",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6caec82adedde838cf97a9fe",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025款 纯电 Max+ 五座长续航版 (896线激光雷达）",
+      "expectedDigest": "26ed31de98d616ce34850d1c921b3351d979a57b115c35822cf6e5b38d7d029b",
+      "patch": {
+        "trim": "2025 EV Max+ 5-seat Long Range LiDAR 896",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227,
+        "transmission": "Одноступенчатый редуктор"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "translations": {
+        "transmission": {
+          "from": "电动车单速变速箱"
+        }
+      },
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, электрическая версия, задний привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 896. Пиковая мощность единственного мотора 227 кВт.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "ab6bcb91cf607b79a4b0dd02",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Pure Electric Ultra AWD 6-seater",
+      "expectedDigest": "a8e2c623bd84f66a4aec0c6f60e793454426fd0dae5feecdfb3a4cf6375b10ed",
+      "patch": {
+        "trim": "2025 Pure Electric Ultra AWD 6-seater",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Лидар не приписан: сохранены только одинаковые параметры соответствующих исполнений. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "d9e6a0543e3601641f17a291",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Range Extender Max+ Edition 53.4kWh 5-seater",
+      "expectedDigest": "06edde7d35a76504b281b23a1905579a12a6f427fe4df7cc728cead8ad14162e",
+      "patch": {
+        "trim": "2025 Range Extender Max+ Edition 53.4kWh 5-seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Лидар не приписан: сохранены только одинаковые параметры соответствующих исполнений. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "e88030809cb7f617c4baa923",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Extended Range Max 37kWh 5-Seater",
+      "expectedDigest": "ab98f9753d74c5acc04e3d9586a305f9fb0a0fa15680973806a0774149ff69bc",
+      "patch": {
+        "trim": "2025 Extended Range Max 37kWh 5-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 5 мест, последовательный гибрид, полный привод, батарея 37 кВт·ч. Лидар не приписан: сохранены только одинаковые параметры соответствующих исполнений. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2a0a2c2592472ec0cd023c29",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Model Extended Range Max+ Edition 53.4kWh 6-Seater",
+      "expectedDigest": "9b0ba8104834ef02d7386b20db1654efbc33469bff2734645010c3930b1e2de0",
+      "patch": {
+        "trim": "2025 Model Extended Range Max+ Edition 53.4kWh 6-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Лидар не приписан: сохранены только одинаковые параметры соответствующих исполнений. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "25a0bf1b98e01c736776301e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Extended Range Ultra 53.4kWh 6-Seater",
+      "expectedDigest": "342a141489c7f1b990e29673537bc54c38d713e0374d80f4d0679f47c72d3342",
+      "patch": {
+        "trim": "2025 Extended Range Ultra 53.4kWh 6-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Лидар не приписан: сохранены только одинаковые параметры соответствующих исполнений. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a7b3662ca65af16af868aa73",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "2025 Model Extended Range Ultra Edition 53.4kWh 5-Seater",
+      "expectedDigest": "880522d66c1de9bdb9ed90f715e3babf5ee18b622d0a9e98a16897ac8f3fe800",
+      "patch": {
+        "trim": "2025 Model Extended Range Ultra Edition 53.4kWh 5-Seater",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Лидар не приписан: сохранены только одинаковые параметры соответствующих исполнений. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "0aa1f57795ee36a93efdcce3",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "纯电 Max+ 六座长续航版 (192线激光雷达）",
+      "expectedDigest": "dea844828a0d6621ea3cdc335229f1b11cd60ece273b41dfb1f80bd559d02be3",
+      "patch": {
+        "trim": "EV Max+ 6-seat Long Range LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, задний привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковая мощность единственного мотора 227 кВт.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "4234cafa1f114e8777965b82",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Max版 53.4kWh 6座版 (896线激光雷达）",
+      "expectedDigest": "0c1daf7022ef6fd06506c15bf6ac79bf52615a1d754e448d5d8d8e0a29604183",
+      "patch": {
+        "trim": "EREV Max 53.4kWh 6-seat LiDAR 896",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 6 мест, последовательный гибрид, задний привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковая мощность единственного мотора 227 кВт. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "b246db132ec4cff640ba6bd9",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "纯电 Max+ 六座四驱版 (192线激光雷达）",
+      "expectedDigest": "39cc322f1aafbad4833ecf086c8b137579c02a4e59fea7d2f1be61e78d8131e7",
+      "patch": {
+        "trim": "EV Max+ 6-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2b97d855954fe35a3bb6cc3f",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "纯电 Max+ 五座四驱版 (192线激光雷达）",
+      "expectedDigest": "46f2e5494c5b7321d32d1db19ce672d2074e1f4a7ed7cc23237e0111eaa86c9b",
+      "patch": {
+        "trim": "EV Max+ 5-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "b7a1996458c447402d00167e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "纯电 Ultra 六座四驱版 (192线激光雷达）",
+      "expectedDigest": "8c2c769ce4e09e036dbcc05368bd049ea017a4c61e18274ee16509b3bdc0c4b2",
+      "patch": {
+        "trim": "EV Ultra 6-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "1739125a3a517451046f84c2",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "纯电 Max+ 六座四驱版 (192线激光雷达）",
+      "expectedDigest": "de3b240f6b050ce8f535135fb432105471da0e31d6ff660ab0bd6e6fc1310555",
+      "patch": {
+        "trim": "EV Max+ 6-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a3d0488a804bf099c4c21d00",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "纯电 Ultra 五座四驱版 (192线激光雷达）",
+      "expectedDigest": "9585d710381d1fcf6d034b9eb6469a95583fa1d689c2fd53a5242d365bf7b384",
+      "patch": {
+        "trim": "EV Ultra 5-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "f5ffeff9c8132d35b3968592",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Max+版 53.4kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "5990f49837f4ea175ecc46587189bdcb4a9ff2f0642ea4cb7e235acba758805e",
+      "patch": {
+        "trim": "EREV Max+ 53.4kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "0a6097830626c0045a801be1",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Ultra版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "9ce080315cc87c30654faaa76dd1f8ad264edc699cc7eebe96faa2b8456fcca5",
+      "patch": {
+        "trim": "EREV Ultra 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "2f69b1306b5b5498380eb2c7",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Ultra版 53.4kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "f94a1140ff6efd5bb2f50b4465d577da0b2d5850a1fb958a78951f79586e162f",
+      "patch": {
+        "trim": "EREV Ultra 53.4kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "14225f4f457153a6e222c732",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Max+版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "8a71a1a7ae29a696de5bdaa406087be7f9b676f21c6b39b137edf0774ec12cc6",
+      "patch": {
+        "trim": "EREV Max+ 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "89eb7203776e92f4c300cd24",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Max版 37kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "519e9b42c78d78d9e278c43c401c337fdc7f7ec4aa298390535a729f544072d0",
+      "patch": {
+        "trim": "EREV Max 37kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 5 мест, последовательный гибрид, полный привод, батарея 37 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6bf81b62408991f7d273acea",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Max版 37kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "e47590261c394c457b0ae6d575bb3f173ba55ebecd77aa3d600b27f33be609f6",
+      "patch": {
+        "trim": "EREV Max 37kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 37,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 6 мест, последовательный гибрид, полный привод, батарея 37 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "a9723826352c2eac76382d0e",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2025,
+      "trim": "增程 Ultra版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "c013a1b7573ab110225a2e19bbc2aa7aa3fa2c2a9df3400516d3a340c148222e",
+      "patch": {
+        "trim": "EREV Ultra 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "54ffbe05c23484b9853856af",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "增程 Max版 53.4kWh 5座版 (896线激光雷达）",
+      "expectedDigest": "c8aa18f63fae3de868c13829749fe553353a94c751328861940deef0eab8c8e2",
+      "patch": {
+        "trim": "EREV Max 53.4kWh 5-seat LiDAR 896",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max, 5 мест, последовательный гибрид, задний привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковая мощность единственного мотора 227 кВт. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "9da9a924d9430c9366d3f93f",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "纯电 Max+ 六座四驱版 (192线激光雷达）",
+      "expectedDigest": "84dfbe81e7989051a1911af1b3f6265f108e02aeadaaa311894e23c7d4e290fe",
+      "patch": {
+        "trim": "EV Max+ 6-seat AWD LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, электрическая версия, полный привод, батарея 100 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 160 кВт, задний 227 кВт; сумма не объявлена мощностью системы.  30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение."
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "8d56cf38f5629d84b9bcf3e4",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "增程 Ultra版 53.4kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "a4a77fcb25da3f71a13b535dfc9f1d43eaf01ce21fd2c0b0665cfdf13313ce0f",
+      "patch": {
+        "trim": "EREV Ultra 53.4kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "c63d839221ccbc6455af1a18",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "增程 Max+版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "3f40124de08cc3aec891a1e56a5eeb5bde31c8e4351b9308811e4fa612f64a41",
+      "patch": {
+        "trim": "EREV Max+ 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "d626417c63fed7576f270cfd",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "增程 Ultra版 53.4kWh 6座版 (192线激光雷达）",
+      "expectedDigest": "09c97918240e5bbce45b0f4c0aa7f8e839d60ddcc1f95d6549f76a015b29312c",
+      "patch": {
+        "trim": "EREV Ultra 53.4kWh 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Ultra, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "6be173018fcbdfcf2e99afa0",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "增程 Max+版 53.4kWh 6座版 (896线激光雷达）",
+      "expectedDigest": "bae2c4e5f759d078c774ba3f86312d67a0a378532d1d9718883f64564cb4c1f7",
+      "patch": {
+        "trim": "EREV Max+ 53.4kWh 6-seat LiDAR 896",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 6 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 896. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "b0972339b8a7f3fc37bf8d6b",
+      "variantId": "db2e450b6ba111cd4d22cdf7",
+      "make": "AITO",
+      "model": "M8",
+      "year": 2026,
+      "trim": "增程 Max+版 53.4kWh 5座版 (192线激光雷达）",
+      "expectedDigest": "16af777d4681d10cd825e59074d879adae329fda983a53f2ac042bc2f675c507",
+      "patch": {
+        "trim": "EREV Max+ 53.4kWh 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "engineCc": 1496,
+        "engineCode": "HG15T"
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://hima.auto/wenjie/m8/configuration/",
+        "checkedAt": "2026-10-21",
+        "statement": "M8 Max+, 5 мест, последовательный гибрид, полный привод, батарея 53.4 кВт·ч. Сопоставлена секция LiDAR 192. Пиковые мощности отдельных моторов: передний 165 кВт, задний 227 кВт; сумма не объявлена мощностью системы. Заводское руководство, стр.425–426: HG15T,1496см³. ДВС:115кВт нетто/118кВт номинальные — только пояснение, без выбора расчётного стандарта. Руководство: https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf 30-минутная мощность не подтверждена; номинальные мощности не подставлены. Перевод КПП не подтверждает исходное наблюдение.",
+        "additionalSources": [
+          {
+            "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM8%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+            "pages": [
+              425,
+              426
+            ],
+            "sha256": "603b2cda43d24b4f35aa6c7de5ee28c349efda671df7cb5242552660b85ee5e2",
+            "fields": [
+              "engineCc",
+              "engineCode"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
