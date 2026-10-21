@@ -1,0 +1,290 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a5-2025-1",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "7cba44fc49b28b2272d1c03e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TFSI quattro Stronic NAVI LED AHK ACC",
+      "expectedDigest": "efc2186da6c2c4e6ab916229a1a402396632a93ab721275122ee593a88b48dc2",
+      "patch": {
+        "fuel": "petrol",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2375
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1396/file_en/7d1819cd2725a93fda98265377a24b29a6016a54/eTD-Audi-A5-Avant-TFSI-quattro-S_tronic-150kW_251127.pdf?1764318154=&disposition=attachment",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Avant TFSI 150 kW quattro, 2025. Заводская техническая таблица от 2025-11-27: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic; разрешённая полная масса 2375 кг. Совпадают год, кузов, объём, мощность и привод; версия110кВт имеет единственный передний привод. Тип гибридной системы не подтверждается этой таблицей и не изменён. Код двигателя и 30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1396/file_en/7d1819cd2725a93fda98265377a24b29a6016a54/eTD-Audi-A5-Avant-TFSI-quattro-S_tronic-150kW_251127.pdf?1764318154=&disposition=attachment",
+            "date": "2025-11-27",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "eb9892a5494e05138a749eec",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TFSI quattro S tronic *ACC*AHK*R-KAM*18",
+      "expectedDigest": "fc20fac8429cdbe1f2d0eb08ad2939d3ca8d8d06aa8066426660f757bf883927",
+      "patch": {
+        "fuel": "petrol",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2375
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1396/file_en/7d1819cd2725a93fda98265377a24b29a6016a54/eTD-Audi-A5-Avant-TFSI-quattro-S_tronic-150kW_251127.pdf?1764318154=&disposition=attachment",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Avant TFSI 150 kW quattro, 2025. Заводская техническая таблица от 2025-11-27: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic; разрешённая полная масса 2375 кг. Совпадают год, кузов, объём, мощность и привод; версия110кВт имеет единственный передний привод. Тип гибридной системы не подтверждается этой таблицей и не изменён. Код двигателя и 30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1396/file_en/7d1819cd2725a93fda98265377a24b29a6016a54/eTD-Audi-A5-Avant-TFSI-quattro-S_tronic-150kW_251127.pdf?1764318154=&disposition=attachment",
+            "date": "2025-11-27",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0f5f3961b465d28c3e5172f4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TDI quattro +STANDHZ+NAV+LED-SW+ASSIST+",
+      "expectedDigest": "e7859cd6d9926c01e9ff9a7eb641280e543b19556bef0a14afdd9dc50f7a97e8",
+      "patch": {
+        "fuel": "diesel",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2490,
+        "powertrainKind": "mhev"
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1398/file_en/5d1fc18d6abb57f5d2498ef77382a83b600194dd/eTD-Audi-A5-Avant-TDI-quattro-S_tronic-150kW_251127.pdf?1764318155=&disposition=attachment",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Avant TDI 150 kW quattro, 2025. Заводская техническая таблица от 2025-11-27: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic; разрешённая полная масса 2490 кг. Совпадают год, кузов, объём, мощность и привод; версия110кВт имеет единственный передний привод. MHEV plus указан заводом; электрический boost не принят за 30-минутную мощность. Код двигателя и 30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1398/file_en/5d1fc18d6abb57f5d2498ef77382a83b600194dd/eTD-Audi-A5-Avant-TDI-quattro-S_tronic-150kW_251127.pdf?1764318155=&disposition=attachment",
+            "date": "2025-11-27",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "6d883e3546e95131df01a86f",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "Avant TDI quattro 150 kW ACC*Matrix*AHK*360°",
+      "expectedDigest": "7d386eacd2be7e84c3bc637d6e41c5c55352b36457a00c03271a7fa7fe3607f5",
+      "patch": {
+        "fuel": "diesel",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2490,
+        "powertrainKind": "mhev"
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1398/file_en/5d1fc18d6abb57f5d2498ef77382a83b600194dd/eTD-Audi-A5-Avant-TDI-quattro-S_tronic-150kW_251127.pdf?1764318155=&disposition=attachment",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Avant TDI 150 kW quattro, 2025. Заводская техническая таблица от 2025-11-27: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic; разрешённая полная масса 2490 кг. Совпадают год, кузов, объём, мощность и привод; версия110кВт имеет единственный передний привод. MHEV plus указан заводом; электрический boost не принят за 30-минутную мощность. Код двигателя и 30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1398/file_en/5d1fc18d6abb57f5d2498ef77382a83b600194dd/eTD-Audi-A5-Avant-TDI-quattro-S_tronic-150kW_251127.pdf?1764318155=&disposition=attachment",
+            "date": "2025-11-27",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "179c41517625a54d112bb7af",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2025,
+      "trim": "2.0 TDI Avant quattro /MATRIX-LED/STANDH./ACC/RÜC",
+      "expectedDigest": "843f4e3c40d1576b302133ef2542942f6dd5411ee1a55d98289093d795652473",
+      "patch": {
+        "fuel": "diesel",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2490,
+        "powertrainKind": "mhev"
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "powertrainKind"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1398/file_en/5d1fc18d6abb57f5d2498ef77382a83b600194dd/eTD-Audi-A5-Avant-TDI-quattro-S_tronic-150kW_251127.pdf?1764318155=&disposition=attachment",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Avant TDI 150 kW quattro, 2025. Заводская техническая таблица от 2025-11-27: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic; разрешённая полная масса 2490 кг. Совпадают год, кузов, объём, мощность и привод; версия110кВт имеет единственный передний привод. MHEV plus указан заводом; электрический boost не принят за 30-минутную мощность. Код двигателя и 30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1398/file_en/5d1fc18d6abb57f5d2498ef77382a83b600194dd/eTD-Audi-A5-Avant-TDI-quattro-S_tronic-150kW_251127.pdf?1764318155=&disposition=attachment",
+            "date": "2025-11-27",
+            "pages": [
+              1,
+              2
+            ],
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
