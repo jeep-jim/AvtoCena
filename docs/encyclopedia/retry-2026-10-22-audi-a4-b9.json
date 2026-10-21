@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T04:25:50.600396+07:00",
+  "models": [
+    {
+      "modelId": "7a296c2cbde73725fc3d6bd4",
+      "make": "Audi",
+      "model": "A4 B9",
+      "records": [
+        {
+          "variantId": "c0a7cfd407112a6a22fec4a6",
+          "year": 2021,
+          "reason": "observed_identity_conflict",
+          "detail": "40 TFSI Premium имеет исходный объём 1968 см³. Нужна точная заводская таблица корейского исполнения и проверка имени/алиаса; европейское значение не перенесено."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,838 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4l-2023-2024",
+  "entries": [
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "bd04c622dfdee0f4c07118c2",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "expectedDigest": "401cdbba02d30324cd8db6837c44839fb6128889a06a4221dbe68e8899bb3aae",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Luxury Dynamic / Люкс Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "620c485a746f06b5dcfec5ea",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "expectedDigest": "a2a55ff3efcbd9d9ba57ac8900354cebfc359318bb4ba998ae85fb46e410e1ec",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Fashion Dynamic / Фэшн Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "140f4b6791bcb3e407f8f629",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "expectedDigest": "404109d0c80e8f255fe2358d364cefc14a3fe51bf2e51b76ce2f7550b65beeff",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Fashion Dynamic / Фэшн Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "e8d385e77e7bd154192a2c31",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "expectedDigest": "b4d3ca16076fbd1d737d3d6bc84f93b2cda84532e50c0b4bcceacff3e75ef571",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Luxury Dynamic / Люкс Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "773d61f3033bb03d69a28625",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI Fashion Supreme Elegant Type",
+      "expectedDigest": "dd44ba649162bd6a465c26f6f3768635d52f19d15d71d907070e9e4e2d3e21b7",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Fashion Elegant / Фэшн Элегант; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "86b4c57b4d7da690eb2d9f6f",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "2023 40 TFSI Fashion Dynamic",
+      "expectedDigest": "ade6d5a924c6e829f46205f405f445f1213ec6d1ba9b79f1d93aff742b51d0fe",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Fashion Dynamic / Фэшн Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "00b4bd66d1a6f5fee2a48981",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI quattro Luxury Dynamic Type",
+      "expectedDigest": "935f7f06032bea39d0e03db5d38706c11d1a4320ed8ead23875976c537f0396a",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2150
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение quattro Luxury Dynamic / quattro Люкс Динамик; 1984см³, 140кВт ДВС, quattro, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2150кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "947388c1c81b76123a37d71d",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "40 TFSI Bang&Olufsen Star Night Edition",
+      "expectedDigest": "8bd43e1a5683ac1798ee1331aaa194f2960f354818c0e1d2cd74aacacb746f74",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение Bang & Olufsen Night Edition / Ночная серия; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "f022836e78b2aa0183b5e577",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2023,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "expectedDigest": "70506bb367565a3b4ba9322c386b18a6090c3fad659a3b192c9d6eae20889243",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "icePowerKw": 180,
+        "powerHp": 245,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2023, заводская таблица 2023.Q3, PDF страница11, редакция на странице17. Точное исполнение quattro Select Dynamic / quattro Селект Динамик; 1984см³, 180кВт ДВС, quattro, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2160кг. 245PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2023%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5/Audi_A4L_2023_Q3.pdf",
+            "edition": "2023.Q3",
+            "pages": [
+              11,
+              17
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "bc34140dd1e1c732c919e09a",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "40 TFSI Fashion Dynamic Type",
+      "expectedDigest": "a0c3f42a28c7a9f7dd60e80bd991ba00629c56cb66daa5078830442e44128d7a",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение Fashion Dynamic / Фэшн Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "e169fc8b1b72f0dd9f5f67e4",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "2024 40 TFSI Luxury Dynamic",
+      "expectedDigest": "dd0b53343a5a41098c88dc8c230ab730c52215cba373b1d4ac8743963a70a62c",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение Luxury Dynamic / Люкс Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "e982e696dc2b0d0e016357ba",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "expectedDigest": "a4158695cfdff1f2d8001b805f29e10d97f4356a4f411b8e3feccf0a037a9884",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение Luxury Dynamic / Люкс Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "9332863d4e3e4639a3b23c5f",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "2024 40 TFSI Fashion Dynamic",
+      "expectedDigest": "b53ad6cd692fc38d5c8bc4b787038a3dc6748f0c044e9200aeaf238ef7e19e83",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение Fashion Dynamic / Фэшн Динамик; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "f520492fa8f1039a803ed6ba",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "40 TFSI Bang&Olufsen Star Night Edition",
+      "expectedDigest": "ac4e08cc55851c7d3ce6c1bd225dcb39624dda49e922884145a317037af78c55",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2080
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение Bang & Olufsen Night Edition / Ночная серия; 1984см³, 140кВт ДВС, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2080кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "e35007d5448f8b5938f367ee",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "40 TFSI quattro RS Kit Flame Speed Type",
+      "expectedDigest": "b5352c7bf6a9fda133971eca8942bb110b45582ef7df07b9d7275984d0f5c5bd",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "powerHp": 190,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2150
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение RS Edition 2 quattro / RS Эдишн 2 quattro; 1984см³, 140кВт ДВС, quattro, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2150кг. 190PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "c2365f94a908e7e90f14976e",
+      "variantId": "24708f6f85a17ed88113efb7",
+      "make": "Audi",
+      "model": "A4L",
+      "year": 2024,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "expectedDigest": "667f41e80d444e5023d85b3712748c9070e2d349ea7b91eb5eda226ad75b27f9",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "icePowerKw": 180,
+        "powerHp": 245,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2160
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "powerHp",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW-Volkswagen Audi A4L MY2024, заводская таблица 2023.Q4, PDF страница13, название модельного года на странице13, редакция на странице19. Точное исполнение quattro Select Dynamic / quattro Селект Динамик; 1984см³, 180кВт ДВС, quattro, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2160кг. 245PS рассчитаны из заводских кВт: round(kW/0.73549875), не отдельная сертифицированная мощность. Совпадают модель/год/название исполнения/привод/КПП; наблюдаемые139.74/180.2кВт согласуются с округлённым пересчётом190/245PS и заменены точным значением таблицы. MHEV, код двигателя и30-минутная мощность этой партией не подтверждаются. Текст первичногоPDF прочитан через веб-индекс; локальный хешPDF/визуальная проверка не заявляются.",
+        "additionalSources": [
+          {
+            "url": "https://www.audichina.cn/content/dam/OneWeb/faw_vw/pdf/2024%E6%9B%B4%E6%96%B0%E8%BD%A6%E5%9E%8B%E9%A1%B5/rename/A4L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2023.Q4 (MY2024)",
+            "pages": [
+              13,
+              19
+            ],
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "powerHp",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
