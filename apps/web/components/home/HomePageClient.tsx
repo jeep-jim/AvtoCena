@@ -1,6 +1,5 @@
 "use client";
 import {MarketResultCount} from '../catalog/MarketResultCount';
-import {AutobotHero} from '../autobot/AutobotHero';
 import { useHomeCatalogCount } from "./useHomeCatalogCount";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 
@@ -340,11 +339,13 @@ export default function HomePageClient({ japanAuctions, dealerGallery = buyers, 
   return <main data-home-react-filters className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
     <PublicHeader />
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
+      <div className="ac-home-intro-grid">
       <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
-        <div className="ab-home-intro"><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="ab-hero-desktop"><AutobotHero/></div></div>
+        <div className="ab-home-intro"><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p></div>
         <div className="ab-budget-desktop">{budgetPanel}</div>
       </section>
-      <div className="-mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
+      <div className="ac-home-hero-gallery -mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
+      </div>
       {specialRail && <SpecialRail {...specialRail} desktopSplit/>}
       <div className="ac-home-services mt-4 hidden gap-4 lg:grid lg:grid-cols-1 lg:items-stretch">
         <section className="ac-home-finance grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">

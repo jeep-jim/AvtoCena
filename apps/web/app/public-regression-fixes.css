@@ -422,3 +422,15 @@ html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-price { 
 .ac-catalog-editor-form .ac-catalog-editor-actions { position:sticky; bottom:-16px; padding:12px 0; background:var(--ac-surface); }
 
 @media(min-width:1024px) { .ac-special-rails--split [data-site-block="market-orders"] .ac-special-rail-track { grid-auto-columns:calc((100% - 80px) / 6); } }
+
+/* Owner desktop home reference, 21 October 2026. Mobile flow is unchanged. */
+@media (min-width:1024px) {
+  .ac-home-page .ac-home-intro-grid { display:grid; grid-template-columns:minmax(0,1fr) 420px; column-gap:80px; row-gap:80px; padding:48px 0 40px; }
+  .ac-home-page .ac-home-hero { display:contents; }
+  .ac-home-page .ab-home-intro { grid-column:1; grid-row:1; min-width:0; }
+  .ac-home-page .ab-budget-desktop { grid-column:2; grid-row:1 / 3; }
+  .ac-home-page .ac-home-hero-gallery { grid-column:1; grid-row:2; min-width:0; align-self:end; }
+  .ac-home-page .ac-home-hero-gallery > section { margin-top:0; }
+  .ac-home-page .ac-home-hero-gallery > section > h2 { display:none; }
+  .ac-home-page .ac-home-hero-gallery .ac-buyers-rail { margin-top:0; padding-bottom:0; }
+}
