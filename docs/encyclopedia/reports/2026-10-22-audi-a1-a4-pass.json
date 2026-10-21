@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-22T03:50:45.052573+07:00",
+  "newVariants": 516,
+  "newFields": 4575,
+  "groups": [
+    {
+      "model": "Audi A1",
+      "variants": 81,
+      "fields": 709
+    },
+    {
+      "model": "Audi A3",
+      "variants": 321,
+      "fields": 2840
+    },
+    {
+      "model": "Audi A4",
+      "variants": 114,
+      "fields": 1026
+    }
+  ],
+  "integration": "not_implemented",
+  "applicationChanged": false,
+  "collectorsChanged": false,
+  "note": "Полевые подтверждения включают проверку уже наблюдавшихся значений,не только заполнение пустых. Строки остаютсяreview. Никакого сетевого поиска/синхронизации на запрос посетителя не добавлялось."
+}
