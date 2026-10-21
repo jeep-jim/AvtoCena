@@ -19,7 +19,7 @@ import type {DealerBrowsingContext} from "@/lib/dealers/browsing-context";
 import { redirect } from "next/navigation";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { readGroupedCatalogFacets } from "@/lib/catalog/market-facets";
-import { readCatalogOverview } from "@/lib/catalog/overview";
+import { readPublicCatalogOverview } from "@/lib/catalog/editorial-overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { readCatalogMarketPage, balanceBusinessRows, businessOrder, sortCatalogRows } from "@/lib/catalog/market-page";
@@ -94,7 +94,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   const railReads=new Map<string,ReturnType<typeof readAjesRailData>>(markets.filter(m=>liveMarket(m.id)||m.id==='japan').map(m=>[m.id,readAjesRailData(m.id as 'japan'|'china'|'korea',params)]));
   // Stock and market snapshots are independent; start both storage reads together.
   const greenRead = (!dealer||dealer.markets.includes("japan")) && (!selectedMarket || japanAll) ? readGreenCorner().catch(()=>null) : Promise.resolve(null);
-  const overview = overviewEligible ? await readCatalogOverview().catch((error) => {
+  const overview = overviewEligible ? await readPublicCatalogOverview().catch((error) => {
     console.error("catalog_overview_read_failed", error);
     return null;
   }) : null;

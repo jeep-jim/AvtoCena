@@ -1,3 +1,4 @@
+import {revalidatePath} from 'next/cache';
 import {getCurrentUser} from '@/lib/auth';
 import {canEditCatalog} from '@/lib/catalog/editorial-access';
 import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
@@ -29,6 +30,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
   }
   const offer=current||{...previous!,images:previous!.originalPhoto?[{url:previous!.originalPhoto}]:[]};
   const saved=await saveCatalogEditorial(offer,input,user!,current?catalogOfferTitle(current):previous!.originalTitle);
+  revalidatePath('/', 'layout');
   return Response.json({entry:saved},{headers});
  }catch(error){
   if(error instanceof EditorialConflict||error instanceof EditorialInputError)return Response.json({error:error.message},{status:error instanceof EditorialConflict?409:400,headers});

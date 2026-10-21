@@ -1,3 +1,4 @@
+import {applyEditorialOverview} from '../apps/web/lib/catalog/editorial-overview';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {getJsonStorage,StorageConflictError} from '../apps/web/lib/data';
@@ -56,6 +57,9 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   assert.equal((await readCatalogBrandModelCounts('Hyundai')).models.reduce((s,m)=>s+m.count,0),2);
   assert.deepEqual((await readCatalogFacets({market:'korea',yearFrom:2022})).makes,['Hyundai']);
   const home=await readHomeCatalogSnapshot(2);assert.equal(home.marketCounts.korea,2);assert.equal(home.items.some(r=>r.id===victim.id),false);
+  const stale:any={markets:{korea:{total:3,items:rows}},generationId};
+  const overview=await applyEditorialOverview(stale);
+  assert.equal(overview!.markets.korea.total,2);assert.equal(overview!.markets.korea.items.some(r=>r.id===victim.id),false);assert.equal(stale.markets.korea.items.length,3);
   // Source regeneration changes neither editorial status nor images/title.
   generationId='editorial-b';resetCatalogReadCachesForTests();resetCatalogEditorialCache();
   assert.equal((await searchOffers({market:'korea'})).items.some(r=>r.id===victim.id),false);

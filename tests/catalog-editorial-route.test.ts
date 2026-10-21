@@ -7,6 +7,7 @@ test('editorial API rejects unauthorized writes, foreign origins, missing photos
  const state:any={actor:{id:'owner',role:'owner',companyId:'dealer_topavto',displayName:'Owner'},offer:{id:'one',market:'korea',sourceId:'s',sourceOfferId:'1',make:'Hyundai',model:'Avante',images:[{url:'https://example.com/car-a.jpg'},{url:'https://example.com/car-b.jpg'}]},index:{revision:'0',entries:{}},writes:0};
  (globalThis as any).__catalogEditorialRoute=state;
  const sources:Record<string,string>={
+  'next/cache':`export const revalidatePath=(path,type)=>{globalThis.__catalogEditorialRoute.revalidated=[path,type];};`,
   '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__catalogEditorialRoute.actor;`,
   '@/lib/catalog/storage':`export const getOfferFromCurrentShard=async()=>globalThis.__catalogEditorialRoute.offer;`,
   '@/lib/catalog/presentation':`export const catalogOfferTitle=()=>"Hyundai Avante";`,
@@ -24,6 +25,7 @@ test('editorial API rejects unauthorized writes, foreign origins, missing photos
   assert.equal((await save({photos:['https://evil.example/foreign.jpg']})).status,400);
   assert.equal((await save({sellerPrice:{amount:-1,currency:'CNY'}})).status,400);
   const response=await save({sellerPrice:{amount:57800,currency:'CNY'},photos:['https://example.com/car-b.jpg','https://example.com/car-a.jpg']});assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+  assert.deepEqual(state.revalidated,['/','layout']);
   const saved=(await response.json()).entry;assert.deepEqual(saved.sellerPrice,{amount:57800,currency:'CNY'});assert.equal(state.index.entries.one.status,'hidden');assert.deepEqual(saved.photos,['https://example.com/car-b.jpg','https://example.com/car-a.jpg']);
   assert.equal((await save()).status,409,'stale editor cannot overwrite');
   state.offer=null;
