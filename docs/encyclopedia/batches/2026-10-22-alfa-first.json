@@ -1,0 +1,1097 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-alfa-first",
+  "entries": [
+    {
+      "modelId": "c73056068974cb178c84d0b6",
+      "variantId": "3ac68c8d1c0b9e141290ae47",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "year": 2017,
+      "trim": "STANDARD",
+      "expectedDigest": "0399147ca803fa86baeb9c8ce16b41c83d36b90fd8e7ed103e70d66c76439960",
+      "patch": {
+        "engineCc": 1742,
+        "powerKw": 177,
+        "icePowerKw": 177,
+        "transmission": "dct"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/ch-de/alfa-romeo/press/mit-dem-alfa-romeo-4c-im-neuen-fahrsimulator-gran-turismo-sport-von-playstation",
+        "checkedAt": "2026-10-22",
+        "statement": "4C 2017, заводская публикация 23.10.2017: 1742 см³, 177 кВт, коробка с двумя сцеплениями TCT. Применены общие параметры серийного двигателя купе/Spider; исполнение кузова не переопределено. Метрические PS и SAE hp не смешивались; powerHp не заполнено.",
+        "additionalSources": []
+      }
+    },
+    {
+      "modelId": "37c5ad68b7ae5208ef5fb83b",
+      "variantId": "212e3b08c82c4a0cca8f07c0",
+      "make": "Alfa Romeo",
+      "model": "8C Competizione Coupe",
+      "year": 2009,
+      "trim": "STANDARD",
+      "expectedDigest": "8310edb7aad56427049307d50ca73c5142ee89e6d8e68e8ab347fe87738f0b08",
+      "patch": {
+        "engineCc": 4691,
+        "powerHp": 450,
+        "powerKw": 331,
+        "icePowerKw": 331,
+        "drive": "rwd",
+        "bodyType": "coupe",
+        "transmission": "6-speed automated manual"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "bodyType",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-competizione",
+        "checkedAt": "2026-10-22",
+        "statement": "Серийная 8C Competizione Coupe 2009: единая серия из 500 купе 2007–2009. Заводской архив: V8 4691 см³, 331 кВт / 450 PS, задний привод, шестиступенчатая роботизированная КПП. 1490 кг в архиве — не разрешённая полная масса; это поле не заполнено.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/de-de/alfa-romeo/press/alfa-romeo-geht-mit-drei-legendaren-oldtimern-bei-der-mille-miglia-an-den-start",
+            "fields": [
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "identity": "Coupe production 2007–2009"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "80bec9eb3050622a66840bcc",
+      "variantId": "51bc0fa9cf150f7f5430ab87",
+      "make": "Alfa Romeo",
+      "model": "8C Spider",
+      "year": 2010,
+      "trim": "Other",
+      "expectedDigest": "f73edb617dce6216002060cb55b5e4aea43061611c56176eb3de02cbd20e972e",
+      "patch": {
+        "engineCc": 4691,
+        "powerHp": 450,
+        "powerKw": 331,
+        "icePowerKw": 331,
+        "drive": "rwd",
+        "bodyType": "convertible",
+        "transmission": "6-speed automated manual"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "bodyType",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/de-de/lancia/press/fca-heritage-beim-salon-retromobile-in-paris",
+        "checkedAt": "2026-10-22",
+        "statement": "8C Spider 2010 прямо указан в заводском архиве: открытый кузов, 331 кВт / 450 PS и шестиступенчатая роботизированная КПП. Heritage подтверждает единую серию Spider, V8 4691 см³ и задний привод. Ошибочное coupe исправлено на convertible. 1590 кг не перенесены в разрешённую массу.",
+        "additionalSources": [
+          {
+            "url": "https://www.stellantisheritage.com/en-uk/heritage/stories/alfa-romeo-8c-spider",
+            "fields": [
+              "engineCc",
+              "drive",
+              "bodyType",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "cfbfdab02b1db9b272211e54",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2021,
+      "trim": "ALFA ROMEO GIULIA 2.2 TURBODIESEL SPRINT AT8 190CV",
+      "expectedDigest": "878c365012a8d88f0b8906df58cd2f7ffd452701f06f00880ece90c77da36f4a",
+      "patch": {
+        "engineCc": 2143,
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/es/model-pricelist/libro_de_producto_giulia_my21_agosto_2021-61277ddf110ce.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2021: заводская таблица MY21, август 2021, точное совпадение двигателя, топлива и названной версии. 2143 см³, 190 метрических л.с. (CV/PS), 140 кВт максимальной мощности ДВС; автоматическая КПП AT8, задний привод. Название Sprint/Sprint Plus не переименовано: подтверждён двигатель 190 CV, а не полный набор оснащения. Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/es/model-pricelist/libro_de_producto_giulia_my21_agosto_2021-61277ddf110ce.pdf",
+            "pages": [
+              2,
+              9
+            ],
+            "sha256": "34d8bc526f87fa64035ead90fa8e61c28dd58120835c56fcab224be87f1caa9e",
+            "fields": [
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "eff0579b5c58e54a1557f7a9",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2021,
+      "trim": "2.0 Turbo 16V 206kW AT8 Veloce Ti Vel...",
+      "expectedDigest": "30a2804c075d49b35ba56b65fe9b9576aa338f697634cb335eac47e72685d621",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce Ti",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/es/model-pricelist/libro_de_producto_giulia_my21_agosto_2021-61277ddf110ce.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2021: заводская таблица MY21, август 2021, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/es/model-pricelist/libro_de_producto_giulia_my21_agosto_2021-61277ddf110ce.pdf",
+            "pages": [
+              2,
+              9
+            ],
+            "sha256": "34d8bc526f87fa64035ead90fa8e61c28dd58120835c56fcab224be87f1caa9e",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "91ad1b6e063dc640c52a8e9a",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "Veloce 2,0 16V 280 AT8 Q4",
+      "expectedDigest": "1619ad21a146f242c52ad0803c063220cafcdc4b3d29197c50652995959c4457",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2023: заводская таблица 01.08.2023, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "7360011bf388c195e9b44aac",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2023,
+      "trim": "Competizione Q4",
+      "expectedDigest": "cb51b1984c67828aa5bb01227a4294ad1ab42b1cc7f26e1bb35eb9ad277607d4",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Competizione",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2023: заводская таблица 01.08.2023, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4. Заводской анонс MY23 отдельно подтверждает бензиновую Competizione 280 PS; дизельная 210 PS не смешивалась. Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy2301_08_2023-650c0c1d1471e.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "35184c9efffb66345ea9a55f2f62f0307111afcb3fc2cf2e62947d47f8184b14",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/at-de/alfa-romeo/press/Alfa-Romeo-Stelvio-und-Alfa-Romeo-Giulia-zeitloses-design_14_03_2023",
+            "fields": [
+              "trim",
+              "fuel",
+              "powerHp",
+              "powerKw",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "5fb520d625b474fb03ab82d7",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.2 t Sprint 160cv auto",
+      "expectedDigest": "3ea6f817c11e1c4ac1709eb88d6add8bddd05769fdfd19bf0e0363505ca6b381",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 160 PS AT8 Sprint",
+        "engineCc": 2143,
+        "powerHp": 160,
+        "powerKw": 118,
+        "icePowerKw": 118,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2024: заводская таблица 22.01.2024, точное совпадение двигателя, топлива и названной версии. 2143 см³, 160 метрических л.с. (CV/PS), 118 кВт максимальной мощности ДВС; автоматическая КПП AT8, задний привод.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              20,
+              21
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "3363a8ccc695c790084af87d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "Veloce Q4 MATRIX+ACC+KAM+LEDER+SHZ+TOT.W+",
+      "expectedDigest": "0012c98e38988b49fad9d478859d7c443deaefa2e8934ca834aa9d9b79f1bccd",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2024: заводская таблица 22.01.2024, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              20,
+              21
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "0c6aef8c03d7ba9e7bd05067",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "Veloce Q4",
+      "expectedDigest": "73940fe503b03c40c1ae4b7c5e2a84902feb168fc555a9681d96118d8db202e7",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2024: заводская таблица 22.01.2024, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              20,
+              21
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "2482607f5d916059c594b219",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "2.0 Turbo 16V Veloce Q4 Navi KomfortPack",
+      "expectedDigest": "6e7e1e2b348a1d2391a11cfe8473c3ce2fdd32d2a5315172df28a30813ad1535",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2024: заводская таблица 22.01.2024, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              20,
+              21
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "bbf321051e45598c8f375cb2",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2024,
+      "trim": "Quadrifoglio 2,9 V6 Navi+RFK+LED+SHZ+LHZ",
+      "expectedDigest": "e1c769a4ef12798eefc3ee39d6298e5eed62193871b74fd10ea1950080033853",
+      "patch": {
+        "trim": "2.9 V6 520 PS AT8 Quadrifoglio",
+        "engineCc": 2891,
+        "powerHp": 520,
+        "powerKw": 382,
+        "icePowerKw": 382,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "rwd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2024: заводская таблица 22.01.2024, точное совпадение двигателя, топлива и названной версии. 2891 см³, 520 метрических л.с. (CV/PS), 382 кВт максимальной мощности ДВС; автоматическая КПП AT8, задний привод. Заводские 520 CV заменяют наблюдаемое 519; источник 2024 не переносится на прежнюю версию 510 PS. Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del22gennaio2024-65bd0200b4ed5.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "866ad1533db24338d4cbeb90b8129956b48f0e85769562293f57a421f78415ff",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          },
+          {
+            "url": "https://www.media.stellantis.com/uploads/fr/attachment/tarifpublicalfaromeogammemy2520250401-67ff6ae22a234.pdf",
+            "pages": [
+              20,
+              21
+            ],
+            "sha256": "b2583499a4ca4f5a9475c0d962e7cd2c3ee878c05baea747a851bd9eb019979d",
+            "fields": [
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "1ee2872177ef5f8e9158ba97",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.2 t Veloce Q4 210cv auto",
+      "expectedDigest": "8777756d97b6f86f2480bf242022d21b09241b2fd38f4e59b2b42a7c3f9edaff",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Veloce",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 2143 см³, 210 метрических л.с. (CV/PS); автоматическая КПП AT8, полный привод Q4. 210 CV заменяют наблюдаемое 211. В официальных документах встречаются 154 и 155 кВт; powerKw/icePowerKw остаются наблюдениями и в подтверждённые поля не входят. Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "16e8a20022dfb41dd538fead",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.2 210cv t Intensa Q4 TETTO-HARMAN KARDON",
+      "expectedDigest": "6ba6a210057f3ce7eb34032db68b7d9a8f140a8fc3bdfd9c833fe688716aeb5f",
+      "patch": {
+        "trim": "2.2 Turbo Diesel 210 PS AT8 Q4 Intensa",
+        "engineCc": 2143,
+        "powerHp": 210,
+        "fuel": "diesel",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 2143 см³, 210 метрических л.с. (CV/PS); автоматическая КПП AT8, полный привод Q4. 210 CV заменяют наблюдаемое 211. В официальных документах встречаются 154 и 155 кВт; powerKw/icePowerKw остаются наблюдениями и в подтверждённые поля не входят. Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "2b35901e31eadd4a7d9e233d",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.0 Turbo Veloce Q4 1.Hand CarPlay",
+      "expectedDigest": "66c79e080f1f5e347012b46b8a8b9c0695cfeb62c7a0a5c8b68b0a7cc220bea7",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "2d7f7143996de1fee2e01be5",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "Veloce Q4 LED-MATRIX+ACC+KAM+SHZ+LEDER+",
+      "expectedDigest": "a110280c3477bdc082d00ab5dc3bb514dd2b9179b2233a369d2bfb83a335a1e1",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "476cf0ac775e98a2064b4f1f",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "2.0 Veloce Q4 |MATRIX | LAS | SHZ | LM19\"",
+      "expectedDigest": "d33b22702e68680356830f8167fea71074caf6c3d1b1820de3f5c7f5dbea844d",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "2448f76198a9aa3fb2586527",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "Giulia 2.0 Turbo 16V 280cv Auto 4x4 Q4 VELOCE",
+      "expectedDigest": "614e98b97417cd05f1f03113a54b58888dcddeeb5de549fd826323d052ad1b38",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Q4 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8, полный привод Q4.  Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "drive"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "296965c95e42800c757012ac",
+      "variantId": "9033563353a29e09fd33ff4b",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2025,
+      "trim": "VELOCE 2.0 TURBO 16V 280 PS AT TECHNOLOGI",
+      "expectedDigest": "d94fe46c2817a5a5041679e4c87503159ab2655454567a10c75eef073f1a9d36",
+      "patch": {
+        "trim": "2.0 Turbo 280 PS AT8 Veloce",
+        "engineCc": 1995,
+        "powerHp": 280,
+        "powerKw": 206,
+        "icePowerKw": 206,
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "fuel",
+        "powertrainKind",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Giulia 2025: заводская таблица 01.04.2025, точное совпадение двигателя, топлива и названной версии. 1995 см³, 280 метрических л.с. (CV/PS), 206 кВт максимальной мощности ДВС; автоматическая КПП AT8. Q4 в исходной идентичности не указан; привод не подтверждён и не подставлен. Масса, код двигателя и остальные неподтверждённые поля не заполнены.",
+        "additionalSources": [
+          {
+            "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoargiuliamy24del1aprile2025-67f3d778da4a7.pdf",
+            "pages": [
+              2,
+              3
+            ],
+            "sha256": "39f58f24fb89d37450bbaebc7b0f383cdf319ade502065354fb66ed09b0f710f",
+            "fields": [
+              "trim",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
