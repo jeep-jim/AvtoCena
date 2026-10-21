@@ -1,0 +1,78 @@
+name: One-shot KB ChaChaCha classification checkpoint v1
+
+on:
+  push:
+    branches:
+      - chore/kbchachacha-route-field-audit-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-kbchachacha-classification-checkpoint-v1.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/kbchachacha-route-field-audit-v1-20260904
+      - name: Update research registry and append roadmap 40.30
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          registry_path = Path('data/catalog/source-qualification-v1.json')
+          registry = json.loads(registry_path.read_text(encoding='utf-8'))
+          target = None
+          for row in registry.get('candidates', []):
+              if row.get('sourceId') == 'kbchachacha_korea_candidate':
+                  target = row
+                  break
+          if target is None:
+              raise SystemExit('kbchachacha registry candidate missing')
+          target['class'] = 'lead_only'
+          target['publishAllowed'] = False
+          target['evidence'] = 'Run 33826631629: robots allows registry search route and public page returns 200, but the visible official public HTML explicitly prohibits unauthorized scraping/automation; probe stopped after exactly robots.txt + registry page with zero detail/pagination/script requests.'
+          target['qualificationDecision'] = 'data/catalog/source-partial-classification-v1.json#kbchachacha_korea_candidate'
+          target['useScope'] = 'manual public search/reference only; no automated ingestion until an explicitly permitted API, partner feed or written authorization is available'
+          registry['updatedAt'] = '2026-09-04'
+          registry['next'] = 'continue qualification of remaining research_pending candidates with source-permission-first no-write probes; do not revisit KB ChaChaCha automation without a permitted data route'
+          registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          roadmap_path = Path('roadmap.md')
+          staged = Path('.github/roadmap-append-kbchachacha-40-30.md')
+          roadmap = roadmap_path.read_text(encoding='utf-8')
+          block = staged.read_text(encoding='utf-8').strip()
+          marker = '### 40.30. KB ChaChaCha Korea: access-policy qualification останавливает автоматический crawl'
+          if marker not in roadmap:
+              roadmap_path.write_text(roadmap.rstrip() + '\n\n' + block + '\n', encoding='utf-8')
+              print('appended roadmap 40.30')
+          else:
+              print('roadmap 40.30 already present')
+          PY
+      - name: Verify research-only checkpoint
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const registry = JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json','utf8'));
+          const row = registry.candidates.find((x) => x.sourceId === 'kbchachacha_korea_candidate');
+          if (!row || row.class !== 'lead_only' || row.publishAllowed !== false) throw new Error('KB classification mismatch');
+          if (!/40\.30\. KB ChaChaCha Korea/.test(fs.readFileSync('roadmap.md','utf8'))) throw new Error('roadmap 40.30 missing');
+          NODE
+      - name: Commit durable checkpoint
+        shell: bash
+        run: |
+          if git diff --quiet -- data/catalog/source-qualification-v1.json roadmap.md; then
+            echo "No durable change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/source-qualification-v1.json roadmap.md
+          git commit -m "docs(catalog): record KB ChaChaCha lead-only access checkpoint"
+          git push origin HEAD:chore/kbchachacha-route-field-audit-v1-20260904

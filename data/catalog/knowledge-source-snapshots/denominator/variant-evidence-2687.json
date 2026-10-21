@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_variant_evidence",
+  "chunk": 2687,
+  "maxRecords": 250,
+  "records": [
+    {
+      "evidenceId": "eea:84d20e2f1078e885870a",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2022,
+      "make": "ZHIDOU. ZD",
+      "commercialName": "ZHIDOU. ZD",
+      "type": "D2S",
+      "variant": "AET1",
+      "version": "AAAB2A",
+      "fuel": "electric",
+      "engineCc": 0,
+      "powerKw": 0,
+      "wheelbaseMm": 1765,
+      "massKg": 895,
+      "observations": 1,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    },
+    {
+      "evidenceId": "eea:47d4b69ec61d4e415d5b",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2022,
+      "make": "ZHIDOU. ZD",
+      "commercialName": "ZHIDOU. ZD",
+      "type": "D2S",
+      "variant": "AET1",
+      "version": "AAAB2A",
+      "fuel": "electric",
+      "engineCc": 0,
+      "powerKw": 36,
+      "wheelbaseMm": 1765,
+      "massKg": 895,
+      "observations": 1,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    },
+    {
+      "evidenceId": "eea:7c3c4ab70d141314ff0d",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2022,
+      "make": "ZHIDOU. ZD",
+      "commercialName": "ZHIDOU. ZD",
+      "type": "KWB",
+      "variant": null,
+      "version": null,
+      "fuel": "electric",
+      "engineCc": 0,
+      "powerKw": 0,
+      "wheelbaseMm": 1765,
+      "massKg": 865,
+      "observations": 79,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    },
+    {
+      "evidenceId": "eea:42a8962460d601d86a9f",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2022,
+      "make": "ZHIDOU. ZD. ELARIS",
+      "commercialName": "ELARIS PIO",
+      "type": "D2S",
+      "variant": "AET1",
+      "version": "AAAB2A",
+      "fuel": "electric",
+      "engineCc": 0,
+      "powerKw": 36,
+      "wheelbaseMm": 1765,
+      "massKg": 865,
+      "observations": 155,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    },
+    {
+      "evidenceId": "eea:6d236c5ea484705010cb",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2022,
+      "make": "ZHIDOU. ZD. ELARIS",
+      "commercialName": "ZHIDOU. ZD. ELARIS PIO",
+      "type": "D2S",
+      "variant": "AET1",
+      "version": "AAAB2A",
+      "fuel": "electric",
+      "engineCc": 0,
+      "powerKw": 36,
+      "wheelbaseMm": 1765,
+      "massKg": 865,
+      "observations": 1,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    },
+    {
+      "evidenceId": "eea:cfbf19df97587b704c68",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2022,
+      "make": "ZHIDOU. ZD.ELARIS",
+      "commercialName": "ZHIDOU. ZD.ELARIS PIO",
+      "type": "D2S",
+      "variant": "AET1",
+      "version": "AAAB2A",
+      "fuel": "electric",
+      "engineCc": 0,
+      "powerKw": 36,
+      "wheelbaseMm": 1765,
+      "massKg": 895,
+      "observations": 3,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    },
+    {
+      "evidenceId": "eea:9971f377dd0c71b21d01",
+      "sourceId": "eea-co2-passenger-cars",
+      "market": "europe",
+      "year": 2023,
+      "make": "ZYRUS ENGINEERING",
+      "commercialName": "LP STRADA 1200",
+      "type": "724",
+      "variant": null,
+      "version": null,
+      "fuel": "petrol",
+      "engineCc": 5204,
+      "powerKw": 681,
+      "wheelbaseMm": 0,
+      "massKg": 1760,
+      "observations": 1,
+      "canonical": {
+        "brandId": null,
+        "modelId": null,
+        "canonicalMake": null,
+        "canonicalModel": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "jobId": 101518683969,
+  "summary": {
+    "count": 3,
+    "problems": [],
+    "sample": [
+      {
+        "bodyType": "Sedan",
+        "currency": "USD",
+        "drive": "Rear-Wheel Drive (RWD)",
+        "engineType": "3.0T 381HP L6",
+        "fuel": "hybrid",
+        "id": "59769656",
+        "images": 20,
+        "powerHp": 381,
+        "price": 103330,
+        "sourceUrl": "https://global.che168.com/en/detail/59769656",
+        "title": "BMW BMW 7 Series 2026 740Li Premium M Sport Package",
+        "transmission": "8-speed automatic with manual shift mode",
+        "year": 2026
+      },
+      {
+        "bodyType": "SUV",
+        "currency": "USD",
+        "drive": "Dual Motor, All-Wheel Drives",
+        "engineType": "Range Extender 143hp",
+        "fuel": "hybrid",
+        "id": "59659799",
+        "images": 9,
+        "powerHp": 143,
+        "price": 48610,
+        "sourceUrl": "https://global.che168.com/en/detail/59659799",
+        "title": "Volkswagen ID.ERA",
+        "transmission": "Electric vehicle single-speed transmission",
+        "year": 2026
+      },
+      {
+        "bodyType": "Sedan",
+        "currency": "USD",
+        "drive": "Front Engine, All-Wheel Drive",
+        "engineType": "6.7T 571HP V12",
+        "fuel": "petrol",
+        "id": "59737522",
+        "images": 30,
+        "powerHp": 571,
+        "price": 574540,
+        "sourceUrl": "https://global.che168.com/en/detail/59737522",
+        "title": "Rolls-Royce Ghost 2024 6.7T Long Wheelbase",
+        "transmission": "8-speed automatic",
+        "year": 2024
+      }
+    ],
+    "source": {
+      "evidenceAccepted": 0,
+      "evidenceRejected": 0,
+      "evidenceSeen": 0,
+      "normalized": 24,
+      "pages": 1,
+      "readinessRole": "",
+      "required": true,
+      "saved": 4,
+      "seen": 24,
+      "sourceId": "autohome_used_china_open",
+      "stopReason": "market_target_reached"
+    }
+  },
+  "workflowRun": 34045114260
+}

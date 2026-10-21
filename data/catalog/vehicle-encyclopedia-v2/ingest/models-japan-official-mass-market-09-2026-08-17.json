@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-mazda-scrum-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Mazda upgrades the Scrum series",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://newsroom.mazda.com/en/publicity/release/2000/200005/0524e.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this Japan-market model. Combined registry labels are not attached to one model; only explicit manufacturer spellings are safe aliases."
+        },
+        {
+          "id": "src-toyota-crown-comfort-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Toyota introduces Crown Comfort and Comfort for taxi use",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/detail/7912522",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this Japan-market model. Combined registry labels are not attached to one model; only explicit manufacturer spellings are safe aliases."
+        },
+        {
+          "id": "src-toyota-esquire-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Toyota launches all-new Esquire deluxe minivan in Japan",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/newsroom/toyota/23437924.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this Japan-market model. Combined registry labels are not attached to one model; only explicit manufacturer spellings are safe aliases."
+        },
+        {
+          "id": "src-toyota-premio-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Toyota launches fully redesigned Premio and Allion",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/newsroom/toyota/22792726.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this Japan-market model. Combined registry labels are not attached to one model; only explicit manufacturer spellings are safe aliases."
+        },
+        {
+          "id": "src-toyota-tank-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "All New Toyota Roomy and Toyota Tank Compact Minivan",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/newsroom/toyota/25527221.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive identifies this Japan-market model. Combined registry labels are not attached to one model; only explicit manufacturer spellings are safe aliases."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "mazda/scrum",
+          "brandId": "mazda",
+          "canonicalName": "Scrum",
+          "slug": "scrum",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "スクラム",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mazda-scrum-japan-archive-2026",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d60d0057642dc4b2",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-dd731b895e20bd8c",
+                "src-mlit-passenger-e1a02decb9f51c0b",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-scrum-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/crown-comfort",
+          "brandId": "toyota",
+          "canonicalName": "Crown Comfort",
+          "slug": "crown-comfort",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "クラウンコンフォート",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-toyota-crown-comfort-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-crown-comfort-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/esquire",
+          "brandId": "toyota",
+          "canonicalName": "Esquire",
+          "slug": "esquire",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "エスクァイア",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-toyota-esquire-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-esquire-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/premio",
+          "brandId": "toyota",
+          "canonicalName": "Premio",
+          "slug": "premio",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "プレミオ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-toyota-premio-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-premio-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/tank",
+          "brandId": "toyota",
+          "canonicalName": "Tank",
+          "slug": "tank",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "タンク",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-toyota-tank-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-tank-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

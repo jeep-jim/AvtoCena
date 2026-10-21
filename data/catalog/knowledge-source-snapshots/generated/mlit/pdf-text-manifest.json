@@ -1,0 +1,1050 @@
+{
+  "schemaVersion": 1,
+  "id": "mlit-japan-passenger-pdf-text",
+  "authority": "government_type_approval_efficiency",
+  "fetchedAt": "2026-08-22T10:44:49.640Z",
+  "status": "complete",
+  "selected": 61,
+  "converted": 61,
+  "skippedOld": 0,
+  "failed": 0,
+  "files": [
+    {
+      "file": "mlit/pdf-text/0001-8a593946508bbea4.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111188.pdf",
+      "title": "燃費一覧について",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 162709,
+      "pdfSha256": "8a593946508bbea49d6e60b4cccb87002637567f341f0e7a82dbf1a7b6828a8d",
+      "textBytes": 12854,
+      "years": [
+        2000,
+        2001,
+        2004,
+        2005,
+        2006,
+        2007,
+        2009,
+        2010,
+        2011,
+        2013,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0002-09c537c7ab3bd261.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111199.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 917085,
+      "pdfSha256": "09c537c7ab3bd26108adeaabb2a846b603412142a941df870ee6c8f3f02c2aea",
+      "textBytes": 282910,
+      "years": [
+        1989,
+        2010,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0003-271cdf18a709fc88.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111200.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 301016,
+      "pdfSha256": "271cdf18a709fc88512bd791b23b970e4a4815192d005637445b7b49cc35747d",
+      "textBytes": 58351,
+      "years": [
+        1989,
+        2000,
+        2010,
+        2015,
+        2019,
+        2021,
+        2023
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0004-0a8fe9c61d62c654.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111201.pdf",
+      "title": "軽自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 449163,
+      "pdfSha256": "0a8fe9c61d62c65451d543f5d249fd5e541bd433d0a239eb69071267d3be5399",
+      "textBytes": 66836,
+      "years": [
+        2010
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0005-73639ebc86fc73db.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111202.pdf",
+      "title": "軽自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 202955,
+      "pdfSha256": "73639ebc86fc73dba7fb6d957bf765f39731071d62d2bf4c70a32741a46e50b6",
+      "textBytes": 25008,
+      "years": [
+        2010,
+        2015,
+        2032
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0006-747516fbe3338243.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111205.pdf",
+      "title": "輸入自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 775956,
+      "pdfSha256": "747516fbe3338243f68561aacb4c79f0ccf048ee753549e67028a1d8450ecad5",
+      "textBytes": 187352,
+      "years": [
+        2000,
+        2010,
+        2035
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0007-e6d6844aea9eb5ff.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111206.pdf",
+      "title": "輸入自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 167371,
+      "pdfSha256": "e6d6844aea9eb5ff56b6d4d930ead08abb50172b08fffa04f23d0d58cc1f4354",
+      "textBytes": 18111,
+      "years": [
+        2000,
+        2010,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0008-b0b93a0e53302b6b.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111207.pdf",
+      "title": "プラグインハイブリッド自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 98444,
+      "pdfSha256": "b0b93a0e53302b6b7656fcc57fdcd82f4c3ede93132e68a730651f523720fc36",
+      "textBytes": 3391,
+      "years": [
+        2010,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0009-1b9bec6cc890a492.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111213.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 103104,
+      "pdfSha256": "1b9bec6cc890a4920b0b56e5eeb1e0df556cfcfe35c266ddc7baf57e58e1c2bc",
+      "textBytes": 5581,
+      "years": [
+        2005,
+        2010,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0010-9689ebc80a2e64ff.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111214.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 105925,
+      "pdfSha256": "9689ebc80a2e64ff6cca51c265f772dfd3b3ab01adbe10b4959bcac5794b5ecc",
+      "textBytes": 5889,
+      "years": [
+        2010,
+        2015,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0011-4eb2865deb7f2ce7.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111215.pdf",
+      "title": "LPガス乗用車燃費(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 96013,
+      "pdfSha256": "4eb2865deb7f2ce79d9f6f98ddb94d94b722bac6777d82f50dd063b376c2056b",
+      "textBytes": 4386,
+      "years": [
+        1989,
+        2010,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0012-7f9f20e45bdfa7f2.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111218.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 328697,
+      "pdfSha256": "7f9f20e45bdfa7f29447d61f8ba04afbfad46232d7559ccb492794f0f219c52e",
+      "textBytes": 54830,
+      "years": [
+        2008,
+        2009,
+        2010,
+        2019,
+        2020,
+        2022,
+        2028
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0013-be51425abc8f6537.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111219.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 119017,
+      "pdfSha256": "be51425abc8f65379617cb4581e9d3106c37583aff7a58e284e64f909536e0fa",
+      "textBytes": 5918,
+      "years": [
+        2010,
+        2015,
+        2034
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0014-b160e9030226ad86.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111220.pdf",
+      "title": "軽自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 361644,
+      "pdfSha256": "b160e9030226ad863c02fb604bd2ce8bf589285211f61e629fbd74d61faa2a93",
+      "textBytes": 51430,
+      "years": [
+        2010,
+        2028,
+        2030,
+        2035
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0015-1862531b26041d04.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111221.pdf",
+      "title": "軽自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 103715,
+      "pdfSha256": "1862531b26041d048a651ac5c60fe52f734bbb1c145c78628db7e118ae01d31e",
+      "textBytes": 5458,
+      "years": [
+        2010,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0016-cf68a7b313ad2c1e.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000111225.pdf",
+      "title": "輸入自動車",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成22年3月) - 国土交通省",
+      "pdfBytes": 108746,
+      "pdfSha256": "cf68a7b313ad2c1ef8ecfdc9349f67e6eeeae5a5c5e276568e19f160a2ec6877",
+      "textBytes": 3272,
+      "years": [
+        2010,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0017-f60f933573fd5d9e.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139532.pdf",
+      "title": "燃費一覧について",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 162262,
+      "pdfSha256": "f60f933573fd5d9e18e128f66f70c9c8dc7c517f152f5ee6708e7b83b23e1d54",
+      "textBytes": 12672,
+      "years": [
+        2000,
+        2001,
+        2004,
+        2005,
+        2006,
+        2007,
+        2010,
+        2011,
+        2013,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0018-afe39e10de416a7b.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139544.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 235896,
+      "pdfSha256": "afe39e10de416a7b6bf77d37c239cda659a8f2701605c8aeee5dfeee58d5e7fb",
+      "textBytes": 252852,
+      "years": [
+        2010,
+        2011,
+        2019,
+        2031
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0019-c6363bee96fa3d71.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139546.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 147311,
+      "pdfSha256": "c6363bee96fa3d71238c90be0a05ef70f3bf840523ff4425b94ec0a789e42fa8",
+      "textBytes": 122211,
+      "years": [
+        1991,
+        2011,
+        2015,
+        2019,
+        2023
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0020-06f175a48457de7d.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139548.pdf",
+      "title": "軽自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 123637,
+      "pdfSha256": "06f175a48457de7dfccd9501bc7de15fc935eb0d6e1ecf209d7d67949a177db7",
+      "textBytes": 72747,
+      "years": [
+        2010,
+        2011
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0021-8be7261919cac90e.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139549.pdf",
+      "title": "軽自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 102539,
+      "pdfSha256": "8be7261919cac90e08be14c82de5d4bc854ef70cbc3d8f14134fb755fba09680",
+      "textBytes": 55453,
+      "years": [
+        2011,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0022-84aaf1167b2dd1a2.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139551.pdf",
+      "title": "輸入自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 227863,
+      "pdfSha256": "84aaf1167b2dd1a27faef83660c34cba5e32e45bcb0da3bb539b4c8cd6cdb58d",
+      "textBytes": 204859,
+      "years": [
+        2000,
+        2010,
+        2011
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0023-69f370bc62351a52.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139554.pdf",
+      "title": "輸入自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 118548,
+      "pdfSha256": "69f370bc62351a52bb4c9f4673cc56d04b7c898b884b3ee0d35144b8e2695e1f",
+      "textBytes": 74053,
+      "years": [
+        2000,
+        2011,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0024-43225e6d48964ded.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139556.pdf",
+      "title": "プラグインハイブリッド自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 53077,
+      "pdfSha256": "43225e6d48964dedbaaddd270a794e3813c543cb5ee8854ce6057f7fdd06442b",
+      "textBytes": 3236,
+      "years": [
+        2011,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0025-51b57b52538d0618.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139559.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 56106,
+      "pdfSha256": "51b57b52538d06187aec8573b7fad40c78e619f3bba5ce25b23fb6091b629126",
+      "textBytes": 6220,
+      "years": [
+        2005,
+        2011,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0026-74c6b7e40bd0b09b.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139560.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 54440,
+      "pdfSha256": "74c6b7e40bd0b09bffa0c11535ef55040fe5bf53a183292fbf484777bb5eaea6",
+      "textBytes": 6357,
+      "years": [
+        2011,
+        2015,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0027-0f59084875188e9a.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139561.pdf",
+      "title": "輸入自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 75217,
+      "pdfSha256": "0f59084875188e9a97476006941f0c852bb2ce9640694fd05fc0ab4eabae428b",
+      "textBytes": 4455,
+      "years": [
+        2000,
+        2005,
+        2010,
+        2011,
+        2020,
+        2030
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0028-5e859b8bca6cdcae.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139562.pdf",
+      "title": "輸入自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 75954,
+      "pdfSha256": "5e859b8bca6cdcae48279836b525411d263a14b1c3b598e4571a11b53b5eab43",
+      "textBytes": 6214,
+      "years": [
+        2000,
+        2010,
+        2011,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0029-b00d53479d3f1533.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139563.pdf",
+      "title": "LPガス乗用車燃費(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 53794,
+      "pdfSha256": "b00d53479d3f1533ce3764e142808ee9d09c373bab536dd19be5af9c0ce73cee",
+      "textBytes": 4654,
+      "years": [
+        1989,
+        2010,
+        2011,
+        2019,
+        2028
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0030-a5c283909af54490.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139566.pdf",
+      "title": "ガソリン小型バス(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 47379,
+      "pdfSha256": "a5c283909af544901addd2a3dd24bb4ae2b0fbeee8738ca9a3bd8f4f74102fc1",
+      "textBytes": 2499,
+      "years": [
+        2000,
+        2010,
+        2011,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0031-e1100ee29982ddc8.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139568.pdf",
+      "title": "ディーゼル小型バス(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 51350,
+      "pdfSha256": "e1100ee29982ddc829104d64351b1fcca2b2c534538a4f4ebd72cf6997105722",
+      "textBytes": 3447,
+      "years": [
+        2010,
+        2011,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0032-e7a10d807556fa94.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139571.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 95368,
+      "pdfSha256": "e7a10d807556fa940a245e6e38b38d23060d0ba7fc5b38269b8b59e1a9466271",
+      "textBytes": 49273,
+      "years": [
+        2008,
+        2010,
+        2011,
+        2019,
+        2020,
+        2028,
+        2029
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0033-358893564b698a65.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139572.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 85365,
+      "pdfSha256": "358893564b698a654456b297583e04b6cc6077a65c541fb1e2804efe5cf73e1d",
+      "textBytes": 48991,
+      "years": [
+        2008,
+        2009,
+        2010,
+        2011,
+        2015,
+        2019,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0034-5babb577e5846da8.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139573.pdf",
+      "title": "軽自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 104102,
+      "pdfSha256": "5babb577e5846da8a6cd84bfe052fca35a6e955399375f3c6682fb1869495fe3",
+      "textBytes": 55356,
+      "years": [
+        2010,
+        2011,
+        2030,
+        2035
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0035-39cfafd77708cecb.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139574.pdf",
+      "title": "軽自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 80370,
+      "pdfSha256": "39cfafd77708cecb1c49e3a80864354178cd3e71eebef863a45e3d1ef0e7c070",
+      "textBytes": 37264,
+      "years": [
+        2011,
+        2015,
+        2021,
+        2030,
+        2035
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0036-344f2d1e555a7351.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139577.pdf",
+      "title": "ディーゼル貨物車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 72975,
+      "pdfSha256": "344f2d1e555a7351f3b0f5bf6dd5c7f5dde73519d9751d70e38e365c97b08e00",
+      "textBytes": 46198,
+      "years": [
+        2000,
+        2008,
+        2011,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0037-b66c59b6e2f79c66.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000139581.pdf",
+      "title": "輸入自動車",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000009.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成23年3月) - 国土交通省",
+      "pdfBytes": 58207,
+      "pdfSha256": "b66c59b6e2f79c66d857ab2e5c28ab2ab38bdeffd5ed5214749d8853006433e3",
+      "textBytes": 5456,
+      "years": [
+        1990,
+        1991,
+        2000,
+        2011,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0038-a31841bedab7615d.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206637.pdf",
+      "title": "燃費一覧について",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 166039,
+      "pdfSha256": "a31841bedab7615d2de4037dec47bf6a8dfce5bd6091a95b8b1581d588ccccb7",
+      "textBytes": 13074,
+      "years": [
+        2000,
+        2001,
+        2004,
+        2005,
+        2006,
+        2007,
+        2010,
+        2011,
+        2012,
+        2013,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0039-a4f4716083309726.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206641.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 191462,
+      "pdfSha256": "a4f47160833097269bd73eb84b700bb41890949e44158306f4338caf5d9737b5",
+      "textBytes": 103655,
+      "years": [
+        1991,
+        2000,
+        2008,
+        2010,
+        2012,
+        2013,
+        2015,
+        2019,
+        2021
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0040-a8628d02417ad1c9.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206642.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 234671,
+      "pdfSha256": "a8628d02417ad1c93eefd4e02557f45b57b00bbdbac62d50937c0e3d1c4b9441",
+      "textBytes": 167176,
+      "years": [
+        1991,
+        2010,
+        2012,
+        2019,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0041-78831179cc33bc53.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206643.pdf",
+      "title": "軽自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 123525,
+      "pdfSha256": "78831179cc33bc53f03f8fe5b1811b3e5a507d9eb857786fe8720fcdc467f5b9",
+      "textBytes": 49550,
+      "years": [
+        2012,
+        2015,
+        2024
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0042-7510558b17200cd3.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206644.pdf",
+      "title": "軽自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 127260,
+      "pdfSha256": "7510558b17200cd37fc8c2fe21a1241d75779dbf5e8532a0d7bbc62a1da89aa3",
+      "textBytes": 77229,
+      "years": [
+        2010,
+        2012,
+        2024
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0043-30e0a3a93cc1d230.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206645.pdf",
+      "title": "輸入自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 153745,
+      "pdfSha256": "30e0a3a93cc1d2308897ac4cb153fc178d8866cc1edf5f26e9ab7028f7da4efc",
+      "textBytes": 91861,
+      "years": [
+        2000,
+        2012,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0044-1c93a503766fd810.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206646.pdf",
+      "title": "輸入自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 170702,
+      "pdfSha256": "1c93a503766fd810f0cadc6b32bb10e9ef996ef0d0bd40c8ac64e5d4d49c9240",
+      "textBytes": 136175,
+      "years": [
+        2000,
+        2010,
+        2012
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0045-c698ae8ac7a9ffcd.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206647.pdf",
+      "title": "プラグインハイブリッド自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 54657,
+      "pdfSha256": "c698ae8ac7a9ffcdd7f5b1cc1092490bda24d111b2935f39f6077397acdf8741",
+      "textBytes": 4751,
+      "years": [
+        2012,
+        2015
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0046-989ccb4b5503d9a3.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206648.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 76520,
+      "pdfSha256": "989ccb4b5503d9a3aea9a110dd204f4bb03d9cdddf221419613c4c14dd395136",
+      "textBytes": 6232,
+      "years": [
+        2012,
+        2015,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0047-e268f9924ea3809a.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206649.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 85565,
+      "pdfSha256": "e268f9924ea3809ade11a849e6d17f9cc46ab5900c8f5eb59e04b5ff6b4b0e05",
+      "textBytes": 6776,
+      "years": [
+        2005,
+        2012,
+        2019
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0048-b5881dfc3c06923d.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206650.pdf",
+      "title": "輸入自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 74577,
+      "pdfSha256": "b5881dfc3c06923da8f3dc3af417ca2730f328aad174760fa4e0215ea1cb79ce",
+      "textBytes": 7284,
+      "years": [
+        2000,
+        2010,
+        2012,
+        2015,
+        2020,
+        2028,
+        2029
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0049-faeb99a94b2f87d1.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206651.pdf",
+      "title": "輸入自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 73574,
+      "pdfSha256": "faeb99a94b2f87d1e8da251ed9c490ae953994589d4cdf8641595c207905bf37",
+      "textBytes": 6144,
+      "years": [
+        2000,
+        2005,
+        2010,
+        2012,
+        2020,
+        2030
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0050-0150e466001ed00c.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206652.pdf",
+      "title": "LPガス乗用車燃費(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 71705,
+      "pdfSha256": "0150e466001ed00c1a82e189d779bf045b37e607b38e7a61b3d382126ce41729",
+      "textBytes": 5733,
+      "years": [
+        1989,
+        2010,
+        2012,
+        2019,
+        2028
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0051-82ed7cd826380d61.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206653.pdf",
+      "title": "ガソリン小型バス(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 69836,
+      "pdfSha256": "82ed7cd826380d6125a3f189de1bd506e0c329e4eaa3be63328f910c5d5fc015",
+      "textBytes": 2307,
+      "years": [
+        2000,
+        2010,
+        2012,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0052-8ade82bf81ac92c7.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206655.pdf",
+      "title": "ディーゼル小型バス(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 69711,
+      "pdfSha256": "8ade82bf81ac92c727d0924505f8fe6bde3f5f73f738d762b1d87d9ad7935593",
+      "textBytes": 2239,
+      "years": [
+        2010,
+        2012,
+        2015,
+        2028
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0053-4a32d962fef4d76e.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206657.pdf",
+      "title": "普通/小型自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 110423,
+      "pdfSha256": "4a32d962fef4d76e8ef533ca4ec50243a91fd68c35caddb2c022054a1b0a4242",
+      "textBytes": 34561,
+      "years": [
+        2000,
+        2008,
+        2009,
+        2010,
+        2012,
+        2015,
+        2019,
+        2020,
+        2028,
+        2033,
+        2034
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0054-084cff9fd9e4f0f0.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206658.pdf",
+      "title": "普通/小型自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 115483,
+      "pdfSha256": "084cff9fd9e4f0f0e0f724cce49880d5a3615b2924f68e8085c382f8cd46eca0",
+      "textBytes": 39073,
+      "years": [
+        2000,
+        2008,
+        2009,
+        2010,
+        2012,
+        2019,
+        2020,
+        2028,
+        2029,
+        2030,
+        2033,
+        2034
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0055-58cbdc0177c5d149.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206659.pdf",
+      "title": "軽自動車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 106095,
+      "pdfSha256": "58cbdc0177c5d1498e3cdab8e9d8286347b66a4fa1c3b87418cbe030703f4f9e",
+      "textBytes": 29442,
+      "years": [
+        2012,
+        2015,
+        2030,
+        2035
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0056-384ee4e1ae7030bd.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206660.pdf",
+      "title": "軽自動車(10・15モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 116659,
+      "pdfSha256": "384ee4e1ae7030bd1034dfbc4fc532c1a215629138b18245e0727a4d7a721c3f",
+      "textBytes": 44223,
+      "years": [
+        2010,
+        2012,
+        2028,
+        2029,
+        2030,
+        2035
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0057-c9050c593eb000dd.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206661.pdf",
+      "title": "ディーゼル貨物車(JC08モード)",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 97414,
+      "pdfSha256": "c9050c593eb000dd3641e0cf15a9fad219ab6b2f4ac873020d57cfda5354859b",
+      "textBytes": 26093,
+      "years": [
+        2000,
+        2008,
+        2009,
+        2010,
+        2012,
+        2015,
+        2020,
+        2028
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0058-33866360257383cb.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/000206665.pdf",
+      "title": "輸入自動車",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000014.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成24年3月) - 国土交通省",
+      "pdfBytes": 105688,
+      "pdfSha256": "33866360257383cbe789f178317f244d670ae0b876162cea5a540df66900395d",
+      "textBytes": 3553,
+      "years": [
+        1990,
+        1991,
+        2000,
+        2012,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0059-6a9b32ea94eacc40.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/001084316.pdf",
+      "title": "燃費一覧について",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000024.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成27年3月) - 国土交通省",
+      "pdfBytes": 154974,
+      "pdfSha256": "6a9b32ea94eacc4065c7febf6fc6940eb391126f52368c18b30d792037733216",
+      "textBytes": 12653,
+      "years": [
+        2000,
+        2001,
+        2004,
+        2005,
+        2006,
+        2007,
+        2009,
+        2010,
+        2011,
+        2013,
+        2014,
+        2015,
+        2020
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0060-d2c84df4866c444c.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/001125022.pdf",
+      "title": "燃費一覧について",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000027.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成28年3月) - 国土交通省",
+      "pdfBytes": 154743,
+      "pdfSha256": "d2c84df4866c444c70eceaa7f9922ff3b2719134f1d6028499248505d6b579d3",
+      "textBytes": 12757,
+      "years": [
+        2000,
+        2001,
+        2004,
+        2005,
+        2006,
+        2007,
+        2009,
+        2010,
+        2011,
+        2013,
+        2015,
+        2016,
+        2020,
+        2022
+      ]
+    },
+    {
+      "file": "mlit/pdf-text/0061-0cdeb057d4f4e249.txt",
+      "sourceUrl": "https://www.mlit.go.jp/common/001178212.pdf",
+      "title": "燃費一覧について",
+      "sourcePageUrl": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000031.html",
+      "sourcePageTitle": "自動車:自動車燃費一覧(平成29年3月) - 国土交通省",
+      "pdfBytes": 23132,
+      "pdfSha256": "0cdeb057d4f4e249748b23e18488329b345ac0c76f413d6ecab70c460554b486",
+      "textBytes": 697,
+      "years": [
+        2004,
+        2016,
+        2017
+      ]
+    }
+  ],
+  "errors": []
+}

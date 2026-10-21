@@ -1,0 +1,45 @@
+name: Container registry retention
+on:
+  schedule:
+    - cron: '30 16 * * *'
+  workflow_dispatch:
+  push:
+    branches: [fix/cloud-storage-budget-20260920, fix/registry-retention-20260919, main]
+    paths: [.github/workflows/container-registry-cleanup.yml, scripts/cleanup-container-registry.mjs, scripts/lib/registry-retention.mjs, .github/market-runs/registry-cleanup.json]
+  workflow_run:
+    workflows: [Deploy to Yandex Cloud]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: avtocena-production
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    # Initial backlog exceeds 1,300 images; provider operations are asynchronous.
+    # Keep concurrency bounded while allowing the first cleanup to finish.
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24}
+      - name: Verify retention safety
+        run: node --test tests/registry-retention.test.mjs
+      - name: Plan on branch; clean obsolete images on main
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: |
+          if [ "$GITHUB_REF" = 'refs/heads/main' ]; then
+            node scripts/cleanup-container-registry.mjs --apply
+          else
+            node scripts/cleanup-container-registry.mjs
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: registry-cleanup-report
+          path: registry-cleanup-report.json
+          retention-days: 30

@@ -1,0 +1,6174 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 51,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "アルファロメオ:mito",
+      "make": "アルファロメオ",
+      "model": "MiTo",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "アルファロメオ:ジュニアイブリダ",
+      "make": "アルファロメオ",
+      "model": "ジュニア イブリダ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "アルファロメオ:ジュリア",
+      "make": "アルファロメオ",
+      "model": "ジュリア",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "アルファロメオ:ジュリエッタ",
+      "make": "アルファロメオ",
+      "model": "ジュリエッタ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "アルファロメオ:ステルヴィオ",
+      "make": "アルファロメオ",
+      "model": "ステルヴィオ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "アルファロメオ:トナーレ",
+      "make": "アルファロメオ",
+      "model": "トナーレ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "いすゞ:",
+      "make": "いすゞ",
+      "model": "※",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "いすゞ:1",
+      "make": "いすゞ",
+      "model": "※1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "いすゞ:1印については日産自動車株式会社が製造事業者です",
+      "make": "いすゞ",
+      "model": "※1印については、日産自動車株式会社が製造事業者です。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "いすゞ:エルフ",
+      "make": "いすゞ",
+      "model": "エルフ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "いすゞ:コモ",
+      "make": "いすゞ",
+      "model": "コモ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:記入要領",
+      "make": "クライスラー",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "クライスラー",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "クライスラー",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:300",
+      "make": "クライスラー",
+      "model": "300",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:5その他について以下に留意し記載する",
+      "make": "クライスラー",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:ジープグランドチェロキー",
+      "make": "クライスラー",
+      "model": "ジープ・グランド チェロキー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:ジープチェロキー",
+      "make": "クライスラー",
+      "model": "ジープ・チェロキー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:ジープパトリオット",
+      "make": "クライスラー",
+      "model": "ジープ・パトリオット",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:ジープラングラー",
+      "make": "クライスラー",
+      "model": "ジープ・ラングラー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:ジープラングラーアンリミッテド",
+      "make": "クライスラー",
+      "model": "ジープ・ラングラー アンリミッテド",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "クライスラー:ジープレネゲード",
+      "make": "クライスラー",
+      "model": "ジープ・レネゲード",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:記入要領",
+      "make": "ジープ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ジープ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ジープ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:5その他について以下に留意し記載する",
+      "make": "ジープ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:6欄外に次の注記を行う",
+      "make": "ジープ",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:グランドチェロキー",
+      "make": "ジープ",
+      "model": "グランド チェロキー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:コマンダー",
+      "make": "ジープ",
+      "model": "コマンダー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:コンパス",
+      "make": "ジープ",
+      "model": "コンパス",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:チェロキー",
+      "make": "ジープ",
+      "model": "チェロキー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:ラングラー",
+      "make": "ジープ",
+      "model": "ラングラー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:ラングラーアンリミッテド",
+      "make": "ジープ",
+      "model": "ラングラー アンリミッテド",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:ラングラーアンリミテッド",
+      "make": "ジープ",
+      "model": "ラングラー アンリミテッド",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジープ:レネゲード",
+      "make": "ジープ",
+      "model": "レネゲード",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "シトロエン:記入要領",
+      "make": "シトロエン",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "シトロエン:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "シトロエン",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "シトロエン:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "シトロエン",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "シトロエン:5その他について以下に留意し記載する",
+      "make": "シトロエン",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "シトロエン:6欄外に次の注記を行う",
+      "make": "シトロエン",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジャガー:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ジャガー",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジャガー:4co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ジャガー",
+      "model": "4.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジャガー:6その他について以下に留意し記載する",
+      "make": "ジャガー",
+      "model": "6.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジャガー:7欄外に必要に応じて次の注記を行う",
+      "make": "ジャガー",
+      "model": "7.欄外に、必要に応じて次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ジャガー:ただしディーゼル車及びlpg車については係数を修正する必要がある",
+      "make": "ジャガー",
+      "model": "ただし、ディーゼル車及びLPG車については、係数を修正する必要がある。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:注",
+      "make": "スズキ",
+      "model": "(注)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:1",
+      "make": "スズキ",
+      "model": "※1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:記入要領",
+      "make": "スズキ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "スズキ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "スズキ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:5その他について以下に留意し記載する",
+      "make": "スズキ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:アルト",
+      "make": "スズキ",
+      "model": "アルト",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:エブリイ",
+      "make": "スズキ",
+      "model": "エブリイ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:キャリイ",
+      "make": "スズキ",
+      "model": "キャリイ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スズキ:ただしディーゼル車及びlpg車については係数を修正する必要がある",
+      "make": "スズキ",
+      "model": "ただし、ディーゼル車及びLPG車については、係数を修正する必要がある。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:",
+      "make": "スバル",
+      "model": "※",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:2",
+      "make": "スバル",
+      "model": "※2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:記入要領",
+      "make": "スバル",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "スバル",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "スバル",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:5その他について以下に留意し記載する",
+      "make": "スバル",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スバル:ただしディーゼル車及びlpg車については係数を修正する必要がある",
+      "make": "スバル",
+      "model": "ただし、ディーゼル車及びLPG車については、係数を修正する必要がある。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スマート:フォーツーカブリオ",
+      "make": "スマート",
+      "model": "フォーツー カブリオ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スマート:フォーツーカブリオターボ",
+      "make": "スマート",
+      "model": "フォーツー カブリオ ターボ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スマート:フォーツークーペ",
+      "make": "スマート",
+      "model": "フォーツー クーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "スマート:フォーツークーペターボ",
+      "make": "スマート",
+      "model": "フォーツー クーペ ターボ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:",
+      "make": "ダイハツ",
+      "model": "※",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:記入要領",
+      "make": "ダイハツ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ダイハツ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ダイハツ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:5その他について以下に留意し記載する",
+      "make": "ダイハツ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:ただしディーゼル車及びlpg車については係数を修正する必要がある",
+      "make": "ダイハツ",
+      "model": "ただし、ディーゼル車及びLPG車については、係数を修正する必要がある。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:ハイゼット",
+      "make": "ダイハツ",
+      "model": "ハイゼット",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:ハイゼットキャディー",
+      "make": "ダイハツ",
+      "model": "ハイゼット キャディー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:ハイゼットトラック",
+      "make": "ダイハツ",
+      "model": "ハイゼット トラック",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:ハイゼットデッキバン",
+      "make": "ダイハツ",
+      "model": "ハイゼットデッキバン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダイハツ:ミラ",
+      "make": "ダイハツ",
+      "model": "ミラ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ダッジ:ナイトロ",
+      "make": "ダッジ",
+      "model": "ナイトロ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:2",
+      "make": "トヨタ",
+      "model": "*2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:",
+      "make": "トヨタ",
+      "model": "※",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:1",
+      "make": "トヨタ",
+      "model": "※1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:記入要領",
+      "make": "トヨタ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "トヨタ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "トヨタ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:5その他について以下に留意し記載する",
+      "make": "トヨタ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:6欄外に次の注記を行う",
+      "make": "トヨタ",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ダイナ",
+      "make": "トヨタ",
+      "model": "ダイナ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ダイナトヨエース",
+      "make": "トヨタ",
+      "model": "ダイナ トヨエース",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:タウンエース",
+      "make": "トヨタ",
+      "model": "タウンエース",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:タウンエースライトエース",
+      "make": "トヨタ",
+      "model": "タウンエース ライトエース",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ただしディーゼル車及びlpg車については係数を修正する必要がある",
+      "make": "トヨタ",
+      "model": "ただし、ディーゼル車及びLPG車については、係数を修正する必要がある。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ハイエース",
+      "make": "トヨタ",
+      "model": "ハイエース",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ハイエースレジアスエース",
+      "make": "トヨタ",
+      "model": "ハイエース レジアスエース",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ピクシストラック",
+      "make": "トヨタ",
+      "model": "ピクシス トラック *",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ピクシスバン",
+      "make": "トヨタ",
+      "model": "ピクシス バン *",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ピクシストトラック",
+      "make": "トヨタ",
+      "model": "ピクシスト トラック*",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:プロボックス",
+      "make": "トヨタ",
+      "model": "プロボックス",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:プロボックスサクシード",
+      "make": "トヨタ",
+      "model": "プロボックス、 サクシード",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "トヨタ:ランドクルーザー",
+      "make": "トヨタ",
+      "model": "ランドクルーザー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:1",
+      "make": "ニッサン",
+      "model": "※1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:1印についてはいすゞ自動車株式会社が製造事業者です",
+      "make": "ニッサン",
+      "model": "※1印については、いすゞ自動車株式会社が製造事業者です。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:2",
+      "make": "ニッサン",
+      "model": "※2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:記入要領",
+      "make": "ニッサン",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ニッサン",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ニッサン",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:5その他について以下に留意し記載する",
+      "make": "ニッサン",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:6欄外に次の注記を行う",
+      "make": "ニッサン",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:adadexpert",
+      "make": "ニッサン",
+      "model": "AD AD EXPERT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:adexpert",
+      "make": "ニッサン",
+      "model": "AD EXPERT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:nt100クリッパー",
+      "make": "ニッサン",
+      "model": "NT100 クリッパー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:nv100クリッパー",
+      "make": "ニッサン",
+      "model": "NV100 クリッパー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:nv150ad",
+      "make": "ニッサン",
+      "model": "NV150 AD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:nv200バネット",
+      "make": "ニッサン",
+      "model": "NV200 バネット",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:nv350キャラバン",
+      "make": "ニッサン",
+      "model": "NV350 キャラバン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:アトラス",
+      "make": "ニッサン",
+      "model": "アトラス",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:ただしディーゼル車及びlpg車については係数を修正する必要がある",
+      "make": "ニッサン",
+      "model": "ただし、ディーゼル車及びLPG車については、係数を修正する必要がある。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサン:バネット",
+      "make": "ニッサン",
+      "model": "バネット",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサンmt:記入要領",
+      "make": "ニッサンMT",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサンmt:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ニッサンMT",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサンmt:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ニッサンMT",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ニッサンmt:5その他について以下に留意し記載する",
+      "make": "ニッサンMT",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:記入要領",
+      "make": "フィアット",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "フィアット",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "フィアット",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:5その他について以下に留意し記載する",
+      "make": "フィアット",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:500",
+      "make": "フィアット",
+      "model": "500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:500500c",
+      "make": "フィアット",
+      "model": "500、 500C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:500c",
+      "make": "フィアット",
+      "model": "500C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:500x",
+      "make": "フィアット",
+      "model": "500X",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:6欄外に次の注記を行う",
+      "make": "フィアット",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フィアット:ドブロ",
+      "make": "フィアット",
+      "model": "ドブロ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フォルクスワーゲン:記入要領",
+      "make": "フォルクスワーゲン",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フォルクスワーゲン:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "フォルクスワーゲン",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フォルクスワーゲン:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "フォルクスワーゲン",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フォルクスワーゲン:5その他について以下に留意し記載する",
+      "make": "フォルクスワーゲン",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "フォルクスワーゲン:6欄外に次の注記を行う",
+      "make": "フォルクスワーゲン",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "プジョー:記入要領",
+      "make": "プジョー",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "プジョー:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "プジョー",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "プジョー:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "プジョー",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "プジョー:5その他について以下に留意し記載する",
+      "make": "プジョー",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "プジョー:6欄外に次の注記を行う",
+      "make": "プジョー",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ベンツ:記入要領",
+      "make": "ベンツ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ベンツ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ベンツ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ベンツ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ベンツ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ベンツ:5その他について以下に留意し記載する",
+      "make": "ベンツ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ベンツ:6欄外に次の注記を行う",
+      "make": "ベンツ",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ポルシェ:記入要領",
+      "make": "ポルシェ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ポルシェ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ポルシェ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ポルシェ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ポルシェ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ポルシェ:5その他について以下に留意し記載する",
+      "make": "ポルシェ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ボルボ:記入要領",
+      "make": "ボルボ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ボルボ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ボルボ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ボルボ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ボルボ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ボルボ:5その他について以下に留意し記載する",
+      "make": "ボルボ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ボルボ:6欄外に次の注記を行う",
+      "make": "ボルボ",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ホンダ:記入要領",
+      "make": "ホンダ",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ホンダ:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ホンダ",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ホンダ:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ホンダ",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ホンダ:5その他について以下に留意し記載する",
+      "make": "ホンダ",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ホンダ:vamoshobio",
+      "make": "ホンダ",
+      "model": "VAMOS Hobio",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ホンダ:アクティ",
+      "make": "ホンダ",
+      "model": "アクティ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "マツダ:注",
+      "make": "マツダ",
+      "model": "(注)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "マツダ:1",
+      "make": "マツダ",
+      "model": "※1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "マツダ:スクラム",
+      "make": "マツダ",
+      "model": "スクラム",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "マツダ:ファミリアバン",
+      "make": "マツダ",
+      "model": "ファミリアバン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "マツダ:ボンゴ",
+      "make": "マツダ",
+      "model": "ボンゴ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ランドローバー:記入要領",
+      "make": "ランドローバー",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ランドローバー:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ランドローバー",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ランドローバー:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ランドローバー",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ランドローバー:5その他について以下に留意し記載する",
+      "make": "ランドローバー",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ルノー:記入要領",
+      "make": "ルノー",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ルノー:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "ルノー",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ルノー:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "ルノー",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ルノー:5その他について以下に留意し記載する",
+      "make": "ルノー",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ルノー:6欄外に次の注記を行う",
+      "make": "ルノー",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "レクサス:記入要領",
+      "make": "レクサス",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "レクサス:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "レクサス",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "レクサス:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "レクサス",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "レクサス:5その他について以下に留意し記載する",
+      "make": "レクサス",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "一汽:一汽蓝舰h6",
+      "make": "一汽",
+      "model": "一汽蓝舰H6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g2/M02/D2/49/120x90_0_q95_autohomecar__ChwFql_-tN6AVu1eAAcWP0KQPvQ325.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "一汽:森雅r7",
+      "make": "一汽",
+      "model": "森雅R7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1030c1dg1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1030C1DG1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途货车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1030c1dg2e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1030C1DG2E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途货车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1040c0cd1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1040C0CD1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1040dcre51",
+      "make": "一汽凌河牌",
+      "model": "CAL1040DCRE5-1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1040pcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL1040PCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1041dcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL1041DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1081dcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL1081DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1082c1a1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1082C1A1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1082c1a1e5d",
+      "make": "一汽凌河牌",
+      "model": "CAL1082C1A1E5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1101dcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL1101DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1110c2a1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1110C2A1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1110c2a1e5d",
+      "make": "一汽凌河牌",
+      "model": "CAL1110C2A1E5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1160c2gf1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1160C2GF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1250c3kf4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1250C3KF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal1310c4mf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL1310C4MF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal2041dcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL2041DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "越野载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3040c1d1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3040C1D1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3040c1d1e5d",
+      "make": "一汽凌河牌",
+      "model": "CAL3040C1D1E5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3041c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3041C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3042c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3042C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3043c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3043C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3044c2ff1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3044C2FF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3120c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3120C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3121c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3121C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3160c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3160C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3161c1df1e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3161C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3251c2gf3e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3251C2GF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3251c2kf3e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3251C2KF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3251c3kf4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3251C3KF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3252c2gf3e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3252C2GF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3252c2kf3e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3252C2KF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3252c3kf4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3252C3KF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3310c3kf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3310C3KF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3310c4f6e6",
+      "make": "一汽凌河牌",
+      "model": "CAL3310C4F6E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3310c4f6e6d",
+      "make": "一汽凌河牌",
+      "model": "CAL3310C4F6E6D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3311c4mf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3311C4MF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3312c4mf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3312C4MF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3312c4nf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3312C4NF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3312c4pf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3312C4PF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal3313c4lf6e5",
+      "make": "一汽凌河牌",
+      "model": "CAL3313C4LF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4180c3ff4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL4180C3FF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4250c4gf4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL4250C4GF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4250c5gf4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4250C5GF4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4251c4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4251C4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4251c4gf4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL4251C4GF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4251q4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4251Q4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4252c4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4252C4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4252c4gf4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL4252C4GF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4252q4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4252Q4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4253c4f4e5",
+      "make": "一汽凌河牌",
+      "model": "CAL4253C4F4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4253c4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4253C4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4253q4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4253Q4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4254c4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4254C4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal4255c4f4e6",
+      "make": "一汽凌河牌",
+      "model": "CAL4255C4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5030tyhe5",
+      "make": "一汽凌河牌",
+      "model": "CAL5030TYHE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "路面养护车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5040ccydcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5040CCYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5040ccydcre51",
+      "make": "一汽凌河牌",
+      "model": "CAL5040CCYDCRE5-1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5040xxydcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5040XXYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5040xxydcre51",
+      "make": "一汽凌河牌",
+      "model": "CAL5040XXYDCRE5-1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041ccydcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041CCYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041cyfe5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041CYFE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "养蜂车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041tpbe5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041TPBE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "平板运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041tqzdcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041TQZDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "清障车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041xcce5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041XCCE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "餐车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041xlcdcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041XLCDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "冷藏车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041xlje5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041XLJE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "旅居车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5041xxydcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5041XXYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5081ccydcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5081CCYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "一汽凌河牌:cal5081xxydcre5",
+      "make": "一汽凌河牌",
+      "model": "CAL5081XXYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    }
+  ]
+}

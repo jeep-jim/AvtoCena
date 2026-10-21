@@ -1,0 +1,20 @@
+name: Catalog refresh europe
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 22 * * *"
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/europe-refresh.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-europe
+  cancel-in-progress: false
+jobs:
+  refresh:
+    uses: ./.github/workflows/catalog-market-refresh.yml
+    with:
+      market: europe
+    secrets: inherit

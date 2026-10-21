@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 12,
+    "newModels": 12,
+    "officialManufacturerSources": 10,
+    "newMlitWorkbookSources": 3,
+    "totalNewSources": 13,
+    "modelsWithMlitIntersection": 12
+  },
+  "reviewed": [
+    {
+      "id": "toyota/crown-sedan",
+      "canonicalName": "Crown Sedan",
+      "officialSourceId": "src-toyota-crown-sedan-japan-archive-2026",
+      "exactSourceNames": [
+        "クラウンセダン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "toyota/comfort",
+      "canonicalName": "Comfort",
+      "officialSourceId": "src-toyota-comfort-japan-archive-2026",
+      "exactSourceNames": [
+        "コンフォート"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "mazda/az-offroad",
+      "canonicalName": "AZ-Offroad",
+      "officialSourceId": "src-mazda-az-offroad-japan-archive-2026",
+      "exactSourceNames": [
+        "AZ-オフロード"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "subaru/pleo",
+      "canonicalName": "Pleo",
+      "officialSourceId": "src-subaru-idling-stop-model-list-2026",
+      "exactSourceNames": [
+        "プレオ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "subaru/dias-wagon",
+      "canonicalName": "Dias Wagon",
+      "officialSourceId": "src-subaru-idling-stop-model-list-2026",
+      "exactSourceNames": [
+        "ディアス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2017,
+        2018,
+        2019
+      ]
+    },
+    {
+      "id": "daihatsu/atrai-wagon",
+      "canonicalName": "Atrai Wagon",
+      "officialSourceId": "src-daihatsu-atrai-wagon-japan-archive-2026",
+      "exactSourceNames": [
+        "アトレーワゴン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "daihatsu/altis",
+      "canonicalName": "Altis",
+      "officialSourceId": "src-daihatsu-altis-japan-archive-2026",
+      "exactSourceNames": [
+        "アルティス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "daihatsu/be-go",
+      "canonicalName": "Be-go",
+      "officialSourceId": "src-daihatsu-be-go-japan-archive-2026",
+      "exactSourceNames": [
+        "ビーゴ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015
+      ]
+    },
+    {
+      "id": "daihatsu/mira",
+      "canonicalName": "Mira",
+      "officialSourceId": "src-daihatsu-mira-japan-archive-2026",
+      "exactSourceNames": [
+        "ミラ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "daihatsu/mira-cocoa",
+      "canonicalName": "Mira Cocoa",
+      "officialSourceId": "src-daihatsu-mira-cocoa-move-conte-2015",
+      "exactSourceNames": [
+        "ミラ ココア"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ]
+    },
+    {
+      "id": "daihatsu/move-conte",
+      "canonicalName": "Move Conte",
+      "officialSourceId": "src-daihatsu-mira-cocoa-move-conte-2015",
+      "exactSourceNames": [
+        "ムーヴ コンテ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "daihatsu/mebius",
+      "canonicalName": "Mebius",
+      "officialSourceId": "src-daihatsu-mebius-japan-archive-2026",
+      "exactSourceNames": [
+        "メビウス"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ]
+    }
+  ]
+}

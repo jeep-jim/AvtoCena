@@ -1,0 +1,7000 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 27,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-fffde3d06ea754f19d88",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 350,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c895df820c9b72d95ba",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 358,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05f09dbf7dadbfc364cf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "B-Max",
+      "modelId": "ford/b-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 55,
+      "commercialNames": [
+        "B-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13e76fcd9f31a2309962",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "B-Max",
+      "modelId": "ford/b-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "B-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c925a27716cb1b967cf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Benimar",
+      "modelId": "ford/benimar",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "BENIMAR TESSORO T483"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d4b2c4098eb118e14b1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 135,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-148cbdae850b5875f560",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 186,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 62,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdeaef482f79de212a24",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2688,
+      "powerKw": 231,
+      "commercialNames": [
+        "BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be489d753b5d5d518f78",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2694,
+      "powerKw": 235,
+      "commercialNames": [
+        "BRONCO",
+        "BRONCO OUTER BANKS",
+        "BRONCO WILDTRACK",
+        "FORD BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b97e669df7c09bac02a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2264,
+      "powerKw": 202,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-712b5c9d9b9ea7eecdd3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2687,
+      "powerKw": 224,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5e86f28aa827031b9c1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2694,
+      "powerKw": 231,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5f2360a009588ad3af0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2694,
+      "powerKw": 232,
+      "commercialNames": [
+        "FORD BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d4ae509ae763c27b294",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2694,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO BADLANDS",
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f393d544354b8c03b122",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1694,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO BALDAUS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2690fbb687237464b60c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 182,
+      "commercialNames": [
+        "BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4821b91a35f0b4566e9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2261,
+      "powerKw": 202,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-962aa28732c4017fcb7e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2264,
+      "powerKw": 205,
+      "commercialNames": [
+        "BRONCO",
+        "BRONCO BIGBEND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8783756bf13e267e292b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2687,
+      "powerKw": 231,
+      "commercialNames": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50959a1e26bac0c4d9e6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": null,
+      "commercialNames": [
+        "BRONCO BADLANDS",
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-095314f8691f1dcb2d15",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": 67,
+      "commercialNames": [
+        "BRONCO BADLANDS",
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd0385762229146a649a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": 95,
+      "commercialNames": [
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-565c893717f2bcd1d8af",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": 245,
+      "commercialNames": [
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41fc7cb51c92852fbb9e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO",
+        "BRONCO BADLANDS",
+        "BRONCO BRADLANDS",
+        "BRONCO OUTER BANKS",
+        "FORD BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD",
+        "FORD MOTOR COMPANY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 1088,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c497774e56b1dfa5a5c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2950,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be765d25c325411625c4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2956,
+      "powerKw": 312,
+      "commercialNames": [
+        "BRONCO RAPTOR",
+        "FORD BRONCO RAPTOR"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14dca77de74edf2396ce",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2967,
+      "powerKw": 309,
+      "commercialNames": [
+        "FORD BRONCO RAPTOR"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecf3149866b5f6ed28ce",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2594,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ece6cc539fe8d402125",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2684,
+      "powerKw": 18,
+      "commercialNames": [
+        "BRONCO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee45b73271053e0461b6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": 18,
+      "commercialNames": [
+        "BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20ecbee06d645504ecfd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2694,
+      "powerKw": 183,
+      "commercialNames": [
+        "BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16a8597b9c82127b5e10",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2964,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52fc2aa908d141e4449b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75ecd96699f2ff49dc50",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2264,
+      "powerKw": 224,
+      "commercialNames": [
+        "BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90b33bb8b03933f2a15e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2693,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO OUTER BANKS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb79303c59de4cd42c4f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2956,
+      "powerKw": 309,
+      "commercialNames": [
+        "BRONCO RAPTOR"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e492038a3fc6b264fa3e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2967,
+      "powerKw": 312,
+      "commercialNames": [
+        "FORD BRONCO RAPTOR"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a80b5e9d3ad767e94e63",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco",
+      "modelId": "ford/bronco",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2694,
+      "powerKw": 246,
+      "commercialNames": [
+        "BRONCO BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38fe0399bc7f2f95b4b2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1497,
+      "powerKw": 135,
+      "commercialNames": [
+        "BRONCO SPORT",
+        "BRONCO SPORT BIG BEND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-108d689821bf1da04e18",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 135,
+      "commercialNames": [
+        "BRONCO SPORT",
+        "FORD BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a890bf4daffb97a940c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 183,
+      "commercialNames": [
+        "BRONCO SPORT",
+        "BRONCO SPORT BADLANDS"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b0fff5b824fc86c0095",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 186,
+      "commercialNames": [
+        "BRONCO SPORT",
+        "BRONCO SPORT FIRST EDITION",
+        "FORD BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c3400b9f852ffaed9cc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 133,
+      "commercialNames": [
+        "BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b3e245d3c2267edc8c8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 180,
+      "commercialNames": [
+        "BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aebe5647ce9b54001ff7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 182,
+      "commercialNames": [
+        "BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1716e7202ece3ba0d756",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "unknown",
+      "engineCc": 1496,
+      "powerKw": 113,
+      "commercialNames": [
+        "BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bee3f3f775f53c71c74",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Bronco Sport",
+      "modelId": "ford/bronco-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "unknown",
+      "engineCc": 1496,
+      "powerKw": 137,
+      "commercialNames": [
+        "BRONCO SPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4159bdbf7e3b02a73990",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 60,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b79f20eaeced44b1ed63",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f355f8f3ce17a2a94e0c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47354db84881a15d992c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19107f5ba03561c30584",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5d67e67c7a883ff0642",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 119,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-466ea558547fc49719f1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "C-MAX 1.5"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a595f0e82b87c4219358",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1560,
+      "powerKw": 70,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e10a2f63d13919314c17",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 141,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcce070fb8ff029ae752",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "C-Max",
+      "modelId": "ford/c-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1997,
+      "powerKw": 110,
+      "commercialNames": [
+        "C-MAX"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7b9d6d032b4ebfe8642",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2294,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPRI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b974047952616522244",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "CAPRI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 626,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-445d511e70a0f4e994a8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 89,
+      "commercialNames": [
+        "CAPRI",
+        "CAPRI ER AWD",
+        "CAPRI ER AWD PREMIUM",
+        "CAPRI ER PREMIUM",
+        "CAPRI ER RWD",
+        "CAPRI PREMIUM",
+        "CAPRI PREMIUM ER AWD",
+        "CAPRI SELECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 1410,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d9a835f6df4b29a5177",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "CAPRI",
+        "CAPRI 210 RWD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8092,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e89a9defca1167f5490",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAPRI",
+        "CAPRI 250 AWD",
+        "CAPRI 250 AWD 4X4"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 3585,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61f7b67a4a7f0f39b437",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 46,
+      "commercialNames": [
+        "CAPRI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-182ac81507e306d8aab5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "CAPRI",
+        "CAPRI PREMIUM",
+        "CAPRI SR RWD",
+        "CAPRI STYLE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdb768c4e4d801d8586b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "CAPRI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb8d20a609c239bdc5c2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "CAPRI",
+        "CAPRI 125 RWD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 230,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45b663bc84d50aa7bc52",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Capri",
+      "modelId": "ford/capri",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "CAPRI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73e65c8e0349a77fc15c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Chausson",
+      "modelId": "ford/chausson",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "CHAUSSON TITANIUM 767GA AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5f60d351620f96bf538",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Chausson",
+      "modelId": "ford/chausson",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "CHAUSSON 757 AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bbe70e68bf6fb4781e3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Crown Victoria",
+      "modelId": "ford/crown-victoria",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4601,
+      "powerKw": 186,
+      "commercialNames": [
+        "FORD CROWN VICTORIA"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63e133e7c8d495dd3fb6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 79,
+      "commercialNames": [
+        "CUSTOM VARIOBUS ABIENTE",
+        "CUSTOM VARIOBUS AMBIENTE",
+        "CUSTOM VARIOBUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 36,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9481d884d8695b43d2f2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "CUSTOM VARIOBUS AMBIENTE",
+        "CUSTOM VARIOBUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01f8a44d5a97bb9c8d07",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 125,
+      "commercialNames": [
+        "CUSTOM TOURNEO L1 300/92",
+        "CUSTOM VARIOBUS TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cca9fff6990df1ee9c3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 81,
+      "commercialNames": [
+        "CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39040c05e8bb30636119",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 100,
+      "commercialNames": [
+        "CUSTOM TITANIUM",
+        "CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 61,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-930bb27bfa73be42b454",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 110,
+      "commercialNames": [
+        "CUSTOM ACTIVE",
+        "CUSTOM TITANIUM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc891f5f3a2949a32750",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": 125,
+      "commercialNames": [
+        "CUSTOM TITANIUM",
+        "CUSTOM TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0e17d8fcf8908203d5d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 87,
+      "commercialNames": [
+        "CUSTOM ACTIVE",
+        "CUSTOM SPORT",
+        "CUSTOM TITANIUM",
+        "CUSTOM TITANIUM X"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-445decb36858123dd6f0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Custom",
+      "modelId": "ford/custom",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1996,
+      "powerKw": null,
+      "commercialNames": [
+        "CUSTOM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-528a0b764689a5274c2e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe46ecff9b634a5880d0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "EcoSport",
+        "ECOSPORT ST-LINE",
+        "ECOSPORT ST-LINE ECOBLUE",
+        "ECOSPORT ST-LINE TDCI",
+        "ECOSPORT TITANIUM",
+        "ECOSPORT TITANIUM ECOBLUE",
+        "ECOSPORT TITANIUM TDCI",
+        "ECOSPORT TITANIUM TDCI 4X4",
+        "ECOSPORT ZETEC ECOBLUE",
+        "ECOSPORT ZETEC TDCI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 292,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f88a35f1090498c68ce1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "ECOSPORT",
+        "EcoSport",
+        "ECOSPORT COOL & CONNECT",
+        "ECOSPORT ST- LINE",
+        "ECOSPORT TITANIUM",
+        "FORD ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 12304,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40da41dea6b41ae8468f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 73,
+      "commercialNames": [
+        "EcoSport",
+        "ECOSPORT",
+        "FORD ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 264,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f43d83df170fe2c9518",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "ECO SPORT",
+        "ECOSPORT",
+        "ECOSPORT / 1.5 / DV5 / 73,5 S",
+        "ECOSPORT 15 DV5 735 S",
+        "ECOSPORT ST-LINE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1770,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-208d70865fe1a1c4fdfa",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "ECOSPORT",
+        "EcoSport",
+        "ECOSPORT ST- LINE",
+        "ECOSPORT TITANIUM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1938,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bad2a8e40ee9ee2eb21f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "EcoSport",
+        "ECOSPORT",
+        "ECOSPORT ST-LINE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 126,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83ad815b99d9a5dd0af8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "EcoSport",
+        "ECOSPORT",
+        "ECOSPORT ST-LINE",
+        "ECOSPORT ST-LINE AUTO",
+        "ECOSPORT TITANIUM",
+        "ECOSPORT TITANIUM AUTO",
+        "ECOSPORT TITANIUM TDCI",
+        "ECOSPORT ZETEC",
+        "ECOSPORT ZETEC AUTO",
+        "ECOSPORT ZETEC ECOBLUE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 18464,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26850f2f02f76e8b8942",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "EcoSport",
+        "ECOSPORT",
+        "ECOSPORT COOL & CONNECT",
+        "ECOSPORT COOL + CONNECT",
+        "FORD ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4584,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afe7cdfcc42a94ea885b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "ECOSPORT",
+        "EcoSport",
+        "ECOSPORT / 1.0 / 73,5 S",
+        "ECOSPORT / 1.0 / 73,5 S M6",
+        "ECOSPORT / 1.0 / 73.5 S",
+        "ECOSPORT / 1.0 / 73.5 S M6",
+        "ECOSPORT 10 735 S",
+        "ECOSPORT COOL & CONNECT",
+        "ECOSPORT COOL + CONNECT",
+        "ECOSPORT ST-LINE",
+        "ECOSPORT TITANIUM",
+        "ECOSPORT TREND"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 17,
+      "registrations": 15057,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad641c50e454ed7a9060",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 92,
+      "commercialNames": [
+        "ECO SPORT",
+        "EcoSport",
+        "ECOSPORT",
+        "ECOSPORT / 1.0 / 92 A6 S",
+        "ECOSPORT / 1.0 / 92 S",
+        "ECOSPORT / 1.0 / 92 S A6",
+        "ECOSPORT / 1.0 / 92 S M6",
+        "ECOSPORT / 10 / 92 S A6",
+        "ECOSPORT / 10 / 92 S M6",
+        "ECOSPORT 10 92 A6 S",
+        "ECOSPORT 10 92 S",
+        "ECOSPORT 10 92 S A6",
+        "ECOSPORT ACTIVE",
+        "ECOSPORT ST- LINE",
+        "ECOSPORT ST- LINE SCHWARZ",
+        "ECOSPORT ST-LINE",
+        "ECOSPORT TITANIUM",
+        "FORD ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 34,
+      "registrations": 117304,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b71d7651f53eda7baac8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 103,
+      "commercialNames": [
+        "ECOSPORT",
+        "EcoSport",
+        "ECOSPORT / 10 / 103 S M6",
+        "ECOSPORT ACTIVE",
+        "ECOSPORT ST- LINE",
+        "ECOSPORT ST-LINE",
+        "FORD ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 4960,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f05adebd75100e7da42",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "ECOSPORT ST-LINE",
+        "ECOSPORT ST-LINE ECOBLUE",
+        "ECOSPORT ST-LINE TDCI"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d02beab501f98133975",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": null,
+      "commercialNames": [
+        "ECOSPORT ZETEC AUTO"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f27a760be56a9d023b3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "EcoSport"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-affbfa805dbf34b47bc0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 998,
+      "powerKw": 92,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3764f4285a1ba991b781",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 49,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62d23f64ce5c6298d55e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 51,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-859a4cd2c39d000a6a2e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e60db1482995c4fc8914",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 59,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91fd4567dd1231f047f0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 61,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3fe22c7e0bc6691bf54",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 62,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a36df2921b06febad66",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 66,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72776900e42bc24a66c9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 67,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8523e8e0894d74085256",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 68,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9eb7cc45ee56c926435a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 69,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15f3aa200c785399bfb5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 70,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dc5a6f656bd4625db40",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 72,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77405b25ff4a74d16c10",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 75,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dae6b36572b12bf5ba56",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 80,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e893fc34075ebd47d6ae",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 81,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19e84068cb3cead36250",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 84,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da911de3d6ef39564a7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 85,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aead178c340d11ce28f4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 90,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0686806fa0ad52afb5e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 91,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88ee37e486833fe17e4b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 95,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8c1237cad4aa7aa31c1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 96,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7af667fbcdf9d0d0e0b7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 110,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8b925e84a68046dcb20",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 112,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d09ae165669624060c59",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 116,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a06a43cae949bf7b4287",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 117,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14490bd9fa2a0f519ccd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 118,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01bf4f291590530deece",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 120,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5bc51c71617cb5b8854c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 125,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f555d9a382c4b13a1ade",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 130,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-221366b089e93748ff69",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 131,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13026b9c13dc365220a9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 132,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abc2c55d55290e61c707",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 136,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0577c52e47b0b768eb86",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 137,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7e149188301ae16d597",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 140,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0e255a3f8d4fc0eafa4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 145,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e25ff897204693d729e7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 147,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d018e72485324f092b42",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 150,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e4bbbbf6911912e873d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 155,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3157f25e5b55469afb17",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 187,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9e40862ff8056aea38a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 195,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-96715ca8817a4f1563a1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 206,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0754a88e43f8728c2d9c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 210,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2181dac11835a779e1dc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 228,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-009a5eee9514fff1791f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 243,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-969f7dec86a25a47b196",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 250,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c09b58a6a7d9f36c9bd6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 320,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2c6c2df1272f1708049",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 375,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bdcecb545496fde83d9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 386,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86ccf41cd657bf56980d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "EcoSport",
+      "modelId": "ford/ecosport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 390,
+      "commercialNames": [
+        "ECOSPORT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-300fb52af89b7e33463d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "Edge"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 256,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ee144b99dc51802a345",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "Edge"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 136,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79c5aeabb87c3fe99cfc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 175,
+      "commercialNames": [
+        "Edge",
+        "EDGE",
+        "EDGE ST LINE",
+        "EDGE ST- LINE",
+        "EDGE TITANIUM",
+        "EDGE VIGNALE",
+        "EDGE VIGNALE 245232",
+        "FORD EDGE ST-LINE",
+        "FORD EDGE VIGNALE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 6170,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99002c9678b20b238f56",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2687,
+      "powerKw": 250,
+      "commercialNames": [
+        "EDGE",
+        "FORD EDGE",
+        "FORD EDGE ST"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdd620beae72cea680d8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2688,
+      "powerKw": 250,
+      "commercialNames": [
+        "EDGE ST"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0552dae9088e5e50a2d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 198,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-875d8961dbfcbc79a0b6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 209,
+      "commercialNames": [
+        "EDGE",
+        "EDGE TITANIUM AWD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f59735fa52870d9fd7d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3721,
+      "powerKw": 198,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71cb38ac44dde31c27c8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "Edge"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83d17a0506ef20c56a02",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 178,
+      "commercialNames": [
+        "EDGE",
+        "FORD EDGE ECOBOOST SEL"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c1b0dc24c6e8adc0c83",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 180,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea60542fc39fe1c231f2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1998,
+      "powerKw": 184,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4fe9edd56a8394c23f5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1990,
+      "powerKw": 177,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9930af2336b80b517232",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1997,
+      "powerKw": 177,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2a7fca044025d78955a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 177,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ff4bb3848ff5b4d9667",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 184,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79ac60cbb7edeb9f5a91",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Edge",
+      "modelId": "ford/edge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 186,
+      "commercialNames": [
+        "EDGE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f6b4058c2894a76a3b9",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 86,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f91d9da6307c240795fe",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 131,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38dae2f041143be11cd0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 89,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dd587ca90298ea9c036",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 149,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bcf2a5fcc8fd590ebcc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 158,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d351c9a803fe39c38ed1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 118,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df85c9d21d2d171cc9f1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2495,
+      "powerKw": 127,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ebf75ee75705d3fbe63",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1497,
+      "powerKw": 135,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1dcc5c1e6ff1ab16c6a6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 132,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c7b50805b207a4ab550",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 135,
+      "commercialNames": [
+        "ESCAPE SEL"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0223ebf2912bdfa785ec",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": null,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b2ec5bff02a4c463129",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": null,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fbb7ba4345dac391e1f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1596,
+      "powerKw": 130,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-242036e4e0930c23cc7f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 176,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c1552a3b69969741ac5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2491,
+      "powerKw": 147,
+      "commercialNames": [
+        "ESCAPE HYBRID"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75a473cf767bddcdc247",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 149,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8719fcd7f2f504881a27",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "ESCAPE XLT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eddd9d08f1a61e5ba086",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 133,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33d32c3d6c5fa6c6eb19",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 133,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-979336ea005b2236b07d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 134,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c662a5cf6746f47d286",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1500,
+      "powerKw": 133,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdbfc9b35034d6285236",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 112,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b1bcca7df5413495bdb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Escape",
+      "modelId": "ford/escape",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1496,
+      "powerKw": 111,
+      "commercialNames": [
+        "ESCAPE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f27bdcc07525a6458e7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Expedition",
+      "modelId": "ford/expedition",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 276,
+      "commercialNames": [
+        "EXPEDITION"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-562f8805eb51039414a5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Expedition",
+      "modelId": "ford/expedition",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 300,
+      "commercialNames": [
+        "EXPEDITION"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-346a93e6e2fe6bfee2e8",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Expedition",
+      "modelId": "ford/expedition",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5398,
+      "powerKw": 227,
+      "commercialNames": [
+        "EXPEDITION"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3af775498e0cc40d7a75",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Expedition",
+      "modelId": "ford/expedition",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3497,
+      "powerKw": 280,
+      "commercialNames": [
+        "EXPEDITION LIMITED",
+        "EXPEDITION PLATINUM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-154206264939a38df0de",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Expedition",
+      "modelId": "ford/expedition",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3497,
+      "powerKw": 328,
+      "commercialNames": [
+        "EXPEDITION"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bb13d3a42d3d2e0089a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 221,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-483ad21d2f9031efa265",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 224,
+      "commercialNames": [
+        "EXPLORER",
+        "EXPLORER ECOBOOST",
+        "EXPLORER XLT AWD",
+        "FORD EXPLORER",
+        "FORD EXPLORER XLT",
+        "FORD EXPLORER XLT AWD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-696b8aae145986935c52",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2956,
+      "powerKw": 267,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 524,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d29ad40c84aac7d0f32b",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2956,
+      "powerKw": 298,
+      "commercialNames": [
+        "EXPLORER",
+        "FORD EXPLORER",
+        "FORD EXPLORER ST AWD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac91cd14b2748f4f8ccd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 298,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d603e5f940882d2b15e3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 211,
+      "commercialNames": [
+        "EXPLORER LIMITED"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0eecb0658d01f408fb76",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 272,
+      "commercialNames": [
+        "FORD EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67cdfb0f2f32556247dc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3497,
+      "powerKw": 216,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9efbd349664ca36a5cf1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2956,
+      "powerKw": 53,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d726d8adb0ab1629d90",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2956,
+      "powerKw": 167,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7f13b27bc51888873cb",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2956,
+      "powerKw": 267,
+      "commercialNames": [
+        "EXPLORER",
+        "Explorer",
+        "EXPLORER / 3.0 / PHEV / 267 A10",
+        "EXPLORER / 30 / PHEV / 267 A10",
+        "EXPLORER 3.0 PHEV 267 A10",
+        "EXPLORER PLATINUM",
+        "EXPLORER ROYKDYKKER",
+        "EXPLORER ST- LINE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 19483,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1af55cd8b8f3d3871f65",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2261,
+      "powerKw": 206,
+      "commercialNames": [
+        "FORD EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd4fda864cc6ce5132f4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3339,
+      "powerKw": 234,
+      "commercialNames": [
+        "EXPLORER HYBRID"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84e740c476598af44737",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2956,
+      "powerKw": 294,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-766519e14b03cedfcca1",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3496,
+      "powerKw": 216,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26b64f23c7fafa2a8e0f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3497,
+      "powerKw": 183,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6149039813a9415de5ab",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4600,
+      "powerKw": 218,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03483eeb62963c0207dc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": null,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-108da44146ce1296be32",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 61,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2ddad0d091bc18f2e42",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 67,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfce5a1e730a7a2e914c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 69,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a4033b83e0ca0c27201",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 81,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf91c38e893fc312281c",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 84,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d758265ea96ccec6d35",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 85,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b567c9d8b4aca06ea756",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 90,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9c33e791ffe3d17288d",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 91,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-190783d0b499aab85458",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 96,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bac8d2dc6a1784709ea",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 112,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f31f184a94af6cbaf408",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 117,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a00e0d077b8e98373dc",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 120,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dfa7cc1444b6f28eac6",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 125,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-831a996e1e50c4574f47",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 147,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8095a1d6792a5646de0",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 174,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d4a3d95b58ed3fde2b4",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2956,
+      "powerKw": 375,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b30692e067590d06279e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1463,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1448cfd8eacd713293b7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "EXPLORER",
+        "EXPLORER PREMIUM",
+        "EXPLORER SR RWD",
+        "EXPLORER STYLE"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 457,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba12dd7e971161f3825e",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 692,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55238531d9290efc07a5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 89,
+      "commercialNames": [
+        "EXPLORER",
+        "EXPLORER ER AWD",
+        "EXPLORER ER AWD PREMIUM",
+        "EXPLORER ER PREMIUM",
+        "EXPLORER PREMIUM",
+        "EXPLORER SELECT"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2223,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d3769ffdc73361c2963",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 99,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c692e1ef8f34eae03fed",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2997,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d23ad20934f73c41b5d7",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3774bff307edd72c576",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "EXPLORER",
+        "EXPLORER / 210 RWD 4X2",
+        "EXPLORER 210 RWD",
+        "EXPLORER 210 RWD 4X2"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 25648,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c7ab206e4e92258daa3",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "EXPLORER",
+        "EXPLORER / 250 AWD 4X4",
+        "EXPLORER 250 AWD",
+        "EXPLORER 250 AWD 4X4"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 9625,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2abed346a47141c30d8a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 58,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd60b1845bfe643333bd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8acd04bf046e178d455",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3eb7f4ac572278f5f492",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "EXPLORER",
+        "EXPLORER 125 RWD"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1251,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93d005690a5099aa0a5f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "Explorer",
+      "modelId": "ford/explorer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 152,
+      "commercialNames": [
+        "EXPLORER"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e14229718f16beea9ea",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2687,
+      "powerKw": 190,
+      "commercialNames": [
+        "F 150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bba4d9919cdeb0c72d74",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2687,
+      "powerKw": 239,
+      "commercialNames": [
+        "F 150",
+        "F-150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-332e0d7ee7106c99ee53",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3490,
+      "powerKw": 276,
+      "commercialNames": [
+        "F 150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d6676649871fea84004",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3340,
+      "powerKw": 213,
+      "commercialNames": [
+        "F-150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85ce51d6a5ca1b02230f",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3514,
+      "powerKw": 207,
+      "commercialNames": [
+        "F-150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c82747fa1844998756a",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4949,
+      "powerKw": 290,
+      "commercialNames": [
+        "F-150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6a2d9edd47e7175f710",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5038,
+      "powerKw": 294,
+      "commercialNames": [
+        "F-150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2da35d2342b9ce77ac38",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 433,
+      "commercialNames": [
+        "F 150",
+        "F150",
+        "FORD F-150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1381e1e27149ef1032d2",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150",
+      "modelId": "ford/f-150",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3500,
+      "powerKw": 316,
+      "commercialNames": [
+        "F150"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5e056cb2f6cb66f9dbd",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150 Lightning",
+      "modelId": "ford/f-150-lightning",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 318,
+      "commercialNames": [
+        "F-150 LIGHTNING"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46f5d0c2bd75e76c6edf",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150 Lightning",
+      "modelId": "ford/f-150-lightning",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 337,
+      "commercialNames": [
+        "F-150 LIGHTNING"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 583,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7169ee008893c62f9f5",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150 Lightning",
+      "modelId": "ford/f-150-lightning",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 433,
+      "commercialNames": [
+        "F-150 LIGHTNING",
+        "F-150 LIGHTNING PLATINUM"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71a65fc0b54d4b46db85",
+      "brandId": "ford",
+      "brand": "Ford",
+      "canonicalModel": "F-150 Lightning",
+      "modelId": "ford/f-150-lightning",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "F-150 LIGHTNING"
+      ],
+      "sourceMakeNames": [
+        "FORD"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

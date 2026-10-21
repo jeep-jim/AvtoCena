@@ -1,0 +1,8754 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 30,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "mercedesbenz:eqs5504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 550 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqs5804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQS 580 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqs5804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 580 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqt",
+      "make": "Mercedes-Benz",
+      "model": "Eqt",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqt",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Eqt"
+      },
+      "aliases": [
+        "EQT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eqv",
+      "make": "Mercedes-Benz",
+      "model": "EQV",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqv",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQV"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:esprinter",
+      "make": "Mercedes-Benz",
+      "model": "eSprinter",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/esprinter",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "eSprinter"
+      },
+      "aliases": [
+        "ESPRINTER"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:esterel",
+      "make": "Mercedes-Benz",
+      "model": "Esterel",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:eura",
+      "make": "Mercedes-Benz",
+      "model": "Eura",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:explorateur",
+      "make": "Mercedes-Benz",
+      "model": "Explorateur",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:frankia",
+      "make": "Mercedes-Benz",
+      "model": "Frankia",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:g550",
+      "make": "Mercedes-Benz",
+      "model": "G 550",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:g550suv",
+      "make": "Mercedes-Benz",
+      "model": "G 550 SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:g580witheqtechnology",
+      "make": "Mercedes-Benz",
+      "model": "G 580 with EQ Technology",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gclass",
+      "make": "Mercedes-Benz",
+      "model": "G-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/g-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "G-Class"
+      },
+      "aliases": [
+        "G / 400 / D AUT.",
+        "G / 450 D / AUT. HYBRID",
+        "G 300 4MATIC",
+        "G 300 4MATIC WITH EQ TECHNOLOGY",
+        "G 300 CDI",
+        "G 350",
+        "G 350 AMG LINE D 4MATIC AUTO",
+        "G 350 AMG LINE PREMIUM D 4M A",
+        "G 350 BlueTEC",
+        "G 350 D AUT",
+        "G 400",
+        "G 400 4MATIC",
+        "G 400 4MATIC WITH EQ TECHNOLOGY",
+        "G 400+ 4MATIC",
+        "G 400+ 4MATIC WITH EQ TECHNOLOGY",
+        "G 500",
+        "G 500 4X4 2",
+        "G 500 AUT",
+        "G 55 AMG",
+        "G 580",
+        "G 580 EQ",
+        "G 63 AMG",
+        "G 63 AMG 4X4",
+        "G-KLASSE",
+        "G270CDI",
+        "G350d",
+        "G400d",
+        "G450d",
+        "G550",
+        "G63",
+        "メルセデスAMG G63",
+        "Geländewagen",
+        "G-Wagen"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gl",
+      "make": "Mercedes-Benz",
+      "model": "GL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/gl",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GL"
+      },
+      "aliases": [
+        "GL 350 BlueTEC 4MATIC",
+        "GL550 4MATIC",
+        "GL63 4MATIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gla",
+      "make": "Mercedes-Benz",
+      "model": "GLA",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/gla",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GLA"
+      },
+      "aliases": [
+        "GLA180",
+        "GLA200",
+        "GLA200D",
+        "GLA200d 4MATIC",
+        "GLA220 4MATIC",
+        "GLA220D 4MATIC",
+        "GLA250 4MATIC",
+        "GLA250E",
+        "GLA45",
+        "メルセデスAMG GLA35 4M",
+        "メルセデスAMG GLA45 S 4M+"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gla2504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLA 250 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gla2504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLA 250 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gla250suv",
+      "make": "Mercedes-Benz",
+      "model": "GLA 250 SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glaclass",
+      "make": "Mercedes-Benz",
+      "model": "GLA-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glb",
+      "make": "Mercedes-Benz",
+      "model": "GLB",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/glb",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GLB"
+      },
+      "aliases": [
+        "GLB180",
+        "GLB 200 d",
+        "GLB200d 4MATIC",
+        "GLB250 4MATIC",
+        "メルセデスAMG GLB35 4M"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glb2504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLB 250 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glb2504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLB 250 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glb250suv",
+      "make": "Mercedes-Benz",
+      "model": "GLB 250 SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glbclass",
+      "make": "Mercedes-Benz",
+      "model": "GLB-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc",
+      "make": "Mercedes-Benz",
+      "model": "GLC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/glc",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GLC"
+      },
+      "aliases": [
+        "GLC 220d 4MATIC",
+        "GLC 220d 4MATIC クーペ",
+        "GLC200",
+        "GLC200 4MATIC",
+        "GLC200 クーペ",
+        "GLC200D",
+        "GLC250 4MATIC",
+        "GLC250 4MATIC クーペ",
+        "GLC300 4MATIC",
+        "GLC300 4MATIC クーペ",
+        "GLC300 DE 4MATIC",
+        "GLC300DE4MMTIC",
+        "GLC400 E 4MATIC",
+        "メルセデス AMG GLC43 4M",
+        "メルセデス AMG GLC43 4M C",
+        "メルセデス AMG GLC63 4M+",
+        "メルセデス AMG GLC63 4M+ C",
+        "メルセデス AMG GLC63S 4M+",
+        "メルセデス AMG GLC63S 4M+ C"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2022,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc3004matic",
+      "make": "Mercedes-Benz",
+      "model": "GLC 300 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc3004maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "GLC 300 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc3004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLC 300 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc350e4matic",
+      "make": "Mercedes-Benz",
+      "model": "GLC 350e 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc350e4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLC 350e 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc63seperformancecoupe",
+      "make": "Mercedes-Benz",
+      "model": "GLC 63 S E Performance Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glc63seperformancesuv",
+      "make": "Mercedes-Benz",
+      "model": "GLC 63 S E Performance SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glcclass",
+      "make": "Mercedes-Benz",
+      "model": "GLC-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle",
+      "make": "Mercedes-Benz",
+      "model": "GLE",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/gle",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GLE"
+      },
+      "aliases": [
+        "GLE 350 d 4MATIC",
+        "GLE 350 d 4MATIC クーペ",
+        "GLE 400 d 4MATIC",
+        "GLE 400d 4MATIC クーペ",
+        "GLE 450d 4MATIC",
+        "GLE 450d 4MATIC クーペ",
+        "GLE000 D 4MATIC",
+        "GLE300",
+        "GLE300d 4MATIC",
+        "GLE350 DE 4M",
+        "GLE350 DE4MATIC",
+        "GLE450 4MATIC",
+        "GLE450 D 4MATIC COUPE",
+        "メルセデス AMG GLE43 4M",
+        "メルセデス AMG GLE43 4M C",
+        "メルセデス AMG GLE63 4M",
+        "メルセデス AMG GLE63S 4M",
+        "メルセデス AMG GLE63S 4M C",
+        "メルセデスAMG GLE53 4M+",
+        "メルセデスAMG GLE53 4M+ C"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle3504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLE 350 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle3504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 350 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle4504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle4504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle450e4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450e 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gle5804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 580 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gleclass",
+      "make": "Mercedes-Benz",
+      "model": "GLE-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glk",
+      "make": "Mercedes-Benz",
+      "model": "GLK",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/glk",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GLK"
+      },
+      "aliases": [
+        "GLK350 4MATIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gls",
+      "make": "Mercedes-Benz",
+      "model": "GLS",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/gls",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "GLS"
+      },
+      "aliases": [
+        "GLS 350 d 4MATIC",
+        "GLS400d 4MATIC",
+        "GLS450d 4MATIC",
+        "GLS550 4MATIC",
+        "GLS580 4MATIC",
+        "GLS600 4MATIC MAYBACH",
+        "メルセデス AMG GLS63 4M"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gls4504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLS 450 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gls4504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLS 450 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gls5804matic",
+      "make": "Mercedes-Benz",
+      "model": "GLS 580 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gls5804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLS 580 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:gls6004maticmaybachsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLS 600 4MATIC Maybach SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:glsclass",
+      "make": "Mercedes-Benz",
+      "model": "GLS-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:hymer",
+      "make": "Mercedes-Benz",
+      "model": "Hymer",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:hymermobil",
+      "make": "Mercedes-Benz",
+      "model": "Hymermobil",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:kompressor",
+      "make": "Mercedes-Benz",
+      "model": "Kompressor",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:l",
+      "make": "Mercedes-Benz",
+      "model": "L",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:la",
+      "make": "Mercedes-Benz",
+      "model": "La",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:liberty",
+      "make": "Mercedes-Benz",
+      "model": "Liberty",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:lmc",
+      "make": "Mercedes-Benz",
+      "model": "Lmc",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:lp",
+      "make": "Mercedes-Benz",
+      "model": "Lp",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:marcopolo",
+      "make": "Mercedes-Benz",
+      "model": "Marco Polo",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/marco-polo",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Marco Polo"
+      },
+      "aliases": [
+        "MARCO POLO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybach",
+      "make": "Mercedes-Benz",
+      "model": "Maybach",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/maybach",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Maybach"
+      },
+      "aliases": [
+        "MAYBACH EQS 480 4MATIC",
+        "MAYBACH EQS 600 4MATIC",
+        "MAYBACH EQS 680",
+        "MAYBACH EQS 680 4MATIC",
+        "MAYBACH GLS 480",
+        "MAYBACH GLS 600",
+        "MAYBACH GLS 680",
+        "MAYBACH S 480",
+        "MAYBACH S 480 4MATIC",
+        "MAYBACH S 580 E",
+        "MAYBACH S 580 E WITH EQ",
+        "MAYBACH S 580 E WITH EQ HAT",
+        "MAYBACH S 650 PULLMAN",
+        "MAYBACH S 680",
+        "MAYBACH SL 680",
+        "MAYBACH SL 680 4MATIC+",
+        "メルセデス・マイバッハ S550",
+        "メルセデス・マイバッハ S550 4MATIC",
+        "メルセデス・マイバッハ S560",
+        "メルセデス・マイバッハ S560 4MATIC",
+        "メルセデス・マイバッハ S600",
+        "メルセデス・マイバッハ SL680"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybachamgsl6804maticroadster",
+      "make": "Mercedes-Benz",
+      "model": "Maybach AMG SL 680 4MATIC Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybacheqs6804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "Maybach EQS 680 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybachgls6004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "Maybach GLS 600 4MATIC SUV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybachs5604matic",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 560 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybachs5804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 580 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybachs650",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 650",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:maybachs6804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "Maybach S 680 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:mb",
+      "make": "Mercedes-Benz",
+      "model": "Mb",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/mb",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Mb"
+      },
+      "aliases": [
+        "MB SPINTER",
+        "MB SPRINTER STIL 910"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:mercedes",
+      "make": "Mercedes-Benz",
+      "model": "Mercedes",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/mercedes",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Mercedes"
+      },
+      "aliases": [
+        "MERCEDES A 180",
+        "MERCEDES AMG EQS 53 4MATIC",
+        "MERCEDES BENZ AMG G63",
+        "MERCEDES EQA",
+        "MERCEDES G63 AMG",
+        "MERCEDES GLC220D",
+        "MERCEDES VITO 110CDI",
+        "MERCEDES- BENZ V-KLASSE",
+        "MERCEDES-AMG C 43E",
+        "MERCEDES-AMG C 63E",
+        "MERCEDES-AMG C43E PERFORM",
+        "MERCEDES-AMG C63E PERFORM",
+        "MERCEDES-AMG CLA 45 E P.",
+        "MERCEDES-AMG E53E",
+        "MERCEDES-AMG GLA 45 E P.",
+        "Mercedes-AMG GT",
+        "Mercedes-AMG GT C",
+        "MERCEDES-AMG GT R",
+        "Mercedes-AMG GT R",
+        "MERCEDES-BENZ",
+        "MERCEDES-BENZ A 180",
+        "MERCEDES-BENZ B180",
+        "MERCEDES-BENZ CLA 180",
+        "MERCEDES-BENZ CLA180D",
+        "MERCEDES-BENZ E450 D 4MATIC",
+        "MERCEDES-BENZ GLC 220 D 4MATIC",
+        "MERCEDES-BENZ GLE 350 DE 4MATIC",
+        "MERCEDES-BENZ V-KLASSE",
+        "MERCEDES-MAYBACH EQS 480",
+        "MERCEDES-MAYBACH EQS 680",
+        "MERCEDES-MAYBACH GLS 480",
+        "MERCEDES-MAYBACH SL 680"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metris",
+      "make": "Mercedes-Benz",
+      "model": "Metris",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metriscargo",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metriscargolwb",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo LWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metriscargovan",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo Van",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metriscargovanlwb",
+      "make": "Mercedes-Benz",
+      "model": "Metris Cargo Van LWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metrispassenger",
+      "make": "Mercedes-Benz",
+      "model": "Metris Passenger",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:metrispassengervan",
+      "make": "Mercedes-Benz",
+      "model": "Metris Passenger Van",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:ml",
+      "make": "Mercedes-Benz",
+      "model": "ML",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/ml",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "ML"
+      },
+      "aliases": [
+        "ML 63 AMG",
+        "ML 270 CDI",
+        "ML 320",
+        "ML 350",
+        "ML 350 BLUETEC 4MATIC",
+        "ML 420 CDI 4MATIC",
+        "ML350 4MATIC",
+        "ML63 4MATIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:o",
+      "make": "Mercedes-Benz",
+      "model": "O",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:rclass",
+      "make": "Mercedes-Benz",
+      "model": "R-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/r-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "R-Class"
+      },
+      "aliases": [
+        "R350 4MATIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:rapido",
+      "make": "Mercedes-Benz",
+      "model": "Rapido",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/rapido",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Rapido"
+      },
+      "aliases": [
+        "RAPIDO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:rimor",
+      "make": "Mercedes-Benz",
+      "model": "Rimor",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:rmb",
+      "make": "Mercedes-Benz",
+      "model": "Rmb",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:roadster",
+      "make": "Mercedes-Benz",
+      "model": "Roadster",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s4504maticswb",
+      "make": "Mercedes-Benz",
+      "model": "S 450 4MATIC SWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5004maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 500 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5004maticswbsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 500 4MATIC SWB Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5604matic",
+      "make": "Mercedes-Benz",
+      "model": "S 560 4MATIC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5604maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "S 560 4MATIC Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5604maticswb",
+      "make": "Mercedes-Benz",
+      "model": "S 560 4MATIC SWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s560cabriolet",
+      "make": "Mercedes-Benz",
+      "model": "S 560 Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s560e",
+      "make": "Mercedes-Benz",
+      "model": "S 560e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5804maticlwbsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 580 4MATIC LWB Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s5804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 580 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:s580e4maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "S 580e 4MATIC Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sclass",
+      "make": "Mercedes-Benz",
+      "model": "S-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/s-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "S-Class"
+      },
+      "aliases": [
+        "S / 350 / D 4-MATIC AUT.",
+        "S / 350 / D AUT.",
+        "S / 350 D / 4-MATIC AUT. HYBRID",
+        "S / 500 / 4-MATIC AUT. HYBRID",
+        "S / 580 / 4-MATIC AUT. HYBRID",
+        "S / 580 / E 4-MATIC AUT. HYBRID",
+        "S 300 h",
+        "S 350 D",
+        "S 350 D 4MATIC",
+        "S 350 D AMG LINE EXECUTIVE A",
+        "S 350 D L AMG LINE AUTO",
+        "S 350 D L AMG LINE EXEC PREM A",
+        "S 350 D L AMG LINE EXEC PREM+A",
+        "S 350 D L AMG LINE EXECUTIVE A",
+        "S 350 D L AMG LINE PREMIUM A",
+        "S 350 GRAND ED EXECUTIVE D A",
+        "S 350 GRAND EDITION D AUTO",
+        "S 350 L",
+        "S 350 L GRAND ED EXECUTIVE D A",
+        "S 400 4MATIC",
+        "S 400 D 4-MATIC AUT",
+        "S 400 h",
+        "S 400 L",
+        "S 400 L GRAND ED EXECUTIVE D A",
+        "S 400E",
+        "S 450 4-MATIC AUT HYBRID",
+        "S 450 4MATIC",
+        "S 450 4MATIC MAYBACH",
+        "S 450 D 4-MATIC AUT. HYBRID",
+        "S 450 E",
+        "S 450 E WITH EQ HYBRID T.",
+        "S 450 L",
+        "S 450 L 4MATIC",
+        "S 450 L AMG LINE EXECUTIVE A",
+        "S 450 L GRAND ED EXEC MHEV A",
+        "S 450 L GRAND EDITION MHEV A",
+        "S 480 MAYBACH",
+        "S 500",
+        "S 500 d 4MATIC",
+        "S 500 L AMG LINE EXEC PREM + A",
+        "S 500 L AMG LINE EXECUTIVE A",
+        "S 500 L GRAND EDITION MHEV A",
+        "S 560 4MATIC MAYBACH",
+        "S 560 AMG LINE PREMIUM AUTO",
+        "S 560 E",
+        "S 560 E L AMG LINE AUTO",
+        "S 560 E L AMG LINE EXECUTIVE A",
+        "S 560 E L SE AUTO",
+        "S 560 GRAND EDITION AUTO",
+        "S 560 MAYBACH",
+        "S 580",
+        "S 580 / MAYBACH / 4-MATIC AUT. HYBRID",
+        "S 580 4MATIC L",
+        "S 580 4MATIC MAYBACH",
+        "S 580 E",
+        "S 580 E 4MATIC",
+        "S 580 E MAYBACH",
+        "S 580 MAYBACH",
+        "S 580 MAYBACH AUT. HYBRID",
+        "S 600 MAYBACH",
+        "S 600L",
+        "S 63 AMG",
+        "S 63 AMG 4MATIC",
+        "S 650",
+        "S 650 4MATIC GUARD",
+        "S 650 4MATIC MAYBACH",
+        "S 650 MAYBACH AUTO",
+        "S 650 Mybach",
+        "S 680 / MAYBACH / 4-MATIC AUT.",
+        "S 680 4MATIC",
+        "S 680 4MATIC GUARD",
+        "S 680 MAYBACH",
+        "S-KLASSE",
+        "S350",
+        "S400",
+        "S400 4MATIC クーペ",
+        "S400d",
+        "S400d 4MATIC",
+        "S450",
+        "S450 4MATIC クーペ",
+        "S450d 4MATIC",
+        "S500 4MATIC",
+        "S550",
+        "S550 カブリオレ",
+        "S550 クーペ",
+        "S550 クーペ 4MATIC",
+        "S560",
+        "S560 4MATIC",
+        "S560 4MATIC クーペ",
+        "S560 カブリオレ",
+        "S560 クーペ",
+        "S580 4MATIC",
+        "S600",
+        "S63",
+        "S63 4MATIC",
+        "S63 クーペ 4MATIC",
+        "S65",
+        "S65 AMG L AUTO",
+        "S65 クーペ",
+        "S650 MAYBACH",
+        "メルセデス AMG S63 4M カブリオレ",
+        "メルセデス AMG S63 4M+",
+        "メルセデスAMG S63",
+        "メルセデスAMG S63 4M+ C",
+        "メルセデスAMG S63 4M+ CA"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sedan",
+      "make": "Mercedes-Benz",
+      "model": "Sedan",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sl",
+      "make": "Mercedes-Benz",
+      "model": "SL",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/sl",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "SL"
+      },
+      "aliases": [
+        "SL350",
+        "SL400",
+        "SL550",
+        "SL63",
+        "メルセデスAMG SL43",
+        "メルセデス AMG SL63"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sl450",
+      "make": "Mercedes-Benz",
+      "model": "SL 450",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sl550",
+      "make": "Mercedes-Benz",
+      "model": "SL 550",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:slclass",
+      "make": "Mercedes-Benz",
+      "model": "SL-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:slc",
+      "make": "Mercedes-Benz",
+      "model": "SLC",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/slc",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "SLC"
+      },
+      "aliases": [
+        "SLC180",
+        "SLC200",
+        "メルセデス AMG SLC43"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:slc300",
+      "make": "Mercedes-Benz",
+      "model": "SLC 300",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:slcclass",
+      "make": "Mercedes-Benz",
+      "model": "SLC-Class",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:slk",
+      "make": "Mercedes-Benz",
+      "model": "SLK",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/slk",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "SLK"
+      },
+      "aliases": [
+        "SLK 200 KOMPRESSOR",
+        "SLK200",
+        "SLK350"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:slr",
+      "make": "Mercedes-Benz",
+      "model": "Slr",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sls",
+      "make": "Mercedes-Benz",
+      "model": "Sls",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/sls",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Sls"
+      },
+      "aliases": [
+        "SLS AMG BLACK SERIES"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:sprinter",
+      "make": "Mercedes-Benz",
+      "model": "Sprinter",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/sprinter",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Sprinter"
+      },
+      "aliases": [
+        "SPRINTER"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:tclass",
+      "make": "Mercedes-Benz",
+      "model": "T-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/t-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "T-Class"
+      },
+      "aliases": [
+        "T-CLASS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:unimog",
+      "make": "Mercedes-Benz",
+      "model": "Unimog",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:vclass",
+      "make": "Mercedes-Benz",
+      "model": "V-Class",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/v-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "V-Class"
+      },
+      "aliases": [
+        "V级MPV",
+        "V级",
+        "Mercedes-Benz V-Class",
+        "V",
+        "V / 220 / D 4MATIC AUT.",
+        "V 200",
+        "V 220",
+        "V 220 d",
+        "V 220 D AMG LINE AUTO",
+        "V 220 D AMG LN MARCOPOLO HZN A",
+        "V 220 D AUT",
+        "V 220 D SPORT MARCO POLO AUTO",
+        "V 220 D SPRT MARCO POLO HRZN A",
+        "V 220 SPORT D AUTO",
+        "V 250",
+        "V 250 D",
+        "V 250 D AMG LINE AUTO",
+        "V 250 D AUT",
+        "V 250 D SPRT MARCO POLO HRZN A",
+        "V 300",
+        "V 300 AMG LINE D AUTO",
+        "V 300 AMG LINE MARCO POLO D A",
+        "V 300 AMG LN MARCOPOLO HRN D A",
+        "V 300 AUT.",
+        "V 300 D",
+        "V 300 D AUT",
+        "V 300 SPORT D AUTO",
+        "V 300 SPORT MARCO POLO HRZ D A",
+        "V KLASSE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "MPV",
+        "mpv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2014,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:vaneo",
+      "make": "Mercedes-Benz",
+      "model": "Vaneo",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/vaneo",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Vaneo"
+      },
+      "aliases": [
+        "VANEO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:vario",
+      "make": "Mercedes-Benz",
+      "model": "Vario",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:vito",
+      "make": "Mercedes-Benz",
+      "model": "Vito",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/vito",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Vito"
+      },
+      "aliases": [
+        "威霆MPV",
+        "威霆",
+        "E VITO TOURER",
+        "EVITO",
+        "EVITO TOURER 129",
+        "EVITO TOURER PRO",
+        "Mercedes-Benz Vito"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Cargo Van",
+        "Crew Van",
+        "Passenger Van"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 1995,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercedesbenz:w",
+      "make": "Mercedes-Benz",
+      "model": "W",
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:caliente",
+      "make": "Mercury",
+      "model": "Caliente",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:capri",
+      "make": "Mercury",
+      "model": "Capri",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:caprighia",
+      "make": "Mercury",
+      "model": "Capri Ghia",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:colonypark",
+      "make": "Mercury",
+      "model": "Colony Park",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:comet",
+      "make": "Mercury",
+      "model": "Comet",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:cometcaliente",
+      "make": "Mercury",
+      "model": "Comet Caliente",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:commuter",
+      "make": "Mercury",
+      "model": "Commuter",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:cougar",
+      "make": "Mercury",
+      "model": "Cougar",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:cougarls",
+      "make": "Mercury",
+      "model": "Cougar LS",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:cougarxr7",
+      "make": "Mercury",
+      "model": "Cougar XR-7",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:custom",
+      "make": "Mercury",
+      "model": "Custom",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:cyclone",
+      "make": "Mercury",
+      "model": "Cyclone",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:cyclonegt",
+      "make": "Mercury",
+      "model": "Cyclone GT",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:eight",
+      "make": "Mercury",
+      "model": "Eight",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:gougar",
+      "make": "Mercury",
+      "model": "Gougar",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:grandmarquis",
+      "make": "Mercury",
+      "model": "Grand Marquis",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:grandmarquisls",
+      "make": "Mercury",
+      "model": "Grand Marquis LS",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:marauder",
+      "make": "Mercury",
+      "model": "Marauder",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:mariner",
+      "make": "Mercury",
+      "model": "Mariner",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:marquis",
+      "make": "Mercury",
+      "model": "Marquis",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:marquisbrougham",
+      "make": "Mercury",
+      "model": "Marquis Brougham",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:meteor",
+      "make": "Mercury",
+      "model": "Meteor",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:monarch",
+      "make": "Mercury",
+      "model": "Monarch",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:montclair",
+      "make": "Mercury",
+      "model": "Mont Clair",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:montclairmarauder",
+      "make": "Mercury",
+      "model": "Montclair Marauder",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:monteclair",
+      "make": "Mercury",
+      "model": "Monteclair",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:montego",
+      "make": "Mercury",
+      "model": "Montego",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:montegomx",
+      "make": "Mercury",
+      "model": "Montego MX",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:monterey",
+      "make": "Mercury",
+      "model": "Monterey",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:montereys55",
+      "make": "Mercury",
+      "model": "Monterey S-55",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:mystique",
+      "make": "Mercury",
+      "model": "Mystique",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:parklane",
+      "make": "Mercury",
+      "model": "Park Lane",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:sable",
+      "make": "Mercury",
+      "model": "Sable",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:sablewagon",
+      "make": "Mercury",
+      "model": "Sable Wagon",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:tracer",
+      "make": "Mercury",
+      "model": "Tracer",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:villager",
+      "make": "Mercury",
+      "model": "Villager",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mercury:zephyr",
+      "make": "Mercury",
+      "model": "Zephyr",
+      "canonical": {
+        "brandId": "mercury",
+        "modelId": null,
+        "canonicalMake": "Mercury",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "merkur:scorpio",
+      "make": "Merkur",
+      "model": "Scorpio",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "merkur:xr4ti",
+      "make": "Merkur",
+      "model": "XR4TI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:1100",
+      "make": "MG",
+      "model": "1100",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:13",
+      "make": "MG",
+      "model": "13",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:1300",
+      "make": "MG",
+      "model": "1300",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:1500",
+      "make": "MG",
+      "model": "1500",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:350",
+      "make": "MG",
+      "model": "350",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:cyberster",
+      "make": "MG",
+      "model": "Cyberster",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/cyberster",
+        "canonicalMake": "MG",
+        "canonicalModel": "Cyberster"
+      },
+      "aliases": [
+        "CYBERSTER",
+        "MG CYBERSTER"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:ehs",
+      "make": "MG",
+      "model": "EHS",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/ehs",
+        "canonicalMake": "MG",
+        "canonicalModel": "EHS"
+      },
+      "aliases": [
+        "EHS /",
+        "MG EHS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:ep",
+      "make": "MG",
+      "model": "EP",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:gs",
+      "make": "MG",
+      "model": "GS",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:gt",
+      "make": "MG",
+      "model": "GT",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:hs",
+      "make": "MG",
+      "model": "HS",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/hs",
+        "canonicalMake": "MG",
+        "canonicalModel": "HS"
+      },
+      "aliases": [
+        "MG HS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:im5",
+      "make": "MG",
+      "model": "IM5",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/im5",
+        "canonicalMake": "MG",
+        "canonicalModel": "IM5"
+      },
+      "aliases": [
+        "IM 5"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:im6",
+      "make": "MG",
+      "model": "IM6",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/im6",
+        "canonicalMake": "MG",
+        "canonicalModel": "IM6"
+      },
+      "aliases": [
+        "IM 6"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:j2",
+      "make": "MG",
+      "model": "J2",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:k",
+      "make": "MG",
+      "model": "K",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:l",
+      "make": "MG",
+      "model": "L",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:m",
+      "make": "MG",
+      "model": "M",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:maestro",
+      "make": "MG",
+      "model": "Maestro",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:magna",
+      "make": "MG",
+      "model": "Magna",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:magnette",
+      "make": "MG",
+      "model": "Magnette",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:marvelr",
+      "make": "MG",
+      "model": "Marvel R",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/marvel-r",
+        "canonicalMake": "MG",
+        "canonicalModel": "Marvel R"
+      },
+      "aliases": [
+        "MARVEL R",
+        "MG MARVEL",
+        "MG Marvel Electric",
+        "MG MARVEL R",
+        "MG Marvel X Electric"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:metro",
+      "make": "MG",
+      "model": "Metro",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg07",
+      "make": "MG",
+      "model": "MG 07",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M04/A4/0E/120x90_0_q95_autohomecar__ChxpVWpUmfGANEvuABra0diQJlI550.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg4x",
+      "make": "MG",
+      "model": "MG 4X",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M0A/DE/1E/120x90_0_q95_autohomecar__ChtpWGoRP_iAFkm5AC3FMY4vuJs777.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgcyberster",
+      "make": "MG",
+      "model": "MG Cyberster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g25/M01/BB/28/120x90_0_q95_autohomecar__CjIFV2himaqAP1lhACfn6Cs-hXo647.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mges5",
+      "make": "MG",
+      "model": "MG ES5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M0B/7A/3E/120x90_0_q95_autohomecar__Chtk2WcSAd2AMGXWABtGdgtFgqA108.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgone",
+      "make": "MG",
+      "model": "MG ONE",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg3",
+      "make": "MG",
+      "model": "MG3",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/mg3",
+        "canonicalMake": "MG",
+        "canonicalModel": "MG3"
+      },
+      "aliases": [
+        "3",
+        "3 EXCITE VTI-TECH",
+        "3 EXCLUSIVE NAV VTI-TECH",
+        "3 EXCLUSIVE VTI-TECH",
+        "3 EXPLORE VTI-TECH",
+        "3 HYBRID+"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg4",
+      "make": "MG",
+      "model": "MG4",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/mg4",
+        "canonicalMake": "MG",
+        "canonicalModel": "MG4"
+      },
+      "aliases": [
+        "MG 4"
+      ],
+      "markets": [
+        "global",
+        "china"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "autohome-china"
+      ],
+      "origins": [
+        "global",
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M09/00/A0/120x90_0_q95_autohomecar__ChxpV2n8Lu6AeO-YABJbi1T3mDQ065.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg5",
+      "make": "MG",
+      "model": "MG5",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/mg5",
+        "canonicalMake": "MG",
+        "canonicalModel": "MG5"
+      },
+      "aliases": [
+        "MG 5 ELECTRIC",
+        "MG 5 EXCITE EV",
+        "MG 5 EXCLUSIVE EV",
+        "MG MG 5 ELECTRIC"
+      ],
+      "markets": [
+        "global",
+        "china"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "autohome-china"
+      ],
+      "origins": [
+        "global",
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M02/8A/C1/120x90_0_q95_autohomecar__ChxkPma--c-AQ8eJAC_A4UQ4G6g379.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg5天蝎座",
+      "make": "MG",
+      "model": "MG5天蝎座",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg6",
+      "make": "MG",
+      "model": "MG6",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "china"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "autohome-china"
+      ],
+      "origins": [
+        "global",
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M0A/6E/66/120x90_0_q95_autohomecar__CjIFVmRrYkOAUPGDACXdC2ylnEw709.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg7",
+      "make": "MG",
+      "model": "MG7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M06/9F/2A/120x90_0_q95_autohomecar__ChxpVWlSi-2AYBx7AEFAGrEGJLA041.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mga",
+      "make": "MG",
+      "model": "MGA",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgb",
+      "make": "MG",
+      "model": "MGB",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgc",
+      "make": "MG",
+      "model": "MGC",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgf",
+      "make": "MG",
+      "model": "MGF",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgs5ev",
+      "make": "MG",
+      "model": "MGS5 EV",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/mgs5-ev",
+        "canonicalMake": "MG",
+        "canonicalModel": "MGS5 EV"
+      },
+      "aliases": [
+        "MG S5 EV",
+        "MGS5 ELECTRIC"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgs6ev",
+      "make": "MG",
+      "model": "MGS6 EV",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/mgs6-ev",
+        "canonicalMake": "MG",
+        "canonicalModel": "MGS6 EV"
+      },
+      "aliases": [
+        "MG S6 EV"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mgs9phev",
+      "make": "MG",
+      "model": "MGS9 PHEV",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg领航",
+      "make": "MG",
+      "model": "MG领航",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:mg领航新能源",
+      "make": "MG",
+      "model": "MG领航新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:midget",
+      "make": "MG",
+      "model": "Midget",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:montego",
+      "make": "MG",
+      "model": "Montego",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:pb",
+      "make": "MG",
+      "model": "PB",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:qtype",
+      "make": "MG",
+      "model": "Q-Type",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:roadster",
+      "make": "MG",
+      "model": "Roadster",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:rv8",
+      "make": "MG",
+      "model": "RV8",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:rx6",
+      "make": "MG",
+      "model": "RX6",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/rx6",
+        "canonicalMake": "MG",
+        "canonicalModel": "RX6"
+      },
+      "aliases": [
+        "MG MG RX6 Plug-in hybrid",
+        "MG RX6",
+        "MG RX6 PLUG-IN HYBRID"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:sa",
+      "make": "MG",
+      "model": "SA",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:t",
+      "make": "MG",
+      "model": "T",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:tf",
+      "make": "MG",
+      "model": "T F",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:ta",
+      "make": "MG",
+      "model": "TA",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:tb",
+      "make": "MG",
+      "model": "TB",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:tc",
+      "make": "MG",
+      "model": "TC",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:td",
+      "make": "MG",
+      "model": "TD",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:tdtf",
+      "make": "MG",
+      "model": "TD/TF",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:tfmidget",
+      "make": "MG",
+      "model": "TF Midget",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:va",
+      "make": "MG",
+      "model": "VA",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:ya",
+      "make": "MG",
+      "model": "YA",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:yb",
+      "make": "MG",
+      "model": "YB",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:yt",
+      "make": "MG",
+      "model": "YT",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:zr",
+      "make": "MG",
+      "model": "ZR",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:zs",
+      "make": "MG",
+      "model": "ZS",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/zs",
+        "canonicalMake": "MG",
+        "canonicalModel": "ZS"
+      },
+      "aliases": [
+        "MG ZS",
+        "MG ZS /",
+        "ZS /"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:zsev",
+      "make": "MG",
+      "model": "ZS EV",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": "mg-motor/zs-ev",
+        "canonicalMake": "MG",
+        "canonicalModel": "ZS EV"
+      },
+      "aliases": [
+        "MG ZS EV",
+        "MG ZS EV /",
+        "MG ZS EV / /",
+        "ZS EV /"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:zt",
+      "make": "MG",
+      "model": "ZT",
+      "canonical": {
+        "brandId": "mg-motor",
+        "modelId": null,
+        "canonicalMake": "MG",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mg:名爵zs",
+      "make": "MG",
+      "model": "名爵ZS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "microcompactcar:smart",
+      "make": "Micro Compact Car",
+      "model": "Smart",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "micro:microlino",
+      "make": "Micro",
+      "model": "Microlino",
+      "canonical": {
+        "brandId": "micro",
+        "modelId": "micro/microlino",
+        "canonicalMake": "Micro",
+        "canonicalModel": "Microlino"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:1000",
+      "make": "Mini",
+      "model": "1000",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:1000specialdeluxe",
+      "make": "Mini",
+      "model": "1000 Special Deluxe",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:1100",
+      "make": "Mini",
+      "model": "1100",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:1300u9",
+      "make": "Mini",
+      "model": "1300 U9",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:aceman",
+      "make": "MINI",
+      "model": "Aceman",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/aceman",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Aceman"
+      },
+      "aliases": [
+        "ACEMAN"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:clubman",
+      "make": "MINI",
+      "model": "Clubman",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/clubman",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Clubman"
+      },
+      "aliases": [
+        "CLUBMAN",
+        "MINI JCW クラブマン",
+        "MINI One クラブマン",
+        "MINI クーパ-S クラブマン",
+        "MINI クーパ-S クラブマン A4",
+        "MINI クーパ- クラブマン",
+        "Mini クーパーD クラブマン",
+        "Mini クーパーSD クラブマン",
+        "MINI Cooper Clubman",
+        "MINI Cooper S クラブマン",
+        "MINI Cooper S クラブマン A4",
+        "MINI JCW Clubman",
+        "MINI One Clubman",
+        "MINI クーパ- D クラブマン",
+        "MINI クーパ- SD クラブマン",
+        "CLUBMAN COOPER"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:convertible",
+      "make": "MINI",
+      "model": "Convertible",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/convertible",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Convertible"
+      },
+      "aliases": [
+        "CONVERTIBLE",
+        "MINI JCW コンバ-チブル",
+        "MINI クーパ- S コンバ-チブル",
+        "MINI クーパ- コンバ-チブル",
+        "MINI JCW コンバーチブル",
+        "MINI クーパ- Sコンバーチブル",
+        "MINI クーパ- コンバーチブル",
+        "MINI クーパー コンバーチブル C",
+        "MINI クーパー コンバーチブル S"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooper",
+      "make": "MINI",
+      "model": "Cooper",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/cooper",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Cooper"
+      },
+      "aliases": [
+        "MINI Cooper",
+        "MINI Cooper 5 Door",
+        "Mini Cooper D",
+        "Mini Cooper D 5 door",
+        "MINI Cooper S",
+        "MINI Cooper S 5 Door",
+        "Mini Cooper SD",
+        "Mini Cooper SD 5 door",
+        "MINI Cooper ペ-スマン A4",
+        "MINI クーパー S",
+        "MINI Cooper 5 Door C",
+        "MINI Cooper 5 Door S",
+        "MINI Cooper C",
+        "COOPER",
+        "COOPER S"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooper3door",
+      "make": "MINI",
+      "model": "Cooper 3 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooper5door",
+      "make": "MINI",
+      "model": "Cooper 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooperclubmanall4",
+      "make": "MINI",
+      "model": "Cooper Clubman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooperconvertible",
+      "make": "MINI",
+      "model": "Cooper Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopercountryman",
+      "make": "MINI",
+      "model": "Cooper Countryman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopercountrymanall4",
+      "make": "MINI",
+      "model": "Cooper Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopers3door",
+      "make": "MINI",
+      "model": "Cooper S 3 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopers5door",
+      "make": "MINI",
+      "model": "Cooper S 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopersclubman",
+      "make": "MINI",
+      "model": "Cooper S Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopersclubmanall4",
+      "make": "MINI",
+      "model": "Cooper S Clubman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopersconvertible",
+      "make": "MINI",
+      "model": "Cooper S Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooperscountryman",
+      "make": "MINI",
+      "model": "Cooper S Countryman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooperscountrymanall4",
+      "make": "MINI",
+      "model": "Cooper S Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:cooperse3door",
+      "make": "MINI",
+      "model": "Cooper SE 3 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:coopersecountrymanall4",
+      "make": "MINI",
+      "model": "Cooper SE Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:countryman",
+      "make": "MINI",
+      "model": "Countryman",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/countryman",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Countryman"
+      },
+      "aliases": [
+        "C-MAN COOPER S E ALL4 CLASSC A",
+        "C-MAN COOPER S E ALL4 EXC A",
+        "C-MAN COOPER S E ALL4 SPORT A",
+        "COUNTRYMAN",
+        "MINI Cooper クロスオーバー",
+        "MINI JCW クロスオ-バ-",
+        "MINI JCW クロスオ-バ- A4",
+        "MINI JCW クロスオーバー",
+        "MINI ONE クロスオ-バ-",
+        "MINI ONE クロスオーバー",
+        "MINI カントリーマン C",
+        "MINI カントリーマン D",
+        "MINI カントリーマン S ALL4",
+        "MINI ク-パ- クロスオ-バ-",
+        "MINI ク-パ-S クロスオ-バ-",
+        "MINI クーパー S クロスオーバー",
+        "MINI クーパー S クロスオーバー A4",
+        "MINI クーパー クロスオーバー A4",
+        "MINI クーパーD クロスオ-バ-",
+        "MINI クーパーD クロスオ-バ-A4",
+        "Mini クーパーD クロスオーバー",
+        "Mini クーパーD クロスオーバーA4",
+        "MINI クーパーSD クロスオ-バ-A4",
+        "Mini クーパーSD クロスオーバー",
+        "Mini クーパーSD クロスオーバーA4"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:countrymansall4",
+      "make": "MINI",
+      "model": "Countryman S ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:countrymanseall418wheels",
+      "make": "MINI",
+      "model": "Countryman SE ALL4 (18\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:countrymanseall419wheels",
+      "make": "MINI",
+      "model": "Countryman SE ALL4 (19\" Wheels)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

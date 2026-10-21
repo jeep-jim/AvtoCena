@@ -1,0 +1,2641 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:25:04.159Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 50,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/uae/used",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 749969,
+            "sha256": "ada777a535a67032d1ca55091267095c933160b4248fff65bef511e28ccc18d1",
+            "title": "Used cars for sale in UAE - Buy second hand cars | DubiCars",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-land-cruiser-lc300-2022-model-full-option-1015750.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 338614,
+            "sha256": "8d73de2f6c74a04678df422ab5d1439e25e18612042fdaf59a540cc5056ebdd6",
+            "title": "Used Toyota Land Cruiser LC300 2022 Model Full Option 2022 for sale in Dubai - 1015750",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-land-cruiser-twin-turbo-35l-engine-2022-model-full-option-1011773.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 302684,
+            "sha256": "88a10449dbf2402b35b15324581fa5a2d146d5843060b7b630626fc114c1efd6",
+            "title": "Used Toyota Land Cruiser Twin Turbo 3.5L Engine 2022 Model Full Option 2022 for sale in Dubai - 1011773",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-land-cruiser-2022-model-twin-turbo-35l-engine-full-option-new-arrival-1010541.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 371293,
+            "sha256": "587234662f1fbb8ef9dd63b732a2c37cf6280b54d6091658b6a5892845d7bead",
+            "title": "Used Toyota Land Cruiser 2022 Model Twin Turbo 3.5L Engine Full Option New Arrival 2022 for sale in Dubai - 1010541",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-prado-994482.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 318448,
+            "sha256": "9e9cbd97eaac3addb6188b31ba939a10f46b03300bba34d253f809154ac0bd34",
+            "title": "Used Toyota Prado 2022 for sale in Dubai - 994482",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-toyota-land-cruiser-2024-model-vxr-twin-turbo-35l-engine-full-option-red-and-black-interior-inside-very-clean-and-perfe-976037.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 341924,
+            "sha256": "1776c19768bb027ce65a42ec666b18bb1c36c98ec4c56f6c761108aed4a704a1",
+            "title": "Used Toyota Land Cruiser 2024 Model VXR TWIN TURBO 3,5L ENGINE FULL OPTION RED AND BLACK INTERIOR INSIDE VERY CLEAN AND PERFE 2024 for sale in Dubai - 976037",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-land-cruiser-gxr-2019-model-facelift-to-2025-shape-exterior-and-interior-full-option-very-perfect-condition-973647.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 336690,
+            "sha256": "fb6b0e5495050f107171fd57a1a20e6b5680742c666d4a5dd622d75a92980414",
+            "title": "Used Toyota Land Cruiser GXR 2019 Model Facelift to 2025 Shape Exterior and Interior Full Option Very Perfect Condition 2019 for sale in Dubai - 973647",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-toyota-land-cruiser-2023-model-gxr-twin-turbo-35l-engine-full-option-very-perfect-condition-968288.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 342591,
+            "sha256": "d30fc538bb0555dd85857560b1836427769227bc0740a614203f2e306de54772",
+            "title": "Used Toyota Land Cruiser 2023 Model GXR Twin Turbo 3.5L Engine Full Option Very Perfect Condition 2023 for sale in Dubai - 968288",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2020-toyota-land-cruiser-gxr-2020-model-facelift-to-lc300-2025-shape-exterior-and-interior-both-car-is-very-clean-and-perfect-961283.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 353636,
+            "sha256": "65a525da7cdfd584c69ae4b8410af99748833bf565d49058a67dce651d87037d",
+            "title": "Used Toyota Land Cruiser GXR 2020 Model Facelift to LC300 2025 Shape Exterior and Interior Both Car is very Clean and Perfect 2020 for sale in Dubai - 961283",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-land-cruiser-2022-model-full-option-very-clean-and-perfect-condition-920087.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 361077,
+            "sha256": "048bfaa5c88523bcde7ee0e20bf7bb06a12ad1ee81d7ed2ac9d2250ad1e46d2f",
+            "title": "Used Toyota Land Cruiser 2022 Model Full Option Very Clean And Perfect Condition 2022 for sale in Dubai - 920087",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-fortuner-gx2-2019-model-lhd-v4-full-option-facelift-to-2025-shape-905654.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 338549,
+            "sha256": "c8af6c45dfddc63b095361a1a0cf2b1e160a1f8815e60658114b9db5e3aab5e4",
+            "title": "Used Toyota Fortuner GX2 2019 Model LHD V4 Full Option Facelift to 2025 Shape 2019 for sale in Dubai - 905654",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-land-cruiser-2022-model-33l-diesel-engine-full-option-top-of-the-range-901014.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 353139,
+            "sha256": "2e5035e5becbde4462953e8fdbad972347b61272f25655d3e8ca9d898d9fdbc5",
+            "title": "Used Toyota Land Cruiser 2022 MODEL 3.3L Diesel Engine Full Option Top Of The Range 2022 for sale in Dubai - 901014",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-prado-tx-l-2019-model-diesel-engine-full-option-4-cylinder-automatic-transmission-gcc-specs-897331.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 343675,
+            "sha256": "d3277b316f357955fab5d2a3101a9055fc96c45a38a01d61838b130bab7bec36",
+            "title": "Used Toyota Prado TX-L 2019 MODEL DIESEL ENGINE FULL OPTION  4 CYLINDER AUTOMATIC TRANSMISSION GCC SPECS 2019 for sale in Dubai - 897331",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2016-toyota-land-cruiser-2016-model-facelift-to-lc300-2025-shape-exterior-and-interior-both-full-complete-upgraded-with-dashb-898425.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 336535,
+            "sha256": "c8ec0a4f2a697153910f6c305a4704581b61f0092a1da165354f96ec6e68ba84",
+            "title": "Used Toyota Land Cruiser 2016 Model Facelift to Lc300 2025 Shape Exterior and Interior Both Full Complete Upgraded with Dashb 2016 for sale in Dubai - 898425",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2021-toyota-hilux-2021-facelifted-2025-gr-sport-gcc-in-excellent-condition-896643.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 322423,
+            "sha256": "5525fce0fd7e6a2c712edfb736712472808e328adf9acd5a9d0dd2eacdf18229",
+            "title": "Used Toyota Hilux 2021 FACELIFTED 2025 GR SPORT GCC IN EXCELLENT CONDITION 2021 for sale in Dubai - 896643",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-toyota-prado-vxr-2023-model-full-option-black-exterior-very-clean-and-perfect-condition-new-fresh-import-894947.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 344401,
+            "sha256": "d9ddc99d0b11a7dbca5f5bf3ed68788ee430da49b21c53e18f04399eef7611d1",
+            "title": "Used Toyota Prado VXR 2023 Model Full Option Black Exterior Very Clean And Perfect Condition New Fresh Import 2023 for sale in Dubai - 894947",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-land-cruiser-gxr-2019-facelifted-2025-with-interior-and-exterior-v6-40l-gcc-in-excellent-condition-868285.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 359615,
+            "sha256": "0cc8fb29ab45b6d7f5cbce15e3a8d4bd9b9cfe5b222934fa0d9251c1a8815f10",
+            "title": "Used Toyota Land Cruiser GXR 2019 FACELIFTED 2025 WITH INTERIOR AND EXTERIOR V6 4.0L GCC IN EXCELLENT CONDITION 2019 for sale in Dubai - 868285",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2018-toyota-land-cruiser-pick-up-2018-rhd-diesel-engine-full-option-very-clean-and-perfect-condition-863853.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 310828,
+            "sha256": "d0647ae4c153bed5bcfab604fa38b6ae8aa1495568bfd7c1e76b72c8e8f7107a",
+            "title": "Used Toyota Land Cruiser Pick Up 2018 RHD  Diesel Engine Full Option Very Clean And Perfect Condition 2018 for sale in Dubai - 863853",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2015-toyota-prado-vxr-txl-2015-upgrade-to-2023-top-of-the-range-very-clean-and-perfect-condition-817342.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 317214,
+            "sha256": "e863a91dced5bf657c438a0fece6e68eb9f6b0c2964bd5aea24fe8641cd15444",
+            "title": "Used Toyota Prado VXR TXL 2015 Upgrade To 2023 Top Of The Range Very Clean And Perfect Condition 2015 for sale in Dubai - 817342",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-fortuner-exr-gxr-v4-2019-model-gcc-specification-very-clean-title-813179.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 350348,
+            "sha256": "cde8cf5cc80ec7fe809a15f5fcb259e734ea20e06420995cacdd0bce52241809",
+            "title": "Used Toyota Fortuner EXR GXR V4 2019 Model GCC Specification Very Clean Title 2019 for sale in Dubai - 813179",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2021-toyota-hilux-adventure-2021-facelifted-2024-gr-monster-design-full-option-top-of-the-range-799868.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 347709,
+            "sha256": "c0c58622c7b24bd16a2722f5ee2be6e7ec1d6a6c7565dc91ef97ff8e5f102bfe",
+            "title": "Used Toyota Hilux ADVENTURE 2021 Facelifted 2024 GR Monster DESIGN Full Option Top Of The Range 2021 for sale in Dubai - 799868",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2018-toyota-land-cruiser-2018-modified-to-2024-v8-full-option-789263.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 328453,
+            "sha256": "e736bb27caca1544e567da23da053f27c1da16c144a92312273ea69264c38d15",
+            "title": "Used Toyota Land Cruiser 2018 Modified to 2024 V8 Full Option 2018 for sale in Dubai - 789263",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-toyota-land-cruiser-963056.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 348766,
+            "sha256": "830e08ef9f622cb653331f4acddfe60fd7e532b8a195ea3f172780f33b497434",
+            "title": "Used Toyota Land Cruiser 2023 for sale in Dubai - 963056",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2017-toyota-land-cruiser-40l-271-hp-4wd-963061.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 380246,
+            "sha256": "784562620ca61cc21f458ec3967cf55eae50ca523ebc070e624b83eba2ba55d6",
+            "title": "Used Toyota Land Cruiser 4.0L (271 HP) 4WD 2017 for sale in Dubai - 963061",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2021-toyota-hilux-sglx-adv-28l-963999.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 360774,
+            "sha256": "9e9d750f7b0cd19f71f04c6fc1759362b37a78a03519b48f58beefee00e7518b",
+            "title": "Used Toyota Hilux SGLX ADV 2.8L 2021 for sale in Dubai - 963999",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2018-toyota-land-cruiser-70-lc76-std-964003.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 333960,
+            "sha256": "ef8329867d47ba702769d3b7dd15b8f02e49f2b8921deecb711eddc3cb8d6c3f",
+            "title": "Used Toyota Land Cruiser 70 LC76 STD 2018 for sale in Dubai - 964003",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-land-cruiser-70-964005.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 299924,
+            "sha256": "fe11fc3a827fb476bc20a189cfd5bd9acb2944f93ac4c81c194762544d5b4b7a",
+            "title": "Used Toyota Land Cruiser 70 2019 for sale in Dubai - 964005",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2020-toyota-prado-964472.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 350005,
+            "sha256": "ca5080e8106f7d1361b0c1604531d8ff8d51617071bcc222daa36df284c4df02",
+            "title": "Used Toyota Prado 2020 for sale in Dubai - 964472",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-prado-28l-965084.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 371853,
+            "sha256": "c3f6c2f1c14aecf41e52dbedb5d71e50afd02a4140585247fa3cf69f4cde1cd6",
+            "title": "Used Toyota Prado 2.8L 2022 for sale in Dubai - 965084",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-toyota-land-cruiser-gxr-vxr-35l-965411.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 382672,
+            "sha256": "06ffb7f5a54dab6d00e20b602329949582026798cfed717d13820959a7ee43c6",
+            "title": "Used Toyota Land Cruiser GXR VXR 3.5L 2022 for sale in Dubai - 965411",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-toyota-land-cruiser-965412.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 368604,
+            "sha256": "3100df84585b981da51d99062a7961e8dbfa3858652f55376fa8b3b2bfdc0a16",
+            "title": "Used Toyota Land Cruiser 2019 for sale in Dubai - 965412",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        }
+      ],
+      "sourceId": "dubicars_uae_exact",
+      "listingRows": 17,
+      "normalizedRows": 17,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [
+        {
+          "sourceOfferId": "1015750",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 271,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-lc300-2022-model-full-option-1015750.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/aa3c84/w_960x540/global-automobile-trading/7e4e6dd8-d4c0-4e19-912a-008b9d8fd6a7.jpeg",
+            "https://www.dubicars.com/images/07a7a6/w_1300x760/global-automobile-trading/7e4e6dd8-d4c0-4e19-912a-008b9d8fd6a7.jpeg",
+            "https://www.dubicars.com/images/a2adb2/w_1300x760/global-automobile-trading/3ce92278-7438-4d2b-96d6-42fcee3878aa.jpeg",
+            "https://www.dubicars.com/images/651a7f/w_1300x760/global-automobile-trading/da7943f5-ef07-4439-94d5-c4a9eda6c0b6.jpeg",
+            "https://www.dubicars.com/images/f16d63/w_1300x760/global-automobile-trading/8478e09f-e83d-494c-b509-bafe745bd6b0.jpeg",
+            "https://www.dubicars.com/images/e6d7c1/w_1300x760/global-automobile-trading/3371bbbd-0eab-455d-8c9b-67ee4b3c454a.jpeg",
+            "https://www.dubicars.com/images/25cad6/w_1300x760/global-automobile-trading/e86c9fa8-dcab-4df3-b7ea-9536180d808e.jpeg",
+            "https://www.dubicars.com/images/aae84b/w_1300x760/global-automobile-trading/aabaac50-5225-41ee-83ab-5e4050281762.jpeg",
+            "https://www.dubicars.com/images/f6b04a/w_1300x760/global-automobile-trading/0b2a3301-31f3-4fc0-bf09-d1179a959cbd.jpeg",
+            "https://www.dubicars.com/images/c0acab/w_1300x760/global-automobile-trading/c2c57193-f4fa-42b4-96ed-73042e36bf6d.jpeg",
+            "https://www.dubicars.com/images/9d130c/w_1300x760/global-automobile-trading/09169374-92ca-450a-9596-67f6abab9d65.jpeg",
+            "https://www.dubicars.com/images/530e83/w_1300x760/global-automobile-trading/131c6c7f-81b4-4bef-ad81-d3d652cbd9ec.jpeg",
+            "https://www.dubicars.com/images/522fb3/w_1300x760/global-automobile-trading/9ec45761-e770-41ca-b791-9aa2bfdf545b.jpeg",
+            "https://www.dubicars.com/images/e13646/w_1300x760/global-automobile-trading/2781de1b-2f09-4945-8498-1ca74e7b43ae.jpeg",
+            "https://www.dubicars.com/images/ea479a/w_1300x760/global-automobile-trading/9230ec3b-c2d5-4613-b9e0-06bef77bc432.jpeg",
+            "https://www.dubicars.com/images/439fad/w_1300x760/global-automobile-trading/0bf87449-5810-4446-8b4a-86eb03ad0c3f.jpeg",
+            "https://www.dubicars.com/images/e4222a/w_1300x760/global-automobile-trading/c9a13b59-7d6b-4844-98cb-6448586b9569.jpeg",
+            "https://www.dubicars.com/images/03bfba/w_1300x760/global-automobile-trading/a7c09c31-902e-4abf-b718-7bdebe91f272.jpeg",
+            "https://www.dubicars.com/images/404c60/w_1300x760/global-automobile-trading/0d35eec5-8638-42ca-be32-5ad46630982e.jpeg",
+            "https://www.dubicars.com/images/876e99/w_650x380/global-automobile-trading/7e4e6dd8-d4c0-4e19-912a-008b9d8fd6a7.jpeg",
+            "https://www.dubicars.com/images/f58d5e/w_650x380/global-automobile-trading/3ce92278-7438-4d2b-96d6-42fcee3878aa.jpeg",
+            "https://www.dubicars.com/images/0051aa/w_650x380/global-automobile-trading/da7943f5-ef07-4439-94d5-c4a9eda6c0b6.jpeg",
+            "https://www.dubicars.com/images/9cda11/w_650x380/global-automobile-trading/8478e09f-e83d-494c-b509-bafe745bd6b0.jpeg",
+            "https://www.dubicars.com/images/f87123/w_650x380/global-automobile-trading/3371bbbd-0eab-455d-8c9b-67ee4b3c454a.jpeg",
+            "https://www.dubicars.com/images/1751e6/w_650x380/global-automobile-trading/e86c9fa8-dcab-4df3-b7ea-9536180d808e.jpeg",
+            "https://www.dubicars.com/images/920af0/w_650x380/global-automobile-trading/aabaac50-5225-41ee-83ab-5e4050281762.jpeg",
+            "https://www.dubicars.com/images/a0e5d0/w_650x380/global-automobile-trading/0b2a3301-31f3-4fc0-bf09-d1179a959cbd.jpeg",
+            "https://www.dubicars.com/images/e46b86/w_650x380/global-automobile-trading/c2c57193-f4fa-42b4-96ed-73042e36bf6d.jpeg",
+            "https://www.dubicars.com/images/e466d4/w_650x380/global-automobile-trading/09169374-92ca-450a-9596-67f6abab9d65.jpeg",
+            "https://www.dubicars.com/images/3fec52/w_650x380/global-automobile-trading/131c6c7f-81b4-4bef-ad81-d3d652cbd9ec.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 271,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "1011773",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 409,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-twin-turbo-35l-engine-2022-model-full-option-1011773.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/33fd06/w_960x540/global-automobile-trading/9ad65301-727f-4032-a498-b51844b3b7e3.jpeg",
+            "https://www.dubicars.com/images/31743f/w_1300x760/global-automobile-trading/9ad65301-727f-4032-a498-b51844b3b7e3.jpeg",
+            "https://www.dubicars.com/images/ee14d0/w_1300x760/global-automobile-trading/9ce3fa96-f815-4385-b64f-0691f1d911c0.jpeg",
+            "https://www.dubicars.com/images/66b501/w_1300x760/global-automobile-trading/49c0af36-1499-46fc-8d7d-7a7bac3c3936.jpeg",
+            "https://www.dubicars.com/images/5de1e6/w_1300x760/global-automobile-trading/c3647de8-f5f1-4035-94ed-8f6d30103cd5.jpeg",
+            "https://www.dubicars.com/images/0f02aa/w_1300x760/global-automobile-trading/1628fe2a-b5d8-466e-99e6-63b5dcdd082d.jpeg",
+            "https://www.dubicars.com/images/aaf2de/w_1300x760/global-automobile-trading/c27a33a8-cbc6-40bc-a05a-6691aedd9d47.jpeg",
+            "https://www.dubicars.com/images/67bc7e/w_1300x760/global-automobile-trading/94032ba1-b923-4609-8306-bd139e9afe74.jpeg",
+            "https://www.dubicars.com/images/8b8eab/w_1300x760/global-automobile-trading/785a5d9e-7141-4480-915c-69ed036e5cc0.jpeg",
+            "https://www.dubicars.com/images/f7ff78/w_1300x760/global-automobile-trading/06009e00-c492-4fb3-a0c1-153f733b2b4b.jpeg",
+            "https://www.dubicars.com/images/6769ce/w_1300x760/global-automobile-trading/d9b479ea-990b-4744-b2fb-256377ea29a7.jpeg",
+            "https://www.dubicars.com/images/b318f7/w_1300x760/global-automobile-trading/a142dbbd-b861-4319-ab9a-99d0ddc04c9c.jpeg",
+            "https://www.dubicars.com/images/9a2749/w_1300x760/global-automobile-trading/f862df7e-708b-42c6-aa0b-b48d5887408f.jpeg",
+            "https://www.dubicars.com/images/de7dba/w_1300x760/global-automobile-trading/30af288b-2db7-4319-baa4-8628dbc55065.jpeg",
+            "https://www.dubicars.com/images/d68509/w_1300x760/global-automobile-trading/a75630c6-fc60-4656-8f83-82c891a889c2.jpeg",
+            "https://www.dubicars.com/images/f14c11/w_1300x760/global-automobile-trading/3aca6379-70e4-4d41-bd87-789b7061a1a0.jpeg",
+            "https://www.dubicars.com/images/3644c8/w_1300x760/global-automobile-trading/92ea9d02-a3dc-4bd7-a6aa-24f3690149d9.jpeg",
+            "https://www.dubicars.com/images/37ec87/w_1300x760/global-automobile-trading/caf62eb3-a4f1-4b56-8422-77b7f12b31a2.jpeg",
+            "https://www.dubicars.com/images/7aa494/w_1300x760/global-automobile-trading/fdfafc68-4a6f-4f44-a3ab-d37078b7f8d3.jpeg",
+            "https://www.dubicars.com/images/e8a08d/w_650x380/global-automobile-trading/9ad65301-727f-4032-a498-b51844b3b7e3.jpeg",
+            "https://www.dubicars.com/images/d0b67e/w_650x380/global-automobile-trading/9ce3fa96-f815-4385-b64f-0691f1d911c0.jpeg",
+            "https://www.dubicars.com/images/711d40/w_650x380/global-automobile-trading/49c0af36-1499-46fc-8d7d-7a7bac3c3936.jpeg",
+            "https://www.dubicars.com/images/dd1d9a/w_650x380/global-automobile-trading/c3647de8-f5f1-4035-94ed-8f6d30103cd5.jpeg",
+            "https://www.dubicars.com/images/a51b2b/w_650x380/global-automobile-trading/1628fe2a-b5d8-466e-99e6-63b5dcdd082d.jpeg",
+            "https://www.dubicars.com/images/7983d0/w_650x380/global-automobile-trading/c27a33a8-cbc6-40bc-a05a-6691aedd9d47.jpeg",
+            "https://www.dubicars.com/images/589141/w_650x380/global-automobile-trading/94032ba1-b923-4609-8306-bd139e9afe74.jpeg",
+            "https://www.dubicars.com/images/505578/w_650x380/global-automobile-trading/785a5d9e-7141-4480-915c-69ed036e5cc0.jpeg",
+            "https://www.dubicars.com/images/fec213/w_650x380/global-automobile-trading/06009e00-c492-4fb3-a0c1-153f733b2b4b.jpeg",
+            "https://www.dubicars.com/images/79fd01/w_650x380/global-automobile-trading/d9b479ea-990b-4744-b2fb-256377ea29a7.jpeg",
+            "https://www.dubicars.com/images/8c1885/w_650x380/global-automobile-trading/a142dbbd-b861-4319-ab9a-99d0ddc04c9c.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 409,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "1010541",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 409,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-2022-model-twin-turbo-35l-engine-full-option-new-arrival-1010541.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/5d4bb7/w_960x540/global-automobile-trading/58133448-25ab-48ef-909d-f475f86e0ed0.jpeg",
+            "https://www.dubicars.com/images/7654a7/w_1300x760/global-automobile-trading/58133448-25ab-48ef-909d-f475f86e0ed0.jpeg",
+            "https://www.dubicars.com/images/149671/w_1300x760/global-automobile-trading/4b185dc5-fde8-4e41-837c-fa35e98044dd.jpeg",
+            "https://www.dubicars.com/images/8f7317/w_1300x760/global-automobile-trading/5ec29c20-0080-48f3-8aa4-32d80baf40eb.jpeg",
+            "https://www.dubicars.com/images/3c5ca7/w_1300x760/global-automobile-trading/ad854093-46dc-4cbe-8716-6ea6b5b841ef.jpeg",
+            "https://www.dubicars.com/images/dbf055/w_1300x760/global-automobile-trading/6e6122d7-1281-47ab-8bc5-f4d9b21539b3.jpeg",
+            "https://www.dubicars.com/images/48bf90/w_1300x760/global-automobile-trading/319ff1de-7557-4a5c-bbcd-c6bbd6d0a1d4.jpeg",
+            "https://www.dubicars.com/images/786654/w_1300x760/global-automobile-trading/363ce6bd-ff14-428f-b811-072aeae89fbd.jpeg",
+            "https://www.dubicars.com/images/55b087/w_1300x760/global-automobile-trading/a35cee03-bacf-46e2-9d84-09f17a99f338.jpeg",
+            "https://www.dubicars.com/images/94f9ce/w_1300x760/global-automobile-trading/4e8e3713-a642-40b2-a3d6-3d15fd22bc17.jpeg",
+            "https://www.dubicars.com/images/efb2b5/w_1300x760/global-automobile-trading/0175e4b1-e073-49cb-872f-69ff1cde6431.jpeg",
+            "https://www.dubicars.com/images/af09c5/w_1300x760/global-automobile-trading/bfa334de-2ae4-4df2-84ef-4580d2d37b46.jpeg",
+            "https://www.dubicars.com/images/e311fb/w_1300x760/global-automobile-trading/035d4021-0e10-4c2c-a17a-82b0c8c860bb.jpeg",
+            "https://www.dubicars.com/images/8e46a3/w_1300x760/global-automobile-trading/06fe379b-c679-4b6c-a17d-e89167a7db00.jpeg",
+            "https://www.dubicars.com/images/43f76e/w_1300x760/global-automobile-trading/18f364b4-4108-4524-9ab1-15c8a412dccb.jpeg",
+            "https://www.dubicars.com/images/271c46/w_1300x760/global-automobile-trading/f1732025-5f67-473d-bec1-b346a753a78f.jpeg",
+            "https://www.dubicars.com/images/aec600/w_1300x760/global-automobile-trading/534f4378-d77b-4ff0-beb4-235e74a72d9e.jpeg",
+            "https://www.dubicars.com/images/c4346c/w_1300x760/global-automobile-trading/02bda1e8-b220-4c33-a751-84e8f7f6034b.jpeg",
+            "https://www.dubicars.com/images/f495c6/w_1300x760/global-automobile-trading/0288785e-32ab-4f40-8a61-7d833ed5acf1.jpeg",
+            "https://www.dubicars.com/images/ac2b20/w_1300x760/global-automobile-trading/2982bcce-6d57-4854-9160-78f23b990384.jpeg",
+            "https://www.dubicars.com/images/66ea63/w_1300x760/global-automobile-trading/c336179b-504b-4906-b8b9-1d6827462e06.jpeg",
+            "https://www.dubicars.com/images/0fb510/w_1300x760/global-automobile-trading/dd07df2d-26de-4fd3-9ee5-285e6db0ceb5.jpeg",
+            "https://www.dubicars.com/images/16dcd7/w_1300x760/global-automobile-trading/59c183f9-0d0c-49ab-93b1-cea84f819390.jpeg",
+            "https://www.dubicars.com/images/6af695/w_1300x760/global-automobile-trading/ed351a3d-234a-4073-91d7-f483206fe97d.jpeg",
+            "https://www.dubicars.com/images/e87a01/w_1300x760/global-automobile-trading/1fe35dad-f050-49b3-ae4e-b1241b19a33b.jpeg",
+            "https://www.dubicars.com/images/323f45/w_1300x760/global-automobile-trading/4e4ab372-215e-4df3-956f-532070a1a91c.jpeg",
+            "https://www.dubicars.com/images/4e7c35/w_1300x760/global-automobile-trading/69bb63b3-2c0a-4c24-886f-247e78bae9a6.jpeg",
+            "https://www.dubicars.com/images/553c84/w_1300x760/global-automobile-trading/274a6638-6363-4f39-a1d4-36a1cc107a2e.jpeg",
+            "https://www.dubicars.com/images/9bedfa/w_1300x760/global-automobile-trading/02721b86-d720-4bfa-b9a1-502a36df74c9.jpeg",
+            "https://www.dubicars.com/images/9e76ba/w_650x380/global-automobile-trading/58133448-25ab-48ef-909d-f475f86e0ed0.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 409,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "994482",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 271,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-prado-994482.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/98494c/w_960x540/global-automobile-trading/058d8bc6-b599-42b4-8a52-5318e122d555.jpeg",
+            "https://www.dubicars.com/images/903c87/w_1300x760/global-automobile-trading/058d8bc6-b599-42b4-8a52-5318e122d555.jpeg",
+            "https://www.dubicars.com/images/0f197f/w_1300x760/global-automobile-trading/5ed7f17c-3718-4256-84f5-9fdc2cdabc21.jpeg",
+            "https://www.dubicars.com/images/8c33f0/w_1300x760/global-automobile-trading/7eb4d714-00f0-4466-be3b-8137443adcfb.jpeg",
+            "https://www.dubicars.com/images/7a9b26/w_1300x760/global-automobile-trading/f995e1bf-cef4-4625-b37d-0a6e96be17bb.jpeg",
+            "https://www.dubicars.com/images/4f3d2a/w_1300x760/global-automobile-trading/432b21e9-3554-4d53-b6aa-25a52db2dddb.jpeg",
+            "https://www.dubicars.com/images/26344f/w_1300x760/global-automobile-trading/dde6f19c-aef3-4267-b990-02d00b40fd3e.jpeg",
+            "https://www.dubicars.com/images/341e66/w_1300x760/global-automobile-trading/493ab670-a737-4ed0-8e16-0df4d95c3e5f.jpeg",
+            "https://www.dubicars.com/images/e38bae/w_1300x760/global-automobile-trading/c5a93b52-dcc9-4129-9d02-145f2f0b4ca9.jpeg",
+            "https://www.dubicars.com/images/6bc0be/w_1300x760/global-automobile-trading/20dafb4d-b922-4d71-9bd2-60228cc2f74d.jpeg",
+            "https://www.dubicars.com/images/c9ad09/w_1300x760/global-automobile-trading/f2f8d540-5e4f-493d-9c98-18365c1d8be0.jpeg",
+            "https://www.dubicars.com/images/5620f5/w_1300x760/global-automobile-trading/10148d78-d6b6-4407-b265-ca73d1a0187d.jpeg",
+            "https://www.dubicars.com/images/8356dc/w_1300x760/global-automobile-trading/509547ba-c1d5-4e78-a70e-7c286d245b8b.jpeg",
+            "https://www.dubicars.com/images/4ae5f6/w_1300x760/global-automobile-trading/840bfac5-ff08-47ee-9180-3253413bb20a.jpeg",
+            "https://www.dubicars.com/images/9accc8/w_1300x760/global-automobile-trading/ae436973-66c4-4be4-b3fc-070c0872e83e.jpeg",
+            "https://www.dubicars.com/images/62c3c2/w_1300x760/global-automobile-trading/21def016-6f62-4a56-9b02-3ff242b5d740.jpeg",
+            "https://www.dubicars.com/images/954682/w_1300x760/global-automobile-trading/1e926062-c156-487f-8b9d-758c6d3d147f.jpeg",
+            "https://www.dubicars.com/images/053db5/w_1300x760/global-automobile-trading/2979b575-e4a2-49ee-a2eb-c4300f781378.jpeg",
+            "https://www.dubicars.com/images/b19cad/w_1300x760/global-automobile-trading/7171de5d-c1f7-4d55-81a6-4a54cf9aaeb1.jpeg",
+            "https://www.dubicars.com/images/623258/w_1300x760/global-automobile-trading/4cceadc3-94e5-40f3-ab02-2e65213d8033.jpeg",
+            "https://www.dubicars.com/images/4c8450/w_1300x760/global-automobile-trading/40179840-fb92-4c27-9d78-0b5ba006b370.jpeg",
+            "https://www.dubicars.com/images/6c6f45/w_650x380/global-automobile-trading/058d8bc6-b599-42b4-8a52-5318e122d555.jpeg",
+            "https://www.dubicars.com/images/f98154/w_650x380/global-automobile-trading/5ed7f17c-3718-4256-84f5-9fdc2cdabc21.jpeg",
+            "https://www.dubicars.com/images/c5f986/w_650x380/global-automobile-trading/7eb4d714-00f0-4466-be3b-8137443adcfb.jpeg",
+            "https://www.dubicars.com/images/bcc4a6/w_650x380/global-automobile-trading/f995e1bf-cef4-4625-b37d-0a6e96be17bb.jpeg",
+            "https://www.dubicars.com/images/00b5f6/w_650x380/global-automobile-trading/432b21e9-3554-4d53-b6aa-25a52db2dddb.jpeg",
+            "https://www.dubicars.com/images/530a35/w_650x380/global-automobile-trading/dde6f19c-aef3-4267-b990-02d00b40fd3e.jpeg",
+            "https://www.dubicars.com/images/521e95/w_650x380/global-automobile-trading/493ab670-a737-4ed0-8e16-0df4d95c3e5f.jpeg",
+            "https://www.dubicars.com/images/45c8ba/w_650x380/global-automobile-trading/c5a93b52-dcc9-4129-9d02-145f2f0b4ca9.jpeg",
+            "https://www.dubicars.com/images/49f758/w_650x380/global-automobile-trading/20dafb4d-b922-4d71-9bd2-60228cc2f74d.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 271,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "976037",
+          "yearAllowed": true,
+          "before": {
+            "year": 2024,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2024-toyota-land-cruiser-2024-model-vxr-twin-turbo-35l-engine-full-option-red-and-black-interior-inside-very-clean-and-perfe-976037.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/ac8b5c/w_960x540/unique-cars/d9377bb1-682a-43b9-9d37-b9a2d8fc1ec9.jpeg",
+            "https://www.dubicars.com/images/36cda8/w_1300x760/unique-cars/d9377bb1-682a-43b9-9d37-b9a2d8fc1ec9.jpeg",
+            "https://www.dubicars.com/images/6be213/w_1300x760/unique-cars/bf899802-77df-4286-a057-86fe38fa3d47.jpeg",
+            "https://www.dubicars.com/images/35bebc/w_1300x760/unique-cars/13cce742-5672-45ff-b2ee-7945d4c53bea.jpeg",
+            "https://www.dubicars.com/images/88099c/w_1300x760/unique-cars/af08ec89-393f-4aef-a947-cd719d17e7ae.jpeg",
+            "https://www.dubicars.com/images/6cc6a2/w_1300x760/unique-cars/d8790e83-10e0-406e-9ca0-5a46901eec4f.jpeg",
+            "https://www.dubicars.com/images/38c1d9/w_1300x760/unique-cars/9666f471-2508-4eba-a98a-553d93ec2e3a.jpeg",
+            "https://www.dubicars.com/images/2760b0/w_1300x760/unique-cars/fe845a4f-1a3b-4aea-8a9a-2834c080fe2e.jpeg",
+            "https://www.dubicars.com/images/eaae54/w_1300x760/unique-cars/69bd9fbc-3430-4ac8-aa6e-ae8fd47ab32a.jpeg",
+            "https://www.dubicars.com/images/9bfd94/w_1300x760/unique-cars/d3a9d827-b716-4c55-b4ea-8e9884e509a8.jpeg",
+            "https://www.dubicars.com/images/738b95/w_1300x760/unique-cars/b7d1e793-2125-4217-bea3-be811c3c9e9f.jpeg",
+            "https://www.dubicars.com/images/52980b/w_1300x760/unique-cars/5f098def-fc43-4eea-829f-d7a133c9f376.jpeg",
+            "https://www.dubicars.com/images/3e3792/w_1300x760/unique-cars/03c479c3-d8b2-4b32-ac6b-1df2d811fe6b.jpeg",
+            "https://www.dubicars.com/images/c4cf01/w_1300x760/unique-cars/b672cf22-13d7-4ffa-8874-7425e5860b85.jpeg",
+            "https://www.dubicars.com/images/fcc201/w_1300x760/unique-cars/62ce2ace-5ca2-400c-a14f-fe51f696edeb.jpeg",
+            "https://www.dubicars.com/images/46971c/w_1300x760/unique-cars/98e40df4-9e86-4334-8461-bb8c4d94b494.jpeg",
+            "https://www.dubicars.com/images/91082f/w_1300x760/unique-cars/11a880d2-04a0-4bbc-8493-0aee7067d198.jpeg",
+            "https://www.dubicars.com/images/b6989f/w_1300x760/unique-cars/b52cf158-a7a8-48ec-95cc-8360e6dd593b.jpeg",
+            "https://www.dubicars.com/images/b9ace3/w_1300x760/unique-cars/12c2f4a3-274d-4c74-b847-94fe3c9e6590.jpeg",
+            "https://www.dubicars.com/images/f332a9/w_1300x760/unique-cars/bb1ffc40-09d6-4e8b-a63f-adf6715ac087.jpeg",
+            "https://www.dubicars.com/images/53fa21/w_1300x760/unique-cars/1c4e833e-2eda-43c7-b806-9c2ad3c57b8b.jpeg",
+            "https://www.dubicars.com/images/8edf53/w_1300x760/unique-cars/62731909-46f2-421b-8b68-2180070d8ea7.jpeg",
+            "https://www.dubicars.com/images/1b7997/w_1300x760/unique-cars/8bf6da98-802e-4d2d-a12a-a63479260bd1.jpeg",
+            "https://www.dubicars.com/images/913ad5/w_1300x760/unique-cars/d64c5ef7-6df4-4727-b512-c7d48585d660.jpeg",
+            "https://www.dubicars.com/images/12f676/w_1300x760/unique-cars/4c031c87-e781-45f9-a4dc-cff980c757d1.jpeg",
+            "https://www.dubicars.com/images/039903/w_1300x760/unique-cars/84697334-0a88-4018-a68f-282cc7550964.jpeg",
+            "https://www.dubicars.com/images/0ee770/w_1300x760/unique-cars/84fd2286-1d50-406d-92dd-548a94d6ca60.jpeg",
+            "https://www.dubicars.com/images/68676a/w_650x380/unique-cars/d9377bb1-682a-43b9-9d37-b9a2d8fc1ec9.jpeg",
+            "https://www.dubicars.com/images/dda19e/w_650x380/unique-cars/bf899802-77df-4286-a057-86fe38fa3d47.jpeg",
+            "https://www.dubicars.com/images/edfeda/w_650x380/unique-cars/13cce742-5672-45ff-b2ee-7945d4c53bea.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "968288",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2023-toyota-land-cruiser-2023-model-gxr-twin-turbo-35l-engine-full-option-very-perfect-condition-968288.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/6ffe83/w_960x540/unique-cars/dfe641fa-a54e-49ea-8cfd-2f4f1b282df0.jpeg",
+            "https://www.dubicars.com/images/ea771b/w_1300x760/unique-cars/dfe641fa-a54e-49ea-8cfd-2f4f1b282df0.jpeg",
+            "https://www.dubicars.com/images/6d86bd/w_1300x760/unique-cars/8a032146-36fb-4188-8d06-9182a7c5f437.jpeg",
+            "https://www.dubicars.com/images/559bdf/w_1300x760/unique-cars/908d84ff-6f7e-465f-8837-675d82d11f38.jpeg",
+            "https://www.dubicars.com/images/8b05cb/w_1300x760/unique-cars/16f86cc2-7b54-4ab3-b42f-8c2adc84b747.jpeg",
+            "https://www.dubicars.com/images/100cfb/w_1300x760/unique-cars/b5530192-5af8-4504-8ba2-742a9d162d18.jpeg",
+            "https://www.dubicars.com/images/88f7c2/w_1300x760/unique-cars/e42d35db-0801-403d-9607-92bae45af706.jpeg",
+            "https://www.dubicars.com/images/a966ff/w_1300x760/unique-cars/4d4112c6-5112-45e1-b8d7-4bbe9ddbc03b.jpeg",
+            "https://www.dubicars.com/images/2ff666/w_1300x760/unique-cars/1e3ac062-cde5-4791-bbc4-36ae22292deb.jpeg",
+            "https://www.dubicars.com/images/a67410/w_1300x760/unique-cars/5539f862-3c8b-4105-9e17-6a81e17b77be.jpeg",
+            "https://www.dubicars.com/images/92c4e1/w_1300x760/unique-cars/6ba54ac4-b1b1-42c0-ad6b-2e15c79d9f0d.jpeg",
+            "https://www.dubicars.com/images/6513d7/w_1300x760/unique-cars/3ecadd24-d946-45fb-83a9-36cf06c0487b.jpeg",
+            "https://www.dubicars.com/images/fe9ce0/w_1300x760/unique-cars/7105a774-71fe-4380-9466-ed0d66776649.jpeg",
+            "https://www.dubicars.com/images/ff126e/w_1300x760/unique-cars/23356d0b-3f00-47dc-9540-76f47056ea2a.jpeg",
+            "https://www.dubicars.com/images/c39c8f/w_1300x760/unique-cars/bb13994e-7369-4c36-bd64-5528b772d5b2.jpeg",
+            "https://www.dubicars.com/images/1b3833/w_1300x760/unique-cars/0dba4d0a-7bf5-4744-9534-789cf67af8e3.jpeg",
+            "https://www.dubicars.com/images/8b2af7/w_1300x760/unique-cars/46f2e808-05d4-45cf-8ab8-7fda5bc9e812.jpeg",
+            "https://www.dubicars.com/images/3de33b/w_1300x760/unique-cars/4472778d-812d-42ab-ab64-23a106c7de22.jpeg",
+            "https://www.dubicars.com/images/49958d/w_1300x760/unique-cars/0958f0af-eff5-4d46-8168-5d12f3fa8ab0.jpeg",
+            "https://www.dubicars.com/images/fe5e05/w_1300x760/unique-cars/99345719-3777-451f-a072-b9aab7b1e5bd.jpeg",
+            "https://www.dubicars.com/images/be9ec4/w_1300x760/unique-cars/5f4a5e9f-cd03-4252-84ab-e29d602d391a.jpeg",
+            "https://www.dubicars.com/images/f60edb/w_1300x760/unique-cars/58c43c2d-5ee0-4671-b481-937c3496a924.jpeg",
+            "https://www.dubicars.com/images/7c0818/w_650x380/unique-cars/dfe641fa-a54e-49ea-8cfd-2f4f1b282df0.jpeg",
+            "https://www.dubicars.com/images/e5113d/w_650x380/unique-cars/8a032146-36fb-4188-8d06-9182a7c5f437.jpeg",
+            "https://www.dubicars.com/images/f703ae/w_650x380/unique-cars/908d84ff-6f7e-465f-8837-675d82d11f38.jpeg",
+            "https://www.dubicars.com/images/6ed1c7/w_650x380/unique-cars/16f86cc2-7b54-4ab3-b42f-8c2adc84b747.jpeg",
+            "https://www.dubicars.com/images/3e0901/w_650x380/unique-cars/b5530192-5af8-4504-8ba2-742a9d162d18.jpeg",
+            "https://www.dubicars.com/images/025d31/w_650x380/unique-cars/e42d35db-0801-403d-9607-92bae45af706.jpeg",
+            "https://www.dubicars.com/images/b40676/w_650x380/unique-cars/4d4112c6-5112-45e1-b8d7-4bbe9ddbc03b.jpeg",
+            "https://www.dubicars.com/images/ee21f1/w_650x380/unique-cars/1e3ac062-cde5-4791-bbc4-36ae22292deb.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "961283",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2020-toyota-land-cruiser-gxr-2020-model-facelift-to-lc300-2025-shape-exterior-and-interior-both-car-is-very-clean-and-perfect-961283.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/9ad8b9/w_960x540/unique-cars/b894b1bd-9717-4105-a931-18c3fc2cfc51.jpeg",
+            "https://www.dubicars.com/images/d439be/w_1300x760/unique-cars/b894b1bd-9717-4105-a931-18c3fc2cfc51.jpeg",
+            "https://www.dubicars.com/images/ca28c5/w_1300x760/unique-cars/13c3ec25-cbec-4053-bb61-1a8b9aebb7a2.jpeg",
+            "https://www.dubicars.com/images/392f0c/w_1300x760/unique-cars/36cbdd69-bc67-4ff6-b520-3daa85725d68.jpeg",
+            "https://www.dubicars.com/images/09c9f4/w_1300x760/unique-cars/75a0f8b7-8bc1-4f0b-8e79-3f08e505d1ee.jpeg",
+            "https://www.dubicars.com/images/ac04bd/w_1300x760/unique-cars/6822c5ea-da3f-46b2-a2e7-6cc01b2b130b.jpeg",
+            "https://www.dubicars.com/images/4cfa1d/w_1300x760/unique-cars/4ccea904-e535-430c-8107-b1df0169fb61.jpeg",
+            "https://www.dubicars.com/images/f86cb2/w_1300x760/unique-cars/72086ed4-7cb4-4802-9a93-0a3e45e56aff.jpeg",
+            "https://www.dubicars.com/images/b6f0e7/w_1300x760/unique-cars/c970ba31-fa25-4519-bb9e-22483a725ae0.jpeg",
+            "https://www.dubicars.com/images/c4aafd/w_1300x760/unique-cars/d1c79998-5697-4624-ac59-5e87f8deb435.jpeg",
+            "https://www.dubicars.com/images/cdd3df/w_1300x760/unique-cars/ba0ec4f7-625f-442c-8a0b-1146904f5aff.jpeg",
+            "https://www.dubicars.com/images/55c5d0/w_1300x760/unique-cars/18e3e733-7d4c-4a7c-87bb-0fc4ab7ed6f4.jpeg",
+            "https://www.dubicars.com/images/0acbae/w_1300x760/unique-cars/ba6fe448-4712-4558-918c-29619c4c04b2.jpeg",
+            "https://www.dubicars.com/images/c5a78c/w_1300x760/unique-cars/969ac723-2ac8-4cc6-a863-62889b0ca3da.jpeg",
+            "https://www.dubicars.com/images/3ea257/w_1300x760/unique-cars/77d951fd-8964-4905-806f-84c9c101f823.jpeg",
+            "https://www.dubicars.com/images/b53565/w_1300x760/unique-cars/65af7752-ac80-472b-a50c-64e4aa405698.jpeg",
+            "https://www.dubicars.com/images/33b047/w_1300x760/unique-cars/2a33384d-360a-4b0d-acb8-7dc1ec8e32a2.jpeg",
+            "https://www.dubicars.com/images/0157f2/w_1300x760/unique-cars/8a866525-99f2-4e76-8866-ad699cf4623b.jpeg",
+            "https://www.dubicars.com/images/decc9f/w_1300x760/unique-cars/5de7908e-7f74-4705-ae61-0c654452b214.jpeg",
+            "https://www.dubicars.com/images/ea2f94/w_1300x760/unique-cars/b2713f9a-8837-4f2b-b4b6-bc5ee195634f.jpeg",
+            "https://www.dubicars.com/images/11dc94/w_650x380/unique-cars/b894b1bd-9717-4105-a931-18c3fc2cfc51.jpeg",
+            "https://www.dubicars.com/images/c1b177/w_650x380/unique-cars/13c3ec25-cbec-4053-bb61-1a8b9aebb7a2.jpeg",
+            "https://www.dubicars.com/images/eab812/w_650x380/unique-cars/36cbdd69-bc67-4ff6-b520-3daa85725d68.jpeg",
+            "https://www.dubicars.com/images/505f75/w_650x380/unique-cars/75a0f8b7-8bc1-4f0b-8e79-3f08e505d1ee.jpeg",
+            "https://www.dubicars.com/images/d170fb/w_650x380/unique-cars/6822c5ea-da3f-46b2-a2e7-6cc01b2b130b.jpeg",
+            "https://www.dubicars.com/images/09c14d/w_650x380/unique-cars/4ccea904-e535-430c-8107-b1df0169fb61.jpeg",
+            "https://www.dubicars.com/images/4f417b/w_650x380/unique-cars/72086ed4-7cb4-4802-9a93-0a3e45e56aff.jpeg",
+            "https://www.dubicars.com/images/3a52c7/w_650x380/unique-cars/c970ba31-fa25-4519-bb9e-22483a725ae0.jpeg",
+            "https://www.dubicars.com/images/57d5b9/w_650x380/unique-cars/d1c79998-5697-4624-ac59-5e87f8deb435.jpeg",
+            "https://www.dubicars.com/images/5eb782/w_650x380/unique-cars/ba0ec4f7-625f-442c-8a0b-1146904f5aff.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "920087",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-2022-model-full-option-very-clean-and-perfect-condition-920087.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/4a74fc/w_960x540/global-automobile-trading/86258a94-ac04-48ef-b668-3685722a5dcc.jpeg",
+            "https://www.dubicars.com/images/63a7c8/w_1300x760/global-automobile-trading/86258a94-ac04-48ef-b668-3685722a5dcc.jpeg",
+            "https://www.dubicars.com/images/e66baa/w_1300x760/global-automobile-trading/7b656cd4-01f3-4eb9-987e-eb4034cdf640.jpeg",
+            "https://www.dubicars.com/images/3fe3c9/w_1300x760/global-automobile-trading/d40b19cd-1b19-444e-b8a2-da7789b6dd81.jpeg",
+            "https://www.dubicars.com/images/98f19c/w_1300x760/global-automobile-trading/6431362e-a87f-4578-91db-fb69d24f4ba7.jpeg",
+            "https://www.dubicars.com/images/0647e2/w_1300x760/global-automobile-trading/51a1270e-bc28-4081-bfb6-2f7ef2893158.jpeg",
+            "https://www.dubicars.com/images/8508b4/w_1300x760/global-automobile-trading/8cedd479-6998-4b03-b269-9ea43685ea5b.jpeg",
+            "https://www.dubicars.com/images/6cd759/w_1300x760/global-automobile-trading/273e69d0-dbc1-4f13-97cd-d7eb38654d5c.jpeg",
+            "https://www.dubicars.com/images/630d87/w_1300x760/global-automobile-trading/5d0a22b8-50f7-407e-bfdf-91e94e5c55a9.jpeg",
+            "https://www.dubicars.com/images/f6ca65/w_1300x760/global-automobile-trading/9a884898-e4e4-4bf2-b41b-2a84f7eea804.jpeg",
+            "https://www.dubicars.com/images/622fd3/w_1300x760/global-automobile-trading/730c867c-077a-4bae-aacc-ddda6db0a094.jpeg",
+            "https://www.dubicars.com/images/566702/w_1300x760/global-automobile-trading/f293cf18-b16a-42b2-a237-cbd5de4e5403.jpeg",
+            "https://www.dubicars.com/images/75b1cd/w_1300x760/global-automobile-trading/19379651-3bfc-40ae-816d-8dfe1a4ab628.jpeg",
+            "https://www.dubicars.com/images/372372/w_1300x760/global-automobile-trading/ccda9d02-ac04-46b5-8300-e7d6e4831237.jpeg",
+            "https://www.dubicars.com/images/dc01b4/w_1300x760/global-automobile-trading/1e03ae76-4232-4bda-b8c1-3320c2de18bc.jpeg",
+            "https://www.dubicars.com/images/5c4962/w_1300x760/global-automobile-trading/c4739e2b-3189-45fa-b4c3-93ff0585f950.jpeg",
+            "https://www.dubicars.com/images/9bf046/w_1300x760/global-automobile-trading/2218a790-f134-4873-8708-1c2c01333bbf.jpeg",
+            "https://www.dubicars.com/images/b1826d/w_1300x760/global-automobile-trading/ed8be97e-0247-4596-a5ec-1d632cb73274.jpeg",
+            "https://www.dubicars.com/images/30b349/w_650x380/global-automobile-trading/86258a94-ac04-48ef-b668-3685722a5dcc.jpeg",
+            "https://www.dubicars.com/images/b8ec35/w_650x380/global-automobile-trading/7b656cd4-01f3-4eb9-987e-eb4034cdf640.jpeg",
+            "https://www.dubicars.com/images/8a7c30/w_650x380/global-automobile-trading/d40b19cd-1b19-444e-b8a2-da7789b6dd81.jpeg",
+            "https://www.dubicars.com/images/49deee/w_650x380/global-automobile-trading/6431362e-a87f-4578-91db-fb69d24f4ba7.jpeg",
+            "https://www.dubicars.com/images/ca8187/w_650x380/global-automobile-trading/51a1270e-bc28-4081-bfb6-2f7ef2893158.jpeg",
+            "https://www.dubicars.com/images/11b7f3/w_650x380/global-automobile-trading/8cedd479-6998-4b03-b269-9ea43685ea5b.jpeg",
+            "https://www.dubicars.com/images/080cb5/w_650x380/global-automobile-trading/273e69d0-dbc1-4f13-97cd-d7eb38654d5c.jpeg",
+            "https://www.dubicars.com/images/999021/w_650x380/global-automobile-trading/5d0a22b8-50f7-407e-bfdf-91e94e5c55a9.jpeg",
+            "https://www.dubicars.com/images/904998/w_650x380/global-automobile-trading/9a884898-e4e4-4bf2-b41b-2a84f7eea804.jpeg",
+            "https://www.dubicars.com/images/c50e38/w_650x380/global-automobile-trading/730c867c-077a-4bae-aacc-ddda6db0a094.jpeg",
+            "https://www.dubicars.com/images/84c17a/w_650x380/global-automobile-trading/f293cf18-b16a-42b2-a237-cbd5de4e5403.jpeg",
+            "https://www.dubicars.com/images/ddede7/w_650x380/global-automobile-trading/19379651-3bfc-40ae-816d-8dfe1a4ab628.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "901014",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "diesel",
+            "powerHp": 302,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-2022-model-33l-diesel-engine-full-option-top-of-the-range-901014.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/05bba0/w_960x540/global-automobile-trading/62b53191-bcc8-4f69-a856-41075ee31a53.jpeg",
+            "https://www.dubicars.com/images/845a94/w_1300x760/global-automobile-trading/62b53191-bcc8-4f69-a856-41075ee31a53.jpeg",
+            "https://www.dubicars.com/images/3d5c7a/w_1300x760/global-automobile-trading/b7017147-fe06-4955-9857-d6e83d7a564b.jpeg",
+            "https://www.dubicars.com/images/375f77/w_1300x760/global-automobile-trading/e7f8e21d-08be-4523-ac74-c0078471a5a9.jpeg",
+            "https://www.dubicars.com/images/b3fe98/w_1300x760/global-automobile-trading/72c91648-ed4c-4e3c-b69f-8ef1b87a41ec.jpeg",
+            "https://www.dubicars.com/images/65f463/w_1300x760/global-automobile-trading/9da2e241-067f-4dcf-bf09-66c56046f5a0.jpeg",
+            "https://www.dubicars.com/images/b000bf/w_1300x760/global-automobile-trading/3dfde5d4-920b-4789-936d-76c2281f6f0e.jpeg",
+            "https://www.dubicars.com/images/398313/w_1300x760/global-automobile-trading/d0930217-b3d8-45e8-b40b-259599001627.jpeg",
+            "https://www.dubicars.com/images/01549e/w_1300x760/global-automobile-trading/1f3522c1-5e6e-4f55-ac3f-233340a222f4.jpeg",
+            "https://www.dubicars.com/images/9bb9cb/w_1300x760/global-automobile-trading/617d2d5a-ca18-4a8e-861f-dcbda68f74e4.jpeg",
+            "https://www.dubicars.com/images/061745/w_1300x760/global-automobile-trading/a8566815-1ff5-4a9b-a0ee-b62ca2b6d770.jpeg",
+            "https://www.dubicars.com/images/d6b06b/w_1300x760/global-automobile-trading/ada10e18-7b50-4d2e-82d0-c6dfb9b1d250.jpeg",
+            "https://www.dubicars.com/images/95d7e0/w_1300x760/global-automobile-trading/6bfb186a-3313-49a4-a732-78f5eb7e7364.jpeg",
+            "https://www.dubicars.com/images/40bdf2/w_1300x760/global-automobile-trading/1edca4fb-5bce-4ad9-b2e2-aa01307f1a0d.jpeg",
+            "https://www.dubicars.com/images/1eb9b2/w_1300x760/global-automobile-trading/7322315f-1379-414a-bf96-3896c5ffed4e.jpeg",
+            "https://www.dubicars.com/images/513b8f/w_1300x760/global-automobile-trading/ab367902-7093-4f95-983c-fec169224b4b.jpeg",
+            "https://www.dubicars.com/images/a19563/w_1300x760/global-automobile-trading/ae4a8abb-0c6c-495c-bb0c-76516b93a976.jpeg",
+            "https://www.dubicars.com/images/3a1b96/w_1300x760/global-automobile-trading/25e37f3e-4656-4883-be1c-aa9a6011a3dc.jpeg",
+            "https://www.dubicars.com/images/15696a/w_1300x760/global-automobile-trading/467dc9c9-0381-466b-8360-5cf271d0d0ef.jpeg",
+            "https://www.dubicars.com/images/0718b2/w_1300x760/global-automobile-trading/57c1011d-ef1a-43d4-b26c-98a84fbf48d5.jpeg",
+            "https://www.dubicars.com/images/a0d03f/w_1300x760/global-automobile-trading/4a61f562-1051-4763-8a9f-f8ccbe76c53f.jpeg",
+            "https://www.dubicars.com/images/119281/w_1300x760/global-automobile-trading/26d4b507-a2e6-49f4-b2cd-5c55b27b55f4.jpeg",
+            "https://www.dubicars.com/images/432d0f/w_1300x760/global-automobile-trading/595242c8-adbf-4434-bb77-0acee6f699eb.jpeg",
+            "https://www.dubicars.com/images/a88ff1/w_1300x760/global-automobile-trading/06b59a57-bdc6-4eb8-bf45-892f07c61ac7.jpeg",
+            "https://www.dubicars.com/images/6c90bd/w_1300x760/global-automobile-trading/b25783ed-88cb-4a5d-93f4-281d0eafa7cd.jpeg",
+            "https://www.dubicars.com/images/e42f7b/w_1300x760/global-automobile-trading/568e14e8-d286-48e4-9259-72740b66c534.jpeg",
+            "https://www.dubicars.com/images/f552e3/w_1300x760/global-automobile-trading/f882756c-672c-4d56-989a-3b950e7b37bf.jpeg",
+            "https://www.dubicars.com/images/2c3734/w_1300x760/global-automobile-trading/e50b225a-e536-4c86-a58f-9322292a101b.jpeg",
+            "https://www.dubicars.com/images/b300f5/w_650x380/global-automobile-trading/62b53191-bcc8-4f69-a856-41075ee31a53.jpeg",
+            "https://www.dubicars.com/images/8dfb9a/w_650x380/global-automobile-trading/b7017147-fe06-4955-9857-d6e83d7a564b.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "diesel",
+            "powerHp": 302,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "896643",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2021-toyota-hilux-2021-facelifted-2025-gr-sport-gcc-in-excellent-condition-896643.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/1a861c/w_960x540/unique-cars/b6c78843-dd6b-43af-b411-c66492e7e94c.jpeg",
+            "https://www.dubicars.com/images/c9caad/w_1300x760/unique-cars/b6c78843-dd6b-43af-b411-c66492e7e94c.jpeg",
+            "https://www.dubicars.com/images/5fc6d7/w_1300x760/unique-cars/70b0af01-b2e5-4cbc-8e9f-dc782683da31.jpeg",
+            "https://www.dubicars.com/images/d46524/w_1300x760/unique-cars/b72fa315-a696-44d5-9831-26475c309f54.jpeg",
+            "https://www.dubicars.com/images/6f3cbe/w_1300x760/unique-cars/c873e71c-3e9d-4d84-a8f8-c0186629c67e.jpeg",
+            "https://www.dubicars.com/images/64ec7a/w_1300x760/unique-cars/a6a92741-29de-4127-9d16-ed099f47353d.jpeg",
+            "https://www.dubicars.com/images/b543ab/w_1300x760/unique-cars/95154c02-1370-4e39-bdf2-b62d7307080a.jpeg",
+            "https://www.dubicars.com/images/d3da73/w_1300x760/unique-cars/1ecd5e6d-79ec-4ead-85bc-22e4831f26bb.jpeg",
+            "https://www.dubicars.com/images/319f75/w_1300x760/unique-cars/091a87d2-5711-483d-a3a4-6de57ba905d3.jpeg",
+            "https://www.dubicars.com/images/c50b37/w_1300x760/unique-cars/b69e587b-9407-45de-8c42-ffa96659bc23.jpeg",
+            "https://www.dubicars.com/images/e73cf1/w_1300x760/unique-cars/948b056c-9e56-4dad-a2c2-26ee5e9a112c.jpeg",
+            "https://www.dubicars.com/images/7f6656/w_1300x760/unique-cars/68a8f450-299e-4faa-844b-1c8851a0419f.jpeg",
+            "https://www.dubicars.com/images/ca8238/w_1300x760/unique-cars/8234325b-5dab-47f4-8f91-f935a045dc27.jpeg",
+            "https://www.dubicars.com/images/aade4d/w_1300x760/unique-cars/3c83584a-526e-4343-ae25-483ddf16ec74.jpeg",
+            "https://www.dubicars.com/images/aa1124/w_1300x760/unique-cars/6e55eec0-ddfb-414f-8cd7-79055737c9aa.jpeg",
+            "https://www.dubicars.com/images/be614c/w_1300x760/unique-cars/837e33fb-50a2-407b-bcd3-4d81549d3915.jpeg",
+            "https://www.dubicars.com/images/cb588e/w_1300x760/unique-cars/8fa49d81-29f1-4adb-bbbf-4ec6267644ff.jpeg",
+            "https://www.dubicars.com/images/402eec/w_1300x760/unique-cars/f129b2eb-2b8d-41f0-b332-d5caf5ace198.jpeg",
+            "https://www.dubicars.com/images/1cfc27/w_1300x760/unique-cars/13e0d7f9-1a13-432f-9aa1-0041fcfda76e.jpeg",
+            "https://www.dubicars.com/images/0d155a/w_1300x760/unique-cars/a8df070d-da1f-493d-8004-813a6ecdb698.jpeg",
+            "https://www.dubicars.com/images/7038e9/w_1300x760/unique-cars/27227ec9-1dd9-4037-8664-39cc72eb26ab.jpeg",
+            "https://www.dubicars.com/images/3a3ae5/w_650x380/unique-cars/b6c78843-dd6b-43af-b411-c66492e7e94c.jpeg",
+            "https://www.dubicars.com/images/f7088d/w_650x380/unique-cars/70b0af01-b2e5-4cbc-8e9f-dc782683da31.jpeg",
+            "https://www.dubicars.com/images/b28d67/w_650x380/unique-cars/b72fa315-a696-44d5-9831-26475c309f54.jpeg",
+            "https://www.dubicars.com/images/02cd00/w_650x380/unique-cars/c873e71c-3e9d-4d84-a8f8-c0186629c67e.jpeg",
+            "https://www.dubicars.com/images/af69f9/w_650x380/unique-cars/a6a92741-29de-4127-9d16-ed099f47353d.jpeg",
+            "https://www.dubicars.com/images/ef9508/w_650x380/unique-cars/95154c02-1370-4e39-bdf2-b62d7307080a.jpeg",
+            "https://www.dubicars.com/images/74cb83/w_650x380/unique-cars/1ecd5e6d-79ec-4ead-85bc-22e4831f26bb.jpeg",
+            "https://www.dubicars.com/images/f191d0/w_650x380/unique-cars/091a87d2-5711-483d-a3a4-6de57ba905d3.jpeg",
+            "https://www.dubicars.com/images/324ec4/w_650x380/unique-cars/b69e587b-9407-45de-8c42-ffa96659bc23.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "894947",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2023-toyota-prado-vxr-2023-model-full-option-black-exterior-very-clean-and-perfect-condition-new-fresh-import-894947.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/bdb1af/w_960x540/unique-cars/a2e37720-2f6c-4910-9e4a-9055494308b5.jpeg",
+            "https://www.dubicars.com/images/8fcffd/w_1300x760/unique-cars/a2e37720-2f6c-4910-9e4a-9055494308b5.jpeg",
+            "https://www.dubicars.com/images/809e8e/w_1300x760/unique-cars/e332e18b-221a-476c-8195-3eeb355e653e.jpeg",
+            "https://www.dubicars.com/images/6cca1e/w_1300x760/unique-cars/36b7a7eb-f749-4b42-b094-a70fcaa43698.jpeg",
+            "https://www.dubicars.com/images/3a4b17/w_1300x760/unique-cars/d0d7ca03-1f79-42ee-8fda-4aa4f03bce1c.jpeg",
+            "https://www.dubicars.com/images/c0c01e/w_1300x760/unique-cars/938939b8-087d-4d1d-b82c-dde0606f05ca.jpeg",
+            "https://www.dubicars.com/images/7545be/w_1300x760/unique-cars/8e2e3d64-0d3d-4db9-afec-2af2d9b84941.jpeg",
+            "https://www.dubicars.com/images/4995ab/w_1300x760/unique-cars/2de4be02-281f-40fc-9f92-56457cf6a6e3.jpeg",
+            "https://www.dubicars.com/images/8fe196/w_1300x760/unique-cars/8a6053fd-561e-4311-b917-a034f24638b9.jpeg",
+            "https://www.dubicars.com/images/7c59eb/w_1300x760/unique-cars/91525384-3ac2-4120-a973-1fff4fb0b2e2.jpeg",
+            "https://www.dubicars.com/images/e197e7/w_1300x760/unique-cars/2090dba8-3424-4025-98aa-b0331c598ec1.jpeg",
+            "https://www.dubicars.com/images/27e1d3/w_1300x760/unique-cars/15d72d89-f292-4e16-a055-0d9a26450957.jpeg",
+            "https://www.dubicars.com/images/1722be/w_1300x760/unique-cars/6e76b7a6-5222-4c38-9365-46d0ad6d4abb.jpeg",
+            "https://www.dubicars.com/images/342fec/w_1300x760/unique-cars/ab27fe5a-136a-426e-aadd-81bedf0808ef.jpeg",
+            "https://www.dubicars.com/images/57f2e3/w_1300x760/unique-cars/2ffa17eb-666a-4f94-89e5-014ae0cb6e91.jpeg",
+            "https://www.dubicars.com/images/ed87b3/w_1300x760/unique-cars/949bcb59-b7a9-4bde-ad95-9675b2b7e705.jpeg",
+            "https://www.dubicars.com/images/7dd5ab/w_1300x760/unique-cars/6de92b93-c48f-4158-9c17-b31add9f7769.jpeg",
+            "https://www.dubicars.com/images/f0e241/w_1300x760/unique-cars/b6a02ae1-03e4-474f-8356-8ec082e6d1f0.jpeg",
+            "https://www.dubicars.com/images/5e46ea/w_650x380/unique-cars/a2e37720-2f6c-4910-9e4a-9055494308b5.jpeg",
+            "https://www.dubicars.com/images/f8bcb7/w_650x380/unique-cars/e332e18b-221a-476c-8195-3eeb355e653e.jpeg",
+            "https://www.dubicars.com/images/f498fa/w_650x380/unique-cars/36b7a7eb-f749-4b42-b094-a70fcaa43698.jpeg",
+            "https://www.dubicars.com/images/537f19/w_650x380/unique-cars/d0d7ca03-1f79-42ee-8fda-4aa4f03bce1c.jpeg",
+            "https://www.dubicars.com/images/85aded/w_650x380/unique-cars/938939b8-087d-4d1d-b82c-dde0606f05ca.jpeg",
+            "https://www.dubicars.com/images/9003e4/w_650x380/unique-cars/8e2e3d64-0d3d-4db9-afec-2af2d9b84941.jpeg",
+            "https://www.dubicars.com/images/0e0459/w_650x380/unique-cars/2de4be02-281f-40fc-9f92-56457cf6a6e3.jpeg",
+            "https://www.dubicars.com/images/e38708/w_650x380/unique-cars/8a6053fd-561e-4311-b917-a034f24638b9.jpeg",
+            "https://www.dubicars.com/images/a61406/w_650x380/unique-cars/91525384-3ac2-4120-a973-1fff4fb0b2e2.jpeg",
+            "https://www.dubicars.com/images/1caecb/w_650x380/unique-cars/2090dba8-3424-4025-98aa-b0331c598ec1.jpeg",
+            "https://www.dubicars.com/images/bc99fe/w_650x380/unique-cars/15d72d89-f292-4e16-a055-0d9a26450957.jpeg",
+            "https://www.dubicars.com/images/efd612/w_650x380/unique-cars/6e76b7a6-5222-4c38-9365-46d0ad6d4abb.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "799868",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2021-toyota-hilux-adventure-2021-facelifted-2024-gr-monster-design-full-option-top-of-the-range-799868.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/27b54b/w_960x540/global-automobile-trading/42d8d0a9-fd96-4967-bba9-d61961136815.jpeg",
+            "https://www.dubicars.com/images/7e6877/w_1300x760/global-automobile-trading/42d8d0a9-fd96-4967-bba9-d61961136815.jpeg",
+            "https://www.dubicars.com/images/01a11b/w_1300x760/global-automobile-trading/76aabe69-4feb-4767-a3f9-703347b36b3d.jpeg",
+            "https://www.dubicars.com/images/483481/w_1300x760/global-automobile-trading/282223ab-e38d-4f5e-8803-f66d890c1ddb.jpeg",
+            "https://www.dubicars.com/images/6fa33e/w_1300x760/global-automobile-trading/b0fcfc3d-04e3-4483-9c6b-d646b176173f.jpeg",
+            "https://www.dubicars.com/images/d873e4/w_1300x760/global-automobile-trading/d44ced2a-85a5-4802-9b13-b49910f6ea9c.jpeg",
+            "https://www.dubicars.com/images/62c814/w_1300x760/global-automobile-trading/8005d574-5ab7-4f93-8bf8-c8881d9b4517.jpeg",
+            "https://www.dubicars.com/images/6fc5c1/w_1300x760/global-automobile-trading/26c923f0-2105-42de-8ff3-6b1a187d7569.jpeg",
+            "https://www.dubicars.com/images/251a75/w_1300x760/global-automobile-trading/adfd1a69-b515-4b20-a7fe-07075d0bd764.jpeg",
+            "https://www.dubicars.com/images/7daffd/w_1300x760/global-automobile-trading/fc6edda1-4210-4f1f-b193-bc57306d19ba.jpeg",
+            "https://www.dubicars.com/images/e2d856/w_1300x760/global-automobile-trading/294bcf1c-b581-417d-a238-ad4052c4138e.jpeg",
+            "https://www.dubicars.com/images/47afa3/w_1300x760/global-automobile-trading/ae80feb3-a787-40c8-ab61-3be911bafb5b.jpeg",
+            "https://www.dubicars.com/images/3693e9/w_1300x760/global-automobile-trading/8fc91248-d5e7-4d91-96cd-8988c4da92c3.jpeg",
+            "https://www.dubicars.com/images/1a27b7/w_1300x760/global-automobile-trading/514a2d61-1621-49cf-a5a1-70ae25cae265.jpeg",
+            "https://www.dubicars.com/images/1bd745/w_1300x760/global-automobile-trading/4e3bb0ef-1170-4d57-85ec-00ebaed087d7.jpeg",
+            "https://www.dubicars.com/images/8ded6d/w_1300x760/global-automobile-trading/a4344fa6-5425-4e36-b09e-cff23d43009d.jpeg",
+            "https://www.dubicars.com/images/dc4f75/w_1300x760/global-automobile-trading/a9e23ffc-9d26-4467-9fd3-1a87ffd9559a.jpeg",
+            "https://www.dubicars.com/images/b3aa0d/w_1300x760/global-automobile-trading/18d7a06f-c5e9-4330-af7a-0d0e16e741fa.jpeg",
+            "https://www.dubicars.com/images/d97245/w_1300x760/global-automobile-trading/220a39c0-9364-497f-a3ba-ee3db7e8811f.jpeg",
+            "https://www.dubicars.com/images/833a41/w_1300x760/global-automobile-trading/9f2a4fe0-0f73-4386-8caa-f803e5a67f3d.jpeg",
+            "https://www.dubicars.com/images/22e216/w_1300x760/global-automobile-trading/3d41d011-cca0-4fd8-a952-1c57d03e9a92.jpeg",
+            "https://www.dubicars.com/images/c6fb34/w_1300x760/global-automobile-trading/7c84e968-ea37-4a35-83c5-acfc38464e9b.jpeg",
+            "https://www.dubicars.com/images/c67596/w_1300x760/global-automobile-trading/4074f832-ffb8-4ce6-b73c-ae437fc66512.jpeg",
+            "https://www.dubicars.com/images/c62cd8/w_1300x760/global-automobile-trading/a21db212-49d0-4071-9c61-71ddd871e8f6.jpeg",
+            "https://www.dubicars.com/images/fe1bd9/w_1300x760/global-automobile-trading/c9b4fe96-19b4-4247-b90e-a25d514ef3fc.jpeg",
+            "https://www.dubicars.com/images/130e0a/w_1300x760/global-automobile-trading/23bf6ee3-8cd2-4c36-9f31-8e168efd5a1a.jpeg",
+            "https://www.dubicars.com/images/a0d794/w_1300x760/global-automobile-trading/3777a74f-a7d9-49f2-9c13-6e6175d8bfb9.jpeg",
+            "https://www.dubicars.com/images/b36068/w_650x380/global-automobile-trading/42d8d0a9-fd96-4967-bba9-d61961136815.jpeg",
+            "https://www.dubicars.com/images/127480/w_650x380/global-automobile-trading/76aabe69-4feb-4767-a3f9-703347b36b3d.jpeg",
+            "https://www.dubicars.com/images/25d3f7/w_650x380/global-automobile-trading/282223ab-e38d-4f5e-8803-f66d890c1ddb.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "963056",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "powerHp": 301,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2023-toyota-land-cruiser-963056.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/187aca/w_960x540/hh-motors-corporation/d7f29ee5-3652-4620-8bb9-b29b2094e268.jpeg",
+            "https://www.dubicars.com/images/bddca6/w_1300x760/hh-motors-corporation/d7f29ee5-3652-4620-8bb9-b29b2094e268.jpeg",
+            "https://www.dubicars.com/images/892229/w_1300x760/hh-motors-corporation/77e85644-9c0d-4423-b14d-b70397b62b89.jpeg",
+            "https://www.dubicars.com/images/80dc20/w_1300x760/hh-motors-corporation/4fb14366-6ff1-4317-85e9-33ac98faf36c.jpeg",
+            "https://www.dubicars.com/images/ebb84b/w_1300x760/hh-motors-corporation/8a864d5c-c7fd-4d42-956c-8dd921e3b0e0.jpeg",
+            "https://www.dubicars.com/images/2b2e68/w_1300x760/hh-motors-corporation/4fce232d-7305-40de-a494-b7e110d68594.jpeg",
+            "https://www.dubicars.com/images/dac058/w_1300x760/hh-motors-corporation/ca59b0fb-a6ad-4428-b186-cacad62904d0.jpeg",
+            "https://www.dubicars.com/images/26974c/w_1300x760/hh-motors-corporation/4a83b8c0-a845-4a20-9a1c-db67a1a4d2a8.jpeg",
+            "https://www.dubicars.com/images/e91307/w_1300x760/hh-motors-corporation/33a4f0fd-18b6-49a3-9f77-ce06f9bafd92.jpeg",
+            "https://www.dubicars.com/images/908906/w_1300x760/hh-motors-corporation/11b86585-5ece-432d-9f31-23d4380d8f4c.jpeg",
+            "https://www.dubicars.com/images/6b2708/w_1300x760/hh-motors-corporation/0345bd20-beed-405e-a266-b2417189f842.jpeg",
+            "https://www.dubicars.com/images/4299f6/w_1300x760/hh-motors-corporation/8397979b-c19b-4c62-9341-24557e614f50.jpeg",
+            "https://www.dubicars.com/images/3b4e9f/w_1300x760/hh-motors-corporation/8156aaa3-033c-4cd4-8834-01b1a8e29459.jpeg",
+            "https://www.dubicars.com/images/3afed1/w_1300x760/hh-motors-corporation/560bb115-4b34-42a8-b3cc-7c865c6d6eab.jpeg",
+            "https://www.dubicars.com/images/78ea6c/w_1300x760/hh-motors-corporation/5703c089-01e3-4d9b-86d1-18269a68c819.jpeg",
+            "https://www.dubicars.com/images/8fabb7/w_1300x760/hh-motors-corporation/b4750df3-d2ee-4f9a-998a-af9089cb9b79.jpeg",
+            "https://www.dubicars.com/images/1cf617/w_1300x760/hh-motors-corporation/4ea01da9-5e4d-4f87-b73d-238192b83d3b.jpeg",
+            "https://www.dubicars.com/images/55ea55/w_1300x760/hh-motors-corporation/2befd8c7-3917-491a-9741-e504d2263beb.jpeg",
+            "https://www.dubicars.com/images/cd19f2/w_1300x760/hh-motors-corporation/95f66032-bd0a-42ed-b730-ba65d990512c.jpeg",
+            "https://www.dubicars.com/images/6484fb/w_1300x760/hh-motors-corporation/0c69d076-f993-4506-9c42-70521ec30e44.jpeg",
+            "https://www.dubicars.com/images/c3c378/w_1300x760/hh-motors-corporation/2b59e407-a7ca-4915-8dbc-b49fc4f5f330.jpeg",
+            "https://www.dubicars.com/images/86d8be/w_650x380/hh-motors-corporation/d7f29ee5-3652-4620-8bb9-b29b2094e268.jpeg",
+            "https://www.dubicars.com/images/99bfd6/w_650x380/hh-motors-corporation/77e85644-9c0d-4423-b14d-b70397b62b89.jpeg",
+            "https://www.dubicars.com/images/2303a1/w_650x380/hh-motors-corporation/4fb14366-6ff1-4317-85e9-33ac98faf36c.jpeg",
+            "https://www.dubicars.com/images/656de4/w_650x380/hh-motors-corporation/8a864d5c-c7fd-4d42-956c-8dd921e3b0e0.jpeg",
+            "https://www.dubicars.com/images/e8ed3f/w_650x380/hh-motors-corporation/4fce232d-7305-40de-a494-b7e110d68594.jpeg",
+            "https://www.dubicars.com/images/a70d53/w_650x380/hh-motors-corporation/ca59b0fb-a6ad-4428-b186-cacad62904d0.jpeg",
+            "https://www.dubicars.com/images/28eece/w_650x380/hh-motors-corporation/4a83b8c0-a845-4a20-9a1c-db67a1a4d2a8.jpeg",
+            "https://www.dubicars.com/images/120ce7/w_650x380/hh-motors-corporation/33a4f0fd-18b6-49a3-9f77-ce06f9bafd92.jpeg",
+            "https://www.dubicars.com/images/8f81cf/w_650x380/hh-motors-corporation/11b86585-5ece-432d-9f31-23d4380d8f4c.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "powerHp": 301,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "963999",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "diesel",
+            "powerHp": 201,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2021-toyota-hilux-sglx-adv-28l-963999.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/10bd13/w_960x540/hh-motors-corporation/ea8b0fd9-7c2c-49f2-bee7-004bf17d13dc.jpeg",
+            "https://www.dubicars.com/images/5f13cb/w_1300x760/hh-motors-corporation/ea8b0fd9-7c2c-49f2-bee7-004bf17d13dc.jpeg",
+            "https://www.dubicars.com/images/c7298b/w_1300x760/hh-motors-corporation/654ca268-56d4-48a1-be3e-38bce54cc864.jpeg",
+            "https://www.dubicars.com/images/34a34c/w_1300x760/hh-motors-corporation/a873937b-de6d-4864-ab30-aad2bc1b11ee.jpeg",
+            "https://www.dubicars.com/images/a583c7/w_1300x760/hh-motors-corporation/7ec07f68-59e1-4858-8e62-d80c1f997e5b.jpeg",
+            "https://www.dubicars.com/images/4de315/w_1300x760/hh-motors-corporation/a26d762b-e019-427f-8272-932d770bd624.jpeg",
+            "https://www.dubicars.com/images/475e48/w_1300x760/hh-motors-corporation/9ed77d26-e4ee-440c-82c5-eca26ddd68cb.jpeg",
+            "https://www.dubicars.com/images/ec6513/w_1300x760/hh-motors-corporation/f0de38f9-5b59-4180-bdf3-ac2d3a2ec4f7.jpeg",
+            "https://www.dubicars.com/images/99be52/w_1300x760/hh-motors-corporation/cc39c0a4-2f3f-4069-be7f-a19caa34d0c1.jpeg",
+            "https://www.dubicars.com/images/2c59ee/w_1300x760/hh-motors-corporation/9fe1ad6c-93cc-4125-959d-788ae2e05693.jpeg",
+            "https://www.dubicars.com/images/5b5d60/w_1300x760/hh-motors-corporation/22c1e7e8-92a5-4d7c-bd8b-6c506deb31f7.jpeg",
+            "https://www.dubicars.com/images/c1b62c/w_1300x760/hh-motors-corporation/d614776a-ab80-4617-9db5-6f223bec21ff.jpeg",
+            "https://www.dubicars.com/images/5d1708/w_1300x760/hh-motors-corporation/367e2a6c-15e2-42bc-a4cc-72b8e26c4775.jpeg",
+            "https://www.dubicars.com/images/62022a/w_1300x760/hh-motors-corporation/29424584-dd3a-4013-adb4-77fddb5db3ef.jpeg",
+            "https://www.dubicars.com/images/f6d693/w_1300x760/hh-motors-corporation/79574d32-2434-45b3-a77c-223fac149488.jpeg",
+            "https://www.dubicars.com/images/3c6ac0/w_1300x760/hh-motors-corporation/395f1b35-ebbd-4401-b78f-8a928568133d.jpeg",
+            "https://www.dubicars.com/images/c71944/w_1300x760/hh-motors-corporation/e8fe7bf4-1fc4-4808-b31a-25f100b189f7.jpeg",
+            "https://www.dubicars.com/images/55f37b/w_1300x760/hh-motors-corporation/261146dc-6aaf-42a6-a8e6-8716368b874b.jpeg",
+            "https://www.dubicars.com/images/44dc9a/w_1300x760/hh-motors-corporation/329e4970-57de-458b-8955-0b4dc2781cce.jpeg",
+            "https://www.dubicars.com/images/ceb4ba/w_1300x760/hh-motors-corporation/72bd238c-11fd-42ae-9507-7cdc6021f0e3.jpeg",
+            "https://www.dubicars.com/images/401513/w_1300x760/hh-motors-corporation/a64e7eb2-ead0-46cc-955c-982d82efbaa9.jpeg",
+            "https://www.dubicars.com/images/026a41/w_650x380/hh-motors-corporation/ea8b0fd9-7c2c-49f2-bee7-004bf17d13dc.jpeg",
+            "https://www.dubicars.com/images/79fe99/w_650x380/hh-motors-corporation/654ca268-56d4-48a1-be3e-38bce54cc864.jpeg",
+            "https://www.dubicars.com/images/a838f4/w_650x380/hh-motors-corporation/a873937b-de6d-4864-ab30-aad2bc1b11ee.jpeg",
+            "https://www.dubicars.com/images/9150e2/w_650x380/hh-motors-corporation/7ec07f68-59e1-4858-8e62-d80c1f997e5b.jpeg",
+            "https://www.dubicars.com/images/6cd33e/w_650x380/hh-motors-corporation/a26d762b-e019-427f-8272-932d770bd624.jpeg",
+            "https://www.dubicars.com/images/adeaf0/w_650x380/hh-motors-corporation/9ed77d26-e4ee-440c-82c5-eca26ddd68cb.jpeg",
+            "https://www.dubicars.com/images/84694d/w_650x380/hh-motors-corporation/f0de38f9-5b59-4180-bdf3-ac2d3a2ec4f7.jpeg",
+            "https://www.dubicars.com/images/577c44/w_650x380/hh-motors-corporation/cc39c0a4-2f3f-4069-be7f-a19caa34d0c1.jpeg",
+            "https://www.dubicars.com/images/b5d5c7/w_650x380/hh-motors-corporation/9fe1ad6c-93cc-4125-959d-788ae2e05693.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "diesel",
+            "powerHp": 201,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "964472",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "diesel",
+            "powerHp": 201,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2020-toyota-prado-964472.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/2eb684/w_960x540/hh-motors-corporation/a3307fc1-857e-4927-978a-1473667cf566.jpeg",
+            "https://www.dubicars.com/images/73ebea/w_1300x760/hh-motors-corporation/a3307fc1-857e-4927-978a-1473667cf566.jpeg",
+            "https://www.dubicars.com/images/7e1652/w_1300x760/hh-motors-corporation/494927fb-6ad8-4bbd-9538-571442c30316.jpeg",
+            "https://www.dubicars.com/images/5d99b0/w_1300x760/hh-motors-corporation/d307293c-21a7-4242-84e2-19f27848ea6e.jpeg",
+            "https://www.dubicars.com/images/891105/w_1300x760/hh-motors-corporation/b3ac0812-c4ec-44af-be26-135241ee872e.jpeg",
+            "https://www.dubicars.com/images/f170e0/w_1300x760/hh-motors-corporation/846970ae-e9a4-40e4-9a2d-ce80156141ef.jpeg",
+            "https://www.dubicars.com/images/833c1e/w_1300x760/hh-motors-corporation/1ae24956-d330-4034-b729-e8db138e491a.jpeg",
+            "https://www.dubicars.com/images/235761/w_1300x760/hh-motors-corporation/ef162100-4447-45d6-bb62-f232e742b78d.jpeg",
+            "https://www.dubicars.com/images/3e38bc/w_1300x760/hh-motors-corporation/e4dc2792-2387-46c4-a3f1-bbbbabc91f24.jpeg",
+            "https://www.dubicars.com/images/351747/w_1300x760/hh-motors-corporation/bb4c1f4e-febb-4ff0-b54c-e061920bbc87.jpeg",
+            "https://www.dubicars.com/images/68ab99/w_1300x760/hh-motors-corporation/b7df74dd-a12b-4abc-b75b-13aee1a41976.jpeg",
+            "https://www.dubicars.com/images/320314/w_1300x760/hh-motors-corporation/e413bb2e-3b5f-4f3c-be60-17adb95db4f2.jpeg",
+            "https://www.dubicars.com/images/548467/w_1300x760/hh-motors-corporation/cdd26cdf-3389-47e2-a282-d5b61718829e.jpeg",
+            "https://www.dubicars.com/images/796124/w_1300x760/hh-motors-corporation/39c0b929-ff7d-479d-9ce9-e863409a945a.jpeg",
+            "https://www.dubicars.com/images/0cd867/w_1300x760/hh-motors-corporation/2cbcba50-b25f-42e1-878f-e26fa057d825.jpeg",
+            "https://www.dubicars.com/images/5f5a35/w_1300x760/hh-motors-corporation/cbc35499-db56-43ea-95fe-067852cca0eb.jpeg",
+            "https://www.dubicars.com/images/8d47f3/w_1300x760/hh-motors-corporation/098de586-f262-4881-adaf-14db58797322.jpeg",
+            "https://www.dubicars.com/images/5c0d5e/w_1300x760/hh-motors-corporation/1aedb663-2395-4075-a0ac-1378a490f7b3.jpeg",
+            "https://www.dubicars.com/images/9809fc/w_1300x760/hh-motors-corporation/2bf5a2f7-3f67-4cd9-95af-e88842b65221.jpeg",
+            "https://www.dubicars.com/images/f3ffd1/w_1300x760/hh-motors-corporation/1bd43721-4f00-4e35-a361-1cb9ecc58764.jpeg",
+            "https://www.dubicars.com/images/99d095/w_1300x760/hh-motors-corporation/11434bb2-153e-4847-9103-3ae10338a9c8.jpeg",
+            "https://www.dubicars.com/images/bcd9aa/w_1300x760/hh-motors-corporation/2925fc7b-d120-4267-b9ff-ca2574fcd598.jpeg",
+            "https://www.dubicars.com/images/9538b7/w_1300x760/hh-motors-corporation/b92c5256-a73b-41a2-9bba-06357aaf4961.jpeg",
+            "https://www.dubicars.com/images/430ce1/w_1300x760/hh-motors-corporation/e4b341de-8481-4cf8-8590-8fe611d9b601.jpeg",
+            "https://www.dubicars.com/images/b214bc/w_1300x760/hh-motors-corporation/5cd0fd05-c45f-4690-8f09-dfba10150c51.jpeg",
+            "https://www.dubicars.com/images/ad0f13/w_1300x760/hh-motors-corporation/06624331-4ca3-4c23-8f36-f8192051e812.jpeg",
+            "https://www.dubicars.com/images/84dd8d/w_1300x760/hh-motors-corporation/01100141-ae21-48fa-b5bf-5552a5328964.jpeg",
+            "https://www.dubicars.com/images/196e64/w_1300x760/hh-motors-corporation/f722e259-35b5-4194-9a51-9ce0549f1cd1.jpeg",
+            "https://www.dubicars.com/images/2181c6/w_1300x760/hh-motors-corporation/06c3d7f3-0688-43bb-916d-32597451aab4.jpeg",
+            "https://www.dubicars.com/images/4e3371/w_1300x760/hh-motors-corporation/7075b159-415d-4b67-8ed1-98a59d5c62fa.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "diesel",
+            "powerHp": 201,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "965084",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "diesel",
+            "powerHp": 201,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-prado-28l-965084.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/662ce0/w_960x540/hh-motors-corporation/93872a3b-febd-4782-9116-932ea337a745.jpeg",
+            "https://www.dubicars.com/images/abd32b/w_1300x760/hh-motors-corporation/93872a3b-febd-4782-9116-932ea337a745.jpeg",
+            "https://www.dubicars.com/images/dc48f6/w_1300x760/hh-motors-corporation/7df323be-d3b5-484a-ad4e-0930675b9b58.jpeg",
+            "https://www.dubicars.com/images/2db8c4/w_1300x760/hh-motors-corporation/216a0c53-2792-40b0-8100-602c9265085f.jpeg",
+            "https://www.dubicars.com/images/ee7273/w_1300x760/hh-motors-corporation/3de6db6b-ca74-4c6a-bc2b-c613cb20a832.jpeg",
+            "https://www.dubicars.com/images/4dbb3a/w_1300x760/hh-motors-corporation/f6e47d49-7424-4c69-af6d-14d2ecb2b0ba.jpeg",
+            "https://www.dubicars.com/images/921e61/w_1300x760/hh-motors-corporation/554c9345-1f10-4892-a8f6-e05f06315a30.jpeg",
+            "https://www.dubicars.com/images/eba7b7/w_1300x760/hh-motors-corporation/7bd368c6-c511-4fe3-b48c-d55f151ca2ba.jpeg",
+            "https://www.dubicars.com/images/c05e13/w_1300x760/hh-motors-corporation/10f940ef-887c-43cf-9ee1-cda1c7d14ca2.jpeg",
+            "https://www.dubicars.com/images/604fc0/w_1300x760/hh-motors-corporation/23c5d5eb-9658-459f-9922-0c69734e5065.jpeg",
+            "https://www.dubicars.com/images/aeebba/w_1300x760/hh-motors-corporation/8f18dd20-a40e-4153-9fa0-e61622ff77eb.jpeg",
+            "https://www.dubicars.com/images/843a4e/w_1300x760/hh-motors-corporation/35d9ef37-6124-47ca-90bb-e72722786a64.jpeg",
+            "https://www.dubicars.com/images/6ce97c/w_1300x760/hh-motors-corporation/344fc1f1-1557-41af-9674-0764039c8741.jpeg",
+            "https://www.dubicars.com/images/3ade1f/w_1300x760/hh-motors-corporation/50297cc6-5d57-429e-92a8-ae2518d5fa8f.jpeg",
+            "https://www.dubicars.com/images/840fc6/w_1300x760/hh-motors-corporation/4a801e9c-acdc-41c4-b984-6a7b2eca2181.jpeg",
+            "https://www.dubicars.com/images/53afce/w_1300x760/hh-motors-corporation/457959b3-8f51-41c6-a7de-89e804e29495.jpeg",
+            "https://www.dubicars.com/images/6306d7/w_1300x760/hh-motors-corporation/4a9c4a8e-084c-4db0-bf85-f19919f67cf1.jpeg",
+            "https://www.dubicars.com/images/b50a36/w_1300x760/hh-motors-corporation/2232ec2c-ad40-47a1-8735-46de5d5d2ac0.jpeg",
+            "https://www.dubicars.com/images/fe90b4/w_1300x760/hh-motors-corporation/f7846c13-61e2-423e-8b12-709c279dae45.jpeg",
+            "https://www.dubicars.com/images/ab3456/w_1300x760/hh-motors-corporation/0f3db83b-10e4-41fb-a044-4cc89616268b.jpeg",
+            "https://www.dubicars.com/images/1e5eb5/w_1300x760/hh-motors-corporation/dc8ceed5-7b15-441e-99bf-af2c446b95ed.jpeg",
+            "https://www.dubicars.com/images/44f524/w_650x380/hh-motors-corporation/93872a3b-febd-4782-9116-932ea337a745.jpeg",
+            "https://www.dubicars.com/images/1f0873/w_650x380/hh-motors-corporation/7df323be-d3b5-484a-ad4e-0930675b9b58.jpeg",
+            "https://www.dubicars.com/images/50b6ac/w_650x380/hh-motors-corporation/216a0c53-2792-40b0-8100-602c9265085f.jpeg",
+            "https://www.dubicars.com/images/ed0d8e/w_650x380/hh-motors-corporation/3de6db6b-ca74-4c6a-bc2b-c613cb20a832.jpeg",
+            "https://www.dubicars.com/images/d42911/w_650x380/hh-motors-corporation/f6e47d49-7424-4c69-af6d-14d2ecb2b0ba.jpeg",
+            "https://www.dubicars.com/images/5106d7/w_650x380/hh-motors-corporation/554c9345-1f10-4892-a8f6-e05f06315a30.jpeg",
+            "https://www.dubicars.com/images/d3bad1/w_650x380/hh-motors-corporation/7bd368c6-c511-4fe3-b48c-d55f151ca2ba.jpeg",
+            "https://www.dubicars.com/images/ac7996/w_650x380/hh-motors-corporation/10f940ef-887c-43cf-9ee1-cda1c7d14ca2.jpeg",
+            "https://www.dubicars.com/images/30c6d9/w_650x380/hh-motors-corporation/23c5d5eb-9658-459f-9922-0c69734e5065.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "diesel",
+            "powerHp": 201,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "965411",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 409,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "images": 30,
+          "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-gxr-vxr-35l-965411.html",
+          "galleryUrls": [
+            "https://www.dubicars.com/images/110cfa/w_960x540/hh-motors-corporation/08cc582a-de0a-4355-a7a5-6979e942ae6c.jpeg",
+            "https://www.dubicars.com/images/ed34d8/w_1300x760/hh-motors-corporation/08cc582a-de0a-4355-a7a5-6979e942ae6c.jpeg",
+            "https://www.dubicars.com/images/57612e/w_1300x760/hh-motors-corporation/a2110135-de9d-46bd-adb3-90ef5c722db6.jpeg",
+            "https://www.dubicars.com/images/7a0ef6/w_1300x760/hh-motors-corporation/084dd99b-2d29-48de-b2ba-6df7e9637b16.jpeg",
+            "https://www.dubicars.com/images/eb60fd/w_1300x760/hh-motors-corporation/d23ee9d4-f56e-4892-9779-ec9f03f6b072.jpeg",
+            "https://www.dubicars.com/images/56b147/w_1300x760/hh-motors-corporation/7fb6247b-e24e-47bb-90ae-cef6876bc5dd.jpeg",
+            "https://www.dubicars.com/images/09c547/w_1300x760/hh-motors-corporation/485b96ac-b0ac-4d25-9439-a18deba93032.jpeg",
+            "https://www.dubicars.com/images/114ce9/w_1300x760/hh-motors-corporation/2566dd44-8f4f-4744-b6b4-ba16b4850b0b.jpeg",
+            "https://www.dubicars.com/images/52c889/w_1300x760/hh-motors-corporation/0ac627aa-8e4f-4cc5-98ac-deb1471880ec.jpeg",
+            "https://www.dubicars.com/images/8fbbc4/w_1300x760/hh-motors-corporation/ea272c2d-ef85-47ec-baa5-79f70a018877.jpeg",
+            "https://www.dubicars.com/images/90478c/w_1300x760/hh-motors-corporation/b589a688-43a7-48f9-95ec-7d0f80da69cd.jpeg",
+            "https://www.dubicars.com/images/993c4f/w_1300x760/hh-motors-corporation/b1f23cbd-ffaf-4970-b04f-4126cd672a4b.jpeg",
+            "https://www.dubicars.com/images/860a78/w_1300x760/hh-motors-corporation/81ef69be-d9f4-464f-b6fc-bc009b1dcf4a.jpeg",
+            "https://www.dubicars.com/images/055c12/w_1300x760/hh-motors-corporation/a24d9374-4e2f-4de6-b539-5e085d11b105.jpeg",
+            "https://www.dubicars.com/images/680fda/w_1300x760/hh-motors-corporation/4f4674b7-fadb-4f2d-a914-88c08eed2641.jpeg",
+            "https://www.dubicars.com/images/32cca2/w_1300x760/hh-motors-corporation/ef726374-6a7e-4f6c-94a5-87f6080e0171.jpeg",
+            "https://www.dubicars.com/images/468a2b/w_1300x760/hh-motors-corporation/59f6d275-9173-4289-a8da-0486ffbae6bd.jpeg",
+            "https://www.dubicars.com/images/fd83eb/w_1300x760/hh-motors-corporation/1afac322-2b41-4aef-8490-8433fdd5169e.jpeg",
+            "https://www.dubicars.com/images/a7a658/w_1300x760/hh-motors-corporation/71dcdb0b-b6a9-42fe-9352-b4985e2d61b2.jpeg",
+            "https://www.dubicars.com/images/75d052/w_1300x760/hh-motors-corporation/74bffd02-b471-432d-a6ee-62d2db9f8049.jpeg",
+            "https://www.dubicars.com/images/af8e56/w_1300x760/hh-motors-corporation/080386ed-dafc-426a-a17c-9dfdbc4642e2.jpeg",
+            "https://www.dubicars.com/images/5bce8d/w_650x380/hh-motors-corporation/08cc582a-de0a-4355-a7a5-6979e942ae6c.jpeg",
+            "https://www.dubicars.com/images/29fe59/w_650x380/hh-motors-corporation/a2110135-de9d-46bd-adb3-90ef5c722db6.jpeg",
+            "https://www.dubicars.com/images/41aa2c/w_650x380/hh-motors-corporation/084dd99b-2d29-48de-b2ba-6df7e9637b16.jpeg",
+            "https://www.dubicars.com/images/04ec90/w_650x380/hh-motors-corporation/d23ee9d4-f56e-4892-9779-ec9f03f6b072.jpeg",
+            "https://www.dubicars.com/images/a8e579/w_650x380/hh-motors-corporation/7fb6247b-e24e-47bb-90ae-cef6876bc5dd.jpeg",
+            "https://www.dubicars.com/images/ac4998/w_650x380/hh-motors-corporation/485b96ac-b0ac-4d25-9439-a18deba93032.jpeg",
+            "https://www.dubicars.com/images/13c709/w_650x380/hh-motors-corporation/2566dd44-8f4f-4744-b6b4-ba16b4850b0b.jpeg",
+            "https://www.dubicars.com/images/f9c5f2/w_650x380/hh-motors-corporation/0ac627aa-8e4f-4cc5-98ac-deb1471880ec.jpeg",
+            "https://www.dubicars.com/images/ed8d05/w_650x380/hh-motors-corporation/ea272c2d-ef85-47ec-baa5-79f70a018877.jpeg"
+          ],
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "powerHp": 409,
+            "sourcePrice": null,
+            "sourceCurrency": null
+          },
+          "changedFields": []
+        }
+      ],
+      "pages": [
+        {
+          "cursor": "1",
+          "returnedRows": 17,
+          "diagnostics": null,
+          "health": {
+            "ok": true,
+            "message": "DubiCars page 1: 17",
+            "checkedAt": "2026-09-07T03:25:36.048Z",
+            "httpStatus": 200,
+            "contentType": "text/html; charset=UTF-8"
+          }
+        }
+      ],
+      "sourceHealth": {
+        "ok": true,
+        "message": "DubiCars page 1: 17",
+        "checkedAt": "2026-09-07T03:25:36.048Z",
+        "httpStatus": 200,
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 17,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 17,
+        "unexaminedRows": 0,
+        "examined": 17,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 17,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 17
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "samples": [
+        {
+          "sourceOfferId": "1015750",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2022,
+          "powerHp": 271,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "1011773",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2022,
+          "powerHp": 409,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "1010541",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2022,
+          "powerHp": 409,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "994482",
+          "make": "Toyota",
+          "model": "Prado",
+          "year": 2022,
+          "powerHp": 271,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "976037",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2024,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "968288",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2023,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "961283",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2020,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "920087",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2022,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "901014",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2022,
+          "powerHp": 302,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "896643",
+          "make": "Toyota",
+          "model": "Hilux",
+          "year": 2021,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "894947",
+          "make": "Toyota",
+          "model": "Prado",
+          "year": 2023,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "799868",
+          "make": "Toyota",
+          "model": "Hilux",
+          "year": 2021,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "963056",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2023,
+          "powerHp": 301,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "963999",
+          "make": "Toyota",
+          "model": "Hilux",
+          "year": 2021,
+          "powerHp": 201,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "964472",
+          "make": "Toyota",
+          "model": "Prado",
+          "year": 2020,
+          "powerHp": 201,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "965084",
+          "make": "Toyota",
+          "model": "Prado",
+          "year": 2022,
+          "powerHp": 201,
+          "fuel": "diesel",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "965411",
+          "make": "Toyota",
+          "model": "Land Cruiser",
+          "year": 2022,
+          "powerHp": 409,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+  "businessSettings": {
+    "uae": {
+      "rawActiveVersion": null,
+      "effectiveVersion": "market_uae_system_average_v2",
+      "profileSource": "runtime_average_defaults",
+      "provisional": true,
+      "effectiveHash": "85fb77b6115aaed696ed8270ea173920cbae4cb2ced88b11d5f962153c553b38",
+      "effectiveExpenses": {
+        "securityDepositRub": 110000,
+        "topAvtoCommissionRub": 90000,
+        "contractInitialPaymentRub": 200000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 120000,
+        "logisticsRub": 450000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

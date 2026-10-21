@@ -1,0 +1,7016 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 79,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-9b71d84539601b496311",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 202,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 266,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0db44bb52a3da043371a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 205,
+      "commercialNames": [
+        "Model X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28af4aa53a6e2adcbcee",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 208,
+      "commercialNames": [
+        "Model X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31cbc350a57225eb72c8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 219,
+      "commercialNames": [
+        "Model X",
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1659,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea3ae01e232ceddf1752",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 380,
+      "commercialNames": [
+        "Model X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2518d1f2907d8b754500",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 386,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-547fb5361e9a848578e1",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 413,
+      "commercialNames": [
+        "Model X"
+      ],
+      "sourceMakeNames": [
+        "Tesla"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfa6e97b956ae814c767",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 421,
+      "commercialNames": [
+        "MODEL X",
+        "Model X"
+      ],
+      "sourceMakeNames": [
+        "TESLA",
+        "Tesla"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1254,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07498f974d42dfd470bd",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 568,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3e3f3b2ffd0ac6f004f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 585,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0812b6a66cf62ec75115",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 599,
+      "commercialNames": [
+        "MODEL X",
+        "Model X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 354,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9f8c8a1daaaa9bcb18a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 54,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16030835a40c3befd103",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 109,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fb1fa29730276a97d66",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 121,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48baa20e84930c715cf8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 158,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14fb6d8667cf7270e920",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 239,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 99,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa2b9470b42d81ac4d56",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 252,
+      "commercialNames": [
+        "Model X",
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 934,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f30b7455d59aa3cdcb5a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 314,
+      "commercialNames": [
+        "Model X",
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 986,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47349ee4d01e33be08ce",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 357,
+      "commercialNames": [
+        "Model X",
+        "MODEL X",
+        "MODEL X / / LONG RANGE AWD",
+        "MODEL X / / PERFORMANCE AWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 185,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-554e9e5075e2e693de31",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 478,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53be7041e4e69f9b0f7e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 623,
+      "commercialNames": [
+        "Model X",
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 537,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35f76240f17f31e56a16",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 750,
+      "commercialNames": [
+        "TESLA MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68834d5f9376ff829b26",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 932,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1052,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da0bb10a785408d5c63",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-043fc03bf72cc4f222cb",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60977ec1357593bf54d8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec0e670e1f91e597e8d9",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47d3f5db5207f3f4499b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0933e637570abf6fcb01",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-827efdfeaa33e70892f5",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3153d70063c45bb3109e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c237141df49d7a4b465",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbb53166d99cb38406c1",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1942ca5875af1a45d8a7",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db9c34660d716fc7bdb0",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d22da659be1bd18eeb8e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acd547d67fde2aa17f58",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-674b51281df4d63e3bee",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75a3660d68d8238bf890",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9173e2d6e14a97ccbe9d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 137,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-929f0cbb4ef8fb1ae26d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b48a97f11dab6032e135",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44cc1f2d2e0e0ad8edef",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 174,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe68e1f2a57dcaa935b5",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-296ff4a4577493d79e6e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 218,
+      "commercialNames": [
+        "MODEL X",
+        "MODEL X / / LONG RANGE AWD",
+        "MODEL X / / PERFORMANCE AWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 305,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2831d8ec07eeb26451c",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 221,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09301e4322e0d053bc33",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 243,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fd7fe4120e54266966d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d08da8061d2625aae3dd",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 504,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2380,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1901bf033a4c424ebf13",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 618,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 423,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b4dc0dbea7fe7b00b7e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model X",
+      "modelId": "tesla/model-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 923,
+      "commercialNames": [
+        "MODEL X"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f41e0bc8df59dad8f209",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MODEL Y",
+        "Model Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 9184,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c0df13c57db85be8a82",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 331,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-887251779d33d0aac7fe",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1789,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd0f43fcdb627339eec0",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / RWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 8811,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-871aa236a51493760e3f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 153,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / LONG RANGE AWD",
+        "MODEL Y / / LONGRANGE"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 23012,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a12ea143cb2dbce60a8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 155,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / PERFORMANCE AWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2391,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db7c480182ba3a92ace2",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 158,
+      "commercialNames": [
+        "MODEL Y",
+        "Model Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 59473,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a77cd35a50b7acfa4188",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 220,
+      "commercialNames": [
+        "Model Y",
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 234450,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62158edf06067b0ec639",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 378,
+      "commercialNames": [
+        "MODEL Y",
+        "Model Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 139636,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c27598305ef31bff82d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-120297ba871dbc7972ab",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 235,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 55098,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f05c11b876ebbf0efb03",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 255,
+      "commercialNames": [
+        "Model Y",
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 60005,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f054b5c4c8e48f3f2fca",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 329,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55c5039e20ae8afff184",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 393,
+      "commercialNames": [
+        "Model Y",
+        "MODEL Y",
+        "TESLA MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 33212,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6295294173c02d15ff3",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 49,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fab0d9f262d61ddb4db8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dec3a000233db3cbc71d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17a77004417c0be315ae",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4123fba34e3f9c253ce6",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36613141d764d3e0c728",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 59,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-408500dba5a1efe641f1",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 36,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-951bb05897adfdb3f85a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e01341a18548c48042d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c03b69706ccb6ff59a14",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 436,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19112772986bbfff5c3b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d78f3179f2374eeb082",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-624da59288df4b937ece",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e91df62032b22300a682",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 47,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f43467f2832efc1666e8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba2d3a95d33c190f057a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03efb05b7fdac288b6ab",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c5c73ac87f09c99321b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c02b3bbd7a2bc96d44c6",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 79,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a4391aeff2da96ccf5b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e268a267bf93746288a0",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 105,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10d32501de1f1de31248",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 62,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d27fedc0d432bfbb38e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3931c83dd331fe3c3ee7",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / RWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 307,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9bc98adf2737e9da518",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66e5d717723f17b6251f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-baf545313cd903039b7b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be61ef4f4ff3c526c422",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-625d5f85ffaaf58b222b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 199,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d21d7830e7afc417b0f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 44,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93d2d4778812886b0943",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "MODEL Y LONG RANGE RWD",
+        "MODEL Y RWD",
+        "MODEL Y STANDARD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1041,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3248040f28b2302fe7a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b19fd95fadac5990d682",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52c19295ecdd190a4924",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d38b9f10fb54060781dc",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da65d733fadf1d5e6bf7",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / LONG RANGE RWD",
+        "MODEL Y / / RWD",
+        "MODEL Y LONG RANGE RWD",
+        "MODEL Y RWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 995,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a2a4e255c0b511c7ce4",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 121,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cca82c7805318861a432",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / RWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 820,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7ee7efa88680b2d4b8e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36394ab505435b4f4e71",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ced7d39d31d4441b0000",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ec7c236ae10763b460d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 133,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30e9bea9cf2b851a193b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97388895016382b00872",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b9245b861fb74c6704a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 137,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fc95e0cca1a727ae798",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e7c80ee2102a439b733",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 141,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d76b5b8f8bfeed18f216",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 143,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-896bb78ca1d3e688be56",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cf11affac0216254e0e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b5fc804697bdb8b0998",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 148,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea06bb1ce04bbbfe1c79",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f95a6260ad9b99dd8037",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 154,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca72653d8e56b680c1b7",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 165,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09be947b8186db7c19e7",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-685436c7daa287fc539b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 173,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8a8a325d3a37f7d4448",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 174,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-128ad4b6de8990c95a17",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-437f47c377353e2b8892",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 183,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e76d2603605fbcb9b711",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 184,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a892504dc4122e9c558b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 185,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / PERFORMANCE AWD",
+        "MODEL Y PERFORMANCE AWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2337,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fd39bc2e09da507f617",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 186,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c4565383ac430663953",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / LONG RANGE AWD",
+        "MODEL Y PERFORMANCE AWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 7900,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb39da62aaaa4ccf0965",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1dd085d354cd8f4f4148",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 206,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-299d6504808a21fa25ef",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 208,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5a6bb238a376f9f7e31",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba51cead16975ed8525f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 221,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53370fdfe86abee8eb90",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 228,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b2861353967a9090040",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd4b6d5d689003ef8c64",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 243,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9e4a45537da2a993f3a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 245,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d1e707ffde15fc01dba",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d24d6491e78b14f88cad",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 253,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f1cc100ee6faecfc6d8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 258,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad749c3a4b1be2b32d5d",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 260,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab65a4697928dfaa8e36",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 267,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02dc3421fed458b5b9c8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 270,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3beb030c881a481e18a4",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 280,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d59bfd28232d550c1ba8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 294,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4899f23017adaa1a8ed",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-adfd5bcd76244d205fa1",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b777bb6c6331645b4276",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 330,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-969375ecdba4e1960493",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 345,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eea4860561b16d0f5ff8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 352,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87eaeca2e38dc4d6203c",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 360,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be6f99ae08061342230b",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 362,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36da96f2eec3a7ab166f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 385,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfadd1030c01ec741510",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 410,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7585ec0e80d08d84118c",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 430,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc9e12d410cc54dd4648",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 460,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-daccbc149a31ce9498b1",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 44,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f1de9530cc75c1d5ab0",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75a83a71177b80488301",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 127,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "MODEL Y LONG RANGE RWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 352,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6289cfd72d4bd052d50a",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 159,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 248,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8261920b17a2303b0464",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 179,
+      "commercialNames": [
+        "MODEL Y",
+        "MODEL Y (OPAL)",
+        "MODEL Y / / LONG RANGE AWD",
+        "MODEL Y LONG RANGE AWD"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5171,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c807d49147c4fd04e63",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 46,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28bb81b339f90236f729",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 201,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c1b541fc2dadb26d671",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 223,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2420c6ef0989f250925e",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 303,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 607,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11ff13b8ff457f1ad92f",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 325,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c1530efd7da52a5ca22",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 358,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73b95dd5f2ddd0478293",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 461,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95a53b9dfe3ad3bb5b9c",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Model Y",
+      "modelId": "tesla/model-y",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 750,
+      "commercialNames": [
+        "MODEL Y"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e756e771bf7c44e44f8",
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "canonicalModel": "Roadster",
+      "modelId": "tesla/roadster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 40,
+      "commercialNames": [
+        "TESLA ROADSTER"
+      ],
+      "sourceMakeNames": [
+        "TESLA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-771e8cd8bddf224196dc",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10F",
+      "modelId": "togg/t10f",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 159,
+      "commercialNames": [
+        "T10F"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19e456a244cdec2689e0",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10F",
+      "modelId": "togg/t10f",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 319,
+      "commercialNames": [
+        "T10F"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fdbbc03febb90a4734a",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10X",
+      "modelId": "togg/t10x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "T10X"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1fd49f17815fcf789fb0",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10X",
+      "modelId": "togg/t10x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 63,
+      "commercialNames": [
+        "T10X"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f6812f39732a29f233d",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10X",
+      "modelId": "togg/t10x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 126,
+      "commercialNames": [
+        "T10X"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46d2d59b95490bb91515",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10X",
+      "modelId": "togg/t10x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 159,
+      "commercialNames": [
+        "T10X"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 76,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6747e1cb72baa960cd7f",
+      "brandId": "togg",
+      "brand": "Togg",
+      "canonicalModel": "T10X",
+      "modelId": "togg/t10x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 319,
+      "commercialNames": [
+        "T10X"
+      ],
+      "sourceMakeNames": [
+        "TOGG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b20b1297323a809a968",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3955,
+      "powerKw": 180,
+      "commercialNames": [
+        "4 RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fdd88cce8c83fba2433",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": null,
+      "commercialNames": [
+        "4 RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85b92edc24d686ae0b69",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 176,
+      "commercialNames": [
+        "4 RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37f308a2c3b2a1535359",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 190,
+      "commercialNames": [
+        "4RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a85dd87a34a0ee2eb5bb",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 198,
+      "commercialNames": [
+        "4 RUNNER",
+        "4RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05a9a8d6426716ab143b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 199,
+      "commercialNames": [
+        "4 RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6114bc7e38c3ca2190c4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 201,
+      "commercialNames": [
+        "4RUNNER",
+        "TOYOTA 4 RUNNER",
+        "TOYOTA 4-RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-318e9c0a469a397df8f6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "4-Runner",
+      "modelId": "toyota/4-runner",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 174,
+      "commercialNames": [
+        "4RUNNER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75ed63ae8b0cee9be6c9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "86",
+      "modelId": "toyota/86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 562,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b67b8672ca7724e8d79e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "86",
+      "modelId": "toyota/86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16b8ab6a0f020c482dce",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Auris",
+      "modelId": "toyota/auris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "AURIS",
+        "TOYOTA AURIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0748c3fdcf4f49bfd6f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Auris",
+      "modelId": "toyota/auris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 97,
+      "commercialNames": [
+        "AURIS",
+        "TOYOTA AURIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA",
+        "Toyota"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 83,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74485b920a18ba4a3033",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Auris",
+      "modelId": "toyota/auris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "AURIS",
+        "AURIS HYBRID",
+        "TOYOTA AURIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 54,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b103c5fa1aca166a9529",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Auris",
+      "modelId": "toyota/auris",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1997,
+      "powerKw": 130,
+      "commercialNames": [
+        "AURIS-TMPL"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3beaa36334ce3bde2e7",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Auris",
+      "modelId": "toyota/auris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "AURIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e29cd5b13ba1119f7e4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Avalon",
+      "modelId": "toyota/avalon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 205,
+      "commercialNames": [
+        "AVALON"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31d9c236d384a938a936",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Avalon",
+      "modelId": "toyota/avalon",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2494,
+      "powerKw": 149,
+      "commercialNames": [
+        "AVALON"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-888fc7dc5f51ee630199",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Avensis",
+      "modelId": "toyota/avensis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 108,
+      "commercialNames": [
+        "AVENSIS",
+        "TOYOTA AVENSIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee7f448aaaa9f222ab4c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Avensis",
+      "modelId": "toyota/avensis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 13,
+      "commercialNames": [
+        "TOYOTA AVENSIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd2dac49591b792d763b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Avensis",
+      "modelId": "toyota/avensis",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "AVENSIS VERSO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0f8c8f656960982c81f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Avensis",
+      "modelId": "toyota/avensis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 105,
+      "commercialNames": [
+        "AVENSIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b91705e3a783bfb4fa23",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo",
+      "modelId": "toyota/aygo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "AYGO",
+        "TOYOTA AYGO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 397,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-118e6049a968a0ab2a62",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo",
+      "modelId": "toyota/aygo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "AYGO JBL EDITION TSS VVT-I",
+        "AYGO JBL EDITION TSS VVT-I CVT"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 290,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4573da1c6e2f433ae264",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo",
+      "modelId": "toyota/aygo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 50,
+      "commercialNames": [
+        "AYGO",
+        "TOYOTA AYGO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-918c618d11888ac664c8",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo",
+      "modelId": "toyota/aygo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 51,
+      "commercialNames": [
+        "AYGO",
+        "TOYOTA AYGO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44ae579f35352f40788e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo",
+      "modelId": "toyota/aygo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "AYGO",
+        "AYGO / 1.0 /",
+        "AYGO / 1.0 / AUT.",
+        "AYGO 1 0 VVT-I",
+        "AYGO 1,0 VVT-I",
+        "AYGO 1.0 VVT-I",
+        "AYGO 10",
+        "AYGO 10 AUT",
+        "AYGO.",
+        "TOYOTA AYGO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 290451,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9eee9a7c3083e355994f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo",
+      "modelId": "toyota/aygo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOYOTA AYGO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a3322dc9e04d77a2d2b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "AYGO X",
+        "AYGO X VVT-I",
+        "AYGO X-CITE TSS VVT-I",
+        "AYGO X-CITE TSS VVT-I CVT",
+        "AYGO X-CITE VVT-I",
+        "AYGO X-CITE VVT-I CVT",
+        "AYGO X-CLUSIV VVT-I",
+        "AYGO X-CLUSIV VVT-I CVT",
+        "AYGO X-PLAY TSS VVT-I",
+        "AYGO X-PLAY TSS VVT-I CVT",
+        "AYGO X-PLAY VVT-I",
+        "AYGO X-PLAY VVT-I CVT",
+        "AYGO X-TREND TSS VVT-I",
+        "AYGO X-TREND TSS VVT-I CVT",
+        "AYGO X-TREND VVT-I",
+        "AYGO X-TREND VVT-I CVT",
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 20748,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-525bc05c85a8c51dcbb3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df428609564177915a63",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "AYGO X",
+        "AYGO X / 1.0 /",
+        "AYGO X / 1.0 / CVT",
+        "AYGO X / 1.0 /CVT",
+        "AYGO X 1.0",
+        "AYGO X 1.0 CVT",
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 279596,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00d0bf9576494b08a292",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 92,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89d1e7537513f53d862d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70a7f16daeacfe4418f9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "AYGO X",
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c266e0044270f5ed167",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 46,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08554169c9e82e0e414e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 58,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-712fca78ec6ba5aa41d1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 62,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd8d34445dc898696e0a",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 69,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c274b0605706cada5e9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d013b3d6652ac60027e2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 77,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf2958d37f610880c4b4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 85,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4544aba3d80bebb1eeb7",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 111,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd4b3d3f07ba192086a2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 112,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c248b86f6cd97942961e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 118,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4778586f983a9de96c6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 124,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ee14607c58efe6ba4e6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 152,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c75d4fa31fa0e4b5c139",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1098,
+      "powerKw": 53,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9155b199fcd03da4d909",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1108,
+      "powerKw": 46,
+      "commercialNames": [
+        "AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa8912fc62f97abf86ea",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": null,
+      "commercialNames": [
+        "AYGO X",
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 77,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15279beaa9e5a0035495",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Aygo X",
+      "modelId": "toyota/aygo-x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 68,
+      "commercialNames": [
+        "AYGO X",
+        "TOYOTA AYGO X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2162,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f916b54033b7aedf30ec",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Bz",
+      "modelId": "toyota/bz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "BZ$X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1a685bf4c6c88ddd9ff",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ 4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1063,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5f31cd4afa550f4df40",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 59,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ef349948eac1bd2fccc",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 322,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce97fcd57866139a9271",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 8876,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-febee8bf44ed0aba91a7",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X",
+        "TOYOTA BZ4X / 4WD /",
+        "TOYOTA BZ4X 4WD"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 217,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83a6d3f14b6d31b959a5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "BZ4X",
+        "BZ4X SUV",
+        "TOYOTA BZ4X",
+        "TOYOTA BZ4X //"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 31692,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f75a6aac34f39d7cd4a8",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "BZ4X",
+        "BZ4X SUV",
+        "TOYOTA BZ4X",
+        "TOYOTA BZ4X / 4WD /",
+        "TOYOTA BZ4X 4WD"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 13044,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f73a4de983fd9853cea",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37eee110a6e8c1ca8314",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 123,
+      "commercialNames": [
+        "BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5136830f001dd3f8fcfa",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 124,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a4d99fcf10840c819e5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9267b4afc51b3232d1e9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 165,
+      "commercialNames": [
+        "BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59ea2a6e93597e138238",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 167,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1040,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b645c740033a01279fd",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dda01da072c532de2f42",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "bZ4X",
+      "modelId": "toyota/bz4x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 255,
+      "commercialNames": [
+        "BZ4X",
+        "TOYOTA BZ4X"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2028,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-051e2955bde3fe09b669",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "BZ4X Touring",
+      "modelId": "toyota/bz4x-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 64,
+      "commercialNames": [
+        "BZ4X TOURING"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-807b3c5854fa197d7379",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "BZ4X Touring",
+      "modelId": "toyota/bz4x-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 128,
+      "commercialNames": [
+        "BZ4X TOURING"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2d88408d4a93b6e4f32",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "C-HR",
+        "TOYOTA C HR",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52c45a92ac7b3c828e26",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "C-HR DESIGN",
+        "C-HR DYNAMIC",
+        "C-HR DYNAMIC AWD CVT",
+        "C-HR EXCEL",
+        "C-HR EXCEL AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32f1778f4b2b70345d27",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "C-HR",
+        "C-HR 1 2 T 2WD",
+        "C-HR 1 2 T 4WD CVT",
+        "C-HR 1,2 T 2WD",
+        "C-HR 12T",
+        "C-HR 12T 4WD CVT",
+        "C-HR 12T CVT",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 9602,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b669188fc2d68e2a3a71",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "C-HR",
+        "C-HR DESIGN HEV CVT",
+        "C-HR DYNAMIC HEV CVT",
+        "C-HR EXCEL HEV CVT",
+        "C-HR ICON HEV CVT",
+        "C-HR LIME EDITION HEV CVT",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 19865,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-236fa8ec52685b1bcda8",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "C HR",
+        "C-HR",
+        "C-HR / 1,8 / CVT HIBRID",
+        "C-HR / 1.8 / CVT HIBRID",
+        "C-HR 1 8 HYBRID 2WD",
+        "C-HR 1,8 HYBRID 2WD",
+        "C-HR 1.8 CVT HIBRID",
+        "C-HR 1.8 HYBRID 2WD",
+        "C-HR 18 CVT HIBRID",
+        "TOYOTA C HR",
+        "TOYOTA C-HR",
+        "TOYOTA CHR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 458618,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bd809613999680d0b40",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": null,
+      "commercialNames": [
+        "C-HR",
+        "C-HR DESIGN HEV CVT",
+        "C-HR DYNAMIC HEV CVT",
+        "C-HR EXCEL HEV CVT",
+        "C-HR ORANGE EDITION HEV CVT",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 5657,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

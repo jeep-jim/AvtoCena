@@ -1,0 +1,8738 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 18,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "daimler:v8250",
+      "make": "Daimler",
+      "model": "V8250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "daimler:xj",
+      "make": "Daimler",
+      "model": "Xj",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "daimler:xj40",
+      "make": "Daimler",
+      "model": "XJ40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "daimler:xj6",
+      "make": "Daimler",
+      "model": "XJ6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dallara:stradale",
+      "make": "Dallara",
+      "model": "Stradale",
+      "canonical": {
+        "brandId": "dallara",
+        "modelId": "dallara/stradale",
+        "canonicalMake": "Dallara",
+        "canonicalModel": "Stradale"
+      },
+      "aliases": [
+        "DALLARA STRADALE",
+        "STRADALE"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1000",
+      "make": "Datsun",
+      "model": "1000",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:100a",
+      "make": "Datsun",
+      "model": "100A",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:120",
+      "make": "Datsun",
+      "model": "120",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:120y",
+      "make": "Datsun",
+      "model": "120 Y",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1200",
+      "make": "Datsun",
+      "model": "1200",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1200deluxe",
+      "make": "Datsun",
+      "model": "1200 De Luxe",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:120a",
+      "make": "Datsun",
+      "model": "120A",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:120ywagon",
+      "make": "Datsun",
+      "model": "120Y Wagon",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1300",
+      "make": "Datsun",
+      "model": "1300",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:140",
+      "make": "Datsun",
+      "model": "140",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1400",
+      "make": "Datsun",
+      "model": "1400",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:140y",
+      "make": "Datsun",
+      "model": "140Y",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1600",
+      "make": "Datsun",
+      "model": "1600",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1600deluxe",
+      "make": "Datsun",
+      "model": "1600 De Luxe",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:1600sss",
+      "make": "Datsun",
+      "model": "1600 Sss",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:160j",
+      "make": "Datsun",
+      "model": "160J",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:160jsss",
+      "make": "Datsun",
+      "model": "160J Sss",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:180sx",
+      "make": "Datsun",
+      "model": "180 Sx",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:180b",
+      "make": "Datsun",
+      "model": "180B",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:180bwagon",
+      "make": "Datsun",
+      "model": "180B Wagon",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:2000",
+      "make": "Datsun",
+      "model": "2000",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:200l",
+      "make": "Datsun",
+      "model": "200L",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:220c",
+      "make": "Datsun",
+      "model": "220C",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:240",
+      "make": "Datsun",
+      "model": "240",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:240z",
+      "make": "Datsun",
+      "model": "240 Z",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:240zsport",
+      "make": "Datsun",
+      "model": "240 Z Sport",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:2400",
+      "make": "Datsun",
+      "model": "2400",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:260",
+      "make": "Datsun",
+      "model": "260",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:260c",
+      "make": "Datsun",
+      "model": "260 C",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:260z",
+      "make": "Datsun",
+      "model": "260 Z",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:260z2plus2",
+      "make": "Datsun",
+      "model": "260Z 2+2",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:280",
+      "make": "Datsun",
+      "model": "280",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:280z",
+      "make": "Datsun",
+      "model": "280 Z",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:280c",
+      "make": "Datsun",
+      "model": "280C",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:280zx",
+      "make": "Datsun",
+      "model": "280ZX",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:510",
+      "make": "Datsun",
+      "model": "510",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:bluebird",
+      "make": "Datsun",
+      "model": "Bluebird",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:bluebird1200",
+      "make": "Datsun",
+      "model": "Bluebird 1200",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:cedric",
+      "make": "Datsun",
+      "model": "Cedric",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:cherry",
+      "make": "Datsun",
+      "model": "Cherry",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:coupe1200",
+      "make": "Datsun",
+      "model": "Coupe 1200",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:fairlady",
+      "make": "Datsun",
+      "model": "Fairlady",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:fairlady2000",
+      "make": "Datsun",
+      "model": "Fairlady 2000",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:laurel",
+      "make": "Datsun",
+      "model": "Laurel",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:patrol",
+      "make": "Datsun",
+      "model": "Patrol",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:silvia",
+      "make": "Datsun",
+      "model": "Silvia",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:stanza",
+      "make": "Datsun",
+      "model": "Stanza",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "datsun:sunny",
+      "make": "Datsun",
+      "model": "Sunny",
+      "canonical": {
+        "brandId": "datsun",
+        "modelId": null,
+        "canonicalMake": "Datsun",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "delorean:dmc",
+      "make": "De Lorean",
+      "model": "Dmc",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "delorean:dmc12",
+      "make": "De Lorean",
+      "model": "Dmc 12",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:1937",
+      "make": "De Soto",
+      "model": "1937",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:adventurer",
+      "make": "De Soto",
+      "model": "Adventurer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:airflow",
+      "make": "De Soto",
+      "model": "Airflow",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:cf",
+      "make": "De Soto",
+      "model": "CF",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:custom",
+      "make": "De Soto",
+      "model": "Custom",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:diplomat",
+      "make": "De Soto",
+      "model": "Diplomat",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:firedome",
+      "make": "De Soto",
+      "model": "Firedome",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:fireflite",
+      "make": "De Soto",
+      "model": "Fireflite",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:firesweep",
+      "make": "De Soto",
+      "model": "Firesweep",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:luxe",
+      "make": "De Soto",
+      "model": "Luxe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:powerflite",
+      "make": "De Soto",
+      "model": "Powerflite",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:s3",
+      "make": "De Soto",
+      "model": "S 3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:soto",
+      "make": "De Soto",
+      "model": "Soto",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "desoto:suburban",
+      "make": "De Soto",
+      "model": "Suburban",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "detomaso:pantera",
+      "make": "De Tomaso",
+      "model": "Pantera",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "detomaso:panteragt5",
+      "make": "De Tomaso",
+      "model": "Pantera GT5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "deepal:s05",
+      "make": "Deepal",
+      "model": "S05",
+      "canonical": {
+        "brandId": "deepal",
+        "modelId": "deepal/s05",
+        "canonicalMake": "Deepal",
+        "canonicalModel": "S05"
+      },
+      "aliases": [
+        "DEEPAL S05"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "deepal:s05max",
+      "make": "Deepal",
+      "model": "S05 Max",
+      "canonical": {
+        "brandId": "deepal",
+        "modelId": null,
+        "canonicalMake": "Deepal",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "deepal:s07",
+      "make": "Deepal",
+      "model": "S07",
+      "canonical": {
+        "brandId": "deepal",
+        "modelId": "deepal/s07",
+        "canonicalMake": "Deepal",
+        "canonicalModel": "S07"
+      },
+      "aliases": [
+        "DEEPAL S07"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "delage:d1",
+      "make": "Delage",
+      "model": "D1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "delage:d670",
+      "make": "Delage",
+      "model": "D6-70",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "delage:d8",
+      "make": "Delage",
+      "model": "D8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "delage:dm",
+      "make": "Delage",
+      "model": "Dm",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "denza:b8",
+      "make": "Denza",
+      "model": "B8",
+      "canonical": {
+        "brandId": "denza",
+        "modelId": null,
+        "canonicalMake": "Denza",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "denza:d9",
+      "make": "Denza",
+      "model": "D9",
+      "canonical": {
+        "brandId": "denza",
+        "modelId": null,
+        "canonicalMake": "Denza",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "denza:d9fwd",
+      "make": "Denza",
+      "model": "D9 Fwd",
+      "canonical": {
+        "brandId": "denza",
+        "modelId": null,
+        "canonicalMake": "Denza",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:580",
+      "make": "DFSK",
+      "model": "580",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/580",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "580"
+      },
+      "aliases": [
+        "580 LPG",
+        "FENGON 580"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:e5",
+      "make": "DFSK",
+      "model": "E5",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/e5",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "E5"
+      },
+      "aliases": [
+        "DFSK E5",
+        "NAVOR E5"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:fengon5",
+      "make": "DFSK",
+      "model": "Fengon 5",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/fengon-5",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "Fengon 5"
+      },
+      "aliases": [
+        "FENGON 5"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:fengon500",
+      "make": "DFSK",
+      "model": "Fengon 500",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/fengon-500",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "Fengon 500"
+      },
+      "aliases": [
+        "FENGON 500",
+        "FENGON 500-MT",
+        "Fengon500",
+        "FENGON500"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:fengon600",
+      "make": "DFSK",
+      "model": "Fengon 600",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/fengon-600",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "Fengon 600"
+      },
+      "aliases": [
+        "FENGON 600"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:ix5",
+      "make": "DFSK",
+      "model": "ix5",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/ix5",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "ix5"
+      },
+      "aliases": [
+        "IX5"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dfsk:seres3",
+      "make": "DFSK",
+      "model": "Seres 3",
+      "canonical": {
+        "brandId": "dfsk",
+        "modelId": "dfsk/seres-3",
+        "canonicalMake": "DFSK",
+        "canonicalModel": "Seres 3"
+      },
+      "aliases": [
+        "SERES 3",
+        "SERES 3 /",
+        "SERES-3",
+        "SERES3"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:330",
+      "make": "Dodge",
+      "model": "330",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:400",
+      "make": "Dodge",
+      "model": "400",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:440",
+      "make": "Dodge",
+      "model": "440",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:600",
+      "make": "Dodge",
+      "model": "600",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:a100",
+      "make": "Dodge",
+      "model": "A100",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:aries",
+      "make": "Dodge",
+      "model": "Aries",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:aspen",
+      "make": "Dodge",
+      "model": "Aspen",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:avenger",
+      "make": "Dodge",
+      "model": "Avenger",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:b200",
+      "make": "Dodge",
+      "model": "B200",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodgebrothers:touring",
+      "make": "Dodge Brothers",
+      "model": "Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:business",
+      "make": "Dodge",
+      "model": "Business",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:caliber",
+      "make": "Dodge",
+      "model": "Caliber",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:caravan",
+      "make": "Dodge",
+      "model": "Caravan",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/caravan",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Caravan"
+      },
+      "aliases": [
+        "CARAVAN"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challenger",
+      "make": "Dodge",
+      "model": "Challenger",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/challenger",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Challenger"
+      },
+      "aliases": [
+        "CHALLENGER",
+        "DODGE CHALLENGER"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengermds",
+      "make": "Dodge",
+      "model": "Challenger (MDS)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengerawd",
+      "make": "Dodge",
+      "model": "Challenger AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengersrtdemon170",
+      "make": "Dodge",
+      "model": "Challenger SRT Demon 170",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengersrthellcat",
+      "make": "Dodge",
+      "model": "Challenger SRT Hellcat",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengersrthellcatwidebody",
+      "make": "Dodge",
+      "model": "Challenger SRT Hellcat Widebody",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengerwidebody",
+      "make": "Dodge",
+      "model": "Challenger Widebody",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:challengerwidebodymds",
+      "make": "Dodge",
+      "model": "Challenger Widebody (MDS)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:charger",
+      "make": "Dodge",
+      "model": "Charger",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/charger",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Charger"
+      },
+      "aliases": [
+        "CHARGER",
+        "DODGE CHARGER"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargermds",
+      "make": "Dodge",
+      "model": "Charger (MDS)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerawd",
+      "make": "Dodge",
+      "model": "Charger AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd24555zr18",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 245/55ZR18",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd25545r20",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 255/45R20",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd27540r20",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 275/40R20",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd2dr18nexentire",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 2Dr (18\" Nexen Tire)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd2dr20goodyeartire",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 2Dr (20\" Goodyear Tire)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd2dr20nexentire",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 2Dr (20\" Nexen Tire)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonartawd30535zr20",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 305/35ZR20",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonascatpackawd30535zr20",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack AWD 305/35ZR20",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonascatpackawd32535zr20rear",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack AWD 325/35ZR20 Rear",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonascatpackawd32535zr20rear3s",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack AWD 325/35ZR20 Rear 3S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonascatpacktrkpackawd2dr3stire",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack Trk Pack AWD 2Dr 3S Tire",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerdaytonascatpacktrkpackawd2drastire",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack Trk Pack AWD 2Dr AS Tire",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerrt",
+      "make": "Dodge",
+      "model": "Charger R/T",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerscatpack",
+      "make": "Dodge",
+      "model": "Charger Scat Pack",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargersrthellcatwidebody",
+      "make": "Dodge",
+      "model": "Charger SRT Hellcat Widebody",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerwidebody",
+      "make": "Dodge",
+      "model": "Charger Widebody",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:chargerwidebodymds",
+      "make": "Dodge",
+      "model": "Charger Widebody (MDS)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:colt",
+      "make": "Dodge",
+      "model": "Colt",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:command",
+      "make": "Dodge",
+      "model": "Command",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:coronet",
+      "make": "Dodge",
+      "model": "Coronet",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:coronetroyallancer",
+      "make": "Dodge",
+      "model": "Coronet Royal Lancer",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:custom",
+      "make": "Dodge",
+      "model": "Custom",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:custom880",
+      "make": "Dodge",
+      "model": "Custom 880",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:customroyal",
+      "make": "Dodge",
+      "model": "Custom Royal",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:dr",
+      "make": "Dodge",
+      "model": "D.r",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:d100",
+      "make": "Dodge",
+      "model": "D100",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:d11",
+      "make": "Dodge",
+      "model": "D11",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:d2",
+      "make": "Dodge",
+      "model": "D2",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:d22",
+      "make": "Dodge",
+      "model": "D22",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:d24",
+      "make": "Dodge",
+      "model": "D24",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:dakota",
+      "make": "Dodge",
+      "model": "Dakota",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:dart",
+      "make": "Dodge",
+      "model": "Dart",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/dart",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Dart"
+      },
+      "aliases": [
+        "DART"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:daytona",
+      "make": "Dodge",
+      "model": "Daytona",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:deluxe",
+      "make": "Dodge",
+      "model": "Deluxe",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:demon",
+      "make": "Dodge",
+      "model": "Demon",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:diplomat",
+      "make": "Dodge",
+      "model": "Diplomat",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:du",
+      "make": "Dodge",
+      "model": "Du",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:durango",
+      "make": "Dodge",
+      "model": "Durango",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/durango",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Durango"
+      },
+      "aliases": [
+        "DODGE DURANGO",
+        "DURANGO"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:durangoawd",
+      "make": "Dodge",
+      "model": "Durango AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:durangoawdsrt",
+      "make": "Dodge",
+      "model": "Durango AWD SRT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:durangoawdsrthellcat",
+      "make": "Dodge",
+      "model": "Durango AWD SRT Hellcat",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:four",
+      "make": "Dodge",
+      "model": "Four",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:grandcaravan",
+      "make": "Dodge",
+      "model": "Grand Caravan",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/grand-caravan",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Grand Caravan"
+      },
+      "aliases": [
+        "DODGE GRAND CARAVAN",
+        "GRAND CARAVAN"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:hornet",
+      "make": "Dodge",
+      "model": "Hornet",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/hornet",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Hornet"
+      },
+      "aliases": [
+        "HORNET"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:hornetawd",
+      "make": "Dodge",
+      "model": "Hornet AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:hornetrtphev",
+      "make": "Dodge",
+      "model": "Hornet R/T PHEV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:intrepid",
+      "make": "Dodge",
+      "model": "Intrepid",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:journey",
+      "make": "Dodge",
+      "model": "Journey",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/journey",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Journey"
+      },
+      "aliases": [
+        "DODGE JOURNEY",
+        "JOURNEY"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:kingsway",
+      "make": "Dodge",
+      "model": "Kingsway",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:lancer",
+      "make": "Dodge",
+      "model": "Lancer",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:magnum",
+      "make": "Dodge",
+      "model": "Magnum",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:matador",
+      "make": "Dodge",
+      "model": "Matador",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:mirada",
+      "make": "Dodge",
+      "model": "Mirada",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:monaco",
+      "make": "Dodge",
+      "model": "Monaco",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:neon",
+      "make": "Dodge",
+      "model": "Neon",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:nitro",
+      "make": "Dodge",
+      "model": "Nitro",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/nitro",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Nitro"
+      },
+      "aliases": [
+        "Nitro",
+        "ナイトロ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:omni",
+      "make": "Dodge",
+      "model": "Omni",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:phoenix",
+      "make": "Dodge",
+      "model": "Phoenix",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:pioneer",
+      "make": "Dodge",
+      "model": "Pioneer",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:polara",
+      "make": "Dodge",
+      "model": "Polara",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:polara880",
+      "make": "Dodge",
+      "model": "Polara 880",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:raider",
+      "make": "Dodge",
+      "model": "Raider",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ram",
+      "make": "Dodge",
+      "model": "Ram",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/ram",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Ram"
+      },
+      "aliases": [
+        "RAM"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ram1500van",
+      "make": "Dodge",
+      "model": "Ram 1500 Van",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ram2500",
+      "make": "Dodge",
+      "model": "Ram 2500",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/ram-2500",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Ram 2500"
+      },
+      "aliases": [
+        "RAM 2500"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ram2500van",
+      "make": "Dodge",
+      "model": "Ram 2500 Van",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ram3500",
+      "make": "Dodge",
+      "model": "Ram 3500",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ram3500van",
+      "make": "Dodge",
+      "model": "Ram 3500 Van",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ramb250",
+      "make": "Dodge",
+      "model": "Ram B250",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ramcharger",
+      "make": "Dodge",
+      "model": "Ram Charger",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ramsrt10",
+      "make": "Dodge",
+      "model": "Ram Srt-10",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ramvan",
+      "make": "Dodge",
+      "model": "Ram Van",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:ramvanwagon",
+      "make": "Dodge",
+      "model": "Ram Van Wagon",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:royal",
+      "make": "Dodge",
+      "model": "Royal",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:royalmonaco",
+      "make": "Dodge",
+      "model": "Royal Monaco",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:shadow",
+      "make": "Dodge",
+      "model": "Shadow",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:sierra",
+      "make": "Dodge",
+      "model": "Sierra",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:spirit",
+      "make": "Dodge",
+      "model": "Spirit",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:srt4",
+      "make": "Dodge",
+      "model": "Srt-4",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:stregis",
+      "make": "Dodge",
+      "model": "St.regis",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:standardsix",
+      "make": "Dodge",
+      "model": "Standard Six",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:stealth",
+      "make": "Dodge",
+      "model": "Stealth",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:stratus",
+      "make": "Dodge",
+      "model": "Stratus",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:superbee",
+      "make": "Dodge",
+      "model": "Super Bee",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:tourer",
+      "make": "Dodge",
+      "model": "Tourer",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:touring",
+      "make": "Dodge",
+      "model": "Touring",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:victory",
+      "make": "Dodge",
+      "model": "Victory",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:victorysix",
+      "make": "Dodge",
+      "model": "Victory Six",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:viper",
+      "make": "Dodge",
+      "model": "Viper",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:wayfarer",
+      "make": "Dodge",
+      "model": "Wayfarer",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:wc",
+      "make": "Dodge",
+      "model": "Wc",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:wc51",
+      "make": "Dodge",
+      "model": "WC51",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:wc52",
+      "make": "Dodge",
+      "model": "WC52",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:wc56",
+      "make": "Dodge",
+      "model": "WC56",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dodge:wc57",
+      "make": "Dodge",
+      "model": "WC57",
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dongfeng:box",
+      "make": "Dongfeng",
+      "model": "Box",
+      "canonical": {
+        "brandId": "dongfeng",
+        "modelId": "dongfeng/box",
+        "canonicalMake": "Dongfeng",
+        "canonicalModel": "Box"
+      },
+      "aliases": [
+        "BOX",
+        "BOX / /"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "donkervoort:d8gto",
+      "make": "Donkervoort",
+      "model": "D8GTO",
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": null,
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "donkervoort:f22",
+      "make": "Donkervoort",
+      "model": "F22",
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": "donkervoort/f22",
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": "F22"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "donkervoort:gto",
+      "make": "Donkervoort",
+      "model": "GTO",
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": "donkervoort/gto",
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": "GTO"
+      },
+      "aliases": [
+        "GTO-INDIVIDUAL",
+        "GTO-INDIVIDUAL SERIES",
+        "GTO-JD70"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "donkervoort:gtors",
+      "make": "Donkervoort",
+      "model": "Gto-RS",
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": null,
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:10ev",
+      "make": "DR",
+      "model": "1.0 EV",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/1-0-ev",
+        "canonicalMake": "DR",
+        "canonicalModel": "1.0 EV"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:30",
+      "make": "DR",
+      "model": "3.0",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/3-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "3.0"
+      },
+      "aliases": [
+        "DR 30",
+        "DR3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:40",
+      "make": "DR",
+      "model": "4.0",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/4-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "4.0"
+      },
+      "aliases": [
+        "DR 4.0",
+        "DR4"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:50",
+      "make": "DR",
+      "model": "5.0",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/5-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "5.0"
+      },
+      "aliases": [
+        "DR 5",
+        "DR 50"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:60",
+      "make": "DR",
+      "model": "6.0",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/6-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "6.0"
+      },
+      "aliases": [
+        "DR 6.0",
+        "DR6"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:70phev",
+      "make": "DR",
+      "model": "7.0 PHEV",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/7-0-phev",
+        "canonicalMake": "DR",
+        "canonicalModel": "7.0 PHEV"
+      },
+      "aliases": [
+        "DR7.0"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:dr7h",
+      "make": "DR",
+      "model": "DR 7H",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/7h",
+        "canonicalMake": "DR",
+        "canonicalModel": "DR 7H"
+      },
+      "aliases": [
+        "DR 7H"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:drarte3",
+      "make": "DR",
+      "model": "DR ART e3",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/art-e3",
+        "canonicalMake": "DR",
+        "canonicalModel": "DR ART e3"
+      },
+      "aliases": [
+        "DR ART E3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:dreq1",
+      "make": "DR",
+      "model": "DR eQ1",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/eq1",
+        "canonicalMake": "DR",
+        "canonicalModel": "DR eQ1"
+      },
+      "aliases": [
+        "DR EQ1"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:f35",
+      "make": "DR",
+      "model": "F35",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/f35",
+        "canonicalMake": "DR",
+        "canonicalModel": "F35"
+      },
+      "aliases": [
+        "F35"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dr:pk8",
+      "make": "DR",
+      "model": "PK8",
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/pk8",
+        "canonicalMake": "DR",
+        "canonicalModel": "PK8"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:記入要領",
+      "make": "DS",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "DS",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "DS",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:5その他について以下に留意し記載する",
+      "make": "DS",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:6欄外に次の注記を行う",
+      "make": "DS",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:ds3",
+      "make": "DS Automobiles",
+      "model": "DS 3",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-3",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 3"
+      },
+      "aliases": [
+        "3",
+        "3 BLUEHDI",
+        "3 CROSSBACK",
+        "3 CROSSBACKN",
+        "DS 3 BLUEHDI 130 AUTOMATICO BASTILLE",
+        "DS 3 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE",
+        "DS 3 BLUEHDI 130 AUTOMATICO RIVOLI",
+        "DS 3 BLUEHDI130 AUTOMATICO PERFORMANCE LINE+",
+        "DS 3 BLUEHDI130 OPERA",
+        "DS 3 CROSSBACK",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL BASTILLE",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL MONTMARTRE",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL PERFORMANCE LINE",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL ROOFS OF PARIS",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL SO CHIC",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOM?TICO BASTILLE",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOM?TICO PERFORMANCE",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOM?TICO RIVOLI",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOMATICO BASTILLE",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOMATICO PERFORMANCE",
+        "DS 3 CROSSBACK BLUEHDI 130 LOUVRE",
+        "DS 3 CROSSBACK E-TENSE BASTILLE",
+        "DS 3 CROSSBACK E-TENSE GRAND CHIC",
+        "DS 3 CROSSBACK E-TENSE PERFORMANCE LINE",
+        "DS 3 CROSSBACK E-TENSE PERFORMANCE LINE +",
+        "DS 3 CROSSBACK E-TENSE RIVOLI",
+        "DS 3 CROSSBACK LA PREMIERE EV",
+        "DS 3 CROSSBACK PRESTIGE EV",
+        "DS 3 CROSSBACK PRFRMNC LINE EV",
+        "DS 3 CROSSBACK PURETECH 100 MANUAL BASTILLE",
+        "DS 3 CROSSBACK PURETECH 100 MANUAL PERFORMANCE LI",
+        "DS 3 CROSSBACK PURETECH 100 MANUAL PERFORMANCE LIN",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO BASTILLE",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO CONNECTED C",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO FAUBOURG",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO GRAND CHIC",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO PERFORMANCE",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO RIVOLI",
+        "DS 3 CROSSBACK PURETECH 130 AUTOMATICO BASTILLE",
+        "DS 3 CROSSBACK PURETECH 130 AUTOMATICO PERFORMANCE",
+        "DS 3 CROSSBACK PURETECH 155 AUTOM?TICO RIVOLI",
+        "DS 3 CROSSBACK ULTRA PRSTGE EV",
+        "DS 3 E-TENSE ESPRIT DE VOYAGE",
+        "DS 3 E-TENSE ETOILE",
+        "DS 3 E-TENSE PERFORMANCE LINE",
+        "DS 3 ETENSE OPERA",
+        "DS 3 HYBRID 136 ANTOINE DE SAINT EXUPERY",
+        "DS 3 HYBRID 136 ETOILE",
+        "DS 3 HYBRID 136 PALLAS",
+        "DS 3 HYBRID 136 PERFORMANCE LINE",
+        "DS 3 HYBRID ANTOINE DE SAINT EXUPERY",
+        "DS 3 HYBRID EDITION FRANCE",
+        "DS 3 HYBRID ETOILE",
+        "DS 3 HYBRID PALLAS",
+        "DS 3 PURETECH 100 MANUAL BASTILLE",
+        "DS 3 PURETECH 100 MANUAL PERFORMANCE LINE",
+        "DS 3 PURETECH 130 AUTOMATICO ANTOINE DE SAINT EXUP",
+        "DS 3 PURETECH 130 AUTOMATICO BASTILLE",
+        "DS 3 PURETECH 130 AUTOMATICO ESPRIT DE VOYAGE",
+        "DS 3 PURETECH 130 AUTOMATICO PERFORMANCE LINE",
+        "DS 3 PURETECH 130 AUTOMATICO PERFORMANCE LINE+",
+        "DS 3 PURETECH 130 AUTOMATICO RIVOLI",
+        "DS 3 PURETECH 130 OPERA",
+        "DS3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:ds4",
+      "make": "DS Automobiles",
+      "model": "DS 4",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-4",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 4"
+      },
+      "aliases": [
+        "4",
+        "4 BLUEHDI",
+        "4 CROSS",
+        "4 E-TENSE",
+        "4 PURETECH",
+        "DS4"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:ds5",
+      "make": "DS Automobiles",
+      "model": "DS 5",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-5",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 5"
+      },
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:ds7",
+      "make": "DS Automobiles",
+      "model": "DS 7",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-7",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 7"
+      },
+      "aliases": [
+        "7",
+        "7 (X74 MCA)",
+        "7 CROSSBACK",
+        "DS 7 BLUE HDI 130 AUTOMATICO ANTOINE DE SAINT EXUP",
+        "DS 7 BLUEHDI 130 AUTOMATICO ANTOINE DE SAINT EXUPE",
+        "DS 7 BLUEHDI 130 AUTOMATICO BASTILLE",
+        "DS 7 BLUEHDI 130 AUTOMATICO ETOILE",
+        "DS 7 BLUEHDI 130 AUTOMATICO OPERA",
+        "DS 7 BLUEHDI 130 AUTOMATICO PALLAS",
+        "DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE",
+        "DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE +",
+        "DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE PLUS",
+        "DS 7 BLUEHDI 130 AUTOMATICO RIVOLI",
+        "DS 7 BLUEHDI 130 EDITION FRANCE",
+        "DS 7 BLUEHDI 130 ETOILE",
+        "DS 7 BLUEHDI 130 JULES VERNE",
+        "DS 7 BLUEHDI 130 PALLAS",
+        "DS 7 BLUEHDI EDITION FRANCE",
+        "DS 7 BLUEHDI ETOILE",
+        "DS 7 BLUEHDI PALLAS",
+        "DS 7 CROSSBACK",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO BASTILLE",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO BASTILLE +",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO PERFORMANCE",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO RIVOLI",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOMATICO BASTILLE +",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOMATICO PERFORMANCE",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOMATICO RIVOLI",
+        "DS 7 CROSSBACK E-TENSE",
+        "DS 7 CROSSBACK E-TENSE 225 BASTILLE +",
+        "DS 7 CROSSBACK E-TENSE 225 LIGNE NOIRE",
+        "DS 7 CROSSBACK E-TENSE 225 PERFORMANCE LINE",
+        "DS 7 CROSSBACK E-TENSE 225 PERFORMANCE LINE (SOLO",
+        "DS 7 CROSSBACK E-TENSE 225 PERFORMANCE LINE +",
+        "DS 7 CROSSBACK E-TENSE 225 RIVOLI",
+        "DS 7 CROSSBACK E-TENSE 225 RIVOLI (SOLO STOCK)",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 BASTILLE +",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 LIGNE NOIRE",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 LOUVRE",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 PERFORMANCE LINE",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 PERFORMANCE LINE +",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 RIVOLI",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 RIVOLI (SOLO STOCK)",
+        "DS 7 CROSSBACK PURETECH 130 AUTOM?TICO BASTILLE",
+        "DS 7 CROSSBACK PURETECH 130 AUTOM?TICO BASTILLE +",
+        "DS 7 CROSSBACK PURETECH 130 AUTOM?TICO PERFORMANCE",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO BASTILLE +",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO PERFORMANCE",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO RIVOLI",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO RIVOLI (SOL",
+        "DS 7 CROSSBACK PURETECH 180 AUTOMATICO PERFORMANCE",
+        "DS 7 CROSSBACK PURETECH 180 AUTOMATICO RIVOLI (SOL",
+        "DS 7 E-TENSE",
+        "DS 7 E-TENSE 225 ANTOINE DE SAINT EXUPERY",
+        "DS 7 E-TENSE 225 BASTILLE",
+        "DS 7 E-TENSE 225 OPERA",
+        "DS 7 E-TENSE 225 PERFORMANCE LINE",
+        "DS 7 E-TENSE 225 PERFORMANCE LINE +",
+        "DS 7 E-TENSE 225 PERFORMANCE LINE PLUS",
+        "DS 7 E-TENSE 225 RIVOLI",
+        "DS 7 E-TENSE 360 4X4 PERFORMANCE LINE PLUS",
+        "DS 7 E-TENSE 4X4 300 ANTOINE DE SAINT EXUPERY",
+        "DS 7 E-TENSE 4X4 300 COLLECTION ASE",
+        "DS 7 E-TENSE 4X4 300 ESPRIT DE VOYAGE",
+        "DS 7 E-TENSE 4X4 300 OPERA",
+        "DS 7 E-TENSE 4X4 300 PERFORMANCE LINE",
+        "DS 7 E-TENSE 4X4 300 PERFORMANCE LINE +",
+        "DS 7 E-TENSE 4X4 300 RIVOLI",
+        "DS 7 E-TENSE 4X4 360 ANTOINE DE SAINT EXUPERY",
+        "DS 7 E-TENSE 4X4 360 OPERA",
+        "DS 7 E-TENSE 4X4 360 PERFORMANCE LINE +",
+        "DS 7 E-TENSE 4X4 360 RIVOLI",
+        "DS 7 ETENSE 225 ESPRIT DE VOYAGE",
+        "DS 7 PLUG-IN HYBRID 225 ANTOINE DE SAINT EXUPERY",
+        "DS 7 PLUG-IN HYBRID 225 EDITION FRANCE",
+        "DS 7 PLUG-IN HYBRID 225 ETOILE",
+        "DS 7 PLUG-IN HYBRID 225 JULES VERNE",
+        "DS 7 PLUG-IN HYBRID 225 PALLAS",
+        "DS 7 PLUG-IN HYBRID 300 EDITION FRANCE",
+        "DS 7 PLUG-IN HYBRID 300 ETOILE",
+        "DS 7 PLUG-IN HYBRID 300 JULES VERNE",
+        "DS 7 PLUG-IN HYBRID 300 PALLAS",
+        "DS 7 PLUG-IN HYBRID 360 PERFORMANCE",
+        "DS 7 PLUG-IN HYBRID AWD 300 ANTOINE DE SAINT EXUPE",
+        "DS 7 PLUG-IN HYBRID AWD 300 ETOILE",
+        "DS 7 PLUG-IN HYBRID AWD 300 PALLAS",
+        "DS 7 PLUG-IN HYBRID AWD 360 ANTOINE DE SAINT EXUPE",
+        "DS 7 PLUG-IN HYBRID AWD 360 PERFORMANCE",
+        "DS7",
+        "NUEVO DS 7 BLUEHDI 130 AUTOM?TICO BASTILLE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOM?TICO PERFORMANCE LINE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOM?TICO RIVOLI",
+        "NUEVO DS 7 BLUEHDI 130 AUTOMATICO BASTILLE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOMATICO RIVOLI",
+        "NUEVO DS 7 E-TENSE 225 BASTILLE",
+        "NUEVO DS 7 E-TENSE 225 OPERA",
+        "NUEVO DS 7 E-TENSE 225 PERFORMANCE LINE",
+        "NUEVO DS 7 E-TENSE 225 PERFORMANCE LINE +",
+        "NUEVO DS 7 E-TENSE 225 RIVOLI",
+        "NUEVO DS 7 E-TENSE 4X4 300 BASTILLE",
+        "NUEVO DS 7 E-TENSE 4X4 300 OPERA",
+        "NUEVO DS 7 E-TENSE 4X4 300 PERFORMANCE LINE",
+        "NUEVO DS 7 E-TENSE 4X4 300 PERFORMANCE LINE +",
+        "NUEVO DS 7 E-TENSE 4X4 300 RIVOLI",
+        "NUEVO DS 7 E-TENSE 4X4 360 LA PREMIERE",
+        "NUEVO DS 7 E-TENSE 4X4 360 OPERA",
+        "NUEVO DS 7 E-TENSE 4X4 360 PERFORMANCE LINE +",
+        "NUEVO DS 7 OPERA E-TENSE 225",
+        "NUEVO DS 7 OPERA E-TENSE 300 4X4",
+        "NUEVO DS 7 PERFORMANCE LINE + E-TENSE 225",
+        "NUEVO DS 7 PERFORMANCE LINE + E-TENSE 300 4X4"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:ds9",
+      "make": "DS Automobiles",
+      "model": "DS 9",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-9",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 9"
+      },
+      "aliases": [
+        "9",
+        "9 E-TENSE",
+        "9 PURETECH",
+        "DS 9 E-TENSE",
+        "DS 9 E-TENSE 225 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 225 RIVOLI +",
+        "DS 9 E-TENSE 250 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 250 RIVOLI +",
+        "DS 9 E-TENSE 360 4X4 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 360 4X4 RIVOLI +",
+        "DS 9 E-TENSE 4X4 360 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 4X4 360 RIVOLI +",
+        "DS 9 ETENSE 250 OPERA",
+        "DS 9 ETENSE 250 PERFORMANCE LINE+",
+        "DS 9 ETENSE 250 RIVOLI+",
+        "DS 9 ETENSE 360 4X4 OPERA",
+        "DS 9 PURETECH 225 AUTOM?TICO RIVOLI +",
+        "DS 9 PURETECH 225 AUTOMATICO RIVOLI +",
+        "DS9"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:dsn4",
+      "make": "DS Automobiles",
+      "model": "DS N°4",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-4",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°4"
+      },
+      "aliases": [
+        "DS N.4 1.2 AUT.",
+        "N 4",
+        "N 4 E-TENSE ETOILE ALCANTARA",
+        "N 4 HYBRID ETOILE ALCANTARA",
+        "N 4 HYBRID ETOILE CUERO NAPPA",
+        "N 4 HYBRID JULES VERNE",
+        "N 4 HYBRID PALLAS",
+        "N 4 PLUG-IN HYBRID ETOILE ALCANTARA"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "dsautomobiles:dsn8",
+      "make": "DS Automobiles",
+      "model": "DS N°8",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-8",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°8"
+      },
+      "aliases": [
+        "N 8",
+        "N 8 AWD LONG RANGE ETOILE",
+        "N 8 FWD ETOILE",
+        "N 8 FWD LONG RANGE ETOILE",
+        "N 8 FWD LONG RANGE JULES VERNE",
+        "N 8 FWD PALLAS"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds3",
+      "make": "DS",
+      "model": "DS 3",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-3",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 3"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds3新能源",
+      "make": "DS",
+      "model": "DS 3新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g30/M08/54/54/120x90_0_q95_autohomecar__ChxknGJgvNKACxNlACOreS4p21c978.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds4",
+      "make": "DS",
+      "model": "DS 4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g24/M00/A4/D3/120x90_0_q95_autohomecar__Chtk3WSilnKABHkFACCtsztEy0E251.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds5",
+      "make": "DS",
+      "model": "DS 5",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-5",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 5"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds7",
+      "make": "DS",
+      "model": "DS 7",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-7",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 7"
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "china"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "autohome-china"
+      ],
+      "origins": [
+        "global",
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g25/M07/FD/81/120x90_0_q95_autohomecar__CjIFV2UO-hGAcFXAACvvCGdf9TM879.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds9",
+      "make": "DS",
+      "model": "DS 9",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-9",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 9"
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "china"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "autohome-china"
+      ],
+      "origins": [
+        "global",
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g25/M06/E3/34/120x90_0_q95_autohomecar__ChxkqWVByf6AT1b0ABdm5RTqM90673.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:ds9新能源",
+      "make": "DS",
+      "model": "DS 9新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g27/M05/C7/42/120x90_0_q95_autohomecar__ChsEbGNFOXGAeYCyACdwUCuirqE568.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:dsn4",
+      "make": "DS",
+      "model": "DS N°4",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-4",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°4"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ds:dsn8",
+      "make": "DS",
+      "model": "DS N°8",
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-8",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°8"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ego:ewavex",
+      "make": "e.GO",
+      "model": "e.wave X",
+      "canonical": {
+        "brandId": "ego-mobile",
+        "modelId": "ego-mobile/e-wave-x",
+        "canonicalMake": "e.GO",
+        "canonicalModel": "e.wave X"
+      },
+      "aliases": [
+        "E.WAVE X"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "ego:life",
+      "make": "e.GO",
+      "model": "Life",
+      "canonical": {
+        "brandId": "ego-mobile",
+        "modelId": "ego-mobile/life",
+        "canonicalMake": "e.GO",
+        "canonicalModel": "Life"
+      },
+      "aliases": [
+        "E.GO LIFE FIRST EDITION",
+        "EGO LIFE FIRST EDITION",
+        "LIFE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "eagle:summit",
+      "make": "Eagle",
+      "model": "Summit",
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "eagle:summitwagon",
+      "make": "Eagle",
+      "model": "Summit Wagon",
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "eagle:talon",
+      "make": "Eagle",
+      "model": "Talon",
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "eagle:vision",
+      "make": "Eagle",
+      "model": "Vision",
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

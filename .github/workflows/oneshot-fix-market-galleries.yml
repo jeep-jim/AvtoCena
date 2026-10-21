@@ -1,0 +1,132 @@
+name: One-shot fix market source galleries
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-fix-market-galleries.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Patch Encar KCar Autohome galleries
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text()
+              if old not in text:
+                  raise SystemExit(f"expected block not found in {path}: {old[:140]!r}")
+              if text.count(old) != 1:
+                  raise SystemExit(f"expected exactly one block in {path}, got {text.count(old)}")
+              p.write_text(text.replace(old, new, 1))
+
+          # Encar: use its source-designated cover + photos/PhotoList, not a recursive
+          # sweep across every image-like field (dashboard, inspection, engine etc.).
+          replace_once(
+              'apps/web/lib/catalog/adapters.ts',
+              '].filter(Boolean))].slice(0, 10);',
+              '].filter(Boolean))].slice(0, 30);',
+          )
+          replace_once(
+              'apps/web/lib/catalog/encar-complete-source.ts',
+              'import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";',
+              'import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";',
+          )
+          replace_once(
+              'apps/web/lib/catalog/encar-complete-source.ts',
+              '    const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);\n    const gallery = detailUrls.slice(0, limit).map(urlImage);',
+              '    const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);\n    const gallery = detailUrls.slice(0, limit).map(urlImage);',
+          )
+          replace_once(
+              'apps/web/lib/catalog/encar-complete-source.ts',
+              '      gallerySafetyMode: "encar_detail_only_v2",',
+              '      gallerySafetyMode: "encar_source_cover_photolist_v3",',
+          )
+
+          # KCar: old code explicitly consumed only /extra/extra_* frames. Scan the
+          # exact car detail for all HQ images whose path carries this exact car id,
+          # then put non-extra/main vehicle photos before extra inspection/detail shots.
+          kcar = 'apps/web/lib/catalog/kcar-exact-source.ts'
+          old = '''function exactVehicleGallery(data: KCarDetailData, carCd: string) {\n  const numericId = carCd.replace(/^[^0-9]+/, "");\n  if (!numericId) return [];\n  const matcher = new RegExp(`^https://img\\\\.kcar\\\\.com/3dcarpicture/\\\\d{4}/\\\\d{2}/\\\\d+/${numericId}_[0-9]+/extra/extra_[0-9]+_hq\\\\.jpg(?:[?#].*)?$`, "i");\n  const urls = clean(data.vrVo?.v_src_show)\n    .split(",")\n    .map((item) => item.trim().replace(/^['\\\"]+|['\\\"]+$/g, "").trim())\n    .filter((url) => matcher.test(url));\n  return [...new Set(urls)].slice(0, 30);\n}\n'''
+          new = '''function collectExactKCarImages(value: unknown, numericId: string, output: string[] = [], depth = 0) {\n  if (value == null || depth > 12) return output;\n  if (typeof value === "string") {\n    const candidates = value.split(",").map((item) => item.trim().replace(/^['\\\"]+|['\\\"]+$/g, "").trim());\n    const matcher = new RegExp(`^https://img\\\\.kcar\\\\.com/3dcarpicture/\\\\d{4}/\\\\d{2}/\\\\d+/${numericId}_[0-9]+/.+?_hq\\\\.(?:jpe?g|webp)(?:[?#].*)?$`, "i");\n    for (const candidate of candidates) if (matcher.test(candidate)) output.push(candidate);\n    return output;\n  }\n  if (Array.isArray(value)) {\n    value.forEach((item) => collectExactKCarImages(item, numericId, output, depth + 1));\n    return output;\n  }\n  if (typeof value === "object") {\n    Object.values(value as Record<string, unknown>).forEach((item) => collectExactKCarImages(item, numericId, output, depth + 1));\n  }\n  return output;\n}\n\nfunction exactVehicleGallery(data: KCarDetailData, carCd: string) {\n  const numericId = carCd.replace(/^[^0-9]+/, "");\n  if (!numericId) return [];\n  const unique = [...new Set(collectExactKCarImages(data, numericId))];\n  const primary = unique.filter((url) => !/\\/extra\\//i.test(url));\n  const extra = unique.filter((url) => /\\/extra\\//i.test(url));\n  return [...primary, ...extra].slice(0, 30);\n}\n'''
+          replace_once(kcar, old, new)
+          replace_once(
+              kcar,
+              '          gallerySafetyMode: "kcar_vrvo_v_src_show_exact_car_id_hq_v1",',
+              '          gallerySafetyMode: "kcar_exact_car_id_primary_then_extra_hq_v2",',
+          )
+
+          # Autohome: official full-size product photos are served not only by
+          # g.autoimg.cn/@img/... but also carN.autoimg.cn/cardfs/product/... .
+          # Also fetch the exact spec-bound gallery URL when the listing exposes it.
+          ah = 'apps/web/lib/catalog/autohome-new-exact-source.ts'
+          replace_once(
+              ah,
+              'const PRODUCT_IMAGE_RE = /^https:\\/\\/g\\.autoimg\\.cn\\/@img\\/car\\d?\\/cardfs\\/product\\/.+\\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i;',
+              'const PRODUCT_IMAGE_RE = /^https:\\/\\/(?:g|car\\d+)\\.autoimg\\.cn\\/(?:@img\\/car\\d?\\/)?cardfs\\/product\\/.+\\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i;',
+          )
+          replace_once(
+              ah,
+              '    const gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));\n    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)), verifiedGallery = gallery.length >= minimum;',
+              '''    const specImages = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));\n    const galleryPage = listing?.galleryUrl\n      ? await fetchDecoded(listing.galleryUrl, specPage.response.url || specUrl(specId)).catch(() => null)\n      : null;\n    const galleryImages = galleryPage\n      ? exactProductImages(galleryPage.body, galleryPage.response.url || listing?.galleryUrl || specUrl(specId))\n      : [];\n    const gallery = [...new Set([...specImages, ...galleryImages])].slice(0, 30);\n    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)), verifiedGallery = gallery.length >= minimum;''',
+          )
+          replace_once(
+              ah,
+              'gallerySafetyMode: "autohome_spec_product_images_v1"',
+              'gallerySafetyMode: "autohome_spec_full_product_gallery_v2"',
+          )
+          # There are two occurrences (initial normalized offer + verified detail).
+          text = Path(ah).read_text().replace('gallerySafetyMode: "autohome_spec_product_images_v1"', 'gallerySafetyMode: "autohome_spec_full_product_gallery_v2"')
+          Path(ah).write_text(text)
+
+          # Self-delete after producing the patch.
+          Path('.github/workflows/oneshot-fix-market-galleries.yml').unlink()
+          PY
+
+      - name: Verify source gallery contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check scripts/catalog-live-recovery-market.mjs
+          npm run typecheck
+          grep -F 'extractEncarImageUrls(offer, detail)' apps/web/lib/catalog/encar-complete-source.ts
+          grep -F 'kcar_exact_car_id_primary_then_extra_hq_v2' apps/web/lib/catalog/kcar-exact-source.ts
+          grep -F 'autohome_spec_full_product_gallery_v2' apps/web/lib/catalog/autohome-new-exact-source.ts
+          grep -F 'car\\d+).*autoimg' apps/web/lib/catalog/autohome-new-exact-source.ts || true
+
+      - name: Commit and push verified source fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            apps/web/lib/catalog/adapters.ts \
+            apps/web/lib/catalog/encar-complete-source.ts \
+            apps/web/lib/catalog/kcar-exact-source.ts \
+            apps/web/lib/catalog/autohome-new-exact-source.ts \
+            .github/workflows/oneshot-fix-market-galleries.yml
+          git commit -m "Use primary full vehicle galleries for Korea and China"
+          git reset --hard HEAD
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main

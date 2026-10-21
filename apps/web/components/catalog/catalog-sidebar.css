@@ -1,0 +1,133 @@
+.ac-catalog-results{min-width:0}
+@media(min-width:1024px){
+ .ac-catalog-layout{display:grid;grid-template-columns:292px minmax(0,1fr);gap:28px;align-items:start;margin-top:0}
+ .ac-catalog-sidebar{grid-column:1;grid-row:1 / span 2;position:sticky;top:88px;min-width:0;max-height:calc(100dvh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;-ms-overflow-style:none}
+ .ac-catalog-sidebar-inner{padding:0 24px 0 0;border-right:1px solid var(--ac-border);border-radius:0;background:transparent}
+ .ac-catalog-heading{grid-column:2;grid-row:1;min-width:0}
+ .ac-catalog-results{grid-column:2;grid-row:2}
+ .ac-catalog-shell{padding-top:24px!important}
+ .ac-catalog-sidebar::-webkit-scrollbar{display:none}
+ .ac-catalog-heading h1{white-space:normal;font-size:clamp(30px,3.5vw,60px)}
+ .ac-catalog-selection:has(.ac-filter-chip){display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:88px;z-index:20;padding:8px 0 12px;background:var(--ac-page-bg)}
+ .ac-catalog-selection .ac-filter-clear--desktop{position:static;flex-shrink:0}
+ .ac-catalog-selection [aria-label="Выбранные параметры"]{margin-top:0}
+ .ac-catalog-sidebar .ac-catalog-filter-panel{margin-top:0}
+ .ac-catalog-sidebar .ac-catalog-filter-panel>.grid,
+ .ac-catalog-sidebar .ac-catalog-filter-panel .ac-primary-lower-grid,
+ .ac-catalog-sidebar .ac-advanced-select-row,
+ .ac-catalog-sidebar .ac-range-fields-shell>.grid{grid-template-columns:minmax(0,1fr)!important}
+ .ac-catalog-sidebar .ac-filter-settings{display:none!important}
+ .ac-catalog-sidebar .ac-sort-control{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:auto!important}
+ .ac-catalog-sidebar .ac-sort-control button{min-height:36px}
+ .ac-catalog-results .ac-catalog-market-rail{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .ac-catalog-results [data-catalog-batch]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ body:has(.ac-catalog-layout) .ac-catalog-sticky{display:none}
+}
+@media(min-width:1440px){.ac-catalog-layout{grid-template-columns:312px minmax(0,1fr);gap:32px}}
+.ac-catalog-view{min-width:0}
+.ac-catalog-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.ac-catalog-view-toggle{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--ac-surface-2);margin-left:auto}
+.ac-catalog-view-toggle button{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:9px;font-size:12px;font-weight:800;color:var(--ac-muted)}
+.ac-catalog-view-toggle button[aria-pressed=true]{background:var(--ac-text);color:var(--ac-page-bg)}
+[data-catalog-view=list] .ac-catalog-market-rail,[data-catalog-view=list] [data-catalog-batch]{display:grid;grid-template-columns:minmax(0,1fr)!important;grid-auto-flow:row;grid-auto-columns:auto;margin-right:0;padding-right:0;gap:0;overflow:visible;background:var(--ac-surface);border:1px solid var(--ac-border);border-radius:12px}
+.ac-catalog-list-row{position:relative;min-width:0;border:0;border-bottom:1px solid var(--ac-border);background:transparent;border-radius:0;color:var(--ac-text)}
+.ac-catalog-list-link{display:grid;grid-template-columns:100px minmax(140px,1.4fr) minmax(85px,.8fr) minmax(100px,1fr) minmax(90px,.8fr) minmax(150px,1.2fr);align-items:center;gap:14px;padding:14px 44px 14px 14px}
+.ac-list-photo{position:relative;width:100px;height:76px;border-radius:10px;overflow:hidden;background:var(--ac-surface-2)}
+.ac-list-photo img{width:100%;height:100%;object-fit:cover}
+.ac-catalog-list-link>div{min-width:0}
+.ac-catalog-list-link>div:not(.ac-list-price)>span,.ac-catalog-list-link>div:not(.ac-list-price)>small{display:block}
+.ac-catalog-list-link strong{font-size:14px;line-height:1.25;display:block}
+.ac-catalog-list-link>div:not(.ac-list-price)>span{font-size:12px}
+.ac-catalog-list-link small,.ac-list-identity>span{font-size:11px;color:var(--ac-muted);margin-top:5px}
+.ac-list-mileage b{display:inline-block;padding:2px 6px;border-radius:5px;background:var(--ac-surface-3);color:var(--ac-text)}
+.ac-list-favorite{position:absolute;right:7px;top:10px;width:30px;height:30px;color:#ff353d}
+.ac-list-price{text-align:right}
+@media(min-width:1024px){
+ .ac-catalog-toolbar{position:sticky;top:88px;z-index:20;background:var(--ac-page-bg);padding:8px 0 12px}
+ .ac-catalog-selection,.ac-catalog-selection:has(.ac-filter-chip){position:static;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0;flex:1;min-width:0}
+ .ac-toolbar-sort{flex:1;min-width:260px;max-width:380px}
+ .ac-toolbar-sort .ac-sort-control{min-height:36px;border-radius:10px}
+ .ac-catalog-sidebar .ac-sidebar-sort{display:block}
+}
+@media(min-width:1024px) and (max-width:1399px){
+ .ac-catalog-list-link{grid-template-columns:86px minmax(120px,1.3fr) minmax(86px,.8fr) minmax(140px,1fr);gap:10px}
+ .ac-list-photo{width:86px;height:70px;grid-row:1 / span 2}
+ .ac-list-identity{grid-column:2;grid-row:1}
+ .ac-list-body{grid-column:2;grid-row:2}
+ .ac-list-engine{grid-column:3;grid-row:1}
+ .ac-list-mileage{grid-column:3;grid-row:2}
+ .ac-list-price{grid-column:4;grid-row:1 / span 2}
+}
+@media(max-width:1023px){
+ .ac-catalog-list-link{grid-template-columns:84px minmax(0,1fr);gap:10px;padding:12px 36px 12px 12px}
+ .ac-list-photo{width:84px;height:72px}
+ .ac-list-identity{grid-column:2}
+ .ac-list-body{grid-column:1 / -1;display:flex;gap:8px;align-items:center}
+ .ac-list-engine{grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap}
+ .ac-list-mileage{grid-column:1 / -1;display:flex;gap:8px;align-items:center}
+ .ac-list-price{grid-column:1 / -1;text-align:left}
+ .ac-catalog-list-link small{margin-top:0}
+}
+/* Keep results covered up to the 64px public/dealer header. */
+@media(min-width:1024px){
+ .ac-catalog-toolbar{top:64px;background:var(--ac-page-bg,#1a2029)!important;isolation:isolate;box-shadow:0 1px 0 var(--ac-border)}
+ .ac-catalog-view-toggle{order:-1;margin-left:0;flex-shrink:0}
+ .ac-catalog-sidebar .ac-catalog-filter-panel .ac-filter-control,
+ .ac-catalog-sidebar .ac-catalog-filter-panel input[type=search],
+ .ac-catalog-sidebar .ac-catalog-filter-panel .ac-japan-badge{height:38px!important;min-height:38px!important;border-radius:10px}
+ .ac-catalog-sidebar .ac-electric-filter>label,
+ .ac-catalog-sidebar .ac-electric-filter>button{height:38px!important;min-height:38px!important}
+ .ac-catalog-sidebar .ac-power-limit{padding-left:12px;padding-right:40px;gap:8px;line-height:1.1}
+ .ac-catalog-sidebar .ac-power-limit>.ac-power-copy{display:block}
+ .ac-catalog-sidebar .ac-power-limit>.ac-power-copy>span{display:block}
+ .ac-catalog-sidebar .ac-power-limit>.ac-power-copy>span:last-child{font-size:9px;margin-top:2px}
+}
+
+.ac-catalog-card,.ac-catalog-list-row{isolation:isolate;z-index:0}
+.ac-chassis-copy button{font-size:11px;text-decoration:underline;text-underline-offset:3px;color:var(--ac-text);padding:4px 0;text-align:left}
+.ac-chassis-copy small:empty{display:none}
+.ac-catalog-sidebar .ac-filter-dropdown.is-up{top:auto!important;bottom:calc(100% + 7px)!important}
+
+[data-catalog-view=list] [data-catalog-batch]{margin-bottom:0;border-radius:0;border-bottom:0}
+[data-catalog-view=list] [data-catalog-batch]:first-child{border-radius:12px 12px 0 0}
+
+@media(min-width:1024px){
+ .ac-catalog-page .ac-catalog-sidebar .ac-catalog-filter-panel .ac-sort-control{height:auto!important;min-height:0!important}
+ .ac-catalog-page .ac-catalog-sidebar .ac-catalog-filter-panel .ac-sort-control>button{height:36px!important;min-height:36px!important}
+ html body .ac-catalog-sidebar .ac-filter-dropdown{box-sizing:border-box;width:100%!important;min-width:0!important;max-width:100%!important;left:0!important;right:0!important;display:flex;flex-direction:column;overflow:hidden!important}
+ .ac-catalog-sidebar .ac-filter-dropdown>*{min-width:0;flex-shrink:0}
+ .ac-catalog-sidebar .ac-filter-dropdown>.ac-hide-scrollbar{min-height:0;flex:1 1 auto;overflow-y:auto}
+ .ac-catalog-sidebar .ac-filter-dropdown .ac-filter-option{min-width:0;max-width:100%;white-space:normal}
+}
+.ac-chassis-copy button{display:inline-flex;align-items:center;gap:4px}
+.ac-chassis-copy small{display:block}
+
+/* Mobile catalog has one presentation: cards, without an empty toolbar. */
+@media(max-width:1023px){.ac-catalog-toolbar{display:none}}
+
+.ac-catalog-results>.grid>div:empty{display:none}
+
+/* Quick filters use the same field geometry and one checkbox in both themes. */
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) :is(.ac-power-limit,.ac-electric-filter){border-radius:10px!important;padding-left:16px;gap:12px;color:var(--ac-muted)}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox{appearance:none;width:24px;height:24px;min-width:24px;flex:0 0 24px;border-radius:8px;border:1px solid var(--ac-border);background:transparent;display:grid;place-content:center;cursor:pointer}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox:checked{background:#ff353d;border-color:#ff353d}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) input.ac-quick-checkbox:checked::after{content:"✓";color:#fff;-webkit-text-fill-color:#fff;font-size:14px;font-weight:900}
+
+@media(max-width:1023px){html body .ac-mobile-filter-sheet :is(.ac-power-limit,.ac-electric-filter){border-radius:13px!important}}
+
+/* Keep the owner reference: readable title above the small red explanation. */
+.ac-power-limit .ac-power-copy>span:first-child{color:var(--ac-text)}
+
+/* Selected brands retain the normal row; only their checkmark is red. */
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-brand-options .is-brand-selected{background:var(--ac-surface-2)!important;color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
+html body :is(.ac-catalog-filter-panel,.ac-mobile-filter-sheet) .ac-brand-options .is-brand-selected>span:last-child{color:#ff353d!important;-webkit-text-fill-color:#ff353d!important;background:transparent!important}
+@media(min-width:1024px){
+ html body .ac-catalog-sidebar .ac-filter-dropdown>.ac-hide-scrollbar{max-height:min(440px,60dvh)}
+ html body .ac-catalog-sidebar .ac-filter-dropdown.ac-model-dropdown{max-height:min(520px,70dvh)}
+}
+
+/* Market counters retain the typography of the overall catalog count. */
+html body .ac-page-copy .ac-market-result-count {
+  font-size:14px;font-weight:400;letter-spacing:normal;
+  color:var(--ac-muted)!important;-webkit-text-fill-color:var(--ac-muted)!important;
+}

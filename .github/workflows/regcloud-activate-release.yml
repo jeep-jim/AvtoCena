@@ -1,0 +1,47 @@
+name: Regcloud — activate prepared release
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-activate-release.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  activate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Activate verified existing image with corrected access gate
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          release=6de99ab6a8486859dd40e1e43788d61a345e6626
+          remote_dir="/opt/avtocena/releases/$release"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          release=6de99ab6a8486859dd40e1e43788d61a345e6626
+          runtime="/opt/avtocena/releases/$release"
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
+          calculator=$(python3 - "$runtime/runtime.env" <<'PY'
+          import pathlib,sys
+          print(next(x.split('=',1)[1] for x in pathlib.Path(sys.argv[1]).read_text().splitlines() if x.startswith('AVTOCENA_CALCULATION_VERSION=')))
+          PY
+          )
+          bash "$runtime/regcloud-deploy-production.sh" "$release" "$calculator"
+          REMOTE

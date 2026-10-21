@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactRegisteredCommercialNamesOnly": true,
+    "manuallyReviewedCanonicalTarget": true,
+    "modelLevelResolutionOnly": true,
+    "trimPowertrainAndBodyLabelsRemainBelowModel": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedModels": 14,
+    "acceptedSourceNames": 38,
+    "observedRegistrations": 1391637,
+    "observedSpecificationGroups": 1314
+  },
+  "accepted": [
+    {
+      "modelId": "mercedes-benz/v-class",
+      "canonicalName": "V-Class",
+      "sourceName": "V KLASSE",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 181522,
+      "specificationGroups": 128
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 220 D",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 82050,
+      "specificationGroups": 79
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "520D",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 65273,
+      "specificationGroups": 35
+    },
+    {
+      "modelId": "lexus/ux",
+      "canonicalName": "UX",
+      "sourceName": "LEXUS UX250H",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 58292,
+      "specificationGroups": 8
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "218I",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 54794,
+      "specificationGroups": 63
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 300 DE",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 51682,
+      "specificationGroups": 39
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "520d xDrive",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 50386,
+      "specificationGroups": 47
+    },
+    {
+      "modelId": "peugeot/2008",
+      "canonicalName": "2008",
+      "sourceName": "N 2008",
+      "years": [
+        2020,
+        2021
+      ],
+      "registrations": 47163,
+      "specificationGroups": 14
+    },
+    {
+      "modelId": "peugeot/208",
+      "canonicalName": "208",
+      "sourceName": "N208",
+      "years": [
+        2020,
+        2021
+      ],
+      "registrations": 41020,
+      "specificationGroups": 11
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "530E",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 38239,
+      "specificationGroups": 36
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "218I ACTIVE TOURER",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 35733,
+      "specificationGroups": 35
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "530E XDRIVE",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 32388,
+      "specificationGroups": 40
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 200",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 32211,
+      "specificationGroups": 43
+    },
+    {
+      "modelId": "mini/jcw",
+      "canonicalName": "Jcw",
+      "sourceName": "JOHN COOPER WORKS",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 32178,
+      "specificationGroups": 28
+    },
+    {
+      "modelId": "alfa-romeo/giulietta",
+      "canonicalName": "Giulietta",
+      "sourceName": "ALFA GIULIETTA",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 31793,
+      "specificationGroups": 17
+    },
+    {
+      "modelId": "bmw/4-series",
+      "canonicalName": "4 Series",
+      "sourceName": "420I",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 30836,
+      "specificationGroups": 24
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 220 D 4MATIC",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 30600,
+      "specificationGroups": 58
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceName": "LEXUS NX350H",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 29483,
+      "specificationGroups": 17
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "530D XDRIVE",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 29260,
+      "specificationGroups": 40
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceName": "LEXUS NX300H",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2025
+      ],
+      "registrations": 28917,
+      "specificationGroups": 8
+    },
+    {
+      "modelId": "peugeot/3008",
+      "canonicalName": "3008",
+      "sourceName": "N 3008",
+      "years": [
+        2020,
+        2021
+      ],
+      "registrations": 28875,
+      "specificationGroups": 11
+    },
+    {
+      "modelId": "bmw/4-series",
+      "canonicalName": "4 Series",
+      "sourceName": "420D",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 28004,
+      "specificationGroups": 32
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 300 DE 4MATIC",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 27797,
+      "specificationGroups": 37
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 300E",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 27609,
+      "specificationGroups": 44
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceName": "LEXUS NX450H+",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 26971,
+      "specificationGroups": 17
+    },
+    {
+      "modelId": "bmw/4-series",
+      "canonicalName": "4 Series",
+      "sourceName": "M440I XDRIVE",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 26414,
+      "specificationGroups": 39
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "540d xDrive",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 26291,
+      "specificationGroups": 25
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "218d Active Tourer",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 24959,
+      "specificationGroups": 22
+    },
+    {
+      "modelId": "mazda/mazda3",
+      "canonicalName": "MAZDA3",
+      "sourceName": "3",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 23256,
+      "specificationGroups": 33
+    },
+    {
+      "modelId": "mercedes-benz/e-class",
+      "canonicalName": "E-Class",
+      "sourceName": "E 200 D",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 23095,
+      "specificationGroups": 22
+    },
+    {
+      "modelId": "lexus/es",
+      "canonicalName": "ES",
+      "sourceName": "LEXUS ES300H",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 20192,
+      "specificationGroups": 10
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "225E XDRIVE ACTIVE TOURER",
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 19330,
+      "specificationGroups": 29
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "220I",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 18811,
+      "specificationGroups": 44
+    },
+    {
+      "modelId": "bmw/5-series",
+      "canonicalName": "5 Series",
+      "sourceName": "520I",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 18267,
+      "specificationGroups": 38
+    },
+    {
+      "modelId": "bmw/4-series",
+      "canonicalName": "4 Series",
+      "sourceName": "420d xDrive",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 17585,
+      "specificationGroups": 73
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "218d",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 17357,
+      "specificationGroups": 34
+    },
+    {
+      "modelId": "lexus/ux",
+      "canonicalName": "UX",
+      "sourceName": "UX250H",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 16669,
+      "specificationGroups": 7
+    },
+    {
+      "modelId": "bmw/2-series",
+      "canonicalName": "2 Series",
+      "sourceName": "220i Active Tourer",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "registrations": 16335,
+      "specificationGroups": 27
+    }
+  ]
+}

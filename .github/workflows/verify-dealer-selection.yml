@@ -1,0 +1,54 @@
+name: Verify dealer selection sharing
+on:
+  push:
+    branches: [main]
+    paths: ['tests/browser/dealer-selection.mjs', 'apps/web/components/dealers/DealerSelectionShare.tsx', 'tests/offer-share.test.ts', '.github/workflows/verify-dealer-selection.yml']
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/*Share*'
+      - 'apps/web/lib/catalog/*share*'
+      - 'apps/web/lib/catalog/offer-metadata.ts'
+      - 'apps/web/lib/telegram-miniapp.ts'
+      - 'apps/web/app/api/share/**'
+      - 'apps/web/app/(public)/s/**'
+      - 'apps/web/components/dealers/DealerSelectionShare.tsx'
+      - 'apps/web/components/dealers/DealerProfileContent.tsx'
+      - 'apps/web/lib/dealers/selection-share*'
+      - 'apps/web/lib/catalog/social-image.ts'
+      - 'apps/web/lib/catalog/photo-rendition.ts'
+      - 'tests/*share*'
+      - 'tests/browser/dealer-selection*'
+      - 'tests/browser/offer-share*'
+      - '.github/workflows/verify-dealer-selection.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: python3 tests/regcloud-social-previews.test.py
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-multiselect.test.ts tests/offer-share.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/dealer-selection-performance.test.ts tests/catalog-market-brand-projection.test.ts tests/catalog-projection-reuse.test.ts tests/photo-proxy.test.ts tests/dealer-market-settings.test.ts
+      - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
+      - name: Check dealer selection on phone and desktop
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
+      - name: Check native sharing, clipboard and mini-app
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dealer-selection-screenshots
+          path: artifacts/dealer-selection/*.png

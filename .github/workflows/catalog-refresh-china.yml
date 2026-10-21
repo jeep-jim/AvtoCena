@@ -1,0 +1,20 @@
+name: Catalog refresh china
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "11 18 * * *"
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/china-refresh.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-china
+  cancel-in-progress: false
+jobs:
+  refresh:
+    uses: ./.github/workflows/catalog-market-refresh.yml
+    with:
+      market: china
+    secrets: inherit

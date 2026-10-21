@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-gm-wuling-asta-hybrid-launch-en-2022",
+          "type": "manufacturer",
+          "title": "SAIC-GM-Wuling Expands Electric Vehicle Lineup with Wuling Asta Hybrid",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2022/Aug/0825-wuling.html",
+          "documentId": "GM China Wuling 2022-08-25 EN",
+          "documentDate": "2022-08-25",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "transmission"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English release establishes Asta as the public English model name, says the original SUV went on sale in September 2021, and records the two-variant HEV DHT launch on 2022-08-25."
+        },
+        {
+          "id": "src-sgmw-wuling-xingchen-hybrid-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱星辰混动版参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=41",
+          "documentId": "SGMW carDetail 41",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "icePowerKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "tankCapacityL",
+            "seats"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact two-column manufacturer table for the Asta/Xingchen HEV. The table labels 130 kW as motor rated power, so it is not mapped to motorPeakKw or legal 30-minute power."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingchen",
+          "brandId": "wuling",
+          "canonicalName": "Asta",
+          "slug": "asta",
+          "aliases": [
+            {
+              "value": "Xingchen",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "五菱 星辰",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2021-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "ICE",
+            "HEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-gm-wuling-asta-hybrid-launch-en-2022",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English release uses Wuling Asta and identifies the September 2021 SUV plus its 2022 HEV expansion."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Canonical public name corrected from review-only Xingchen romanization to official English Asta; Xingchen remains a searchable transliteration alias.",
+            "The exact two-grade 2022 HEV lineup is staged below; existing ICE identity remains part of the same model family."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingchen/hybrid-2022",
+          "modelId": "wuling/xingchen",
+          "name": "Hybrid (2022)",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2022-08",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-asta-hybrid-launch-en-2022",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release records the Asta HEV launch on 2022-08-25."
+            }
+          ],
+          "researchNotes": [
+            "Powertrain-edition container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingchen/hybrid-2022/2-0l-dht-power",
+          "modelId": "wuling/xingchen",
+          "generationId": "wuling/xingchen/hybrid-2022",
+          "faceliftId": null,
+          "name": "2.0L DHT Power",
+          "aliases": [
+            {
+              "value": "2.0L DHT 电劲款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-xingchen-hybrid-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "HEV",
+          "fuel": "Petrol",
+          "engineCc": 1999,
+          "transmission": "DHT",
+          "drive": "FWD",
+          "icePowerKw": 100,
+          "lengthMm": 4594,
+          "widthMm": 1820,
+          "heightMm": 1740,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1595,
+          "tankCapacityL": 52,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-asta-hybrid-launch-en-2022",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release dates the two-variant HEV launch to 2022-08-25."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-xingchen-hybrid-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "transmission",
+                "drive",
+                "icePowerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "tankCapacityL",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW; 1.999 L is normalized to the exact equivalent 1,999 cm³ and front-engine/front-wheel drive to FWD."
+            }
+          ],
+          "researchNotes": [
+            "The manufacturer's 130 kW motor value is explicitly rated power, so it is not reused as motorPeakKw, powerKw or legal 30-minute power.",
+            "No horsepower value is calculated from kW."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/xingchen/hybrid-2022/2-0l-dht-speed",
+          "modelId": "wuling/xingchen",
+          "generationId": "wuling/xingchen/hybrid-2022",
+          "faceliftId": null,
+          "name": "2.0L DHT Speed",
+          "aliases": [
+            {
+              "value": "2.0L DHT 电速款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-xingchen-hybrid-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "HEV",
+          "fuel": "Petrol",
+          "engineCc": 1999,
+          "transmission": "DHT",
+          "drive": "FWD",
+          "icePowerKw": 100,
+          "lengthMm": 4594,
+          "widthMm": 1820,
+          "heightMm": 1740,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1615,
+          "tankCapacityL": 52,
+          "seats": 5,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-asta-hybrid-launch-en-2022",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release dates the two-variant HEV launch to 2022-08-25."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-xingchen-hybrid-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "transmission",
+                "drive",
+                "icePowerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "tankCapacityL",
+                "seats"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW; 1.999 L is normalized to the exact equivalent 1,999 cm³ and front-engine/front-wheel drive to FWD."
+            }
+          ],
+          "researchNotes": [
+            "The manufacturer's 130 kW motor value is explicitly rated power, so it is not reused as motorPeakKw, powerKw or legal 30-minute power.",
+            "No horsepower value is calculated from kW."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

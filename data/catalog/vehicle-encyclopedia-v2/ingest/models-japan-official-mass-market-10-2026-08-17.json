@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-mitsubishi-delica-d3-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Mitsubishi official used-vehicle catalog: Delica D:3",
+          "publisher": "Mitsubishi Motors Corporation",
+          "url": "https://ucar.mitsubishi-motors.co.jp/ucar/area/mMI/sS103",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Mitsubishi's official used-vehicle catalog identifies Delica D:3 as a Mitsubishi model. Only the identity is staged; listing specifications and production boundaries are not copied."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "mitsubishi/delica-d3",
+          "brandId": "mitsubishi",
+          "canonicalName": "Delica D:3",
+          "slug": "delica-d3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "デリカD：3",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mitsubishi-delica-d3-japan-archive-2026",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mitsubishi-delica-d3-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

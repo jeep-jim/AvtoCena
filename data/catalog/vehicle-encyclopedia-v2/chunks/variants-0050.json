@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 2,
+  "entityType": "variant",
+  "chunk": 50,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "peugeot/205/eea-registration-observations-2020-2025/eea-mod-0bea35eb2583a662a8cc",
+      "modelId": "peugeot/205",
+      "generationId": "peugeot/205/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "205 — Petrol 1360 cc 44 kW (EEA registration group)",
+      "aliases": [],
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "engineCc": 1360,
+      "powerKw": 44,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 2 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/206/eea-registration-observations-2020-2025/eea-mod-13f2acd9dee6756e4002",
+      "modelId": "peugeot/206",
+      "generationId": "peugeot/206/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "206 — Petrol 1360 cc 55 kW (EEA registration group)",
+      "aliases": [],
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "engineCc": 1360,
+      "powerKw": 55,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 2 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/206/eea-registration-observations-2020-2025/eea-mod-25e78668a25735f459af",
+      "modelId": "peugeot/206",
+      "generationId": "peugeot/206/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "206+ — Diesel 1398 cc 50 kW (EEA registration group)",
+      "aliases": [
+        {
+          "value": "206+",
+          "kind": "source_spelling",
+          "safe": false,
+          "language": null,
+          "market": "Europe",
+          "sourceIds": [
+            "src-eea-co2cars-2025-provisional"
+          ]
+        }
+      ],
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Diesel",
+      "engineCc": 1398,
+      "powerKw": 50,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 1 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/206/eea-registration-observations-2020-2025/eea-mod-4620c48a48da74b04b8b",
+      "modelId": "peugeot/206",
+      "generationId": "peugeot/206/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "206+ — Petrol 1124 cc 44 kW (EEA registration group)",
+      "aliases": [
+        {
+          "value": "206+",
+          "kind": "source_spelling",
+          "safe": false,
+          "language": null,
+          "market": "Europe",
+          "sourceIds": [
+            "src-eea-co2cars-2023-final"
+          ]
+        }
+      ],
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "engineCc": 1124,
+      "powerKw": 44,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 1 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/206/eea-registration-observations-2020-2025/eea-mod-fc9f16c0d650c32ad4bf",
+      "modelId": "peugeot/206",
+      "generationId": "peugeot/206/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "206 ZEST 3 HDI — Diesel 1498 cc (EEA registration group)",
+      "aliases": [
+        {
+          "value": "206 ZEST 3 HDI",
+          "kind": "source_spelling",
+          "safe": false,
+          "language": null,
+          "market": "Europe",
+          "sourceIds": [
+            "src-eea-co2cars-2020-2022-final"
+          ]
+        }
+      ],
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Diesel",
+      "engineCc": 1498,
+      "powerKw": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 4 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/207/eea-registration-observations-2020-2025/eea-mod-455ce0c959b77ee2e2e5",
+      "modelId": "peugeot/207",
+      "generationId": "peugeot/207/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "207 — Diesel 1560 cc 66 kW (EEA registration group)",
+      "aliases": [],
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Diesel",
+      "engineCc": 1560,
+      "powerKw": 66,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 2 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/207/eea-registration-observations-2020-2025/eea-mod-ad9769c9482677bc4286",
+      "modelId": "peugeot/207",
+      "generationId": "peugeot/207/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "207 5P 14HDI — Diesel 1398 cc 50 kW (EEA registration group)",
+      "aliases": [
+        {
+          "value": "207 5P 14HDI",
+          "kind": "source_spelling",
+          "safe": false,
+          "language": null,
+          "market": "Europe",
+          "sourceIds": [
+            "src-eea-co2cars-2023-final"
+          ]
+        }
+      ],
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Diesel",
+      "engineCc": 1398,
+      "powerKw": 50,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 1 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/207/eea-registration-observations-2020-2025/eea-mod-f8fce559f53fd835372b",
+      "modelId": "peugeot/207",
+      "generationId": "peugeot/207/eea-registration-observations-2020-2025",
+      "faceliftId": null,
+      "name": "207 — Petrol 1397 cc 70 kW (EEA registration group)",
+      "aliases": [],
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "bodyType": "Passenger car",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "engineCc": 1397,
+      "powerKw": 70,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerKw"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact grouped EEA new-passenger-car registration observation. Passenger car is the dataset class, not an inferred body style; source spellings remain unsafe aliases."
+        }
+      ],
+      "researchNotes": [
+        "EEA grouped registration observation across 1 source specification group(s) and 1 registration(s).",
+        "Linked to an explicitly non-public EEA observation container because no source-backed manufacturer generation is staged yet.",
+        "No trim, body style, transmission, drive, generation boundary, horsepower or 30-minute power is inferred from the EEA grouping.",
+        "Review-only: this record cannot auto-resolve pricing until model/generation and source-name matching is separately approved."
+      ],
+      "updatedAt": "2026-08-17"
+    }
+  ]
+}

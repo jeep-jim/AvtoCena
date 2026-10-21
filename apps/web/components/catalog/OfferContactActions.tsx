@@ -1,0 +1,173 @@
+"use client";
+import {useEffect,useRef,useState,type ReactNode,type CSSProperties} from "react";
+import {createPortal} from "react-dom";
+import { FavoriteToggle, type FavoriteSnapshot } from "./FavoriteToggle";
+import { ShareLinkButton } from "./ShareLinkButton";
+import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
+
+function PhoneIcon() {
+  return <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.15 3.75 10 8.35 8.3 10.1a14.9 14.9 0 0 0 5.6 5.6l1.75-1.7 4.6 2.85c.5.3.7.92.48 1.46-.56 1.38-1.83 2.3-3.31 2.4C10.08 21.13 2.87 13.92 3.29 6.58c.1-1.48 1.02-2.75 2.4-3.31.54-.22 1.16-.02 1.46.48Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+type FavoriteProps = {offerId: string; snapshot: FavoriteSnapshot};
+
+function ActionButtons({ className = "", stacked = false, stickyContact=false, offerId, snapshot }: FavoriteProps & { className?: string; stacked?: boolean;stickyContact?:boolean }) {
+  const buttonClass = "ac-offer-contact-button relative inline-flex h-14 min-w-0 items-center justify-center rounded-[1.05rem] px-12 text-base font-black leading-tight !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] ";
+  const contact=<button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>{stickyContact?'Оставить заявку':'Оставить заявку на расчёт'}</span></button>;
+  return <div className={`ac-offer-action-row grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
+    {stickyContact?<StickyContact imageUrl={snapshot.imageUrl} title={snapshot.title}>{contact}</StickyContact>:contact}
+    <ShareLinkButton compactMobile className={`${buttonClass} bg-[#00A2E8]`} />
+    <div data-offer-copy-slot className="empty:!hidden" />
+    <div data-offer-pdf-slot className="empty:!hidden" />
+    <FavoriteToggle offerId={offerId} snapshot={snapshot} compact className="ac-offer-favorite" />
+  </div>;
+}
+
+export function OfferDesktopActions({position = "sidebar", ...favorite}: FavoriteProps & {position?: "sidebar" | "below"}) {
+  return <ActionButtons {...favorite} stacked={position === "sidebar"} className={`mt-4 hidden xl:grid ac-offer-actions-${position}`} />;
+}
+
+// Keep the anchor in document flow: its bounds describe the original position,
+// while the button bounds follow the viewport after it becomes fixed.
+function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:string;title:string}) {
+  const anchor=useRef<HTMLDivElement>(null),dismiss=useRef<()=>void>(()=>{});
+  const [floating,setFloating]=useState<{inHeader:boolean;top:number;left:number;width:number;height:number;zIndex:number}|null>(null);
+  useEffect(()=>{
+    const node=anchor.current;if(!node)return;
+    const header=node.closest('main')?.querySelector<HTMLElement>('.ac-public-header')||document.querySelector<HTMLElement>('.ac-public-header');
+    let frame=0,closed=false;
+    const originalInert=header?.inert??false;
+    const restoreHeader=()=>{if(header){delete header.dataset.offerContact;header.inert=originalInert;}};
+    const update=()=>{
+      frame=0;
+      const rect=node.getBoundingClientRect(),bounds=header?.getBoundingClientRect();
+      const top=Math.max(0,bounds?.bottom||0)+8,passed=rect.top<top;
+      if(!passed)closed=false;
+      const mobile=window.innerWidth<768&&!!header;
+      const fixed=window.innerWidth<1280&&rect.width>0&&passed&&(!mobile||!closed),inHeader=mobile&&fixed;
+      if(inHeader&&header){header.dataset.offerContact='true';header.inert=true;}else restoreHeader();
+      const headerZ=header?Number.parseInt(getComputedStyle(header).zIndex,10)||0:0;
+      const next=fixed?{inHeader,zIndex:Math.max(1001,headerZ+1),top:inHeader?Math.max(0,bounds!.top)+8:top,left:inHeader?bounds!.left+10:rect.left,width:inHeader?bounds!.width-20:rect.width,height:Math.max(44,(bounds?.height||64)-16)}:null;
+      setFloating(current=>JSON.stringify(current)===JSON.stringify(next)?current:next);
+    };
+    dismiss.current=()=>{closed=true;update();header?.querySelector<HTMLElement>('button,a')?.focus({preventScroll:true});};
+    const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
+    const observer=new ResizeObserver(schedule);observer.observe(node);observer.observe(document.body);if(header)observer.observe(header);
+    window.addEventListener('scroll',schedule,{passive:true,capture:true});window.addEventListener('resize',schedule);update();
+    return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule,true);window.removeEventListener('resize',schedule);};
+  },[]);
+  const bar=<div className="ac-offer-contact-bar"><button type="button" className="ac-offer-contact-close" aria-label="Закрыть панель заявки и показать шапку" onClick={()=>dismiss.current()}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div>;
+  // A portal avoids clipping/stacking contexts in both dealer and catalogue layouts.
+  // The original anchor remains in flow, so scrolling and the reset point do not jump.
+  return <><div ref={anchor} className="ac-offer-contact-anchor" data-stuck={!!floating} data-in-header={!!floating?.inHeader}>{!floating&&bar}</div>{floating&&createPortal(<div className="ac-offer-contact-floating ac-offer-action-row" data-stuck="true" data-in-header={floating.inHeader} style={{position:'fixed',top:floating.top,left:floating.left,width:floating.width,zIndex:floating.zIndex,'--contact-header-height':`${floating.height}px`} as CSSProperties}>{bar}</div>,document.body)}</>;
+
+}
+
+export function OfferMobileActions(favorite: FavoriteProps) {
+  return <div className="ac-offer-mobile-actions relative mt-4 w-full xl:hidden"><ActionButtons {...favorite} stacked stickyContact/></div>;
+}
+
+export function OfferCreditCalculator() {
+  return <div data-offer-credit-host>
+    <section className="ac-credit-calculator-mock rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4" aria-label="Кредитный калькулятор">
+      <div className="flex items-start justify-between gap-4"><div className="min-w-0"><div className="text-[10px] font-black normal-case tracking-normal text-red-500">Финансирование</div><div className="mt-0.5 flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1"><h2 className="text-xl font-black tracking-[-0.035em] text-[var(--ac-text)]">Кредитный калькулятор</h2><span className="text-xs font-semibold text-[var(--ac-muted)]">Сюда подключим форму партнёра.</span></div></div><span className="shrink-0 rounded-full bg-red-500/10 px-2.5 py-1 text-[10px] font-black normal-case tracking-normal text-red-500">Скоро</span></div>
+      <div className="mt-3 grid grid-cols-3 gap-2">{[["Стоимость авто", "из карточки"], ["Первый взнос", "0 ₽"], ["Срок", "60 мес"]].map(([label, value]) => <div key={label} className="rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 py-2.5"><div className="text-[10px] font-bold text-[var(--ac-muted)]">{label}</div><div className="mt-0.5 text-sm font-black text-[var(--ac-text)]">{value}</div></div>)}</div>
+      <div className="mt-2 flex items-stretch gap-2"><div className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl bg-red-500/10 px-3 py-2.5"><span className="text-xs font-black text-[var(--ac-text)]">Ежемесячный платёж</span><span className="text-lg font-black text-red-500">— ₽</span></div><a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} className="ac-credit-partner-button inline-flex min-w-[176px] items-center justify-center rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black !text-white transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[.99]">Подобрать кредит</a></div>
+    </section>
+  </div>;
+}
+
+export function OfferContactActionsStyles() {
+  return <style dangerouslySetInnerHTML={{ __html: `
+    html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
+    .ac-offer-contact-floating{display:block!important;color:var(--ac-text)}
+    .ac-offer-contact-close{display:none}
+    .ac-offer-contact-anchor{grid-column:1/-1;min-height:56px}
+    .ac-offer-contact-bar{display:flex;align-items:center;gap:8px;width:100%;border-radius:1.05rem}
+    .ac-offer-contact-bar>.ac-offer-contact-button{flex:1;min-width:0}
+    .ac-offer-contact-thumbnail{display:none;width:56px;height:56px;flex:0 0 56px;padding:0;border:0;overflow:hidden;cursor:pointer;border-radius:12px}
+    .ac-offer-contact-thumbnail img{display:block;width:100%;height:100%;object-fit:cover}
+    .ac-offer-contact-thumbnail:focus-visible{outline:2px solid var(--ac-text);outline-offset:3px}
+    :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:color-mix(in srgb,var(--ac-surface) 55%,transparent);-webkit-backdrop-filter:blur(16px) saturate(120%);backdrop-filter:blur(16px) saturate(120%);box-shadow:0 6px 20px #0002}
+    :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-stuck="true"] .ac-offer-contact-thumbnail:not([hidden]){display:block}
+    .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
+    .ac-offer-action-row .ac-offer-contact-button>span{font-size:inherit!important}
+    .ac-offer-action-row .ac-offer-contact-button>svg,
+    .ac-offer-action-row .ac-offer-contact-button>span:has(>svg){left:20px!important;top:50%;transform:translateY(-50%)}
+    .ac-offer-action-row [data-offer-pdf-slot] button{height:56px!important}
+    .ac-offer-action-row [data-offer-pdf-slot] svg{width:21px;height:21px;flex-shrink:0}
+    .ac-offer-action-row .ac-offer-contact-button>svg{display:block!important}
+    .ac-offer-contact-button>span{font-size:inherit}
+    .ac-credit-partner-button{color:#fff!important;-webkit-text-fill-color:#fff!important}
+    .ac-offer-page [data-offer-credit-host]{display:none!important}
+    .ac-offer-page>section>section{border-top:1px solid rgba(255,255,255,.085)!important;padding-top:1rem}
+    html[data-theme="light"] .ac-offer-page>section>section{border-top-color:rgba(35,42,55,.12)!important}
+    .ac-offer-favorite{width:56px!important;height:56px!important;border-radius:1.05rem!important;background:rgba(255,53,61,.09)!important;color:#ff353d!important}
+    .ac-offer-favorite svg{width:26px;height:26px}
+    @media(max-width:1279px){
+      .ac-offer-action-row{grid-template-columns:minmax(0,1fr) 56px;gap:10px}
+      .ac-offer-action-row>[data-offer-action="lead"]{grid-column:1/-1}
+      .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 76px 56px}
+      .ac-offer-action-row [data-offer-pdf-slot] button{padding:0;gap:4px}
+      .ac-offer-action-row .ac-offer-contact-button{padding-left:48px;padding-right:12px}
+    }
+    .ac-offer-action-row[data-has-copy="true"]{grid-template-columns:minmax(0,1fr) 56px 56px}
+    .ac-offer-action-row[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 56px 76px 56px}
+    @media(max-width:767px){
+      .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button>svg{display:none!important}
+      .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button{padding-left:8px;padding-right:8px;font-size:13px!important}
+    }
+    @media(max-width:767px){
+      .ac-offer-page>section:has(.ac-offer-contact-anchor[data-in-header="true"]){z-index:auto!important}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"]>.ac-offer-contact-bar{z-index:1001!important}
+      .ac-public-header[data-offer-contact="true"]>*{visibility:hidden!important;pointer-events:none!important}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-close{display:flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:44px;padding:0;border:0;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-muted)}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"]>.ac-offer-contact-bar{box-shadow:none;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;gap:8px}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-thumbnail{width:var(--contact-header-height);height:var(--contact-header-height);flex-basis:var(--contact-header-height)}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-button{height:var(--contact-header-height)!important;font-size:14px!important;padding-left:36px!important;padding-right:8px!important}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-button>span:has(>svg){left:10px!important}
+    }
+    @media(max-width:359px){
+      .ac-offer-action-row{gap:8px}
+      .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 60px 44px}
+      .ac-offer-action-row[data-has-copy="true"]{grid-template-columns:minmax(0,1fr) 44px 44px}
+      .ac-offer-action-row[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 44px 60px 44px}
+      .ac-offer-action-row .ac-offer-copy{width:100%!important}
+      .ac-offer-action-row .ac-offer-favorite{width:100%!important}
+    }
+    @media(min-width:1280px){
+      .ac-offer-favorite{height:56px!important;width:56px!important}
+      .ac-offer-actions-below{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px}
+      .ac-offer-actions-sidebar{grid-template-columns:minmax(0,1fr) 56px}
+      .ac-offer-actions-sidebar>[data-offer-action="lead"]{grid-column:1/-1}
+      .ac-offer-actions-sidebar[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 80px 56px}
+      .ac-offer-actions-sidebar .ac-offer-contact-button{padding-left:48px;padding-right:12px;font-size:16px}
+      .ac-offer-actions-sidebar .ac-offer-contact-button>span>span:first-child{display:inline!important}
+      .ac-offer-actions-sidebar .ac-offer-contact-button>span>span:last-child{display:none!important}
+      .ac-offer-actions-sidebar [data-offer-pdf-slot] button{padding:0;gap:4px}
+
+
+      .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px 56px}
+      .ac-offer-actions-sidebar[data-has-copy="true"]{grid-template-columns:minmax(0,1fr) 56px 56px}
+      .ac-offer-actions-sidebar[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 56px 80px 56px}
+      .ac-offer-actions-below[data-has-copy="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px 56px}
+      .ac-offer-actions-below[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px 100px 56px}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button{padding-left:48px;padding-right:12px;font-size:14px!important}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>svg,.ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>span:has(>svg){left:20px!important}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>span{white-space:normal!important}
+      .ac-offer-page .ac-offer-actions-sidebar{display:none}
+      .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}
+      .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-below{display:none}
+
+      .ac-offer-page .ac-offer-detail-stack>div:first-child{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+      .ac-offer-page .ac-offer-detail-stack>div:first-child>.ac-offer-spec-tile{grid-column:span 3!important;order:10}
+      .ac-offer-page .ac-offer-detail-stack>div:first-child>.ac-offer-spec-tile[aria-label^="Год:"]{grid-column:span 2!important;order:1}
+      .ac-offer-page .ac-offer-detail-stack>div:first-child>.ac-offer-spec-tile[aria-label^="Двигатель:"]{grid-column:span 2!important;order:2}
+      .ac-offer-page .ac-offer-detail-stack>div:first-child>.ac-offer-spec-tile[aria-label^="Пробег:"]{grid-column:span 2!important;order:3}
+      .ac-offer-page .ac-offer-detail-stack>div:first-child:not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"]))>.ac-offer-spec-tile[aria-label^="Год:"],.ac-offer-page .ac-offer-detail-stack>div:first-child:not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"]))>.ac-offer-spec-tile[aria-label^="Двигатель:"]{grid-column:span 3!important}
+      .ac-offer-page:has(.ac-offer-breakdown[open]) [data-offer-credit-host]{display:block!important;margin-top:1rem}
+      .ac-credit-calculator-mock{border:1px solid rgba(255,255,255,.06);box-shadow:0 12px 28px rgba(0,0,0,.10)!important}
+      html[data-theme="light"] .ac-credit-calculator-mock{border-color:rgba(35,42,55,.09);box-shadow:0 12px 26px rgba(38,43,57,.07)!important}
+    }
+  ` }} />;
+}

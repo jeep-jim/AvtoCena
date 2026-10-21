@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-ciimo-secondary-identity-2026",
+          "type": "secondary_reference",
+          "title": "Ciimo brand identity and 2020-2024 product history",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ciimo",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "medium",
+          "notes": "Secondary identity corroboration only. Ciimo remains review-only and cannot become an automatic make resolver without stronger manufacturer identity evidence.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-dongfeng-honda-mnv-official-2026",
+          "type": "manufacturer",
+          "title": "Dongfeng Honda official M-NV model page",
+          "publisher": "Dongfeng Honda Automobile Co., Ltd.",
+          "url": "https://www.dongfeng-honda.com/car/m-nv/",
+          "market": "China",
+          "language": "zh",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "notes": "Official model page used only for the M-NV public identity and its electric passenger-SUV category; detailed values remain for a later exact variant batch.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-kyc-azerbaijan-authorized-range-2026",
+          "type": "authoritative_catalog",
+          "title": "KYC Azerbaijan official distributor brand and model range",
+          "publisher": "KYC Azerbaijan / Automobiles Group",
+          "url": "https://kyc.az/en",
+          "market": "Azerbaijan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "high",
+          "notes": "The authorized distributor explicitly identifies KYC as Changan Kuayue and lists the current D5 REEV, V5, V7, V5 EV and V7 EV model lines. No unlisted technical association is inferred.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "ciimo",
+          "canonicalName": "CIIMO",
+          "slug": "ciimo",
+          "aliases": [
+            {
+              "value": "Ciimo",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-ciimo-secondary-identity-2026"
+              ]
+            },
+            {
+              "value": "思铭",
+              "kind": "localized",
+              "safe": false,
+              "language": "zh",
+              "market": "China",
+              "sourceIds": [
+                "src-ciimo-secondary-identity-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-ciimo-secondary-identity-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "medium",
+              "note": "The secondary source establishes a distinct China-market CIIMO identity; aliases stay unsafe until stronger manufacturer identity evidence is staged."
+            }
+          ],
+          "researchNotes": [
+            "An authentic archived logo candidate exists but lacks a complete original source trace, so no logo media is staged.",
+            "Review and logo-rights gates block production publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kuayue",
+          "canonicalName": "Kuayue",
+          "slug": "kuayue",
+          "aliases": [
+            {
+              "value": "KYC",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-kyc-azerbaijan-authorized-range-2026"
+              ]
+            },
+            {
+              "value": "Changan Kuayue",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-kyc-azerbaijan-authorized-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-kyc-azerbaijan-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The authorized distributor explicitly identifies KYC as the Changan Kuayue commercial-vehicle brand."
+            }
+          ],
+          "researchNotes": [
+            "An authentic archived logo candidate exists but lacks a complete original source trace, so no logo media is staged.",
+            "Review and logo-rights gates block production publication."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "ciimo/m-nv",
+          "brandId": "ciimo",
+          "canonicalName": "M-NV",
+          "slug": "m-nv",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-dongfeng-honda-mnv-official-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source explicitly lists this model line and its vehicle/powertrain category; exact generations and configurations are not inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active or priority-window 2020-2026 identity; review-only until exact generation and configuration research is complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kuayue/d5-reev",
+          "brandId": "kuayue",
+          "canonicalName": "D5 REEV",
+          "slug": "d5-reev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Light truck"
+          ],
+          "powertrainKinds": [
+            "EREV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-kyc-azerbaijan-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source explicitly lists this model line and its vehicle/powertrain category; exact generations and configurations are not inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active or priority-window 2020-2026 identity; review-only until exact generation and configuration research is complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kuayue/v5",
+          "brandId": "kuayue",
+          "canonicalName": "V5",
+          "slug": "v5",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Microvan"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-kyc-azerbaijan-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source explicitly lists this model line and its vehicle/powertrain category; exact generations and configurations are not inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active or priority-window 2020-2026 identity; review-only until exact generation and configuration research is complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kuayue/v5-ev",
+          "brandId": "kuayue",
+          "canonicalName": "V5 EV",
+          "slug": "v5-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Electric van"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-kyc-azerbaijan-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source explicitly lists this model line and its vehicle/powertrain category; exact generations and configurations are not inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active or priority-window 2020-2026 identity; review-only until exact generation and configuration research is complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kuayue/v7",
+          "brandId": "kuayue",
+          "canonicalName": "V7",
+          "slug": "v7",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Microvan"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-kyc-azerbaijan-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source explicitly lists this model line and its vehicle/powertrain category; exact generations and configurations are not inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active or priority-window 2020-2026 identity; review-only until exact generation and configuration research is complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kuayue/v7-ev",
+          "brandId": "kuayue",
+          "canonicalName": "V7 EV",
+          "slug": "v7-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Electric van"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-kyc-azerbaijan-authorized-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source explicitly lists this model line and its vehicle/powertrain category; exact generations and configurations are not inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active or priority-window 2020-2026 identity; review-only until exact generation and configuration research is complete."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,334 @@
+"use client";
+
+import {ajesImageUrl} from '@/lib/catalog/ajes-query';
+import {offerImages} from '@/lib/catalog/offer-images';
+import { PhotoBrowser } from "./PhotoBrowser";
+import type { FavoriteSnapshot } from "./FavoriteToggle";
+import { retryProtectedPhoto } from "./protected-photo-retry";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
+import { AuctionSheetHelp } from "./AuctionSheetHelp";
+import styles from "./VehicleGallery.module.css";
+import { AuctionSheetAi } from "./AuctionSheetAi";
+
+function dominantWheelDelta(event: WheelEvent) {
+  return Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+}
+
+export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, snapshot, editor }: { editor?: ReactNode; images: string[]; title: string; auctionSheetUrls?: string[]; offerId?: string; snapshot?: FavoriteSnapshot }) {
+  const cleanImages = offerImages(images);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [photoRequested,setPhotoRequested]=useState(false);
+  const [browserOpen, setBrowserOpen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const helpCloseButton = useRef<HTMLButtonElement | null>(null);
+  const helpTrigger = useRef<HTMLButtonElement | null>(null);
+  const isSheet = auctionSheetUrls.includes(cleanImages[activeIndex]);
+  const touchStartX = useRef<number | null>(null);
+  const didSwipe = useRef(false);
+  const activeSideThumb = useRef<HTMLButtonElement | null>(null);
+  const mainImageButton = useRef<HTMLButtonElement | null>(null);
+  const desktopThumbnailRail = useRef<HTMLDivElement | null>(null);
+  const fullscreenRoot = useRef<HTMLDivElement | null>(null);
+  const lastWheelAt = useRef(0);
+  const lastFullscreenWheelAt = useRef(0);
+
+  useEffect(() => {
+    setActiveIndex(0);
+    setFullscreen(false);
+    setBrowserOpen(false);
+    setHelpOpen(false);
+  }, [images.join("|")]);
+
+  useEffect(() => {
+    activeSideThumb.current?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const node = mainImageButton.current;
+    if (!node || cleanImages.length < 2) return;
+    const handleWheel = (event: WheelEvent) => {
+      if (window.innerWidth < 1280) return;
+      const delta = dominantWheelDelta(event);
+      if (Math.abs(delta) < 1) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - lastWheelAt.current < 135) return;
+      lastWheelAt.current = now;
+      if (delta > 0) next();
+      else previous();
+    };
+    node.addEventListener("wheel", handleWheel, { passive: false });
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [cleanImages.length]);
+
+  useEffect(() => {
+    const node = desktopThumbnailRail.current;
+    if (!node || cleanImages.length < 2) return;
+    const handleWheel = (event: WheelEvent) => {
+      const delta = dominantWheelDelta(event);
+      if (Math.abs(delta) < 1) return;
+      event.preventDefault();
+      node.scrollLeft += delta;
+    };
+    node.addEventListener("wheel", handleWheel, { passive: false });
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [cleanImages.length]);
+
+  useEffect(() => {
+    const node = fullscreenRoot.current;
+    if (!fullscreen || !node || cleanImages.length < 2) return;
+    lastFullscreenWheelAt.current = 0;
+    const handleWheel = (event: WheelEvent) => {
+      if (!window.matchMedia("(pointer: fine)").matches) return;
+      if ((event.target as Element)?.closest("[data-auction-help], details")) return;
+      const delta = dominantWheelDelta(event);
+      if (Math.abs(delta) < 1) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - lastFullscreenWheelAt.current < 160) return;
+      lastFullscreenWheelAt.current = now;
+      if (delta > 0) next();
+      else previous();
+    };
+    node.addEventListener("wheel", handleWheel, { passive: false });
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [fullscreen, cleanImages.length]);
+
+  useEffect(() => {
+    if (!fullscreen) { setHelpOpen(false); return; }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { if (helpOpen) setHelpOpen(false); else setFullscreen(false); }
+      if (helpOpen) { if (event.key === "Tab") { event.preventDefault(); helpCloseButton.current?.focus(); } return; }
+      if (event.key === "ArrowLeft") previous();
+      if (event.key === "ArrowRight") next();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [fullscreen, cleanImages.length, helpOpen]);
+
+  useEffect(() => {
+    if (helpOpen) helpCloseButton.current?.focus();
+    else helpTrigger.current?.focus({preventScroll:true});
+  }, [helpOpen]);
+
+  if (!cleanImages.length) {
+    return <div className="flex h-[360px] min-w-0 max-w-full items-center justify-center overflow-hidden rounded-[2rem] bg-white/[0.045] text-sm font-black text-white/35 md:h-[520px]">Фото загружается</div>;
+  }
+
+  function previous() {
+    setPhotoRequested(true);
+    setActiveIndex((current) => (current === 0 ? cleanImages.length - 1 : current - 1));
+  }
+
+  function next() {
+    setPhotoRequested(true);
+    setActiveIndex((current) => (current + 1) % cleanImages.length);
+  }
+
+  function startSwipe(clientX: number) {
+    touchStartX.current = clientX;
+    didSwipe.current = false;
+  }
+
+  function finishSwipe(clientX: number) {
+    if (touchStartX.current == null) return;
+    const delta = clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 45 || cleanImages.length < 2) return;
+    didSwipe.current = true;
+    if (delta < 0) next();
+    else previous();
+  }
+
+  function openFullscreen() {
+    if (didSwipe.current) {
+      didSwipe.current = false;
+      return;
+    }
+    if(isSheet) setFullscreen(true);
+    else setBrowserOpen(true);
+  }
+
+  const image = (
+    <img onError={retryProtectedPhoto}
+      key={cleanImages[activeIndex]}
+      src={photoRequested?(ajesImageUrl(cleanImages[activeIndex],'original')||cleanImages[activeIndex]):cleanImages[activeIndex]}
+      alt={`${title}, фото ${activeIndex + 1}`}
+      className={`block h-full w-full max-w-full select-none ${isSheet ? "object-contain" : "object-cover"}`}
+      loading="eager"
+      decoding="async"
+      fetchPriority="high"
+      draggable={false}
+    />
+  );
+
+  const thumbButton = (thumbnail: string, index: number, mode: "side" | "mobile" | "desktop") => (
+    <button
+      key={`${mode}-${thumbnail}-${index}`}
+      ref={(mode === "side" || mode === "desktop") && index === activeIndex ? activeSideThumb : undefined}
+      type="button"
+      onClick={() => {setPhotoRequested(true);setActiveIndex(index);}}
+      className={`relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl transition-opacity duration-200 ${
+        mode === "side" ? "h-[82px]" : mode === "desktop" ? "h-16" : "h-14 sm:h-16 md:h-24"
+      } ${index === activeIndex ? (mode === "desktop" ? "opacity-100" : "opacity-100 ring-2 ring-red-500 ring-offset-2 ring-offset-transparent") : "opacity-55 hover:opacity-90"}`}
+      aria-label={`Открыть фото ${index + 1}`}
+      aria-pressed={index === activeIndex}
+    >
+      <img onError={retryProtectedPhoto} src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
+      {index === activeIndex ? <span className="absolute inset-x-2 bottom-0 h-1 rounded-full bg-red-500" /> : null}
+    </button>
+  );
+
+  const whiteControlStyle = { color: "#ffffff", WebkitTextFillColor: "#ffffff" } as const;
+
+  const fullscreenGallery = fullscreen ? (
+    <div
+      ref={fullscreenRoot}
+      className="fixed inset-0 z-[2147483647] flex items-center justify-center bg-black/95 p-3 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Фотографии ${title}`}
+      onClick={() => setFullscreen(false)}
+    >
+      <div className={isSheet ? styles.sheetLayout : "flex max-h-[94dvh] w-full max-w-5xl flex-col items-center"} onClick={(event) => event.stopPropagation()}>
+        {isSheet ? <aside className={styles.side}><AuctionSheetHelp kind="grades" /></aside> : null}
+        <div className={styles.center}>
+        {isSheet ? <AuctionSheetAi key={cleanImages[activeIndex]} imageUrl={cleanImages[activeIndex]} title={title} /> : null}
+        <button
+          type="button"
+          onClick={() => setFullscreen(false)}
+          className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-3xl text-white sm:right-6 sm:top-6"
+          style={whiteControlStyle}
+          aria-label="Закрыть галерею"
+        >
+          ×
+        </button>
+
+        <div
+          className="flex min-h-0 w-full flex-1 items-center justify-center"
+          onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
+          onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
+        >
+          <img onError={retryProtectedPhoto}
+            data-fullscreen-image
+            key={`fullscreen-${cleanImages[activeIndex]}`}
+            src={ajesImageUrl(cleanImages[activeIndex],'original')||cleanImages[activeIndex]}
+            alt={`${title}, фото ${activeIndex + 1}`}
+            className="max-h-[68dvh] max-w-full select-none rounded-2xl object-contain"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            draggable={false}
+          />
+        </div>
+
+        {cleanImages.length > 1 ? (
+          <div className="ac-hide-scrollbar mt-3 flex max-w-full gap-2 overflow-x-auto px-1 pb-1">
+            {cleanImages.map((thumbnail, index) => (
+              <button
+                key={`fullscreen-${thumbnail}-${index}`}
+                type="button"
+                onClick={() => {setPhotoRequested(true);setActiveIndex(index);}}
+                className={`h-14 w-20 shrink-0 overflow-hidden rounded-xl transition ${index === activeIndex ? "opacity-100 ring-2 ring-red-500" : "opacity-45 hover:opacity-80"}`}
+                aria-label={`Открыть фото ${index + 1}`}
+                aria-pressed={index === activeIndex}
+              >
+                <img onError={retryProtectedPhoto} src={thumbnail} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
+              </button>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-3 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={previous}
+            className="ac-gallery-nav flex h-11 min-w-24 items-center justify-center rounded-xl bg-white/10 px-4 text-xl font-black text-white"
+            style={whiteControlStyle}
+            aria-label="Предыдущее фото"
+          >
+            ←
+          </button>
+          <span className="min-w-16 text-center text-sm font-black text-white/70" style={whiteControlStyle}>{activeIndex + 1} / {cleanImages.length}</span>
+          <button
+            type="button"
+            onClick={next}
+            className="ac-gallery-nav flex h-11 min-w-24 items-center justify-center rounded-xl bg-white/10 px-4 text-xl font-black text-white"
+            style={whiteControlStyle}
+            aria-label="Следующее фото"
+          >
+            →
+          </button>
+        </div>
+        {isSheet ? <button ref={helpTrigger} type="button" className={styles.mobileHelp} onClick={() => setHelpOpen(true)} aria-haspopup="dialog">Как читать аукционный лист</button> : null}
+        </div>
+        {isSheet ? <aside className={styles.side}><AuctionSheetHelp kind="damage" /></aside> : null}
+      </div>
+      {isSheet && helpOpen ? <div className={styles.helpOverlay} onClick={event => { event.stopPropagation(); setHelpOpen(false); }}>
+        <section className={styles.helpPanel} role="dialog" aria-modal="true" aria-label="Как читать аукционный лист" onClick={event => event.stopPropagation()} data-auction-help>
+          <header className={styles.helpHeader}><h2>Аукционный лист: расшифровка</h2><button ref={helpCloseButton} type="button" onClick={() => setHelpOpen(false)} aria-label="Закрыть подсказки">×</button></header>
+          <div className={styles.helpBody}><AuctionSheetHelp kind="grades" /><AuctionSheetHelp kind="damage" /></div>
+        </section>
+      </div> : null}
+    </div>
+  ) : null;
+
+  return (
+    <>
+      <div className="min-w-0 max-w-full overflow-hidden">
+        <div className={`min-w-0 ${cleanImages.length > 1 ? "md:grid md:grid-cols-[minmax(0,1fr)_104px] md:gap-3 xl:block" : ""}`}>
+          <div className="relative min-w-0">
+          <button
+            ref={mainImageButton}
+            type="button"
+            onClick={openFullscreen}
+            onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
+            onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
+            className="relative block h-[360px] w-full cursor-zoom-in touch-pan-y overflow-hidden rounded-[1.6rem] bg-white/[0.04] md:h-[520px] md:rounded-[2rem]"
+            aria-label="Открыть фотографии автомобиля"
+          >
+            {image}
+            {cleanImages.length > 1 ? <div className="pointer-events-none absolute bottom-4 left-8 right-24 hidden gap-2 xl:flex" aria-hidden="true">
+              {cleanImages.map((_, index) => <span key={`progress-${index}`} className={`h-[3px] min-w-0 flex-1 rounded-full ${index === activeIndex ? "bg-red-500" : "bg-white/50"}`} />)}
+            </div> : null}
+            <div className="ac-on-image absolute bottom-3 right-3 rounded-full bg-black/55 px-3 py-1 text-xs font-black text-white/85 backdrop-blur xl:bottom-4">
+              {activeIndex + 1} / {cleanImages.length}
+            </div>
+          </button>
+          {editor}
+          </div>
+
+          {cleanImages.length > 1 ? (
+            <div className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex xl:hidden">
+              {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "side"))}
+            </div>
+          ) : null}
+        </div>
+
+        {cleanImages.length > 1 ? <>
+          <div className="ac-vehicle-thumbnails ac-hide-scrollbar -mr-4 mt-3 grid max-w-[calc(100%+1rem)] grid-flow-col auto-cols-[3.75rem] gap-2 overflow-x-auto p-1 pb-2 pr-4 sm:auto-cols-[4.5rem] md:hidden">
+            {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
+          </div>
+          <div className="relative mt-3 hidden xl:block">
+            <div ref={desktopThumbnailRail} className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">
+              {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}
+            </div>
+          </div>
+        </> : null}
+      </div>
+
+      <style>{`@media(max-width:639px){.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:auto!important;aspect-ratio:4/3!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}}`}</style>
+      {browserOpen && typeof document !== "undefined" ? createPortal(<PhotoBrowser images={cleanImages.filter(src=>!auctionSheetUrls.includes(src))} title={title} initialIndex={Math.max(0,cleanImages.filter(src=>!auctionSheetUrls.includes(src)).indexOf(cleanImages[activeIndex]))} offerId={offerId} snapshot={snapshot} onClose={()=>setBrowserOpen(false)} />, document.body) : null}
+      {fullscreenGallery && typeof document !== "undefined" ? createPortal(fullscreenGallery, document.body) : null}
+    </>
+  );
+}

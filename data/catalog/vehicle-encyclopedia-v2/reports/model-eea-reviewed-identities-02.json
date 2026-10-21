@@ -1,0 +1,642 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialRegistryObservationRequired": true,
+    "explicitSameBrandBoundaryRequired": true,
+    "sourceSpellingsUnsafeByDefault": true,
+    "productionYearsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 50,
+    "newModels": 14,
+    "registrations": 52955
+  },
+  "reviewed": [
+    {
+      "modelId": "mg-motor/rx6",
+      "canonicalName": "RX6",
+      "sourceNames": 3,
+      "registrations": 6144,
+      "specificationGroups": 7,
+      "years": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "modelId": "nissan/nv300",
+      "canonicalName": "NV300",
+      "sourceNames": 4,
+      "registrations": 5216,
+      "specificationGroups": 26,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "modelId": "dr-automobiles/f35",
+      "canonicalName": "F35",
+      "sourceNames": 1,
+      "registrations": 5072,
+      "specificationGroups": 12,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "ebro/s800",
+      "canonicalName": "S800",
+      "sourceNames": 2,
+      "registrations": 2868,
+      "specificationGroups": 2,
+      "years": [
+        2025
+      ]
+    },
+    {
+      "modelId": "great-wall/haval-h2w",
+      "canonicalName": "Haval H2W",
+      "sourceNames": 2,
+      "registrations": 2275,
+      "specificationGroups": 5,
+      "years": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "modelId": "nio/es8",
+      "canonicalName": "ES8",
+      "sourceNames": 2,
+      "registrations": 1991,
+      "specificationGroups": 13,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "dr-automobiles/eq1",
+      "canonicalName": "DR eQ1",
+      "sourceNames": 1,
+      "registrations": 1827,
+      "specificationGroups": 3,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "ford/tourneo-connect",
+      "canonicalName": "Tourneo Connect",
+      "sourceNames": 10,
+      "registrations": 1820,
+      "specificationGroups": 79,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "forthing/forthing-4",
+      "canonicalName": "Forthing 4",
+      "sourceNames": 2,
+      "registrations": 1606,
+      "specificationGroups": 18,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "geely/coolray",
+      "canonicalName": "Coolray",
+      "sourceNames": 1,
+      "registrations": 1503,
+      "specificationGroups": 4,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "great-wall/wey-coffee-01",
+      "canonicalName": "Wey Coffee 01",
+      "sourceNames": 1,
+      "registrations": 1329,
+      "specificationGroups": 11,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "swm/g01",
+      "canonicalName": "G01",
+      "sourceNames": 3,
+      "registrations": 1329,
+      "specificationGroups": 13,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "forthing/t5-evo",
+      "canonicalName": "T5 EVO",
+      "sourceNames": 5,
+      "registrations": 1217,
+      "specificationGroups": 13,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "xpeng/g3",
+      "canonicalName": "G3",
+      "sourceNames": 1,
+      "registrations": 1163,
+      "specificationGroups": 3,
+      "years": [
+        2021,
+        2022
+      ]
+    },
+    {
+      "modelId": "alpina/b5",
+      "canonicalName": "B5",
+      "sourceNames": 10,
+      "registrations": 1012,
+      "specificationGroups": 21,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "forthing/forthing-5",
+      "canonicalName": "Forthing 5",
+      "sourceNames": 1,
+      "registrations": 994,
+      "specificationGroups": 16,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "seres/seres-5",
+      "canonicalName": "Seres 5",
+      "sourceNames": 3,
+      "registrations": 968,
+      "specificationGroups": 21,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "alpina/xd3",
+      "canonicalName": "XD3",
+      "sourceNames": 1,
+      "registrations": 945,
+      "specificationGroups": 10,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "baic/x75",
+      "canonicalName": "X75",
+      "sourceNames": 1,
+      "registrations": 920,
+      "specificationGroups": 11,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "mazda/6e",
+      "canonicalName": "Mazda6e",
+      "sourceNames": 1,
+      "registrations": 909,
+      "specificationGroups": 2,
+      "years": [
+        2025
+      ]
+    },
+    {
+      "modelId": "dfsk/ix5",
+      "canonicalName": "ix5",
+      "sourceNames": 1,
+      "registrations": 888,
+      "specificationGroups": 11,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "ds-automobiles/ds-n-8",
+      "canonicalName": "DS N°8",
+      "sourceNames": 6,
+      "registrations": 847,
+      "specificationGroups": 19,
+      "years": [
+        2025
+      ]
+    },
+    {
+      "modelId": "dfsk/fengon-5",
+      "canonicalName": "Fengon 5",
+      "sourceNames": 1,
+      "registrations": 830,
+      "specificationGroups": 28,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "opel/movano",
+      "canonicalName": "Movano",
+      "sourceNames": 1,
+      "registrations": 669,
+      "specificationGroups": 21,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "nio/el7",
+      "canonicalName": "EL7",
+      "sourceNames": 1,
+      "registrations": 627,
+      "specificationGroups": 12,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "alpina/d5-s",
+      "canonicalName": "D5 S",
+      "sourceNames": 5,
+      "registrations": 580,
+      "specificationGroups": 23,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "sportequipe/ich-x-k3",
+      "canonicalName": "ICH-X K3",
+      "sourceNames": 1,
+      "registrations": 537,
+      "specificationGroups": 3,
+      "years": [
+        2025
+      ]
+    },
+    {
+      "modelId": "alpina/xb7",
+      "canonicalName": "XB7",
+      "sourceNames": 2,
+      "registrations": 433,
+      "specificationGroups": 9,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "great-wall/wey-coffee-02",
+      "canonicalName": "Wey Coffee 02",
+      "sourceNames": 1,
+      "registrations": 409,
+      "specificationGroups": 8,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "seres/seres-3",
+      "canonicalName": "Seres 3",
+      "sourceNames": 1,
+      "registrations": 404,
+      "specificationGroups": 7,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "swm/g05",
+      "canonicalName": "G05",
+      "sourceNames": 3,
+      "registrations": 400,
+      "specificationGroups": 8,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "hongqi/e-hs9",
+      "canonicalName": "E-HS9",
+      "sourceNames": 1,
+      "registrations": 389,
+      "specificationGroups": 7,
+      "years": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "alpina/xd4",
+      "canonicalName": "XD4",
+      "sourceNames": 1,
+      "registrations": 380,
+      "specificationGroups": 8,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "forthing/friday",
+      "canonicalName": "Friday",
+      "sourceNames": 5,
+      "registrations": 376,
+      "specificationGroups": 8,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "geely/starray",
+      "canonicalName": "Starray",
+      "sourceNames": 2,
+      "registrations": 371,
+      "specificationGroups": 5,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "polestar/polestar-1",
+      "canonicalName": "Polestar 1",
+      "sourceNames": 3,
+      "registrations": 361,
+      "specificationGroups": 9,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2024
+      ]
+    },
+    {
+      "modelId": "fiat/scudo",
+      "canonicalName": "Scudo",
+      "sourceNames": 2,
+      "registrations": 321,
+      "specificationGroups": 22,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "jac/iev7s",
+      "canonicalName": "iEV7S",
+      "sourceNames": 3,
+      "registrations": 288,
+      "specificationGroups": 24,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "modelId": "great-wall/wey-05",
+      "canonicalName": "Wey 05",
+      "sourceNames": 1,
+      "registrations": 287,
+      "specificationGroups": 7,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "geely/atlas-pro",
+      "canonicalName": "Atlas Pro",
+      "sourceNames": 1,
+      "registrations": 273,
+      "specificationGroups": 2,
+      "years": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "modelId": "jac/es4",
+      "canonicalName": "ES4",
+      "sourceNames": 2,
+      "registrations": 265,
+      "specificationGroups": 5,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "dr-automobiles/7h",
+      "canonicalName": "DR 7H",
+      "sourceNames": 1,
+      "registrations": 262,
+      "specificationGroups": 2,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "dr-automobiles/art-e3",
+      "canonicalName": "DR ART e3",
+      "sourceNames": 1,
+      "registrations": 243,
+      "specificationGroups": 5,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "modelId": "jac/e-js4",
+      "canonicalName": "E-JS4",
+      "sourceNames": 1,
+      "registrations": 232,
+      "specificationGroups": 6,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "jac/e30x",
+      "canonicalName": "E30X",
+      "sourceNames": 3,
+      "registrations": 229,
+      "specificationGroups": 5,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "borgward/bx7",
+      "canonicalName": "BX7",
+      "sourceNames": 2,
+      "registrations": 212,
+      "specificationGroups": 4,
+      "years": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "modelId": "ebro/s900",
+      "canonicalName": "S900",
+      "sourceNames": 1,
+      "registrations": 194,
+      "specificationGroups": 1,
+      "years": [
+        2025
+      ]
+    },
+    {
+      "modelId": "sportequipe/x-k2",
+      "canonicalName": "X K2",
+      "sourceNames": 2,
+      "registrations": 189,
+      "specificationGroups": 3,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "omoda/e5",
+      "canonicalName": "E5",
+      "sourceNames": 1,
+      "registrations": 177,
+      "specificationGroups": 6,
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "modelId": "geely/cityray",
+      "canonicalName": "Cityray",
+      "sourceNames": 1,
+      "registrations": 174,
+      "specificationGroups": 1,
+      "years": [
+        2025
+      ]
+    }
+  ]
+}

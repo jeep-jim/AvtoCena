@@ -1,0 +1,7016 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 26,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-7fd4b419a082173e4711",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 120,
+      "commercialNames": [
+        "ABARTH 500",
+        "FIAT ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1573,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-592ad1f03c0b8acfaa66",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 121,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 16074,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-769028e8351157ec6b5f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 132,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 16263,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-607179e4eb683707c454",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1357,
+      "powerKw": 121,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7aaeee1f74f41a40f800",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 47,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 203,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12eaa32c8df642faed90",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Abarth 500",
+      "modelId": "fiat/abarth-500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24a91f433999af15aab3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Adria Twin",
+      "modelId": "fiat/adria-twin",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "ADRIA TWIN 600SPB"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a4f966e57f530d6eaae",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Bravo",
+      "modelId": "fiat/bravo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT BRAVO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91780883678d025cb829",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Bravo",
+      "modelId": "fiat/bravo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1910,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT BRAVO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-324e3e8be6793affb3ed",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Bravo",
+      "modelId": "fiat/bravo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 66,
+      "commercialNames": [
+        "FIAT BRAVO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-971f63f8a0e068f1dbdc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Capron",
+      "modelId": "fiat/capron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "CAPRON"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c012045644149f540eb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Coral",
+      "modelId": "fiat/coral",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 118,
+      "commercialNames": [
+        "CORAL XL 670SL"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-989a8c84a0b4d12b6719",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Croma",
+      "modelId": "fiat/croma",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1910,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT CROMA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a92624d86470ef31a052",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Fiorino",
+      "modelId": "fiat/fiorino",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": null,
+      "commercialNames": [
+        "FIORINO 16V AD MULTIJET II S S"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e5a0be5d617e9cda85c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Fiorino",
+      "modelId": "fiat/fiorino",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 59,
+      "commercialNames": [
+        "FIAT FIORINO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b9013402d3bbb741487",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Fiorino",
+      "modelId": "fiat/fiorino",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT FIORINO",
+        "FIORINO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcb7f217b1e302952f04",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Fiorino",
+      "modelId": "fiat/fiorino",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "FIAT FIORINO QUBO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e6a8464f369fd5af49b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Fiorino",
+      "modelId": "fiat/fiorino",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "FIAT FIORINO",
+        "FIORINO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5eb591deb3336d5843f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Freemont",
+      "modelId": "fiat/freemont",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "commercialNames": [
+        "FREEMONT"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a19506e9b64abaa32e00",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ft",
+      "modelId": "fiat/ft",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "FT 599 HB"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd880ca0664cca1c5657",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Grande Panda",
+      "modelId": "fiat/grande-panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "GRANDE PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7973303cec4bfc76f5e0",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Grande Panda",
+      "modelId": "fiat/grande-panda",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "GRANDE PANDA E"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6de60180abb384402bf7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Grande Panda",
+      "modelId": "fiat/grande-panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 83,
+      "commercialNames": [
+        "GRANDE PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 88,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7144e9a1cad7e762e96",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Grande Panda",
+      "modelId": "fiat/grande-panda",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "GRANDE PANDA 1.2"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 101,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7fc01ca2252986dcd60",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Grande Punto",
+      "modelId": "fiat/grande-punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1248,
+      "powerKw": 55,
+      "commercialNames": [
+        "GRANDE PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-811ac6f8b4937486a9be",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Hymer",
+      "modelId": "fiat/hymer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "HYMER T CL 698"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67bd810403e3323fc0ea",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Idea",
+      "modelId": "fiat/idea",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT IDEA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-727ce16c563c59eb59c3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Idea",
+      "modelId": "fiat/idea",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT IDEA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be5296fd07a7e9d71a7e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Idea",
+      "modelId": "fiat/idea",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1248,
+      "powerKw": 66,
+      "commercialNames": [
+        "FIAT IDEA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08632ccfbf084d84ff30",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Knaus",
+      "modelId": "fiat/knaus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "KNAUS R11"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e0f6b22f07fd0173d1e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Knaus",
+      "modelId": "fiat/knaus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "KNAUS R07"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-816878cdb83d409ea61e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Mclouis",
+      "modelId": "fiat/mclouis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "MC LOUIS MC4 879",
+        "MCLOUIS MC4 879",
+        "MCLOUIS MENFYS 3",
+        "MCLOUIS MENFYS 3 MAXI"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-146bd3640ae7273e0b6c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Mclouis",
+      "modelId": "fiat/mclouis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 118,
+      "commercialNames": [
+        "MCLOUIS NEVIS 879"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85547a1205a04f209b52",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Mclouis",
+      "modelId": "fiat/mclouis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "MCLOUIS MENFYS 3 MAXI"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acb91c634289f11de98d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 875,
+      "powerKw": 62,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61da00742e499cde53ea",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 875,
+      "powerKw": 63,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 649,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe2eac3fa1aea06c8182",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17171512b371c76dfaca",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT PANDA",
+        "FIAT PANDA 4X4"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-261610947ed6de0571ca",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 55,
+      "commercialNames": [
+        "FIAT PANDA",
+        "FIAT PANDA 4X4",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 36,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cfb978df0149e854d2d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30ce981ae973f507c6e1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-214593e06aca1415be42",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA",
+        "PANDA / 1.2 / GPL",
+        "PANDA / 12 / GPL"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 57628,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3d202887df57b169389",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 875,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 158,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cde3a4742fc1866dd38d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 875,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1209,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c87a4c72b3827db12e84",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 875,
+      "powerKw": 59,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-942523a0723b7bac343e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 875,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 13605,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2920749c5ca5a5140915",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 875,
+      "powerKw": 63,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21f7664820fe2d21b02b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1242,
+      "powerKw": 44,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cf4ab2f56ac3eff2f74",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36a7e0e8535b60054a73",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbfa9f25faa555e25ec7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA",
+        "PANDA CROSS TWINAIR",
+        "PANDA CROSS TWINAIR 4X4",
+        "PANDA LOUNGE TWINAIR",
+        "PANDA TWINAIR 4X4",
+        "PANDA WAZE EDITION TWINAIR 4X4",
+        "PANDA WILD TWINAIR 4X4"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1091,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-703539d0fa2a3a9a8079",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 9174,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a6891f65fc899033532",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 875,
+      "powerKw": 63,
+      "commercialNames": [
+        "FIAT PANDA",
+        "Panda",
+        "PANDA",
+        "PANDA / 0.9 / 4X4",
+        "PANDA / 0.9 / 4X4 CROSS",
+        "PANDA / 0.9 / 4X4 CROSS HEA",
+        "PANDA / 0.9 / 4X4 HEA",
+        "PANDA / 0.9 / 4X4 STREET",
+        "PANDA / 0.9 / 4X4 STREET HEA",
+        "PANDA / 09 / 4X4 CROSS",
+        "PANDA / 09 / 4X4 STREET",
+        "PANDA 0.9 4X4 STREET",
+        "PANDA 4X4",
+        "PANDA 09 4X4",
+        "PANDA 09 4X4 CROSS"
+      ],
+      "sourceMakeNames": [
+        "FIAT",
+        "Fiat"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 48908,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb5f8515c13f68369e0c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA",
+        "PANDA CITY CROSS MHEV",
+        "PANDA CITY LIFE MHEV",
+        "PANDA EASY MHEV",
+        "PANDA SPORT MHEV",
+        "PANDA TRUSSARDI MHEV",
+        "PANDA WAZE EDITION MHEV"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1171,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8be43111474a58fa2bc7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 50065,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d5ab94546b88f344923",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA",
+        "PANDA / 1.0 /",
+        "PANDA / 1.0 / CROSS",
+        "PANDA / 1.0 / HYBRID",
+        "PANDA / 1.0 / HYBRID CITY",
+        "PANDA / 1.0 / HYBRID CITY CROSS",
+        "PANDA / 1.0 / HYBRID CROSS",
+        "PANDA / 1.0 / HYBRID EASY",
+        "PANDA / 1.0 / HYBRID SPORT",
+        "PANDA / 1.0 / HYBRID STREET",
+        "PANDA / 1.0 / STREET",
+        "PANDA / 10 /",
+        "PANDA / 10 / CITTY",
+        "PANDA / 10 / CROSS",
+        "PANDA / 10 / HYBRID",
+        "PANDA / 10 / HYBRID CROSS",
+        "PANDA / 10 / HYBRID STREET",
+        "PANDA / 10 / STREET",
+        "PANDA / PANDINA",
+        "PANDA 1.0",
+        "PANDA PA",
+        "PANDA PANDINA",
+        "PANDA SPORT"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 40,
+      "registrations": 653739,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f37c7a99befdfd1758a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1108,
+      "powerKw": 40,
+      "commercialNames": [
+        "FIAT PANDA",
+        "FIAT PANDA 4X4",
+        "PANDA",
+        "PANDA 4X4",
+        "PANDA 1108 4X4 CATAL"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4289689420aa363fbbdc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA CITY CROSS",
+        "PANDA EASY",
+        "PANDA LOUNGE",
+        "PANDA POP",
+        "PANDA TRUSSARDI",
+        "PANDA WAZE EDITION"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2068,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-447259bff32e6c48f524",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 44,
+      "commercialNames": [
+        "FIAT PANDA",
+        "FIAT PANDA 4X4",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8ebef163684af7c387a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT PANDA",
+        "FIAT PANDA 4X4",
+        "PANDA",
+        "PANDA / 1.2 /",
+        "PANDA 12",
+        "PANDA 12 CROSS"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 185376,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20ab347793f6a049e10d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 83,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51f134e94f19c875dc13",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1242,
+      "powerKw": 44,
+      "commercialNames": [
+        "FIAT PANDA 4X4"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7eb08c912cbd8fdc0bcc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 875,
+      "powerKw": 63,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45fcc9ac5ad998b9fdf6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 42,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-507dbbd43d32e5a4e65b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 516,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d26a26b23fc241a5203",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "ng",
+      "engineCc": 875,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd7e44e3887a5f5bb3f2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "ng",
+      "engineCc": 875,
+      "powerKw": 62,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab09803852bf8de11bcc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "ng",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FIAT PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efd3b7d0c0d3dc9872f1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 49,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea92f06ee44d8f02414e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 51,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46b74f80cc7bc1dd989d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 55,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-772fb30080c0d1927d5a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 59,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52b309342dbf45ea2784",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 61,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97aa5642a25362aa112d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 67,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-528d6a9d67597392c489",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 68,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-668969ec75b7a862adf0",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 69,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4682075042c72a685a0",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 70,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94587c4c4294af19ddc3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 72,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb94d51056eefe47f169",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 74,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35cc9f2ced5555c9cfbb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 75,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ab71e92632f00fb1701",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 77,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58c3e94621759b51d3f8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 79,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7af6bcbf6f4a04482682",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 80,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cbbe6cbf1fa97412db1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 81,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bca9ff6b1b0ee759a52a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 84,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dad396b3eace7127c04b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 85,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-827a49c22d9a9a17059c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 90,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fd5c284bc5c8f66bd75",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 91,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-208b95f1db000f6b2cbb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 92,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07f32c4c798ce0629dea",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 95,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b557ab8678c8a884029",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 96,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18e560b0477af63ee4f1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 110,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b0b2d883186fd1d6b7d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 112,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-facdb87409c493620ce8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 114,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aac57a8a958388aaa644",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 116,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ed797cacd5a1735bac2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 117,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90129181f8095718bba4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 120,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bcabaaf8953c0028aaa",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 131,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ff303e9f8c51c50583c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 132,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5efdfdd6a55b63128ba",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 137,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0061e82b5c8a386422b7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 140,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e54456758265f08c1da",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 141,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7798d48419a87538eeda",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 143,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-615afa532dc5087a06a3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 145,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d421b2f8951a8e1aad76",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 147,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c30eeeb46945e5b868b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 148,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a882f4f1b23967c7949",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 150,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce19fec51288f1e2843c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 180,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fc4666e6a815585353a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 185,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19fd0c968449823af6d4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 187,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13b1bc7b56e2998ae8fe",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 190,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-400d8ac59a0a0cb08079",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 210,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c65eca993913fe5e32c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 228,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-654172628574561e7ab0",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 243,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d4b2b58eef3a0ab4b96",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 245,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10dc92e01d30f9e26a21",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 246,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-931abcd0fe29958f9349",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 250,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-436a2db03af8cf93dbac",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 258,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bed3ead8fa7f6c9d873",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 280,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37dfcab0d129b0351282",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 320,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2ddc79682f257b308a4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 338,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5e7c1efae378f90b144",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 360,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5b81a3e2b4a457b43ba",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 386,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15c95ad081c8ca5e52a9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 450,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e919a7af15b81e6d32d2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 875,
+      "powerKw": 490,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a8feca441e9818a2d9f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7c37e8a94bd644c568b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5c6245d5247373d2e59",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d279879b3564b5c22fb8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d3dcaf7fd4cbd0f8b04",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de5e1520a46d541fe2a6",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6642db5b57fe1c0477aa",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a997b043aad5b30de46",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94eb20b12c2cb214418b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d346351c07d10d0d7bb7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b575dddccc2781d716f7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-109fc0a8f7f3095791d1",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c224e8405af251ac79c7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 150,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdd2ad99bd5050d20999",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 186,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d662386610db528552bc",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 228,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef64583a8162576073ae",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 410,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afa77c99bf9dbeb82229",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 83,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6383,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a613135a75f38b4dd07e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 999,
+      "powerKw": 51,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 55,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b6c0a7dff88a08b4ceb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 800,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-092ffbe5a54f42c4e720",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 238,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3af0b71ceaa3f660617",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 47,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dd8ce50a8497e9ad987",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 48,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4666,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e4e320bc0cac70daff3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 456,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1c5b54df304c697d9f2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 17069,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9071dc3fa85d17b13659",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cff2bcc0db99562b7990",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-033b8dfbc0d6f948ca4c",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Panda",
+      "modelId": "fiat/panda",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "PANDA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 106,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0d5691a588c9da189db",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 55,
+      "commercialNames": [
+        "FIAT PUNTO",
+        "PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 124,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fd566748bd99cab863a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 66,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40480aba61f7375f1975",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e6590372d451ceab6d2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a2c51f97dc3ed97e19e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 48,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42767a4a0882b1874259",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 51,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d43773c8206ade087f25",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 59,
+      "commercialNames": [
+        "PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7835c4782dad8c4f6a0",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "FIAT PUNTO",
+        "PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecc835728ca9f79ef882",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a050ffc93f133c5a83b2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Punto",
+      "modelId": "fiat/punto",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1248,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIAT PUNTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0788fe42e80357f7b80",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": null,
+      "commercialNames": [
+        "QUBO LOUNGE MULTIJET",
+        "QUBO TREKKING MULTIJET"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff4e4e0dfb1cf314240f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 59,
+      "commercialNames": [
+        "QUBO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dd3b1af12e3a181055a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "QUBO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-657a1c0a6d5cc6e19641",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "QUBO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-542d6bbc7893cee403df",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "QUBO LOUNGE",
+        "QUBO POP"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86517c793f3438aa0be5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 57,
+      "commercialNames": [
+        "QUBO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aade3bcc701d21ffe499",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Qubo",
+      "modelId": "fiat/qubo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 55,
+      "commercialNames": [
+        "QUBO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52ab961f6a9a4326b289",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "R07",
+      "modelId": "fiat/r07",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "R07"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62e254bd214df332bd66",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "R07",
+      "modelId": "fiat/r07",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "R07"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-780c61ba0066d768fc26",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "R47",
+      "modelId": "fiat/r47",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "R47"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5351433e9b3926270deb",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Rapido",
+      "modelId": "fiat/rapido",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "RAPIDO 650F AUTO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3335ed89773aaf66fc20",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Rapido",
+      "modelId": "fiat/rapido",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 132,
+      "commercialNames": [
+        "RAPIDO",
+        "RAPIDO DUCATO S11",
+        "RAPIDO FIAT DUCATO S80"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04c0ef5af95931492508",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Rapido",
+      "modelId": "fiat/rapido",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "RAPIDO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ae5e8eb41183f2f54b7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Rapido",
+      "modelId": "fiat/rapido",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2184,
+      "powerKw": 118,
+      "commercialNames": [
+        "RAPIDO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66a42b0b4213cb018429",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Rimor",
+      "modelId": "fiat/rimor",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "RIMOR",
+        "RIMOR SEAL 5"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1134d16bdefca8d3072",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Rimor",
+      "modelId": "fiat/rimor",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "RIMOR HORUS 95"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c50402907029f439a450",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Sedici",
+      "modelId": "fiat/sedici",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1910,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT SEDICI"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f15c04ed777e2a5ebdb7",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Sedici",
+      "modelId": "fiat/sedici",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 99,
+      "commercialNames": [
+        "FIAT SEDICI",
+        "SEDICI"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f5a0ce119b101e4c1e3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Stilo",
+      "modelId": "fiat/stilo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1910,
+      "powerKw": 85,
+      "commercialNames": [
+        "FIAT STILO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6323d2abb89aed419c13",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Stilo",
+      "modelId": "fiat/stilo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1910,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT STILO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7420efbec3efdf9f727",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT TIPO",
+        "FIAT TIPO ? FIAT EGEA",
+        "FIAT TIPO / FIAT EGEA",
+        "FIAT TIPO I FIAT EGEA",
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 34914,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c8c20ba1934ceee5cad",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1db3d84f0f44a2c0e859",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "TIPO LOUNGE MULTIJET",
+        "TIPO MIRROR MULTIJET"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 314,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82f35cc6ebf300a8a4e5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "FIAT TIPO",
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bf54572c3e2ab9ee7b5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT TIPO",
+        "FIAT TIPO ? FIAT EGEA",
+        "FIAT TIPO / FIAT EGEA",
+        "TIPO",
+        "TIPO / 1.6 / JTD",
+        "TIPO / 1.6 / JTD CA",
+        "TIPO 16 JTD",
+        "TIPO 16 JTD CA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 22394,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec2a427563af14864be5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 1000,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75fddb560f5a6fe89b6b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT TIPO",
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 860,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f90e6c9798bde19b652f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT TIPO",
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 136,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3da5a3e81c393fe33531",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "FIAT TIPO",
+        "TIPO",
+        "TIPO CROSS"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1766,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db3e27f5c39866b761a2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "FIAT TIPO",
+        "FIAT TIPO ? FIAT EGEA",
+        "FIAT TIPO / FIAT EGEA",
+        "FIAT TIPO /10/ HB",
+        "FIAT TIPO I FIAT EGEA",
+        "TIPO",
+        "TIPO / 1.0 /",
+        "TIPO / 1.0 / BASE",
+        "TIPO / 1.0 / CROSS",
+        "TIPO / 10 /",
+        "TIPO / 10 / CROSS",
+        "TIPO / 10 / SW"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 49030,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6541c1df34b42b72f423",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "TIPO EASY",
+        "TIPO EASY +",
+        "TIPO EASY + T-JET",
+        "TIPO LOUNGE",
+        "TIPO LOUNGE T-JET",
+        "TIPO MIRROR",
+        "TIPO MIRROR T-JET",
+        "TIPO S-DESIGN",
+        "TIPO S-DESIGN T-JET",
+        "TIPO SPORT",
+        "TIPO SPORT T-JET",
+        "TIPO STREET"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 1814,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2ea6d4e95fd231e3612",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT TIPO",
+        "FIAT TIPO ? FIAT EGEA",
+        "TIPO",
+        "TIPO / 1.4 /",
+        "TIPO 14"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 54751,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5cf52cc08dbbaffc65d",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "commercialNames": [
+        "FIAT TIPO",
+        "TIPO",
+        "TIPO / 1.4 /",
+        "TIPO 14"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 19434,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7f258d8a96c4a851bfe",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 1000,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7689a1876fa079edd3f2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-955e70365a9e82362e4e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f1086965e4a5ac542a5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "FIAT TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65e4e561f98553bcab81",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a051debc0b7d4704325",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIAT TIPO",
+        "FIAT TIPO ? FIAT EGEA",
+        "FIAT TIPO / FIAT EGEA",
+        "FIAT TIPO I FIAT EGEA",
+        "TIPO",
+        "TIPO / 1.6 / JTD",
+        "TIPO / 1.6 / JTD CROSS",
+        "TIPO / 16 / JTD",
+        "TIPO / 16 / JTD CROSS",
+        "TIPO/16/ JTD HB",
+        "TIPO/16/ JTD SW"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 45806,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28c6959a2088b72e04be",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 73,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30ed37c6c174e57cc098",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1248,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-665cd2d749bb2e8da961",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "FIAT TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36da5d8032d232ea1c29",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIAT TIPO",
+        "FIAT TIPO ? FIAT EGEA",
+        "FIAT TIPO I FIAT EGEA",
+        "TIPO",
+        "TIPO / 15 / HYBRID"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 10518,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9653490644907c28b77a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIAT TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d4479227bff1ae4fcfe",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": 110,
+      "commercialNames": [
+        "FIAT TIPO I FIAT EGEA"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac3fdeee97352fcc6082",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 59,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67cbbdbad4fd91729a42",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bccd6d3fb79c32aa76c4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e4e63077b5628454d4f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 68,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64ef2585989523c0038e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 69,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e6efce0838b76b0e3c3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 74,
+      "commercialNames": [
+        "FIAT TIPO",
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73131880a465e94fd2b9",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a50977077cbf292d6b3b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a534ba410bd15783ecc5",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2af80eea6cb7b36b75c3",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a85bf79e65ccc885c9b",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 91,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba19f52ffbc332b6ce3a",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da87c8d98a47d09080ad",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6af4247fd4ce37e9b0db",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1444eb3c8fd5f9acbdc2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-746ed9a4290f2622fe06",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b52f4300d445f4ab5a4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bcac9da287ac56e3842",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 131,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ce72b5d7fdd3c7a0991",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 143,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72ffb8de0815521783f2",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 145,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-640a2ec315cce3d4296e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 195,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64f9b54053036d01516f",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 210,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7e546cfbc72f1b2a456",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 250,
+      "commercialNames": [
+        "TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae590bf7b573f5e5d61e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Tipo",
+      "modelId": "fiat/tipo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "FIAT TIPO"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7a84961c88ce75322b8",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e2494702a3dfb8f9cc4",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 106,
+      "commercialNames": [
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e49888b884054ab4e68",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 130,
+      "commercialNames": [
+        "FIAT ULYSSE",
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2312,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d60ac0546ddb7dd94b41",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 57,
+      "commercialNames": [
+        "FIAT ULYSSE",
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 216,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69394b60b20d7ad426ac",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "ULYSSE",
+        "ULYSSE H SKUDO",
+        "ULYSSE TRIPIOD",
+        "ULYSSE TRIPOD"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 858,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40be81165c2e91a40609",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f47006005c418214e738",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e2ca65c7d3db6b37f6e",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "FIAT ULYSSE",
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87670033ad04710a9b02",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Ulysse",
+      "modelId": "fiat/ulysse",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2184,
+      "powerKw": 132,
+      "commercialNames": [
+        "FIAT ULYSSE",
+        "ULYSSE"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef2be4551cbc856fe881",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Weinsberg",
+      "modelId": "fiat/weinsberg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 103,
+      "commercialNames": [
+        "WEINSBERG R47"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91a7c783a6a106a66503",
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "canonicalModel": "Weinsberg",
+      "modelId": "fiat/weinsberg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2287,
+      "powerKw": 103,
+      "commercialNames": [
+        "WEINSBERG R47"
+      ],
+      "sourceMakeNames": [
+        "FIAT"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2c888e0e576e085f013",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 166,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7edeb968f65842f7374",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 285,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f183377f192fe3e2d684",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 176,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4eeb63056f7cc2594ac6",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 179,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 440,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cafa77cb1b7ff28d565",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 351,
+      "commercialNames": [
+        "OCEAN",
+        "OCEAN ULTRA"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 613,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5258eca24f52131d71d1",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 352,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 453,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73b6950f24692a576d2e",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-870adffa97377f862118",
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "canonicalModel": "Ocean",
+      "modelId": "fisker/ocean",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "OCEAN"
+      ],
+      "sourceMakeNames": [
+        "FISKER"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

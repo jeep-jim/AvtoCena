@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "us-government-vehicle-data",
+  "authority": "us_government_vehicle_specifications",
+  "fetchedAt": "2026-08-22T10:30:41.676Z",
+  "status": "complete",
+  "files": [
+    {
+      "file": "fueleconomy-vehicles.csv",
+      "bytes": 21725531,
+      "sha256": "cb6304e8970fabc4ae144ee91210953729ab3bae1ff0290f986c31501bf2c7a7",
+      "sourceUrl": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv",
+      "contentType": "application/octet-stream"
+    },
+    {
+      "file": "nhtsa-all-makes.json",
+      "bytes": 611168,
+      "sha256": "608d3c2ef478bc5d9d7f9fda60286a6186dc0bc0b35ee2c971864d9d72962b92",
+      "sourceUrl": "https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json",
+      "contentType": "application/json"
+    },
+    {
+      "file": "nhtsa-models-current-makes.json",
+      "bytes": 348133,
+      "sha256": "96947885cf41643048805c3bfc662eeaec709311e275016c61ca9e71d8ac72e4",
+      "sourceUrl": "https://vpic.nhtsa.dot.gov/api/"
+    }
+  ],
+  "counts": {
+    "fuelEconomyRows": 50242,
+    "nhtsaMakes": 12340,
+    "nhtsaCurrentMakesQueried": 59,
+    "nhtsaCurrentMakeResponses": 59,
+    "nhtsaCurrentModels": 2341
+  },
+  "errors": [],
+  "notes": [
+    "FuelEconomy.gov is the DOE/EPA passenger/light-truck specification spine; NHTSA vPIC adds manufacturer-reported US make/model identities. Compilation applies model-year >=2020.",
+    "NHTSA is queried once per distinct 2020+ make observed in the EPA bulk CSV, with a bounded make cap and delay; there are no per-vehicle or per-VIN request loops."
+  ]
+}

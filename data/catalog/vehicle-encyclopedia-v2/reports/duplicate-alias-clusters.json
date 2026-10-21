@@ -1,0 +1,72 @@
+{
+  "clusters": [
+    {
+      "key": "brand:global:audi",
+      "rows": [
+        {
+          "normalized": "audi",
+          "value": "Audi",
+          "kind": "canonical",
+          "safe": true,
+          "entityType": "brand",
+          "entityId": "audi",
+          "brandId": "audi",
+          "modelId": null
+        },
+        {
+          "normalized": "audi",
+          "value": "AUDI",
+          "kind": "market_name",
+          "safe": false,
+          "entityType": "brand",
+          "entityId": "audi-china",
+          "brandId": "audi-china",
+          "modelId": null
+        }
+      ],
+      "entityIds": [
+        "audi",
+        "audi-china"
+      ]
+    },
+    {
+      "key": "model:mazda:mazda6e",
+      "rows": [
+        {
+          "normalized": "mazda6e",
+          "value": "Mazda6e",
+          "kind": "canonical",
+          "safe": false,
+          "entityType": "model",
+          "entityId": "mazda/6e",
+          "brandId": "mazda",
+          "modelId": "mazda/6e"
+        },
+        {
+          "normalized": "mazda6e",
+          "value": "MAZDA6e",
+          "kind": "canonical",
+          "safe": false,
+          "entityType": "model",
+          "entityId": "mazda/mazda6e",
+          "brandId": "mazda",
+          "modelId": "mazda/mazda6e"
+        },
+        {
+          "normalized": "mazda6e",
+          "value": "MAZDA 6E",
+          "kind": "source_spelling",
+          "safe": false,
+          "entityType": "model",
+          "entityId": "mazda/mazda6e",
+          "brandId": "mazda",
+          "modelId": "mazda/mazda6e"
+        }
+      ],
+      "entityIds": [
+        "mazda/6e",
+        "mazda/mazda6e"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,816 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactNormalizedEeaToVehiclesDbIntersectionRequired": true,
+    "importedStatus": "review",
+    "safeAutomaticResolution": false,
+    "productionYearsInferred": false,
+    "generationInferred": false,
+    "completionClaimAllowed": false,
+    "reviewedVariantLevelIdentitiesExcluded": true
+  },
+  "totals": {
+    "eeaMatchedCanonicalModels": 1211,
+    "eeaExactCanonicalModels": 1209,
+    "eeaPrefixMatchedCanonicalModels": 2,
+    "existingModelIntersections": 1207,
+    "existingPrefixModelIntersections": 2,
+    "newReviewModels": 0,
+    "newExactReviewModels": 0,
+    "newPrefixReviewModels": 0,
+    "stagedModelsWithEeaEvidence": 1057,
+    "brandsWithNewReviewModels": 0,
+    "sources": 0,
+    "stagedModificationCandidates": 22734,
+    "variantLevelCandidatesExcluded": 2
+  },
+  "byBrand": [
+    {
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "acura",
+      "brand": "Acura",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "aion",
+      "brand": "AION",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 13
+    },
+    {
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "newReviewModels": 0,
+      "existingModelIntersections": 17
+    },
+    {
+      "brandId": "audi",
+      "brand": "Audi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 43
+    },
+    {
+      "brandId": "baic",
+      "brand": "BAIC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "bmw",
+      "brand": "BMW",
+      "newReviewModels": 0,
+      "existingModelIntersections": 43
+    },
+    {
+      "brandId": "bugatti",
+      "brand": "Bugatti",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "buick",
+      "brand": "Buick",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "byd",
+      "brand": "BYD",
+      "newReviewModels": 0,
+      "existingModelIntersections": 15
+    },
+    {
+      "brandId": "cadillac",
+      "brand": "Cadillac",
+      "newReviewModels": 0,
+      "existingModelIntersections": 12
+    },
+    {
+      "brandId": "caterham",
+      "brand": "Caterham",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "chery",
+      "brand": "Chery",
+      "newReviewModels": 0,
+      "existingModelIntersections": 8
+    },
+    {
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "newReviewModels": 0,
+      "existingModelIntersections": 20
+    },
+    {
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "newReviewModels": 0,
+      "existingModelIntersections": 33
+    },
+    {
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 9
+    },
+    {
+      "brandId": "daihatsu",
+      "brand": "Daihatsu",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "newReviewModels": 0,
+      "existingModelIntersections": 10
+    },
+    {
+      "brandId": "dongfeng",
+      "brand": "Dongfeng",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "donkervoort",
+      "brand": "Donkervoort",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "ds-automobiles",
+      "brand": "DS Automobiles",
+      "newReviewModels": 0,
+      "existingModelIntersections": 6
+    },
+    {
+      "brandId": "ebro",
+      "brand": "EBRO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "ego-mobile",
+      "brand": "e.GO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "elaris",
+      "brand": "Elaris",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "emc",
+      "brand": "EMC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "evo",
+      "brand": "EVO",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "exlantix",
+      "brand": "Exlantix",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "faw",
+      "brand": "FAW",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "newReviewModels": 0,
+      "existingModelIntersections": 38
+    },
+    {
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "newReviewModels": 0,
+      "existingModelIntersections": 38
+    },
+    {
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "newReviewModels": 0,
+      "existingModelIntersections": 42
+    },
+    {
+      "brandId": "gac",
+      "brand": "GAC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "geely",
+      "brand": "Geely",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "genesis",
+      "brand": "Genesis",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "gmc",
+      "brand": "GMC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 8
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "newReviewModels": 0,
+      "existingModelIntersections": 8
+    },
+    {
+      "brandId": "haval",
+      "brand": "Haval",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "honda",
+      "brand": "Honda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 27
+    },
+    {
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "newReviewModels": 0,
+      "existingModelIntersections": 29
+    },
+    {
+      "brandId": "ineos",
+      "brand": "INEOS",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "infiniti",
+      "brand": "Infiniti",
+      "newReviewModels": 0,
+      "existingModelIntersections": 12
+    },
+    {
+      "brandId": "isuzu",
+      "brand": "Isuzu",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "jaecoo",
+      "brand": "Jaecoo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "jaguar",
+      "brand": "Jaguar",
+      "newReviewModels": 0,
+      "existingModelIntersections": 10
+    },
+    {
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "newReviewModels": 0,
+      "existingModelIntersections": 15
+    },
+    {
+      "brandId": "jetour",
+      "brand": "Jetour",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "kgm",
+      "brand": "KGM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 6
+    },
+    {
+      "brandId": "kia",
+      "brand": "Kia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 34
+    },
+    {
+      "brandId": "ktm",
+      "brand": "KTM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "lada",
+      "brand": "Lada",
+      "newReviewModels": 0,
+      "existingModelIntersections": 6
+    },
+    {
+      "brandId": "lamborghini",
+      "brand": "Lamborghini",
+      "newReviewModels": 0,
+      "existingModelIntersections": 13
+    },
+    {
+      "brandId": "lancia",
+      "brand": "Lancia",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "land-rover",
+      "brand": "Land Rover",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "leapmotor",
+      "brand": "Leapmotor",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "levc",
+      "brand": "LEVC",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 15
+    },
+    {
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "newReviewModels": 0,
+      "existingModelIntersections": 8
+    },
+    {
+      "brandId": "livan",
+      "brand": "Livan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 12
+    },
+    {
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "man",
+      "brand": "MAN",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "newReviewModels": 0,
+      "existingModelIntersections": 9
+    },
+    {
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 15
+    },
+    {
+      "brandId": "mclaren",
+      "brand": "McLaren",
+      "newReviewModels": 0,
+      "existingModelIntersections": 16
+    },
+    {
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "newReviewModels": 0,
+      "existingModelIntersections": 53
+    },
+    {
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "newReviewModels": 0,
+      "existingModelIntersections": 13
+    },
+    {
+      "brandId": "mini",
+      "brand": "MINI",
+      "newReviewModels": 0,
+      "existingModelIntersections": 8
+    },
+    {
+      "brandId": "mitsubishi",
+      "brand": "Mitsubishi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 12
+    },
+    {
+      "brandId": "mobilize",
+      "brand": "Mobilize",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "moke",
+      "brand": "Moke",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "morgan",
+      "brand": "Morgan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 6
+    },
+    {
+      "brandId": "nio",
+      "brand": "Nio",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "nissan",
+      "brand": "Nissan",
+      "newReviewModels": 0,
+      "existingModelIntersections": 30
+    },
+    {
+      "brandId": "omoda",
+      "brand": "OMODA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "opel",
+      "brand": "Opel",
+      "newReviewModels": 0,
+      "existingModelIntersections": 16
+    },
+    {
+      "brandId": "ora",
+      "brand": "ORA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "peugeot",
+      "brand": "Peugeot",
+      "newReviewModels": 0,
+      "existingModelIntersections": 28
+    },
+    {
+      "brandId": "polestar",
+      "brand": "Polestar",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "pontiac",
+      "brand": "Pontiac",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "newReviewModels": 0,
+      "existingModelIntersections": 10
+    },
+    {
+      "brandId": "ram",
+      "brand": "RAM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "renault",
+      "brand": "Renault",
+      "newReviewModels": 0,
+      "existingModelIntersections": 26
+    },
+    {
+      "brandId": "rivian",
+      "brand": "Rivian",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "rolls-royce",
+      "brand": "Rolls-Royce",
+      "newReviewModels": 0,
+      "existingModelIntersections": 16
+    },
+    {
+      "brandId": "ruf",
+      "brand": "RUF",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    },
+    {
+      "brandId": "saturn",
+      "brand": "Saturn",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "scion",
+      "brand": "Scion",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "seat",
+      "brand": "SEAT",
+      "newReviewModels": 0,
+      "existingModelIntersections": 10
+    },
+    {
+      "brandId": "secma",
+      "brand": "SECMA",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 14
+    },
+    {
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "skyworth",
+      "brand": "Skyworth",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "smart",
+      "brand": "Smart",
+      "newReviewModels": 0,
+      "existingModelIntersections": 11
+    },
+    {
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "newReviewModels": 0,
+      "existingModelIntersections": 9
+    },
+    {
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "newReviewModels": 0,
+      "existingModelIntersections": 13
+    },
+    {
+      "brandId": "suda",
+      "brand": "Suda",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "newReviewModels": 0,
+      "existingModelIntersections": 15
+    },
+    {
+      "brandId": "swm",
+      "brand": "SWM",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "newReviewModels": 0,
+      "existingModelIntersections": 5
+    },
+    {
+      "brandId": "togg",
+      "brand": "Togg",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "newReviewModels": 0,
+      "existingModelIntersections": 45
+    },
+    {
+      "brandId": "vauxhall",
+      "brand": "Vauxhall",
+      "newReviewModels": 0,
+      "existingModelIntersections": 7
+    },
+    {
+      "brandId": "vinfast",
+      "brand": "VinFast",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "newReviewModels": 0,
+      "existingModelIntersections": 39
+    },
+    {
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 23
+    },
+    {
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "newReviewModels": 0,
+      "existingModelIntersections": 2
+    },
+    {
+      "brandId": "willys",
+      "brand": "Willys",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "xiaomi",
+      "brand": "Xiaomi",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "newReviewModels": 0,
+      "existingModelIntersections": 4
+    },
+    {
+      "brandId": "yudo",
+      "brand": "Yudo",
+      "newReviewModels": 0,
+      "existingModelIntersections": 1
+    },
+    {
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "newReviewModels": 0,
+      "existingModelIntersections": 3
+    }
+  ],
+  "modelIds": [],
+  "excludedVariantLevelIdentities": [
+    {
+      "brandId": "bugatti",
+      "canonicalName": "Chiron Pur Sport",
+      "disposition": "legacy_exact_candidate",
+      "registrations": 8,
+      "reason": "reviewed derivative of a canonical model; retain as future variant/grade work instead of inflating the model count"
+    },
+    {
+      "brandId": "bugatti",
+      "canonicalName": "Chiron Super Sport",
+      "disposition": "legacy_exact_candidate",
+      "registrations": 6,
+      "reason": "reviewed derivative of a canonical model; retain as future variant/grade work instead of inflating the model count"
+    }
+  ]
+}

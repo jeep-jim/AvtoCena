@@ -1,0 +1,7247 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 57,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-e1ee9daf1ecdd9c8a825",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1496,
+      "powerKw": 85,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN ONE D",
+        "Clubman One D"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 3676,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04fe089e63f48c716a40",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "CLUBMAN COOPER D CLASSIC",
+        "CLUBMAN COOPER D CLASSIC AUTO",
+        "CLUBMAN COOPER D EXCLUSIVE",
+        "CLUBMAN COOPER D EXCLUSIVE A",
+        "CLUBMAN COOPER D SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63350bc1b7d044cad91d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "Clubman Cooper D"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b27492dab5b6485b806e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN COOPER",
+        "Clubman Cooper D",
+        "CLUBMAN COOPER D",
+        "CLUBMAN COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 4815,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-363502792beec9d519bc",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN COOPER",
+        "Clubman Cooper SD",
+        "CLUBMAN COOPER SD",
+        "Clubman Cooper SD ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 1836,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5429a56de7991ddb33be",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "CLUBMAN COOPER",
+        "CLUBMAN COOPER CLASSIC",
+        "CLUBMAN COOPER CLASSIC AUTO",
+        "CLUBMAN COOPER EXCLUSIVE",
+        "CLUBMAN COOPER EXCLUSIVE AUTO",
+        "CLUBMAN COOPER SPORT",
+        "CLUBMAN COOPER SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2366,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d87da4e5c0ca6e39dbf7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN ONE",
+        "Clubman One",
+        "CLUBMAN ONE / /"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 6470,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3db343fdda4a1723961a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN COOPER",
+        "Clubman Cooper",
+        "CLUBMAN COOPER / / AUT."
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 23523,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31e1a993e80e72dda5b9",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "CLUBMAN COOPER S CLASSIC",
+        "CLUBMAN COOPER S CLASSIC AUTO",
+        "CLUBMAN COOPER S EXCLUSIVE",
+        "CLUBMAN COOPER S EXCLUSIVE A",
+        "CLUBMAN COOPER S SPORT",
+        "CLUBMAN COOPER S SPORT AUTO",
+        "CLUBMAN JCW ALL4",
+        "CLUBMAN JOHN COOPER WORKS A4 A"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1805,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad44084e75f44022dca3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "Clubman Cooper S",
+        "CLUBMAN COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0af4c4bf555e41108e88",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN COOPER",
+        "CLUBMAN COOPER S",
+        "CLUBMAN COOPER S / / AUT",
+        "Clubman Cooper S ALL4",
+        "CLUBMAN COOPER S ALL4",
+        "CLUBMAN COOPERS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 7801,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6eda41cd2ec23ff1acaf",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 141,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN COOPER",
+        "Clubman Cooper S",
+        "CLUBMAN COOPER S",
+        "CLUBMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5558,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca054ca22e4c605f23ea",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 225,
+      "commercialNames": [
+        "CLUBMAN",
+        "CLUBMAN ALL4",
+        "CLUBMAN JCW",
+        "Clubman JCW ALL4",
+        "CLUBMAN JCW ALL4",
+        "CLUBMAN JCW ALL4 / / AUT",
+        "CLUBMAN JOHN COOPER WORKS",
+        "CLUBMAN JOHN COOPER WORKS ALL4",
+        "CLUBMAN JOHN COOPER WORKS ALL4 / / AUT."
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 6850,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc4e1a52721b2d394a3d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f926aadbb4e19112d0a3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30c44332ca2ba98b0bf7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-258841387ada5f3371ef",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 72,
+      "commercialNames": [
+        "CLUBMAN ONE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-558f8eceb56c4f0cb3ea",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f19dc667c2a9b9f09487",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f3f75214a7186921993",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0494d2264b24d1c92a83",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57337628600f3a6400c7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c9b2cecc3594b67d7ca",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 100,
+      "commercialNames": [
+        "CLUBMAN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c8c6dcda53390e80c40",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "CLUBMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90029f08dc8b6a316e2d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "CLUBMAN COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f262ea2a0556fb518374",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 210,
+      "commercialNames": [
+        "CLUBMAN COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32c97f441bd866d81093",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Clubman",
+      "modelId": "mini/clubman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 370,
+      "commercialNames": [
+        "CLUBMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d272aa11f81f800abd3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Convertible",
+      "modelId": "mini/convertible",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 150,
+      "commercialNames": [
+        "CONVERTIBLE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19edb99c50adfb91e9bb",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1496,
+      "powerKw": 85,
+      "commercialNames": [
+        "COOPER",
+        "Cooper D",
+        "COOPER D"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 379,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03385643332b7ea0c2c1",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1560,
+      "powerKw": 80,
+      "commercialNames": [
+        "MINI COOPER D CLUBMANN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ab57feea2335d0196e3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 82,
+      "commercialNames": [
+        "COOPER",
+        "MINI COOPER D COUNTRYMAN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c62c774c29895476dd2f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 82,
+      "commercialNames": [
+        "COOPER D",
+        "COOPER D COUNTRYMAN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6d78052f80d7a85c40b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 105,
+      "commercialNames": [
+        "COOPER",
+        "COOPER SD",
+        "COOPER SD ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff5178f8493887af9144",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "COOPER D CLUBMAN",
+        "COOPER D COUNTRYMAN",
+        "COOPER D COUNTRYMAN ALL4",
+        "MINI COOPER D ALL4 COUNTRYMAN",
+        "MINI COOPER D CLUBMAN F54 B47",
+        "MINI COOPER D COUNTRYMAN F60 B"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 448,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b96f62d5c96512219d15",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 125,
+      "commercialNames": [
+        "COOPER",
+        "COOPER SD"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d586656ee205dececb9c",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "COOPER SD CLUBMAN",
+        "COOPER SD CLUBMAN ALL4",
+        "COOPER SD COUNTRYMAN",
+        "COOPER SD COUNTRYMAN ALL4",
+        "MINI COOPER SD ALL4 CLUBMAN F5",
+        "MINI COOPER SD ALL4 COUNTRYMAN",
+        "MINI COOPER SD CLUBMAN F54 B47",
+        "MINI COOPER SD COUNTRYMAN F60"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 141,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8b49ec529a1377ba951",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "COOPER",
+        "COOPER E",
+        "COOPER S ELECTRC LEVEL 1",
+        "COOPER S ELECTRC LEVEL 2",
+        "COOPER S ELECTRC LEVEL 3",
+        "COOPER SE",
+        "Cooper SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 43468,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16317c01aa1828266a7d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "COOPER",
+        "Cooper SE",
+        "COOPER SE",
+        "COOPER SE / / AUT",
+        "COOPER SE / / AUT.",
+        "COOPER SE AUT",
+        "MINI COOPER SE BEV F56 IB1",
+        "MINI COOPER SE CABRIO F57 IB1"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 23554,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d3042f02d8dcb9c3aa0",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "COOPER",
+        "COOPER E",
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 72607,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce74e57f760f7a805759",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9c78eab9ee8a502d16e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "COOPER",
+        "COOPER CLASSIC",
+        "COOPER CLASSIC AUTO",
+        "COOPER EXCLUSIVE",
+        "COOPER EXCLUSIVE AUTO",
+        "COOPER SPORT",
+        "COOPER SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 17554,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d27cb84a1c63942158e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "COOPER",
+        "Cooper",
+        "COOPER / /",
+        "COOPER / / AUT",
+        "COOPER / / AUT.",
+        "COOPER AUT",
+        "COOPER CABRIO",
+        "COOPER CABRIO / / AUT.",
+        "COOPER CLUBMAN",
+        "COOPER COUNTRYMAN",
+        "COOPER COUNTRYMAN ALL4",
+        "COOPER F55 B38",
+        "COOPER F56 B38",
+        "COOPER F57 B38",
+        "COOPER SE COUNTRYMAN ALL4",
+        "MINI COOPER ALL4 COUNTRYMAN F6",
+        "MINI COOPER CLUBMAN F54 B38",
+        "MINI COOPER COUNTRYMAN F60 B38"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 57,
+      "registrations": 200239,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abff55e0501f99641bde",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c835d741a45817887fd",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 90,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99aa03f9925a706198b3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 128,
+      "commercialNames": [
+        "COOPER",
+        "MINI COOPER S CABRIO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acb1705ca691d2cc5649",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 135,
+      "commercialNames": [
+        "COOPER",
+        "COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d5213a581dc34485db2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 141,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-316dec3a31044658aa4e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "COOPER S",
+        "COOPER S CLASSIC",
+        "COOPER S CLASSIC AUTO",
+        "COOPER S EXCLUSIVE",
+        "COOPER S EXCLUSIVE AUTO",
+        "COOPER S SIDEWALK AUTO",
+        "COOPER S SPORT",
+        "COOPER S SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 6924,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53b14b15440a7b6bc814",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 75,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27a58f53ef2cf0133b8d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER",
+        "COOPER C",
+        "COOPER C CABRIO AUT.",
+        "Cooper S",
+        "COOPER S",
+        "MINI COOPER C",
+        "MINI COOPER C CABRIO",
+        "MINI COOPER CABRIO C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 7237,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84008a20ca42752686ce",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "COOPER",
+        "COOPER CABRIO S / /",
+        "COOPER CABRIO S / / AUT",
+        "COOPER CABRIO S / / AUT.",
+        "Cooper S",
+        "COOPER S",
+        "COOPER S / /",
+        "COOPER S / / AUT",
+        "COOPER S / / AUT.",
+        "COOPER S AUT",
+        "Cooper S Cabriolet",
+        "COOPER S F55 B48",
+        "COOPER S F56 B48",
+        "COOPER S F57 B48",
+        "MINI COOPER S ALL4 CLUBMAN F54",
+        "MINI COOPER S ALL4 COUNTRYMAN",
+        "MINI COOPER S CLUBMAN",
+        "MINI COOPER S CLUBMAN F54 B48",
+        "MINI COOPER S COUNTRYMAN F60 B"
+      ],
+      "sourceMakeNames": [
+        "MINI",
+        "Mini"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 57,
+      "registrations": 49656,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-327f0ee534706aeceb1a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 141,
+      "commercialNames": [
+        "COOPER",
+        "COOPER CABRIO S AUT",
+        "COOPER S",
+        "COOPER S / / AUT.",
+        "COOPER S ALL4",
+        "COOPER S ALL4 CLUBMAN",
+        "COOPER S AUT",
+        "COOPER S CABRIO",
+        "COOPER S CLUBMAN",
+        "COOPER S COUNTRYMAN",
+        "COOPER S COUNTRYMAN ALL4",
+        "COOPER S F55 B48",
+        "COOPER S F56 B48",
+        "COOPER S F57 B48",
+        "MINI COOPER S ALL4 CLUBMAN F54",
+        "MINI COOPER S ALL4 COUNTRYMAN",
+        "MINI COOPER S CLUBMAN F54 B48",
+        "MINI COOPER S COUNTRYMAN F60 B"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 25679,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8765507593d40ad5d21",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 225,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2ab46e3eb1da7b795d0",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "COOPER SE",
+        "MINI COOPER SE ALL4 COUNTRYMAN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 574,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b14596e179a7878929ba",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "COOPER SE COUNTRYMAN",
+        "COOPER SE COUNTRYMAN ALL4",
+        "MINI COOPER S E ALL4 COUNTRYMA"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 128,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30f7f18862ed72351acc",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93ada2a16604a0d93c25",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "Cooper S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fcefd937d68ab9990c1",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52ca79c411ad42d58014",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "COOPER CABRIO",
+        "MINI COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fcbbe5d05e11bb82259",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 155,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b97ed5a5d1ce0fc274b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 170,
+      "commercialNames": [
+        "COOPER",
+        "MINI COOPER JCW"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c31142e183bf66e0bede",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f4f89226c5016f70f53",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-435d38ca7fdd22760fe0",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e73aad57284d5fb1c56",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bfaa92f5c07cd949ad7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c11f2a2a503c2891dc67",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91b252486421e8839cb9",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9d5934869034b96b66b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35aad01afe5f83df773a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ce7cd597fbc030d1b5b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f770832bec106741fd21",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ec8b2ea6ae26c3685b9",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1364f7100e7aec3b7743",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bd52175ad2718006417",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f020ec51fb7c9c1b6fe",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-403d2884abb419c5d741",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3fcdd72da5d08e13692",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9251798fc2ae06d7083d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdcdeeb0f5ce70cb4c49",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31e67af3e02e65c228f8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26d2526719faa973475b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a6655c7834564211c7a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c52080a7c8e24ecd082",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a5e0c09ebb265a0d05a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99b014aa44a743b06094",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36870037607014015d4d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6c6d16d55ebdab181f2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 206,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-982d9a5ce0c3e3a09af0",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f83b98ddbf30160bbd08",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 243,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfff8e0433a5756ce460",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 280,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e26e2024a9d0c21752b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 460,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c583530e757ac6cc3902",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c653e838d481c6457b40",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d7f8422bb3fd9ffde5b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 68,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c95db46a7359f7420d4e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 69,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e237c298ed25bfed2723",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1e85246dbfd9eeeb4d3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d688424073d017373d00",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e80ebe57306977e6b70a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 90,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f05e359c39dbd1e64b99",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 91,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c9a94c559f7509c94a6",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5744cf1c67fe2a1fe8fa",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 95,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4878e77627e7b0b65e6",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-573d2a5738487ef85cfc",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66d8b5599b0e87d7a420",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "COOPER",
+        "COOPER C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1c80382c488a2dc831b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 116,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca0730546dbb1d5e7fcc",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER",
+        "COOPER C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f128aab78c22e5d9837d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 121,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6f14c38f6a895f3cc3a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 132,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a0abbf318dafa4c6944",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 136,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df5db9b472acf0ed8bc2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 140,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d0f04de60c667844a12",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 147,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6d3a35ff0950ee4b385",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 148,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3056fed59930097982ba",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-429b69ab46415d9057d3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 210,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ad0ec23318a908ae5cb",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 375,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4eb65c208ea621bfc126",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 49,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f968a9f0afdadc461c1",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 55,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcf02360873f73ee9e81",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21fbe982c2eb18f97361",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e77569c58fd6f9f1339d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecf79fee758213ada1e9",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 69,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffeb1517bc5d03de97f3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44db3d31642d7e1df0f9",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3584d036104eb8fec79",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ef96b6eacac4dd96f1c",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05eb3ac19d7fb529e3f7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 88,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2f4b1e3dfd377efbda8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b59cd68823e9bdca9686",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 95,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7764a13fbc37c531dc3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2e0e85806a02eb7e964",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 117,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-276b35d911fe29034c58",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed4b140936013f3f5855",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a0f88558cbd31dceb63",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-176ea36e149a67f4ec61",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 155,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3916d1ff2dfceea254b8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cfd883f4f3cfd5421e6",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 310,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07ea47f9c76d344b22d3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 430,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60a80d60dd1a64120017",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 26,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a330a54a7155097081b2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "COOPER E",
+        "COOPER E / / AUT.",
+        "COOPER E AUT.",
+        "MINI COOPER E",
+        "MINI COOPER E J01 HC0"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1131,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e06586d66c4bd13d7aff",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "COOPER SE",
+        "COOPER SE / / AUT.",
+        "COOPER SE AUT.",
+        "MINI COOPER SE",
+        "MINI COOPER SE J01 HC0"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af36b7d34a5ea59dc146",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "COOPER",
+        "COOPER E",
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 16465,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cabd78881b7dd19a93cd",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36aad6efbf45c0ef3038",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "COOPER",
+        "COOPER C",
+        "COOPER C / / AUT.",
+        "COOPER C AUT.",
+        "MINI COOPER 5-TURER",
+        "MINI COOPER 5-TURER C",
+        "MINI COOPER C",
+        "MINI COOPER C F66 B38"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 37315,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05340dd92f98e53719b4",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "COOPER",
+        "COOPER S",
+        "COOPER S / / AUT.",
+        "COOPER S AUT.",
+        "COOPER S CABRIO AUT.",
+        "MINI COOPER 5-TURER S",
+        "MINI COOPER CABRIO S",
+        "MINI COOPER S",
+        "MINI COOPER S 5-TURER",
+        "MINI COOPER S CABRIO",
+        "MINI COOPER S F66 B48"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 15690,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5baa914f5e985f08aa0e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "COOPER",
+        "COOPER E"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45446530398006ee54d5",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 290,
+      "commercialNames": [
+        "COOPER E"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59009d9f4286930fb9e6",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 92,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bca21578fbf572ec842",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 124,
+      "commercialNames": [
+        "COOPER C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2558f68edd1a37ade2b5",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 168,
+      "commercialNames": [
+        "COOPER C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-583aaa60dbcdd0be93bb",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Cooper",
+      "modelId": "mini/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3876,
+      "powerKw": 92,
+      "commercialNames": [
+        "COOPER C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef42961170af830b9a02",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1496,
+      "powerKw": 85,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN ONE D",
+        "Countryman One D"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 10236,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-239490331e04b111b64f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "COUNTRYMAN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd57e16df354bed9d853",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "COUNTRYMAN COOPER D A4 CLASS A",
+        "COUNTRYMAN COOPER D A4 CLASSIC",
+        "COUNTRYMAN COOPER D ALL4 EXC A",
+        "COUNTRYMAN COOPER D ALL4 EXCL",
+        "COUNTRYMAN COOPER D ALL4 SPORT",
+        "COUNTRYMAN COOPER D ALL4 SPT A",
+        "COUNTRYMAN COOPER D CLASSIC",
+        "COUNTRYMAN COOPER D CLASSIC A",
+        "COUNTRYMAN COOPER D EXCLUSIV A",
+        "COUNTRYMAN COOPER D EXCLUSIVE",
+        "COUNTRYMAN COOPER D SPORT",
+        "COUNTRYMAN COOPER D SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 232,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0317182683f2af0fbc07",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "Countryman Cooper D",
+        "COUNTRYMAN COOPER D",
+        "Countryman Cooper D ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 267,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ab1ad90f0fe56b57e57",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "Countryman Cooper D",
+        "COUNTRYMAN COOPER D",
+        "COUNTRYMAN COOPER D / /",
+        "COUNTRYMAN COOPER D / / AUT",
+        "COUNTRYMAN COOPER D / / AUT.",
+        "COUNTRYMAN COOPER D ALL4",
+        "Countryman Cooper D ALL4",
+        "COUNTRYMAN COOPER D ALL4 / / AUT",
+        "COUNTRYMAN COOPER D ALL4 / / AUT.",
+        "COUNTRYMAN COOPER D ALL4 AUT",
+        "Countryman CooperD ALL4",
+        "COUNTRYMAN D",
+        "COUNTRYMAN D / / AUT.",
+        "COUNTRYMAN D AUT.",
+        "COUNTRYMAN JCW ALL4",
+        "MINI COUNTRYMAN D",
+        "MINI COUNTRYMAN D U25 B47"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 29132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-417e94e2170069eb7d5f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "Countryman Cooper SD"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09388280757a26543d8a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN COOPER",
+        "Countryman Cooper SD",
+        "COUNTRYMAN COOPER SD",
+        "COUNTRYMAN COOPER SD / / AUT.",
+        "COUNTRYMAN COOPER SD ALL4",
+        "Countryman Cooper SD ALL4",
+        "COUNTRYMAN COOPER SD ALL4 / / AUT",
+        "COUNTRYMAN COOPER SD ALL4 / / AUT.",
+        "COUNTRYMAN COOPER SD ALL4 AUT"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 7131,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c5e5ea475ef856717ce",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "COUNTRYMAN COOPER D ALL4",
+        "COUNTRYMAN COOPER D ALL4 AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9647812460627aa878ba",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 85,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69a2547f937a9e0838fe",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "COUNTRYMAN COOPER",
+        "COUNTRYMAN COOPER ALL4",
+        "COUNTRYMAN COOPER ALL4 CLASS A",
+        "COUNTRYMAN COOPER ALL4 CLASSIC",
+        "COUNTRYMAN COOPER ALL4 EXCL",
+        "COUNTRYMAN COOPER ALL4 EXCL A",
+        "COUNTRYMAN COOPER ALL4 SPORT",
+        "COUNTRYMAN COOPER ALL4 SPORT A",
+        "COUNTRYMAN COOPER AUTO",
+        "COUNTRYMAN COOPER CLASSIC",
+        "COUNTRYMAN COOPER CLASSIC AUTO",
+        "COUNTRYMAN COOPER EXCLUSIVE",
+        "COUNTRYMAN COOPER EXCLUSIVE A",
+        "COUNTRYMAN COOPER SPORT",
+        "COUNTRYMAN COOPER SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 5224,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f36fb5b6e577d89ffb4",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN COOPER",
+        "Countryman One",
+        "COUNTRYMAN ONE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 7368,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea008d19a99a9978505f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "Countryman Cooper SE ALL4",
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1516,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e4a6c53a6f0bec3ee3b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN ALL4",
+        "COUNTRYMAN COOPER",
+        "Countryman Cooper",
+        "COUNTRYMAN COOPER / / AUT",
+        "COUNTRYMAN COOPER / / AUT.",
+        "Countryman Cooper ALL 4",
+        "COUNTRYMAN COOPER ALL4",
+        "Countryman Cooper ALL4",
+        "COUNTRYMAN COOPER ALL4 / / AUT",
+        "COUNTRYMAN COOPER AUT",
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN COOPER SD",
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 58165,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec2ee3be74c3f250b8d3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN COOPER SD ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaf967adce13c192b3d5",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S A4 CLASS A",
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN COOPER S ALL4 EXC A",
+        "COUNTRYMAN COOPER S ALL4 SPT A",
+        "COUNTRYMAN COOPER S CLASSIC",
+        "COUNTRYMAN COOPER S CLASSIC A",
+        "COUNTRYMAN COOPER S EXCLUSIV A",
+        "COUNTRYMAN COOPER S EXCLUSIVE",
+        "COUNTRYMAN COOPER S SPORT",
+        "COUNTRYMAN COOPER S SPORT AUTO",
+        "COUNTRYMAN JCW ALL4",
+        "COUNTRYMAN JOHN COOPER WORKS A"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 3097,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36c38dc83b01c633b5e2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "Countryman Cooper S",
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 127,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21524d25d051a6e442cf",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN CO.",
+        "COUNTRYMAN COOPER S",
+        "Countryman Cooper S",
+        "COUNTRYMAN COOPER S / / AUT",
+        "COUNTRYMAN COOPER S / / AUT.",
+        "COUNTRYMAN COOPER S ALL 4",
+        "COUNTRYMAN COOPER S ALL4",
+        "Countryman Cooper S ALL4",
+        "COUNTRYMAN COOPER S ALL4 / / AUT",
+        "COUNTRYMAN COOPER S ALL4 / / AUT.",
+        "COUNTRYMAN COOPER S ALL4 AUT",
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 15529,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19b45d44277485bcb836",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 141,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN ALL4",
+        "Countryman Cooper S",
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN COOPER S ALL4 AUT"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4913,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-761dc2986046b5f4c902",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 225,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN JCW",
+        "COUNTRYMAN JCW ALL 4 AUT",
+        "COUNTRYMAN JCW ALL4",
+        "COUNTRYMAN JCW ALL4 / / AUT",
+        "COUNTRYMAN JCW ALL4 / / AUT."
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 6675,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7b3387165a3d46d9349",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S E ALL4 A",
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85aa49cacf248f58614d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 28,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 155,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4215159cc0b6671dc142",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 65,
+      "commercialNames": [
+        "Countryman Cooper SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "Mini"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89a8749f2c409a36e889",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6af4773432b212efe2d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN COOPER",
+        "COUNTRYMAN COOPER SE",
+        "COUNTRYMAN COOPER SE ALL",
+        "COUNTRYMAN COOPER SE ALL4",
+        "Countryman Cooper SE ALL4",
+        "COUNTRYMAN COOPER SE ALL4 / / AUT",
+        "COUNTRYMAN COOPER SE ALL4 / / AUT.",
+        "COUNTRYMAN COOPER SE ALL4 AUT",
+        "MINI COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 55605,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56028548d4b4d9a61179",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "COUNTRYMAN ALL4",
+        "COUNTRYMAN COOPEER SE ALL4",
+        "COUNTRYMAN COOPER",
+        "COUNTRYMAN COOPER SE",
+        "COUNTRYMAN COOPER SE ALL",
+        "Countryman Cooper SE ALL4",
+        "COUNTRYMAN COOPER SE ALL4 AUT"
+      ],
+      "sourceMakeNames": [
+        "MINI",
+        "Mini"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 11171,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2dc1f215a0d273c0918",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 162,
+      "commercialNames": [
+        "Countryman Cooper SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3670262eebfa15baf72b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "COUNTRYMAN"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2179f485e674627587ab",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": 82,
+      "commercialNames": [
+        "COUNTRYMAN COOPER D ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2692bcea5c93fd41554c",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 69,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SD ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a90a113b53300d4d827",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30a786fd5302262bbc76",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "COUNTRYMAN COOPER",
+        "COUNTRYMAN COOPER ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9dfb2df39c793b97ad4c",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90800df47edfd44e3814",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c013a9421eebc5f12c7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 91,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52f44024bff403670818",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 95,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecaf422eff74b101de7e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a201f7dcc121051d311",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "COUNTRYMAN COOPER",
+        "COUNTRYMAN COOPER ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30936bd379779252c0a3",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-639c1663e3492b098a8a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN C",
+        "COUNTRYMAN C / / AUT.",
+        "COUNTRYMAN C AUT.",
+        "COUNTRYMAN COOPER",
+        "MINI COUNTRYMAN C",
+        "MINI COUNTRYMAN C U25 B38"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 24193,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f57d26089ebdeeb9101",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 116,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8092c9ca2842479456f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 117,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d784a1dec593a40be94b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 132,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5893ce0f142852347509",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 210,
+      "commercialNames": [
+        "COUNTRYMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dc588b227e10ad6ed6b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4104627b5dc85fc6adc",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 69,
+      "commercialNames": [
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5290f3e10725aced446a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bef6050290587620078",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99d1339d3a1035e4c891",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7338c6ac00bac1cb80db",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b9f2efd0f9e7cabd141",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 92,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e14033050c0f4c96418b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-671a085a79de541e3c80",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 112,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4",
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a295fd64f6abdbd39f8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 137,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-141404a590c33a134046",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9ed31f43ec8c5e43ff8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 142,
+      "commercialNames": [
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8df7267824b8a2aa7498",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 145,
+      "commercialNames": [
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40b515ba64cd1935aa61",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 210,
+      "commercialNames": [
+        "COUNTRYMAN JCW ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbff7d4c052b8500b058",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 250,
+      "commercialNames": [
+        "COUNTRYMAN COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a78bd6b4e3877f079f93",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58cf58dd98b380bc0f9d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb834ced1ccac80a4fdf",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfaa8fd089ab44738fc8",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b3a0e7e219970e5c0d7",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84aaa45952a8b4d0364c",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75f0a6d3efc8bbdbf24e",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a80a3cc4ec7e71943628",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 116,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d1f98c16975d0740c38",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 140,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d58519e8b9e8d1325a54",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53f803ef882cdcfd577d",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 184,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85fff2bc0f2eeb1bfca9",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 210,
+      "commercialNames": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b3cbc969c86540fbc77",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "COUNTRYMAN E",
+        "COUNTRYMAN SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 205,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9b7dba4cbbdfca1013f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "COUNTRYMAN E",
+        "COUNTRYMAN E / / AUT.",
+        "COUNTRYMAN E AUT.",
+        "MINI COUNTRYMAN E",
+        "MINI COUNTRYMAN E U25 HB0"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1152,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86d3d9bfe6b01571f3bd",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 104,
+      "commercialNames": [
+        "COUNTRYMAN SE ALL4",
+        "COUNTRYMAN SE ALL4 / / AUT.",
+        "COUNTRYMAN SE ALL4 AUT.",
+        "MINI COUNTRYMAN SE ALL4",
+        "MINI COUNTRYMAN SE ALL4 U25 XE"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 502,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfe78a760feeb3613510",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "COUNTRYMAN E",
+        "COUNTRYMAN SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-deb9f0d69ddb8bb6c22b",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN E",
+        "COUNTRYMAN SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 14278,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5ac1cf34739dcf88122",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "COUNTRYMAN SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ddea5adc2093439846f5",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "COUNTRYMAN E",
+        "COUNTRYMAN SE",
+        "COUNTRYMAN SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 6365,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9b593939a38365069fe",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN S ALL 4 / / AUT.",
+        "COUNTRYMAN S ALL 4 AUT.",
+        "COUNTRYMAN S ALL4",
+        "MINI COUNTRYMAN S ALL4",
+        "MINI COUNTRYMAN S ALL4 U25 B48"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 5508,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87eaee109b5760052ad2",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 221,
+      "commercialNames": [
+        "COUNTRYMAN",
+        "COUNTRYMAN JCW ALL4",
+        "MINI COUNTRYMAN JCW ALL4",
+        "MINI COUNTRYMAN JCW ALL4 U25 B"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-355a6004715cfcacab5f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "COUNTRYMAN S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-160b472a4d83d6e20dca",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "COUNTRYMAN D"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f4780808eaa954f5b45",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "COUNTRYMAN E"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b44cf752b64d4febe2bd",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 58,
+      "commercialNames": [
+        "COUNTRYMAN C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acc7ad8245f5d618f1ca",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 58,
+      "commercialNames": [
+        "COUNTRYMAN SE ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6238e2395ccd8c4c099",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "COUNTRYMAN S ALL4"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-125cde10e8a143f3c987",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Countryman",
+      "modelId": "mini/countryman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "COUNTRYMAN C"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9dbb3281c8ef31bec744",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 170,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6eccdb94de61837813f",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "JOHN COOPER WORKS",
+        "JOHN COOPER WORKS AUTO",
+        "JOHN COOPER WORKS GP AUTO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2127,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f656b64f3ac05e2dc779",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 170,
+      "commercialNames": [
+        "JCW",
+        "JCW AUT.",
+        "JCW CABRIO AUT.",
+        "John Cooper Works",
+        "JOHN COOPER WORKS",
+        "JOHN COOPER WORKS / /",
+        "JOHN COOPER WORKS / / AUT.",
+        "JOHN COOPER WORKS AUT",
+        "JOHN COOPER WORKS CABRIO / / AUT",
+        "JOHN COOPER WORKS CABRIO / / AUT.",
+        "JOHN COOPER WORKS COUNTRYMAN ALL4",
+        "JOHN COOPER WORKS F56 B48",
+        "JOHN COOPER WORKS F57 B48",
+        "MINI JCW CABRIO",
+        "MINI JOHN COOPER WORKS",
+        "MINI JOHN COOPER WORKS CABRIO"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 37042,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0062d8624fc589ad8337",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 225,
+      "commercialNames": [
+        "JOHN COOPER WORKS",
+        "JOHN COOPER WORKS ALL4",
+        "JOHN COOPER WORKS ALL4 F60 B48",
+        "JOHN COOPER WORKS COUNTRYMAN",
+        "JOHN COOPER WORKS COUNTRYMAN ALL4",
+        "JOHN COOPER WORKS GP",
+        "JOHN COOPER WORKS GP F56 B48",
+        "MINI JCW ALL4 COUNTRYMAN F60 B",
+        "MINI JOHN COOPER WORKS ALL4 F5"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 3058,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e5a0e2daf8b468d310a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61833162435941c27d64",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 160,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e87c6f1bc4c56418ced5",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d72e22baadb0f195224a",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46d81f13daab781af9a6",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 69,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-577c323731416a771d19",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 70,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5dfec92ab163aad9f39",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d12886c5c13175f0ed59",
+      "brandId": "mini",
+      "brand": "MINI",
+      "canonicalModel": "Jcw",
+      "modelId": "mini/jcw",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 75,
+      "commercialNames": [
+        "JOHN COOPER WORKS"
+      ],
+      "sourceMakeNames": [
+        "MINI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

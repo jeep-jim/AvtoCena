@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "applied": true,
+  "modelsBefore": 1418,
+  "modelsAfter": 1410,
+  "duplicatesRemoved": 8,
+  "mergedDuplicates": 7,
+  "genericDuplicatesRemoved": 1,
+  "removed": [
+    {
+      "duplicateId": "bmw/clubman-cooper",
+      "targetId": "mini/clubman",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 1
+    },
+    {
+      "duplicateId": "bmw/cooper",
+      "targetId": "mini/cooper",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 4
+    },
+    {
+      "duplicateId": "bmw/cooper-s",
+      "targetId": "mini/cooper",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 4
+    },
+    {
+      "duplicateId": "bmw/john-cooper-works",
+      "targetId": "mini/jcw",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 3
+    },
+    {
+      "duplicateId": "bmw/mini",
+      "targetId": null,
+      "disposition": "generic_brand_label_removed",
+      "preservedSourceNames": 0,
+      "preservedEvidence": 0
+    },
+    {
+      "duplicateId": "bmw/mini-cooper",
+      "targetId": "mini/cooper",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 4
+    },
+    {
+      "duplicateId": "bmw/mini-one",
+      "targetId": "mini/one",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 1
+    },
+    {
+      "duplicateId": "bmw/one",
+      "targetId": "mini/one",
+      "disposition": "merged_into_mini_model",
+      "preservedSourceNames": 1,
+      "preservedEvidence": 1
+    }
+  ]
+}

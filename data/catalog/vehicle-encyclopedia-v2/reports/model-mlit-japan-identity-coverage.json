@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "window": {
+    "market": "Japan",
+    "fromYear": 2015,
+    "toYear": 2026
+  },
+  "policy": {
+    "everyMlitSourceNameRequiresDecision": true,
+    "exactSourceSpellingPreserved": true,
+    "oneCanonicalModelTargetRequiredForMappedNames": true,
+    "rejectedNoiseCombinedAndWrongBrandRowsRemainAuditable": true,
+    "typeCodesNotPromotedToModelsOrVariants": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "candidateRows": 1341,
+    "sourceNames": 1479,
+    "mapped": 1446,
+    "rejected": 33,
+    "ambiguous": 0,
+    "unresolved": 0,
+    "decided": 1479,
+    "decisionCoveragePercent": 100
+  },
+  "byBrand": [
+    {
+      "brandId": "abarth",
+      "sourceNames": 3,
+      "mapped": 1,
+      "rejected": 2,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "alfa-romeo",
+      "sourceNames": 6,
+      "mapped": 6,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "audi",
+      "sourceNames": 235,
+      "mapped": 235,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "bmw",
+      "sourceNames": 280,
+      "mapped": 278,
+      "rejected": 2,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "chrysler",
+      "sourceNames": 6,
+      "mapped": 6,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "citroen",
+      "sourceNames": 12,
+      "mapped": 11,
+      "rejected": 1,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "daihatsu",
+      "sourceNames": 19,
+      "mapped": 19,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "dodge",
+      "sourceNames": 1,
+      "mapped": 1,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "fiat",
+      "sourceNames": 5,
+      "mapped": 5,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "honda",
+      "sourceNames": 41,
+      "mapped": 33,
+      "rejected": 8,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "jaguar",
+      "sourceNames": 21,
+      "mapped": 18,
+      "rejected": 3,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "jeep",
+      "sourceNames": 9,
+      "mapped": 9,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "land-rover",
+      "sourceNames": 33,
+      "mapped": 33,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "lexus",
+      "sourceNames": 54,
+      "mapped": 54,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "mazda",
+      "sourceNames": 31,
+      "mapped": 30,
+      "rejected": 1,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "mercedes-benz",
+      "sourceNames": 335,
+      "mapped": 334,
+      "rejected": 1,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "mini",
+      "sourceNames": 32,
+      "mapped": 32,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "mitsubishi",
+      "sourceNames": 19,
+      "mapped": 17,
+      "rejected": 2,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "nissan",
+      "sourceNames": 29,
+      "mapped": 29,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "peugeot",
+      "sourceNames": 1,
+      "mapped": 1,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "porsche",
+      "sourceNames": 33,
+      "mapped": 33,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "renault",
+      "sourceNames": 4,
+      "mapped": 4,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "smart",
+      "sourceNames": 10,
+      "mapped": 10,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "subaru",
+      "sourceNames": 18,
+      "mapped": 18,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "suzuki",
+      "sourceNames": 20,
+      "mapped": 20,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "toyota",
+      "sourceNames": 71,
+      "mapped": 60,
+      "rejected": 11,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "volkswagen",
+      "sourceNames": 126,
+      "mapped": 126,
+      "rejected": 0,
+      "ambiguous": 0,
+      "unresolved": 0
+    },
+    {
+      "brandId": "volvo",
+      "sourceNames": 25,
+      "mapped": 23,
+      "rejected": 2,
+      "ambiguous": 0,
+      "unresolved": 0
+    }
+  ],
+  "rejected": [
+    {
+      "brandId": "abarth",
+      "sourceName": "595、595C",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_multi_model_row"
+    },
+    {
+      "brandId": "abarth",
+      "sourceName": "595、595C、695",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_multi_model_row"
+    },
+    {
+      "brandId": "bmw",
+      "sourceName": "クロスオーバー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "generic_body_family_without_model"
+    },
+    {
+      "brandId": "bmw",
+      "sourceName": "クロスオーバー A4",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "generic_body_family_without_model"
+    },
+    {
+      "brandId": "citroen",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "wrong_brand_contamination"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N BOX Custom",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX + Custom",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX CUSTOM",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX Custom",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX JOY",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-WGN CUSTOM",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-WGN Custom",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "ステップワゴン スパーダ",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "grade_or_derivative"
+    },
+    {
+      "brandId": "jaguar",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "wrong_brand_contamination"
+    },
+    {
+      "brandId": "jaguar",
+      "sourceName": "XFR/ XF Supercharged",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_multi_model_row"
+    },
+    {
+      "brandId": "jaguar",
+      "sourceName": "XJ Supersport/XJR",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_multi_model_row"
+    },
+    {
+      "brandId": "mazda",
+      "sourceName": "マツダ教習車",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "special_purpose_label"
+    },
+    {
+      "brandId": "mercedes-benz",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "wrong_brand_contamination"
+    },
+    {
+      "brandId": "mitsubishi",
+      "sourceName": "デリカ",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "model_family"
+    },
+    {
+      "brandId": "mitsubishi",
+      "sourceName": "リューション",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "fragment_noise"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "*2",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "fragment_noise"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "アリオン プレミオ",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "アルファード ヴェルファイア",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "エスクァイア ノア",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "クラウンセダン クラウンコンフォート",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ノア ヴォクシー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ノア ヴォクシー エスクァイア",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "プレミオ アリオン",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ポルテ スペイド",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ルーミー * タンク *",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ヴォクシー ノア",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_models"
+    },
+    {
+      "brandId": "volvo",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "wrong_brand_contamination"
+    },
+    {
+      "brandId": "volvo",
+      "sourceName": "ボルボV40/V40クロスカントリー",
+      "disposition": "rejected",
+      "modelIds": [],
+      "reason": "combined_multi_model_row"
+    }
+  ],
+  "ambiguous": [],
+  "unresolved": []
+}

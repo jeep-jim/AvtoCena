@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "korea-jeju-registration-file",
+  "authority": "government_registration",
+  "fetchedAt": "2026-08-22T06:32:57.078Z",
+  "status": "complete_compacted_2020_plus_observation_window",
+  "sourceUrl": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002922208&fileDetailSn=1&insertDataPrcus=N",
+  "raw": {
+    "bytes": 42606896,
+    "sha256": "371a7e483f82ce7c31f351310b87a2f48c53aab3c0833afe50cdbc1d987a8ead",
+    "encoding": "euc-kr",
+    "rows": 424332,
+    "storedInGit": false,
+    "note": "Raw registration rows are not committed because duplicate registrations add repository weight without adding vehicle knowledge. Rows are retained only when the source explicitly proves a 2020+ model year or, when that column is absent, a 2020+ first-registration year. First-registration evidence is never relabeled as model year."
+  },
+  "headers": [
+    "차명",
+    "배기량",
+    "연료",
+    "용도구분",
+    "최초등록일",
+    "차종분류",
+    "차종유형",
+    "차종종별",
+    "등록현황",
+    "데이터기준일자"
+  ],
+  "columnIndexes": {
+    "name": 0,
+    "year": -1,
+    "cc": 1,
+    "fuel": 2,
+    "purpose": 3,
+    "firstDate": 4,
+    "class": 5,
+    "type": 6,
+    "kind": 7,
+    "status": 8,
+    "date": 9
+  },
+  "counts": {
+    "rowsParsed": 424332,
+    "rowsIn2020Plus": 380863,
+    "rowsWithExplicitModelYear": 0,
+    "rowsWithFirstRegistrationWindowOnly": 380863,
+    "rowsRejectedMissingOrOutsideYearWindow": 43469,
+    "uniqueTuples": 6792
+  },
+  "files": [
+    "jeju-vehicle-registry-tuples-0001.json",
+    "jeju-vehicle-registry-tuples-0002.json"
+  ]
+}

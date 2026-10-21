@@ -1,0 +1,3562 @@
+[
+  {
+    "id": "bmw/i4/g26/edrive40-2024-global",
+    "modelId": "bmw/i4",
+    "make": "BMW",
+    "model": "i4",
+    "generation": "G26",
+    "generationAliases": [
+      "G26"
+    ],
+    "yearFrom": 2024,
+    "productionFrom": "2024-07",
+    "fuel": "Electric",
+    "drive": "RWD",
+    "bodyType": "gran coupe",
+    "powertrainKind": "electric",
+    "powerHp": 340,
+    "powerKw": 250,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-bmw-i4-update-2024"
+    ],
+    "sourceUrl": "https://www.press.bmwgroup.com/global/article/detail/T0441229EN/the-new-bmw-i4-and-the-new-bmw-4-series-gran-coup%C3%A9?language=en",
+    "verifiedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-ex-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-ex-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-ex-turbo-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-ex-turbo-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-slope-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-slope-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-slope-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-slope-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-turbo-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-turbo-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-turbo-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/custom-l-turbo-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/ex-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/ex-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/ex-turbo-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/ex-turbo-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/g-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/g-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/g-slope-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/g-slope-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-slope-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-slope-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-slope-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-slope-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-turbo-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-turbo-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-turbo-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-turbo-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-turbo-slope-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2017/facelift-2020/l-turbo-slope-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JF3",
+      "JF4",
+      "JF3/JF4"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2023,
+    "productionFrom": "2020-12",
+    "productionTo": "2023-09",
+    "engineCc": 658,
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2020",
+      "src-honda-n-box-second-generation-spec-2023"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2020/4201224-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/base-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/base-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-slope-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-slope-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-turbo-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-turbo-coordinate-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-turbo-coordinate-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/custom-turbo-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/fashion-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/fashion-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-black-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-black-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-turbo-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-turbo-black-style-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-turbo-black-style-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/joy-turbo-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/slope-4wd",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-box/japan-2023/facelift-2026/slope-ff",
+    "modelId": "honda/n-box",
+    "make": "Honda",
+    "model": "N-BOX",
+    "generation": "Third generation",
+    "generationAliases": [
+      "JF5",
+      "JF6",
+      "JF5/JF6"
+    ],
+    "yearFrom": 2026,
+    "productionFrom": "2026-07",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-box-japan-facelift-2026",
+      "src-honda-n-box-current-spec-2026",
+      "src-honda-n-box-owner-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2026/4260716-n-box.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one-e/japan-2025/e-g-ff",
+    "modelId": "honda/n-one-e",
+    "make": "Honda",
+    "model": "N-ONE e:",
+    "generation": "2025 launch series",
+    "generationAliases": [
+      "JG5"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "drive": "FF",
+    "bodyType": "kei passenger car",
+    "powertrainKind": "electric",
+    "powerHp": 64,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-e-japan-launch-2025",
+      "src-honda-n-one-e-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250911-n-one-e.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one-e/japan-2025/e-l-ff",
+    "modelId": "honda/n-one-e",
+    "make": "Honda",
+    "model": "N-ONE e:",
+    "generation": "2025 launch series",
+    "generationAliases": [
+      "JG5"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "drive": "FF",
+    "bodyType": "kei passenger car",
+    "powertrainKind": "electric",
+    "powerHp": 64,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-e-japan-launch-2025",
+      "src-honda-n-one-e-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250911-n-one-e.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/original-4wd",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/original-craft-style-4wd",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/original-craft-style-ff",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/original-ff",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/premium-4wd",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/premium-ff",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/premium-tourer-4wd",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "4WD",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/premium-tourer-ff",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission with torque converter",
+    "drive": "FF",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-one/japan-2020/update-2025/rs-ff",
+    "modelId": "honda/n-one",
+    "make": "Honda",
+    "model": "N-ONE",
+    "generation": "2020 full model change",
+    "generationAliases": [
+      "JG3",
+      "JG4",
+      "JG3/JG4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-11",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "6-speed manual",
+    "drive": "FF",
+    "bodyType": "kei hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-one-japan-update-2025",
+      "src-honda-n-one-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4251120-n-one.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-black-style-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026",
+      "src-honda-n-wgn-current-performance-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-black-style-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026",
+      "src-honda-n-wgn-current-performance-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-turbo-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-turbo-black-style-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026",
+      "src-honda-n-wgn-current-performance-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-turbo-black-style-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026",
+      "src-honda-n-wgn-current-performance-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/custom-l-turbo-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 64,
+    "powerKw": 47,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/l-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/l-fashion-style-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/l-fashion-style-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/l-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/l-passenger-swivel-seat-4wd",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/n-wgn/japan-2019/update-2025/l-passenger-swivel-seat-ff",
+    "modelId": "honda/n-wgn",
+    "make": "Honda",
+    "model": "N-WGN",
+    "generation": "Second generation",
+    "generationAliases": [
+      "JH3",
+      "JH4",
+      "JH3/JH4"
+    ],
+    "yearFrom": 2025,
+    "productionFrom": "2025-09",
+    "engineCc": 658,
+    "fuel": "Gasoline",
+    "transmission": "CVT",
+    "drive": "FF",
+    "bodyType": "kei height wagon",
+    "powertrainKind": "combustion",
+    "powerHp": 58,
+    "powerKw": 43,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-n-wgn-japan-update-2025",
+      "src-honda-n-wgn-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2025/4250925-n-wgn.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "honda/vezel/japan-2021/facelift-2024/g-cvt-4wd",
+    "modelId": "honda/vezel",
+    "make": "Honda",
+    "model": "Vezel",
+    "generation": "Second generation",
+    "generationAliases": [
+      "RV4",
+      "RV5",
+      "RV6",
+      "RV4/RV5/RV6"
+    ],
+    "yearFrom": 2024,
+    "productionFrom": "2024-04",
+    "engineCc": 1496,
+    "fuel": "Gasoline",
+    "transmission": "Continuously variable transmission",
+    "drive": "4WD",
+    "bodyType": "compact suv",
+    "powertrainKind": "combustion",
+    "powerHp": 118,
+    "powerKw": 87,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-honda-vezel-japan-minor-change-2024",
+      "src-honda-vezel-current-spec-2026"
+    ],
+    "sourceUrl": "https://global.honda/jp/news/2024/4240425-vezel.html",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "suzuki/swift/japan-2023/xg-cvt-2wd",
+    "modelId": "suzuki/swift",
+    "make": "Suzuki",
+    "model": "Swift",
+    "generation": "2023 Japan generation",
+    "generationAliases": [
+      "ZCEDS",
+      "ZCDDS"
+    ],
+    "yearFrom": 2023,
+    "productionFrom": "2023-12",
+    "engineCc": 1197,
+    "transmission": "CVT",
+    "drive": "2WD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 82,
+    "powerKw": 60,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-suzuki-swift-japan-launch-2023",
+      "src-suzuki-swift-digital-library",
+      "src-wikimedia-suzuki-swift-2024-jp"
+    ],
+    "sourceUrl": "https://www.suzuki.co.jp/release/a/2023/1206/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "suzuki/swift/japan-2023/xg-cvt-4wd",
+    "modelId": "suzuki/swift",
+    "make": "Suzuki",
+    "model": "Swift",
+    "generation": "2023 Japan generation",
+    "generationAliases": [
+      "ZCEDS",
+      "ZCDDS"
+    ],
+    "yearFrom": 2023,
+    "productionFrom": "2023-12",
+    "engineCc": 1197,
+    "transmission": "CVT",
+    "drive": "4WD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 82,
+    "powerKw": 60,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-suzuki-swift-japan-launch-2023",
+      "src-suzuki-swift-digital-library",
+      "src-wikimedia-suzuki-swift-2024-jp"
+    ],
+    "sourceUrl": "https://www.suzuki.co.jp/release/a/2023/1206/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/rav4/xa50/hybrid-awd-i-uk",
+    "modelId": "toyota/rav4",
+    "make": "Toyota",
+    "model": "RAV4",
+    "generation": "Fifth generation",
+    "generationAliases": [
+      "XA50",
+      "GA-K"
+    ],
+    "yearFrom": 2019,
+    "yearTo": 2024,
+    "productionFrom": "2019",
+    "productionTo": "2026",
+    "fuel": "Petrol hybrid",
+    "drive": "AWD",
+    "bodyType": "suv",
+    "powertrainKind": "other_hybrid",
+    "powerHp": 219,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-rav4-launch-2018",
+      "src-toyota-rav4-archive"
+    ],
+    "sourceUrl": "https://media.toyota.co.uk/specifications-and-prices-announced-for-the-all-new-all-hybrid-toyota-rav4/",
+    "verifiedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/sienta/third-generation/g-1-5-cvt-fwd-5-seat",
+    "modelId": "toyota/sienta",
+    "make": "Toyota",
+    "model": "Sienta",
+    "generation": "Third generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2022,
+    "yearTo": 2024,
+    "productionFrom": "2022-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-sienta-ucar-jp-2022",
+      "src-toyota-sienta-spec-m15a-fks-jp-2022"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-SIENTA/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/sienta/third-generation/g-1-5-cvt-fwd-7-seat",
+    "modelId": "toyota/sienta",
+    "make": "Toyota",
+    "model": "Sienta",
+    "generation": "Third generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2022,
+    "yearTo": 2024,
+    "productionFrom": "2022-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-sienta-ucar-jp-2022",
+      "src-toyota-sienta-spec-m15a-fks-jp-2022"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-SIENTA/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/sienta/third-generation/x-1-5-cvt-fwd-5-seat",
+    "modelId": "toyota/sienta",
+    "make": "Toyota",
+    "model": "Sienta",
+    "generation": "Third generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2022,
+    "yearTo": 2024,
+    "productionFrom": "2022-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-sienta-ucar-jp-2022",
+      "src-toyota-sienta-spec-m15a-fks-jp-2022"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-SIENTA/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/sienta/third-generation/x-1-5-cvt-fwd-7-seat",
+    "modelId": "toyota/sienta",
+    "make": "Toyota",
+    "model": "Sienta",
+    "generation": "Third generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2022,
+    "yearTo": 2024,
+    "productionFrom": "2022-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-sienta-ucar-jp-2022",
+      "src-toyota-sienta-spec-m15a-fks-jp-2022"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-SIENTA/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/sienta/third-generation/z-1-5-cvt-fwd-5-seat",
+    "modelId": "toyota/sienta",
+    "make": "Toyota",
+    "model": "Sienta",
+    "generation": "Third generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2022,
+    "yearTo": 2024,
+    "productionFrom": "2022-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-sienta-ucar-jp-2022",
+      "src-toyota-sienta-spec-m15a-fks-jp-2022"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-SIENTA/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/sienta/third-generation/z-1-5-cvt-fwd-7-seat",
+    "modelId": "toyota/sienta",
+    "make": "Toyota",
+    "model": "Sienta",
+    "generation": "Third generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2022,
+    "yearTo": 2024,
+    "productionFrom": "2022-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-sienta-ucar-jp-2022",
+      "src-toyota-sienta-spec-m15a-fks-jp-2022"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-SIENTA/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/g-1-5-cvt-4wd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/g-1-5-cvt-fwd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/x-1-5-cvt-4wd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/x-1-5-cvt-fwd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/x-b-package-1-5-cvt-4wd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/x-b-package-1-5-cvt-fwd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/z-1-5-cvt-4wd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris-cross/japan-2020/z-1-5-cvt-fwd",
+    "modelId": "toyota/yaris-cross",
+    "make": "Toyota",
+    "model": "Yaris Cross",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2022,
+    "productionFrom": "2020-08",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-cross-ucar-jp-2020",
+      "src-toyota-yaris-cross-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS_CROSS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/g-1-0-cvt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 996,
+    "fuel": "Petrol",
+    "transmission": "Super CVT-i",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 69,
+    "powerKw": 51,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-1kr-fe-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/g-1-5-6mt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "6MT",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/g-1-5-cvt-4wd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/g-1-5-cvt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/x-1-0-cvt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 996,
+    "fuel": "Petrol",
+    "transmission": "Super CVT-i",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 69,
+    "powerKw": 51,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-1kr-fe-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/x-1-5-6mt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "6MT",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/x-1-5-cvt-4wd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/x-1-5-cvt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/x-b-package-1-0-cvt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 996,
+    "fuel": "Petrol",
+    "transmission": "Super CVT-i",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 69,
+    "powerKw": 51,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-1kr-fe-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/z-1-5-6mt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "6MT",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/z-1-5-cvt-4wd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "4WD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/yaris/japan-2020/z-1-5-cvt-fwd",
+    "modelId": "toyota/yaris",
+    "make": "Toyota",
+    "model": "Yaris",
+    "generation": "2020 Japan generation",
+    "generationAliases": [
+      "GA-B"
+    ],
+    "yearFrom": 2020,
+    "yearTo": 2021,
+    "productionFrom": "2020-02",
+    "engineCc": 1490,
+    "fuel": "Petrol",
+    "transmission": "Direct Shift-CVT",
+    "drive": "FWD",
+    "bodyType": "hatchback",
+    "powertrainKind": "combustion",
+    "powerHp": 120,
+    "powerKw": 88,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-yaris-ucar-jp-2020",
+      "src-toyota-yaris-spec-m15a-fks-jp-2020"
+    ],
+    "sourceUrl": "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/",
+    "verifiedAt": "2026-08-16T00:00:00.000Z",
+    "active": true
+  }
+]

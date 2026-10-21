@@ -1,0 +1,3564 @@
+{
+  "version": 17,
+  "checkedAt": "2026-07-18T08:41:54.227Z",
+  "totalStored": 2112,
+  "markets": {
+    "japan": {
+      "stored": 489,
+      "public": 246,
+      "rejected": 243,
+      "bySource": {
+        "tcv_japan_open:active": 1,
+        "japan_partner_open:stale": 1,
+        "goonet_japan_exact:stale": 242,
+        "goonet_japan_exact:active": 245
+      },
+      "rejectionReasons": {
+        "status:stale": 243,
+        "total_range": 115,
+        "recent_too_low": 1,
+        "new_too_low": 1
+      },
+      "rejectedSamples": [
+        {
+          "id": "fdd9176b9c6c30924fe46f1b",
+          "sourceId": "japan_partner_open",
+          "sourceOfferId": "partner",
+          "make": "Toyota",
+          "model": "Vitz F M Packege",
+          "year": 2016,
+          "sourcePrice": 110111213146086,
+          "sourceCurrency": "JPY",
+          "totalRub": 53183495797133,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 110111213146086,
+          "rawYear": 2016,
+          "rawMake": "Toyota",
+          "rawModel": "Vitz F M Packege",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "3d90f39a0475fa6b4dbaa21c",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026071100901425001",
+          "make": "TOYOTA",
+          "model": "HIACE WAGON GL",
+          "year": 2026,
+          "sourcePrice": 5823000,
+          "sourceCurrency": "JPY",
+          "totalRub": 458063508,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 5823000,
+          "rawYear": 2026,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE WAGON GL",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "33f14d0d095a3ddca3d693b9",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026071400901425001",
+          "make": "TOYOTA",
+          "model": "HIACE VAN SUPER GL DARK PRIME II",
+          "year": 2022,
+          "sourcePrice": 6123000,
+          "sourceCurrency": "JPY",
+          "totalRub": 481659258,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 6123000,
+          "rawYear": 2022,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE VAN SUPER GL DARK PRIME II",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "4306e539d8c99434b1171395",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026070801157270002",
+          "make": "TOYOTA",
+          "model": "HIACE VAN SUPER GL DARK PRIME II",
+          "year": 2026,
+          "sourcePrice": 5683000,
+          "sourceCurrency": "JPY",
+          "totalRub": 447052158,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 5683000,
+          "rawYear": 2026,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE VAN SUPER GL DARK PRIME II",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "b20024965233100419a40781",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026071100402794001",
+          "make": "TOYOTA",
+          "model": "HIACE WAGON GL",
+          "year": 2026,
+          "sourcePrice": 6083000,
+          "sourceCurrency": "JPY",
+          "totalRub": 478513158,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 6083000,
+          "rawYear": 2026,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE WAGON GL",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "db484d52ed26693d67169980",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070135930260707004",
+          "make": "TOYOTA",
+          "model": "ROOMY CUSTOM G",
+          "year": 2020,
+          "sourcePrice": 1846500,
+          "sourceCurrency": "JPY",
+          "totalRub": 145301841,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1846500,
+          "rawYear": 2020,
+          "rawMake": "TOYOTA",
+          "rawModel": "ROOMY CUSTOM G",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "09222a7b94732a47dc17d152",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026062800503927001",
+          "make": "TOYOTA",
+          "model": "LAND CRUISER 250 VX FIRST EDITION",
+          "year": 2024,
+          "sourcePrice": 8123000,
+          "sourceCurrency": "JPY",
+          "totalRub": 638964258,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 8123000,
+          "rawYear": 2024,
+          "rawMake": "TOYOTA",
+          "rawModel": "LAND CRUISER 250 VX FIRST EDITION",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "be6e4a7a9b7710f7b78665ed",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026071500901425001",
+          "make": "TOYOTA",
+          "model": "HIACE WAGON GL",
+          "year": 2026,
+          "sourcePrice": 5423000,
+          "sourceCurrency": "JPY",
+          "totalRub": 426602508,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 5423000,
+          "rawYear": 2026,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE WAGON GL",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "e91371c530f8420c25010597",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026071500901425002",
+          "make": "TOYOTA",
+          "model": "HIACE WAGON GRAND CABIN",
+          "year": 2026,
+          "sourcePrice": 5823000,
+          "sourceCurrency": "JPY",
+          "totalRub": 458063508,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 5823000,
+          "rawYear": 2026,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE WAGON GRAND CABIN",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "a08db3d11f0756f9275bc3e3",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070592930260708002",
+          "make": "TOYOTA",
+          "model": "YARIS X",
+          "year": 2020,
+          "sourcePrice": 1883900,
+          "sourceCurrency": "JPY",
+          "totalRub": 148243445,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1883900,
+          "rawYear": 2020,
+          "rawMake": "TOYOTA",
+          "rawModel": "YARIS X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "8ff793d4d7146290624de01f",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070798530260128010",
+          "make": "TOYOTA",
+          "model": "ROOMY CUSTOM G",
+          "year": 2025,
+          "sourcePrice": 2743000,
+          "sourceCurrency": "JPY",
+          "totalRub": 215813808,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 2743000,
+          "rawYear": 2025,
+          "rawMake": "TOYOTA",
+          "rawModel": "ROOMY CUSTOM G",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "a13a5cf3dcc0243985c66371",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070798530260223006",
+          "make": "TOYOTA",
+          "model": "ROOMY G",
+          "year": 2025,
+          "sourcePrice": 2501000,
+          "sourceCurrency": "JPY",
+          "totalRub": 196779903,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 2501000,
+          "rawYear": 2025,
+          "rawMake": "TOYOTA",
+          "rawModel": "ROOMY G",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "4a6f4ca6f03b3cdeae34d0e1",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026062901001276002",
+          "make": "TOYOTA",
+          "model": "LAND CRUISER 250 VX FIRST EDITION",
+          "year": 2024,
+          "sourcePrice": 7165000,
+          "sourceCurrency": "JPY",
+          "totalRub": 563615163,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 7165000,
+          "rawYear": 2024,
+          "rawMake": "TOYOTA",
+          "rawModel": "LAND CRUISER 250 VX FIRST EDITION",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "d190a1d8949fd90c41f38f4e",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070135930260707006",
+          "make": "TOYOTA",
+          "model": "PASSO X",
+          "year": 2021,
+          "sourcePrice": 1204100,
+          "sourceCurrency": "JPY",
+          "totalRub": 94775475,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1204100,
+          "rawYear": 2021,
+          "rawMake": "TOYOTA",
+          "rawModel": "PASSO X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "eeb7f6fb8e1dd1a0627c1346",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "975026071200561232001",
+          "make": "TOYOTA",
+          "model": "HIACE VAN",
+          "year": 2021,
+          "sourcePrice": 6032000,
+          "sourceCurrency": "JPY",
+          "totalRub": 474501880,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 6032000,
+          "rawYear": 2021,
+          "rawMake": "TOYOTA",
+          "rawModel": "HIACE VAN",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "fe6e41d7d0ac3422abeab724",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700071023230260710003",
+          "make": "TOYOTA",
+          "model": "RAIZE Z",
+          "year": 2022,
+          "sourcePrice": 2872800,
+          "sourceCurrency": "JPY",
+          "totalRub": 226022902,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 2872800,
+          "rawYear": 2022,
+          "rawMake": "TOYOTA",
+          "rawModel": "RAIZE Z",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "ec4e941bb23f01b3765cd9c0",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070798530260709003",
+          "make": "NISSAN",
+          "model": "ROOX X",
+          "year": 2026,
+          "sourcePrice": 2165500,
+          "sourceCurrency": "JPY",
+          "totalRub": 170391989,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 2165500,
+          "rawYear": 2026,
+          "rawMake": "NISSAN",
+          "rawModel": "ROOX X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d989ba7e46f486b2d02622e0",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070135930260707008",
+          "make": "NISSAN",
+          "model": "X-TRAIL X E-4ORCE X-TREMER X",
+          "year": 2023,
+          "sourcePrice": 4400700,
+          "sourceCurrency": "JPY",
+          "totalRub": 346196057,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 4400700,
+          "rawYear": 2023,
+          "rawMake": "NISSAN",
+          "rawModel": "X-TRAIL X E-4ORCE X-TREMER X",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "269882dc0f3b715884326579",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700071003030260707002",
+          "make": "NISSAN",
+          "model": "DAYZ J",
+          "year": 2017,
+          "sourcePrice": 965400,
+          "sourceCurrency": "JPY",
+          "totalRub": 76001124,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 965400,
+          "rawYear": 2017,
+          "rawMake": "NISSAN",
+          "rawModel": "DAYZ J",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "5f76dd28df3b600d6b2f3f6c",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070109330260714003",
+          "make": "NISSAN",
+          "model": "ROOX X",
+          "year": 2026,
+          "sourcePrice": 2168800,
+          "sourceCurrency": "JPY",
+          "totalRub": 170651542,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 2168800,
+          "rawYear": 2026,
+          "rawMake": "NISSAN",
+          "rawModel": "ROOX X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "805d4880e49355b30dbaf802",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070798530260303006",
+          "make": "NISSAN",
+          "model": "DAYZ J",
+          "year": 2017,
+          "sourcePrice": 922500,
+          "sourceCurrency": "JPY",
+          "totalRub": 72626931,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 922500,
+          "rawYear": 2017,
+          "rawMake": "NISSAN",
+          "rawModel": "DAYZ J",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d745a12a067012922edb8837",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070798530260709001",
+          "make": "NISSAN",
+          "model": "MOCO X",
+          "year": 2016,
+          "sourcePrice": 984100,
+          "sourceCurrency": "JPY",
+          "totalRub": 77471925,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 984100,
+          "rawYear": 2016,
+          "rawMake": "NISSAN",
+          "rawModel": "MOCO X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "744fb5dbc010bfc83b2b0810",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700071014330260712001",
+          "make": "NISSAN",
+          "model": "DAYZ ROOX HIGHWAY STAR X V SELECTION",
+          "year": 2015,
+          "sourcePrice": 1139200,
+          "sourceCurrency": "JPY",
+          "totalRub": 89670928,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1139200,
+          "rawYear": 2015,
+          "rawMake": "NISSAN",
+          "rawModel": "DAYZ ROOX HIGHWAY STAR X V SELECTION",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c32823339b9bdb3ff5e4c03f",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700071014330260623002",
+          "make": "NISSAN",
+          "model": "NOTE X",
+          "year": 2020,
+          "sourcePrice": 1297600,
+          "sourceCurrency": "JPY",
+          "totalRub": 102129484,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1297600,
+          "rawYear": 2020,
+          "rawMake": "NISSAN",
+          "rawModel": "NOTE X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "42df83799e101f3b6b474568",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700020523430260710001",
+          "make": "NISSAN",
+          "model": "LEAF X THANKS EDITION(30KWH)",
+          "year": 2017,
+          "sourcePrice": 486900,
+          "sourceCurrency": "JPY",
+          "totalRub": 38365902,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 486900,
+          "rawYear": 2017,
+          "rawMake": "NISSAN",
+          "rawModel": "LEAF X THANKS EDITION(30KWH)",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c420a5f6b5ac015f196d44f0",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070109330260713004",
+          "make": "NISSAN",
+          "model": "NOTE X",
+          "year": 2019,
+          "sourcePrice": 1074300,
+          "sourceCurrency": "JPY",
+          "totalRub": 84566381,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1074300,
+          "rawYear": 2019,
+          "rawMake": "NISSAN",
+          "rawModel": "NOTE X",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "2bede9ff592d7735997434c8",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700020318930260710001",
+          "make": "NISSAN",
+          "model": "DAYZ J",
+          "year": 2017,
+          "sourcePrice": 524000,
+          "sourceCurrency": "JPY",
+          "totalRub": 41283910,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 524000,
+          "rawYear": 2017,
+          "rawMake": "NISSAN",
+          "rawModel": "DAYZ J",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "97b7c4b069e9cd0701d2c4c6",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700071014330260225003",
+          "make": "NISSAN",
+          "model": "DAYZ J",
+          "year": 2017,
+          "sourcePrice": 1013800,
+          "sourceCurrency": "JPY",
+          "totalRub": 79807905,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1013800,
+          "rawYear": 2017,
+          "rawMake": "NISSAN",
+          "rawModel": "DAYZ J",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c85ace2c7ce118f733eda9ec",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700071003030260705002",
+          "make": "NISSAN",
+          "model": "ROOX HIGHWAY STAR G TURBO PROPILOT EDITION",
+          "year": 2021,
+          "sourcePrice": 1973000,
+          "sourceCurrency": "JPY",
+          "totalRub": 155251383,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 1973000,
+          "rawYear": 2021,
+          "rawMake": "NISSAN",
+          "rawModel": "ROOX HIGHWAY STAR G TURBO PROPILOT EDITION",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "9ef6267f3941a37d72b75744",
+          "sourceId": "goonet_japan_exact",
+          "sourceOfferId": "700070798530260117002",
+          "make": "NISSAN",
+          "model": "SERENA HIGHWAY STAR V",
+          "year": 2020,
+          "sourcePrice": 3051000,
+          "sourceCurrency": "JPY",
+          "totalRub": 240038778,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 3051000,
+          "rawYear": 2020,
+          "rawMake": "NISSAN",
+          "rawModel": "SERENA HIGHWAY STAR V",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        }
+      ]
+    },
+    "korea": {
+      "stored": 479,
+      "public": 41,
+      "rejected": 438,
+      "bySource": {
+        "encar_direct:stale": 438,
+        "encar_direct:active": 41
+      },
+      "rejectionReasons": {
+        "status:stale": 438,
+        "recent_too_low": 12,
+        "new_too_low": 14
+      },
+      "rejectedSamples": [
+        {
+          "id": "9db58cd28c5efc44b6d5cd1e",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41608344",
+          "make": "기아",
+          "model": "올 뉴 카니발",
+          "year": 2018,
+          "sourcePrice": 13800000,
+          "sourceCurrency": "KRW",
+          "totalRub": 725946,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1380,
+          "rawYear": "2018",
+          "rawMake": "기아",
+          "rawModel": "올 뉴 카니발",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d2b8416dd0177d342579da78",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41607349",
+          "make": "기아",
+          "model": "더 뉴 쏘렌토",
+          "year": 2020,
+          "sourcePrice": 19200000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1010012,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1920,
+          "rawYear": "2020",
+          "rawMake": "기아",
+          "rawModel": "더 뉴 쏘렌토",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "67327cdacb977d11266d33c3",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41608582",
+          "make": "기아",
+          "model": "더 뉴 쏘렌토",
+          "year": 2018,
+          "sourcePrice": 19300000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1015273,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 1930,
+          "rawYear": "2018",
+          "rawMake": "기아",
+          "rawModel": "더 뉴 쏘렌토",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "7c3db17e7ba9b170a9d2c18c",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41605466",
+          "make": "기아",
+          "model": "더 뉴 쏘렌토",
+          "year": 2019,
+          "sourcePrice": 19600000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1031054,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 1960,
+          "rawYear": "2019",
+          "rawMake": "기아",
+          "rawModel": "더 뉴 쏘렌토",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "3dbbe8adfb0dd9e103e802c0",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "40820914",
+          "make": "기아",
+          "model": "뉴 쏘렌토 R",
+          "year": 2014,
+          "sourcePrice": 6700000,
+          "sourceCurrency": "KRW",
+          "totalRub": 352452,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 670,
+          "rawYear": "2014",
+          "rawMake": "기아",
+          "rawModel": "뉴 쏘렌토 R",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "679339bf976d16174c5ea03c",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "40871583",
+          "make": "기아",
+          "model": "니로",
+          "year": 2018,
+          "sourcePrice": 13800000,
+          "sourceCurrency": "KRW",
+          "totalRub": 725946,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1380,
+          "rawYear": "2018",
+          "rawMake": "기아",
+          "rawModel": "니로",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c85f43f081cb09ed683bc30c",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41172090",
+          "make": "KG모빌리티(쌍용)",
+          "model": "베리 뉴 티볼리",
+          "year": 2021,
+          "sourcePrice": 12500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 657560,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 1250,
+          "rawYear": "2021",
+          "rawMake": "KG모빌리티(쌍용)",
+          "rawModel": "베리 뉴 티볼리",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "ff810cdd8188c489abaa174d",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41009257",
+          "make": "제네시스",
+          "model": "EQ900",
+          "year": 2016,
+          "sourcePrice": 15500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 815374,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 1550,
+          "rawYear": "2016",
+          "rawMake": "제네시스",
+          "rawModel": "EQ900",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "2eb681620c6e74233a247e3c",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41257863",
+          "make": "현대",
+          "model": "팰리세이드",
+          "year": 2019,
+          "sourcePrice": 24900000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1309860,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 2490,
+          "rawYear": "2019",
+          "rawMake": "현대",
+          "rawModel": "팰리세이드",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "6822e8c6dfdf56f06832199b",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "40462998",
+          "make": "지프",
+          "model": "랭글러 (JK)",
+          "year": 2017,
+          "sourcePrice": 19200000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1010012,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 1920,
+          "rawYear": "2017",
+          "rawMake": "지프",
+          "rawModel": "랭글러 (JK)",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "da7c11c1279b71d874ea13ff",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "40829758",
+          "make": "미니",
+          "model": "쿠퍼 S",
+          "year": 2023,
+          "sourcePrice": 28300000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1488716,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 2830,
+          "rawYear": "2023",
+          "rawMake": "미니",
+          "rawModel": "쿠퍼 S",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "23e2e2258e30aeaca299e56a",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "39069828",
+          "make": "현대",
+          "model": "더 뉴 그랜드 스타렉스",
+          "year": 2019,
+          "sourcePrice": 16990000,
+          "sourceCurrency": "KRW",
+          "totalRub": 893756,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1699,
+          "rawYear": "2019",
+          "rawMake": "현대",
+          "rawModel": "더 뉴 그랜드 스타렉스",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "bc0f1d6f0bbc2354564a16c5",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41006899",
+          "make": "기아",
+          "model": "쏘렌토 4세대",
+          "year": 2022,
+          "sourcePrice": 38900000,
+          "sourceCurrency": "KRW",
+          "totalRub": 2046327,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 3890,
+          "rawYear": "2022",
+          "rawMake": "기아",
+          "rawModel": "쏘렌토 4세대",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "ccc37b19c4378ddb9f36c5f4",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41241619",
+          "make": "포드",
+          "model": "익스플로러 6세대",
+          "year": 2020,
+          "sourcePrice": 25600000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1346683,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 2560,
+          "rawYear": "2020",
+          "rawMake": "포드",
+          "rawModel": "익스플로러 6세대",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "173260b9e4ba573e13af7886",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41090089",
+          "make": "기아",
+          "model": "카니발 4세대",
+          "year": 2022,
+          "sourcePrice": 18500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 973189,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1850,
+          "rawYear": "2022",
+          "rawMake": "기아",
+          "rawModel": "카니발 4세대",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "db17f16f654e90f345dd9311",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41250102",
+          "make": "제네시스",
+          "model": "GV70",
+          "year": 2022,
+          "sourcePrice": 34300000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1804345,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 3430,
+          "rawYear": "2022",
+          "rawMake": "제네시스",
+          "rawModel": "GV70",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "dd3f204f6449eb08cc5de1ec",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41336373",
+          "make": "포르쉐",
+          "model": "카이엔 (PO536)",
+          "year": 2023,
+          "sourcePrice": 99500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 5234178,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 9950,
+          "rawYear": "2023",
+          "rawMake": "포르쉐",
+          "rawModel": "카이엔 (PO536)",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "af19df0159e0fec013472946",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41420609",
+          "make": "벤츠",
+          "model": "E-클래스 W213",
+          "year": 2022,
+          "sourcePrice": 44300000,
+          "sourceCurrency": "KRW",
+          "totalRub": 2330393,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 4430,
+          "rawYear": "2022",
+          "rawMake": "벤츠",
+          "rawModel": "E-클래스 W213",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "2bc4e23da67bff43662c7827",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41598970",
+          "make": "기아",
+          "model": "K5 3세대",
+          "year": 2021,
+          "sourcePrice": 20600000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1083659,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 2060,
+          "rawYear": "2021",
+          "rawMake": "기아",
+          "rawModel": "K5 3세대",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "6fdc003247169bc40d45cfd4",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "40662359",
+          "make": "현대",
+          "model": "아이오닉 일렉트릭",
+          "year": 2018,
+          "sourcePrice": 10700000,
+          "sourceCurrency": "KRW",
+          "totalRub": 562871,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1070,
+          "rawYear": "2018",
+          "rawMake": "현대",
+          "rawModel": "아이오닉 일렉트릭",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "9c00c10aedf459430e9235da",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41604135",
+          "make": "기아",
+          "model": "카니발 4세대",
+          "year": 2021,
+          "sourcePrice": 26900000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1415069,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 2690,
+          "rawYear": "2021",
+          "rawMake": "기아",
+          "rawModel": "카니발 4세대",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "1193371b8ba711ae320678f3",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41603794",
+          "make": "현대",
+          "model": "올 뉴 투싼",
+          "year": 2018,
+          "sourcePrice": 15500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 815374,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 1550,
+          "rawYear": "2018",
+          "rawMake": "현대",
+          "rawModel": "올 뉴 투싼",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "0b46c0405e71cee1099b4bf4",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41177636",
+          "make": "아우디",
+          "model": "A6 (C8)",
+          "year": 2025,
+          "sourcePrice": 52400000,
+          "sourceCurrency": "KRW",
+          "totalRub": 2756492,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 5240,
+          "rawYear": "2025",
+          "rawMake": "아우디",
+          "rawModel": "A6 (C8)",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "e0f5b7f142403a648b43600e",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41603708",
+          "make": "르노코리아(삼성)",
+          "model": "SM3 네오",
+          "year": 2016,
+          "sourcePrice": 4500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 236722,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 450,
+          "rawYear": "2016",
+          "rawMake": "르노코리아(삼성)",
+          "rawModel": "SM3 네오",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "008a9d0585fd208c732936b8",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41606988",
+          "make": "현대",
+          "model": "팰리세이드",
+          "year": 2021,
+          "sourcePrice": 29900000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1572884,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 2990,
+          "rawYear": "2021",
+          "rawMake": "현대",
+          "rawModel": "팰리세이드",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "3857f68e8adc0e4f0df8d22b",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "41667371",
+          "make": "지프",
+          "model": "체로키(KL)",
+          "year": 2021,
+          "sourcePrice": 16400000,
+          "sourceCurrency": "KRW",
+          "totalRub": 862719,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1640,
+          "rawYear": "2021",
+          "rawMake": "지프",
+          "rawModel": "체로키(KL)",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "6519f4769bfd77a508b879dd",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "42093774",
+          "make": "현대",
+          "model": "팰리세이드",
+          "year": 2019,
+          "sourcePrice": 19900000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1046836,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 1990,
+          "rawYear": "2019",
+          "rawMake": "현대",
+          "rawModel": "팰리세이드",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "ea375376438c667d5de2cc83",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "42074033",
+          "make": "제네시스",
+          "model": "더 뉴 G70",
+          "year": 2022,
+          "sourcePrice": 26800000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1409809,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 2680,
+          "rawYear": "2022",
+          "rawMake": "제네시스",
+          "rawModel": "더 뉴 G70",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d173382d80ea209c77dc7d1b",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "42065984",
+          "make": "제네시스",
+          "model": "GV70",
+          "year": 2021,
+          "sourcePrice": 32500000,
+          "sourceCurrency": "KRW",
+          "totalRub": 1709656,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 3250,
+          "rawYear": "2021",
+          "rawMake": "제네시스",
+          "rawModel": "GV70",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "740a8ffbf7a837626960ec67",
+          "sourceId": "encar_direct",
+          "sourceOfferId": "42234146",
+          "make": "포르쉐",
+          "model": "파나메라 (971)",
+          "year": 2018,
+          "sourcePrice": 56800000,
+          "sourceCurrency": "KRW",
+          "totalRub": 2987953,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 5680,
+          "rawYear": "2018",
+          "rawMake": "포르쉐",
+          "rawModel": "파나메라 (971)",
+          "reasons": [
+            "status:stale"
+          ]
+        }
+      ]
+    },
+    "china": {
+      "stored": 250,
+      "public": 227,
+      "rejected": 23,
+      "bySource": {
+        "autohome_used_china_open:active": 1,
+        "che168_dealer_exact:active": 1,
+        "guazi_china_export:active": 225,
+        "guazi_china_export:stale": 23
+      },
+      "rejectionReasons": {
+        "status:stale": 23,
+        "new_too_low": 10,
+        "recent_too_low": 1
+      },
+      "rejectedSamples": [
+        {
+          "id": "36d043c204ba588a01bfbbc2",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "xqvud2kr5l",
+          "make": "Volkswagen",
+          "model": "Teramont 2020 Revised Version 530 V6 Four-Wheel Drive",
+          "year": 2020,
+          "sourcePrice": 22370,
+          "sourceCurrency": "USD",
+          "totalRub": 2008841,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 22370,
+          "rawYear": 2020,
+          "rawMake": "Volkswagen",
+          "rawModel": "Teramont 2020 Revised Version 530 V6 Four-Wheel Drive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "305f58e868396da79b76ac60",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "bbm6v4qvpw",
+          "make": "Volkswagen",
+          "model": "Talagon 2021 530TSI Four-Wheel Drive Flagship Shengjing Edition",
+          "year": 2021,
+          "sourcePrice": 22798,
+          "sourceCurrency": "USD",
+          "totalRub": 2042493,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 22798,
+          "rawYear": 2021,
+          "rawMake": "Volkswagen",
+          "rawModel": "Talagon 2021 530TSI Four-Wheel Drive Flagship Shengjing Edition",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "fa597a041d8aef1868c6346a",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "utrjleuqd9",
+          "make": "Volkswagen",
+          "model": "Phideon 2018 Revised Version 380TSI Two-Wheel-Drive Flagship Edition",
+          "year": 2018,
+          "sourcePrice": 15649,
+          "sourceCurrency": "USD",
+          "totalRub": 1480403,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 15649,
+          "rawYear": 2018,
+          "rawMake": "Volkswagen",
+          "rawModel": "Phideon 2018 Revised Version 380TSI Two-Wheel-Drive Flagship Edition",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d6fda37afb4f25b836669c65",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "n3jwrlwdux",
+          "make": "Toyota",
+          "model": "YARiS L Zhi Xuan 2022 X-Trail 1.5L CVT",
+          "year": 2022,
+          "sourcePrice": 5728,
+          "sourceCurrency": "USD",
+          "totalRub": 700364,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 5728,
+          "rawYear": 2022,
+          "rawMake": "Toyota",
+          "rawModel": "YARiS L Zhi Xuan 2022 X-Trail 1.5L CVT",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "b712d26c8d103525e87f14ef",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "k6la4varjs",
+          "make": "BYD",
+          "model": "Han L 2025 EV Four-Wheel Drive LiDAR Flagship",
+          "year": 2025,
+          "sourcePrice": 29836,
+          "sourceCurrency": "USD",
+          "totalRub": 2595856,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 29836,
+          "rawYear": 2025,
+          "rawMake": "BYD",
+          "rawModel": "Han L 2025 EV Four-Wheel Drive LiDAR Flagship",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c1d6d26dfe00868d646ef817",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "29e42afz32",
+          "make": "BYD",
+          "model": "Seal 05 DM-i 2025 DM-i Smart Drive 55KM",
+          "year": 2025,
+          "sourcePrice": 7631,
+          "sourceCurrency": "USD",
+          "totalRub": 849987,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 7631,
+          "rawYear": 2025,
+          "rawMake": "BYD",
+          "rawModel": "Seal 05 DM-i 2025 DM-i Smart Drive 55KM",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "4c6a3ff4cb78ffe6020d8e0a",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "jc65ya878g",
+          "make": "BYD",
+          "model": "Song PLUS New Energy 2023 Champion Edition DM-i",
+          "year": 2023,
+          "sourcePrice": 12822,
+          "sourceCurrency": "USD",
+          "totalRub": 1258130,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 12822,
+          "rawYear": 2023,
+          "rawMake": "BYD",
+          "rawModel": "Song PLUS New Energy 2023 Champion Edition DM-i",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "1d11df7e0edfbdadc9bc5a87",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "8uhpk43yp5",
+          "make": "BYD",
+          "model": "Song PLUS New Energy 2023 Champion Edition DM-i",
+          "year": 2023,
+          "sourcePrice": 12508,
+          "sourceCurrency": "USD",
+          "totalRub": 1233442,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 12508,
+          "rawYear": 2023,
+          "rawMake": "BYD",
+          "rawModel": "Song PLUS New Energy 2023 Champion Edition DM-i",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "5c624b76918b367087e944e3",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "ep7gf3y9f2",
+          "make": "BYD",
+          "model": "Song PLUS New Energy 2024 HONOR Edition DM-i",
+          "year": 2024,
+          "sourcePrice": 14036,
+          "sourceCurrency": "USD",
+          "totalRub": 1353581,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 14036,
+          "rawYear": 2024,
+          "rawMake": "BYD",
+          "rawModel": "Song PLUS New Energy 2024 HONOR Edition DM-i",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "ad9c4ca5cccfdfbf1cfc8409",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "xxmckvyybd",
+          "make": "Geely Auto",
+          "model": "Monjaro L 2023 2.0TD High-Power Automatic Two-Wheel Drive",
+          "year": 2023,
+          "sourcePrice": 13009,
+          "sourceCurrency": "USD",
+          "totalRub": 1272833,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 13009,
+          "rawYear": 2023,
+          "rawMake": "Geely Auto",
+          "rawModel": "Monjaro L 2023 2.0TD High-Power Automatic Two-Wheel Drive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "7aaf1ce95bc015e6fe08cd6b",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "f5yrb8mcmq",
+          "make": "Geely Auto",
+          "model": "Emgrand X7 Sport 2023 Boyue COOL 1.5TD Smart",
+          "year": 2023,
+          "sourcePrice": 8115,
+          "sourceCurrency": "USD",
+          "totalRub": 888042,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 8115,
+          "rawYear": 2023,
+          "rawMake": "Geely Auto",
+          "rawModel": "Emgrand X7 Sport 2023 Boyue COOL 1.5TD Smart",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "acf38bd0cdb50b3ef4605869",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "far2dnjqtu",
+          "make": "Geely Auto",
+          "model": "Emgrand 2023 4th Generation Champion Edition 1.5L Manual",
+          "year": 2023,
+          "sourcePrice": 5838,
+          "sourceCurrency": "USD",
+          "totalRub": 709013,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 5838,
+          "rawYear": 2023,
+          "rawMake": "Geely Auto",
+          "rawModel": "Emgrand 2023 4th Generation Champion Edition 1.5L Manual",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "0f0921513502209f8dfd4abf",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "f5swvyxsfq",
+          "make": "Geely Auto",
+          "model": "Vision X6 2016 1.3T CVT Flagship Model",
+          "year": 2016,
+          "sourcePrice": 2596,
+          "sourceCurrency": "USD",
+          "totalRub": 454111,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 2596,
+          "rawYear": 2016,
+          "rawMake": "Geely Auto",
+          "rawModel": "Vision X6 2016 1.3T CVT Flagship Model",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "362f51b8785921b76d6919fc",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "g28gk9sbac",
+          "make": "Geely Auto",
+          "model": "Coolray 2023 1.5T DCT Platinum Edition",
+          "year": 2023,
+          "sourcePrice": 7702,
+          "sourceCurrency": "USD",
+          "totalRub": 855570,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 7702,
+          "rawYear": 2023,
+          "rawMake": "Geely Auto",
+          "rawModel": "Coolray 2023 1.5T DCT Platinum Edition",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "e6afff6dee304dbec900280b",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "2hwpp5tetw",
+          "make": "Geely Auto",
+          "model": "Binray 2024 Binrui COOL 1.5T DCT Champion Edition",
+          "year": 2024,
+          "sourcePrice": 7790,
+          "sourceCurrency": "USD",
+          "totalRub": 862489,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 7790,
+          "rawYear": 2024,
+          "rawMake": "Geely Auto",
+          "rawModel": "Binray 2024 Binrui COOL 1.5T DCT Champion Edition",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "5ea534fc55ae85e2533fab7d",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "4bpul2rd3h",
+          "make": "Geely Auto",
+          "model": "Vision 2018 1.5L Automatic Happiness Edition",
+          "year": 2018,
+          "sourcePrice": 3077,
+          "sourceCurrency": "USD",
+          "totalRub": 491929,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 3077,
+          "rawYear": 2018,
+          "rawMake": "Geely Auto",
+          "rawModel": "Vision 2018 1.5L Automatic Happiness Edition",
+          "reasons": [
+            "status:stale",
+            "recent_too_low"
+          ]
+        },
+        {
+          "id": "b24c876ef0b95e814a6f8cdb",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "l8t6zvb6n2",
+          "make": "Geely Auto",
+          "model": "Emgrand 2023 4th Generation Champion Edition 1.5L Manual",
+          "year": 2023,
+          "sourcePrice": 5873,
+          "sourceCurrency": "USD",
+          "totalRub": 711765,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 5873,
+          "rawYear": 2023,
+          "rawMake": "Geely Auto",
+          "rawModel": "Emgrand 2023 4th Generation Champion Edition 1.5L Manual",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "96ef49c11f8a0b59af97a025",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "rzw9pgmcwx",
+          "make": "Honda",
+          "model": "Crider 2022 180Turbo CVT Luxury Edition",
+          "year": 2022,
+          "sourcePrice": 7847,
+          "sourceCurrency": "USD",
+          "totalRub": 866970,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 7847,
+          "rawYear": 2022,
+          "rawMake": "Honda",
+          "rawModel": "Crider 2022 180Turbo CVT Luxury Edition",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "1483de0ef2ebfc5ec1c5ba56",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "fln9hldxh5",
+          "make": "Hyundai",
+          "model": "Genesis 2015 3.0GDi Four-Wheel Drive Flagship Edition",
+          "year": 2015,
+          "sourcePrice": 10374,
+          "sourceCurrency": "USD",
+          "totalRub": 1065656,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 10374,
+          "rawYear": 2015,
+          "rawMake": "Hyundai",
+          "rawModel": "Genesis 2015 3.0GDi Four-Wheel Drive Flagship Edition",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "b6de1f741df22dc34c2b6a99",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "awuxzwyru5",
+          "make": "Hyundai",
+          "model": "Sonata 2015 2.4L TOP Flagship Edition",
+          "year": 2015,
+          "sourcePrice": 5949,
+          "sourceCurrency": "USD",
+          "totalRub": 717740,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 5949,
+          "rawYear": 2015,
+          "rawMake": "Hyundai",
+          "rawModel": "Sonata 2015 2.4L TOP Flagship Edition",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "4bf90ff7bddee743a7a21fc9",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "8d2rgbku9z",
+          "make": "Changan",
+          "model": "CS55PLUS 2022 Blue Whale Edition 1.5T DCT Luxury",
+          "year": 2022,
+          "sourcePrice": 8200,
+          "sourceCurrency": "USD",
+          "totalRub": 894725,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 8200,
+          "rawYear": 2022,
+          "rawMake": "Changan",
+          "rawModel": "CS55PLUS 2022 Blue Whale Edition 1.5T DCT Luxury",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "3468be05ed7a459380cce36c",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "5r6k4sq9xa",
+          "make": "Changan",
+          "model": "UNI-V 2022 1.5T Prestige Version",
+          "year": 2022,
+          "sourcePrice": 7207,
+          "sourceCurrency": "USD",
+          "totalRub": 816650,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 7207,
+          "rawYear": 2022,
+          "rawMake": "Changan",
+          "rawModel": "UNI-V 2022 1.5T Prestige Version",
+          "reasons": [
+            "status:stale",
+            "new_too_low"
+          ]
+        },
+        {
+          "id": "54a543c5ec66839659c1ec5f",
+          "sourceId": "guazi_china_export",
+          "sourceOfferId": "u6rbhm5bf4",
+          "make": "Changan",
+          "model": "UNI-T 2020 1.5T Flagship Version",
+          "year": 2020,
+          "sourcePrice": 7681,
+          "sourceCurrency": "USD",
+          "totalRub": 853919,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 7681,
+          "rawYear": 2020,
+          "rawMake": "Changan",
+          "rawModel": "UNI-T 2020 1.5T Flagship Version",
+          "reasons": [
+            "status:stale"
+          ]
+        }
+      ]
+    },
+    "uae": {
+      "stored": 625,
+      "public": 137,
+      "rejected": 488,
+      "bySource": {
+        "dubicars_clean:stale": 5,
+        "dubicars_uae:stale": 168,
+        "dubicars_uae_exact:active": 137,
+        "dubicars_uae_exact:stale": 315
+      },
+      "rejectionReasons": {
+        "status:stale": 488,
+        "new_too_low": 69,
+        "year": 3,
+        "total_range": 121,
+        "recent_too_low": 17
+      },
+      "rejectedSamples": [
+        {
+          "id": "e7388d677ca625ae824937b8",
+          "sourceId": "dubicars_clean",
+          "sourceOfferId": "923255",
+          "make": "Bentley",
+          "model": "Flying Spur v8",
+          "year": 2015,
+          "sourcePrice": 39509,
+          "sourceCurrency": "USD",
+          "totalRub": 3310939,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 7,
+          "rawPrice": 39509,
+          "rawYear": 2015,
+          "rawMake": "Bentley",
+          "rawModel": "Flying Spur v8",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "b3bbb7dbdfcf56f207714ef5",
+          "sourceId": "dubicars_clean",
+          "sourceOfferId": "999087",
+          "make": "GMC",
+          "model": "Sierra",
+          "year": 2022,
+          "sourcePrice": 51771,
+          "sourceCurrency": "USD",
+          "totalRub": 4276449,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 51771,
+          "rawYear": 2022,
+          "rawMake": "GMC",
+          "rawModel": "Sierra",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "0b9482a13c908d3a6668cd9f",
+          "sourceId": "dubicars_clean",
+          "sourceOfferId": "979840",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 199500,
+          "sourceCurrency": "USD",
+          "totalRub": 15908630,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 199500,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "35b804c1fca0a5af61a4cfaa",
+          "sourceId": "dubicars_clean",
+          "sourceOfferId": "986730",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 58100,
+          "sourceCurrency": "USD",
+          "totalRub": 4774794,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 58100,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "25e2f10aeb3819930909f7f1",
+          "sourceId": "dubicars_clean",
+          "sourceOfferId": "821096",
+          "make": "Audi",
+          "model": "A5",
+          "year": 2022,
+          "sourcePrice": 29700,
+          "sourceCurrency": "USD",
+          "totalRub": 2538578,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 9,
+          "rawPrice": 29700,
+          "rawYear": 2022,
+          "rawMake": "Audi",
+          "rawModel": "A5",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "eebf8b36d0caf202989c4420",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "979840",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 199500,
+          "sourceCurrency": "USD",
+          "totalRub": 15908630,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 199500,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "b60b183a655a5c698584b95c",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "986730",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 58100,
+          "sourceCurrency": "USD",
+          "totalRub": 4774794,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 58100,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "9f6924130e0b24b13cc9ef4b",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997555",
+          "make": "Bentley",
+          "model": "Continental GT",
+          "year": 2019,
+          "sourcePrice": 163215,
+          "sourceCurrency": "USD",
+          "totalRub": 13051549,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 163215,
+          "rawYear": 2019,
+          "rawMake": "Bentley",
+          "rawModel": "Continental GT",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "83f0849356b8510b3d6b612a",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "993643",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2024,
+          "sourcePrice": 435967,
+          "sourceCurrency": "USD",
+          "totalRub": 34528042,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 435967,
+          "rawYear": 2024,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "356d3ca7a587c3609ef97613",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "993646",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2022,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 1,
+          "rawYear": 2022,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "63cccfc3c30aa258d2e14299",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997440",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2025,
+          "sourcePrice": 28610,
+          "sourceCurrency": "USD",
+          "totalRub": 2452751,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 28610,
+          "rawYear": 2025,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "50a7a36ca55053e73bcaf0e1",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997444",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2025,
+          "sourcePrice": 31335,
+          "sourceCurrency": "USD",
+          "totalRub": 2667318,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 31335,
+          "rawYear": 2025,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "2306c93fbe73f20b2da3784f",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997443",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2022,
+          "sourcePrice": 50953,
+          "sourceCurrency": "USD",
+          "totalRub": 4212039,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 50953,
+          "rawYear": 2022,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c4ffff2421c463dc5b64a417",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997445",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2025,
+          "sourcePrice": 32697,
+          "sourceCurrency": "USD",
+          "totalRub": 2774562,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 32697,
+          "rawYear": 2025,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "49c29319d78a058e35df0f74",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997446",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2025,
+          "sourcePrice": 31335,
+          "sourceCurrency": "USD",
+          "totalRub": 2667318,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 31335,
+          "rawYear": 2025,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "3503c04f3efbaca679a215d1",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997447",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 45912,
+          "sourceCurrency": "USD",
+          "totalRub": 3815111,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 45912,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "92923eeae96f9626fef61cbe",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997449",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 32970,
+          "sourceCurrency": "USD",
+          "totalRub": 2796058,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 32970,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "9083259b24d68157877921e8",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997451",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 39782,
+          "sourceCurrency": "USD",
+          "totalRub": 3332435,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 39782,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d742d0bfe655cd0277e6fc4e",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "997454",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive",
+          "year": 2023,
+          "sourcePrice": 31880,
+          "sourceCurrency": "USD",
+          "totalRub": 2710231,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 31880,
+          "rawYear": 2023,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "f0aadd192cae19d8c00e8a7f",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "978838",
+          "make": "MG",
+          "model": "GT LUXURY MG GT",
+          "year": 2023,
+          "sourcePrice": 10700,
+          "sourceCurrency": "USD",
+          "totalRub": 1042518,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 10700,
+          "rawYear": 2023,
+          "rawMake": "MG",
+          "rawModel": "GT LUXURY MG GT",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "f073ec282ae4d3e79239528d",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "996490",
+          "make": "Location",
+          "model": "Location",
+          "year": 2024,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 1,
+          "rawYear": 2024,
+          "rawMake": "Location",
+          "rawModel": "Location",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "dbea5abbb0144efe5f3a4493",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "789263",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive Exclusively",
+          "year": 2018,
+          "sourcePrice": 38400,
+          "sourceCurrency": "USD",
+          "totalRub": 3220256,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 38400,
+          "rawYear": 2018,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive Exclusively",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "8a4e2fc0c541787ba9b34d36",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "992597",
+          "make": "Highly",
+          "model": "Responsive Certified Pre-Owned Highly",
+          "year": 2024,
+          "sourcePrice": 53100,
+          "sourceCurrency": "USD",
+          "totalRub": 4376448,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 53100,
+          "rawYear": 2024,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Certified Pre-Owned Highly",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "5624b440905961af45a06596",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "789352",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive Exclusively",
+          "year": 2018,
+          "sourcePrice": 45200,
+          "sourceCurrency": "USD",
+          "totalRub": 3755093,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 45200,
+          "rawYear": 2018,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive Exclusively",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "d8b817dd8a7015e4e3b87b77",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "996978",
+          "make": "Highly",
+          "model": "Responsive Certified Pre-Owned Highly",
+          "year": 2025,
+          "sourcePrice": 60200,
+          "sourceCurrency": "USD",
+          "totalRub": 4934881,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 60200,
+          "rawYear": 2025,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Certified Pre-Owned Highly",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "1c2e0526c024f4f4ecfabb8c",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "834289",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive Exclusively",
+          "year": 2016,
+          "sourcePrice": 32100,
+          "sourceCurrency": "USD",
+          "totalRub": 2724745,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 32100,
+          "rawYear": 2016,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive Exclusively",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "ac12ec72a95b36dca4b41736",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "863657",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive Exclusively",
+          "year": 2015,
+          "sourcePrice": 32100,
+          "sourceCurrency": "USD",
+          "totalRub": 2724745,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 32100,
+          "rawYear": 2015,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive Exclusively",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "3a3bc4ad70a7c0f5f1fed824",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "887556",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive Exclusively",
+          "year": 2016,
+          "sourcePrice": 27400,
+          "sourceCurrency": "USD",
+          "totalRub": 2355079,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 27400,
+          "rawYear": 2016,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive Exclusively",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "1270bfd6620633cd90ea50c8",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "881951",
+          "make": "Highly",
+          "model": "Responsive Highly Responsive Exclusively",
+          "year": 2015,
+          "sourcePrice": 24100,
+          "sourceCurrency": "USD",
+          "totalRub": 2095525,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 24100,
+          "rawYear": 2015,
+          "rawMake": "Highly",
+          "rawModel": "Responsive Highly Responsive Exclusively",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "28fe860bb274fd66d5908f95",
+          "sourceId": "dubicars_uae",
+          "sourceOfferId": "987475",
+          "make": "Infiniti",
+          "model": "QX80 LUXE SENSORY PROACTIVE",
+          "year": 2021,
+          "sourcePrice": 32100,
+          "sourceCurrency": "USD",
+          "totalRub": 2724745,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 1,
+          "rawPrice": 32100,
+          "rawYear": 2021,
+          "rawMake": "Infiniti",
+          "rawModel": "QX80 LUXE SENSORY PROACTIVE",
+          "reasons": [
+            "status:stale"
+          ]
+        }
+      ]
+    },
+    "europe": {
+      "stored": 269,
+      "public": 209,
+      "rejected": 60,
+      "bySource": {
+        "gaspedaal_nl_open:stale": 11,
+        "otomoto_pl_open:stale": 1,
+        "standvirtual_pt_open:stale": 1,
+        "otomoto_europe_exact:active": 209,
+        "otomoto_europe_exact:stale": 47
+      },
+      "rejectionReasons": {
+        "status:stale": 60,
+        "total_range": 1,
+        "year": 46
+      },
+      "rejectedSamples": [
+        {
+          "id": "fec5c912943137eb711e9660",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "4600154d79c89da7ee081f7c",
+          "make": "Alle",
+          "model": "BMW&#x27;s",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 7,
+          "rawYear": 2008,
+          "rawMake": "Alle",
+          "rawModel": "BMW&#x27;s",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "350c366c73486f9d7a51146e",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "volkswagen",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 7,
+          "rawYear": 2008,
+          "rawMake": "Volkswagen",
+          "rawModel": "Golf",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "4337a4e0528fcce4ccd4e9ad",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "klasse",
+          "make": "Mercedes-Benz",
+          "model": "A-Klasse",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 7,
+          "rawYear": 2008,
+          "rawMake": "Mercedes-Benz",
+          "rawModel": "A-Klasse",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c8aeafef713bfacbd935ea20",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "156a02e8609d555697dcc0d3",
+          "make": "Mercedes-Benz",
+          "model": "EQE",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 4,
+          "rawYear": 2008,
+          "rawMake": "Mercedes-Benz",
+          "rawModel": "EQE",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "2547f627561f15341a36618b",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "e0ac7258006f69eb88af8382",
+          "make": "Alle",
+          "model": "Mercedes-Benz",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 8,
+          "rawYear": 2008,
+          "rawMake": "Alle",
+          "rawModel": "Mercedes-Benz",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c34cf0ef28d1102a38122b2e",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "toyota",
+          "make": "Toyota",
+          "model": "Aygo",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 8,
+          "rawYear": 2008,
+          "rawMake": "Toyota",
+          "rawModel": "Aygo",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "87c8ca35c1b65ddf15f3c211",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "peugeot",
+          "make": "Peugeot",
+          "model": "208",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 5,
+          "rawYear": 2008,
+          "rawMake": "Peugeot",
+          "rawModel": "208",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "092b8171e752100ba9abe2e3",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "cupra",
+          "make": "Cupra",
+          "model": "Cupra",
+          "year": 1999,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 4,
+          "rawYear": 1999,
+          "rawMake": "Cupra",
+          "rawModel": "Cupra",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "773e28ba5c5d755230aeadca",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "nissan",
+          "make": "Nissan",
+          "model": "Nissan",
+          "year": 2008,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 4,
+          "rawYear": 2008,
+          "rawMake": "Nissan",
+          "rawModel": "Nissan",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "c0194abf22cf514564f59e10",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "skoda",
+          "make": "Skoda",
+          "model": "Enyaq iV: deze elektrisch aangedreven",
+          "year": 2026,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 3,
+          "rawYear": 2026,
+          "rawMake": "Skoda",
+          "rawModel": "Enyaq iV: deze elektrisch aangedreven",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "b99015e3bb278ce713734846",
+          "sourceId": "gaspedaal_nl_open",
+          "sourceOfferId": "tesla",
+          "make": "De",
+          "model": "Tesla Model 3 blinkt uit",
+          "year": 2025,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 2,
+          "rawYear": 2025,
+          "rawMake": "De",
+          "rawModel": "Tesla Model 3 blinkt uit",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "1fc6aa3331c5219b7861622b",
+          "sourceId": "otomoto_pl_open",
+          "sourceOfferId": "osobowe",
+          "make": "116",
+          "model": "900",
+          "year": 2019,
+          "sourcePrice": 2019116900,
+          "sourceCurrency": "PLN",
+          "totalRub": 41910809493,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 2019116900,
+          "rawYear": 2019,
+          "rawMake": "116",
+          "rawModel": "900",
+          "reasons": [
+            "status:stale",
+            "total_range"
+          ]
+        },
+        {
+          "id": "218091e037d260c7b361c179",
+          "sourceId": "standvirtual_pt_open",
+          "sourceOfferId": "carros",
+          "make": "Renault",
+          "model": "Mégane Sport Tourer 1.5 Blue",
+          "year": 2021,
+          "sourcePrice": 12990,
+          "sourceCurrency": "EUR",
+          "totalRub": 1160392,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 10,
+          "rawPrice": 12990,
+          "rawYear": 2021,
+          "rawMake": "Renault",
+          "rawModel": "Mégane Sport Tourer 1.5 Blue",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "34c4d7d988a40e0954a6fd84",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6EE",
+          "make": "Opel",
+          "model": "Insignia 2.0 CDTI 4x4 GSi S&S",
+          "year": 1956,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1956,
+          "rawMake": "Opel",
+          "rawModel": "Insignia 2.0 CDTI 4x4 GSi S&S",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "522acc8995d3e3b4bb428d33",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6tP",
+          "make": "Volvo",
+          "model": "V40 T2 Drive-E Momentum",
+          "year": 1969,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1969,
+          "rawMake": "Volvo",
+          "rawModel": "V40 T2 Drive-E Momentum",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "aa35e467d350fa2d12e9d14b",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6vT",
+          "make": "Opel",
+          "model": "Insignia 2.0 CDTI Active",
+          "year": 1956,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1956,
+          "rawMake": "Opel",
+          "rawModel": "Insignia 2.0 CDTI Active",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "ff9a4bcd290c66585c475b0f",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6Tr",
+          "make": "Volkswagen",
+          "model": "Touran 2.0 TDI BMT Highline DSG",
+          "year": 1968,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1968,
+          "rawMake": "Volkswagen",
+          "rawModel": "Touran 2.0 TDI BMT Highline DSG",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "c9227ec3f358330bc74a6fc4",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6Dr",
+          "make": "SEAT",
+          "model": "Leon 2.0 TDI FR S&S EU6",
+          "year": 1968,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1968,
+          "rawMake": "SEAT",
+          "rawModel": "Leon 2.0 TDI FR S&S EU6",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "675ac332fe0cc00cc62e642f",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6NU",
+          "make": "Volvo",
+          "model": "XC 60 B5 B Momentum",
+          "year": 1969,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1969,
+          "rawMake": "Volvo",
+          "rawModel": "XC 60 B5 B Momentum",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "68b8fe894311d04ec39a674f",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6I72QG",
+          "make": "Audi",
+          "model": "A5 Sportback 45 TFSI mHEV Quattro S tronic",
+          "year": 1984,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1984,
+          "rawMake": "Audi",
+          "rawModel": "A5 Sportback 45 TFSI mHEV Quattro S tronic",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "b3263b1b4ca46386cb9e32f0",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6I7mgI",
+          "make": "Audi",
+          "model": "A4 Limousine 2.0 TDI DPF Attraction",
+          "year": 1968,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1968,
+          "rawMake": "Audi",
+          "rawModel": "A4 Limousine 2.0 TDI DPF Attraction",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "95fe626f925a7e9418cc08c7",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia7bo",
+          "make": "Mercedes-Benz",
+          "model": "Vito Tourer L2 Select 4x4 9G-Tronic 447.703",
+          "year": 1950,
+          "sourcePrice": 265000,
+          "sourceCurrency": "PLN",
+          "totalRub": 5474344,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 265000,
+          "rawYear": 1950,
+          "rawMake": "Mercedes-Benz",
+          "rawModel": "Vito Tourer L2 Select 4x4 9G-Tronic 447.703",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "b805267f2bf0db77a71aea9f",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6Gw",
+          "make": "Mercedes-Benz",
+          "model": "GLC 200 d 4Matic 9G-TRONIC AMG Line Plus",
+          "year": 1950,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1950,
+          "rawMake": "Mercedes-Benz",
+          "rawModel": "GLC 200 d 4Matic 9G-TRONIC AMG Line Plus",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "0f2d8db43c8b894db36a3901",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6ll",
+          "make": "Audi",
+          "model": "A4 Avant 2.0 TDI",
+          "year": 1968,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 200000,
+          "rawYear": 1968,
+          "rawMake": "Audi",
+          "rawModel": "A4 Avant 2.0 TDI",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "4d15469734be230181dbdc61",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6HC8rA",
+          "make": "Peugeot",
+          "model": "308",
+          "year": 2017,
+          "sourcePrice": 200000,
+          "sourceCurrency": "PLN",
+          "totalRub": 4131580,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 2,
+          "rawPrice": 200000,
+          "rawYear": 2017,
+          "rawMake": "Peugeot",
+          "rawModel": "308",
+          "reasons": [
+            "status:stale"
+          ]
+        },
+        {
+          "id": "2c239ec1c7cad2428adb8c38",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia7c6",
+          "make": "Cupra",
+          "model": "Formentor 2.0 TSI 4Drive DSG",
+          "year": 1984,
+          "sourcePrice": null,
+          "sourceCurrency": null,
+          "totalRub": null,
+          "calculationStatus": "needs_data",
+          "status": "stale",
+          "imageCount": 3,
+          "rawYear": 1984,
+          "rawMake": "Cupra",
+          "rawModel": "Formentor 2.0 TSI 4Drive DSG",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "cd60b7459e5d46999ee12553",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia7bp",
+          "make": "Cupra",
+          "model": "Formentor 2.0 TSI 4Drive DSG",
+          "year": 1984,
+          "sourcePrice": 182900,
+          "sourceCurrency": "PLN",
+          "totalRub": 3778330,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 182900,
+          "rawYear": 1984,
+          "rawMake": "Cupra",
+          "rawModel": "Formentor 2.0 TSI 4Drive DSG",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "40e329890542d52399650f5b",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6HUth2",
+          "make": "Skoda",
+          "model": "Kodiaq 2.0 TDI 4x4 Sportline DSG",
+          "year": 1968,
+          "sourcePrice": 234488,
+          "sourceCurrency": "PLN",
+          "totalRub": 4844030,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 234488,
+          "rawYear": 1968,
+          "rawMake": "Skoda",
+          "rawModel": "Kodiaq 2.0 TDI 4x4 Sportline DSG",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "65c9a43225abadbcdfb38424",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6HUtdS",
+          "make": "Skoda",
+          "model": "Kodiaq 2.0 TDI 4x4 Sportline DSG",
+          "year": 1968,
+          "sourcePrice": 234488,
+          "sourceCurrency": "PLN",
+          "totalRub": 4844030,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 234488,
+          "rawYear": 1968,
+          "rawMake": "Skoda",
+          "rawModel": "Kodiaq 2.0 TDI 4x4 Sportline DSG",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        },
+        {
+          "id": "bd68e094982ce28cb3c6648b",
+          "sourceId": "otomoto_europe_exact",
+          "sourceOfferId": "6Ia6Cd",
+          "make": "Volvo",
+          "model": "XC 60 B5 B AWD Ultimate Dark",
+          "year": 1969,
+          "sourcePrice": 184700,
+          "sourceCurrency": "PLN",
+          "totalRub": 3815514,
+          "calculationStatus": "ready",
+          "status": "stale",
+          "imageCount": 3,
+          "rawPrice": 184700,
+          "rawYear": 1969,
+          "rawMake": "Volvo",
+          "rawModel": "XC 60 B5 B AWD Ultimate Dark",
+          "reasons": [
+            "status:stale",
+            "year"
+          ]
+        }
+      ]
+    }
+  },
+  "duplicateFirstImages": [
+    {
+      "checksum": "de95286edcea8daf17e1c476b46171603af38abe64944562ca514065c189d08a",
+      "rows": [
+        {
+          "id": "27c3cbe1ee72a946232f2bd0",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "ASX BASIC",
+          "year": 2024
+        },
+        {
+          "id": "15365c675e1830f844cc6f51",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Eclipse Cross GLS MIDLINE",
+          "year": 2025
+        },
+        {
+          "id": "ecf65f4fe23c00aa2a864b32",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Eclipse Cross GLS MIDLINE",
+          "year": 2025
+        },
+        {
+          "id": "481947d00d697cf3a27080bc",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Xpander Cross PREMIUM Signature edition",
+          "year": 2024
+        },
+        {
+          "id": "becbac93ae0b50cc4ec9c388",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "ASX GLX LOWLINE BASIC",
+          "year": 2024
+        },
+        {
+          "id": "bbb2cac0027405ceb9e81216",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Xpander Cross PREMIUM HIGH LINE SIGNATURE EDITION",
+          "year": 2024
+        },
+        {
+          "id": "5c943b8d065b63ca64bffe02",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "ASX GLX LOWLINE BASIC",
+          "year": 2024
+        },
+        {
+          "id": "30edf1676f78ba895b8faf3d",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Eclipse Cross GLS MIDLINE",
+          "year": 2025
+        },
+        {
+          "id": "2994fbaeac50dab7f3fdf8e7",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Lexus",
+          "model": "RC350 F SPORT PLATINUM",
+          "year": 2015
+        },
+        {
+          "id": "5fd9ce8328204a6b546b511c",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Land Rover",
+          "model": "Defender URBAN Kit 2022 V8 with Maltik",
+          "year": 2022
+        },
+        {
+          "id": "3da275457ba59767c265390e",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Infiniti",
+          "model": "QX80 GCC 2019 Nardo Grey Unique Interior",
+          "year": 2019
+        },
+        {
+          "id": "ce529bf00b3314d74d293396",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Audi",
+          "model": "RS2 Black Badge | Certified Pre-Owned |",
+          "year": 2025
+        },
+        {
+          "id": "bf025bb0ce4ac23fb1dbf802",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Hyundai",
+          "model": "Staria 3.5L Comfort (9 Seater)",
+          "year": 2025
+        },
+        {
+          "id": "b653179dc185e3808360b03a",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Chevrolet",
+          "model": "Malibu LS LT",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "checksum": "5624414142e1152998d528511da4b2c1a47826d6145b7e41077be574e83735a1",
+      "rows": [
+        {
+          "id": "9c8a192f1cd32c434ff526ff",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Lamborghini",
+          "model": "Urus LAMBORGHINI SE 2026 800 HP |",
+          "year": 2026
+        },
+        {
+          "id": "c15bd56b81a7a1041ac21246",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Lamborghini",
+          "model": "Urus LAMBORGHINI SE 2026 800 HP |",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "ffca03d996dc7fc54361eee1923684994f99dbda315fbeadc5867b1cee62553f",
+      "rows": [
+        {
+          "id": "a1dd3824d6e5e0f49775f9e7",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "dc72f992cc1fe7310bd71c8e",
+          "market": "uae",
+          "sourceId": "dubicars_uae_exact",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "checksum": "093d5e41dd12746087850253517bfc99e6a9f369e8088aa0bfe39bd3de504d52",
+      "rows": [
+        {
+          "id": "d49b8309cf2aecdd62c78fae",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Cupra",
+          "model": "Formentor 1.5 eTSI mHEV DSG",
+          "year": 2026
+        },
+        {
+          "id": "a4430746849100f5daf24e8e",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Cupra",
+          "model": "Formentor 1.5 eTSI mHEV DSG",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "cef05b1ad9693eae85f6e15a37812a10306341bc8ce150dd4d300d62ce3cae7a",
+      "rows": [
+        {
+          "id": "382bd9748c9cbf7308320ea4",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Audi",
+          "model": "A3 Sportback",
+          "year": 2026
+        },
+        {
+          "id": "dec258a8367c1d903fc076a3",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "Audi",
+          "model": "A3 Sportback",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "ac9ae8c70d42669ccb0b6866acc7acd58a1715c48993ce7d4efad059b5ea95b1",
+      "rows": [
+        {
+          "id": "80bc22bba1838c02c1fdf3dc",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "BMW",
+          "model": "i5",
+          "year": 2026
+        },
+        {
+          "id": "563662bddb3f9e557de19be8",
+          "market": "europe",
+          "sourceId": "otomoto_europe_exact",
+          "make": "BMW",
+          "model": "i5",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "checksum": "7627d08a2729299b475cbc1117a10ddf19ef7d31962c31b5848ada2aa214f914",
+      "rows": [
+        {
+          "id": "1aa16a22f79d40288c774100",
+          "market": "china",
+          "sourceId": "guazi_china_export",
+          "make": "Geely Auto",
+          "model": "icon 2023 1.5TD Chocolate Luxe Edition",
+          "year": 2023
+        },
+        {
+          "id": "85fd7fea4ce865bfe8c57881",
+          "market": "china",
+          "sourceId": "guazi_china_export",
+          "make": "Geely Auto",
+          "model": "Monjaro L 2024 2.0TD DCT EVO Two-Wheel Drive",
+          "year": 2024
+        }
+      ]
+    }
+  ],
+  "repeatedPrices": [
+    {
+      "key": "japan:goonet_japan_exact:10756331",
+      "count": 4,
+      "rows": [
+        {
+          "id": "28453359d620d4056034d1a8",
+          "make": "TOYOTA",
+          "model": "PRIUS U",
+          "year": 2024
+        },
+        {
+          "id": "46d9e1ba9a8bd405b9ca5213",
+          "make": "TOYOTA",
+          "model": "LAND CRUISER PRADO TX L PACKAGE MATT BLACK",
+          "year": 2023
+        },
+        {
+          "id": "ec92d72ed7fe4a08a207ed13",
+          "make": "TOYOTA",
+          "model": "COROLLA CROSS HYBRID Z",
+          "year": 2026
+        },
+        {
+          "id": "ba70651547cc15198961689c",
+          "make": "TOYOTA",
+          "model": "YARIS CROSS HYBRID Z URBANO",
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "key": "uae:dubicars_uae_exact:2031963",
+      "count": 4,
+      "rows": [
+        {
+          "id": "2d727cc5210dbe10a4e85fe7",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "9ae937f19e457ab90bea7cbb",
+          "make": "Mitsubishi",
+          "model": "Outlander PREMIUM Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "a1dd3824d6e5e0f49775f9e7",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        },
+        {
+          "id": "dc72f992cc1fe7310bd71c8e",
+          "make": "Mitsubishi",
+          "model": "Outlander GLX HIGHLINE Z06 GLX High 2.4L",
+          "year": 2024
+        }
+      ]
+    },
+    {
+      "key": "europe:otomoto_europe_exact:4131580",
+      "count": 149,
+      "rows": [
+        {
+          "id": "b006971fc4bd3094059cac87",
+          "make": "RAM",
+          "model": "1500 5.7 Crew Cab Longbed Laramie Black",
+          "year": 2020
+        },
+        {
+          "id": "8617c1a5d5ff9a81ac8b4ec0",
+          "make": "DS Automobiles",
+          "model": "DS 7 Crossback 1.6 E-Tense Performance Line +",
+          "year": 2021
+        },
+        {
+          "id": "5950b3f4e18450dc77393dd6",
+          "make": "Mercedes-Benz",
+          "model": "Klasa S",
+          "year": 2008
+        },
+        {
+          "id": "0e3158e9ae81292082624b2a",
+          "make": "Mercedes-Benz",
+          "model": "SL 500",
+          "year": 2011
+        },
+        {
+          "id": "93f79a8925361ae76986e6b8",
+          "make": "Opel",
+          "model": "Insignia 2.8 T V6 OPC EU6",
+          "year": 2015
+        },
+        {
+          "id": "e6850d358c8919647a678b40",
+          "make": "Jaguar",
+          "model": "XF P250 HSE",
+          "year": 1997
+        },
+        {
+          "id": "f3e4e90cb8b58b889d528206",
+          "make": "Jeep",
+          "model": "Grand Cherokee 3.6 V6 Pentastar 4WD Automatik Overland",
+          "year": 2022
+        },
+        {
+          "id": "970e815a9ce9bf56279d140f",
+          "make": "Jeep",
+          "model": "Compass 1.4 TMair Limited 4WD S&S",
+          "year": 2018
+        },
+        {
+          "id": "1ac954cc857c81f733a1f763",
+          "make": "BMW",
+          "model": "Seria 4 420d xDrive",
+          "year": 1995
+        },
+        {
+          "id": "b60ba6b60273896a4165810b",
+          "make": "Volkswagen",
+          "model": "Polo 1.0 TSI OPF Comfortline",
+          "year": 2019
+        },
+        {
+          "id": "b1c16e537685b6a2e4abb166",
+          "make": "Jeep",
+          "model": "Wrangler Unlimited 2.0 Turbo PHEV 4xe Sahara",
+          "year": 1995
+        },
+        {
+          "id": "b75d1d7a9ea0a7b2b0948656",
+          "make": "Cupra",
+          "model": "Formentor 1.5 TSI DSG",
+          "year": 2023
+        },
+        {
+          "id": "6558512bacb256b48fe4da5f",
+          "make": "Renault",
+          "model": "Kadjar 1.2 Energy TCe Zen",
+          "year": 2016
+        },
+        {
+          "id": "5cd9e4ec286e4060b3571a0f",
+          "make": "Honda",
+          "model": "HR-V",
+          "year": 2025
+        },
+        {
+          "id": "fccad95d048dc4a980111887",
+          "make": "Hyundai",
+          "model": "Tucson",
+          "year": 2019
+        },
+        {
+          "id": "29f56e01f70f21e787df951e",
+          "make": "Volkswagen",
+          "model": "Polo 1.4 16V Highline",
+          "year": 2014
+        },
+        {
+          "id": "7d1a1567530303f78ea2b189",
+          "make": "Fiat",
+          "model": "Punto Evo 1.2 8V",
+          "year": 2012
+        },
+        {
+          "id": "ee8d556564ddd54dcd6fb05a",
+          "make": "Volkswagen",
+          "model": "Golf 1.5 TSI EVO Life",
+          "year": 2022
+        },
+        {
+          "id": "d7f07218d25d39127bc8e173",
+          "make": "Opel",
+          "model": "Mokka 1.6 ecoFLEX Start/Stop Color Edition",
+          "year": 2015
+        },
+        {
+          "id": "d5643a0f46616affdc7729e9",
+          "make": "Suzuki",
+          "model": "Vitara 1.6 (4x4) Allgrip Limited",
+          "year": 2015
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-18",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 4,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 4
+  },
+  "modelId": "wuling/air-ev",
+  "canonicalName": "Air EV",
+  "generationIds": [
+    "wuling/air-ev/china-launch-2022"
+  ],
+  "variantIds": [
+    "wuling/air-ev/china-launch-2022/2-seat-standard",
+    "wuling/air-ev/china-launch-2022/2-seat-advanced",
+    "wuling/air-ev/china-launch-2022/4-seat-standard",
+    "wuling/air-ev/china-launch-2022/4-seat-advanced"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "exactManufacturerGradesOnly": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "fourSeatDimensionsNotCopiedToTwoSeatEditions": true,
+    "batteryBasisUnspecifiedAndRejected": true,
+    "motorPeakNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-09-06",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "encar": {
+    "officialAppUrl": "https://car.encar.com/_next/static/chunks/pages/_app-2e91ab97405be59a.js",
+    "officialAppSha256": "80c31e5737983aba08e4c85cf548b4349a87589f2cc4a33144b11543c2d78b69",
+    "routeStillPresent": "https://api.encar.com/search/car/list/mobile",
+    "responseStatus": 404,
+    "responseMetaRefreshPath": "/has_been_cr_blocked_AWS.html",
+    "conclusion": "Access block response, not evidence of obsolete route. No authorization/cookie or challenge bypass used."
+  },
+  "china": {
+    "url": "https://global.che168.com/en/detail/59282752",
+    "responseSha256": "f6bc470a48b883fe99a19758789302454dd739e8fabe7ba1fa097a083b4b3a33",
+    "listingId": "59282752",
+    "specId": 32677,
+    "engineCc": 2356,
+    "powerHp": 208,
+    "proof": "SSR JSON component binds carId, initialSpecId and named Engine parameters. The public API engine label contains only 2.4L."
+  },
+  "dubicars": {
+    "url": "https://www.dubicars.com/2021-lexus-ls500-platinum-ls-500-twin-turbo-american-specs-luxury-package-994147.html",
+    "responseSha256": "1b1c126d5f45ed5fe2d5cc25ea1b7348147ddb4a81d2f4c17124c6e62cd6c4d6",
+    "fixed": "Read item-specifications section after description and title-bar price; reject price on request instead of borrowing recommendations.",
+    "verifiedAfterFix": {
+      "fuel": "petrol",
+      "powerHp": 400,
+      "engineCc": null,
+      "sourcePrice": null
+    }
+  },
+  "georgia": {
+    "url": "https://autopapa.ge/en/usd/lexus/LX-600/959885",
+    "responseSha256": "8f1dfddf6a4825ab8e9b10468ccbf665854f67d4d2d381bac2bac6e80c0f9365",
+    "primaryPower": "blank",
+    "primaryEngineLabel": "3.4 l",
+    "conclusion": "No exact cc or horsepower in this primary facts block."
+  }
+}

@@ -1,0 +1,9042 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 39,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "trabant:p601",
+      "make": "Trabant",
+      "model": "P601",
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "trabant:p601k",
+      "make": "Trabant",
+      "model": "P601 K",
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "trabant:p601l",
+      "make": "Trabant",
+      "model": "P601L",
+      "canonical": {
+        "brandId": "trabant",
+        "modelId": null,
+        "canonicalMake": "Trabant",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1200herald",
+      "make": "Triumph",
+      "model": "1200 Herald",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1360herald",
+      "make": "Triumph",
+      "model": "13/60 Herald",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1300",
+      "make": "Triumph",
+      "model": "1300",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1300tc",
+      "make": "Triumph",
+      "model": "1300 Tc",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1500",
+      "make": "Triumph",
+      "model": "1500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1500tc",
+      "make": "Triumph",
+      "model": "1500 Tc",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:1800roadster",
+      "make": "Triumph",
+      "model": "1800 Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:20tr3",
+      "make": "Triumph",
+      "model": "20 Tr 3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2000",
+      "make": "Triumph",
+      "model": "2000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2000mk2",
+      "make": "Triumph",
+      "model": "2000 MK2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2500",
+      "make": "Triumph",
+      "model": "2500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2500pi",
+      "make": "Triumph",
+      "model": "2500 PI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2500s",
+      "make": "Triumph",
+      "model": "2500 S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2500sauto",
+      "make": "Triumph",
+      "model": "2500 S Auto",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:2500tc",
+      "make": "Triumph",
+      "model": "2500 Tc",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:dolomite",
+      "make": "Triumph",
+      "model": "Dolomite",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:dolomitesprint",
+      "make": "Triumph",
+      "model": "Dolomite Sprint",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:gloria",
+      "make": "Triumph",
+      "model": "Gloria",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:gt6",
+      "make": "Triumph",
+      "model": "GT6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:gt6mk3",
+      "make": "Triumph",
+      "model": "GT6 Mk3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:herald",
+      "make": "Triumph",
+      "model": "Herald",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:herald1250",
+      "make": "Triumph",
+      "model": "Herald 12/50",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:herald1200",
+      "make": "Triumph",
+      "model": "Herald 1200",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:herald1360",
+      "make": "Triumph",
+      "model": "Herald 13/60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:mayflower",
+      "make": "Triumph",
+      "model": "Mayflower",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:mk2",
+      "make": "Triumph",
+      "model": "MK2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:renown",
+      "make": "Triumph",
+      "model": "Renown",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:roadster",
+      "make": "Triumph",
+      "model": "Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfire",
+      "make": "Triumph",
+      "model": "Spitfire",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfire1500",
+      "make": "Triumph",
+      "model": "Spitfire 1500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfire1500tc",
+      "make": "Triumph",
+      "model": "Spitfire 1500 Tc",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfire4",
+      "make": "Triumph",
+      "model": "Spitfire 4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfiremk",
+      "make": "Triumph",
+      "model": "Spitfire Mk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfiremk1v",
+      "make": "Triumph",
+      "model": "Spitfire Mk 1V",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfiremk2",
+      "make": "Triumph",
+      "model": "Spitfire Mk2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfiremk3",
+      "make": "Triumph",
+      "model": "Spitfire Mk3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:spitfiremk4",
+      "make": "Triumph",
+      "model": "Spitfire Mk4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:sports",
+      "make": "Triumph",
+      "model": "Sports",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:stag",
+      "make": "Triumph",
+      "model": "Stag",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:super7",
+      "make": "Triumph",
+      "model": "Super 7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:toledo",
+      "make": "Triumph",
+      "model": "Toledo",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr",
+      "make": "Triumph",
+      "model": "Tr",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr2",
+      "make": "Triumph",
+      "model": "TR2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr250",
+      "make": "Triumph",
+      "model": "TR250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr3",
+      "make": "Triumph",
+      "model": "TR3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr3a",
+      "make": "Triumph",
+      "model": "TR3A",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr4",
+      "make": "Triumph",
+      "model": "TR4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr4irs",
+      "make": "Triumph",
+      "model": "TR4 Irs",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr4a",
+      "make": "Triumph",
+      "model": "TR4A",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr4airs",
+      "make": "Triumph",
+      "model": "TR4A Irs",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr5",
+      "make": "Triumph",
+      "model": "TR5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr5pi",
+      "make": "Triumph",
+      "model": "TR5 PI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr6",
+      "make": "Triumph",
+      "model": "TR6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr6pi",
+      "make": "Triumph",
+      "model": "TR6 PI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr7",
+      "make": "Triumph",
+      "model": "TR7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:tr8",
+      "make": "Triumph",
+      "model": "TR8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:vitesse",
+      "make": "Triumph",
+      "model": "Vitesse",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "triumph:vitesse6",
+      "make": "Triumph",
+      "model": "Vitesse 6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:290",
+      "make": "TVR",
+      "model": "290",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:3000m",
+      "make": "TVR",
+      "model": "3000 M",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:3000s",
+      "make": "TVR",
+      "model": "3000S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:350i",
+      "make": "TVR",
+      "model": "350i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:cerbera",
+      "make": "TVR",
+      "model": "Cerbera",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:chimaera",
+      "make": "TVR",
+      "model": "Chimaera",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:chimaera500",
+      "make": "TVR",
+      "model": "Chimaera 500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:chimera",
+      "make": "TVR",
+      "model": "Chimera",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:grantura",
+      "make": "TVR",
+      "model": "Grantura",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:griffith",
+      "make": "TVR",
+      "model": "Griffith",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:griffith500",
+      "make": "TVR",
+      "model": "Griffith 500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:s3",
+      "make": "TVR",
+      "model": "S3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:sagaris",
+      "make": "TVR",
+      "model": "Sagaris",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:t350c",
+      "make": "TVR",
+      "model": "T350C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:tamora",
+      "make": "TVR",
+      "model": "Tamora",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:tasmin",
+      "make": "TVR",
+      "model": "Tasmin",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:tuscan",
+      "make": "TVR",
+      "model": "Tuscan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "tvr:vixen",
+      "make": "TVR",
+      "model": "Vixen",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:2206",
+      "make": "UAZ",
+      "model": "2206",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:3741",
+      "make": "UAZ",
+      "model": "3741",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:3909",
+      "make": "UAZ",
+      "model": "3909",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:3962",
+      "make": "UAZ",
+      "model": "3962",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:452",
+      "make": "UAZ",
+      "model": "452",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:469",
+      "make": "UAZ",
+      "model": "469",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "uaz:469b",
+      "make": "UAZ",
+      "model": "469B",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "valiant:barracuda",
+      "make": "Valiant",
+      "model": "Barracuda",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "valiant:v200",
+      "make": "Valiant",
+      "model": "V-200",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vandenplas:1500",
+      "make": "Vanden Plas",
+      "model": "1500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vandenplas:princess",
+      "make": "Vanden Plas",
+      "model": "Princess",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vandenplas:princess4litrer",
+      "make": "Vanden Plas",
+      "model": "Princess 4 Litre R",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vanster:vanster",
+      "make": "Vanster",
+      "model": "Vanster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:10",
+      "make": "Vauxhall",
+      "model": "10",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:12",
+      "make": "Vauxhall",
+      "model": "12",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:adam",
+      "make": "Vauxhall",
+      "model": "Adam",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:agila",
+      "make": "Vauxhall",
+      "model": "Agila",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:ampera",
+      "make": "Vauxhall",
+      "model": "Ampera",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:antara",
+      "make": "Vauxhall",
+      "model": "Antara",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:astra",
+      "make": "Vauxhall",
+      "model": "Astra",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/astra",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Astra"
+      },
+      "aliases": [
+        "ASTRA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:calibra",
+      "make": "Vauxhall",
+      "model": "Calibra",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:carlton",
+      "make": "Vauxhall",
+      "model": "Carlton",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:cascada",
+      "make": "Vauxhall",
+      "model": "Cascada",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:cavalier",
+      "make": "Vauxhall",
+      "model": "Cavalier",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:chevette",
+      "make": "Vauxhall",
+      "model": "Chevette",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:combolife",
+      "make": "Vauxhall",
+      "model": "Combo Life",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/combo-life",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Combo Life"
+      },
+      "aliases": [
+        "COMBO LIFE DESIGN CDTI S S",
+        "COMBO LIFE DESIGN S S",
+        "COMBO LIFE DESIGN TURBO D S S",
+        "COMBO LIFE EDITION S S",
+        "Combo Life Electric",
+        "COMBO LIFE ELITE S S AUTO",
+        "COMBO LIFE ELITE TURBO D S S A",
+        "COMBO LIFE ENERGY CDTI S S",
+        "COMBO LIFE ENERGY CDTI SS AUTO",
+        "COMBO LIFE ENERGY S S",
+        "COMBO LIFE ENERGY S S AUTO",
+        "COMBO LIFE ENERGY TURBO D S S",
+        "COMBO LIFE SE TURBO D S S",
+        "Combo-e Life"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:corsa",
+      "make": "Vauxhall",
+      "model": "Corsa",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/corsa",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Corsa"
+      },
+      "aliases": [
+        "CORSA E ELITE NAV",
+        "CORSA E SE NAV",
+        "CORSA ELITE",
+        "CORSA ELITE CDTI ECOTEC S S",
+        "CORSA ELITE NAV PREMIUM TRBO A",
+        "CORSA ELITE NAV PREMIUM TRBO D",
+        "CORSA ELITE NAV PREMIUM TURBO",
+        "CORSA ELITE NAV TURBO",
+        "CORSA ELITE NAV TURBO AUTO",
+        "CORSA ELITE NAV TURBO D",
+        "CORSA ELITE TURBO AUTO",
+        "CORSA SE",
+        "CORSA SE NAV",
+        "CORSA SE NAV PREMIUM",
+        "CORSA SE NAV PREMIUM TURBO",
+        "CORSA SE NAV PREMIUM TURBO A",
+        "CORSA SE NAV PREMIUM TURBO D",
+        "CORSA SE NAV TURBO",
+        "CORSA SE NAV TURBO AUTO",
+        "CORSA SE NAV TURBO D",
+        "CORSA SE PREMIUM",
+        "CORSA SE PREMIUM TURBO",
+        "CORSA SE PREMIUM TURBO AUTO",
+        "CORSA SE PREMIUM TURBO D",
+        "CORSA SE TURBO",
+        "CORSA SE TURBO AUTO",
+        "CORSA SE TURBO D",
+        "CORSA SPORT",
+        "CORSA SRI",
+        "CORSA SRI NAV PREMIUM TURBO",
+        "CORSA SRI NAV PREMIUM TURBO D",
+        "CORSA SRI NAV TURBO",
+        "CORSA SRI PREMIUM TURBO",
+        "CORSA SRI PREMIUM TURBO AUTO",
+        "CORSA SRI PREMIUM TURBO D",
+        "CORSA SRI TURBO",
+        "CORSA SRI TURBO D",
+        "CORSA ULTIMATE NAV TURBO AUTO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:cresta",
+      "make": "Vauxhall",
+      "model": "Cresta",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:crossland",
+      "make": "Vauxhall",
+      "model": "Crossland",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/crossland",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Crossland"
+      },
+      "aliases": [
+        "CROSSLAND X B-NESS ED NAV T A",
+        "CROSSLAND X B-NESS ED NAV TD A",
+        "CROSSLAND X BUSINESS ED NAV",
+        "CROSSLAND X BUSINESS ED NAV T",
+        "CROSSLAND X BUSINESS ED NAV TD",
+        "CROSSLAND X DESIGN LN ECO S S",
+        "CROSSLAND X ELITE",
+        "CROSSLAND X ELITE ECOTEC D S S",
+        "CROSSLAND X ELITE ECOTEC S S",
+        "CROSSLAND X ELITE NAV",
+        "CROSSLAND X ELITE NAV ECO D SS",
+        "CROSSLAND X ELITE NAV ECO S S",
+        "CROSSLAND X ELITE NAV TD AUTO",
+        "CROSSLAND X ELITE NAV TURBO",
+        "CROSSLAND X ELITE NAV TURBO A",
+        "CROSSLAND X ELITE NAV TURBO D",
+        "CROSSLAND X ELITE NAV TURBO SS",
+        "CROSSLAND X ELITE TURBO",
+        "CROSSLAND X ELITE TURBO AUTO",
+        "CROSSLAND X ELITE TURBO D",
+        "CROSSLAND X ELITE TURBO D AUTO",
+        "CROSSLAND X ELITE TURBO S S",
+        "CROSSLAND X ELT NV ETEC T SS A",
+        "CROSSLAND X GRIFFIN",
+        "CROSSLAND X GRIFFIN TURBO",
+        "CROSSLAND X GRIFFIN TURBO AUTO",
+        "CROSSLAND X GRIFFIN TURBO D",
+        "CROSSLAND X GRIFFIN TURBO D A",
+        "CROSSLAND X SE",
+        "CROSSLAND X SE ECOTEC D S S",
+        "CROSSLAND X SE ECOTEC S S",
+        "CROSSLAND X SE NAV",
+        "CROSSLAND X SE NAV ECOTEC S S",
+        "CROSSLAND X SPORT",
+        "CROSSLAND X SPORT NAV PREM T",
+        "CROSSLAND X SPORT NAV PREM T A",
+        "CROSSLAND X SPORT NAV PREM TD",
+        "CROSSLAND X SPORT NAV PREMIUM",
+        "CROSSLAND X SPORT TURBO",
+        "CROSSLAND X SPORT TURBO AUTO",
+        "CROSSLAND X SPORT TURBO D",
+        "CROSSLAND X SPORT TURBO D AUTO",
+        "CROSSLAND X SPT NAV PREM TD A",
+        "CROSSLAND X SRI NAV",
+        "CROSSLAND X SRI NAV TURBO",
+        "CROSSLAND X SRI NAV TURBO AUTO",
+        "CROSSLAND X SRI NAV TURBO D",
+        "CROSSLAND X TEC LN NV ECO D SS",
+        "CROSSLAND X TECH LINE NAV",
+        "CROSSLAND X TECH LN NAV ECO SS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:dx",
+      "make": "Vauxhall",
+      "model": "Dx",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:eaglequest",
+      "make": "Vauxhall",
+      "model": "Eagle Quest",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:firenza",
+      "make": "Vauxhall",
+      "model": "Firenza",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:frontera",
+      "make": "Vauxhall",
+      "model": "Frontera",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/frontera",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Frontera"
+      },
+      "aliases": [
+        "FRONTERA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:grandland",
+      "make": "Vauxhall",
+      "model": "Grandland",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/grandland",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Grandland"
+      },
+      "aliases": [
+        "G-LAND X BUS ED NAV PRM HYB4 A",
+        "GRANDLAND X B-NESS ED NV T D A",
+        "GRANDLAND X BNESS ED NAV HYB A",
+        "GRANDLAND X BUSINESS ED NAV T",
+        "GRANDLAND X BUSINSS ED NAV T A",
+        "GRANDLAND X BUSINSS ED NAV T D",
+        "GRANDLAND X DESIGN LINE T SS A",
+        "GRANDLAND X ELITE NAV HYB4 A",
+        "GRANDLAND X ELITE NAV PREM T",
+        "GRANDLAND X ELITE NAV PREM T A",
+        "GRANDLAND X ELITE NAV PREM TD",
+        "GRANDLAND X ELITE NAV T D A",
+        "GRANDLAND X ELITE NAV T D SS",
+        "GRANDLAND X ELITE NAV T D SS A",
+        "GRANDLAND X ELITE NAV T SS A",
+        "GRANDLAND X ELITE NAV TURBO",
+        "GRANDLAND X ELITE NAV TURBO A",
+        "GRANDLAND X ELITE NAV TURBO D",
+        "GRANDLAND X ELITE NAV TURBO SS",
+        "GRANDLAND X ELITE NV PREM TD A",
+        "GRANDLAND X GRIFFIN TURBO",
+        "GRANDLAND X GRIFFIN TURBO AUTO",
+        "GRANDLAND X GRIFFIN TURBO D",
+        "GRANDLAND X GRIFFIN TURBO D A",
+        "GRANDLAND X SE NAV HYBRID AUTO",
+        "GRANDLAND X SE PREMIUM TD AUTO",
+        "GRANDLAND X SE PREMIUM TURBO",
+        "GRANDLAND X SE PREMIUM TURBO A",
+        "GRANDLAND X SE PREMIUM TURBO D",
+        "GRANDLAND X SE TURBO",
+        "GRANDLAND X SE TURBO AUTO",
+        "GRANDLAND X SE TURBO D",
+        "GRANDLAND X SE TURBO D AUTO",
+        "GRANDLAND X SE TURBO D S S",
+        "GRANDLAND X SE TURBO D S S A",
+        "GRANDLAND X SE TURBO S S",
+        "GRANDLAND X SE TURBO S S AUTO",
+        "GRANDLAND X SPORT NAV T D SS",
+        "GRANDLAND X SPORT NAV T D SS A",
+        "GRANDLAND X SPORT NAV T SS A",
+        "GRANDLAND X SPORT NAV TURBO SS",
+        "GRANDLAND X SRI NAV HYBRID A",
+        "GRANDLAND X SRI NAV HYBRID4 A",
+        "GRANDLAND X SRI NAV TURBO",
+        "GRANDLAND X SRI NAV TURBO A",
+        "GRANDLAND X SRI NAV TURBO D",
+        "GRANDLAND X SRI NAV TURBO D A",
+        "GRANDLAND X TECH LINE NAV T SS",
+        "GRANDLAND X TECH LN NAV T D SS",
+        "GRANDLAND X TECH LN NAV T SS A",
+        "GRANDLAND X ULTIMATE T D S S A",
+        "GRANDLAND X ULTIMATE TURBO D A",
+        "GRANDLAND X ULTIMTE NAV HYB4 A"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:gy",
+      "make": "Vauxhall",
+      "model": "Gy",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:insignia",
+      "make": "Vauxhall",
+      "model": "Insignia",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/insignia",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Insignia"
+      },
+      "aliases": [
+        "INSIGNIA DESIGN ECOTEC D",
+        "INSIGNIA DESIGN NAV ECOTEC D",
+        "INSIGNIA DESIGN NAV TURBO",
+        "INSIGNIA DESIGN NAV TURBO D",
+        "INSIGNIA DESIGN NAV TURBO D A",
+        "INSIGNIA DESIGN TURBO",
+        "INSIGNIA DESIGN TURBO AUTO",
+        "INSIGNIA DESIGN TURBO D",
+        "INSIGNIA DESIGN TURBO D AUTO",
+        "INSIGNIA ELITE NAV ECOTEC D",
+        "INSIGNIA ELITE NAV TURBO",
+        "INSIGNIA ELITE NAV TURBO AUTO",
+        "INSIGNIA ELITE NAV TURBO D",
+        "INSIGNIA ELITE NAV TURBO D A",
+        "INSIGNIA GSI NAV T D 4X4 A",
+        "INSIGNIA GSI TURBO 4X4 AUTO",
+        "INSIGNIA SE NAV CDTI",
+        "INSIGNIA SE NAV TURBO D",
+        "INSIGNIA SE NAV TURBO D AUTO",
+        "INSIGNIA SRI ECOTEC D",
+        "INSIGNIA SRI NAV ECOTEC D",
+        "INSIGNIA SRI NAV TURBO",
+        "INSIGNIA SRI NAV TURBO AUTO",
+        "INSIGNIA SRI NAV TURBO D",
+        "INSIGNIA SRI NAV TURBO D AUTO",
+        "INSIGNIA SRI TURBO",
+        "INSIGNIA SRI TURBO AUTO",
+        "INSIGNIA SRI TURBO D",
+        "INSIGNIA SRI VX-LINE NAV T D",
+        "INSIGNIA SRI VX-LINE NAV T D A",
+        "INSIGNIA SRI VX-LINE NAV TUR A",
+        "INSIGNIA SRI VX-LINE NAV TURBO",
+        "INSIGNIA TECH LINE NAV E-TEC D",
+        "INSIGNIA TECH LINE NAV T D A",
+        "INSIGNIA TECH LINE NAV TURBO",
+        "INSIGNIA TECH LINE NAV TURBO A",
+        "INSIGNIA TECH LINE NAV TURBO D",
+        "INSIGNIA ULTIMATE NAV TUR D A",
+        "INSIGNIA ULTIMATE NAV TURBO A",
+        "INSIGNIA ULTIMATE NAV TURBO D"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:j14",
+      "make": "Vauxhall",
+      "model": "J14",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:magnum",
+      "make": "Vauxhall",
+      "model": "Magnum",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:meriva",
+      "make": "Vauxhall",
+      "model": "Meriva",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:mokka",
+      "make": "Vauxhall",
+      "model": "Mokka",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/mokka",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Mokka"
+      },
+      "aliases": [
+        "MOKKA X"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:monaro",
+      "make": "Vauxhall",
+      "model": "Monaro",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:nova",
+      "make": "Vauxhall",
+      "model": "Nova",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:omega",
+      "make": "Vauxhall",
+      "model": "Omega",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:royale",
+      "make": "Vauxhall",
+      "model": "Royale",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:signum",
+      "make": "Vauxhall",
+      "model": "Signum",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:sports",
+      "make": "Vauxhall",
+      "model": "Sports",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:tigra",
+      "make": "Vauxhall",
+      "model": "Tigra",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:vectra",
+      "make": "Vauxhall",
+      "model": "Vectra",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:velox",
+      "make": "Vauxhall",
+      "model": "Velox",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:ventora",
+      "make": "Vauxhall",
+      "model": "Ventora",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:victor",
+      "make": "Vauxhall",
+      "model": "Victor",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:viscount",
+      "make": "Vauxhall",
+      "model": "Viscount",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:viva",
+      "make": "Vauxhall",
+      "model": "Viva",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:vivarolife",
+      "make": "Vauxhall",
+      "model": "Vivaro Life",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/vivaro-life",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Vivaro Life"
+      },
+      "aliases": [
+        "Vivaro Life Combi",
+        "VIVARO LIFE EDITION S S",
+        "VIVARO LIFE ELITE S S",
+        "VIVARO LIFE ELITE S S AUTO",
+        "Vivaro-e Life",
+        "VIVARO-E LIFE EDITION",
+        "VIVARO-E LIFE ELITE"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:vx",
+      "make": "Vauxhall",
+      "model": "Vx",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:vx220",
+      "make": "Vauxhall",
+      "model": "VX220",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:vx490",
+      "make": "Vauxhall",
+      "model": "VX4/90",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:vxr8",
+      "make": "Vauxhall",
+      "model": "VXR8",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:wyvern",
+      "make": "Vauxhall",
+      "model": "Wyvern",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vauxhall:zafira",
+      "make": "Vauxhall",
+      "model": "Zafira",
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf6",
+      "make": "VinFast",
+      "model": "VF 6",
+      "canonical": {
+        "brandId": "vinfast",
+        "modelId": "vinfast/vf-6",
+        "canonicalMake": "VinFast",
+        "canonicalModel": "VF 6"
+      },
+      "aliases": [
+        "VF6"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf7",
+      "make": "Vinfast",
+      "model": "VF 7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf8",
+      "make": "VinFast",
+      "model": "VF 8",
+      "canonical": {
+        "brandId": "vinfast",
+        "modelId": "vinfast/vf-8",
+        "canonicalMake": "VinFast",
+        "canonicalModel": "VF 8"
+      },
+      "aliases": [
+        "VF8"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf9",
+      "make": "Vinfast",
+      "model": "VF 9",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf7plus",
+      "make": "VinFast",
+      "model": "VF7 PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf8eco",
+      "make": "VinFast",
+      "model": "VF8 ECO",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf8plus",
+      "make": "VinFast",
+      "model": "VF8 PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf8plusperformance",
+      "make": "VinFast",
+      "model": "VF8 PLUS Performance",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf9eco",
+      "make": "VinFast",
+      "model": "VF9 ECO",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "vinfast:vf9plus",
+      "make": "VinFast",
+      "model": "VF9 PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volga:gazm21",
+      "make": "Volga",
+      "model": "Gaz-M21",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volga:m21",
+      "make": "Volga",
+      "model": "M21",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:1100",
+      "make": "Volkswagen",
+      "model": "1100",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:1200",
+      "make": "Volkswagen",
+      "model": "1200",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:1500",
+      "make": "Volkswagen",
+      "model": "1500",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:1500s",
+      "make": "Volkswagen",
+      "model": "1500 S",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:1600",
+      "make": "Volkswagen",
+      "model": "1600",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:166",
+      "make": "Volkswagen",
+      "model": "166",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:18",
+      "make": "Volkswagen",
+      "model": "18",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:181",
+      "make": "Volkswagen",
+      "model": "181",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:19e",
+      "make": "Volkswagen",
+      "model": "19 E",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:204",
+      "make": "Volkswagen",
+      "model": "204",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:211",
+      "make": "Volkswagen",
+      "model": "211",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:221",
+      "make": "Volkswagen",
+      "model": "221",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:224",
+      "make": "Volkswagen",
+      "model": "224",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:241",
+      "make": "Volkswagen",
+      "model": "241",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:251",
+      "make": "Volkswagen",
+      "model": "251",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:253",
+      "make": "Volkswagen",
+      "model": "253",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:28",
+      "make": "Volkswagen",
+      "model": "28",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:3bg",
+      "make": "Volkswagen",
+      "model": "3BG",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:411",
+      "make": "Volkswagen",
+      "model": "411",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:411le",
+      "make": "Volkswagen",
+      "model": "411 Le",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:412",
+      "make": "Volkswagen",
+      "model": "412",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:7hk",
+      "make": "Volkswagen",
+      "model": "7HK",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:arteon",
+      "make": "Volkswagen",
+      "model": "Arteon",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/arteon",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Arteon"
+      },
+      "aliases": [
+        "ARTEON",
+        "Arteon 2.0 / 200kW (DSG)",
+        "Arteon 2.0 / 206kW (DSG)"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:arteon4motion",
+      "make": "Volkswagen",
+      "model": "Arteon 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlas",
+      "make": "Volkswagen",
+      "model": "Atlas",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/atlas",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Atlas"
+      },
+      "aliases": [
+        "ATLAS",
+        "TERAMONT",
+        "TERAMONT X"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlas4motion",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlas4motioncomfortline",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION Comfortline",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlas4motionhighlineexecline",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION Highline/Execline",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlas4motionpeakedition",
+      "make": "Volkswagen",
+      "model": "Atlas 4MOTION Peak Edition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlascrosssport",
+      "make": "Volkswagen",
+      "model": "Atlas Cross Sport",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/atlas-cross-sport",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Atlas Cross Sport"
+      },
+      "aliases": [
+        "ATLAS CROSS SPORT"
+      ],
+      "markets": [
+        "global",
+        "canada",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:atlascrosssport4motion",
+      "make": "Volkswagen",
+      "model": "Atlas Cross Sport 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:beetle",
+      "make": "Volkswagen",
+      "model": "Beetle",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/beetle",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Beetle"
+      },
+      "aliases": [
+        "BEETLE",
+        "The Beetle 2.0 R-Line (DSG)",
+        "The Beetle Cabriolet (DSG)",
+        "The Beetle Design (DSG) The Beetle Design Leather Packge (DSG)",
+        "The Beetle Design Leather Packge (DSG)",
+        "The Beetle (DSG)",
+        "The Beetle Dune (DSG)",
+        "The Beetle R-Line (DSG)",
+        "The Beetle Turbo (DSG)",
+        "Käfer",
+        "Vocho",
+        "Fusca",
+        "Coccinelle",
+        "Type 1"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:bora",
+      "make": "Volkswagen",
+      "model": "Bora",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/bora",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Bora"
+      },
+      "aliases": [
+        "BORA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:cabrio",
+      "make": "Volkswagen",
+      "model": "Cabrio",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:cabriolet",
+      "make": "Volkswagen",
+      "model": "Cabriolet",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:caddy",
+      "make": "Volkswagen",
+      "model": "Caddy",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/caddy",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Caddy"
+      },
+      "aliases": [
+        "CADDY"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:california",
+      "make": "Volkswagen",
+      "model": "California",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/california",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "California"
+      },
+      "aliases": [
+        "CALIFORNIA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "van"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:caravelle",
+      "make": "Volkswagen",
+      "model": "Caravelle",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/caravelle",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Caravelle"
+      },
+      "aliases": [
+        "ABT E-CARAVELLE 6.1",
+        "CARAVELLE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:cc",
+      "make": "Volkswagen",
+      "model": "CC",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/cc",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "CC"
+      },
+      "aliases": [
+        "Volkswagen CC TSI (DSG)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:corrado",
+      "make": "Volkswagen",
+      "model": "Corrado",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:crafter",
+      "make": "Volkswagen",
+      "model": "Crafter",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/crafter",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Crafter"
+      },
+      "aliases": [
+        "CRAFTER",
+        "CRAFTER 2017",
+        "CRAFTER 2017 L2H2",
+        "CRAFTER CR35 STARTLINE TDI",
+        "CRAFTER CR35 TRENDLINE TDI",
+        "CRAFTER F-WAV",
+        "Crafter panel van",
+        "CRAFTER PMR",
+        "CRAFTER PMR REHATRANS",
+        "CRAFTER SKÅP",
+        "CRAFTER TRIFLEXAIR",
+        "CRAFTER-OLMEDO SPA",
+        "VW CRAFTER",
+        "VW CRAFTER STIL"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Van"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:derby",
+      "make": "Volkswagen",
+      "model": "Derby",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:egolf",
+      "make": "Volkswagen",
+      "model": "E-Golf",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/e-golf",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "E-Golf"
+      },
+      "aliases": [
+        "E-GOLF"
+      ],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:eup",
+      "make": "Volkswagen",
+      "model": "E-Up !",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/e-up",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "E-Up !"
+      },
+      "aliases": [
+        "E - UP!",
+        "E-UP",
+        "E-UP!",
+        "EUP!",
+        "EUP! / /"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:eos",
+      "make": "Volkswagen",
+      "model": "Eos",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/eos",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Eos"
+      },
+      "aliases": [
+        "EOS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:eurovan",
+      "make": "Volkswagen",
+      "model": "Eurovan",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:fox",
+      "make": "Volkswagen",
+      "model": "Fox",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:gli",
+      "make": "Volkswagen",
+      "model": "GLI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:gol",
+      "make": "Volkswagen",
+      "model": "Gol",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:golf",
+      "make": "Volkswagen",
+      "model": "Golf",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/golf",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Golf"
+      },
+      "aliases": [
+        "Golf 1.2 / 77kW (DSG)",
+        "Golf 1.4 / 103kW (DSG)",
+        "Golf 2.0 GTI (DSG)",
+        "Golf 2.0 TDI / 110kW (DSG)",
+        "Golf Alltrack (DSG)",
+        "Golf Cabriolet (DSG)",
+        "Golf eTSI 1.0 / 81kW (DSG)",
+        "Golf eTSI 1.5 / 110kW (DSG)",
+        "Golf eTSI 1.5 / 85kW (DSG)",
+        "Golf GTI",
+        "Golf GTI 2.0 / 180kW (DSG)",
+        "Golf GTI Clubsport (DSG)",
+        "Golf GTI (DSG)",
+        "Golf GTI Performance (DSG)",
+        "Golf GTI TCR 2.0/213kW (DSG)",
+        "Golf R",
+        "Golf R 2.0 / 235kW (DSG)",
+        "Golf R (DSG)",
+        "Golf R Variant 2.0 / 235kW (DSG)",
+        "Golf R Variant (DSG)",
+        "Golf TSI Highline (DSG)",
+        "Golf TSI Trendline BlueMotion Technology (DSG)",
+        "Golf TSI Trendline / Comfortline (DSG)",
+        "Golf Variant 1.2 / 77kW (DSG)",
+        "Golf Variant 1.4 / 103kW (DSG)",
+        "Golf Variant 2.0 TDI / 110kW (DSG)",
+        "Golf Variant eTSI 1.0 / 81kW (DSG)",
+        "Golf Variant eTSI 1.5 / 110kW (DSG)",
+        "Golf Variant eTSI 1.5 / 85kW (DSG)",
+        "Golf Variant TDI / 110kW (DSG)",
+        "Golf Variant TSI Comfortline (DSG)",
+        "Golf Variant TSI Highline (DSG) Golf Variant R-line (DSG)",
+        "Golf Variant TSI Trendline BlueMotion Technology (DSG)",
+        "New Golf 1.2 / 77kW (DSG)",
+        "New Golf 1.4 / 103kW (DSG)",
+        "New Golf Alltrack (DSG)",
+        "New Golf GTI",
+        "New Golf GTI (DSG)",
+        "New Golf R",
+        "New Golf R (DSG)",
+        "New Golf R Variant (DSG)",
+        "New Golf Variant 1.2 / 77kW (DSG)",
+        "New Golf Variant 1.4 / 103kW (DSG)",
+        "Rabbit"
+      ],
+      "markets": [
+        "global",
+        "canada",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "Compact car",
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:golfr",
+      "make": "Volkswagen",
+      "model": "Golf R",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:golfgti",
+      "make": "Volkswagen",
+      "model": "Golf/GTI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:grandcalifornia",
+      "make": "Volkswagen",
+      "model": "Grand California",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/grand-california",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Grand California"
+      },
+      "aliases": [
+        "GRAND CALIFORNIA"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:gti",
+      "make": "Volkswagen",
+      "model": "GTI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:idbuzz",
+      "make": "Volkswagen",
+      "model": "Id. Buzz",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-buzz",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Id. Buzz"
+      },
+      "aliases": [
+        "ID BUZZ",
+        "ID. BUZZ",
+        "ID.BUZZ",
+        "IDBUZZ"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:idbuzzpro",
+      "make": "Volkswagen",
+      "model": "ID. Buzz Pro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:idbuzzpro4motion",
+      "make": "Volkswagen",
+      "model": "ID. Buzz Pro 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id3",
+      "make": "Volkswagen",
+      "model": "ID.3",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-3",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.3"
+      },
+      "aliases": [
+        "ID. 3",
+        "ID.3PRO S 150KW",
+        "ID.3PRO107KW",
+        "ID3",
+        "ID3PRO150KW"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4",
+      "make": "Volkswagen",
+      "model": "ID.4",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-4",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.4"
+      },
+      "aliases": [
+        "ID 4",
+        "ID. 4",
+        "ID.4PRO 150 KW",
+        "ID4",
+        "ID4GTX 220 KW"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4awd",
+      "make": "Volkswagen",
+      "model": "ID.4 AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4awdpro",
+      "make": "Volkswagen",
+      "model": "ID.4 AWD Pro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4awdpros",
+      "make": "Volkswagen",
+      "model": "ID.4 AWD Pro S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4pro",
+      "make": "Volkswagen",
+      "model": "ID.4 Pro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4pros",
+      "make": "Volkswagen",
+      "model": "ID.4 Pro S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id4s",
+      "make": "Volkswagen",
+      "model": "ID.4 S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id5",
+      "make": "Volkswagen",
+      "model": "ID.5",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-5",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.5"
+      },
+      "aliases": [
+        "ID5",
+        "ID5GTX 220KW"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id6",
+      "make": "Volkswagen",
+      "model": "ID.6",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-6",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.6"
+      },
+      "aliases": [
+        "ID6",
+        "ID6X PRIME",
+        "ID6X PRO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:id7",
+      "make": "Volkswagen",
+      "model": "ID.7",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-7",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.7"
+      },
+      "aliases": [
+        "\"ID.7\"",
+        "ID7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:iltis",
+      "make": "Volkswagen",
+      "model": "Iltis",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:jetta",
+      "make": "Volkswagen",
+      "model": "Jetta",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/jetta",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Jetta"
+      },
+      "aliases": [
+        "JETTA"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:jettacomfortlinehighline",
+      "make": "Volkswagen",
+      "model": "Jetta Comfortline/Highline",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:jettagli",
+      "make": "Volkswagen",
+      "model": "Jetta GLI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:joker",
+      "make": "Volkswagen",
+      "model": "Joker",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:k70",
+      "make": "Volkswagen",
+      "model": "K70",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/k70",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "K70"
+      },
+      "aliases": [
+        "K 70"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:karmannghia",
+      "make": "Volkswagen",
+      "model": "Karmann Ghia",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:kasten",
+      "make": "Volkswagen",
+      "model": "Kasten",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:lavida",
+      "make": "Volkswagen",
+      "model": "Lavida",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/lavida",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Lavida"
+      },
+      "aliases": [
+        "Lavida"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Sedan",
+        "Station wagon"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:lt",
+      "make": "Volkswagen",
+      "model": "Lt",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:lupo",
+      "make": "Volkswagen",
+      "model": "Lupo",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:multivan",
+      "make": "Volkswagen",
+      "model": "Multivan",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/multivan",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Multivan"
+      },
+      "aliases": [
+        "MULTIVAN"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:passat",
+      "make": "Volkswagen",
+      "model": "Passat",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/passat",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Passat"
+      },
+      "aliases": [
+        "PASSAT",
+        "Passat 1.5 / 110kW (DSG)",
+        "Passat 1.5 TSI (DSG)",
+        "Passat 2.0TDI / 140kW(DSG) Passat Variant 2.0TDI / 140kW(DSG)",
+        "Passat 2.0TDI / 140kW Passat Variant 2.0TDI / 140kW (DSG)",
+        "Passat 2.0 TDI (DSG)",
+        "Passat Alltrack 2.0 TDI / 140kW (DSG)",
+        "Passat Alltrack TSI 4MOTION (DSG)",
+        "Passat Sedan 1.4/110kW(DSC) Passat Variant 1.4/110kW(DSC)",
+        "Passat Sedan 2.0 / 162kW (DSC)",
+        "Passat Sedan 2.0 / 162kW (DSG)",
+        "Passat Sedan 2.0TDI / 140kW (DSG)",
+        "Passat Sedan / Variant 1.4 / 110kW (DSC)",
+        "Passat Sedan / Variant 1.4 / 110kW (DSG)",
+        "Passat TSI Comfortline(DSG) Passat TSI Highline(DSG)",
+        "Passat Variant 2.0 / 162kW (DSC)",
+        "Passat Variant 2.0 / 162kW (DSG)",
+        "Passat Variant 2.0TDI / 140kW (DSG)",
+        "Passat Variant TSI Comfortline(DSG) Passat Variant TSI Highline(DSG)",
+        "Passat Variant TSI Comfortline(DSG) Passat Variant TSI Highline(DSG) Passat Variant R-Line Edition"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:phaeton",
+      "make": "Volkswagen",
+      "model": "Phaeton",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:polo",
+      "make": "Volkswagen",
+      "model": "Polo",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/polo",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Polo"
+      },
+      "aliases": [
+        "POLO",
+        "VOLKSWAGEN POLO",
+        "CrossPolo (DSG)",
+        "Polo 1.0 / 70kW (DSG)",
+        "Polo 1.2 / 66kW (DSG)",
+        "Polo 1.4 / 110kW (DSG)",
+        "Polo 1.5 / 110kW (DSG)",
+        "Polo Blue GT (DSG)",
+        "Polo Blue Motion (DSG)",
+        "Polo GTI",
+        "Polo GTI 2.0 / 152kW (DSG)",
+        "Polo GTI (DSG)",
+        "Polo TSI Comfortline BlueMotion Technology (DSG)",
+        "Polo TSI Comfortline (DSG)",
+        "Polo TSI Comfortline(DSG) Polo TSI Comfortline Upgrade Package (DSG)",
+        "Polo TSI Highline (DSG)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:rabbit",
+      "make": "Volkswagen",
+      "model": "Rabbit",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/rabbit",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Rabbit"
+      },
+      "aliases": [
+        "RABBIT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:routan",
+      "make": "Volkswagen",
+      "model": "Routan",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:santana",
+      "make": "Volkswagen",
+      "model": "Santana",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:scirocco",
+      "make": "Volkswagen",
+      "model": "Scirocco",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/scirocco",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Scirocco"
+      },
+      "aliases": [
+        "SCIROCCO",
+        "Scirocco R (DSG)",
+        "Scirocco TSI / R-line (DSG)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:sharan",
+      "make": "Volkswagen",
+      "model": "Sharan",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/sharan",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Sharan"
+      },
+      "aliases": [
+        "Volkswagen Sharan",
+        "Sharan 1.4 / 110kW (DSG)",
+        "Sharan 2.0 TDI / 130kW (DSG)",
+        "Sharan TSI Comfortline(DSG) Sharan TSI Highline(DSG)",
+        "Sharan TSI Trendline(DSG) Sharan TSI Comfortline(DSG) Sharan TSI Highline(DSG)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:tcross",
+      "make": "Volkswagen",
+      "model": "T-Cross",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/t-cross",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "T-Cross"
+      },
+      "aliases": [
+        "T CROSS",
+        "T-Cross (DSG)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:troc",
+      "make": "Volkswagen",
+      "model": "T-Roc",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/t-roc",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "T-Roc"
+      },
+      "aliases": [
+        "Volkswagen T-Roc",
+        "T-Roc 1.5 / 110kW (DSG)",
+        "T-Roc 2.0 TDI / 110kW (DSG)"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:taigo",
+      "make": "Volkswagen",
+      "model": "Taigo",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/taigo",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Taigo"
+      },
+      "aliases": [
+        "Volkswagen Taigo"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:taos",
+      "make": "Volkswagen",
+      "model": "Taos",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/taos",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Taos"
+      },
+      "aliases": [
+        "TAOS"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:taos4motion",
+      "make": "Volkswagen",
+      "model": "Taos 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:tayron",
+      "make": "Volkswagen",
+      "model": "Tayron",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/tayron",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Tayron"
+      },
+      "aliases": [
+        "TAYRON"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:tiguan",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/tiguan",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Tiguan"
+      },
+      "aliases": [
+        "TIGUAN",
+        "tiguan",
+        "Tiguan 1.4 / 110kW (DSG)",
+        "Tiguan 1.4 / 118kW (DSG)",
+        "Tiguan 1.5 / 110kW (DSG)",
+        "Tiguan 1.5 TSI (DSG)",
+        "Tiguan 2.0 / 132kW (DSG)",
+        "Tiguan 2.0 / 140kW (DSG)",
+        "Tiguan 2.0TDI / 110kW (DSG)",
+        "Tiguan 2.0 TDI (DSG)",
+        "Tiguan 2.0TSI Leistung 4MOTION (DSG) Tiguan 2.0TSI R-Line 4MOTION (DSG)",
+        "Tiguan R 2.0 / 235kW (DSG)",
+        "Tiguan Sport & Style Tiguan R-Line (DSG)",
+        "Tiguan TSI BlueMotion Technology(DSG)"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:tiguan4motion",
+      "make": "Volkswagen",
+      "model": "Tiguan 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:tiguanallspace",
+      "make": "Volkswagen",
+      "model": "Tiguan Allspace",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/tiguan-allspace",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Tiguan Allspace"
+      },
+      "aliases": [
+        "TIGUAN ALLSPACE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:tiguanrline4motion",
+      "make": "Volkswagen",
+      "model": "Tiguan R-Line 4MOTION",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "volkswagen:touareg",
+      "make": "Volkswagen",
+      "model": "Touareg",
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/touareg",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Touareg"
+      },
+      "aliases": [
+        "TOUAREG",
+        "Touareg 3.6V6",
+        "Touareg 3.6 V6 Air suspension",
+        "Touareg Hybrid"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

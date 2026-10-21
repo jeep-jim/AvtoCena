@@ -1,0 +1,3344 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 4,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "fisker:oceanultra22wheels",
+      "make": "Fisker",
+      "model": "Ocean Ultra (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:bronco",
+      "make": "Ford",
+      "model": "Bronco",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:bronco4wd",
+      "make": "Ford",
+      "model": "Bronco 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:bronco4wdwithsportmode",
+      "make": "Ford",
+      "model": "Bronco 4WD (With Sport Mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:broncobadlands4wd",
+      "make": "Ford",
+      "model": "Bronco Badlands 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:broncoblackdiamond4wd",
+      "make": "Ford",
+      "model": "Bronco Black Diamond 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:broncoouterbanks4wd",
+      "make": "Ford",
+      "model": "Bronco Outer Banks 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:broncoraptor4wd",
+      "make": "Ford",
+      "model": "Bronco Raptor 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:broncosasquatch4wd",
+      "make": "Ford",
+      "model": "Bronco Sasquatch 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:broncosport",
+      "make": "Ford",
+      "model": "Bronco Sport",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:broncosport4wd",
+      "make": "Ford",
+      "model": "Bronco Sport 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:broncosportsasquatch",
+      "make": "Ford",
+      "model": "Bronco Sport Sasquatch",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:ecosport",
+      "make": "Ford",
+      "model": "EcoSport",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:ecosportawd",
+      "make": "Ford",
+      "model": "EcoSport AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:edge",
+      "make": "Ford",
+      "model": "Edge",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:edgeawd",
+      "make": "Ford",
+      "model": "Edge AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:escape",
+      "make": "Ford",
+      "model": "Escape",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:escapeawd",
+      "make": "Ford",
+      "model": "Escape AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:escapehybrid",
+      "make": "Ford",
+      "model": "Escape Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:escapehybridawd",
+      "make": "Ford",
+      "model": "Escape Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:escapepluginhybrid",
+      "make": "Ford",
+      "model": "Escape Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:expedition",
+      "make": "Ford",
+      "model": "Expedition",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "ford:expedition4wd",
+      "make": "Ford",
+      "model": "Expedition 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:expedition4x4",
+      "make": "Ford",
+      "model": "Expedition 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:expedition4x4withoutstopstart",
+      "make": "Ford",
+      "model": "Expedition 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:expeditionmax4x4",
+      "make": "Ford",
+      "model": "Expedition MAX 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "ford:expeditiontimberline4x4",
+      "make": "Ford",
+      "model": "Expedition Timberline 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:expeditiontimberline4x4withoutstopstart",
+      "make": "Ford",
+      "model": "Expedition Timberline 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:explorer",
+      "make": "Ford",
+      "model": "Explorer",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:explorerawd",
+      "make": "Ford",
+      "model": "Explorer AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:explorerawdwithoutstopstart",
+      "make": "Ford",
+      "model": "Explorer AWD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:explorerhybridawd",
+      "make": "Ford",
+      "model": "Explorer Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:explorertimberlineawd",
+      "make": "Ford",
+      "model": "Explorer Timberline AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:explorertimberlineawdwithoutstopstart",
+      "make": "Ford",
+      "model": "Explorer Timberline AWD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:explorertremorawd",
+      "make": "Ford",
+      "model": "Explorer Tremor AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:f150lttirepkg",
+      "make": "Ford",
+      "model": "F-150 (LT Tire Pkg)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:f150withoutstopstart",
+      "make": "Ford",
+      "model": "F-150 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f1504x4",
+      "make": "Ford",
+      "model": "F-150 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:f1504x4withoutstopstart",
+      "make": "Ford",
+      "model": "F-150 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f1504x4ffv",
+      "make": "Ford",
+      "model": "F-150 4X4 FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f1504x4ffvwithoutstopstart",
+      "make": "Ford",
+      "model": "F-150 4X4 FFV (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f1504x4limited",
+      "make": "Ford",
+      "model": "F-150 4X4 Limited",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:f1504x4xlxlt",
+      "make": "Ford",
+      "model": "F-150 4X4 XL/XLT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:f150ffv",
+      "make": "Ford",
+      "model": "F-150 FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150ffvlttirepkg",
+      "make": "Ford",
+      "model": "F-150 FFV (LT Tire Pkg)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:f150ffvpayloadpkg",
+      "make": "Ford",
+      "model": "F-150 FFV (Payload Pkg)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:f150ffvwithoutstopstart",
+      "make": "Ford",
+      "model": "F-150 FFV (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150ffv4x4",
+      "make": "Ford",
+      "model": "F-150 FFV 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "ford:f150ffv4x4withoutstopstart",
+      "make": "Ford",
+      "model": "F-150 FFV 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "ford:f150hybrid",
+      "make": "Ford",
+      "model": "F-150 Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150hybrid4x4",
+      "make": "Ford",
+      "model": "F-150 Hybrid 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:f150lightning",
+      "make": "Ford",
+      "model": "F-150 Lightning",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:f150lightningextendedrange",
+      "make": "Ford",
+      "model": "F-150 Lightning Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:f150lightningextendedrange123kwh",
+      "make": "Ford",
+      "model": "F-150 Lightning Extended Range (123 kWh)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:f150lightningextendedrange131kwh",
+      "make": "Ford",
+      "model": "F-150 Lightning Extended Range (131 kWh)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:f150lightningplatinum",
+      "make": "Ford",
+      "model": "F-150 Lightning Platinum",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:f150lightningpro",
+      "make": "Ford",
+      "model": "F-150 Lightning Pro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:f150lightningproextendedrange131kwh",
+      "make": "Ford",
+      "model": "F-150 Lightning PRO Extended Range (131 kWh)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:f150lightningstandardrange",
+      "make": "Ford",
+      "model": "F-150 Lightning Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:f150raptor374x4",
+      "make": "Ford",
+      "model": "F-150 Raptor 37 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150raptor374x4withoutstopstart",
+      "make": "Ford",
+      "model": "F-150 Raptor 37 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150raptor4x4",
+      "make": "Ford",
+      "model": "F-150 Raptor 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:f150raptor4x4withoutstopstart",
+      "make": "Ford",
+      "model": "F-150 Raptor 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150raptorr4x4",
+      "make": "Ford",
+      "model": "F-150 Raptor R 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:f150tremor4x4",
+      "make": "Ford",
+      "model": "F-150 Tremor 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:f150tremor4x4withoutstopstart",
+      "make": "Ford",
+      "model": "F-150 Tremor 4X4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150tremor4x4ffv",
+      "make": "Ford",
+      "model": "F-150 Tremor 4X4 FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150tremor4x4ffvwithoutstopstart",
+      "make": "Ford",
+      "model": "F-150 Tremor 4X4 FFV (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:f150",
+      "make": "Ford",
+      "model": "F150",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:fusion",
+      "make": "Ford",
+      "model": "Fusion",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:fusionenergi",
+      "make": "Ford",
+      "model": "Fusion Energi",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:fusionhybrid",
+      "make": "Ford",
+      "model": "Fusion Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:gt",
+      "make": "Ford",
+      "model": "GT",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:maverick",
+      "make": "Ford",
+      "model": "Maverick",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:maverickawd",
+      "make": "Ford",
+      "model": "Maverick AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:maverickhybrid",
+      "make": "Ford",
+      "model": "Maverick Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:maverickhybridawd",
+      "make": "Ford",
+      "model": "Maverick Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mavericklariathybridawd",
+      "make": "Ford",
+      "model": "Maverick Lariat Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mavericklobo",
+      "make": "Ford",
+      "model": "Maverick Lobo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ford:maverickloboawd",
+      "make": "Ford",
+      "model": "Maverick Lobo AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mavericktremorawd",
+      "make": "Ford",
+      "model": "Maverick Tremor AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustang",
+      "make": "Ford",
+      "model": "Mustang",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustanghighperformance",
+      "make": "Ford",
+      "model": "Mustang (High Performance)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangperformancepack",
+      "make": "Ford",
+      "model": "Mustang (Performance Pack)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:mustangperformancepkg",
+      "make": "Ford",
+      "model": "Mustang (Performance Pkg)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:mustangstopstart",
+      "make": "Ford",
+      "model": "Mustang (Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "ford:mustangbullitt",
+      "make": "Ford",
+      "model": "Mustang Bullitt",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:mustangconvertible",
+      "make": "Ford",
+      "model": "Mustang Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangconvertiblehighperformance",
+      "make": "Ford",
+      "model": "Mustang Convertible (High Performance)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangconvertibleperformancepkg",
+      "make": "Ford",
+      "model": "Mustang Convertible (Performance Pkg)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:mustangdarkhorse",
+      "make": "Ford",
+      "model": "Mustang Dark Horse",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustanggtd",
+      "make": "Ford",
+      "model": "Mustang GTD",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmach1",
+      "make": "Ford",
+      "model": "Mustang Mach 1",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangmache",
+      "make": "Ford",
+      "model": "Mustang Mach-E",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmachecaliforniaroute1",
+      "make": "Ford",
+      "model": "Mustang Mach-E California Route 1",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:mustangmachecaliforniaroute1awd",
+      "make": "Ford",
+      "model": "Mustang Mach-E California Route 1 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangmacheextendedrange",
+      "make": "Ford",
+      "model": "Mustang Mach-E Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmacheextendedrange19wheels",
+      "make": "Ford",
+      "model": "Mustang Mach-E Extended Range (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "ford:mustangmacheextendedrangeawd",
+      "make": "Ford",
+      "model": "Mustang Mach-E Extended Range AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmachegt",
+      "make": "Ford",
+      "model": "Mustang Mach-E GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmachegtperformanceedition",
+      "make": "Ford",
+      "model": "Mustang Mach-E GT Performance Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangmacherally",
+      "make": "Ford",
+      "model": "Mustang Mach-E Rally",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmachestandardrange",
+      "make": "Ford",
+      "model": "Mustang Mach-E Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmachestandardrangelfp",
+      "make": "Ford",
+      "model": "Mustang Mach-E Standard Range (LFP)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:mustangmachestandardrangeawd",
+      "make": "Ford",
+      "model": "Mustang Mach-E Standard Range AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:mustangmachestandardrangeawdlfp",
+      "make": "Ford",
+      "model": "Mustang Mach-E Standard Range AWD (LFP)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:ranger",
+      "make": "Ford",
+      "model": "Ranger",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:ranger4wd",
+      "make": "Ford",
+      "model": "Ranger 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:ranger4wdwithoutstopstart",
+      "make": "Ford",
+      "model": "Ranger 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:ranger4wdtremor",
+      "make": "Ford",
+      "model": "Ranger 4WD Tremor",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:rangerraptor4wd",
+      "make": "Ford",
+      "model": "Ranger Raptor 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ford:rangertremor4wd",
+      "make": "Ford",
+      "model": "Ranger Tremor 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:shelbygt350mustang",
+      "make": "Ford",
+      "model": "Shelby GT350 Mustang",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:shelbygt500mustang",
+      "make": "Ford",
+      "model": "Shelby GT500 Mustang",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:t150wagonffv",
+      "make": "Ford",
+      "model": "T-150 Wagon FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "ford:t150wagonffv4wd",
+      "make": "Ford",
+      "model": "T-150 Wagon FFV 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "ford:transitconnect",
+      "make": "Ford",
+      "model": "Transit Connect",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:transitconnectvan",
+      "make": "Ford",
+      "model": "Transit Connect Van",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:transitconnectvanffv",
+      "make": "Ford",
+      "model": "Transit Connect Van FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:transitconnectvanlwb",
+      "make": "Ford",
+      "model": "Transit Connect Van LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ford:transitconnectwagonlwb",
+      "make": "Ford",
+      "model": "Transit Connect Wagon LWB",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ford:transitconnectwagonlwbffv",
+      "make": "Ford",
+      "model": "Transit Connect Wagon LWB FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "ford:transitt150wagon",
+      "make": "Ford",
+      "model": "Transit T150 Wagon",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "genesis:electrifiedg80",
+      "make": "Genesis",
+      "model": "Electrified G80",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "genesis:electrifiedgv70",
+      "make": "Genesis",
+      "model": "Electrified GV70",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:g70",
+      "make": "Genesis",
+      "model": "G70",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "genesis:g70awd",
+      "make": "Genesis",
+      "model": "G70 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:g80",
+      "make": "Genesis",
+      "model": "G80",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "genesis:g80awd",
+      "make": "Genesis",
+      "model": "G80 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:g90",
+      "make": "Genesis",
+      "model": "G90",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:g90awd",
+      "make": "Genesis",
+      "model": "G90 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "genesis:gv60",
+      "make": "Genesis",
+      "model": "GV60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "genesis:gv60advancedawd",
+      "make": "Genesis",
+      "model": "GV60 Advanced AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:gv60magma",
+      "make": "Genesis",
+      "model": "GV60 Magma",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "genesis:gv60performanceawd",
+      "make": "Genesis",
+      "model": "GV60 Performance AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:gv70",
+      "make": "Genesis",
+      "model": "GV70",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "genesis:gv70awd",
+      "make": "Genesis",
+      "model": "GV70 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "genesis:gv80",
+      "make": "Genesis",
+      "model": "GV80",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2027
+    },
+    {
+      "key": "genesis:gv80awd",
+      "make": "Genesis",
+      "model": "GV80 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:acadia",
+      "make": "GMC",
+      "model": "Acadia",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "gmc:acadiaawd",
+      "make": "GMC",
+      "model": "Acadia AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:canyon",
+      "make": "GMC",
+      "model": "Canyon",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:canyon4wd",
+      "make": "GMC",
+      "model": "Canyon 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:canyon4wdmudterraintire",
+      "make": "GMC",
+      "model": "Canyon 4WD Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "gmc:canyonat4x4wd",
+      "make": "GMC",
+      "model": "Canyon AT4X 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:canyonat4xaev4wd",
+      "make": "GMC",
+      "model": "Canyon AT4X AEV 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:hummerev",
+      "make": "GMC",
+      "model": "Hummer EV",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerevpickup",
+      "make": "GMC",
+      "model": "Hummer EV Pickup",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "gmc:hummerevsuv",
+      "make": "GMC",
+      "model": "Hummer EV SUV",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "gmc:hummerev2xpickup",
+      "make": "GMC",
+      "model": "HUMMER EV2X Pickup",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev2xpickupmudterraintire",
+      "make": "GMC",
+      "model": "HUMMER EV2X Pickup Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev2xsuv",
+      "make": "GMC",
+      "model": "HUMMER EV2X SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev2xsuvmudterraintire",
+      "make": "GMC",
+      "model": "HUMMER EV2X SUV Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev3xpickup20mbattery",
+      "make": "GMC",
+      "model": "HUMMER EV3X Pickup (20M Battery)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev3xpickupmudterraintire20mbattery",
+      "make": "GMC",
+      "model": "HUMMER EV3X Pickup Mud Terrain Tire (20M Battery)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev3xsuv",
+      "make": "GMC",
+      "model": "HUMMER EV3X SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:hummerev3xsuvmudterraintire",
+      "make": "GMC",
+      "model": "HUMMER EV3X SUV Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:sierra",
+      "make": "GMC",
+      "model": "Sierra",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierrawithsportmode",
+      "make": "GMC",
+      "model": "Sierra (With Sport Mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "gmc:sierrawithoutafm",
+      "make": "GMC",
+      "model": "Sierra (Without AFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierrawithoutdfm",
+      "make": "GMC",
+      "model": "Sierra (Without DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wd",
+      "make": "GMC",
+      "model": "Sierra 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierra4wdnodfm",
+      "make": "GMC",
+      "model": "Sierra 4WD (No DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:sierra4wdnostopstart",
+      "make": "GMC",
+      "model": "Sierra 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:sierra4wdwithsportmode",
+      "make": "GMC",
+      "model": "Sierra 4WD (With Sport Mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:sierra4wdwithoutafm",
+      "make": "GMC",
+      "model": "Sierra 4WD (Without AFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wdwithoutdfm",
+      "make": "GMC",
+      "model": "Sierra 4WD (Without DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wdwithoutstopstart",
+      "make": "GMC",
+      "model": "Sierra 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wdat4",
+      "make": "GMC",
+      "model": "Sierra 4WD AT4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wdat4withoutdfm",
+      "make": "GMC",
+      "model": "Sierra 4WD AT4 (Without DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wdat4withoutstopstart",
+      "make": "GMC",
+      "model": "Sierra 4WD AT4 (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierra4wdat4x",
+      "make": "GMC",
+      "model": "Sierra 4WD AT4X",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierra4wdffv",
+      "make": "GMC",
+      "model": "Sierra 4WD FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierra4wdmudterraintire",
+      "make": "GMC",
+      "model": "Sierra 4WD Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierra4wdmudterraintirenodfm",
+      "make": "GMC",
+      "model": "Sierra 4WD Mud Terrain Tire (No DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:sierra4wdmudterraintirenostopstart",
+      "make": "GMC",
+      "model": "Sierra 4WD Mud Terrain Tire (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:sierra4wdmudterraintireffv",
+      "make": "GMC",
+      "model": "Sierra 4WD Mud Terrain Tire FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "gmc:sierra4wdwt",
+      "make": "GMC",
+      "model": "Sierra 4WD WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierraevdenaliextrange115kwcharger",
+      "make": "GMC",
+      "model": "Sierra EV Denali Ext Range (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierraevdenaliextrange192kwcharger",
+      "make": "GMC",
+      "model": "Sierra EV Denali Ext Range (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierraevelevationextrange115kwcharger",
+      "make": "GMC",
+      "model": "Sierra EV Elevation Ext Range (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierraevelevationextrange192kwcharger",
+      "make": "GMC",
+      "model": "Sierra EV Elevation Ext Range (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierraevextendedrange",
+      "make": "GMC",
+      "model": "Sierra EV Extended Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "gmc:sierraevstdrange",
+      "make": "GMC",
+      "model": "Sierra EV Std Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:sierraffv",
+      "make": "GMC",
+      "model": "Sierra FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "gmc:sierrawt",
+      "make": "GMC",
+      "model": "Sierra WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:sierrawt4wd",
+      "make": "GMC",
+      "model": "Sierra WT 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "gmc:terrain",
+      "make": "GMC",
+      "model": "Terrain",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "gmc:terrainawd",
+      "make": "GMC",
+      "model": "Terrain AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:terrainawdat4denali",
+      "make": "GMC",
+      "model": "Terrain AWD AT4/Denali",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:yukon",
+      "make": "GMC",
+      "model": "Yukon",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:yukonnostopstart",
+      "make": "GMC",
+      "model": "Yukon (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:yukonwithoutstopstart",
+      "make": "GMC",
+      "model": "Yukon (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:yukon4wd",
+      "make": "GMC",
+      "model": "Yukon 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:yukon4wdnostopstart",
+      "make": "GMC",
+      "model": "Yukon 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:yukon4wdwithoutstopstart",
+      "make": "GMC",
+      "model": "Yukon 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:yukon4wdffv",
+      "make": "GMC",
+      "model": "Yukon 4WD FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "gmc:yukonffv",
+      "make": "GMC",
+      "model": "Yukon FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "gmc:yukonxl",
+      "make": "GMC",
+      "model": "Yukon XL",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:yukonxlnostopstart",
+      "make": "GMC",
+      "model": "Yukon XL (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:yukonxlwithoutstopstart",
+      "make": "GMC",
+      "model": "Yukon XL (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:yukonxl4wd",
+      "make": "GMC",
+      "model": "Yukon XL 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "gmc:yukonxl4wdnostopstart",
+      "make": "GMC",
+      "model": "Yukon XL 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "gmc:yukonxl4wdwithoutstopstart",
+      "make": "GMC",
+      "model": "Yukon XL 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "gmc:yukonxl4wdffv",
+      "make": "GMC",
+      "model": "Yukon XL 4WD FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "gmc:yukonxlffv",
+      "make": "GMC",
+      "model": "Yukon XL FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "honda:accord",
+      "make": "Honda",
+      "model": "Accord",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:accordhybrid",
+      "make": "Honda",
+      "model": "Accord Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "honda:accordhybridsporttouring",
+      "make": "Honda",
+      "model": "Accord Hybrid Sport/Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "honda:accordsporttouring",
+      "make": "Honda",
+      "model": "Accord Sport/Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "honda:civic",
+      "make": "Honda",
+      "model": "Civic",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:civiccoupe",
+      "make": "Honda",
+      "model": "Civic Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "honda:civiccoupesi",
+      "make": "Honda",
+      "model": "Civic Coupe Si",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "honda:civichatchback",
+      "make": "Honda",
+      "model": "Civic Hatchback",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:civichatchbackhybrid",
+      "make": "Honda",
+      "model": "Civic Hatchback Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:civichatchbacksport",
+      "make": "Honda",
+      "model": "Civic Hatchback Sport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "honda:civicsedan",
+      "make": "Honda",
+      "model": "Civic Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:civicsedanhybrid",
+      "make": "Honda",
+      "model": "Civic Sedan Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:civicsedansi",
+      "make": "Honda",
+      "model": "Civic Sedan Si",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:civictyper",
+      "make": "Honda",
+      "model": "Civic Type R",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "honda:clarity",
+      "make": "Honda",
+      "model": "Clarity",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "honda:claritypluginhybrid",
+      "make": "Honda",
+      "model": "Clarity Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "honda:crv",
+      "make": "Honda",
+      "model": "CR-V",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:crvawd",
+      "make": "Honda",
+      "model": "CR-V AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:crvhybridawd",
+      "make": "Honda",
+      "model": "CR-V Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:crvhybridawdtrailsport",
+      "make": "Honda",
+      "model": "CR-V Hybrid AWD TrailSport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:fit",
+      "make": "Honda",
+      "model": "Fit",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "honda:hrv",
+      "make": "Honda",
+      "model": "HR-V",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "honda:hrvawd",
+      "make": "Honda",
+      "model": "HR-V AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:insight",
+      "make": "Honda",
+      "model": "Insight",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "honda:insightex",
+      "make": "Honda",
+      "model": "Insight EX",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "honda:insightextouring",
+      "make": "Honda",
+      "model": "Insight EX/Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "honda:insighttouring",
+      "make": "Honda",
+      "model": "Insight Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "honda:odyssey",
+      "make": "Honda",
+      "model": "Odyssey",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:passport",
+      "make": "Honda",
+      "model": "Passport",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:passportawd",
+      "make": "Honda",
+      "model": "Passport AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:passportawdtrailsport",
+      "make": "Honda",
+      "model": "Passport AWD TrailSport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:pilot",
+      "make": "Honda",
+      "model": "Pilot",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:pilotawd",
+      "make": "Honda",
+      "model": "Pilot AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "honda:pilotawdtouringeliteblack",
+      "make": "Honda",
+      "model": "Pilot AWD Touring/Elite/Black",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "honda:pilotawdtrailsport",
+      "make": "Honda",
+      "model": "Pilot AWD TrailSport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "honda:prelude",
+      "make": "Honda",
+      "model": "Prelude",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:prologue",
+      "make": "Honda",
+      "model": "Prologue",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:prologueexawd",
+      "make": "Honda",
+      "model": "Prologue EX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "honda:prologueexlawd",
+      "make": "Honda",
+      "model": "Prologue EX-L AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "honda:prologuetouringawd",
+      "make": "Honda",
+      "model": "Prologue Touring AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "honda:ridgeline",
+      "make": "Honda",
+      "model": "Ridgeline",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:ridgelineawd",
+      "make": "Honda",
+      "model": "Ridgeline AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "honda:ridgelineawdtrailsport",
+      "make": "Honda",
+      "model": "Ridgeline AWD TrailSport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:accent",
+      "make": "Hyundai",
+      "model": "Accent",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    }
+  ]
+}

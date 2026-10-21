@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-09-07",
+  "evidence": "data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json#visualReview",
+  "method": "Previously completed visual review; exact source URL metadata, no new image downloads. This is a small review list, not an automatic image classifier.",
+  "excludedImages": [
+    {
+      "url": "https://img.classistatic.de/api/v1/mo-prod/images/61/61655b0f-2b2c-44bb-b51f-2d2914ec3ead?rule=mo-1600",
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "455124671",
+      "reason": "financing_services_panel"
+    },
+    {
+      "url": "https://img.classistatic.de/api/v1/mo-prod/images/d6/d6e46581-c178-4d2e-8136-e607f0d3d6d0?rule=mo-1600",
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "455124671",
+      "reason": "financing_services_panel"
+    },
+    {
+      "url": "https://img.classistatic.de/api/v1/mo-prod/images/75/75e784b2-398d-4ccc-a697-5f28616278a7?rule=mo-1600",
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "460632484",
+      "reason": "promotional_cover"
+    },
+    {
+      "url": "https://img.classistatic.de/api/v1/mo-prod/images/13/13c017d6-d86c-4f06-836d-aa179f09a487?rule=mo-1600",
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "443578799",
+      "reason": "financing_cover"
+    },
+    {
+      "url": "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_1_hq.jpg",
+      "sourceId": "kcar_korea_open",
+      "sourceOfferId": "EC61387808",
+      "reason": "near_duplicate_dashboard_view_keep_extra_0"
+    },
+    {
+      "url": "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_2_hq.jpg",
+      "sourceId": "kcar_korea_open",
+      "sourceOfferId": "EC61387808",
+      "reason": "near_duplicate_dashboard_view_keep_extra_0"
+    },
+    {
+      "url": "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_3_hq.jpg",
+      "sourceId": "kcar_korea_open",
+      "sourceOfferId": "EC61387808",
+      "reason": "near_duplicate_dashboard_view_keep_extra_0"
+    }
+  ],
+  "heldOffers": [
+    {
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "43069464351904",
+      "reason": "gallery_advertising_panel_location_requires_review"
+    },
+    {
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "38449215943136",
+      "reason": "gallery_model_identity_requires_review"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "operation": "all-market-continuations-20261007-0822",
+  "market": "europe",
+  "publishMarkets": [
+    "europe"
+  ],
+  "resetCursors": false,
+  "reason": "Owner requested independent full traversals. Resume safe published cursors, retain source observations and publish each slice. No price/power admission caps. Never cancel an active market."
+}

@@ -1,0 +1,3371 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "acura:adx",
+      "make": "Acura",
+      "model": "ADX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:adxawd",
+      "make": "Acura",
+      "model": "ADX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "acura:ilx",
+      "make": "Acura",
+      "model": "ILX",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "acura:integra",
+      "make": "Acura",
+      "model": "Integra",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:integraaspec",
+      "make": "Acura",
+      "model": "Integra A-SPEC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:integratypes",
+      "make": "Acura",
+      "model": "Integra Type S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:mdx",
+      "make": "Acura",
+      "model": "MDX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:mdxhybridawd",
+      "make": "Acura",
+      "model": "MDX Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:mdxshawd",
+      "make": "Acura",
+      "model": "MDX SH-AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:mdxshawdaspec",
+      "make": "Acura",
+      "model": "MDX SH-AWD A-SPEC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:mdxshawdtypes",
+      "make": "Acura",
+      "model": "MDX SH-AWD Type S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:mdxtypes",
+      "make": "Acura",
+      "model": "MDX Type S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "acura:nsx",
+      "make": "Acura",
+      "model": "NSX",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "acura:rdx",
+      "make": "Acura",
+      "model": "RDX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:rdxawd",
+      "make": "Acura",
+      "model": "RDX AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:rdxawdaspec",
+      "make": "Acura",
+      "model": "RDX AWD A-SPEC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:rdxshawd",
+      "make": "Acura",
+      "model": "RDX SH-AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:rdxshawdaspec",
+      "make": "Acura",
+      "model": "RDX SH-AWD A-SPEC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:rlx",
+      "make": "Acura",
+      "model": "RLX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:rlxhybrid",
+      "make": "Acura",
+      "model": "RLX Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:tlx",
+      "make": "Acura",
+      "model": "TLX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "acura:tlxaspec",
+      "make": "Acura",
+      "model": "TLX A-SPEC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:tlxshawd",
+      "make": "Acura",
+      "model": "TLX SH-AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "acura:tlxshawdaspec",
+      "make": "Acura",
+      "model": "TLX SH-AWD A-SPEC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "acura:tlxshawdaspeclimitededition",
+      "make": "Acura",
+      "model": "TLX SH-AWD A-SPEC/Limited Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "acura:tlxtypes",
+      "make": "Acura",
+      "model": "TLX Type S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "acura:tlxtypesperformancetire",
+      "make": "Acura",
+      "model": "TLX Type S (Performance Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "acura:zdx",
+      "make": "Acura",
+      "model": "ZDX",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "acura:zdxaspecawd",
+      "make": "Acura",
+      "model": "ZDX A-SPEC AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "acura:zdxtypesawd",
+      "make": "Acura",
+      "model": "ZDX Type S AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "alfaromeo:4c",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "alfaromeo:4cspider",
+      "make": "Alfa Romeo",
+      "model": "4C Spider",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "alfaromeo:giulia",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "alfaromeo:giuliaawd",
+      "make": "Alfa Romeo",
+      "model": "Giulia AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "alfaromeo:giuliaquadrifoglio",
+      "make": "Alfa Romeo",
+      "model": "Giulia Quadrifoglio",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "alfaromeo:stelvio",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "alfaromeo:stelvioawd",
+      "make": "Alfa Romeo",
+      "model": "Stelvio AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "alfaromeo:stelvioawdquadrifoglio",
+      "make": "Alfa Romeo",
+      "model": "Stelvio AWD Quadrifoglio",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "alfaromeo:tonale",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "alfaromeo:tonaleawd",
+      "make": "Alfa Romeo",
+      "model": "Tonale AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "alfaromeo:tonaleeawd",
+      "make": "Alfa Romeo",
+      "model": "Tonale eAWD",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "alfaromeo:tonalephev",
+      "make": "Alfa Romeo",
+      "model": "Tonale PHEV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "astonmartin:db11",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "astonmartin:db11amr",
+      "make": "Aston Martin",
+      "model": "DB11 AMR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "astonmartin:db11v12",
+      "make": "Aston Martin",
+      "model": "DB11 V12",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "astonmartin:db11v8",
+      "make": "Aston Martin",
+      "model": "DB11 V8",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "astonmartin:db12",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:db12s",
+      "make": "Aston Martin",
+      "model": "DB12 S",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027
+    },
+    {
+      "key": "astonmartin:db12v8",
+      "make": "Aston Martin",
+      "model": "DB12 V8",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027
+    },
+    {
+      "key": "astonmartin:dbs",
+      "make": "Aston Martin",
+      "model": "DBS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "astonmartin:dbssuperleggera",
+      "make": "Aston Martin",
+      "model": "DBS Superleggera",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "astonmartin:dbsv12",
+      "make": "Aston Martin",
+      "model": "DBS V12",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "astonmartin:dbx707",
+      "make": "Aston Martin",
+      "model": "DBX 707",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:dbx727",
+      "make": "Aston Martin",
+      "model": "DBX 727",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:dbxs",
+      "make": "Aston Martin",
+      "model": "DBX S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:dbxv8",
+      "make": "Aston Martin",
+      "model": "DBX V8",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "astonmartin:v12vantage",
+      "make": "Aston Martin",
+      "model": "V12 Vantage",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "astonmartin:valhalla",
+      "make": "Aston Martin",
+      "model": "Valhalla",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:valour",
+      "make": "Aston Martin",
+      "model": "Valour",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "astonmartin:vanquish",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "astonmartin:vanquishcoupe",
+      "make": "Aston Martin",
+      "model": "Vanquish Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:vanquishvolante",
+      "make": "Aston Martin",
+      "model": "Vanquish Volante",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:vantage",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "astonmartin:vantagemanual",
+      "make": "Aston Martin",
+      "model": "Vantage Manual",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "astonmartin:vantagev8",
+      "make": "Aston Martin",
+      "model": "Vantage V8",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:a3",
+      "make": "Audi",
+      "model": "A3",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:a340tfsiquattro",
+      "make": "Audi",
+      "model": "A3 40 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:a3cabrioletquattro",
+      "make": "Audi",
+      "model": "A3 Cabriolet quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a3quattro",
+      "make": "Audi",
+      "model": "A3 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a3sedan40tfsiquattro",
+      "make": "Audi",
+      "model": "A3 Sedan 40 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:a4",
+      "make": "Audi",
+      "model": "A4",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a445tfsiquattro",
+      "make": "Audi",
+      "model": "A4 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a4allroad45tfsiquattro",
+      "make": "Audi",
+      "model": "A4 allroad 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a4allroadquattro",
+      "make": "Audi",
+      "model": "A4 allroad quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a4quattro",
+      "make": "Audi",
+      "model": "A4 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a4sedan40tfsiquattro",
+      "make": "Audi",
+      "model": "A4 Sedan 40 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:a4sedan45tfsiquattro",
+      "make": "Audi",
+      "model": "A4 Sedan 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:a5",
+      "make": "Audi",
+      "model": "A5",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:a5cabriolet45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Cabriolet 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:a5cabrioletquattro",
+      "make": "Audi",
+      "model": "A5 Cabriolet quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a5coup45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Coup 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a5coupe45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Coupe 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:a5quattro",
+      "make": "Audi",
+      "model": "A5 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a5sedanquattro",
+      "make": "Audi",
+      "model": "A5 Sedan quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a5sportback45tfsiquattro",
+      "make": "Audi",
+      "model": "A5 Sportback 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a5sportbackquattro",
+      "make": "Audi",
+      "model": "A5 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a5tfsiquattro",
+      "make": "Audi",
+      "model": "A5 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:a6",
+      "make": "Audi",
+      "model": "A6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:a645tfsiquattro",
+      "make": "Audi",
+      "model": "A6 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a655tfsiquattro",
+      "make": "Audi",
+      "model": "A6 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:a660etron",
+      "make": "Audi",
+      "model": "A6 60 e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a660etronultra",
+      "make": "Audi",
+      "model": "A6 60 e-tron ultra",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a6allroad",
+      "make": "Audi",
+      "model": "A6 allroad",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a6allroad55tfsiquattro",
+      "make": "Audi",
+      "model": "A6 allroad 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:a6etron",
+      "make": "Audi",
+      "model": "A6 e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:a6quattro",
+      "make": "Audi",
+      "model": "A6 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a6sedan45tfsiquattro",
+      "make": "Audi",
+      "model": "A6 Sedan 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:a6sedan55tfsiquattro",
+      "make": "Audi",
+      "model": "A6 Sedan 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:a7",
+      "make": "Audi",
+      "model": "A7",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a7quattro",
+      "make": "Audi",
+      "model": "A7 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:a7sportback",
+      "make": "Audi",
+      "model": "A7 Sportback",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a7sportback55tfsiequattro",
+      "make": "Audi",
+      "model": "A7 Sportback 55 TFSI e quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:a7sportback55tfsiquattro",
+      "make": "Audi",
+      "model": "A7 Sportback 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:a8",
+      "make": "Audi",
+      "model": "A8",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:a8l55tfsiquattro",
+      "make": "Audi",
+      "model": "A8 L 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:a8lsedan55tfsiquattro",
+      "make": "Audi",
+      "model": "A8 L Sedan 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:a8lsedan60tfsiequattro",
+      "make": "Audi",
+      "model": "A8 L Sedan 60 TFSI e quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:a8lsedan60tfsiquattro",
+      "make": "Audi",
+      "model": "A8 L Sedan 60 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:a8quattro",
+      "make": "Audi",
+      "model": "A8 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:a8l",
+      "make": "Audi",
+      "model": "A8L",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:allnewq5sportbacktfsiquattro",
+      "make": "Audi",
+      "model": "All-new Q5 Sportback TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:allnewq5tfsiquattro",
+      "make": "Audi",
+      "model": "All-new Q5 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:allnewsq5quattro",
+      "make": "Audi",
+      "model": "All-new SQ5 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:allnewsq5sportbackquattro",
+      "make": "Audi",
+      "model": "All-new SQ5 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:etron",
+      "make": "Audi",
+      "model": "e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:etron55quattro",
+      "make": "Audi",
+      "model": "e-tron 55 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:etrongt",
+      "make": "Audi",
+      "model": "e-tron GT",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:etrons",
+      "make": "Audi",
+      "model": "e-tron S",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:etronssportbackquattro20wheels",
+      "make": "Audi",
+      "model": "e-tron S Sportback quattro (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:etronssportbackquattro21or22wheels",
+      "make": "Audi",
+      "model": "e-tron S Sportback quattro (21\" or 22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:etronsportback",
+      "make": "Audi",
+      "model": "e-tron Sportback",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "audi:etronsportback55quattro",
+      "make": "Audi",
+      "model": "e-tron Sportback 55 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:q3",
+      "make": "Audi",
+      "model": "Q3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q340tfsiquattro",
+      "make": "Audi",
+      "model": "Q3 40 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q345tfsiquattro",
+      "make": "Audi",
+      "model": "Q3 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q3quattro",
+      "make": "Audi",
+      "model": "Q3 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:q3tfsiquattro",
+      "make": "Audi",
+      "model": "Q3 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q445etron",
+      "make": "Audi",
+      "model": "Q4 45 e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q450etron",
+      "make": "Audi",
+      "model": "Q4 50 e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:q450etronquattro",
+      "make": "Audi",
+      "model": "Q4 50 e-tron quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:q450etronsportbackquattro",
+      "make": "Audi",
+      "model": "Q4 50 e-tron Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:q455etron",
+      "make": "Audi",
+      "model": "Q4 55 e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:q455etronquattro",
+      "make": "Audi",
+      "model": "Q4 55 e-tron quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q4etron",
+      "make": "Audi",
+      "model": "Q4 e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q4sportback50etron",
+      "make": "Audi",
+      "model": "Q4 Sportback 50 e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:q4sportback50etronquattro",
+      "make": "Audi",
+      "model": "Q4 Sportback 50 e-tron quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:q4sportback55etron",
+      "make": "Audi",
+      "model": "Q4 Sportback 55 e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:q4sportback55etronquattro",
+      "make": "Audi",
+      "model": "Q4 Sportback 55 e-tron quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q5",
+      "make": "Audi",
+      "model": "Q5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q540tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 40 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q545tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q555tfsiequattro",
+      "make": "Audi",
+      "model": "Q5 55 TFSI e quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q5sportback45tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 Sportback 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q5sportbacktfsiquattro",
+      "make": "Audi",
+      "model": "Q5 Sportback TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q5tfsiquattro",
+      "make": "Audi",
+      "model": "Q5 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q5tfsie",
+      "make": "Audi",
+      "model": "Q5 TFSIe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:q660etronquattro19wheels",
+      "make": "Audi",
+      "model": "Q6 60 e-tron quattro (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q660etronquattro20wheels",
+      "make": "Audi",
+      "model": "Q6 60 e-tron quattro (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q6etron",
+      "make": "Audi",
+      "model": "Q6 e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:q6sportback60etronquattro19wheels",
+      "make": "Audi",
+      "model": "Q6 Sportback 60 e-tron quattro (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q6sportback60etronquattro20wheels",
+      "make": "Audi",
+      "model": "Q6 Sportback 60 e-tron quattro (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q7",
+      "make": "Audi",
+      "model": "Q7",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q745tfsiquattro",
+      "make": "Audi",
+      "model": "Q7 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q755tfsiquattro",
+      "make": "Audi",
+      "model": "Q7 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q8",
+      "make": "Audi",
+      "model": "Q8",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:q855tfsiquattro",
+      "make": "Audi",
+      "model": "Q8 55 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:q8etron",
+      "make": "Audi",
+      "model": "Q8 e-tron",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q8etron20wheels",
+      "make": "Audi",
+      "model": "Q8 e-tron (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q8etron21wheels",
+      "make": "Audi",
+      "model": "Q8 e-tron (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q8sportbacketron",
+      "make": "Audi",
+      "model": "Q8 Sportback e-tron",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:q8sportbacketron20wheels",
+      "make": "Audi",
+      "model": "Q8 Sportback e-tron (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:q8sportbacketron21wheels",
+      "make": "Audi",
+      "model": "Q8 Sportback e-tron (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:r8",
+      "make": "Audi",
+      "model": "R8",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:r8coupperformance",
+      "make": "Audi",
+      "model": "R8 Coup Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:r8coupperformancequattro",
+      "make": "Audi",
+      "model": "R8 Coup Performance quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:r8coupe",
+      "make": "Audi",
+      "model": "R8 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:r8coupeperformance",
+      "make": "Audi",
+      "model": "R8 Coupe Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:r8coupeperformancequattro",
+      "make": "Audi",
+      "model": "R8 Coupe Performance quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:r8coupequattro",
+      "make": "Audi",
+      "model": "R8 Coupe quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:r8gtcoup",
+      "make": "Audi",
+      "model": "R8 GT Coup",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:r8spyder",
+      "make": "Audi",
+      "model": "R8 Spyder",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:r8spyderperformance",
+      "make": "Audi",
+      "model": "R8 Spyder Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:r8spyderperformancequattro",
+      "make": "Audi",
+      "model": "R8 Spyder Performance quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:r8spyderquattro",
+      "make": "Audi",
+      "model": "R8 Spyder quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:rs",
+      "make": "Audi",
+      "model": "RS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:rs3",
+      "make": "Audi",
+      "model": "RS 3",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:rs5",
+      "make": "Audi",
+      "model": "RS 5",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "audi:rs5coup",
+      "make": "Audi",
+      "model": "RS 5 Coup",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:rs5coupquattro",
+      "make": "Audi",
+      "model": "RS 5 Coup quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:rs5coupequattro",
+      "make": "Audi",
+      "model": "RS 5 Coupe quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:rs5sportback",
+      "make": "Audi",
+      "model": "RS 5 Sportback",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:rs5sportbackquattro",
+      "make": "Audi",
+      "model": "RS 5 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:rs6avant",
+      "make": "Audi",
+      "model": "RS 6 Avant",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "audi:rs6avantgt",
+      "make": "Audi",
+      "model": "RS 6 Avant GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:rs6avantperformance",
+      "make": "Audi",
+      "model": "RS 6 Avant performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:rs6avantquattro",
+      "make": "Audi",
+      "model": "RS 6 Avant quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:rs6avantquattroperformance",
+      "make": "Audi",
+      "model": "RS 6 Avant quattro performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:rs7",
+      "make": "Audi",
+      "model": "RS 7",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "audi:rs7sportbackperformance",
+      "make": "Audi",
+      "model": "RS 7 Sportback performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:rs7sportbackquattro",
+      "make": "Audi",
+      "model": "RS 7 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:rs7sportbackquattroperformance",
+      "make": "Audi",
+      "model": "RS 7 Sportback quattro performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:rsetron",
+      "make": "Audi",
+      "model": "RS e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:rsetrongt",
+      "make": "Audi",
+      "model": "RS e-tron GT",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:rsetrongtquattroperformance",
+      "make": "Audi",
+      "model": "RS e-tron GT quattro performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:rsq8",
+      "make": "Audi",
+      "model": "RS Q8",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:rsq8performance",
+      "make": "Audi",
+      "model": "RS Q8 performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:rsq8quattro",
+      "make": "Audi",
+      "model": "RS Q8 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:setron",
+      "make": "Audi",
+      "model": "S e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:setrongt20wheels",
+      "make": "Audi",
+      "model": "S e-tron GT (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:setrongt21wheels",
+      "make": "Audi",
+      "model": "S e-tron GT (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:s3",
+      "make": "Audi",
+      "model": "S3",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:s3quattro",
+      "make": "Audi",
+      "model": "S3 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:s3sedanquattro",
+      "make": "Audi",
+      "model": "S3 Sedan quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:s4",
+      "make": "Audi",
+      "model": "S4",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s4quattro",
+      "make": "Audi",
+      "model": "S4 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s4sedanquattro",
+      "make": "Audi",
+      "model": "S4 Sedan quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:s5",
+      "make": "Audi",
+      "model": "S5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:s5cabriolet",
+      "make": "Audi",
+      "model": "S5 Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:s5cabrioletquattro",
+      "make": "Audi",
+      "model": "S5 Cabriolet quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "audi:s5coupquattro",
+      "make": "Audi",
+      "model": "S5 Coup quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s5coupequattro",
+      "make": "Audi",
+      "model": "S5 Coupe quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:s5sedanquattro",
+      "make": "Audi",
+      "model": "S5 Sedan quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:s5sportback",
+      "make": "Audi",
+      "model": "S5 Sportback",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:s5sportbackquattro",
+      "make": "Audi",
+      "model": "S5 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s6",
+      "make": "Audi",
+      "model": "S6",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s6etron",
+      "make": "Audi",
+      "model": "S6 e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:s6etronquattro20wheels",
+      "make": "Audi",
+      "model": "S6 e-tron quattro (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s6etronquattro21wheels",
+      "make": "Audi",
+      "model": "S6 e-tron quattro (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s6quattro",
+      "make": "Audi",
+      "model": "S6 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s6sedanquattro",
+      "make": "Audi",
+      "model": "S6 Sedan quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:s7",
+      "make": "Audi",
+      "model": "S7",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s7quattro",
+      "make": "Audi",
+      "model": "S7 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s7sportbackquattro",
+      "make": "Audi",
+      "model": "S7 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:s8",
+      "make": "Audi",
+      "model": "S8",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:s8quattro",
+      "make": "Audi",
+      "model": "S8 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:s8sedanquattro",
+      "make": "Audi",
+      "model": "S8 Sedan quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:sq5",
+      "make": "Audi",
+      "model": "SQ5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:sq5quattro",
+      "make": "Audi",
+      "model": "SQ5 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:sq5sportbackquattro",
+      "make": "Audi",
+      "model": "SQ5 Sportback quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:sq6etron",
+      "make": "Audi",
+      "model": "SQ6 e-tron",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:sq6sportbacketronquattro",
+      "make": "Audi",
+      "model": "SQ6 Sportback e-tron quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:sq7",
+      "make": "Audi",
+      "model": "SQ7",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:sq7quattro",
+      "make": "Audi",
+      "model": "SQ7 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:sq8",
+      "make": "Audi",
+      "model": "SQ8",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "audi:sq8etron",
+      "make": "Audi",
+      "model": "SQ8 e-tron",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:sq8etron20wheels",
+      "make": "Audi",
+      "model": "SQ8 e-tron (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:sq8etron21or22wheels",
+      "make": "Audi",
+      "model": "SQ8 e-tron (21\" or 22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:sq8quattro",
+      "make": "Audi",
+      "model": "SQ8 quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "audi:sq8sportbacketron20wheels",
+      "make": "Audi",
+      "model": "SQ8 Sportback e-tron (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:sq8sportbacketron21or22wheels",
+      "make": "Audi",
+      "model": "SQ8 Sportback e-tron (21\" or 22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "audi:tt",
+      "make": "Audi",
+      "model": "TT",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:ttcoup45tfsiquattro",
+      "make": "Audi",
+      "model": "TT Coup 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:ttcoupe45tfsiquattro",
+      "make": "Audi",
+      "model": "TT Coupe 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:ttcoupequattro",
+      "make": "Audi",
+      "model": "TT Coupe quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:ttroadster45tfsiquattro",
+      "make": "Audi",
+      "model": "TT Roadster 45 TFSI quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "audi:ttroadsterquattro",
+      "make": "Audi",
+      "model": "TT Roadster quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "audi:ttrs",
+      "make": "Audi",
+      "model": "TT RS",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "audi:ttrscoupequattro",
+      "make": "Audi",
+      "model": "TT RS Coupe quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:tts",
+      "make": "Audi",
+      "model": "TTS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "audi:ttscoupquattro",
+      "make": "Audi",
+      "model": "TTS Coup quattro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    }
+  ]
+}

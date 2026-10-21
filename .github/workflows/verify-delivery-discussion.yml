@@ -1,0 +1,36 @@
+name: Verify delivery and lead discussion
+on:
+  push:
+    branches: [fix/delivery-lead-comments-20261001]
+  pull_request:
+    paths:
+      - 'apps/web/lib/crm-discussion*'
+      - 'apps/web/components/crm/TeamDiscussion.tsx'
+      - 'apps/web/components/crm/ActivityFeed.tsx'
+      - 'apps/web/app/(crm)/crm/leads/page.tsx'
+      - 'apps/web/lib/catalog/city-delivery.ts'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/city-delivery.test.ts tests/card-city-delivery.test.ts tests/crm-discussion.test.ts tests/crm-permissions-activity.test.ts tests/crm-activity-groups.test.ts
+      - run: npm run typecheck
+      - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Lead columns, own comment editing and overview status at four widths in both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+          CRM_TEST_PAGES: leads,overview,client
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/crm-mobile-layout.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: delivery-discussion-preview
+          path: artifacts/crm-mobile
+          retention-days: 7

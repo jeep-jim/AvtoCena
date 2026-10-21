@@ -1,0 +1,308 @@
+[
+  {
+    "id": "audi-a3-sportback-china-2023",
+    "brand": "Audi",
+    "model": "A3 Sportback",
+    "title": "Audi A3 Sportback",
+    "market": "china",
+    "marketName": "Китай",
+    "year": 2023,
+    "body": "hatchback",
+    "bodyName": "Хэтчбек",
+    "fuel": "Бензин",
+    "transmission": "Робот",
+    "drive": "Передний привод",
+    "powerHp": 150,
+    "engineVolumeCc": 1400,
+    "mileageKm": 18000,
+    "city": "Кемерово",
+    "deliveryDays": "14–30",
+    "totalRub": 2560800,
+    "currency": "CNY",
+    "exchangeRate": 11.47,
+    "sourcePrice": 130000,
+    "tags": [
+      "пример",
+      "китай",
+      "хэтчбек",
+      "до 3 млн"
+    ],
+    "recommendation": "Реальный пример расчёта по Китаю: автомобиль, экспорт, логистика до границы, перегруз по РФ, таможня, брокер, ЭПТС, СБКТС и комиссия TopAvto уже учтены.",
+    "lines": [
+      {
+        "id": "security",
+        "title": "Обеспечительный взнос, экспорт, проверка",
+        "amountRub": 160000,
+        "kind": "deposit"
+      },
+      {
+        "id": "car",
+        "title": "Стоимость авто в Китае",
+        "amountRub": 1491100,
+        "kind": "car",
+        "note": "130 000 ¥ × 11,47"
+      },
+      {
+        "id": "china-logistics",
+        "title": "Логистика до Suifenhe/Horgos",
+        "amountRub": 114700,
+        "kind": "logistics",
+        "note": "10 000 ¥ × 11,47"
+      },
+      {
+        "id": "rf-reload",
+        "title": "Перегруз Уссурийск/НурЖолы — город РФ",
+        "amountRub": 130000,
+        "kind": "logistics"
+      },
+      {
+        "id": "customs",
+        "title": "Таможенные платежи",
+        "amountRub": 480000,
+        "kind": "customs"
+      },
+      {
+        "id": "broker",
+        "title": "Брокер, СВХ, ЭПТС, СБКТС, прописка",
+        "amountRub": 95000,
+        "kind": "service"
+      },
+      {
+        "id": "commission",
+        "title": "Комиссия TopAvto",
+        "amountRub": 90000,
+        "kind": "commission"
+      }
+    ],
+    "process": [
+      "Договор и предоплата 250 000 ₽",
+      "Поиск и проверка автомобиля",
+      "Инвойс и оплата автомобиля",
+      "Доставка до границы",
+      "Таможня и лаборатория",
+      "ЭПТС, СБКТС и автовоз"
+    ]
+  },
+  {
+    "id": "toyota-harrier-japan-2021",
+    "brand": "Toyota",
+    "model": "Harrier",
+    "title": "Toyota Harrier",
+    "market": "japan",
+    "marketName": "Япония",
+    "year": 2021,
+    "body": "crossover",
+    "bodyName": "Кроссовер",
+    "fuel": "Гибрид",
+    "transmission": "CVT",
+    "drive": "Передний привод",
+    "powerHp": 178,
+    "engineVolumeCc": 2500,
+    "mileageKm": 52000,
+    "city": "Владивосток / автовоз по РФ",
+    "deliveryDays": "25–45",
+    "totalRub": 3180000,
+    "currency": "JPY",
+    "exchangeRate": 0.57,
+    "sourcePrice": 2850000,
+    "tags": [
+      "япония",
+      "аукцион",
+      "кроссовер",
+      "гибрид"
+    ],
+    "recommendation": "Хороший семейный вариант из Японии. Для точной АвтоЦены нужна ставка на конкретный лот, аукционный лист и дата выпуска для утиля и таможни.",
+    "lines": [
+      {
+        "id": "deposit",
+        "title": "Обеспечительный взнос",
+        "amountRub": 31000,
+        "kind": "deposit"
+      },
+      {
+        "id": "car",
+        "title": "Ориентир покупки на аукционе",
+        "amountRub": 1624500,
+        "kind": "car"
+      },
+      {
+        "id": "japan-logistics",
+        "title": "Доставка, порт, фрахт",
+        "amountRub": 260000,
+        "kind": "logistics"
+      },
+      {
+        "id": "customs",
+        "title": "Таможня и утиль",
+        "amountRub": 1070500,
+        "kind": "customs"
+      },
+      {
+        "id": "broker",
+        "title": "Брокер, СВХ, ЭПТС, СБКТС",
+        "amountRub": 155000,
+        "kind": "service"
+      },
+      {
+        "id": "commission",
+        "title": "Комиссия TopAvto",
+        "amountRub": 39000,
+        "kind": "commission"
+      }
+    ],
+    "process": [
+      "Договор и оплата 70 000 ₽",
+      "Анализ лотов и ставки",
+      "Выигрыш аукциона и инвойс",
+      "Отправка во Владивосток",
+      "Таможня и лаборатория",
+      "Выдача или автовоз"
+    ]
+  },
+  {
+    "id": "kia-k5-korea-2022",
+    "brand": "Kia",
+    "model": "K5",
+    "title": "Kia K5",
+    "market": "korea",
+    "marketName": "Корея",
+    "year": 2022,
+    "body": "sedan",
+    "bodyName": "Седан",
+    "fuel": "Бензин",
+    "transmission": "Автомат",
+    "drive": "Передний привод",
+    "powerHp": 180,
+    "engineVolumeCc": 2000,
+    "mileageKm": 43000,
+    "city": "Владивосток / автовоз по РФ",
+    "deliveryDays": "25–40",
+    "totalRub": 2850000,
+    "currency": "KRW",
+    "exchangeRate": 0.067,
+    "sourcePrice": 24000000,
+    "tags": [
+      "корея",
+      "седан",
+      "автомат",
+      "до 3 млн"
+    ],
+    "recommendation": "Седан для клиента, которому важны левый руль, автомат и понятная ликвидность. Расчёт пока ориентировочный, точный будет после конкретного предложения.",
+    "lines": [
+      {
+        "id": "car",
+        "title": "Стоимость авто в Корее",
+        "amountRub": 1608000,
+        "kind": "car"
+      },
+      {
+        "id": "logistics",
+        "title": "Логистика и фрахт",
+        "amountRub": 240000,
+        "kind": "logistics"
+      },
+      {
+        "id": "customs",
+        "title": "Таможня и утиль",
+        "amountRub": 747000,
+        "kind": "customs"
+      },
+      {
+        "id": "broker",
+        "title": "Брокер, СВХ, ЭПТС, СБКТС",
+        "amountRub": 165000,
+        "kind": "service"
+      },
+      {
+        "id": "commission",
+        "title": "Комиссия TopAvto",
+        "amountRub": 90000,
+        "kind": "commission"
+      }
+    ],
+    "process": [
+      "Договор и согласование бюджета",
+      "Поиск авто в Корее",
+      "Проверка и выкуп",
+      "Доставка",
+      "Таможня и документы",
+      "Выдача"
+    ]
+  },
+  {
+    "id": "bmw-320-china-2023",
+    "brand": "BMW",
+    "model": "320",
+    "title": "BMW 320",
+    "market": "china",
+    "marketName": "Китай",
+    "year": 2023,
+    "body": "sedan",
+    "bodyName": "Седан",
+    "fuel": "Бензин",
+    "transmission": "Автомат",
+    "drive": "Задний привод",
+    "powerHp": 156,
+    "engineVolumeCc": 2000,
+    "mileageKm": 56000,
+    "city": "Новосибирск / Кемерово",
+    "deliveryDays": "25–30",
+    "totalRub": 3077000,
+    "currency": "CNY",
+    "exchangeRate": 11.47,
+    "sourcePrice": 160000,
+    "tags": [
+      "китай",
+      "bmw",
+      "седан",
+      "до 3.2 млн"
+    ],
+    "recommendation": "Популярный коммерческий вариант из Китая. Хорошо подходит для SEO-выдачи по запросам BMW цена, BMW 320 под заказ, авто из Китая под ключ.",
+    "lines": [
+      {
+        "id": "security",
+        "title": "Обеспечительный взнос, экспорт, проверка",
+        "amountRub": 160000,
+        "kind": "deposit"
+      },
+      {
+        "id": "car",
+        "title": "Ориентир стоимости авто",
+        "amountRub": 1835200,
+        "kind": "car"
+      },
+      {
+        "id": "logistics",
+        "title": "Логистика Китай + РФ",
+        "amountRub": 260000,
+        "kind": "logistics"
+      },
+      {
+        "id": "customs",
+        "title": "Таможня и утиль",
+        "amountRub": 632800,
+        "kind": "customs"
+      },
+      {
+        "id": "broker",
+        "title": "Брокер, СВХ, ЭПТС, СБКТС",
+        "amountRub": 99000,
+        "kind": "service"
+      },
+      {
+        "id": "commission",
+        "title": "Комиссия TopAvto",
+        "amountRub": 90000,
+        "kind": "commission"
+      }
+    ],
+    "process": [
+      "Договор и предоплата 250 000 ₽",
+      "Поиск без окрасов",
+      "Осмотр",
+      "Инвойс",
+      "Таможня",
+      "Автовоз"
+    ]
+  }
+]

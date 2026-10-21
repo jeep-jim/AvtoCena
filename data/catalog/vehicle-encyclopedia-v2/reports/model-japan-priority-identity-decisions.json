@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "window": {
+    "market": "Japan",
+    "fromYear": 2015,
+    "toYear": 2026
+  },
+  "policy": {
+    "englishCanonicalModelRequired": true,
+    "combinedRegistryLabelsNeverAutoResolve": true,
+    "gradesAndDerivativesRemainBelowModelLayer": true,
+    "fragmentsAndSpecialPurposeLabelsNeverBecomeModels": true
+  },
+  "totals": {
+    "priorityBrands": 8,
+    "residualSourceNames": 22,
+    "acceptedAsNewModels": 0,
+    "decisionsByDisposition": {
+      "combined_models": 10,
+      "fragment_noise": 2,
+      "grade_or_derivative": 8,
+      "model_family": 1,
+      "special_purpose_label": 1
+    }
+  },
+  "brandsWithNoResidualSourceNames": [
+    "nissan",
+    "suzuki",
+    "subaru",
+    "daihatsu"
+  ],
+  "decisions": [
+    {
+      "brandId": "toyota",
+      "sourceName": "*2",
+      "disposition": "fragment_noise",
+      "targetModelIds": []
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "アリオン プレミオ",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/allion",
+        "toyota/premio"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "アルファード ヴェルファイア",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/alphard",
+        "toyota/vellfire"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ヴォクシー ノア",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/voxy",
+        "toyota/noah"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "エスクァイア ノア",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/esquire",
+        "toyota/noah"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "クラウンセダン クラウンコンフォート",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/crown-sedan",
+        "toyota/crown-comfort"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ノア ヴォクシー",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/noah",
+        "toyota/voxy"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ノア ヴォクシー エスクァイア",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/noah",
+        "toyota/voxy",
+        "toyota/esquire"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "プレミオ アリオン",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/premio",
+        "toyota/allion"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ポルテ スペイド",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/porte",
+        "toyota/spade"
+      ]
+    },
+    {
+      "brandId": "toyota",
+      "sourceName": "ルーミー * タンク *",
+      "disposition": "combined_models",
+      "targetModelIds": [
+        "toyota/roomy",
+        "toyota/tank"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N BOX Custom",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-box"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX + Custom",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-box"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX Custom",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-box"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX CUSTOM",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-box"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-BOX JOY",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-box"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-WGN Custom",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-wgn"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "N-WGN CUSTOM",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/n-wgn"
+      ]
+    },
+    {
+      "brandId": "honda",
+      "sourceName": "ステップワゴン スパーダ",
+      "disposition": "grade_or_derivative",
+      "targetModelIds": [
+        "honda/step-wgn"
+      ]
+    },
+    {
+      "brandId": "mazda",
+      "sourceName": "マツダ教習車",
+      "disposition": "special_purpose_label",
+      "targetModelIds": []
+    },
+    {
+      "brandId": "mitsubishi",
+      "sourceName": "デリカ",
+      "disposition": "model_family",
+      "targetModelIds": [
+        "mitsubishi/delica-d2",
+        "mitsubishi/delica-d3",
+        "mitsubishi/delica-d5",
+        "mitsubishi/delica-mini"
+      ]
+    },
+    {
+      "brandId": "mitsubishi",
+      "sourceName": "リューション",
+      "disposition": "fragment_noise",
+      "targetModelIds": []
+    }
+  ]
+}

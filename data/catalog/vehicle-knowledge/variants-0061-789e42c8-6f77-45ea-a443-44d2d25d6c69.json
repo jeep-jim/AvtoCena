@@ -1,0 +1,31 @@
+[
+  {
+    "id": "volkswagen/touareg/cr-3.0-tsi-2018-2025",
+    "modelId": "volkswagen/touareg",
+    "make": "Volkswagen",
+    "model": "Touareg",
+    "generation": "CR",
+    "generationAliases": [
+      "3rd generation"
+    ],
+    "trimContains": [
+      "3.0 TSI"
+    ],
+    "yearFrom": 2018,
+    "yearTo": 2025,
+    "engineCc": 2995,
+    "engineCcTolerance": 100,
+    "fuel": "petrol",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 340,
+    "powerKw": 250,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "guazi_china_export"
+    ],
+    "sourceUrl": "https://www.volkswagen-newsroom.com/en/the-new-touareg-world-premiere-16049/overview-of-important-facts-16050",
+    "verifiedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  }
+]

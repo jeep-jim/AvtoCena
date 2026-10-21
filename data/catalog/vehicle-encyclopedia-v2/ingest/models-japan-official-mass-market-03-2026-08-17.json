@@ -1,0 +1,1016 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-daihatsu-atrai-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Atrai official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/atrai/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Atrai; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-copen-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Copen official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/copen/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Copen; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-honda-n-van-e-japan-current-2026",
+          "type": "manufacturer",
+          "title": "N-VAN e: official Japan model page",
+          "publisher": "Honda Motor Co., Ltd.",
+          "url": "https://www.honda.co.jp/N-VAN-e/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies N-VAN e:; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-honda-n-van-japan-current-2026",
+          "type": "manufacturer",
+          "title": "N-VAN official Japan model page",
+          "publisher": "Honda Motor Co., Ltd.",
+          "url": "https://www.honda.co.jp/N-VAN/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies N-VAN; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-bongo-van-japan-current-2026",
+          "type": "manufacturer",
+          "title": "BONGO VAN official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/commercial/bongo-van/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies BONGO VAN; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-familia-van-japan-current-2026",
+          "type": "manufacturer",
+          "title": "FAMILIA VAN official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/commercial/familia-van/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies FAMILIA VAN; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-scrum-van-japan-current-2026",
+          "type": "manufacturer",
+          "title": "SCRUM VAN official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/commercial/scrum-van/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies SCRUM VAN; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mazda-scrum-wagon-japan-current-2026",
+          "type": "manufacturer",
+          "title": "SCRUM WAGON official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://www.mazda.co.jp/cars/light-vehicle/scrum-wagon/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies SCRUM WAGON; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mlit-passenger-62474673333bd97c",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001251616.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001251616.xlsx",
+          "documentId": "001251616.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-a506e413d16c2e55",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001741627.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001741627.xls",
+          "documentId": "001741627.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-cfda73b4eb3c004e",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 000234321.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/000234321.xlsx",
+          "documentId": "000234321.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-nissan-skyline-japan-current-2026",
+          "type": "manufacturer",
+          "title": "SKYLINE official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://www3.nissan.co.jp/vehicles/new/skyline.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies SKYLINE; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-subaru-stella-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Stella official Japan model page",
+          "publisher": "Subaru Corporation",
+          "url": "https://www.subaru.jp/stella/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Stella; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-carry-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Carry official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/carry/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Carry; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-every-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Every official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/every/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Every; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-century-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Century official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/century/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Century; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-pixis-epoch-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Pixis Epoch official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/pixisepoch/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Pixis Epoch; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-pixis-van-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Pixis Van official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/pixisvan/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Pixis Van; historical generation and production boundaries are not inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "daihatsu/atrai",
+          "brandId": "daihatsu",
+          "canonicalName": "Atrai",
+          "slug": "atrai",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "アトレー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-atrai-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-atrai-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/copen",
+          "brandId": "daihatsu",
+          "canonicalName": "Copen",
+          "slug": "copen",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "コペン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-copen-japan-current-2026",
+                "src-mlit-passenger-0a08b4157aca6203",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-copen-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/n-van",
+          "brandId": "honda",
+          "canonicalName": "N-VAN",
+          "slug": "n-van",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-honda-n-van-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/n-van-e",
+          "brandId": "honda",
+          "canonicalName": "N-VAN e:",
+          "slug": "n-van-e",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-honda-n-van-e-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/bongo-van",
+          "brandId": "mazda",
+          "canonicalName": "BONGO VAN",
+          "slug": "bongo-van",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-bongo-van-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/familia-van",
+          "brandId": "mazda",
+          "canonicalName": "FAMILIA VAN",
+          "slug": "familia-van",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-familia-van-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/scrum-van",
+          "brandId": "mazda",
+          "canonicalName": "SCRUM VAN",
+          "slug": "scrum-van",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-scrum-van-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/scrum-wagon",
+          "brandId": "mazda",
+          "canonicalName": "SCRUM WAGON",
+          "slug": "scrum-wagon",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-scrum-wagon-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/skyline",
+          "brandId": "nissan",
+          "canonicalName": "SKYLINE",
+          "slug": "skyline",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "スカイライン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-371951746ee3954d",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5615de0cd2580a2f",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-86aba6aa586376c0",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f14fef9166bd3a02",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-nissan-skyline-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-skyline-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "subaru/stella",
+          "brandId": "subaru",
+          "canonicalName": "Stella",
+          "slug": "stella",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ステラ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-b29b86346a4c1d6a",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-c6beb5dd34536cc2",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-subaru-stella-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-subaru-stella-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/carry",
+          "brandId": "suzuki",
+          "canonicalName": "Carry",
+          "slug": "carry",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "キャリイ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-suzuki-carry-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-carry-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/every",
+          "brandId": "suzuki",
+          "canonicalName": "Every",
+          "slug": "every",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "エブリイ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-suzuki-every-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-every-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/century",
+          "brandId": "toyota",
+          "canonicalName": "Century",
+          "slug": "century",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "センチュリー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5615de0cd2580a2f",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-century-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-century-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/pixis-epoch",
+          "brandId": "toyota",
+          "canonicalName": "Pixis Epoch",
+          "slug": "pixis-epoch",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ピクシス エポック",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-62474673333bd97c",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a506e413d16c2e55",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cfda73b4eb3c004e",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-f859ea48a4a0d9cd",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-toyota-pixis-epoch-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-pixis-epoch-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/pixis-van",
+          "brandId": "toyota",
+          "canonicalName": "Pixis Van",
+          "slug": "pixis-van",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ピクシス バン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-toyota-pixis-van-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-pixis-van-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

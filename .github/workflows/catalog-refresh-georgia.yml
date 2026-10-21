@@ -1,0 +1,20 @@
+name: Catalog refresh georgia
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "29 21 * * *"
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/georgia-refresh.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-georgia
+  cancel-in-progress: false
+jobs:
+  refresh:
+    uses: ./.github/workflows/catalog-market-refresh.yml
+    with:
+      market: georgia
+    secrets: inherit

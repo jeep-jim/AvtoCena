@@ -1,0 +1,30 @@
+name: Verify homepage counts and footer
+on:
+  push:
+    branches: [fix/home-city-count-20260927]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-home-count.test.ts tests/catalog-filter-search.test.ts tests/card-city-delivery.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/home-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Home city, count races, failures, themes and footer
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/home-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/home-count.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: home-count-browser
+          path: artifacts/home-count/
+          retention-days: 7

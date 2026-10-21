@@ -1,0 +1,51 @@
+{
+  "name": "avtocena",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "apps/bot",
+    "packages/engine"
+  ],
+  "scripts": {
+    "dev": "npm --workspace=@avtocena/web run dev",
+    "dev:web": "npm --workspace=@avtocena/web run dev",
+    "dev:bot": "npm --workspace=@avtocena/bot run dev",
+    "build": "npm --workspace=@avtocena/web run build",
+    "clean:web": "node -e \"require('fs').rmSync('apps/web/.next',{recursive:true,force:true})\"",
+    "dev:fresh": "npm run clean:web && npm run dev",
+    "test": "node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/*.test.ts",
+    "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && npm --workspace=@avtocena/engine exec tsc -- --noEmit",
+    "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
+    "catalog:import": "tsx scripts/catalog-import.mjs",
+    "catalog:smoke": "tsx scripts/catalog-smoke.mjs",
+    "catalog:import:sample": "tsx scripts/catalog-import-production.mjs",
+    "catalog:power-review": "tsx scripts/catalog-power-review.mjs",
+    "catalog:power-knowledge": "tsx scripts/catalog-build-power-knowledge.mjs",
+    "catalog:power-reference-queue": "tsx scripts/catalog-build-certified-power-queue.mjs",
+    "catalog:power-apply": "tsx scripts/catalog-apply-certified-power.mjs",
+    "catalog:sync-vehicle-models": "tsx scripts/catalog-sync-vehicle-models.mjs",
+    "catalog:build-vehicle-variants": "tsx scripts/catalog-build-vehicle-variants.mjs",
+    "catalog:audit-vehicle-knowledge": "tsx scripts/catalog-audit-vehicle-knowledge.mjs",
+    "catalog:audit-encyclopedia-identity": "tsx scripts/catalog-audit-encyclopedia-identity.mjs",
+    "catalog:audit-source-specifications": "tsx scripts/catalog-audit-source-specifications.mjs",
+    "catalog:targeted-detail-queue": "tsx scripts/catalog-build-targeted-detail-queue.mjs",
+    "catalog:targeted-detail-fetch": "tsx scripts/catalog-fetch-targeted-detail-candidates.mjs",
+    "catalog:targeted-detail-delta": "tsx scripts/catalog-apply-targeted-detail-delta.mjs",
+    "catalog:compile-knowledge-core": "node scripts/catalog-compile-knowledge-core.mjs",
+    "catalog:cleanup-storage": "tsx scripts/catalog-clean-object-storage.mjs",
+    "catalog:reindex-vehicle-knowledge": "tsx scripts/catalog-reindex-vehicle-knowledge.mjs",
+    "autocatalog:publish": "tsx scripts/publish-autocatalog.mjs"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.28"
+    },
+    "geoip-country": {
+      "ip-address": "10.7.4"
+    }
+  },
+  "dependencies": {
+    "geoip-country": "^5.0.202610170130"
+  }
+}

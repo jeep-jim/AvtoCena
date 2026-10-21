@@ -1,0 +1,77 @@
+import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import { observationShardWriter, restoreIntakeCursor } from './lib/catalog-intake-checkpoint.mjs';
+import { collectSourceStates, intakeState, intakeReportEvidence } from './lib/catalog-source-intake.mjs';
+const market=process.env.CATALOG_INTAKE_MARKET;
+if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
+const ownerControls=await readCollectionControls();
+if(!collectionMarketEnabled(ownerControls,market))throw Error('collection_disabled_by_owner:'+market);
+process.env.CATALOG_REBUILD_MARKET=market;
+process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
+process.env.CATALOG_SOURCE_MIN_YEAR=String(market==='japan'?2010:new Date().getUTCFullYear()-6);
+if (market==='korea') {
+  try {
+    const result=await promisify(execFile)(process.execPath,['scripts/catalog-download-korea-energy-models.mjs'],{
+      env:{...process.env,KOREA_OFFICIAL_POWER_SNAPSHOT:'data/catalog/korea-official-power/snapshot.json'},timeout:180000,maxBuffer:1000000});
+    console.log(result.stdout);
+  } catch {console.warn('Official power reference refresh unavailable; retaining the last verified snapshot.');}
+}
+const {catalogImportSources}=await import('../apps/web/lib/catalog/importer.ts');
+const {AUTOHOME_NEW_MIN_YEAR}=await import('../apps/web/lib/catalog/source-inventory-scope.ts');
+const {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded}=await import('../apps/web/lib/catalog/inventory-admission.ts');
+const {REQUIRED_CATALOG_SOURCES}=await import('../apps/web/lib/catalog/required-catalog-sources.ts');
+const {sourceListingSnapshot}=await import('../apps/web/lib/catalog/source-listing-snapshot.ts');
+const {untranslatedSpecificationFields}=await import('../apps/web/lib/catalog/specification-display.ts');
+const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/specification-evidence-audit.ts');
+const directory=`catalog-intake-${market}`;
+await fs.mkdir(directory,{recursive:true});
+if ((await fs.readdir(directory)).some(name=>name.endsWith('.jsonl'))) throw Error('intake_output_not_empty');
+const selectedSourceIds=(process.env.CATALOG_INTAKE_SOURCE_IDS||'').split(',').filter(Boolean);
+if(selectedSourceIds.some(id=>!REQUIRED_CATALOG_SOURCES[market].some(source=>source.sourceId===id)))throw Error('intake_source_not_approved');
+const selectedSources=REQUIRED_CATALOG_SOURCES[market].filter(source=>collectionEnabled(ownerControls,source.sourceId)&&(!selectedSourceIds.length||selectedSourceIds.includes(source.sourceId)));
+if(!selectedSources.length)throw Error('collection_disabled_by_owner:no_enabled_parsers');
+const states=selectedSources.map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
+if (process.env.CATALOG_INTAKE_RESUME === '1') {
+  const {getJsonStorage}=await import('../apps/web/lib/data.ts');
+  const saved=await getJsonStorage().readJson(`catalog/intake-cursors/v1/${market}.json`,null);
+  for(const state of states) if(state.source) restoreIntakeCursor(state,saved);
+}
+const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(directory,state.sourceId)]));
+const startedAt=new Date().toISOString();
+const deadline=Date.now()+Math.min((market==='korea'?300:210)*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
+const maxRowsPerSource=Math.min(100000,Math.max(1,Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000)));
+const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',controlsRevision:ownerControls.revision,requiredSourceIds:selectedSources.map(s=>s.sourceId),
+  note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
+let checkpointQueue = Promise.resolve();
+let lastProgressAt = 0;
+function checkpoint() {
+ return checkpointQueue = checkpointQueue.then(async () => {
+  const value={...report,updatedAt:new Date().toISOString(),...intakeReportEvidence(states)};
+  await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(value,null,2));
+  await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));
+  if (Date.now()-lastProgressAt >= 60000 || report.completedAt) {
+    lastProgressAt=Date.now();
+    console.log(JSON.stringify({stage:'intake_progress',market,at:value.updatedAt,
+      sources:value.sources.map(s=>({sourceId:s.sourceId,pages:s.pages,uniqueOffers:s.observations,withImages:s.withImages,stopReason:s.stopReason}))}));
+  }
+ });
+}
+await checkpoint();
+await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSource,maxPages:2000,detailConcurrency:4,
+      minYear:state.sourceId==='autohome_new_china_open'?AUTOHOME_NEW_MIN_YEAR:market==='japan'?2010:new Date().getUTCFullYear()-6,
+      inventoryAgeEligible:offer=>catalogInventoryAgeDecision(offer).eligible && !catalogHeavyVehicleExcluded(offer),
+      snapshot:sourceListingSnapshot,checkpoint,
+      hasDiskRoom:async()=>{const disk=await fs.statfs(directory);return disk.bavail*disk.bsize>=2*1024**3;},
+      translationReport:groups=>untranslatedSpecificationFields(groups),
+      specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
+      writeObservation:writers.get(state.sourceId)}));
+for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}
+report.completedAt=new Date().toISOString();
+report.partialSources=states.filter(s=>s.stopReason!=="source_finished").map(s=>({sourceId:s.sourceId,reason:s.stopReason}));
+report.qualityStatus=report.partialSources.length?"partial":"configured_routes_finished";
+await checkpoint();
+console.log(JSON.stringify({...report,...intakeReportEvidence(states)}));

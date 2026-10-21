@@ -1,0 +1,772 @@
+{
+  "version": 1,
+  "scope": "Only image copies created by PR833 generation canaries; no live catalog keys",
+  "runs": [
+    {
+      "runId": "34073795968-1",
+      "market": "europe",
+      "codeSha": "3e30bd78f0a17c6461346b3ac446b59a087079c8",
+      "reportKey": "catalog/canaries/34073795968-1/europe/report.json",
+      "files": [
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/0ca2f56150e67171b25e0a333a12ec52524ff13ddae1a61516be3d60f6d9b894.webp",
+          "sha256": "0ca2f56150e67171b25e0a333a12ec52524ff13ddae1a61516be3d60f6d9b894",
+          "bytes": 27826
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/0daad9b2a806316d319684ae24791bdc81d496d995256e65b16e725d409e59f1.webp",
+          "sha256": "0daad9b2a806316d319684ae24791bdc81d496d995256e65b16e725d409e59f1",
+          "bytes": 54570
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/23d1fc8edf807537c3fbde6ad8d700d432e40397f9b939233c87a3831ec2023b.webp",
+          "sha256": "23d1fc8edf807537c3fbde6ad8d700d432e40397f9b939233c87a3831ec2023b",
+          "bytes": 64742
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/294173dd69e96d05e4e651f8bea17c8efbe47582e80172f6c0e5592df86a1299.webp",
+          "sha256": "294173dd69e96d05e4e651f8bea17c8efbe47582e80172f6c0e5592df86a1299",
+          "bytes": 318534
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/3042b966bbdcf682d19e30a77da32717b52de04679884900049badb0f8ccf5fa.webp",
+          "sha256": "3042b966bbdcf682d19e30a77da32717b52de04679884900049badb0f8ccf5fa",
+          "bytes": 58738
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/31c0d0cc4635a1e373b10ae265decbea38b8509270f892a05b5cc4617edad214.webp",
+          "sha256": "31c0d0cc4635a1e373b10ae265decbea38b8509270f892a05b5cc4617edad214",
+          "bytes": 145732
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/3951414bfb88ac5ded49b85667e7a0e7bcf543df7c412e497e1fe26029b749bb.webp",
+          "sha256": "3951414bfb88ac5ded49b85667e7a0e7bcf543df7c412e497e1fe26029b749bb",
+          "bytes": 101428
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/3b251868b10c7ab1a18129a60dc531880510bf5a119ed25f4d6b0ca58f9694fc.webp",
+          "sha256": "3b251868b10c7ab1a18129a60dc531880510bf5a119ed25f4d6b0ca58f9694fc",
+          "bytes": 52326
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/4024a13d3b9647811d2dfc8ef326172723c1365ab31d6df4bb511cdc089ed513.webp",
+          "sha256": "4024a13d3b9647811d2dfc8ef326172723c1365ab31d6df4bb511cdc089ed513",
+          "bytes": 48438
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/40dbad656ef56c0d24f8d720e7f44833deacb188e617ab7e6a090ecb94b5d170.webp",
+          "sha256": "40dbad656ef56c0d24f8d720e7f44833deacb188e617ab7e6a090ecb94b5d170",
+          "bytes": 59186
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/410f59d08e0e1bf124c884d156100139817963786faf03f4f582a3fd49c32b9e.webp",
+          "sha256": "410f59d08e0e1bf124c884d156100139817963786faf03f4f582a3fd49c32b9e",
+          "bytes": 60796
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/42ef637bf972661dcfadd5bf324aa1d1847b83a91f5d5428154a6e7d0dc12998.webp",
+          "sha256": "42ef637bf972661dcfadd5bf324aa1d1847b83a91f5d5428154a6e7d0dc12998",
+          "bytes": 58832
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/4390c4453f1cb07264e088ace149c3d622e9d25acb667b681d4b87286c957be9.webp",
+          "sha256": "4390c4453f1cb07264e088ace149c3d622e9d25acb667b681d4b87286c957be9",
+          "bytes": 54500
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/43976dda51dd550631bb03a0635944a041ece5e748762b03f8d66907ba8885fb.webp",
+          "sha256": "43976dda51dd550631bb03a0635944a041ece5e748762b03f8d66907ba8885fb",
+          "bytes": 34354
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/441b929926c61debbfbc31180986c1dc29fe1e9c5ce3e8fdcc919e6f4e416de2.webp",
+          "sha256": "441b929926c61debbfbc31180986c1dc29fe1e9c5ce3e8fdcc919e6f4e416de2",
+          "bytes": 202152
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/455d13b082fb96877651728f496be17de873f18661d6b906dd2359fc84c8f2d8.webp",
+          "sha256": "455d13b082fb96877651728f496be17de873f18661d6b906dd2359fc84c8f2d8",
+          "bytes": 14540
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/491cd66f8c57efa84762ae3ac420c1f76e1b3a3c34b0a5c53189c43ba6abde69.webp",
+          "sha256": "491cd66f8c57efa84762ae3ac420c1f76e1b3a3c34b0a5c53189c43ba6abde69",
+          "bytes": 62920
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/4b383614ad5f0e6d6b04460bb70465c2cca18edc03c644114c6da917e9097141.webp",
+          "sha256": "4b383614ad5f0e6d6b04460bb70465c2cca18edc03c644114c6da917e9097141",
+          "bytes": 368274
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/4e0268953c3d94d18239daa217fb906421d0d784b5a978ac8bbc42431cadfd1c.webp",
+          "sha256": "4e0268953c3d94d18239daa217fb906421d0d784b5a978ac8bbc42431cadfd1c",
+          "bytes": 55628
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/51bc445482c9562f571bc036f98d5dadebdebaf0ff4fc4ed33f2f74758c2d559.webp",
+          "sha256": "51bc445482c9562f571bc036f98d5dadebdebaf0ff4fc4ed33f2f74758c2d559",
+          "bytes": 56888
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/566be87cc5596fa37e813be3ba35d750e426b329ac9d614862f263c5e2f64e35.webp",
+          "sha256": "566be87cc5596fa37e813be3ba35d750e426b329ac9d614862f263c5e2f64e35",
+          "bytes": 83934
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/5ebbec6223a92cbd1251287ecbe8e8097b03695519a3cf13699b83f4f9b3dfe7.webp",
+          "sha256": "5ebbec6223a92cbd1251287ecbe8e8097b03695519a3cf13699b83f4f9b3dfe7",
+          "bytes": 386278
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/6222eb78680a5000b24653a31792c08f0bf0055b34e11e5cd993188e5013f33d.webp",
+          "sha256": "6222eb78680a5000b24653a31792c08f0bf0055b34e11e5cd993188e5013f33d",
+          "bytes": 67650
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/6437c4296410a06a578dd0b913007eb8f84a943cd3ff62de5e206328221d6551.webp",
+          "sha256": "6437c4296410a06a578dd0b913007eb8f84a943cd3ff62de5e206328221d6551",
+          "bytes": 62466
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/667542a23e92bb4282fa839e8d48e38dcb49dfd45e10b3b1853b4c089e559a1b.webp",
+          "sha256": "667542a23e92bb4282fa839e8d48e38dcb49dfd45e10b3b1853b4c089e559a1b",
+          "bytes": 25684
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/6cffbc784c3b1aaa58ed21639a4fd85e9504b153254740c1971ded76ac173726.webp",
+          "sha256": "6cffbc784c3b1aaa58ed21639a4fd85e9504b153254740c1971ded76ac173726",
+          "bytes": 60758
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/6ea155d16dfb9186ff51b301ba3c77195b843480af3050140e7a877282cc94d4.webp",
+          "sha256": "6ea155d16dfb9186ff51b301ba3c77195b843480af3050140e7a877282cc94d4",
+          "bytes": 118368
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/723864536c44e87046e4bea17428ac476abc2c49db75bee5c8c57d4ce0ec7571.webp",
+          "sha256": "723864536c44e87046e4bea17428ac476abc2c49db75bee5c8c57d4ce0ec7571",
+          "bytes": 126718
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/74be2ac1480d4372cf16a8b0a90a17f863d0df4af53ee4e6cb76b785934dd2d9.webp",
+          "sha256": "74be2ac1480d4372cf16a8b0a90a17f863d0df4af53ee4e6cb76b785934dd2d9",
+          "bytes": 98924
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/77f832c673c81d78777f018842c0ea8032560b40c68828f5d55f51b6bac31460.webp",
+          "sha256": "77f832c673c81d78777f018842c0ea8032560b40c68828f5d55f51b6bac31460",
+          "bytes": 59398
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/7efd9dd3dd54058eac389c64ca58a517555a75c98def9048554e6e580fd90f9e.webp",
+          "sha256": "7efd9dd3dd54058eac389c64ca58a517555a75c98def9048554e6e580fd90f9e",
+          "bytes": 100024
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/8a1693fc49c7537d13bbc030027a9fb85040f50d542f37c8bd683393dba6432d.webp",
+          "sha256": "8a1693fc49c7537d13bbc030027a9fb85040f50d542f37c8bd683393dba6432d",
+          "bytes": 51830
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/8b2a02af8f2323f7288fdc702b6f34a3f6bb3c4d5d8e70dda4f6efbc6215698a.webp",
+          "sha256": "8b2a02af8f2323f7288fdc702b6f34a3f6bb3c4d5d8e70dda4f6efbc6215698a",
+          "bytes": 115130
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/90f03940d694327f24d4e896a640d8bd732b77a9de3a7ca276e08780497a5b7b.webp",
+          "sha256": "90f03940d694327f24d4e896a640d8bd732b77a9de3a7ca276e08780497a5b7b",
+          "bytes": 27686
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/96b60f10a00403353fa5b3f78dd2084d61a99cfa71b71624e90de09cde3885b0.webp",
+          "sha256": "96b60f10a00403353fa5b3f78dd2084d61a99cfa71b71624e90de09cde3885b0",
+          "bytes": 131178
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/9c3e29d7a9e43df28385942b84bd588ca3a41737b6cf0e65bc75af7cbd2271e0.webp",
+          "sha256": "9c3e29d7a9e43df28385942b84bd588ca3a41737b6cf0e65bc75af7cbd2271e0",
+          "bytes": 154564
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/a20fbe4457a66f4e2f54cb8ed9c0134b458ab18b5ebe42d331b6c7a0bdd5a15a.webp",
+          "sha256": "a20fbe4457a66f4e2f54cb8ed9c0134b458ab18b5ebe42d331b6c7a0bdd5a15a",
+          "bytes": 72614
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/a812988e936df1c41458a9820f050ee11653aec6f3e645f7a0cdc3c14b8dff6b.webp",
+          "sha256": "a812988e936df1c41458a9820f050ee11653aec6f3e645f7a0cdc3c14b8dff6b",
+          "bytes": 89014
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/b21e413981b09f18cc2d133c81027f47694ff13fb4555d77b8d0c68709f3be9b.webp",
+          "sha256": "b21e413981b09f18cc2d133c81027f47694ff13fb4555d77b8d0c68709f3be9b",
+          "bytes": 259074
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/c18be806b2c4710e25bfd130b3b6da162969e1ce2629bfa7de12ba0851a044db.webp",
+          "sha256": "c18be806b2c4710e25bfd130b3b6da162969e1ce2629bfa7de12ba0851a044db",
+          "bytes": 37114
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/c38be7d6917cb23e39271f435a5e55f4182ea5dbc14ecf9f7fc689dfc0d39c02.webp",
+          "sha256": "c38be7d6917cb23e39271f435a5e55f4182ea5dbc14ecf9f7fc689dfc0d39c02",
+          "bytes": 307104
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/c88a84ff3d4af343b4d1c5c1c275ded7625160a7204b5d1e3823dfda6506af6b.webp",
+          "sha256": "c88a84ff3d4af343b4d1c5c1c275ded7625160a7204b5d1e3823dfda6506af6b",
+          "bytes": 406338
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/ccc1c078255b77d9c6ede23cd867e246bd1fc352a10aad1436ecda1309d84c79.webp",
+          "sha256": "ccc1c078255b77d9c6ede23cd867e246bd1fc352a10aad1436ecda1309d84c79",
+          "bytes": 91904
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/d28ce517cabb908f94de2ead482104a8f754e7d9e5e009d78637148075323ac6.webp",
+          "sha256": "d28ce517cabb908f94de2ead482104a8f754e7d9e5e009d78637148075323ac6",
+          "bytes": 46794
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/d2dab2f91f0309f6265bd3f842ef5e36035adf1f055e037e41c32fa381944a19.webp",
+          "sha256": "d2dab2f91f0309f6265bd3f842ef5e36035adf1f055e037e41c32fa381944a19",
+          "bytes": 46236
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/d538cc3cbc4a0b745e7c0463afb25da1ee02b0f792e1f93f377069c7aa62c8c4.webp",
+          "sha256": "d538cc3cbc4a0b745e7c0463afb25da1ee02b0f792e1f93f377069c7aa62c8c4",
+          "bytes": 47524
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/d8a23a6861edb90cb7848ca0156f68a0c5da8f0297b0596b8bab9921f136a786.webp",
+          "sha256": "d8a23a6861edb90cb7848ca0156f68a0c5da8f0297b0596b8bab9921f136a786",
+          "bytes": 160650
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/dcb31b7c215ba04191b42cc2fd000e3caeb5ab8b9922deb36d3a035689816798.webp",
+          "sha256": "dcb31b7c215ba04191b42cc2fd000e3caeb5ab8b9922deb36d3a035689816798",
+          "bytes": 59956
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/dfdc225927dca2f2e4cdbfeec6cc914830112ff54747d48e444a5058f939545a.webp",
+          "sha256": "dfdc225927dca2f2e4cdbfeec6cc914830112ff54747d48e444a5058f939545a",
+          "bytes": 143042
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/e61a280a7f1a5d88cb6266d619e283497a7315cd5543008f830399fa79fdeb75.webp",
+          "sha256": "e61a280a7f1a5d88cb6266d619e283497a7315cd5543008f830399fa79fdeb75",
+          "bytes": 42564
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/e62688153e6892040c0f2af6314f5295d2db3177b9f5f82a191e545d300412d4.webp",
+          "sha256": "e62688153e6892040c0f2af6314f5295d2db3177b9f5f82a191e545d300412d4",
+          "bytes": 43784
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/e7b02cde170b6c5f5f21627c104e143b9602dbd8f8584956808d9c852bad011e.webp",
+          "sha256": "e7b02cde170b6c5f5f21627c104e143b9602dbd8f8584956808d9c852bad011e",
+          "bytes": 209058
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/ecab563ad0837d1a2db26ebb45a44f67cc876f6ef2fbfd938a89102ec1444565.webp",
+          "sha256": "ecab563ad0837d1a2db26ebb45a44f67cc876f6ef2fbfd938a89102ec1444565",
+          "bytes": 80114
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/f3b9f70d1ba2591dc866fb7b781559fd6b4b098712ebc8702bc616f6d46b6d03.webp",
+          "sha256": "f3b9f70d1ba2591dc866fb7b781559fd6b4b098712ebc8702bc616f6d46b6d03",
+          "bytes": 50802
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/f7f5756a9eec0c9e272dc225b494083f6f82b82db2909941f2d3cd0dfd79786a.webp",
+          "sha256": "f7f5756a9eec0c9e272dc225b494083f6f82b82db2909941f2d3cd0dfd79786a",
+          "bytes": 51116
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/f7fd69a6db700eecfebd3ee9a34642e5f5cf25480fffc1633e41f39f3f998d03.webp",
+          "sha256": "f7fd69a6db700eecfebd3ee9a34642e5f5cf25480fffc1633e41f39f3f998d03",
+          "bytes": 47208
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/fa3513b8a5ba82f7c75cdd5493d7e18ae4655cb1c83ed30435d523a67678ef1f.webp",
+          "sha256": "fa3513b8a5ba82f7c75cdd5493d7e18ae4655cb1c83ed30435d523a67678ef1f",
+          "bytes": 50128
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/europe/catalog/images/europe/fd3a81ad1133e5ac0678222b091a2507f234a7d691cc5e3e3a835bbcbfadab9d.webp",
+          "sha256": "fd3a81ad1133e5ac0678222b091a2507f234a7d691cc5e3e3a835bbcbfadab9d",
+          "bytes": 200562
+        }
+      ]
+    },
+    {
+      "runId": "34073795968-1",
+      "market": "korea",
+      "codeSha": "3e30bd78f0a17c6461346b3ac446b59a087079c8",
+      "reportKey": "catalog/canaries/34073795968-1/korea/report.json",
+      "files": [
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/0449ae76bbfc4848642c4a48a4245487823ec564e6bec70e1b77835552239373.webp",
+          "sha256": "0449ae76bbfc4848642c4a48a4245487823ec564e6bec70e1b77835552239373",
+          "bytes": 47920
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/0560aeef24461d611c7d34149023fbbfaf2865955a7e3ada1ce4a025dbdac6b3.webp",
+          "sha256": "0560aeef24461d611c7d34149023fbbfaf2865955a7e3ada1ce4a025dbdac6b3",
+          "bytes": 228834
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/0ac6005a3a2d1c0f15a41ac184c67ae5de4e83f411bbc985f1fb23adc89a1df9.webp",
+          "sha256": "0ac6005a3a2d1c0f15a41ac184c67ae5de4e83f411bbc985f1fb23adc89a1df9",
+          "bytes": 113518
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/129b3ba4ea5e9685879ea7fa4789f9e15a663c4e7a41a04cb84ac8add41b373b.webp",
+          "sha256": "129b3ba4ea5e9685879ea7fa4789f9e15a663c4e7a41a04cb84ac8add41b373b",
+          "bytes": 166726
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/1a6bbdec0599814a197cec292d8c55473ad381243e3c7215ad6521f43f8a437b.webp",
+          "sha256": "1a6bbdec0599814a197cec292d8c55473ad381243e3c7215ad6521f43f8a437b",
+          "bytes": 72040
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/22f5b6ead337dfad8b0ccf30728090d9a82c258d94092af74e083e15354218c7.webp",
+          "sha256": "22f5b6ead337dfad8b0ccf30728090d9a82c258d94092af74e083e15354218c7",
+          "bytes": 101498
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/2b73dbaf0fa3a47879cb046f5e41b4286c6240cdb51c825fcb1227279ac6d335.webp",
+          "sha256": "2b73dbaf0fa3a47879cb046f5e41b4286c6240cdb51c825fcb1227279ac6d335",
+          "bytes": 46432
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/40a6470629eafeda79ca29cd0f3cdf5055a587c3a43b0d9001032be20456f0e0.webp",
+          "sha256": "40a6470629eafeda79ca29cd0f3cdf5055a587c3a43b0d9001032be20456f0e0",
+          "bytes": 43398
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/40f322b02c74a1c0dfd12c2848900891cb04181970cf04d830c4f7874a17c9a5.webp",
+          "sha256": "40f322b02c74a1c0dfd12c2848900891cb04181970cf04d830c4f7874a17c9a5",
+          "bytes": 197746
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/45e4ce0785b23be00263c6bc741be2e717c7a896bc34fc0c3218edf6b931a669.webp",
+          "sha256": "45e4ce0785b23be00263c6bc741be2e717c7a896bc34fc0c3218edf6b931a669",
+          "bytes": 77380
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/52bef6330b3dd962a70be4249d131905eccde972e7998944b74d8a7b7d95b111.webp",
+          "sha256": "52bef6330b3dd962a70be4249d131905eccde972e7998944b74d8a7b7d95b111",
+          "bytes": 54390
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/5c2a78f6d113f09c7dc4f9a935813e5f934e11d577eede96c5cbc22ed9956b39.webp",
+          "sha256": "5c2a78f6d113f09c7dc4f9a935813e5f934e11d577eede96c5cbc22ed9956b39",
+          "bytes": 38070
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/5d6936b9134722deebfb05b662da6c0cd5003c86f2024470ac3e90cef2a0871c.webp",
+          "sha256": "5d6936b9134722deebfb05b662da6c0cd5003c86f2024470ac3e90cef2a0871c",
+          "bytes": 63360
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/69a01e895c57ba7bd1877e02b3319a28d5d27f2d8031b57a433215828e585b5d.webp",
+          "sha256": "69a01e895c57ba7bd1877e02b3319a28d5d27f2d8031b57a433215828e585b5d",
+          "bytes": 61856
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/6ce4dec75f5a4c1aee0d5ef51fc75a4b8fb46027d68cfb5a6640acfe97429fdc.webp",
+          "sha256": "6ce4dec75f5a4c1aee0d5ef51fc75a4b8fb46027d68cfb5a6640acfe97429fdc",
+          "bytes": 139500
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/70e99c74d9ead712b9ac8dbbfa1b8cc2d31db50bc75ad42ebeab26e6e6f37043.webp",
+          "sha256": "70e99c74d9ead712b9ac8dbbfa1b8cc2d31db50bc75ad42ebeab26e6e6f37043",
+          "bytes": 87452
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/7306c13f551a98b26ce084599c42bb7a4b138419f1c8529409134af1aaf774e1.webp",
+          "sha256": "7306c13f551a98b26ce084599c42bb7a4b138419f1c8529409134af1aaf774e1",
+          "bytes": 37858
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/77f628976d3a5cf2f10f4342b2ff58f47d300680a915320eb1012261d9136013.webp",
+          "sha256": "77f628976d3a5cf2f10f4342b2ff58f47d300680a915320eb1012261d9136013",
+          "bytes": 43624
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/7bb370d4093bf4b0e2173eef0c9cefcbbb80a11963219d5b305a59e507a69692.webp",
+          "sha256": "7bb370d4093bf4b0e2173eef0c9cefcbbb80a11963219d5b305a59e507a69692",
+          "bytes": 58854
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/7c38cf0506fdde8a23a072dd0eb8a2d20a7fdcc6933c925aa240251ec7463cef.webp",
+          "sha256": "7c38cf0506fdde8a23a072dd0eb8a2d20a7fdcc6933c925aa240251ec7463cef",
+          "bytes": 12362
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/7cae9315f4520c2702c2b1080852777717975644638a47d551b7898f5c14927d.webp",
+          "sha256": "7cae9315f4520c2702c2b1080852777717975644638a47d551b7898f5c14927d",
+          "bytes": 44810
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/7e3b7b3a8ddfdf4e77eb99de74e50b8d850c8f6253063adfde81d0510ae3fa8f.webp",
+          "sha256": "7e3b7b3a8ddfdf4e77eb99de74e50b8d850c8f6253063adfde81d0510ae3fa8f",
+          "bytes": 154584
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/8365acf686dccee2a2c7e03fbce3ed2d0c2125b772fc850edc9c7a77a52f4282.webp",
+          "sha256": "8365acf686dccee2a2c7e03fbce3ed2d0c2125b772fc850edc9c7a77a52f4282",
+          "bytes": 53292
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/85e246495f9eb037cdf59bc0bf1626699721726b727f165529803432283a37c0.webp",
+          "sha256": "85e246495f9eb037cdf59bc0bf1626699721726b727f165529803432283a37c0",
+          "bytes": 125148
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/87917f569ef0765302a4930c55d99fd3439c02f9b7009c47b8d4fc03809a1dd8.webp",
+          "sha256": "87917f569ef0765302a4930c55d99fd3439c02f9b7009c47b8d4fc03809a1dd8",
+          "bytes": 173018
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/89767587c689238c1b0648dc8ec2036d16707b2cc1d67f3e6910598f7e0aa94b.webp",
+          "sha256": "89767587c689238c1b0648dc8ec2036d16707b2cc1d67f3e6910598f7e0aa94b",
+          "bytes": 25336
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/8a56548bc4ac35ce7adc95e8ce54eb72d12e944b0cbd8867dc8893a4ba5ef0c9.webp",
+          "sha256": "8a56548bc4ac35ce7adc95e8ce54eb72d12e944b0cbd8867dc8893a4ba5ef0c9",
+          "bytes": 105926
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/8e6b365411d7a2fe3d2c23251cf3f2b45419e44c9beb6a26f67a1e06808d39c3.webp",
+          "sha256": "8e6b365411d7a2fe3d2c23251cf3f2b45419e44c9beb6a26f67a1e06808d39c3",
+          "bytes": 124814
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/906e28108725592226a338c7f3ac18dabe7243c55c7261f964ce9b237b580e8f.webp",
+          "sha256": "906e28108725592226a338c7f3ac18dabe7243c55c7261f964ce9b237b580e8f",
+          "bytes": 87424
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/90efcf4987829c9461df6afc7f52cc89b67dbde11dc91aa6dc95fdd4d6a8db32.webp",
+          "sha256": "90efcf4987829c9461df6afc7f52cc89b67dbde11dc91aa6dc95fdd4d6a8db32",
+          "bytes": 41982
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/9d3bc18de148538441c2dbaf2e8e4488dfd921f0045462fbaa1c462fd0a16f7c.webp",
+          "sha256": "9d3bc18de148538441c2dbaf2e8e4488dfd921f0045462fbaa1c462fd0a16f7c",
+          "bytes": 56652
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/a4f55a77d645e5e979ef5d0b22c58f564899d922c7e9f0e94f422e62609e33a9.webp",
+          "sha256": "a4f55a77d645e5e979ef5d0b22c58f564899d922c7e9f0e94f422e62609e33a9",
+          "bytes": 185546
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/a53449a2782c0a60bbeab58a3b5b7e50e5bf882a744e57f10586d45879005ce7.webp",
+          "sha256": "a53449a2782c0a60bbeab58a3b5b7e50e5bf882a744e57f10586d45879005ce7",
+          "bytes": 44400
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/a7cc6949e0d4fb7fe488daf40d165382506a47fd2b51a65ddfdfa4f9caf5b792.webp",
+          "sha256": "a7cc6949e0d4fb7fe488daf40d165382506a47fd2b51a65ddfdfa4f9caf5b792",
+          "bytes": 146188
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/a9057c8403fb56148e621bf62003772d24818beb73b26331fd698bb9956319eb.webp",
+          "sha256": "a9057c8403fb56148e621bf62003772d24818beb73b26331fd698bb9956319eb",
+          "bytes": 58376
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/ae2fee27dff7dfd597fa4536937e2851d17a9428f0ddbcbf44c01b4ae87cc8a6.webp",
+          "sha256": "ae2fee27dff7dfd597fa4536937e2851d17a9428f0ddbcbf44c01b4ae87cc8a6",
+          "bytes": 104548
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/b0c5f3c68d45b0511916692c06b2dd3e054905796509c5699d1d8a32e535418f.webp",
+          "sha256": "b0c5f3c68d45b0511916692c06b2dd3e054905796509c5699d1d8a32e535418f",
+          "bytes": 149572
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/b57b1c30c4037ed9125640aafda26d75aaa2a0c7be0d4c576c67c1d90fe310ac.webp",
+          "sha256": "b57b1c30c4037ed9125640aafda26d75aaa2a0c7be0d4c576c67c1d90fe310ac",
+          "bytes": 32774
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/b653d9e70749f4b48063b194037a39be094f4c46fb57649b9d251a4b406e401b.webp",
+          "sha256": "b653d9e70749f4b48063b194037a39be094f4c46fb57649b9d251a4b406e401b",
+          "bytes": 45906
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/b7a106f9d79634c879e9f6ed2ff7789b1ee8dad5f559c17caab2fbb041f73b5d.webp",
+          "sha256": "b7a106f9d79634c879e9f6ed2ff7789b1ee8dad5f559c17caab2fbb041f73b5d",
+          "bytes": 183070
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/be464955199de26191fa43bc51bc499c0f385c745236216acc2f3d487cd90ca0.webp",
+          "sha256": "be464955199de26191fa43bc51bc499c0f385c745236216acc2f3d487cd90ca0",
+          "bytes": 40782
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/c1917456b8ef7f6fc2e51978d107fa2774dad7e7cd90a0b1d65e6510d3e11504.webp",
+          "sha256": "c1917456b8ef7f6fc2e51978d107fa2774dad7e7cd90a0b1d65e6510d3e11504",
+          "bytes": 60786
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/c89b550e78cfa14aa4c347d58e41c8b98a8bb9a37394fce9609888bdf4a874bb.webp",
+          "sha256": "c89b550e78cfa14aa4c347d58e41c8b98a8bb9a37394fce9609888bdf4a874bb",
+          "bytes": 187180
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/c917ca2e599ad3dbf2af654022ae0cfa973df10552504645df09e92558668173.webp",
+          "sha256": "c917ca2e599ad3dbf2af654022ae0cfa973df10552504645df09e92558668173",
+          "bytes": 49538
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/cfccf6033e3dadf06a6dd2ffc17173806d3547ce5390f711e8a5b911c00fb653.webp",
+          "sha256": "cfccf6033e3dadf06a6dd2ffc17173806d3547ce5390f711e8a5b911c00fb653",
+          "bytes": 72250
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/df6957898da53a290622fca48523def3640d13ffce34d8c379c72ff874dd4d8b.webp",
+          "sha256": "df6957898da53a290622fca48523def3640d13ffce34d8c379c72ff874dd4d8b",
+          "bytes": 113450
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/e515618ae639fea8f30499211bbd4ce6b6b5b23f419a00f9dc0ef12db5718a83.webp",
+          "sha256": "e515618ae639fea8f30499211bbd4ce6b6b5b23f419a00f9dc0ef12db5718a83",
+          "bytes": 87250
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/e96235aea63d773ce802326e237663dc370a7b1f9ff7aa527f85da15602228a9.webp",
+          "sha256": "e96235aea63d773ce802326e237663dc370a7b1f9ff7aa527f85da15602228a9",
+          "bytes": 35836
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/ea18277d4552f626679dded2ce0da16e75a044004d59fc6b164fe843251c4f25.webp",
+          "sha256": "ea18277d4552f626679dded2ce0da16e75a044004d59fc6b164fe843251c4f25",
+          "bytes": 39934
+        },
+        {
+          "key": "catalog/canaries/34073795968-1/korea/catalog/images/korea/ec0f772f451385e1f7f0209511cd89d0818e79ad434acd4782c23b7df0381b21.webp",
+          "sha256": "ec0f772f451385e1f7f0209511cd89d0818e79ad434acd4782c23b7df0381b21",
+          "bytes": 68228
+        }
+      ]
+    },
+    {
+      "runId": "34074192666-1",
+      "market": "europe",
+      "codeSha": "944f2ae1f5493a164685619d88ad65e4de192d04",
+      "reportKey": "catalog/canaries/34074192666-1/europe/report.json",
+      "files": [
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/0e8a08a398b7e319dd15281ca7f2f98ddeb7efe84e8030225eef173b3489e212.webp",
+          "sha256": "0e8a08a398b7e319dd15281ca7f2f98ddeb7efe84e8030225eef173b3489e212",
+          "bytes": 74108
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/11984920de5ae0dd4d8b580572b05b614abfc64bfff612ba3f50ca4b48d56ee7.webp",
+          "sha256": "11984920de5ae0dd4d8b580572b05b614abfc64bfff612ba3f50ca4b48d56ee7",
+          "bytes": 56124
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/1570a6076e97ca38653fee4fd1eabff164c16b925413a2d3550937a1e2bcc5e2.webp",
+          "sha256": "1570a6076e97ca38653fee4fd1eabff164c16b925413a2d3550937a1e2bcc5e2",
+          "bytes": 111338
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/173983cb9ee7921c8b902ffe48d88cf59c7e1f87574d2aeebf9d402ecd57a1fc.webp",
+          "sha256": "173983cb9ee7921c8b902ffe48d88cf59c7e1f87574d2aeebf9d402ecd57a1fc",
+          "bytes": 85928
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/1d15310a460b0e8e4a66a0a74d6d8bd0c18d629e887abb08c109654464425538.webp",
+          "sha256": "1d15310a460b0e8e4a66a0a74d6d8bd0c18d629e887abb08c109654464425538",
+          "bytes": 100310
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/23d1fc8edf807537c3fbde6ad8d700d432e40397f9b939233c87a3831ec2023b.webp",
+          "sha256": "23d1fc8edf807537c3fbde6ad8d700d432e40397f9b939233c87a3831ec2023b",
+          "bytes": 64742
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/2b106c113b52d9dd0e923ddc5ca588fb14a33e8e4e1db71af9fdf4532371377e.webp",
+          "sha256": "2b106c113b52d9dd0e923ddc5ca588fb14a33e8e4e1db71af9fdf4532371377e",
+          "bytes": 60396
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/3042b966bbdcf682d19e30a77da32717b52de04679884900049badb0f8ccf5fa.webp",
+          "sha256": "3042b966bbdcf682d19e30a77da32717b52de04679884900049badb0f8ccf5fa",
+          "bytes": 58738
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/318ca4fa7dcbfae809547b8aa5bab8d35ca377b2d9b1956b62a1eded8e5d1664.webp",
+          "sha256": "318ca4fa7dcbfae809547b8aa5bab8d35ca377b2d9b1956b62a1eded8e5d1664",
+          "bytes": 52682
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/34568bbc33e40144ebd00272212e997fb596e2e9af23bce08306e65ffbf84a35.webp",
+          "sha256": "34568bbc33e40144ebd00272212e997fb596e2e9af23bce08306e65ffbf84a35",
+          "bytes": 169174
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/40dbad656ef56c0d24f8d720e7f44833deacb188e617ab7e6a090ecb94b5d170.webp",
+          "sha256": "40dbad656ef56c0d24f8d720e7f44833deacb188e617ab7e6a090ecb94b5d170",
+          "bytes": 59186
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/42ef637bf972661dcfadd5bf324aa1d1847b83a91f5d5428154a6e7d0dc12998.webp",
+          "sha256": "42ef637bf972661dcfadd5bf324aa1d1847b83a91f5d5428154a6e7d0dc12998",
+          "bytes": 58832
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/4b383614ad5f0e6d6b04460bb70465c2cca18edc03c644114c6da917e9097141.webp",
+          "sha256": "4b383614ad5f0e6d6b04460bb70465c2cca18edc03c644114c6da917e9097141",
+          "bytes": 368274
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/5403706855865ee431754e10e72361e21b97881885cb072f0a879aaa44f45297.webp",
+          "sha256": "5403706855865ee431754e10e72361e21b97881885cb072f0a879aaa44f45297",
+          "bytes": 49780
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/555c2dc640a0e0ef6560e5700f9a9cd13ca326fd4515c4410391481c1b50cd3b.webp",
+          "sha256": "555c2dc640a0e0ef6560e5700f9a9cd13ca326fd4515c4410391481c1b50cd3b",
+          "bytes": 336432
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/5c3e6b11816827defa803fe3fb0bcee3be5c0af180d58b70063496c560e33a8c.webp",
+          "sha256": "5c3e6b11816827defa803fe3fb0bcee3be5c0af180d58b70063496c560e33a8c",
+          "bytes": 32974
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/5d4b6e7651820b9a3f6b2f6764bb64c78f0e13fcca87d8147247fb0808d78317.webp",
+          "sha256": "5d4b6e7651820b9a3f6b2f6764bb64c78f0e13fcca87d8147247fb0808d78317",
+          "bytes": 51090
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/5ebbec6223a92cbd1251287ecbe8e8097b03695519a3cf13699b83f4f9b3dfe7.webp",
+          "sha256": "5ebbec6223a92cbd1251287ecbe8e8097b03695519a3cf13699b83f4f9b3dfe7",
+          "bytes": 386278
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/6af50770c027f7108b063df1060c10b6448aeba0d9ba96b5771bfe87c9668896.webp",
+          "sha256": "6af50770c027f7108b063df1060c10b6448aeba0d9ba96b5771bfe87c9668896",
+          "bytes": 48612
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/6cffbc784c3b1aaa58ed21639a4fd85e9504b153254740c1971ded76ac173726.webp",
+          "sha256": "6cffbc784c3b1aaa58ed21639a4fd85e9504b153254740c1971ded76ac173726",
+          "bytes": 60758
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/6ea6d39170c1998cc9b4aca3e08aef34f7fb3ff08470dff427a84d53487f66f8.webp",
+          "sha256": "6ea6d39170c1998cc9b4aca3e08aef34f7fb3ff08470dff427a84d53487f66f8",
+          "bytes": 51328
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/723864536c44e87046e4bea17428ac476abc2c49db75bee5c8c57d4ce0ec7571.webp",
+          "sha256": "723864536c44e87046e4bea17428ac476abc2c49db75bee5c8c57d4ce0ec7571",
+          "bytes": 126718
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/77f832c673c81d78777f018842c0ea8032560b40c68828f5d55f51b6bac31460.webp",
+          "sha256": "77f832c673c81d78777f018842c0ea8032560b40c68828f5d55f51b6bac31460",
+          "bytes": 59398
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/7b0d94f8aba3bdaf9cd194f21f64727e0f133c91c133cd5a558c17489a32fda7.webp",
+          "sha256": "7b0d94f8aba3bdaf9cd194f21f64727e0f133c91c133cd5a558c17489a32fda7",
+          "bytes": 41490
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/8a1693fc49c7537d13bbc030027a9fb85040f50d542f37c8bd683393dba6432d.webp",
+          "sha256": "8a1693fc49c7537d13bbc030027a9fb85040f50d542f37c8bd683393dba6432d",
+          "bytes": 51830
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/8a60b07382eef15f13d651211fdb7493d9344f8ad49c57cfbabea30af29c5465.webp",
+          "sha256": "8a60b07382eef15f13d651211fdb7493d9344f8ad49c57cfbabea30af29c5465",
+          "bytes": 106236
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/8b2a02af8f2323f7288fdc702b6f34a3f6bb3c4d5d8e70dda4f6efbc6215698a.webp",
+          "sha256": "8b2a02af8f2323f7288fdc702b6f34a3f6bb3c4d5d8e70dda4f6efbc6215698a",
+          "bytes": 115130
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/90f60ecea974b3ee992e0840a7d1179e2241802bef16b0e9c9ef0cb3fd3afe40.webp",
+          "sha256": "90f60ecea974b3ee992e0840a7d1179e2241802bef16b0e9c9ef0cb3fd3afe40",
+          "bytes": 71182
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/ac1a3d3c5f75117f04f3fabef8e505f920aa98c8048d7a74d66d8ed03f515909.webp",
+          "sha256": "ac1a3d3c5f75117f04f3fabef8e505f920aa98c8048d7a74d66d8ed03f515909",
+          "bytes": 110112
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/b0234778efd3f49f63886fe73d7e38ce633e8d46e7fc8c891b2dbd56551c1014.webp",
+          "sha256": "b0234778efd3f49f63886fe73d7e38ce633e8d46e7fc8c891b2dbd56551c1014",
+          "bytes": 58864
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/c38be7d6917cb23e39271f435a5e55f4182ea5dbc14ecf9f7fc689dfc0d39c02.webp",
+          "sha256": "c38be7d6917cb23e39271f435a5e55f4182ea5dbc14ecf9f7fc689dfc0d39c02",
+          "bytes": 307104
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/cd26a747b13b276b67c0e84eef05656bf85d371322b67cede7e1d80220ccb7d4.webp",
+          "sha256": "cd26a747b13b276b67c0e84eef05656bf85d371322b67cede7e1d80220ccb7d4",
+          "bytes": 47482
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/cf3eb24e65a14456b2181de90b374bef06f362ba92003ffc97543e06b6efc087.webp",
+          "sha256": "cf3eb24e65a14456b2181de90b374bef06f362ba92003ffc97543e06b6efc087",
+          "bytes": 96906
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/d2dab2f91f0309f6265bd3f842ef5e36035adf1f055e037e41c32fa381944a19.webp",
+          "sha256": "d2dab2f91f0309f6265bd3f842ef5e36035adf1f055e037e41c32fa381944a19",
+          "bytes": 46236
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/e7b02cde170b6c5f5f21627c104e143b9602dbd8f8584956808d9c852bad011e.webp",
+          "sha256": "e7b02cde170b6c5f5f21627c104e143b9602dbd8f8584956808d9c852bad011e",
+          "bytes": 209058
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/f3e53c7a11630343a9f820b8436470bf96d608f9f7ae95554fed0f37770231f1.webp",
+          "sha256": "f3e53c7a11630343a9f820b8436470bf96d608f9f7ae95554fed0f37770231f1",
+          "bytes": 60174
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/f5815d9f52fa08d54dce3b77e8a21fdf2fe01c612152c7b5e238fdbb4538b4e4.webp",
+          "sha256": "f5815d9f52fa08d54dce3b77e8a21fdf2fe01c612152c7b5e238fdbb4538b4e4",
+          "bytes": 232212
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/f7f5756a9eec0c9e272dc225b494083f6f82b82db2909941f2d3cd0dfd79786a.webp",
+          "sha256": "f7f5756a9eec0c9e272dc225b494083f6f82b82db2909941f2d3cd0dfd79786a",
+          "bytes": 51116
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/f7fd69a6db700eecfebd3ee9a34642e5f5cf25480fffc1633e41f39f3f998d03.webp",
+          "sha256": "f7fd69a6db700eecfebd3ee9a34642e5f5cf25480fffc1633e41f39f3f998d03",
+          "bytes": 47208
+        },
+        {
+          "key": "catalog/canaries/34074192666-1/europe/catalog/images/europe/fe14546308aff1b1d250a3a930385dca2c1b48776eb0bf77339e045adb1dfd21.webp",
+          "sha256": "fe14546308aff1b1d250a3a930385dca2c1b48776eb0bf77339e045adb1dfd21",
+          "bytes": 233968
+        }
+      ]
+    }
+  ],
+  "expectedFiles": 148,
+  "expectedBytes": 14914620
+}

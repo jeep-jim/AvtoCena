@@ -1,0 +1,257 @@
+import {enableChinaParserFixtures} from './helpers/china-parser-controls';
+enableChinaParserFixtures();
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+import {
+  Che168GlobalExactAdapter,
+  che168GlobalSpecificationEvidence,
+} from "../apps/web/lib/catalog/che168-global-exact-source";
+import { catalogSemanticEvidenceRejectionReason } from "../apps/web/lib/catalog/offer-quality";
+import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
+
+const source = new Che168GlobalExactAdapter();
+
+test("Che168 collection uses the full dealer inventory lane", async () => {
+  const adapter = new Che168GlobalExactAdapter();
+  const originalFetch = globalThis.fetch;
+  let requestedUrl = "";
+  globalThis.fetch = async (input) => {
+    requestedUrl = String(input);
+    if (requestedUrl.includes('/api/v1/brand')) return new Response(JSON.stringify({
+      returncode: 0,
+      result: { brands: [{ brandid: 7, brandname: 'Toyota' }] },
+    }), { status: 200, headers: { "content-type": "application/json" } });
+    return new Response(JSON.stringify({
+      returncode: 0,
+      result: { totalcount: 237251, pagecount: 9886, carlist: [listing()] },
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  try {
+    const page = await adapter.fetchPage();
+    const url = new URL(requestedUrl);
+    assert.equal(url.searchParams.get("vehicle_list"), "1");
+    assert.equal(url.searchParams.get("brandid"), "7");
+    assert.equal(page.count, 237251);
+    assert.equal(page.finished, false);
+    assert.match(String(page.health?.message), /full inventory/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("Che168 advances across brand partitions instead of stopping at the global 10k window", async () => {
+  const adapter = new Che168GlobalExactAdapter();
+  const originalFetch = globalThis.fetch;
+  const searches: URL[] = [];
+  globalThis.fetch = async (input) => {
+    const url = new URL(String(input));
+    if (url.pathname.endsWith('/brand')) return new Response(JSON.stringify({ returncode: 0, result: { brands: [
+      { brandid: 10, brandname: 'Toyota' }, { brandid: 20, brandname: 'Volkswagen' },
+    ] } }), { status: 200 });
+    searches.push(url);
+    const brand = url.searchParams.get('brandid');
+    const page = Number(url.searchParams.get('pageindex'));
+    const rows = page === 1 ? [listing({ infoid: brand === '10' ? 10 : 20 })] : [];
+    return new Response(JSON.stringify({ returncode: 0, result: { totalcount: 1, pagecount: 1, carlist: rows } }), { status: 200 });
+  };
+  try {
+    const first = await adapter.fetchPage();
+    assert.equal(first.finished, false);
+    const second = await adapter.fetchPage(first.nextCursor);
+    assert.equal(second.finished, true);
+    assert.deepEqual(searches.map(url => url.searchParams.get('brandid')), ['10', '20']);
+    assert.ok(searches.every(url => url.searchParams.get('vehicle_list') === '1'));
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('Che168 bound manufacture date takes precedence over model-year labels',async()=>{
+ const adapter=new Che168GlobalExactAdapter();
+ const offer=adapter.normalizeOffer(listing({specname:'2019 Luxury',carname:'Toyota Camry 2019',regdate:'2021.09'}))!;
+ const originalFetch=globalThis.fetch;
+ globalThis.fetch=async()=>new Response(JSON.stringify({returncode:0,result:detail({specname:'2019 Luxury',carname:'Toyota Camry 2019',regdate:'2021.09',manufacturedate:'2020-12-01 00:00:00'})}),{status:200});
+ try {
+  await adapter.fetchImages(offer);
+  assert.equal(offer.year,2020);assert.equal(offer.productionDate,'2020-12-01');
+  assert.equal((offer.operational?.semanticEvidence as any).year.status,'exact');
+  assert.equal((offer.operational?.raw as any).detail.manufacturedate,'2020-12-01 00:00:00');
+ }finally{globalThis.fetch=originalFetch;}
+});
+
+const che168WorkflowPaths = [
+  ".github/workflows/catalog-v6-che168-exact-readiness.yml",
+  ".github/workflows/catalog-v6-che168-strict-ladder.yml",
+];
+
+function listing(overrides: Record<string, unknown> = {}) {
+  return {
+    infoid: 123456,
+    carname: "Toyota Camry 2024 2.0",
+    brandname: "Toyota",
+    seriesname: "Camry",
+    specname: "2024 2.0 Luxury",
+    mileage: 12000,
+    price: 23000,
+    regdate: "2024-01",
+    fuelname: "Gasoline",
+    ...overrides,
+  };
+}
+
+function detail(overrides: Record<string, unknown> = {}) {
+  return {
+    ...listing(),
+    engine: "1998 cc 173 hp",
+    gearbox: "Automatic",
+    drivingmode: "FWD",
+    structure: "Sedan",
+    catepiclist: [{
+      title: "Exterior",
+      list: Array.from({ length: 5 }, (_, index) => `https://erscglobal2.autoimg.cn/escimg/auto/2026/1400x0_c42_autohomecar__camry_${index}.jpg`),
+    }],
+    ...overrides,
+  };
+}
+
+test("Che168 carinfo accepts one explicit engine and power value", () => {
+  const evidence = che168GlobalSpecificationEvidence({
+    listingYear: 2024,
+    detailYear: 2024,
+    listingFuel: "Gasoline",
+    detailFuel: "Gasoline",
+    detailEngine: "1998 cc 127 kW (173 hp)",
+  });
+  assert.equal(evidence.fuel.status, "exact");
+  assert.equal(evidence.year.status, "exact");
+  assert.equal(evidence.fuel.value, "petrol");
+  assert.equal(evidence.engineCc.status, "exact");
+  assert.equal(evidence.engineCc.value, 1998);
+  assert.equal(evidence.powerHp.status, "exact");
+  assert.ok(Math.abs(Number(evidence.powerHp.value) - 173) <= 1);
+});
+
+test("Che168 never promotes a range or conflicting carinfo values", () => {
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "1.5-2.0 L" }).engineCc.status, "ambiguous");
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "2.0 L / 2.5 L" }).engineCc.status, "conflict");
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "150 hp / 190 hp" }).powerHp.status, "conflict");
+  assert.equal(che168GlobalSpecificationEvidence({ listingFuel: "Gasoline", detailFuel: "Diesel" }).fuel.status, "conflict");
+  assert.equal(che168GlobalSpecificationEvidence({ listingYear: 2024, detailYear: 2023 }).year.status, "conflict");
+});
+
+test("Che168 treats an explicit range extender as hybrid source evidence", () => {
+  const evidence = che168GlobalSpecificationEvidence({
+    listingYear: 2025,
+    detailYear: 2025,
+    listingFuel: "Range Extender",
+    detailFuel: "Range Extender",
+    detailEngine: "1.5T 152HP L4",
+  });
+  assert.equal(evidence.fuel.status, "exact");
+  assert.equal(evidence.fuel.value, "hybrid");
+
+  const offer = source.normalizeOffer(listing({ fuelname: "Range Extender" }));
+  assert.ok(offer);
+  assert.equal(offer!.fuel, "hybrid");
+  assert.equal(offer!.powertrainKind, "series_hybrid");
+});
+
+test("Che168 unknown fuel marker stays empty and fail-closed", () => {
+  const offer = source.normalizeOffer(listing({ fuelname: "--" }));
+  assert.ok(offer);
+  assert.equal(offer!.fuel, undefined);
+  assert.equal(offer!.powertrainKind, "unknown");
+  assert.equal((offer!.operational as any).semanticEvidence.fuel.status, "ambiguous");
+});
+
+test("Che168 listing stores classified fuel provenance without inventing detail metrics", () => {
+  const offer = source.normalizeOffer(listing());
+  assert.ok(offer);
+  assert.equal(offer!.fuel, "petrol");
+  assert.equal(offer!.powertrainKind, "combustion");
+  assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "missing");
+  assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "missing");
+});
+
+test("Che168 exact carinfo preserves field provenance", async () => {
+  const offer = source.normalizeOffer(listing());
+  assert.ok(offer);
+  const originalFetch = global.fetch;
+  global.fetch = async () => new Response(JSON.stringify({ returncode: 0, result: detail() }), {
+    status: 200,
+    headers: { "content-type": "application/json" },
+  });
+  try {
+    const images = await source.fetchImages(offer!);
+    assert.equal(images.length, 5);
+    assert.equal(offer!.engineCc, 1998);
+    assert.equal(offer!.powerHp, 173);
+    assert.equal(offer!.powerDataConfidence, "source_exact");
+    assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
+    assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "exact");
+    assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "exact");
+    assert.equal(catalogSemanticEvidenceRejectionReason(offer!), "");
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test("Che168 conflicting carinfo clears calculation fields and fails closed", async () => {
+  const offer = source.normalizeOffer(listing());
+  assert.ok(offer);
+  const originalFetch = global.fetch;
+  global.fetch = async () => new Response(JSON.stringify({
+    returncode: 0,
+    result: detail({ fuelname: "Diesel", engine: "2.0 L / 2.5 L 150 hp / 190 hp" }),
+  }), { status: 200, headers: { "content-type": "application/json" } });
+  try {
+    await source.fetchImages(offer!);
+    assert.equal(offer!.fuel, undefined);
+    assert.equal(offer!.powertrainKind, "unknown");
+    assert.equal(offer!.engineCc, undefined);
+    assert.equal(offer!.powerHp, undefined);
+    assert.equal(offer!.powerKw, undefined);
+    assert.equal(offer!.calculationStatus, "needs_data");
+    assert.equal((offer!.operational as any).semanticEvidence.fuel.status, "conflict");
+    assert.equal((offer!.operational as any).semanticEvidence.engineCc.status, "conflict");
+    assert.equal((offer!.operational as any).semanticEvidence.powerHp.status, "conflict");
+    assert.equal(catalogSemanticEvidenceRejectionReason(offer!), "semantic_fuel_conflict");
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test("Che168 workflows validate canonical provenance instead of raw fuel spelling", () => {
+  for (const path of che168WorkflowPaths) {
+    const workflow = fs.readFileSync(path, "utf8");
+    assert.doesNotMatch(workflow, /clean\(offer\.fuel\)\s*!==\s*clean\(detail\.fuelname\)/);
+    assert.match(workflow, /fuel_evidence_not_exact/);
+    assert.match(workflow, /fuel_not_bound_to_carinfo/);
+    assert.match(workflow, /unsafe_engine_promoted/);
+    assert.match(workflow, /unsafe_power_promoted/);
+  }
+  const strictWorkflow = fs.readFileSync(".github/workflows/catalog-v6-che168-strict-ladder.yml", "utf8");
+  assert.match(strictWorkflow, /unsafe_fuel_promoted/);
+  assert.match(strictWorkflow, /push:\n\s+branches: \[main\]/);
+});
+
+
+test("Che168 litre-only details do not manufacture exact displacement", () => {
+  for (const detailEngine of ["1.5L 150 hp", "2.0 L 173 hp", "3.0T"]) {
+    assert.equal(che168GlobalSpecificationEvidence({ detailEngine }).engineCc.value, undefined);
+  }
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "1.5L 1498 cc 150 hp" }).engineCc.value, 1498);
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "2.4L 1498 cc 150 hp" }).engineCc.status, "conflict");
+});
+
+
+test("Che168 accepts explicit horsepower words and compact cylinder suffixes without inventing displacement", () => {
+  for (const [label, hp] of [["2.0T 245 horsepower L4", 245], ["2.4L208hpL4", 208], ["3.0T381HP L6", 381]] as const) {
+    const evidence = che168GlobalSpecificationEvidence({ detailEngine: label });
+    assert.equal(evidence.powerHp.value, hp);
+    assert.equal(evidence.powerHp.status, "exact");
+    assert.equal(evidence.engineCc.value, undefined);
+  }
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "99999 horsepower" }).powerHp.value, undefined);
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "245 horsepower / 208 hp" }).powerHp.status, "conflict");
+});

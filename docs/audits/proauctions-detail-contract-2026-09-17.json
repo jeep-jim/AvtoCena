@@ -1,0 +1,1150 @@
+{
+  "source": "proauctions",
+  "productionWrites": false,
+  "sourceRequests": 0,
+  "checkedAt": "2026-09-17T16:47:43.862Z",
+  "sampleCount": 10,
+  "validPriceCount": 10,
+  "parsedFuelCount": 10,
+  "sourceFieldConflicts": 0,
+  "exactCalculationReady": 0,
+  "rows": [
+    {
+      "sourceId": "30162134",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/mazda/cx-5/30162134.html",
+      "sourceFields": {
+        "Год": [
+          "2025"
+        ],
+        "Тип кузова": [
+          "Джип/SUV"
+        ],
+        "Комплектация": [
+          "20S Black Selection"
+        ],
+        "Поколение": [
+          "2 (KF)"
+        ],
+        "Номер кузова": [
+          "KFEP"
+        ],
+        "Объем, см³": [
+          "2000"
+        ],
+        "Мощность": [
+          "156 л.с. (114.7 кВт)"
+        ],
+        "Трансмиссия": [
+          "FAT"
+        ],
+        "Пробег, км": [
+          "16 000"
+        ],
+        "Оценка": [
+          "4.5"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2025",
+        "v": "2000",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "156",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "156.36",
+        "auction": "TAA Kyushu",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "1",
+        "kuzov": "4",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Mazda CX-5 2025 год, Лот 30025, торги от 15.09.2026",
+        "price": "2769000"
+      },
+      "identity": {
+        "name": "Mazda CX-5",
+        "year": 2025,
+        "lotNumber": "30025",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "chassis": "KFEP",
+        "trim": "20S Black Selection"
+      },
+      "price": {
+        "amountJpy": 2769000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 2769000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 2000,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 156,
+        "reportedCombustionPowerKw": 114.7,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 156.36,
+        "transmission": null,
+        "transmissionRaw": "FAT",
+        "mileageKm": 16000,
+        "grade": "4.5"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342151/1789366011.3015_14.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342151/1789366011.3764_15.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "a71aa8e68b3ff34019c130124b95083a12d9d2d198297a388c815cc4e9a40a9b"
+    },
+    {
+      "sourceId": "30162135",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/mazda/mx-30/30162135.html",
+      "sourceFields": {
+        "Год": [
+          "2023"
+        ],
+        "Тип кузова": [
+          "Джип/SUV"
+        ],
+        "Комплектация": [
+          "IN DUST REAL CLASSIC"
+        ],
+        "Номер кузова": [
+          "DREJ3P"
+        ],
+        "Объем, см³": [
+          "2000"
+        ],
+        "Мощность ДВС": [
+          "156 л.с. (114.7 кВт)"
+        ],
+        "Мощность ЭД": [
+          "5.1 кВт"
+        ],
+        "30-мин. мощность ЭД": [
+          "2 кВт"
+        ],
+        "Трансмиссия": [
+          "FAT"
+        ],
+        "Гибрид": [
+          "да"
+        ],
+        "Пробег, км": [
+          "33 000"
+        ],
+        "Оценка": [
+          "4.5"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2023",
+        "v": "2000",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "156",
+        "powerElectro": "5.1",
+        "power_30min_ls": "3",
+        "p": "159.36000000000001",
+        "auction": "TAA Kyushu",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "1",
+        "kuzov": "4",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Mazda MX-30 2023 год, Лот 30016, торги от 15.09.2026",
+        "price": "1644000"
+      },
+      "identity": {
+        "name": "Mazda MX-30",
+        "year": 2023,
+        "lotNumber": "30016",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "chassis": "DREJ3P",
+        "trim": "IN DUST REAL CLASSIC"
+      },
+      "price": {
+        "amountJpy": 1644000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 1644000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 2000,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "hybrid",
+        "reportedCombustionPowerHp": 156,
+        "reportedCombustionPowerKw": 114.7,
+        "motorPeakKw": 5.1,
+        "claimedMotor30MinKw": 2,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 159.36,
+        "transmission": null,
+        "transmissionRaw": "FAT",
+        "mileageKm": 33000,
+        "grade": "4.5"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342152/1789365975.8893_5.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342152/1789365975.9604_6.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed",
+        "certified_motor_power_required"
+      ],
+      "inputSha256": "4a9844a527245e88964b23ec391e64fffeffdfeaefd3e05962d1f3fbeef35957"
+    },
+    {
+      "sourceId": "30162136",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/nissan/elgrand/30162136.html",
+      "sourceFields": {
+        "Год": [
+          "2011"
+        ],
+        "Тип кузова": [
+          "Минивэн"
+        ],
+        "Комплектация": [
+          "4WD HIGHWAY STAR A-"
+        ],
+        "Поколение": [
+          "3 (E52)"
+        ],
+        "Номер кузова": [
+          "TNE52"
+        ],
+        "Объем, см³": [
+          "2500"
+        ],
+        "Мощность": [
+          "170 л.с. (125.0 кВт)"
+        ],
+        "Трансмиссия": [
+          "Автомат"
+        ],
+        "Пробег, км": [
+          "156 000"
+        ],
+        "Оценка": [
+          "3.5"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2011",
+        "v": "2500",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "170",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "169.95",
+        "auction": "SAA Sapporo",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "1",
+        "kuzov": "3",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Nissan Elgrand 2011 год, Лот 5082, торги от 15.09.2026",
+        "price": "123000"
+      },
+      "identity": {
+        "name": "Nissan Elgrand",
+        "year": 2011,
+        "lotNumber": "5082",
+        "auctionDate": "2026-09-15",
+        "auctionName": "SAA Sapporo",
+        "chassis": "TNE52",
+        "trim": "4WD HIGHWAY STAR A-"
+      },
+      "price": {
+        "amountJpy": 123000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 123000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 2500,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 170,
+        "reportedCombustionPowerKw": 125,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 169.95,
+        "transmission": "automatic",
+        "transmissionRaw": "Автомат",
+        "mileageKm": 156000,
+        "grade": "3.5"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342153/1789365960.6004_14.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342153/1789365960.6458_15.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342153/1789365960.6920_16.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342153/1789365960.7399_17.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342153/1789365960.7877_18.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "f1198c598eac79b9ff1f97c9fca0f94a75ff90ce3311f9f4d1094d4e107ce890"
+    },
+    {
+      "sourceId": "30162137",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/nissan/x-trail/30162137.html",
+      "sourceFields": {
+        "Год": [
+          "2014"
+        ],
+        "Тип кузова": [
+          "Джип/SUV"
+        ],
+        "Комплектация": [
+          "4WD 20X"
+        ],
+        "Поколение": [
+          "3 (T32)"
+        ],
+        "Номер кузова": [
+          "NT32"
+        ],
+        "Объем, см³": [
+          "2000"
+        ],
+        "Мощность": [
+          "147 л.с. (108.1 кВт)"
+        ],
+        "Трансмиссия": [
+          "Автомат"
+        ],
+        "Пробег, км": [
+          "99 000"
+        ],
+        "Цвет": [
+          "синий"
+        ],
+        "Оценка": [
+          "3"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2014",
+        "v": "2000",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "147",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "146.84",
+        "auction": "SAA Sapporo",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "1",
+        "kuzov": "4",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Nissan X-Trail 2014 год, Лот 5080, торги от 15.09.2026",
+        "price": "224000"
+      },
+      "identity": {
+        "name": "Nissan X-Trail",
+        "year": 2014,
+        "lotNumber": "5080",
+        "auctionDate": "2026-09-15",
+        "auctionName": "SAA Sapporo",
+        "chassis": "NT32",
+        "trim": "4WD 20X"
+      },
+      "price": {
+        "amountJpy": 224000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 224000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 2000,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 147,
+        "reportedCombustionPowerKw": 108.1,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 146.84,
+        "transmission": "automatic",
+        "transmissionRaw": "Автомат",
+        "mileageKm": 99000,
+        "grade": "3"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342154/1789374258.2515_2.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342154/1789374258.3130_3.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342154/1789374258.3742_4.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342154/1789374258.4398_5.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "751e2466c36ed412fb94436dc095a79635d6ed8da3018e137579e1129a69d48b"
+    },
+    {
+      "sourceId": "30162138",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/nissan/serena/30162138.html",
+      "sourceFields": {
+        "Год": [
+          "2011"
+        ],
+        "Тип кузова": [
+          "Минивэн"
+        ],
+        "Комплектация": [
+          "4WD 20X"
+        ],
+        "Поколение": [
+          "4 (C26)"
+        ],
+        "Номер кузова": [
+          "NC26"
+        ],
+        "Объем, см³": [
+          "2000"
+        ],
+        "Мощность": [
+          "144 л.с. (105.9 кВт)"
+        ],
+        "Трансмиссия": [
+          "Автомат"
+        ],
+        "Пробег, км": [
+          "110 000"
+        ],
+        "Цвет": [
+          "синий"
+        ],
+        "Оценка": [
+          "3"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2011",
+        "v": "2000",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "144",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "144.12",
+        "auction": "SAA Sapporo",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "1",
+        "kuzov": "3",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Nissan Serena 2011 год, Лот 5097, торги от 15.09.2026",
+        "price": "87000"
+      },
+      "identity": {
+        "name": "Nissan Serena",
+        "year": 2011,
+        "lotNumber": "5097",
+        "auctionDate": "2026-09-15",
+        "auctionName": "SAA Sapporo",
+        "chassis": "NC26",
+        "trim": "4WD 20X"
+      },
+      "price": {
+        "amountJpy": 87000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 87000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 2000,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 144,
+        "reportedCombustionPowerKw": 105.9,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 144.12,
+        "transmission": "automatic",
+        "transmissionRaw": "Автомат",
+        "mileageKm": 110000,
+        "grade": "3"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342155/1789366080.8875_8.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342155/1789366080.9542_9.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342155/1789366081.0273_10.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342155/1789366081.0992_11.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342155/1789366081.1738_12.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "c791d44ef47ec06d9b01d83d133b21c17594ea5cf3b32b192e619634e5f5e543"
+    },
+    {
+      "sourceId": "30162139",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/nissan/moco/30162139.html",
+      "sourceFields": {
+        "Год": [
+          "2014"
+        ],
+        "Тип кузова": [
+          "Хэтчбек"
+        ],
+        "Комплектация": [
+          "4WD S FOUR"
+        ],
+        "Поколение": [
+          "3 (G33)"
+        ],
+        "Номер кузова": [
+          "MG33S"
+        ],
+        "Объем, см³": [
+          "660"
+        ],
+        "Мощность": [
+          "52 л.с. (38.2 кВт)"
+        ],
+        "Трансмиссия": [
+          "Автомат"
+        ],
+        "Пробег, км": [
+          "188 000"
+        ],
+        "Цвет": [
+          "черный"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2014",
+        "v": "660",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "52",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "51.67",
+        "auction": "SAA Sapporo",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "",
+        "kuzov": "1",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Nissan Moco 2014 год, Лот 9036, торги от 15.09.2026",
+        "price": "24000"
+      },
+      "identity": {
+        "name": "Nissan Moco",
+        "year": 2014,
+        "lotNumber": "9036",
+        "auctionDate": "2026-09-15",
+        "auctionName": "SAA Sapporo",
+        "chassis": "MG33S",
+        "trim": "4WD S FOUR"
+      },
+      "price": {
+        "amountJpy": 24000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 24000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 660,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 52,
+        "reportedCombustionPowerKw": 38.2,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 51.67,
+        "transmission": "automatic",
+        "transmissionRaw": "Автомат",
+        "mileageKm": 188000,
+        "grade": null
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342156/1789370236.4683_8.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342156/1789370236.5382_9.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342156/1789370236.5932_10.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342156/1789370236.6609_11.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342156/1789370236.7177_12.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "0739d9ae6af06433da42021dd3057456a91553782dba996300f1556dba6edbc6"
+    },
+    {
+      "sourceId": "30162141",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/mazda/mazda2/30162141.html",
+      "sourceFields": {
+        "Год": [
+          "2020"
+        ],
+        "Тип кузова": [
+          "Хэтчбек"
+        ],
+        "Комплектация": [
+          "15S"
+        ],
+        "Поколение": [
+          "3 (DJ)"
+        ],
+        "Номер кузова": [
+          "DJLFS"
+        ],
+        "Объем, см³": [
+          "1500"
+        ],
+        "Мощность": [
+          "110 л.с. (80.9 кВт)"
+        ],
+        "Трансмиссия": [
+          "FAT"
+        ],
+        "Пробег, км": [
+          "63 000"
+        ],
+        "Оценка": [
+          "R"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2020",
+        "v": "1500",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "110",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "110.13",
+        "auction": "TAA Kyushu",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "",
+        "kuzov": "1",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Mazda Mazda2 2020 год, Лот 30031, торги от 15.09.2026",
+        "price": "780000"
+      },
+      "identity": {
+        "name": "Mazda Mazda2",
+        "year": 2020,
+        "lotNumber": "30031",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "chassis": "DJLFS",
+        "trim": "15S"
+      },
+      "price": {
+        "amountJpy": 780000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 780000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 1500,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 110,
+        "reportedCombustionPowerKw": 80.9,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 110.13,
+        "transmission": null,
+        "transmissionRaw": "FAT",
+        "mileageKm": 63000,
+        "grade": "R"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342158/1789365957.5987_5.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342158/1789365957.6840_6.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "9f92789ff0773bc1ff256f1d8f3219e538f2c2ace258b139cf0e2e94ee37793c"
+    },
+    {
+      "sourceId": "30162142",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/suzuki/swift/30162142.html",
+      "sourceFields": {
+        "Год": [
+          "2019"
+        ],
+        "Тип кузова": [
+          "Хэтчбек"
+        ],
+        "Комплектация": [
+          "XG Limited"
+        ],
+        "Поколение": [
+          "5"
+        ],
+        "Номер кузова": [
+          "ZC83S"
+        ],
+        "Объем, см³": [
+          "1200"
+        ],
+        "Мощность": [
+          "90 л.с. (66.2 кВт)"
+        ],
+        "Трансмиссия": [
+          "FAT"
+        ],
+        "Пробег, км": [
+          "144 000"
+        ],
+        "Оценка": [
+          "4"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2019",
+        "v": "1200",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "90",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "89.73",
+        "auction": "TAA Kyushu",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "",
+        "kuzov": "1",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Suzuki Swift 2019 год, Лот 9037, торги от 15.09.2026",
+        "price": "412000"
+      },
+      "identity": {
+        "name": "Suzuki Swift",
+        "year": 2019,
+        "lotNumber": "9037",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "chassis": "ZC83S",
+        "trim": "XG Limited"
+      },
+      "price": {
+        "amountJpy": 412000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 412000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 1200,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 90,
+        "reportedCombustionPowerKw": 66.2,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 89.73,
+        "transmission": null,
+        "transmissionRaw": "FAT",
+        "mileageKm": 144000,
+        "grade": "4"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342159/1789369728.7508_2.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342159/1789369728.8261_3.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "59b8d01b0622f2abe2411b14295dc40edc61ed564ddc15ca504a089c19937692"
+    },
+    {
+      "sourceId": "30162143",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/toyota/vitz/30162143.html",
+      "sourceFields": {
+        "Год": [
+          "2013"
+        ],
+        "Тип кузова": [
+          "Хэтчбек"
+        ],
+        "Комплектация": [
+          "FS MILE EDITION"
+        ],
+        "Поколение": [
+          "3 (XP130)"
+        ],
+        "Номер кузова": [
+          "KSP130"
+        ],
+        "Объем, см³": [
+          "1000"
+        ],
+        "Мощность": [
+          "69 л.с. (50.7 кВт)"
+        ],
+        "Трансмиссия": [
+          "FAT"
+        ],
+        "Пробег, км": [
+          "97 000"
+        ],
+        "Цвет": [
+          "синий"
+        ],
+        "Оценка": [
+          "3"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2013",
+        "v": "1000",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "69",
+        "powerElectro": "0",
+        "power_30min_ls": "0",
+        "p": "69.34",
+        "auction": "TAA Kyushu",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "",
+        "kuzov": "1",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Toyota Vitz 2013 год, Лот 9045, торги от 15.09.2026",
+        "price": "150000"
+      },
+      "identity": {
+        "name": "Toyota Vitz",
+        "year": 2013,
+        "lotNumber": "9045",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "chassis": "KSP130",
+        "trim": "FS MILE EDITION"
+      },
+      "price": {
+        "amountJpy": 150000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 150000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 1000,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "combustion",
+        "reportedCombustionPowerHp": 69,
+        "reportedCombustionPowerKw": 50.7,
+        "motorPeakKw": null,
+        "claimedMotor30MinKw": null,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 69.34,
+        "transmission": null,
+        "transmissionRaw": "FAT",
+        "mileageKm": 97000,
+        "grade": "3"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342160/1789365920.9392_11.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342160/1789365921.0528_12.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed"
+      ],
+      "inputSha256": "a28ecbd4171617e714a6b99880c3c4a6b1c4e29c56dfc16881f9f05a1f19f356"
+    },
+    {
+      "sourceId": "30162144",
+      "sourceUrl": "https://demo.pro-auctions.ru/statistika/honda/fit/30162144.html",
+      "sourceFields": {
+        "Год": [
+          "2014"
+        ],
+        "Тип кузова": [
+          "Хэтчбек"
+        ],
+        "Комплектация": [
+          "L Package"
+        ],
+        "Поколение": [
+          "3 (GP)"
+        ],
+        "Номер кузова": [
+          "GP5"
+        ],
+        "Объем, см³": [
+          "1500"
+        ],
+        "Мощность ДВС": [
+          "110 л.с. (80.9 кВт)"
+        ],
+        "Мощность ЭД": [
+          "22 кВт"
+        ],
+        "30-мин. мощность ЭД": [
+          "11 кВт"
+        ],
+        "Трансмиссия": [
+          "FAT"
+        ],
+        "Гибрид": [
+          "да"
+        ],
+        "Пробег, км": [
+          "147 000"
+        ],
+        "Оценка": [
+          "R"
+        ]
+      },
+      "calculatorInputs": {
+        "strategy": "auto_japan",
+        "price_decod": "1",
+        "year": "2014",
+        "v": "1500",
+        "m": "b",
+        "emin": "",
+        "power_ls_theoretical": "",
+        "powerDVS": "110",
+        "powerElectro": "22",
+        "power_30min_ls": "15",
+        "p": "125.13",
+        "auction": "TAA Kyushu",
+        "fiz": "1",
+        "showbutton": "1",
+        "s": "1",
+        "sanction": "1",
+        "kuzov": "1",
+        "isPickup": "",
+        "managerWarning": "",
+        "isTruck": "",
+        "entity": "jcar",
+        "item": "Array",
+        "car_name": "Honda Fit 2014 год, Лот 4323, торги от 15.09.2026",
+        "price": "282000"
+      },
+      "identity": {
+        "name": "Honda Fit",
+        "year": 2014,
+        "lotNumber": "4323",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "chassis": "GP5",
+        "trim": "L Package"
+      },
+      "price": {
+        "amountJpy": 282000,
+        "kind": "published_auction_amount",
+        "displayAmountJpy": 282000,
+        "evidence": [
+          "car-price-hero__src",
+          "calx-ajax-form input[name=price]",
+          "Стоимость на аукционе"
+        ],
+        "soldStatusRaw": null,
+        "saleConfirmed": false
+      },
+      "specifications": {
+        "reportedEngineCc": 1500,
+        "engineCcPrecision": "auction_reported_unverified",
+        "fuel": "gasoline",
+        "fuelCode": "b",
+        "powertrain": "hybrid",
+        "reportedCombustionPowerHp": 110,
+        "reportedCombustionPowerKw": 80.9,
+        "motorPeakKw": 22,
+        "claimedMotor30MinKw": 11,
+        "motor30MinCertification": "unverified",
+        "calculatorCombinedPowerHp": 125.13,
+        "transmission": null,
+        "transmissionRaw": "FAT",
+        "mileageKm": 147000,
+        "grade": "R"
+      },
+      "imageUrls": [
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342162/1789365905.8248_5.webp",
+        "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882342162/1789365905.9112_6.webp"
+      ],
+      "issues": [],
+      "calculationBlockers": [
+        "exact_engine_displacement_required",
+        "production_month_not_confirmed",
+        "certified_motor_power_required"
+      ],
+      "inputSha256": "514fe58bf0b6d6a9f15caa2fdcafabf8ac2c7a24a24cb2755ca56404c55dd6e7"
+    }
+  ]
+}

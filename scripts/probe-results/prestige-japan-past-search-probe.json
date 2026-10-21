@@ -1,0 +1,624 @@
+{
+  "generatedAt": "2026-08-08T03:56:07.975Z",
+  "landing": {
+    "status": 200,
+    "bytes": 292829,
+    "makeCount": 112,
+    "makeSample": [
+      {
+        "value": "158",
+        "name": "AC",
+        "attrs": "data-name=\"AC\"",
+        "dataName": "AC"
+      },
+      {
+        "value": "11",
+        "name": "ACURA",
+        "attrs": "data-name=\"ACURA\"",
+        "dataName": "ACURA"
+      },
+      {
+        "value": "161",
+        "name": "ALFA",
+        "attrs": "data-name=\"ALFA\"",
+        "dataName": "ALFA"
+      },
+      {
+        "value": "22",
+        "name": "ALFA ROMEO",
+        "attrs": "data-name=\"ALFA ROMEO\"",
+        "dataName": "ALFA ROMEO"
+      },
+      {
+        "value": "12",
+        "name": "ALFAROMEO",
+        "attrs": "data-name=\"ALFAROMEO\"",
+        "dataName": "ALFAROMEO"
+      },
+      {
+        "value": "102",
+        "name": "AMC",
+        "attrs": "data-name=\"AMC\"",
+        "dataName": "AMC"
+      },
+      {
+        "value": "111",
+        "name": "AMG",
+        "attrs": "data-name=\"AMG\"",
+        "dataName": "AMG"
+      },
+      {
+        "value": "112",
+        "name": "ASTON MARTIN",
+        "attrs": "data-name=\"ASTON MARTIN\"",
+        "dataName": "ASTON MARTIN"
+      },
+      {
+        "value": "168",
+        "name": "ATLAS",
+        "attrs": "data-name=\"ATLAS\"",
+        "dataName": "ATLAS"
+      },
+      {
+        "value": "13",
+        "name": "AUDI",
+        "attrs": "data-name=\"AUDI\"",
+        "dataName": "AUDI"
+      },
+      {
+        "value": "113",
+        "name": "AUSTIN",
+        "attrs": "data-name=\"AUSTIN\"",
+        "dataName": "AUSTIN"
+      },
+      {
+        "value": "335",
+        "name": "AUTOBIANCHI",
+        "attrs": "data-name=\"AUTOBIANCHI\"",
+        "dataName": "AUTOBIANCHI"
+      },
+      {
+        "value": "115",
+        "name": "BENTLEY",
+        "attrs": "data-name=\"BENTLEY\"",
+        "dataName": "BENTLEY"
+      },
+      {
+        "value": "116",
+        "name": "BIRKIN",
+        "attrs": "data-name=\"BIRKIN\"",
+        "dataName": "BIRKIN"
+      },
+      {
+        "value": "178",
+        "name": "BLUEBIRD",
+        "attrs": "data-name=\"BLUEBIRD\"",
+        "dataName": "BLUEBIRD"
+      },
+      {
+        "value": "14",
+        "name": "BMW",
+        "attrs": "data-name=\"BMW\"",
+        "dataName": "BMW"
+      },
+      {
+        "value": "117",
+        "name": "BMW ALPINA",
+        "attrs": "data-name=\"BMW ALPINA\"",
+        "dataName": "BMW ALPINA"
+      },
+      {
+        "value": "118",
+        "name": "BUICK",
+        "attrs": "data-name=\"BUICK\"",
+        "dataName": "BUICK"
+      },
+      {
+        "value": "119",
+        "name": "CADILLAC",
+        "attrs": "data-name=\"CADILLAC\"",
+        "dataName": "CADILLAC"
+      },
+      {
+        "value": "120",
+        "name": "CATERHAM",
+        "attrs": "data-name=\"CATERHAM\"",
+        "dataName": "CATERHAM"
+      }
+    ]
+  },
+  "selection": {
+    "make": {
+      "value": "1",
+      "name": "TOYOTA",
+      "attrs": "data-name=\"TOYOTA\"",
+      "dataName": "TOYOTA"
+    },
+    "modelCount": 749,
+    "model": {
+      "id": 1568,
+      "ext_id": 4,
+      "make_id": 1,
+      "name": "ALPHARD"
+    },
+    "modelSample": [
+      {
+        "id": 7598,
+        "ext_id": 35236,
+        "make_id": 1,
+        "name": ""
+      },
+      {
+        "id": 14384,
+        "ext_id": 37873,
+        "make_id": 1,
+        "name": "02-5FD30"
+      },
+      {
+        "id": 14183,
+        "ext_id": 36680,
+        "make_id": 1,
+        "name": "02-5FD35"
+      },
+      {
+        "id": 14385,
+        "ext_id": 49648,
+        "make_id": 1,
+        "name": "02-5FGL18"
+      },
+      {
+        "id": 14386,
+        "ext_id": 43451,
+        "make_id": 1,
+        "name": "02-5SD15"
+      },
+      {
+        "id": 14184,
+        "ext_id": 38010,
+        "make_id": 1,
+        "name": "02-6FD15"
+      },
+      {
+        "id": 14185,
+        "ext_id": 39819,
+        "make_id": 1,
+        "name": "02-6FG30"
+      },
+      {
+        "id": 14264,
+        "ext_id": 36545,
+        "make_id": 1,
+        "name": "02-7FDA50"
+      },
+      {
+        "id": 14186,
+        "ext_id": 38525,
+        "make_id": 1,
+        "name": "02-7FG35"
+      },
+      {
+        "id": 14387,
+        "ext_id": 40223,
+        "make_id": 1,
+        "name": "02-7FGJ35"
+      },
+      {
+        "id": 14388,
+        "ext_id": 40124,
+        "make_id": 1,
+        "name": "02-7FGL20"
+      },
+      {
+        "id": 14389,
+        "ext_id": 39566,
+        "make_id": 1,
+        "name": "02-8FDL30"
+      },
+      {
+        "id": 14187,
+        "ext_id": 34376,
+        "make_id": 1,
+        "name": "02-8FGL20"
+      },
+      {
+        "id": 6256,
+        "ext_id": 10187,
+        "make_id": 1,
+        "name": "1600GT"
+      },
+      {
+        "id": 14265,
+        "ext_id": 49626,
+        "make_id": 1,
+        "name": "20-2FD135"
+      },
+      {
+        "id": 14324,
+        "ext_id": 38766,
+        "make_id": 1,
+        "name": "20-5FD60"
+      },
+      {
+        "id": 9425,
+        "ext_id": 6352,
+        "make_id": 1,
+        "name": "2000GT"
+      },
+      {
+        "id": 14188,
+        "ext_id": 39337,
+        "make_id": 1,
+        "name": "2SDK6"
+      },
+      {
+        "id": 14390,
+        "ext_id": 36460,
+        "make_id": 1,
+        "name": "3FBL9"
+      },
+      {
+        "id": 14189,
+        "ext_id": 38585,
+        "make_id": 1,
+        "name": "3FD20"
+      },
+      {
+        "id": 14190,
+        "ext_id": 37429,
+        "make_id": 1,
+        "name": "3FD35"
+      },
+      {
+        "id": 14391,
+        "ext_id": 37191,
+        "make_id": 1,
+        "name": "3FG15"
+      },
+      {
+        "id": 12258,
+        "ext_id": 4934,
+        "make_id": 1,
+        "name": "4 RUNNER"
+      },
+      {
+        "id": 14325,
+        "ext_id": 38328,
+        "make_id": 1,
+        "name": "40-3FG25"
+      },
+      {
+        "id": 14326,
+        "ext_id": 49640,
+        "make_id": 1,
+        "name": "40-7FG23"
+      },
+      {
+        "id": 14327,
+        "ext_id": 46661,
+        "make_id": 1,
+        "name": "40-8FB15"
+      },
+      {
+        "id": 14328,
+        "ext_id": 37862,
+        "make_id": 1,
+        "name": "42-7FG15"
+      },
+      {
+        "id": 14329,
+        "ext_id": 37744,
+        "make_id": 1,
+        "name": "42-7FGK25"
+      },
+      {
+        "id": 14392,
+        "ext_id": 46223,
+        "make_id": 1,
+        "name": "4FG25"
+      },
+      {
+        "id": 1564,
+        "ext_id": 1,
+        "make_id": 1,
+        "name": "4RUNNER"
+      }
+    ]
+  },
+  "search": {
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 40269,
+    "total": "33156",
+    "carsHtmlBytes": 38127,
+    "links": [
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=UirJiNxy5aZySF",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=UhxxDmF26ziAZZ",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=Uc7pCLnPdV9NHV",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=TZRS7pvE2IhLiM",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=TYvABgbQyNKjtL",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=TZpMgH5nxprhmr",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=TK1zUk8kV5ERmV",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=T9QRvy4wQ0fgd0",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SS6nE2MGKTVooC",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=STTKYTxKI8jk0Y",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SLK4XZCXUE5DdS",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SLhY9hbHqle0hx",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SN7lt9WLnyC63T",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SO1x9zPimaj3Vz",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SGiVXolM3ZUPVO",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SGL2N7N3xiLjS0",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SARNWN5AblL3DK",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SApI85DjH3UyHp",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SyBkMcSfJPwCW4",
+      "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=SwkRBCFVijidem"
+    ],
+    "plainSample": "2022 TOYOTA ALPHARD X AWD 4WD Auction Date: 07-08-2026 USS Nagoya 2500cc IA 75,000 kms Grade 3.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2021 TOYOTA ALPHARD 2.5S TYPE GORUTO2 AWD 4WD Auction Date: 07-08-2026 USS Nagoya 2500cc IA 86,000 kms Grade R (Repaired) Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD Z Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 27,000 kms Grade 4 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2021 TOYOTA ALPHARD 2.5S TYPE GORUDO Auction Date: 07-08-2026 USS Nagoya 2500cc IA 52,000 kms Grade R (Repaired) Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD Z Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 18,000 kms Grade 4.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2019 TOYOTA ALPHARD 2.5S C PACKAGE Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 61,000 kms Grade 4 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD EXE KTI LOUNGE Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 8,000 kms Grade 4 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2018 TOYOTA ALPHARD 2.5S C PACKAGE Auction Date: 07-08-2026 USS Nagoya 2500cc IA 94,000 kms Grade 4 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2018 TOYOTA ALPHARD 2.5S A PACKAGE Auction Date: 07-08-2026 USS Nagoya 2500cc IA 194,000 kms Grade R (Repaired) Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2026 TOYOTA ALPHARD Z Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 0 kms Grade 6 (New) Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD Z Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 36,000 kms Grade 4.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD Z Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 30,000 kms Grade 3.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD EXE KTI LOUNGE AWD 4WD Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 9,000 kms Grade 3.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don’t need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. 0 YEN Auction Start Price 2024 TOYOTA ALPHARD Z Auction Date: 07-08-2026 USS Nagoya 2500cc Automatic 16,000 kms Grade 4.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more de"
+  },
+  "details": [
+    {
+      "url": "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=UirJiNxy5aZySF",
+      "title": "Japanese Auction Vehicle Details - Prestige Motorsport",
+      "auctionLocation": "",
+      "auctionDate": "07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you.",
+      "auctionGrade": "",
+      "modelCode": "",
+      "chassis": "AYH30W FREE",
+      "kilometers": "s 75,000 Capacity 2500 cc Colour White (pearl) Extras -",
+      "engine": "",
+      "startPriceRaw": "0 YEN Most vehicles sell for significantly more than the",
+      "startPrice": 0,
+      "finalPriceRaw": "Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an",
+      "finalPrice": 0,
+      "currentStatus": "to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (",
+      "imageCount": 55,
+      "imageSample": [
+        "https://prestigemotorsport.com.au/auction-vehicle-display/IE=edge",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/width=device-width,%20initial-scale=1.0",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport%20auction%20vehicle%20display%20--%20view%20pictures,%20inspection%20report%20and%20price%20for%20the%20selected%20Japanese%20auction%20vehicle.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/noodp",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/en_US",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/article",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Japanese%20Auction%20Vehicle%20Details%20-%20Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2015/05/auction.jpg",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/280",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/210",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/summary",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery.js?ver=1.12.4",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/jquery-ui-1.10.3.custom.min.js?ver=13.3",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/waitForImages.js?ver=4.8.17",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/jquery.touchSwipe.min.js",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/noscroll.js",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/WordPress%204.8.17",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20WPBakery%20Page%20Builder%20-%20drag%20and%20drop%20page%20builder%20for%20WordPress.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20Slider%20Revolution%205.4.8%20-%20responsive,%20Mobile-Friendly%20Slider%20Plugin%20for%20WordPress%20with%20comfortable%20drag%20and%20drop%20interface.",
+        "https://prestigemotorsport.com.au/wp-content/plugins/wp-spamshield/js/jscripts.php",
+        "https://8.ajes.com/imgs/3caJP9IZRD0UNA0dmbKfX1VN2qJh7GhHJL2QcHS7q0oMn2-UirJiNxy5aZySF-7",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/Email-150x150.png",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/guarantee.jpg",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2017/08/Checklist-How-to-Buy.jpg",
+        "https://prestigemotorsport.com.au/wp-content/themes/prestigemotorsport/js/pgwslideshow.js"
+      ],
+      "textSample": "Japanese Auction Vehicle Details - Prestige Motorsport Contact Us 1 AUD = 111.55 JPY Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Japanese Auction Vehicle Details 2022 TOYOTA ALPHARD X AWD 4WD Year 2022 Make TOYOTA Model ALPHARD Trans IA Kms 75,000 Capacity 2500 cc Colour White (pearl) Extras - Grade 3.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don't need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. Chassis AYH30W FREE Auction Alerts Sign up to receive daily email alerts for any model Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:45 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3676 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week and can offer some good deals. Allow for additional inland transport of about 40,000 Yen to Osaka for shipping if required, as vessels do not always call into nearby Moji Port. Start Price 0 YEN Most vehicles sell for significantly more than the start price and nearly all vehicles will have an undisclosed reserve price set by the seller. A zero start price may only indicate the start price has not yet been entered. Final Price Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an auction run by USS is to be bidding yourself or by watching the bidding live. Sales data is available for non-USS auctions and this can still be used for price research. The last bid price achieved will be shown here following auction (if available). This may take 24 to 48 hours to update depending on auction systems. Check Current Status to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (final price not published). For final price calculations use actual SOLD prices only. Current Status -->Not yet available --> Denotes whether the vehicle is Unsold (awaiting auction), was Sold, Unsold / Passed In (reserve price not met), or Sold on Negotiation (final price not published). Send ENQUIRY How to BUY Prestige Motorsport Mileage Promise Auction GUIDE Model INFO COST Calculator Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:45 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3676 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions e",
+      "status": 200,
+      "bytes": 197450,
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=UhxxDmF26ziAZZ",
+      "title": "Japanese Auction Vehicle Details - Prestige Motorsport",
+      "auctionLocation": "",
+      "auctionDate": "07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you.",
+      "auctionGrade": "",
+      "modelCode": "",
+      "chassis": "AGH35W FREE",
+      "kilometers": "s 86,000 Capacity 2500 cc Colour White (pearl) Extras -",
+      "engine": "",
+      "startPriceRaw": "0 YEN Most vehicles sell for significantly more than the",
+      "startPrice": 0,
+      "finalPriceRaw": "Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an",
+      "finalPrice": 0,
+      "currentStatus": "to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (",
+      "imageCount": 55,
+      "imageSample": [
+        "https://prestigemotorsport.com.au/auction-vehicle-display/IE=edge",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/width=device-width,%20initial-scale=1.0",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport%20auction%20vehicle%20display%20--%20view%20pictures,%20inspection%20report%20and%20price%20for%20the%20selected%20Japanese%20auction%20vehicle.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/noodp",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/en_US",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/article",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Japanese%20Auction%20Vehicle%20Details%20-%20Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2015/05/auction.jpg",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/280",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/210",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/summary",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery.js?ver=1.12.4",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/jquery-ui-1.10.3.custom.min.js?ver=13.3",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/waitForImages.js?ver=4.8.17",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/jquery.touchSwipe.min.js",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/noscroll.js",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/WordPress%204.8.17",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20WPBakery%20Page%20Builder%20-%20drag%20and%20drop%20page%20builder%20for%20WordPress.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20Slider%20Revolution%205.4.8%20-%20responsive,%20Mobile-Friendly%20Slider%20Plugin%20for%20WordPress%20with%20comfortable%20drag%20and%20drop%20interface.",
+        "https://prestigemotorsport.com.au/wp-content/plugins/wp-spamshield/js/jscripts.php",
+        "https://8.ajes.com/imgs/3caJP9IZRD0UNA0dmbKfX1VN2qJh7GhHJL2Q601xIFIsB4-UhxxDmF26ziAZZ-7",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/Email-150x150.png",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/guarantee.jpg",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2017/08/Checklist-How-to-Buy.jpg",
+        "https://prestigemotorsport.com.au/wp-content/themes/prestigemotorsport/js/pgwslideshow.js"
+      ],
+      "textSample": "Japanese Auction Vehicle Details - Prestige Motorsport Contact Us 1 AUD = 111.55 JPY Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Japanese Auction Vehicle Details 2021 TOYOTA ALPHARD 2.5S TYPE GORUTO2 AWD 4WD Year 2021 Make TOYOTA Model ALPHARD Trans IA Kms 86,000 Capacity 2500 cc Colour White (pearl) Extras - Grade R (Repaired) Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don't need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. Chassis AGH35W FREE Auction Alerts Sign up to receive daily email alerts for any model Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:45 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3674 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week and can offer some good deals. Allow for additional inland transport of about 40,000 Yen to Osaka for shipping if required, as vessels do not always call into nearby Moji Port. Start Price 0 YEN Most vehicles sell for significantly more than the start price and nearly all vehicles will have an undisclosed reserve price set by the seller. A zero start price may only indicate the start price has not yet been entered. Final Price Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an auction run by USS is to be bidding yourself or by watching the bidding live. Sales data is available for non-USS auctions and this can still be used for price research. The last bid price achieved will be shown here following auction (if available). This may take 24 to 48 hours to update depending on auction systems. Check Current Status to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (final price not published). For final price calculations use actual SOLD prices only. Current Status -->Not yet available --> Denotes whether the vehicle is Unsold (awaiting auction), was Sold, Unsold / Passed In (reserve price not met), or Sold on Negotiation (final price not published). Send ENQUIRY How to BUY Prestige Motorsport Mileage Promise Auction GUIDE Model INFO COST Calculator Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:45 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3674 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a ",
+      "status": 200,
+      "bytes": 197463,
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=Uc7pCLnPdV9NHV",
+      "title": "Japanese Auction Vehicle Details - Prestige Motorsport",
+      "auctionLocation": "",
+      "auctionDate": "07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you.",
+      "auctionGrade": "",
+      "modelCode": "",
+      "chassis": "AGH40W FREE",
+      "kilometers": "s 27,000 Capacity 2500 cc Colour GOLD Extras -",
+      "engine": "",
+      "startPriceRaw": "0 YEN Most vehicles sell for significantly more than the",
+      "startPrice": 0,
+      "finalPriceRaw": "Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an",
+      "finalPrice": 0,
+      "currentStatus": "to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (",
+      "imageCount": 55,
+      "imageSample": [
+        "https://prestigemotorsport.com.au/auction-vehicle-display/IE=edge",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/width=device-width,%20initial-scale=1.0",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport%20auction%20vehicle%20display%20--%20view%20pictures,%20inspection%20report%20and%20price%20for%20the%20selected%20Japanese%20auction%20vehicle.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/noodp",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/en_US",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/article",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Japanese%20Auction%20Vehicle%20Details%20-%20Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2015/05/auction.jpg",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/280",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/210",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/summary",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery.js?ver=1.12.4",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/jquery-ui-1.10.3.custom.min.js?ver=13.3",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/waitForImages.js?ver=4.8.17",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/jquery.touchSwipe.min.js",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/noscroll.js",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/WordPress%204.8.17",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20WPBakery%20Page%20Builder%20-%20drag%20and%20drop%20page%20builder%20for%20WordPress.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20Slider%20Revolution%205.4.8%20-%20responsive,%20Mobile-Friendly%20Slider%20Plugin%20for%20WordPress%20with%20comfortable%20drag%20and%20drop%20interface.",
+        "https://prestigemotorsport.com.au/wp-content/plugins/wp-spamshield/js/jscripts.php",
+        "https://8.ajes.com/imgs/3caJP9IZRD0UNA0dmbKfX1VN2qJh7GhHJL2PlLPbvNCxXf-Uc7pCLnPdV9NHV-7",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/Email-150x150.png",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/guarantee.jpg",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2017/08/Checklist-How-to-Buy.jpg",
+        "https://prestigemotorsport.com.au/wp-content/themes/prestigemotorsport/js/pgwslideshow.js"
+      ],
+      "textSample": "Japanese Auction Vehicle Details - Prestige Motorsport Contact Us 1 AUD = 111.55 JPY Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Japanese Auction Vehicle Details 2024 TOYOTA ALPHARD Z Year 2024 Make TOYOTA Model ALPHARD Trans Automatic Kms 27,000 Capacity 2500 cc Colour GOLD Extras - Grade 4 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don't need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. Chassis AGH40W FREE Auction Alerts Sign up to receive daily email alerts for any model Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:43 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3665 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week and can offer some good deals. Allow for additional inland transport of about 40,000 Yen to Osaka for shipping if required, as vessels do not always call into nearby Moji Port. Start Price 0 YEN Most vehicles sell for significantly more than the start price and nearly all vehicles will have an undisclosed reserve price set by the seller. A zero start price may only indicate the start price has not yet been entered. Final Price Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an auction run by USS is to be bidding yourself or by watching the bidding live. Sales data is available for non-USS auctions and this can still be used for price research. The last bid price achieved will be shown here following auction (if available). This may take 24 to 48 hours to update depending on auction systems. Check Current Status to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (final price not published). For final price calculations use actual SOLD prices only. Current Status -->Not yet available --> Denotes whether the vehicle is Unsold (awaiting auction), was Sold, Unsold / Passed In (reserve price not met), or Sold on Negotiation (final price not published). Send ENQUIRY How to BUY Prestige Motorsport Mileage Promise Auction GUIDE Model INFO COST Calculator Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:43 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3665 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week and",
+      "status": 200,
+      "bytes": 197444,
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=TZRS7pvE2IhLiM",
+      "title": "Japanese Auction Vehicle Details - Prestige Motorsport",
+      "auctionLocation": "",
+      "auctionDate": "07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you.",
+      "auctionGrade": "",
+      "modelCode": "",
+      "chassis": "AGH30W FREE",
+      "kilometers": "s 52,000 Capacity 2500 cc Colour White (pearl) Extras -",
+      "engine": "",
+      "startPriceRaw": "0 YEN Most vehicles sell for significantly more than the",
+      "startPrice": 0,
+      "finalPriceRaw": "Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an",
+      "finalPrice": 0,
+      "currentStatus": "to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (",
+      "imageCount": 55,
+      "imageSample": [
+        "https://prestigemotorsport.com.au/auction-vehicle-display/IE=edge",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/width=device-width,%20initial-scale=1.0",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport%20auction%20vehicle%20display%20--%20view%20pictures,%20inspection%20report%20and%20price%20for%20the%20selected%20Japanese%20auction%20vehicle.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/noodp",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/en_US",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/article",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Japanese%20Auction%20Vehicle%20Details%20-%20Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2015/05/auction.jpg",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/280",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/210",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/summary",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery.js?ver=1.12.4",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/jquery-ui-1.10.3.custom.min.js?ver=13.3",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/waitForImages.js?ver=4.8.17",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/jquery.touchSwipe.min.js",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/noscroll.js",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/WordPress%204.8.17",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20WPBakery%20Page%20Builder%20-%20drag%20and%20drop%20page%20builder%20for%20WordPress.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20Slider%20Revolution%205.4.8%20-%20responsive,%20Mobile-Friendly%20Slider%20Plugin%20for%20WordPress%20with%20comfortable%20drag%20and%20drop%20interface.",
+        "https://prestigemotorsport.com.au/wp-content/plugins/wp-spamshield/js/jscripts.php",
+        "https://8.ajes.com/imgs/3caJP9IZRD0UNA0dmbKfX1VN2qJh7GhHJL2NHGa93PUf1G-TZRS7pvE2IhLiM-7",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/Email-150x150.png",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/guarantee.jpg",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2017/08/Checklist-How-to-Buy.jpg",
+        "https://prestigemotorsport.com.au/wp-content/themes/prestigemotorsport/js/pgwslideshow.js"
+      ],
+      "textSample": "Japanese Auction Vehicle Details - Prestige Motorsport Contact Us 1 AUD = 111.55 JPY Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Japanese Auction Vehicle Details 2021 TOYOTA ALPHARD 2.5S TYPE GORUDO Year 2021 Make TOYOTA Model ALPHARD Trans IA Kms 52,000 Capacity 2500 cc Colour White (pearl) Extras - Grade R (Repaired) Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don't need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. Chassis AGH30W FREE Auction Alerts Sign up to receive daily email alerts for any model Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:39 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3644 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week and can offer some good deals. Allow for additional inland transport of about 40,000 Yen to Osaka for shipping if required, as vessels do not always call into nearby Moji Port. Start Price 0 YEN Most vehicles sell for significantly more than the start price and nearly all vehicles will have an undisclosed reserve price set by the seller. A zero start price may only indicate the start price has not yet been entered. Final Price Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an auction run by USS is to be bidding yourself or by watching the bidding live. Sales data is available for non-USS auctions and this can still be used for price research. The last bid price achieved will be shown here following auction (if available). This may take 24 to 48 hours to update depending on auction systems. Check Current Status to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (final price not published). For final price calculations use actual SOLD prices only. Current Status -->Not yet available --> Denotes whether the vehicle is Unsold (awaiting auction), was Sold, Unsold / Passed In (reserve price not met), or Sold on Negotiation (final price not published). Send ENQUIRY How to BUY Prestige Motorsport Mileage Promise Auction GUIDE Model INFO COST Calculator Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:39 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3644 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of",
+      "status": 200,
+      "bytes": 197459,
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=TYvABgbQyNKjtL",
+      "title": "Japanese Auction Vehicle Details - Prestige Motorsport",
+      "auctionLocation": "",
+      "auctionDate": "07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you.",
+      "auctionGrade": "",
+      "modelCode": "",
+      "chassis": "AGH40W FREE",
+      "kilometers": "s 18,000 Capacity 2500 cc Colour Black Extras -",
+      "engine": "",
+      "startPriceRaw": "0 YEN Most vehicles sell for significantly more than the",
+      "startPrice": 0,
+      "finalPriceRaw": "Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an",
+      "finalPrice": 0,
+      "currentStatus": "to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (",
+      "imageCount": 55,
+      "imageSample": [
+        "https://prestigemotorsport.com.au/auction-vehicle-display/IE=edge",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/width=device-width,%20initial-scale=1.0",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport%20auction%20vehicle%20display%20--%20view%20pictures,%20inspection%20report%20and%20price%20for%20the%20selected%20Japanese%20auction%20vehicle.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/noodp",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/en_US",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/article",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Japanese%20Auction%20Vehicle%20Details%20-%20Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Prestige%20Motorsport",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2015/05/auction.jpg",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/280",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/210",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/summary",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery.js?ver=1.12.4",
+        "https://prestigemotorsport.com.au/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/jquery-ui-1.10.3.custom.min.js?ver=13.3",
+        "https://prestigemotorsport.com.au/wp-content/plugins/automotive/js/waitForImages.js?ver=4.8.17",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js?ver=5.4.8",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/jquery.touchSwipe.min.js",
+        "https://prestigemotorsport.com.au/wp-content/plugins/responsive-menu-pro/public/js/noscroll.js",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/WordPress%204.8.17",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20WPBakery%20Page%20Builder%20-%20drag%20and%20drop%20page%20builder%20for%20WordPress.",
+        "https://prestigemotorsport.com.au/auction-vehicle-display/Powered%20by%20Slider%20Revolution%205.4.8%20-%20responsive,%20Mobile-Friendly%20Slider%20Plugin%20for%20WordPress%20with%20comfortable%20drag%20and%20drop%20interface.",
+        "https://prestigemotorsport.com.au/wp-content/plugins/wp-spamshield/js/jscripts.php",
+        "https://8.ajes.com/imgs/3caJP9IZRD0UNA0dmbKfX1VN2qJh7GhHJL2NwkRMZCnLlJ-TYvABgbQyNKjtL-7",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/Email-150x150.png",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2018/08/guarantee.jpg",
+        "https://prestigemotorsport.com.au/wp-content/uploads/2017/08/Checklist-How-to-Buy.jpg",
+        "https://prestigemotorsport.com.au/wp-content/themes/prestigemotorsport/js/pgwslideshow.js"
+      ],
+      "textSample": "Japanese Auction Vehicle Details - Prestige Motorsport Contact Us 1 AUD = 111.55 JPY Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Home What We Do Auctions SEARCH Japan Car Auctions Set Up FREE Auction Alerts How to Buy from Auction Prepare to Bid at Auction How to Check Auction Sale Prices How to Read a Japanese Auction Sheet Examples Client Inspections Auction Sales ARCHIVE Cost Calc FAQ FULL FAQ or select below How Direct Car Import Works Aust Vehicle Import Rules Current &#038; New Regulations New 25 Year Import Rule Hybrid Electric Cars Kei Cars Popular Import Models Daihatsu Rocky Hybrid Taft Tanto / Tanto Custom Tanto Fun Cross Honda CR-V e:HEV Hybrid Fit Hybrid (GP5, GP6) Fit e:HEV Hybrid (GR3) Fit Shuttle hybrid Grace Hybrid Odyssey Hybrid S660 kei car Stepwgn Spada Hybrid (RP5) Stepwgn Spada Hybrid (RP8) Vezel Hybrid Lexus LS 460 LS 500h Hybrid RC 300h Hybrid RX 450h Hybrid (10 series) RX 450h Hybrid (20 series) Mitsubishi Delica D2 hybrid Delica D5 Delica Mini hybrid EK Space hybrid EK X hybrid Nissan Ariya EV Aura e-Power Hybrid Kicks e-Power Hybrid Leaf EV Note e-Power Hybrid (HE12) Note e-Power Hybrid (E13, SNE13) Serena e-Power Hybrid (HC27 / HFC27) Serena e-Power Hybrid (GC28 / GFC28) X-Trail Hybrid Subaru Impreza XV Hybrid Legacy Touring Wagon Suzuki Hustler Hybrid Solio Bandit Hybrid Solio Hybrid Spacia Hybrid Swift Hybrid Toyota Alphard Hybrid 20 Alphard | Vellfire Hybrid 30 Alphard hybrid 40 BZ4X EV C-HR Hybrid Corolla Axio Hybrid Corolla Cross hybrid Corolla Fielder Hybrid Corolla Touring Wagon hybrid Crown S20 &#038; S21 Crown Crossover hybrid Esquire Hybrid Estima Hybrid Harrier Hybrid 60 Harrier Hybrid / PHV 80 Noah Hybrid 80 Series Noah Hybrid 90 Series Prius Hybrid (MXWH60/65) Prius PHV Hybrid (MXWH61) Prius PHV Hybrid (ZVW52) Raize Hybrid RAV4 Plug-in Hybrid Sienta Hybrid (MXPL10 / 15) Vellfire Hybrid 20 Vellfire hybrid 40 Vitz hybrid Voxy Hybrid 80 Series Voxy Hybrid 90 Series Import Service Cost Why Use a Car Import Agent Genuine Mileage Promise Japan Odometer Check Car Valuations Japanese Car Specifications Blog Testimonials Contact Us Vehicle Inquiry Japanese Auction Vehicle Details 2024 TOYOTA ALPHARD Z Year 2024 Make TOYOTA Model ALPHARD Trans Automatic Kms 18,000 Capacity 2500 cc Colour Black Extras - Grade 4.5 Vehicles are graded from 6 (best) to 0 with A (best) to D used for interior grade. 0, R, A are all used to denote repaired vehicles, with RA, A1 being minor repairs. *** is used when there is major existing damage or fault. Our Japanese Auction Guide has a full explanation of how the auctions work and more detail about the grading including abbreviations used in the auction inspection reports. Most relevant information is understandable by anyone, and positive and negative comments in Japanese will be translated for clients. So you don't need to read Japanese ! We use the auction reports as a guide only, and always inspect vehicles in person ourselves. See our FAQ Vehicle condition and the importance of vehicle inspections for why this is so critical. Chassis AGH40W FREE Auction Alerts Sign up to receive daily email alerts for any model Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:38 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3641 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week and can offer some good deals. Allow for additional inland transport of about 40,000 Yen to Osaka for shipping if required, as vessels do not always call into nearby Moji Port. Start Price 0 YEN Most vehicles sell for significantly more than the start price and nearly all vehicles will have an undisclosed reserve price set by the seller. A zero start price may only indicate the start price has not yet been entered. Final Price Not yet available NOTE : From Dec 2016 USS auctions completely stopped publishing SALE PRICES online. Since then the only way to know what a vehicle sells for at an auction run by USS is to be bidding yourself or by watching the bidding live. Sales data is available for non-USS auctions and this can still be used for price research. The last bid price achieved will be shown here following auction (if available). This may take 24 to 48 hours to update depending on auction systems. Check Current Status to find out whether the vehicle was Sold, Passed In (reserve price not met), or Sold on Negotiation (final price not published). For final price calculations use actual SOLD prices only. Current Status -->Not yet available --> Denotes whether the vehicle is Unsold (awaiting auction), was Sold, Unsold / Passed In (reserve price not met), or Sold on Negotiation (final price not published). Send ENQUIRY How to BUY Prestige Motorsport Mileage Promise Auction GUIDE Model INFO COST Calculator Auction Date 07-08-2026 The date this vehicle was or will be auctioned. Please note that you must be registered as a client in advance before we can inspect and bid on vehicles for you. Auction Time 16:38 The approx. auction time in Japan. This varies depending on how quickly the auction progresses and delays can occur due to computer systems. Number 3641 Location USS Nagoya The Best Auctions While Japan has more than 70 auctions each week, in reality most vehicles are sourced from a smaller number of major auctions. Several small auctions are held on Monday but most are online only such as AUCNET and NPS Tokyo Nyusatsu which don't enable physical inspections as there is no centralised auction location. Other auctions are so small that it is not viable to have an agent there to inspect vehicles. For the best selection of vehicles, condition and prices our favourite auctions are in Tokyo, Nagoya, Osaka, Kobe and Fukuoka: Tuesday USS Yokohama, JU Saitama, CAA Tokyo, CAA Gifu Wednesday JAA, CAA Chubu, BAYAUC Thursday USS Tokyo, Hanaten Osaka, KCAA Fukuoka Friday USS Nagoya, USS Osaka Saturday HAA Kobe, JU Gifu, USS Fukuoka Auctions We Avoid We specifically avoid all Sapporo auctions due to rust issues. Sapporo is on the island of Hokkaido in the far north of Japan very near Russia, they have about 7 months of snow each year and salt the roads. That means nearly all vehicles there are affected by rust. We also avoid auctions in Gunma on Thursday and Saturday, as like Sapporo this is a heavy snow area. BCN Saitama auction on Wednesdays has been renamed 'MiRIVE' and is located in Fukuya City, Saitama prefecture. It is only a small 'outback' style auction. Fukuoka in the south of Japan has a couple of good auctions each week ",
+      "status": 200,
+      "bytes": 197436,
+      "contentType": "text/html; charset=UTF-8"
+    }
+  ]
+}

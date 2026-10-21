@@ -1,0 +1,425 @@
+{
+  "date": "2026-09-06",
+  "scope": "Retained Autohome reference snapshot, not live listings or calculated offers",
+  "snapshotFetchedAt": "2026-08-22T10:47:52.620Z",
+  "snapshotStatus": "partial",
+  "records": 17924,
+  "uniqueSpecIds": 17914,
+  "populatedFields": {
+    "engineLiters": 11436,
+    "enginePowerHp": 12573,
+    "enginePowerKw": 17804,
+    "motorTotalKw": 7564,
+    "systemPowerKw": 1996
+  },
+  "energy": {
+    "汽油": 5965,
+    "汽油+48V轻混系统": 560,
+    "油电混合": 392,
+    "柴油": 3325,
+    "汽油电驱": 8,
+    "纯电动": 5336,
+    "汽油+CNG": 291,
+    "CNG": 32,
+    "missing": 87,
+    "汽油+24V轻混系统": 1,
+    "插电式混合动力": 1301,
+    "氢燃料": 5,
+    "增程式": 560,
+    "柴油+48V轻混系统": 51,
+    "甲醇混动": 10
+  },
+  "inputs": [
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0001.json",
+      "sha256": "75685d77697f2c85267065d3ddeecfb17037ba4c04b565f0d43040dbbc3b83e5"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0002.json",
+      "sha256": "3a7ed70f9e7678da95a744e135574318a0b3fcb59f62e3cd4867a2e2a1158f08"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0003.json",
+      "sha256": "551c4208c78a687c86991d08b1e9a95bf6ccf4dfc4002ffe3f62a766f5d67040"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0004.json",
+      "sha256": "55f7c123f94b030272f705f0fcd8b1841e461181badfa55f3a2c2203b3965120"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0005.json",
+      "sha256": "caaa06aed4ae3bf75eea5ae417bf9fabb73e9c2f139515af843968ec5310959f"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0006.json",
+      "sha256": "ffbc8293c20cabe496daa13b0c14a0d67193d822332a277d2a6d7893aa7e5a7b"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0007.json",
+      "sha256": "26ff538421e8db29bdf7ba6a1a8dcbe63ecb526a60ce45e86acecfdaa6428476"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0008.json",
+      "sha256": "f26d4957736761ac711b7d2e071d145a4ee15a017f8d2a4b6f56b842f0659123"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0009.json",
+      "sha256": "96cdb888c6043ad3615a0420fc2f795325721e79c686d7fd43b49d45fd822099"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0010.json",
+      "sha256": "bbf10dbf09bf0115b0ca263830fc485c96ba72b3a686ce89edd7fd66d19943b1"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0011.json",
+      "sha256": "b5a520fd9524fd9a546e5a9432c495c12f2812390ac485ac4249b34096595e91"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0012.json",
+      "sha256": "5270be213f486231e3a4b9dd9567a70ffe0875f20b7f78082f103069d9e64988"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0013.json",
+      "sha256": "cc021358bba8ae7197cf3e7f959020d801eac3746785b0cdf13c29fbeacbb5e1"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0014.json",
+      "sha256": "bcad5739302dfdc5026cd787c89b89f340afb19c7cf16acf51c9aec4d28479c1"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0015.json",
+      "sha256": "cf20fc7f173fb16ea52be973af889cdf05bdcac79e1edbdd5b43508b2b2cced2"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0016.json",
+      "sha256": "246e4563c0819242bcae912311457b42374cd83f5f9d3f6afe6e2bfd98ad0464"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0017.json",
+      "sha256": "6ec08aab513b9977971c44f428df654c1d89b9248f60440ac0b82f25228ca83b"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0018.json",
+      "sha256": "2ec47f8f7716aef9d8945c023afdd0e5a4f048697c93d829722a22e60fcdf49b"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0019.json",
+      "sha256": "1286243bd7b979381e23087481e7dbcd1381cbca4e4c02d192942150f71895a6"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0020.json",
+      "sha256": "bed5d714df97b6dfeb9f9104f9eecdf64da522fc67d67fd7a330a04c91902c41"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0021.json",
+      "sha256": "fc66e1b239221851c84d27cd76e9aba5d42b0a039dd835a8cc60f404fba72280"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0022.json",
+      "sha256": "67ba0633833fbdacf9eac3437385b15bc3f2b278cb84e3b9e05294e44c68fa0d"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0023.json",
+      "sha256": "df19c0d1bff6bcc55f795a6f69c7ab2d0b04ce0b8260cb2c33bfe8fe51323708"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0024.json",
+      "sha256": "9c2354fbd4b06efcef776278b487d7c2150ee411b4845abb8f4523d48c35876e"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0025.json",
+      "sha256": "240923e5e6096cd4b85e5532b44b1e429a42624e03e0ffcb97f80b21b4f9b0df"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0026.json",
+      "sha256": "ed24f5b795290e8cdd7ef89f2758872e9be6043222e8af3a3683c280f5568bb5"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0027.json",
+      "sha256": "9cdf8382aa96549a79ba77a0d577d9b95bb0da94b0dca4da290c7aa1eca5da4d"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0028.json",
+      "sha256": "7c8aa508e2ad206c2c39f055691de46f86ce4603307e4e65084598b0d3bd24c2"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0029.json",
+      "sha256": "515831f157f645600e07962bcf8b9f0e8870a01e3fccce13957499d6b6b94509"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0030.json",
+      "sha256": "6e67e41dbff948704c1ef9a8f9856ea67cd1fe6c5d58f681c56a6e3cb06f7473"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0031.json",
+      "sha256": "fcf471a0d9c53896abba3be64e3927ee0d38860a76e2fa7c8808b5633fc4115e"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0032.json",
+      "sha256": "1d4179ceac4099d973b4c1259e190012f41f2fbb9225ba1dfa720f59fbc67c63"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0033.json",
+      "sha256": "76fed592f952d1a1067279d3df340936a55df789f1d74bfbfb424b008634be62"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0034.json",
+      "sha256": "2ed3a5ec70587d98ed1976ea47fa68bd3dc2dab23eb02ae88c764d6716099ec9"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0035.json",
+      "sha256": "83ab4f499cc3a4242ff1635e473e9b25cbf637357a14f68db116884d020c2786"
+    },
+    {
+      "path": "data/catalog/knowledge-source-snapshots/generated/autohome-china/variants-0036.json",
+      "sha256": "ae79a7287e3ab8d7ac4fd5e1d89337729a33799e9cc277581a4a9c0c8309c2a7"
+    }
+  ],
+  "productionWrites": false,
+  "sourceRequests": 0,
+  "limitations": [
+    "Snapshot rows have no retained full config parameter map; missing exact cc cannot be reconstructed from litres.",
+    "New extraction only preserves explicitly unit-labelled displacement in future config responses; it does not verify source truth or listing compatibility.",
+    "No corpus verification status was promoted and no new calculation coverage is claimed."
+  ],
+  "next": [
+    "Obtain permitted config evidence for exact specIds, retaining explicit displacement parameter and source identity.",
+    "Independently verify specification market, model year and variant linkage before calculation.",
+    "Re-run saved listing audit after evidenced variant updates; keep Japan paused."
+  ],
+  "duplicateSpecIds": [
+    {
+      "specId": 76207,
+      "count": 2,
+      "differingFields": [
+        "marketDate",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5061,
+        8710
+      ],
+      "titles": [
+        "探岳 PHEV 2026款 探岳L PRO",
+        "探岳 PHEV 2026款 PRO"
+      ]
+    },
+    {
+      "specId": 76208,
+      "count": 2,
+      "differingFields": [
+        "marketDate",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5061,
+        8710
+      ],
+      "titles": [
+        "探岳 PHEV 2026款 探岳L PRIME",
+        "探岳 PHEV 2026款 PRIME"
+      ]
+    },
+    {
+      "specId": 1023346,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 捷运型平顶6座",
+        "王 2026款 捷运型平顶6座 CNG"
+      ]
+    },
+    {
+      "specId": 1023347,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 享型平顶9座",
+        "王 2026款 享型平顶9座 CNG"
+      ]
+    },
+    {
+      "specId": 1023348,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 捷运型高顶6座",
+        "王 2026款 捷运型高顶6座 CNG"
+      ]
+    },
+    {
+      "specId": 1023349,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 享型高顶9座",
+        "王 2026款 享型高顶9座 CNG"
+      ]
+    },
+    {
+      "specId": 1023350,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型平顶7座",
+        "王 2026款 悦享型平顶7座 CNG"
+      ]
+    },
+    {
+      "specId": 1023351,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型平顶9座",
+        "王 2026款 悦享型平顶9座 CNG"
+      ]
+    },
+    {
+      "specId": 1023352,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型高顶7座",
+        "王 2026款 悦享型高顶7座 CNG"
+      ]
+    },
+    {
+      "specId": 1023353,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型高顶9座",
+        "王 2026款 悦享型高顶9座 CNG"
+      ]
+    }
+  ],
+  "previousChangeCi": {
+    "runId": 34037647982,
+    "commit": "d362ca7fbfb1e8691a1f8bf1e5a772c20ec1d377",
+    "conclusion": "success"
+  },
+  "compilerFollowup": {
+    "change": "Autohome litre fallback removed; explicit engineCc preserved",
+    "profileTests": 13,
+    "passed": 13,
+    "corpusRebuilt": false
+  }
+}

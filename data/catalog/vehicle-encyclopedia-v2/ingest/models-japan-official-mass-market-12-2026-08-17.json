@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-mlit-passenger-073d4d7c85aebd69",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001474461.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001474461.xls",
+          "documentId": "001474461.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-200aa531d3a11bed",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001225532.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001225532.xls",
+          "documentId": "001225532.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-678c2005a0e63b4f",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001741617.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001741617.xlsx",
+          "documentId": "001741617.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-6eba5c4bb14a8494",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001338001.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001338001.xls",
+          "documentId": "001338001.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-7f8a9d845cab8f57",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001125035.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001125035.xls",
+          "documentId": "001125035.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-b60d6436954a12b3",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 6.5.Dimport_JC08.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/6.5.Dimport_JC08.xls",
+          "documentId": "6.5.Dimport_JC08.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-b7785551256457e2",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001282821.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001282821.xls",
+          "documentId": "001282821.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-volvo-v40-cross-country-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Volvo Cars official archive: V40 Cross Country model year 2017",
+          "publisher": "Volvo Car Corporation",
+          "url": "https://www.media.volvocars.com/global/en-gb/media/pressreleases/190783/volvo-v40-cross-country-model-year-20178",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Volvo Cars' official media archive identifies V40 Cross Country. Production dates and technical specifications are not copied into this identity-only batch."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "volvo/v40-cross-country",
+          "brandId": "volvo",
+          "canonicalName": "V40 Cross Country",
+          "slug": "v40-cross-country",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ボルボV40クロスカントリー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-073d4d7c85aebd69",
+                "src-mlit-passenger-112544ae3266913f",
+                "src-mlit-passenger-200aa531d3a11bed",
+                "src-mlit-passenger-2e18513621227dae",
+                "src-mlit-passenger-678c2005a0e63b4f",
+                "src-mlit-passenger-6eba5c4bb14a8494",
+                "src-mlit-passenger-7f8a9d845cab8f57",
+                "src-mlit-passenger-828379cbbcd3910c",
+                "src-mlit-passenger-90a3365aaa448efb",
+                "src-mlit-passenger-94192db29984183e",
+                "src-mlit-passenger-94752914c4875e20",
+                "src-mlit-passenger-af6f209ef438d450",
+                "src-mlit-passenger-b60d6436954a12b3",
+                "src-mlit-passenger-b7785551256457e2",
+                "src-mlit-passenger-cd4512da88914640",
+                "src-mlit-passenger-f7a1fc4f30a6aeef"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-volvo-v40-cross-country-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

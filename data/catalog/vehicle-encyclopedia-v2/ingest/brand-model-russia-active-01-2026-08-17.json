@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-agr-solaris-official-range-2026",
+          "type": "manufacturer",
+          "title": "AGR official Solaris model range",
+          "publisher": "AGR Automotive Group",
+          "url": "https://agr.auto/solaris",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official or brand-authorized current-range identity source. The batch records English public brand/model identities only and does not infer technical configurations."
+        },
+        {
+          "id": "src-evolute-official-range-2026",
+          "type": "manufacturer",
+          "title": "EVOLUTE official manufacturer site and current model range",
+          "publisher": "Motorinvest",
+          "url": "https://www.evolute.ru/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official or brand-authorized current-range identity source. The batch records English public brand/model identities only and does not infer technical configurations."
+        },
+        {
+          "id": "src-sollers-official-lcv-range-2026",
+          "type": "manufacturer",
+          "title": "Sollers official LCV range archive and current portfolio",
+          "publisher": "SOLLERS PJSC",
+          "url": "https://sollers-auto.com/en/press-center/news-and-events/sollers-launches-a-project-to-set-up-lcv-production-under-its-own-brand/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official or brand-authorized current-range identity source. The batch records English public brand/model identities only and does not infer technical configurations."
+        },
+        {
+          "id": "src-tenet-official-range-2026",
+          "type": "manufacturer",
+          "title": "TENET official current model range",
+          "publisher": "TENET RUS LLC",
+          "url": "https://tenet.ru/models/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official or brand-authorized current-range identity source. The batch records English public brand/model identities only and does not infer technical configurations."
+        },
+        {
+          "id": "src-xcite-official-range-2024-2026",
+          "type": "authoritative_catalog",
+          "title": "XCITE official site: X-Cross model range",
+          "publisher": "St. Petersburg Automobile Plant",
+          "url": "https://xcite-center.ru/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Russia",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Official or brand-authorized current-range identity source. The batch records English public brand/model identities only and does not infer technical configurations."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "evolute",
+          "canonicalName": "EVOLUTE",
+          "slug": "evolute",
+          "aliases": [],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source identifies the brand and its active Russian-market vehicle range within the 2020-2026 priority window."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos, rights review and complete generation/grade coverage remain required before publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "solaris",
+          "canonicalName": "Solaris",
+          "slug": "solaris",
+          "aliases": [],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-agr-solaris-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source identifies the brand and its active Russian-market vehicle range within the 2020-2026 priority window."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos, rights review and complete generation/grade coverage remain required before publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sollers",
+          "canonicalName": "Sollers",
+          "slug": "sollers",
+          "aliases": [],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-sollers-official-lcv-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source identifies the brand and its active Russian-market vehicle range within the 2020-2026 priority window."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos, rights review and complete generation/grade coverage remain required before publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tenet",
+          "canonicalName": "TENET",
+          "slug": "tenet",
+          "aliases": [],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-tenet-official-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source identifies the brand and its active Russian-market vehicle range within the 2020-2026 priority window."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos, rights review and complete generation/grade coverage remain required before publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xcite",
+          "canonicalName": "XCITE",
+          "slug": "xcite",
+          "aliases": [],
+          "countries": [
+            "Russia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-xcite-official-range-2024-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source identifies the brand and its active Russian-market vehicle range within the 2020-2026 priority window."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos, rights review and complete generation/grade coverage remain required before publication."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "evolute/i-jet",
+          "brandId": "evolute",
+          "canonicalName": "i-JET",
+          "slug": "i-jet",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "evolute/i-joy",
+          "brandId": "evolute",
+          "canonicalName": "i-JOY",
+          "slug": "i-joy",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "evolute/i-pro",
+          "brandId": "evolute",
+          "canonicalName": "i-PRO",
+          "slug": "i-pro",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "evolute/i-sky",
+          "brandId": "evolute",
+          "canonicalName": "i-SKY",
+          "slug": "i-sky",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "evolute/i-space",
+          "brandId": "evolute",
+          "canonicalName": "i-SPACE",
+          "slug": "i-space",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "evolute/i-van",
+          "brandId": "evolute",
+          "canonicalName": "i-VAN",
+          "slug": "i-van",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-evolute-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "solaris/hc",
+          "brandId": "solaris",
+          "canonicalName": "HC",
+          "slug": "hc",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-agr-solaris-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "solaris/hs",
+          "brandId": "solaris",
+          "canonicalName": "HS",
+          "slug": "hs",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-agr-solaris-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "solaris/krs",
+          "brandId": "solaris",
+          "canonicalName": "KRS",
+          "slug": "krs",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-agr-solaris-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "solaris/krx",
+          "brandId": "solaris",
+          "canonicalName": "KRX",
+          "slug": "krx",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-agr-solaris-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sollers/argo",
+          "brandId": "sollers",
+          "canonicalName": "Argo",
+          "slug": "argo",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sollers-official-lcv-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sollers/atlant",
+          "brandId": "sollers",
+          "canonicalName": "Atlant",
+          "slug": "atlant",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sollers-official-lcv-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sollers/sf1",
+          "brandId": "sollers",
+          "canonicalName": "SF1",
+          "slug": "sf1",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sollers-official-lcv-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sollers/sf5",
+          "brandId": "sollers",
+          "canonicalName": "SF5",
+          "slug": "sf5",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sollers-official-lcv-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tenet/t4",
+          "brandId": "tenet",
+          "canonicalName": "T4",
+          "slug": "t4",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-tenet-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tenet/t4l",
+          "brandId": "tenet",
+          "canonicalName": "T4L",
+          "slug": "t4l",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-tenet-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tenet/t7",
+          "brandId": "tenet",
+          "canonicalName": "T7",
+          "slug": "t7",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-tenet-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tenet/t8",
+          "brandId": "tenet",
+          "canonicalName": "T8",
+          "slug": "t8",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-tenet-official-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xcite/x-cross-7",
+          "brandId": "xcite",
+          "canonicalName": "X-Cross 7",
+          "slug": "x-cross-7",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-xcite-official-range-2024-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xcite/x-cross-8",
+          "brandId": "xcite",
+          "canonicalName": "X-Cross 8",
+          "slug": "x-cross-8",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-xcite-official-range-2024-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The official or brand-authorized range page establishes this public model identity; dates and technical variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window model identity for the Russian 2020-2026 market.",
+            "Review status: generation boundaries, exact variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

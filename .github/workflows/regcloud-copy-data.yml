@@ -1,0 +1,83 @@
+name: Regcloud migration — reconcile preserved copy
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-reconcile.json']
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: regcloud-staging
+  cancel-in-progress: false
+jobs:
+  copy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pause legacy storage workflows for migration
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/regcloud-pause-writers.py
+      - name: Preserve workflow states for selective restoration
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regcloud-paused-workflows-${{ github.run_id }}-${{ github.run_attempt }}
+          path: regcloud-paused-workflows.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Reconcile preserved copy and verify every current object
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          SOURCE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          SOURCE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          SOURCE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          SOURCE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          SOURCE_ACCESS: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          SOURCE_SECRET: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          TARGET_ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          TARGET_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          task_dir=$(mktemp -d)
+          trap 'rm -rf -- "$task_dir"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$task_dir/key"
+          unset SSH_PRIVATE_KEY
+          python3 - "$task_dir/config.json" <<'PY'
+          import json, os, sys
+          names = ['source_endpoint', 'source_region', 'source_bucket', 'source_prefix', 'source_access', 'source_secret', 'target_access', 'target_secret']
+          with open(sys.argv[1], 'w') as f:
+              json.dump({name: os.environ.get(name.upper(), '') for name in names}, f)
+          PY
+          unset SOURCE_ENDPOINT SOURCE_REGION SOURCE_BUCKET SOURCE_PREFIX SOURCE_ACCESS SOURCE_SECRET TARGET_ACCESS TARGET_SECRET
+          ssh_opts=(-i "$task_dir/key" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/staging/migration/run-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "test ! -e /opt/avtocena/PRODUCTION_ACTIVE && install -d -m 700 /opt/avtocena/staging/migration '$remote_dir'"
+          scp "${ssh_opts[@]}" "$task_dir/config.json" scripts/regcloud-copy-s3.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote_dir'" <<'REMOTE'
+          set -euo pipefail
+          umask 077
+          work_dir=$1
+          trap 'rm -f -- "$work_dir/config.json"' EXIT HUP INT TERM
+          chmod 600 "$work_dir/config.json"
+          exec 9>/run/lock/avtocena-migration-copy.lock
+          flock -n 9
+          if ! /usr/bin/python3 -c 'import boto3' >/dev/null 2>&1; then
+            export DEBIAN_FRONTEND=noninteractive
+            apt-get -o DPkg::Lock::Timeout=120 update
+            apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends python3-boto3
+          fi
+          # Use provider-compatible checksum behaviour; TLS validation stays enabled.
+          export REGCLOUD_RECONCILE=1
+          export AWS_REQUEST_CHECKSUM_CALCULATION=when_required
+          export AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
+          timeout --signal=TERM --kill-after=30s 165m /usr/bin/python3 -u "$work_dir/regcloud-copy-s3.py" "$work_dir/config.json"
+          REMOTE

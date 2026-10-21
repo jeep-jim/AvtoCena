@@ -1,0 +1,8441 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 12,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "lincoln:mkc",
+      "make": "Lincoln",
+      "model": "Mkc",
+      "aliases": [
+        "LINCOLN MKC"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/mkc",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Mkc"
+      }
+    },
+    {
+      "key": "lincoln:mks",
+      "make": "Lincoln",
+      "model": "Mks",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:mkt",
+      "make": "Lincoln",
+      "model": "Mkt",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:mktlivery",
+      "make": "Lincoln",
+      "model": "Mkt Livery",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:mkx",
+      "make": "Lincoln",
+      "model": "Mkx",
+      "aliases": [
+        "LINCOLN MKX RES."
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/mkx",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Mkx"
+      }
+    },
+    {
+      "key": "lincoln:mkz",
+      "make": "Lincoln",
+      "model": "Mkz",
+      "aliases": [
+        "LINCOLN MKZ"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/mkz",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Mkz"
+      }
+    },
+    {
+      "key": "lincoln:nautilus",
+      "make": "Lincoln",
+      "model": "Nautilus",
+      "aliases": [
+        "LINCOLN NAUTILUS",
+        "NAUTILUS"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/nautilus",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Nautilus"
+      }
+    },
+    {
+      "key": "lincoln:navicator",
+      "make": "Lincoln",
+      "model": "Navicator",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:navigator",
+      "make": "Lincoln",
+      "model": "Navigator",
+      "aliases": [
+        "LINCOLN NAVIGATOR"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": "lincoln/navigator",
+        "canonicalMake": "Lincoln",
+        "canonicalModel": "Navigator"
+      }
+    },
+    {
+      "key": "lincoln:navigatorl",
+      "make": "Lincoln",
+      "model": "Navigator L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:premier",
+      "make": "Lincoln",
+      "model": "Premier",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:premiere",
+      "make": "Lincoln",
+      "model": "Premiere",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:town",
+      "make": "Lincoln",
+      "model": "Town",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:towncar",
+      "make": "Lincoln",
+      "model": "Town Car",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:towncarauto",
+      "make": "Lincoln",
+      "model": "Town Car Auto",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:towncarcartier",
+      "make": "Lincoln",
+      "model": "Town Car Cartier",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:towncarffv",
+      "make": "Lincoln",
+      "model": "Town Car Ffv",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:towncarsignature",
+      "make": "Lincoln",
+      "model": "Town Car Signature",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:versailles",
+      "make": "Lincoln",
+      "model": "Versailles",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lincoln:zephyr",
+      "make": "Lincoln",
+      "model": "Zephyr",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lincoln",
+        "modelId": null,
+        "canonicalMake": "Lincoln",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "livan:x3pro",
+      "make": "Livan",
+      "model": "X3 Pro",
+      "aliases": [
+        "LIVAN X3 PRO",
+        "X3 PRO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "livan",
+        "modelId": "livan/x3-pro",
+        "canonicalMake": "Livan",
+        "canonicalModel": "X3 Pro"
+      }
+    },
+    {
+      "key": "lloyd:alexander",
+      "make": "Lloyd",
+      "model": "Alexander",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lloyd:alexanderts",
+      "make": "Lloyd",
+      "model": "Alexander Ts",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lloyd:arabella",
+      "make": "Lloyd",
+      "model": "Arabella",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lotus:2eleven",
+      "make": "Lotus",
+      "model": "2-Eleven",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:cortina",
+      "make": "Lotus",
+      "model": "Cortina",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:eclat",
+      "make": "Lotus",
+      "model": "Eclat",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elan",
+      "make": "Lotus",
+      "model": "Elan",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elanplus2s130",
+      "make": "Lotus",
+      "model": "Elan + 2 S130",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elanplus2",
+      "make": "Lotus",
+      "model": "Elan +2",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elans2",
+      "make": "Lotus",
+      "model": "Elan S2",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elans4",
+      "make": "Lotus",
+      "model": "Elan S4",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elanse",
+      "make": "Lotus",
+      "model": "Elan Se",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elanseturbo",
+      "make": "Lotus",
+      "model": "Elan Se Turbo",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elansprint",
+      "make": "Lotus",
+      "model": "Elan Sprint",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:eletre",
+      "make": "Lotus",
+      "model": "Eletre",
+      "aliases": [
+        "ELETRE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/eletre",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Eletre"
+      }
+    },
+    {
+      "key": "lotus:elise",
+      "make": "Lotus",
+      "model": "Elise",
+      "aliases": [
+        "ELISE"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/elise",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Elise"
+      }
+    },
+    {
+      "key": "lotus:elisecup250",
+      "make": "Lotus",
+      "model": "Elise Cup 250",
+      "aliases": [
+        "ELISE CUP 250"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/elise-cup-250",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Elise Cup 250"
+      }
+    },
+    {
+      "key": "lotus:elises",
+      "make": "Lotus",
+      "model": "Elise S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:elisesport220",
+      "make": "Lotus",
+      "model": "Elise Sport 220",
+      "aliases": [
+        "ELISE SPORT 220"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/elise-sport-220",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Elise Sport 220"
+      }
+    },
+    {
+      "key": "lotus:elisesport240",
+      "make": "Lotus",
+      "model": "Elise Sport 240",
+      "aliases": [
+        "ELISE SPORT 240"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/elise-sport-240",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Elise Sport 240"
+      }
+    },
+    {
+      "key": "lotus:elite",
+      "make": "Lotus",
+      "model": "Elite",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:emeya",
+      "make": "Lotus",
+      "model": "Emeya",
+      "aliases": [
+        "EMEYA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/emeya",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Emeya"
+      }
+    },
+    {
+      "key": "lotus:emeyas",
+      "make": "Lotus",
+      "model": "Emeya S",
+      "aliases": [
+        "EMEYA S"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/emeya-s",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Emeya S"
+      }
+    },
+    {
+      "key": "lotus:emira",
+      "make": "Lotus",
+      "model": "Emira",
+      "aliases": [
+        "EMIRA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/emira",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Emira"
+      }
+    },
+    {
+      "key": "lotus:emiraturbose",
+      "make": "Lotus",
+      "model": "Emira Turbo Se",
+      "aliases": [
+        "EMIRA TURBO SE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/emira-turbo-se",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Emira Turbo Se"
+      }
+    },
+    {
+      "key": "lotus:esprit",
+      "make": "Lotus",
+      "model": "Esprit",
+      "aliases": [
+        "ESPRIT"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/esprit",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Esprit"
+      }
+    },
+    {
+      "key": "lotus:esprits3",
+      "make": "Lotus",
+      "model": "Esprit S3",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:espritturbo",
+      "make": "Lotus",
+      "model": "Esprit Turbo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:espritv8",
+      "make": "Lotus",
+      "model": "Esprit V8",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:europa",
+      "make": "Lotus",
+      "model": "Europa",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:europas",
+      "make": "Lotus",
+      "model": "Europa S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:europas2",
+      "make": "Lotus",
+      "model": "Europa S2",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:evora",
+      "make": "Lotus",
+      "model": "Evora",
+      "aliases": [
+        "EVORA 410",
+        "EVORA GT 410 4 SEAT AUTOMATIC GEARBOX",
+        "EVORA GT 410 4 SEAT MANUAL GEARBOX",
+        "EVORA GT410 SPORT",
+        "EVORA SPORT 410",
+        "EVORA SPORT 410 AUTO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/evora",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Evora"
+      }
+    },
+    {
+      "key": "lotus:excel",
+      "make": "Lotus",
+      "model": "Excel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:exige",
+      "make": "Lotus",
+      "model": "Exige",
+      "aliases": [
+        "EXIGE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": "lotus/exige",
+        "canonicalMake": "Lotus",
+        "canonicalModel": "Exige"
+      }
+    },
+    {
+      "key": "lotus:exigesauto",
+      "make": "Lotus",
+      "model": "Exige S Auto",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:mk6",
+      "make": "Lotus",
+      "model": "MK6",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:mk7",
+      "make": "Lotus",
+      "model": "MK7",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:s4",
+      "make": "Lotus",
+      "model": "S4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:seven",
+      "make": "Lotus",
+      "model": "Seven",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:sevens3",
+      "make": "Lotus",
+      "model": "Seven S3",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:sevens4",
+      "make": "Lotus",
+      "model": "Seven S4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:super7",
+      "make": "Lotus",
+      "model": "Super 7",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:superseven",
+      "make": "Lotus",
+      "model": "Super Seven",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lotus:turboesprit",
+      "make": "Lotus",
+      "model": "Turbo Esprit",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lotus",
+        "modelId": null,
+        "canonicalMake": "Lotus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "luaz:969a",
+      "make": "Luaz",
+      "model": "969A",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "lucid:air",
+      "make": "Lucid",
+      "model": "Air",
+      "aliases": [
+        "AIR",
+        "AIR DREAM EDITION PERFORM",
+        "AIR DREAM PERFORMANCE",
+        "AIR GRAND TOURING",
+        "LUCID AIR"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lucid",
+        "modelId": "lucid/air",
+        "canonicalMake": "Lucid",
+        "canonicalModel": "Air"
+      }
+    },
+    {
+      "key": "lucid:airdreamp",
+      "make": "Lucid",
+      "model": "Air Dream P",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lucid",
+        "modelId": null,
+        "canonicalMake": "Lucid",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "lucid:airpure",
+      "make": "Lucid",
+      "model": "Air Pure",
+      "aliases": [
+        "AIR PURE"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lucid",
+        "modelId": "lucid/air-pure",
+        "canonicalMake": "Lucid",
+        "canonicalModel": "Air Pure"
+      }
+    },
+    {
+      "key": "lucid:airsapphire",
+      "make": "Lucid",
+      "model": "Air Sapphire",
+      "aliases": [
+        "AIR SAPPHIRE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lucid",
+        "modelId": "lucid/air-sapphire",
+        "canonicalMake": "Lucid",
+        "canonicalModel": "Air Sapphire"
+      }
+    },
+    {
+      "key": "lucid:airtouring",
+      "make": "Lucid",
+      "model": "Air Touring",
+      "aliases": [
+        "AIR TOURING"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lucid",
+        "modelId": "lucid/air-touring",
+        "canonicalMake": "Lucid",
+        "canonicalModel": "Air Touring"
+      }
+    },
+    {
+      "key": "lucid:gravity",
+      "make": "Lucid",
+      "model": "Gravity",
+      "aliases": [
+        "GRAVITY GRAND TOURING",
+        "GRAVITY TOURING",
+        "LUCID GRAVITY"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lucid",
+        "modelId": "lucid/gravity",
+        "canonicalMake": "Lucid",
+        "canonicalModel": "Gravity"
+      }
+    },
+    {
+      "key": "luxeed:r7",
+      "make": "LUXEED",
+      "model": "R7",
+      "aliases": [
+        "智界 R7"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "luxeed",
+        "modelId": "luxeed/r7",
+        "canonicalMake": "LUXEED",
+        "canonicalModel": "R7"
+      }
+    },
+    {
+      "key": "luxeed:s7",
+      "make": "LUXEED",
+      "model": "S7",
+      "aliases": [
+        "智界 S7"
+      ],
+      "bodyTypes": [
+        "Sedan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "luxeed",
+        "modelId": "luxeed/s7",
+        "canonicalMake": "LUXEED",
+        "canonicalModel": "S7"
+      }
+    },
+    {
+      "key": "luxeed:v9",
+      "make": "LUXEED",
+      "model": "V9",
+      "aliases": [
+        "智界 V9"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "luxeed",
+        "modelId": "luxeed/v9",
+        "canonicalMake": "LUXEED",
+        "canonicalModel": "V9"
+      }
+    },
+    {
+      "key": "lynkandco:01",
+      "make": "Lynk & Co",
+      "model": "01",
+      "aliases": [
+        "Lynk & Co 01",
+        "LYNK & CO 01",
+        "LYNK CO 01"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lynk-and-co",
+        "modelId": "lynk-and-co/01",
+        "canonicalMake": "Lynk & Co",
+        "canonicalModel": "01"
+      }
+    },
+    {
+      "key": "lynkandco:02",
+      "make": "Lynk & Co",
+      "model": "02",
+      "aliases": [
+        "LYNK & CO 02",
+        "LYNK CO 02"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lynk-and-co",
+        "modelId": "lynk-and-co/02",
+        "canonicalMake": "Lynk & Co",
+        "canonicalModel": "02"
+      }
+    },
+    {
+      "key": "lynkandco:08",
+      "make": "Lynk & Co",
+      "model": "08",
+      "aliases": [
+        "LYNK AND CO 08",
+        "LYNK AND CO 08 DX11 PHEV AUT.",
+        "LYNK CO 08"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lynk-and-co",
+        "modelId": "lynk-and-co/08",
+        "canonicalMake": "Lynk & Co",
+        "canonicalModel": "08"
+      }
+    },
+    {
+      "key": "lynkandco:gx6",
+      "make": "Lynk & Co",
+      "model": "GX6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "lynk-and-co",
+        "modelId": "lynk-and-co/gx6",
+        "canonicalMake": "Lynk & Co",
+        "canonicalModel": "GX6"
+      }
+    },
+    {
+      "key": "maextro:s800",
+      "make": "Maextro",
+      "model": "S800",
+      "aliases": [
+        "尊界 S800"
+      ],
+      "bodyTypes": [
+        "Sedan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "maextro",
+        "modelId": "maextro/s800",
+        "canonicalMake": "Maextro",
+        "canonicalModel": "S800"
+      }
+    },
+    {
+      "key": "maextro:v680",
+      "make": "Maextro",
+      "model": "V680",
+      "aliases": [
+        "尊界 V680"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "maextro",
+        "modelId": "maextro/v680",
+        "canonicalMake": "Maextro",
+        "canonicalModel": "V680"
+      }
+    },
+    {
+      "key": "maextro:v800",
+      "make": "Maextro",
+      "model": "V800",
+      "aliases": [
+        "尊界 V800"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "maextro",
+        "modelId": "maextro/v800",
+        "canonicalMake": "Maextro",
+        "canonicalModel": "V800"
+      }
+    },
+    {
+      "key": "mahindra:kuv100nxt",
+      "make": "Mahindra",
+      "model": "KUV100 NXT",
+      "aliases": [
+        "KUV 100",
+        "KUV 100 NXT",
+        "KUV 100 NXT LPG",
+        "MAHINDRA KUV 100 NXT"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mahindra",
+        "modelId": "mahindra/kuv100-nxt",
+        "canonicalMake": "Mahindra",
+        "canonicalModel": "KUV100 NXT"
+      }
+    },
+    {
+      "key": "mahindra:xuv500",
+      "make": "Mahindra",
+      "model": "XUV500",
+      "aliases": [
+        "MAHINDRA XUV 500"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mahindra",
+        "modelId": "mahindra/xuv500",
+        "canonicalMake": "Mahindra",
+        "canonicalModel": "XUV500"
+      }
+    },
+    {
+      "key": "man:tge",
+      "make": "MAN",
+      "model": "TGE",
+      "aliases": [
+        "MAN TGE L2H2",
+        "TGE",
+        "TGE 3.140",
+        "TGE 3.180 4X4 SB",
+        "TGE PMR"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "man",
+        "modelId": "man/tge",
+        "canonicalMake": "MAN",
+        "canonicalModel": "TGE"
+      }
+    },
+    {
+      "key": "marlin:berlinetta",
+      "make": "Marlin",
+      "model": "Berlinetta",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "maserati:222",
+      "make": "Maserati",
+      "model": "222",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:228",
+      "make": "Maserati",
+      "model": "228",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:3200gt",
+      "make": "Maserati",
+      "model": "3200 GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:3500gt",
+      "make": "Maserati",
+      "model": "3500 GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:4200",
+      "make": "Maserati",
+      "model": "4200",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:424",
+      "make": "Maserati",
+      "model": "424",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:425",
+      "make": "Maserati",
+      "model": "425",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:430",
+      "make": "Maserati",
+      "model": "430",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:biturbo",
+      "make": "Maserati",
+      "model": "Bi Turbo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:biturbo425",
+      "make": "Maserati",
+      "model": "Biturbo 425",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:biturbospyder",
+      "make": "Maserati",
+      "model": "Biturbo Spyder",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:bora",
+      "make": "Maserati",
+      "model": "Bora",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:coupe",
+      "make": "Maserati",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:coupegransport",
+      "make": "Maserati",
+      "model": "Coupe Gransport",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:ghibli",
+      "make": "Maserati",
+      "model": "Ghibli",
+      "aliases": [
+        "GHIBLI",
+        "MASERATI GHIBLI"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/ghibli",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "Ghibli"
+      }
+    },
+    {
+      "key": "maserati:granturismo",
+      "make": "Maserati",
+      "model": "Gran Turismo",
+      "aliases": [
+        "GRAN TURISMO",
+        "GRANTURISMO",
+        "MASERATI GRANTURISMO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/gran-turismo",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "Gran Turismo"
+      }
+    },
+    {
+      "key": "maserati:grancabrio",
+      "make": "Maserati",
+      "model": "Grancabrio",
+      "aliases": [
+        "GRANCABRIO"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/grancabrio",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "Grancabrio"
+      }
+    },
+    {
+      "key": "maserati:gransport",
+      "make": "Maserati",
+      "model": "Gransport",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:grecale",
+      "make": "Maserati",
+      "model": "Grecale",
+      "aliases": [
+        "GRECALE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/grecale",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "Grecale"
+      }
+    },
+    {
+      "key": "maserati:gt2stradale",
+      "make": "Maserati",
+      "model": "GT2 Stradale",
+      "aliases": [
+        "GT2 STRADALE",
+        "GT2STRADALE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/gt2-stradale",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "GT2 Stradale"
+      }
+    },
+    {
+      "key": "maserati:indy",
+      "make": "Maserati",
+      "model": "Indy",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:karif",
+      "make": "Maserati",
+      "model": "Karif",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:khamsin",
+      "make": "Maserati",
+      "model": "Khamsin",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:kyalami",
+      "make": "Maserati",
+      "model": "Kyalami",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:levante",
+      "make": "Maserati",
+      "model": "Levante",
+      "aliases": [
+        "LEVANTE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/levante",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "Levante"
+      }
+    },
+    {
+      "key": "maserati:mc12",
+      "make": "Maserati",
+      "model": "MC12",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:mc20",
+      "make": "Maserati",
+      "model": "MC20",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/mc20",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "MC20"
+      }
+    },
+    {
+      "key": "maserati:mcpura",
+      "make": "Maserati",
+      "model": "MCPura",
+      "aliases": [
+        "MC PURA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/mcpura",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "MCPura"
+      }
+    },
+    {
+      "key": "maserati:merak",
+      "make": "Maserati",
+      "model": "Merak",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:mexico",
+      "make": "Maserati",
+      "model": "Mexico",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:mistral",
+      "make": "Maserati",
+      "model": "Mistral",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:quattroporte",
+      "make": "Maserati",
+      "model": "Quattroporte",
+      "aliases": [
+        "QUATTROPORTE"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": "maserati/quattroporte",
+        "canonicalMake": "Maserati",
+        "canonicalModel": "Quattroporte"
+      }
+    },
+    {
+      "key": "maserati:sebring",
+      "make": "Maserati",
+      "model": "Sebring",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:shamal",
+      "make": "Maserati",
+      "model": "Shamal",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maserati:spyder",
+      "make": "Maserati",
+      "model": "Spyder",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maserati",
+        "modelId": null,
+        "canonicalMake": "Maserati",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maxus:edeliver9",
+      "make": "Maxus",
+      "model": "eDeliver 9",
+      "aliases": [
+        "E DELIVER 9",
+        "E-DELIVER 9",
+        "E-DELIVER9",
+        "eDELIVER 9",
+        "EDELIVER 9",
+        "EDELIVER9",
+        "MAXUS eDELIVER 9",
+        "MAXUS EDELIVER 9",
+        "MAXUS EDELIVER9"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maxus",
+        "modelId": "maxus/edeliver-9",
+        "canonicalMake": "Maxus",
+        "canonicalModel": "eDeliver 9"
+      }
+    },
+    {
+      "key": "maxus:euniq5",
+      "make": "Maxus",
+      "model": "Euniq 5",
+      "aliases": [
+        "EUNIQ 5",
+        "EUNIQ5",
+        "MAXUS EUNIQ 5",
+        "Maxus Euniq 5"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maxus",
+        "modelId": "maxus/euniq-5",
+        "canonicalMake": "Maxus",
+        "canonicalModel": "Euniq 5"
+      }
+    },
+    {
+      "key": "maxus:euniq6",
+      "make": "Maxus",
+      "model": "Euniq 6",
+      "aliases": [
+        "EUNIQ 6",
+        "EUNIQ6",
+        "MAXUS EUNIQ 6"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maxus",
+        "modelId": "maxus/euniq-6",
+        "canonicalMake": "Maxus",
+        "canonicalModel": "Euniq 6"
+      }
+    },
+    {
+      "key": "maxus:mifa9",
+      "make": "Maxus",
+      "model": "Mifa 9",
+      "aliases": [
+        "MAXUS MIFA 9",
+        "MIFA 9",
+        "MIFA9"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maxus",
+        "modelId": "maxus/mifa-9",
+        "canonicalMake": "Maxus",
+        "canonicalModel": "Mifa 9"
+      }
+    },
+    {
+      "key": "maxus:v80",
+      "make": "Maxus",
+      "model": "V80",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maxus",
+        "modelId": null,
+        "canonicalMake": "Maxus",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maybach:57",
+      "make": "Maybach",
+      "model": "57",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maybach",
+        "modelId": null,
+        "canonicalMake": "Maybach",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maybach:57s",
+      "make": "Maybach",
+      "model": "57 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maybach",
+        "modelId": null,
+        "canonicalMake": "Maybach",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maybach:57zeppelin",
+      "make": "Maybach",
+      "model": "57 Zeppelin",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maybach",
+        "modelId": null,
+        "canonicalMake": "Maybach",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maybach:62",
+      "make": "Maybach",
+      "model": "62",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maybach",
+        "modelId": null,
+        "canonicalMake": "Maybach",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maybach:62s",
+      "make": "Maybach",
+      "model": "62S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maybach",
+        "modelId": null,
+        "canonicalMake": "Maybach",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "maybach:landaulet",
+      "make": "Maybach",
+      "model": "Landaulet",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "maybach",
+        "modelId": null,
+        "canonicalMake": "Maybach",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:1000",
+      "make": "Mazda",
+      "model": "1000",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:110s",
+      "make": "Mazda",
+      "model": "110S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:1200",
+      "make": "Mazda",
+      "model": "1200",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:121",
+      "make": "Mazda",
+      "model": "121",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:1300",
+      "make": "Mazda",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:1500",
+      "make": "Mazda",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:1600",
+      "make": "Mazda",
+      "model": "1600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:1800",
+      "make": "Mazda",
+      "model": "1800",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:323",
+      "make": "Mazda",
+      "model": "323",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:616",
+      "make": "Mazda",
+      "model": "616",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:626",
+      "make": "Mazda",
+      "model": "626",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:808",
+      "make": "Mazda",
+      "model": "808",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:818",
+      "make": "Mazda",
+      "model": "818",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:929",
+      "make": "Mazda",
+      "model": "929",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:atenza",
+      "make": "Mazda",
+      "model": "Atenza",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:axela",
+      "make": "Mazda",
+      "model": "Axela",
+      "aliases": [
+        "Axela"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "Sedan",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/axela",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Axela"
+      }
+    },
+    {
+      "key": "mazda:azoffroad",
+      "make": "Mazda",
+      "model": "AZ-Offroad",
+      "aliases": [
+        "AZ-OFFROAD",
+        "AZ-オフロード"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/az-offroad",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "AZ-Offroad"
+      }
+    },
+    {
+      "key": "mazda:b2000",
+      "make": "Mazda",
+      "model": "B2000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:b2600",
+      "make": "Mazda",
+      "model": "B2600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:b3000",
+      "make": "Mazda",
+      "model": "B3000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:b3000ffv",
+      "make": "Mazda",
+      "model": "B3000 Ffv",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:b4000",
+      "make": "Mazda",
+      "model": "B4000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:biante",
+      "make": "Mazda",
+      "model": "Biante",
+      "aliases": [
+        "ビアンテ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/biante",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Biante"
+      }
+    },
+    {
+      "key": "mazda:bongo",
+      "make": "Mazda",
+      "model": "Bongo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:bongovan",
+      "make": "Mazda",
+      "model": "BONGO VAN",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/bongo-van",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "BONGO VAN"
+      }
+    },
+    {
+      "key": "mazda:bt50",
+      "make": "Mazda",
+      "model": "BT50",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:capella",
+      "make": "Mazda",
+      "model": "Capella",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:carol",
+      "make": "Mazda",
+      "model": "CAROL",
+      "aliases": [
+        "キャロル"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/carol",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CAROL"
+      }
+    },
+    {
+      "key": "mazda:cosmo",
+      "make": "Mazda",
+      "model": "Cosmo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:cronos",
+      "make": "Mazda",
+      "model": "Cronos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:cx3",
+      "make": "Mazda",
+      "model": "CX-3",
+      "aliases": [
+        "CX-3",
+        "MAZDA CX-3"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-3",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-3"
+      }
+    },
+    {
+      "key": "mazda:cx30",
+      "make": "Mazda",
+      "model": "CX-30",
+      "aliases": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-30",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-30"
+      }
+    },
+    {
+      "key": "mazda:cx5",
+      "make": "Mazda",
+      "model": "CX-5",
+      "aliases": [
+        "CX 5",
+        "MAZDA CX 5"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-5",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-5"
+      }
+    },
+    {
+      "key": "mazda:cx50",
+      "make": "Mazda",
+      "model": "CX-50",
+      "aliases": [
+        "Mazda CX-50"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-50",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-50"
+      }
+    },
+    {
+      "key": "mazda:cx60",
+      "make": "Mazda",
+      "model": "CX-60",
+      "aliases": [
+        "CX-60",
+        "MAZDA CX-60"
+      ],
+      "bodyTypes": [
+        "Crossover SUV",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": 2022,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-60",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-60"
+      }
+    },
+    {
+      "key": "mazda:cx6e",
+      "make": "Mazda",
+      "model": "CX-6e",
+      "aliases": [
+        "CX-6E"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-6e",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-6e"
+      }
+    },
+    {
+      "key": "mazda:cx7",
+      "make": "Mazda",
+      "model": "CX-7",
+      "aliases": [
+        "MAZDA CX-7"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-7",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-7"
+      }
+    },
+    {
+      "key": "mazda:cx70",
+      "make": "Mazda",
+      "model": "CX-70",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:cx8",
+      "make": "Mazda",
+      "model": "CX-8",
+      "aliases": [
+        "CX-8"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-8",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-8"
+      }
+    },
+    {
+      "key": "mazda:cx80",
+      "make": "Mazda",
+      "model": "CX-80",
+      "aliases": [
+        "MAZDA CX-80",
+        "MAZDA CX80"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-80",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-80"
+      }
+    },
+    {
+      "key": "mazda:cx9",
+      "make": "Mazda",
+      "model": "CX-9",
+      "aliases": [
+        "CX 9",
+        "MAZDA CX-9"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/cx-9",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "CX-9"
+      }
+    },
+    {
+      "key": "mazda:cx90",
+      "make": "Mazda",
+      "model": "CX-90",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:demio",
+      "make": "Mazda",
+      "model": "Demio",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mazda2",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Mazda2"
+      }
+    },
+    {
+      "key": "mazda:eseries",
+      "make": "Mazda",
+      "model": "E Series",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:eunos",
+      "make": "Mazda",
+      "model": "Eunos",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:familia",
+      "make": "Mazda",
+      "model": "Familia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:familiavan",
+      "make": "Mazda",
+      "model": "FAMILIA VAN",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/familia-van",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "FAMILIA VAN"
+      }
+    },
+    {
+      "key": "mazda:flair",
+      "make": "Mazda",
+      "model": "FLAIR",
+      "aliases": [
+        "フレア"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/flair",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "FLAIR"
+      }
+    },
+    {
+      "key": "mazda:flaircrossover",
+      "make": "Mazda",
+      "model": "FLAIR CROSSOVER",
+      "aliases": [
+        "フレア クロスオーバー"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/flair-crossover",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "FLAIR CROSSOVER"
+      }
+    },
+    {
+      "key": "mazda:flairwagon",
+      "make": "Mazda",
+      "model": "FLAIR WAGON",
+      "aliases": [
+        "フレア ワゴン"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/flair-wagon",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "FLAIR WAGON"
+      }
+    },
+    {
+      "key": "mazda:glc",
+      "make": "Mazda",
+      "model": "GLC",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:mazda2",
+      "make": "Mazda",
+      "model": "Mazda2",
+      "aliases": [
+        "MAZDA2",
+        "Mazda 2",
+        "マツダ2",
+        "マツダ ツー",
+        "Demio",
+        "デミオ",
+        "2",
+        "2 100TH ANNIVERSARY ED MHEV",
+        "2 GT SPORT NAV MHEV",
+        "2 HYBRID",
+        "2 SE-L MHEV",
+        "2 SE-L NAV MHEV",
+        "2 SPORT NAV AUTO",
+        "2 SPORT NAV MHEV",
+        "MAZDA 2"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mazda2",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Mazda2"
+      }
+    },
+    {
+      "key": "mazda:mazda3",
+      "make": "Mazda",
+      "model": "MAZDA3",
+      "aliases": [
+        "3",
+        "3 100TH ANNIVERSARY ED MHEV",
+        "3 5-DOOR",
+        "3 GT SPORT MHEV",
+        "3 GT SPORT MHEV AUTO",
+        "3 GT SPORT TECH MHEV",
+        "3 GT SPORT TECH MHEV 4X4",
+        "3 GT SPORT TECH MHEV 4X4 AUTO",
+        "3 GT SPORT TECH MHEV AUTO",
+        "3 SE-L LUX MHEV",
+        "3 SE-L LUX MHEV AUTO",
+        "3 SE-L MHEV",
+        "3 SE-L MHEV AUTO",
+        "3 SPORT LUX D",
+        "3 SPORT LUX MHEV",
+        "3 SPORT LUX MHEV AUTO",
+        "3 SPORT MHEV",
+        "3 SPORT MHEV AUTO",
+        "MAZDA 3",
+        "アクセラ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mazda3",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "MAZDA3"
+      }
+    },
+    {
+      "key": "mazda:mazda5",
+      "make": "Mazda",
+      "model": "MAZDA5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:mazda6",
+      "make": "Mazda",
+      "model": "MAZDA6",
+      "aliases": [
+        "6",
+        "6 100TH ANNIVERSARY EDITION A",
+        "6 GT SPORT NAV + AUTO",
+        "6 GT SPORT NAV + D",
+        "6 GT SPORT NAV + D AUTO",
+        "6 SE-L LUX NAV +",
+        "6 SE-L LUX NAV + D",
+        "6 SE-L NAV +",
+        "6 SE-L NAV + AUTO",
+        "6 SE-L NAV + D",
+        "6 SE-L NAV + D AUTO",
+        "6 SPORT NAV +",
+        "6 SPORT NAV + D",
+        "6 SPORT NAV + D AUTO",
+        "MAZDA 6",
+        "アテンザ"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mazda6",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "MAZDA6"
+      }
+    },
+    {
+      "key": "mazda:mazda6e",
+      "make": "Mazda",
+      "model": "Mazda6e",
+      "aliases": [
+        "6E",
+        "MAZDA 6E"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:millenia",
+      "make": "Mazda",
+      "model": "Millenia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:mpv",
+      "make": "Mazda",
+      "model": "MPV",
+      "aliases": [
+        "MPV"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mpv",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "MPV"
+      }
+    },
+    {
+      "key": "mazda:mx3",
+      "make": "Mazda",
+      "model": "MX-3",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mx-3",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "MX-3"
+      }
+    },
+    {
+      "key": "mazda:mx30",
+      "make": "Mazda",
+      "model": "MX-30",
+      "aliases": [
+        "MX-30",
+        "MAZDA MX-30"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mx-30",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "MX-30"
+      }
+    },
+    {
+      "key": "mazda:mx5",
+      "make": "Mazda",
+      "model": "MX-5",
+      "aliases": [
+        "Mazda MX-5",
+        "MAZDA MX-5",
+        "MAZDA MX5",
+        "MX 5",
+        "MX5",
+        "MAZDA ROADSTER",
+        "ロードスター"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/mx-5",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "MX-5"
+      }
+    },
+    {
+      "key": "mazda:mx6",
+      "make": "Mazda",
+      "model": "MX-6",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:navajo",
+      "make": "Mazda",
+      "model": "Navajo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:persona",
+      "make": "Mazda",
+      "model": "Persona",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:premacy",
+      "make": "Mazda",
+      "model": "Premacy",
+      "aliases": [
+        "プレマシー"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/premacy",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Premacy"
+      }
+    },
+    {
+      "key": "mazda:protege",
+      "make": "Mazda",
+      "model": "Protege",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:roadster",
+      "make": "Mazda",
+      "model": "Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:rx2",
+      "make": "Mazda",
+      "model": "RX-2",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:rx3",
+      "make": "Mazda",
+      "model": "RX-3",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:rx4",
+      "make": "Mazda",
+      "model": "RX-4",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:rx7",
+      "make": "Mazda",
+      "model": "RX-7",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:rx8",
+      "make": "Mazda",
+      "model": "RX-8",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:scrum",
+      "make": "Mazda",
+      "model": "Scrum",
+      "aliases": [
+        "スクラム"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/scrum",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Scrum"
+      }
+    },
+    {
+      "key": "mazda:scrumvan",
+      "make": "Mazda",
+      "model": "SCRUM VAN",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/scrum-van",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "SCRUM VAN"
+      }
+    },
+    {
+      "key": "mazda:scrumwagon",
+      "make": "Mazda",
+      "model": "SCRUM WAGON",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/scrum-wagon",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "SCRUM WAGON"
+      }
+    },
+    {
+      "key": "mazda:sentia",
+      "make": "Mazda",
+      "model": "Sentia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:tribute",
+      "make": "Mazda",
+      "model": "Tribute",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:verisa",
+      "make": "Mazda",
+      "model": "Verisa",
+      "aliases": [
+        "ベリーサ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": "mazda/verisa",
+        "canonicalMake": "Mazda",
+        "canonicalModel": "Verisa"
+      }
+    },
+    {
+      "key": "mazda:xedos",
+      "make": "Mazda",
+      "model": "Xedos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:xedos6",
+      "make": "Mazda",
+      "model": "Xedos 6",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mazda:xedos9",
+      "make": "Mazda",
+      "model": "Xedos 9",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mazda",
+        "modelId": null,
+        "canonicalMake": "Mazda",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mcc:smart",
+      "make": "Mcc",
+      "model": "Smart",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "mclaren:540c",
+      "make": "McLaren",
+      "model": "540C",
+      "aliases": [
+        "540C COUPE S-A",
+        "MCLAREN 540C COUPE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/540c",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "540C"
+      }
+    },
+    {
+      "key": "mclaren:570gt",
+      "make": "McLaren",
+      "model": "570GT",
+      "aliases": [
+        "570GT COUPE S-A"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/570gt",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "570GT"
+      }
+    },
+    {
+      "key": "mclaren:570s",
+      "make": "McLaren",
+      "model": "570S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/570s",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "570S"
+      }
+    },
+    {
+      "key": "mclaren:600lt",
+      "make": "McLaren",
+      "model": "600LT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/600lt",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "600LT"
+      }
+    },
+    {
+      "key": "mclaren:620r",
+      "make": "McLaren",
+      "model": "620R",
+      "aliases": [
+        "620R COUPE",
+        "620R V8 S-A",
+        "MCLAREN 620R COUPE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/620r",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "620R"
+      }
+    },
+    {
+      "key": "mclaren:650s",
+      "make": "McLaren",
+      "model": "650S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": null,
+        "canonicalMake": "McLaren",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mclaren:650sspider",
+      "make": "McLaren",
+      "model": "650S Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": null,
+        "canonicalMake": "McLaren",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mclaren:675lt",
+      "make": "McLaren",
+      "model": "675LT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": null,
+        "canonicalMake": "McLaren",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mclaren:720s",
+      "make": "McLaren",
+      "model": "720S",
+      "aliases": [
+        "MCLAREN 720S"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/720s",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "720S"
+      }
+    },
+    {
+      "key": "mclaren:750s",
+      "make": "McLaren",
+      "model": "750S",
+      "aliases": [
+        "MCLAREN 750S"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/750s",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "750S"
+      }
+    },
+    {
+      "key": "mclaren:750sspider",
+      "make": "McLaren",
+      "model": "750S Spider",
+      "aliases": [
+        "750S SPIDER",
+        "MCLAREN 750S SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/750s-spider",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "750S Spider"
+      }
+    },
+    {
+      "key": "mclaren:765lt",
+      "make": "McLaren",
+      "model": "765LT",
+      "aliases": [
+        "MCLAREN 765LT"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/765lt",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "765LT"
+      }
+    },
+    {
+      "key": "mclaren:765ltspider",
+      "make": "McLaren",
+      "model": "765LT Spider",
+      "aliases": [
+        "765LT SPIDER",
+        "MCLAREN 765 LT SPIDER",
+        "MCLAREN 765LT SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/765lt-spider",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "765LT Spider"
+      }
+    },
+    {
+      "key": "mclaren:artura",
+      "make": "McLaren",
+      "model": "Artura",
+      "aliases": [
+        "ARTURA",
+        "MCLAREN ARTURA",
+        "McLaren Artura"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/artura",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "Artura"
+      }
+    },
+    {
+      "key": "mclaren:arturaspider",
+      "make": "McLaren",
+      "model": "Artura Spider",
+      "aliases": [
+        "ARTURA SPIDER",
+        "MCLAREN ARTURA SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/artura-spider",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "Artura Spider"
+      }
+    },
+    {
+      "key": "mclaren:gt",
+      "make": "McLaren",
+      "model": "GT",
+      "aliases": [
+        "MCLAREN GT"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/gt",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "GT"
+      }
+    },
+    {
+      "key": "mclaren:gts",
+      "make": "McLaren",
+      "model": "Gts",
+      "aliases": [
+        "GTS",
+        "MCLAREN GTS"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/gts",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "Gts"
+      }
+    },
+    {
+      "key": "mclaren:mp4",
+      "make": "McLaren",
+      "model": "MP4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": null,
+        "canonicalMake": "McLaren",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mclaren:mp412c",
+      "make": "McLaren",
+      "model": "MP4-12C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": null,
+        "canonicalMake": "McLaren",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mclaren:p1",
+      "make": "McLaren",
+      "model": "P1",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": null,
+        "canonicalMake": "McLaren",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mclaren:senna",
+      "make": "McLaren",
+      "model": "Senna",
+      "aliases": [
+        "MCLAREN SENNA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/senna",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "Senna"
+      }
+    },
+    {
+      "key": "mclaren:speedtail",
+      "make": "McLaren",
+      "model": "Speedtail",
+      "aliases": [
+        "MCLAREN SPEEDTAIL"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mclaren",
+        "modelId": "mclaren/speedtail",
+        "canonicalMake": "McLaren",
+        "canonicalModel": "Speedtail"
+      }
+    },
+    {
+      "key": "mercedesbenz:1045turismofunerario",
+      "make": "Mercedes-Benz",
+      "model": "1045 Turismo Funerario",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:108",
+      "make": "Mercedes-Benz",
+      "model": "108",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:108d",
+      "make": "Mercedes-Benz",
+      "model": "108 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:109d",
+      "make": "Mercedes-Benz",
+      "model": "109 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:110",
+      "make": "Mercedes-Benz",
+      "model": "110",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:110d",
+      "make": "Mercedes-Benz",
+      "model": "110 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:111",
+      "make": "Mercedes-Benz",
+      "model": "111",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:1113",
+      "make": "Mercedes-Benz",
+      "model": "1113",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:112",
+      "make": "Mercedes-Benz",
+      "model": "112",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:113",
+      "make": "Mercedes-Benz",
+      "model": "113",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:116",
+      "make": "Mercedes-Benz",
+      "model": "116",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:120",
+      "make": "Mercedes-Benz",
+      "model": "120",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:123",
+      "make": "Mercedes-Benz",
+      "model": "123",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    }
+  ]
+}

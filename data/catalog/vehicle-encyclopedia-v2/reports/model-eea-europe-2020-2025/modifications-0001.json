@@ -1,0 +1,7138 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-c44a884af60533b56766",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 107,
+      "commercialNames": [
+        "500",
+        "500 / 1.4 / 595",
+        "500 14 16V TURBO",
+        "500 ABARTH",
+        "500 C ABARTH",
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2507,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3cc3908b50dfb0d0da0",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 121,
+      "commercialNames": [
+        "500",
+        "500 / 1.4 / 595 TURISMO",
+        "500 / 1.4 / MONZA",
+        "500 /1.4/ ABARTH",
+        "500 /14/ ABARTH",
+        "500 14 595 TURISMO",
+        "500 ABARTH",
+        "500 C ABARTH",
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 3773,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b99307c61d01245e4635",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 132,
+      "commercialNames": [
+        "500",
+        "500 / 1.4 / 595 COMPETIZIONE",
+        "500 /1.4/ ABARTH MONZA",
+        "500 /14/ ABARTH CABRIO",
+        "500 /14/ ABARTH MONZA",
+        "500 14 595 COMPETIZIONE",
+        "500 14 595 COMPETIZIONE CA",
+        "500 ABARTH",
+        "500 C ABARTH",
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 3303,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31add846c1d3af3105b7",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 99,
+      "commercialNames": [
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d10a366d3bca745a462",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 118,
+      "commercialNames": [
+        "500 ABARTH",
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc356733ffb84c1e3e42",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 120,
+      "commercialNames": [
+        "500",
+        "500 ABARTH",
+        "ABARTH 500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 434,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee67b616ca2e4d6fd40d",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b527077e75433a0946d",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 47,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 100,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-155647bb5f65965efa45",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2195,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad14b33d31f1eecc037b",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2864,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b8d38828c0116444f65",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 43,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 36,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f083f76f6b88653eef69",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500",
+      "modelId": "abarth/500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "500"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-539a5993c38a259c90c1",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "500e",
+      "modelId": "abarth/500e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "500E"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39cf6a9a13b0f3e58fa1",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "595",
+      "modelId": "abarth/595",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "595",
+        "595 COMPETIZIONE",
+        "595 COMPETIZIONE S-A",
+        "595 ESSEESSE",
+        "595 MONSTER YAMAHA",
+        "595 PISTA",
+        "595 PISTA 70TH ANNIVERSARY",
+        "595 PISTA 70TH ANNIVERSARY S-A",
+        "595 SCORPIONEORO",
+        "595 TROFEO",
+        "595 TURISMO",
+        "595 TURISMO S-A"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 3882,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ae0643119b11a37223a",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "600E",
+      "modelId": "abarth/600e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "600E"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 179,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3397e7c0ad290ce2cdb3",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "600E",
+      "modelId": "abarth/600e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 207,
+      "commercialNames": [
+        "600E"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 354,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08f9516502be55b41508",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "600E",
+      "modelId": "abarth/600e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "600E"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d7d991ddc24b23fc175",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "600E",
+      "modelId": "abarth/600e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "600E"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dbef011418422cb7132",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "600E",
+      "modelId": "abarth/600e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 208,
+      "commercialNames": [
+        "600E"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19d7d8a6b4b160b1f9eb",
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "canonicalModel": "695",
+      "modelId": "abarth/695",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "695 70TH ANNIVERSARY",
+        "695 ANNIVERSARY"
+      ],
+      "sourceMakeNames": [
+        "ABARTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 96,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f4ca7fd882984dc4f28",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Mdx",
+      "modelId": "acura/mdx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3000,
+      "powerKw": 239,
+      "commercialNames": [
+        "MDX SPORT HYBRID SH-AWD"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d7a4c0c5f9f27f28b0b",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Mdx",
+      "modelId": "acura/mdx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3664,
+      "powerKw": 224,
+      "commercialNames": [
+        "MDX"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-396ed1daceeab9bf48cd",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Mdx",
+      "modelId": "acura/mdx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3741,
+      "powerKw": 22,
+      "commercialNames": [
+        "MDX"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4bc43a5e5c5c193c50d",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Rdx",
+      "modelId": "acura/rdx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 200,
+      "commercialNames": [
+        "RDX"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afd53555cb6185bbea62",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Tlx",
+      "modelId": "acura/tlx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2997,
+      "powerKw": 265,
+      "commercialNames": [
+        "TLX"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7aaa17a6a13c7c5d0338",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Tlx Type S",
+      "modelId": "acura/tlx-type-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2997,
+      "powerKw": 265,
+      "commercialNames": [
+        "TLX TYPE S AWD"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-602d2d4fea9770657e9e",
+      "brandId": "acura",
+      "brand": "Acura",
+      "canonicalModel": "Tsx",
+      "modelId": "acura/tsx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2354,
+      "powerKw": 147,
+      "commercialNames": [
+        "TSX"
+      ],
+      "sourceMakeNames": [
+        "ACURA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e9204bad28efa600255",
+      "brandId": "aion",
+      "brand": "AION",
+      "canonicalModel": "V",
+      "modelId": "aion/v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 45,
+      "commercialNames": [
+        "AION V"
+      ],
+      "sourceMakeNames": [
+        "AION"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34964206258b5589f850",
+      "brandId": "aion",
+      "brand": "AION",
+      "canonicalModel": "V",
+      "modelId": "aion/v",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "AION V"
+      ],
+      "sourceMakeNames": [
+        "AION"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 102,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c7b46e3588e0245844b",
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "canonicalModel": "U5",
+      "modelId": "aiways/u5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "U5"
+      ],
+      "sourceMakeNames": [
+        "AIWAYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 605,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c914dd258284b941a3a",
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "canonicalModel": "U5",
+      "modelId": "aiways/u5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "U5",
+        "U5 / /"
+      ],
+      "sourceMakeNames": [
+        "AIWAYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2384,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0388d5931ba53a99af3",
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "canonicalModel": "U5",
+      "modelId": "aiways/u5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "AIWAYS U5",
+        "U5"
+      ],
+      "sourceMakeNames": [
+        "AIWAYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 93,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f9efdb62ab75dcda853",
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "canonicalModel": "U5",
+      "modelId": "aiways/u5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "U5"
+      ],
+      "sourceMakeNames": [
+        "AIWAYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2977,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8720e8557f8e2140b91",
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "canonicalModel": "U5",
+      "modelId": "aiways/u5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "U5"
+      ],
+      "sourceMakeNames": [
+        "AIWAYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ad12acf61d96125e669",
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "canonicalModel": "U5",
+      "modelId": "aiways/u5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 1506,
+      "commercialNames": [
+        "U5"
+      ],
+      "sourceMakeNames": [
+        "AIWAYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b2ffe0521e41e5d7d65",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "4C",
+      "modelId": "alfa-romeo/4c",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1742,
+      "powerKw": 177,
+      "commercialNames": [
+        "4C"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11a49a12b6110f751bcb",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "33",
+      "modelId": "alfa-romeo/33",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 463,
+      "commercialNames": [
+        "ALFA ROMEO 33 STRADALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6e249c61fb14d1d1e24",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "147",
+      "modelId": "alfa-romeo/147",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1910,
+      "powerKw": 88,
+      "commercialNames": [
+        "147"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e1b6d031b7f4623719c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "159",
+      "modelId": "alfa-romeo/159",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1910,
+      "powerKw": 88,
+      "commercialNames": [
+        "ALFA ROMEO 159"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be9e428a462e06244114",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "159",
+      "modelId": "alfa-romeo/159",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1910,
+      "powerKw": 110,
+      "commercialNames": [
+        "ALFA ROMEO 159"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea17b8b28179cf61ebf3",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "159",
+      "modelId": "alfa-romeo/159",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1910,
+      "powerKw": 85,
+      "commercialNames": [
+        "159"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8403e48c61a07682f940",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 148,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72ccdd5d601be53a70ec",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA LUSSO TI TD AUTO",
+        "GIULIA SPECIALE TD AUTO",
+        "GIULIA SPRINT TD AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-acb790c9a4ca0b6e86e5",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 100,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 788,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-686307a97c95291f73d4",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 110,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72bccb42652a3bbd84d8",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 118,
+      "commercialNames": [
+        "GIULIA",
+        "Giulia",
+        "GIULIA / 2.2 / MULTIJET CA",
+        "GIULIA 22 MULTIJET CA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO",
+        "Alfa Romeo"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 8509,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7575fd42de63f6ca2ec",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 132,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7204bb3f8d178944b00",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 140,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA, GIULIA QUADRIFOGLIO",
+        "GIULIA. GIULIA QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4625,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a678072aab9da818b69",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 155,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1618,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd3423e283f90b637a5a",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA NERO EDIZIONE TB AUTO",
+        "GIULIA SPRINT TB AUTO",
+        "GIULIA VELOCE TB AUTO",
+        "GIULIA VELOCE TI TB AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1115,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-968d70e9d210383c6764",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3702968557e68e2d5894",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 148,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA, GIULIA QUADRIFOGLIO",
+        "GIULIA. GIULIA QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 5647,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ebe4f42154a78649cbb",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 184,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44ff36aa46460a9ae21c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 206,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA / 2.0 /",
+        "GIULIA / 2.0 / TB CA",
+        "GIULIA / 20 /",
+        "GIULIA 2.0",
+        "GIULIA GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA, GIULIA QUADRIFOGLIO",
+        "GIULIA. GIULIA QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 11065,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e53a451ae77053143535",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA QUADRIFOGLIO VERDE",
+        "GIULIA V6 BIT Q-RFOGLIO ARR A",
+        "GIULIA V6 BITURBO Q-RIFOGLIO A"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 461,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34a8847398d07852a09c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": 375,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA / 2.9 / V6 QUADRIFOGLIO",
+        "GIULIA GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO GIULIA",
+        "Giulia Quadrifoglio Verde",
+        "GIULIA, GIULIA QUADRIFOGLIO",
+        "GIULIA. GIULIA QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 2376,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d82d36c7466db6a6c1a1",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": 383,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO \"ALFA ROMEO RACING\"",
+        "GIULIA QUADRIFOGLIO \"ALFA ROMEO RACING\"\"\""
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-938e24107f510c2bdd52",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 154,
+      "commercialNames": [
+        "GIULIA",
+        "Giulia",
+        "GIULIA / 2.2 /",
+        "GIULIA / 2.2 / MULTIJET CA",
+        "GIULIA / 22 /",
+        "GIULIA 22JTDQ4",
+        "GIULIA GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA, GIULIA QUADRIFOGLIO",
+        "GIULIA. GIULIA QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 3154,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ab68e943bf4cef104a4",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": 397,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA GTA",
+        "GIULIA GTAM",
+        "GIULIA GTAm",
+        "GIULIA QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 353,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ed44fcb3f26e8818dbd",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 206,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b917dd54f2dc04b2be63",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 116,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f75533f47fb7f445254",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a970de17ab8f9350eb54",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 69,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4ca57b307da9c32f487",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd9ffcff109a5092ef6e",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 90,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95c5ab7d93d6a4219765",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-730f4585fbb0e931e29d",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdb8f8184eb217b9fe84",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 121,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cac5464c1566ccf5e06d",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 155,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3587951e722e89ac4dd2",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2891,
+      "powerKw": 382,
+      "commercialNames": [
+        "GIULIA",
+        "GIULIA 2.9",
+        "GIULIA QUADRIFOGLIO",
+        "GIULIA QUADRIFOGLIO VERD",
+        "GIULIA QUADRIFOGLIO VERDE",
+        "GIULIA QUADRIFOGLIO VERGDE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1040,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ee650e5bf380a5e874d",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2861,
+      "powerKw": 382,
+      "commercialNames": [
+        "GIULIA QUADRIFOGLIO VERDE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99018840a929d01f571f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1995,
+      "powerKw": 206,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e32a74e54457d136a9e",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 382,
+      "commercialNames": [
+        "GIULIA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf791ffc619df65ce6db",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia Super",
+      "modelId": "alfa-romeo/giulia-super",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIA SUPER TD AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 82,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-855e0116008381287d4f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulia Super",
+      "modelId": "alfa-romeo/giulia-super",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIA SUPER TB AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 66,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a762dd1b50d398b7eb29",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIETTA SPECIALE JTDM-2",
+        "GIULIETTA SPORT JTDM-2",
+        "GIULIETTA SUPER JTDM-2",
+        "GIULIETTA SUPER JTDM-2 S-A"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 152,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-780597d17a6d1de5e6dc",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "ALFA GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-681bd0e152252e0606e0",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "ALFA GIULIETTA",
+        "ALFA ROMEO GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80b6227d5030e6d49421",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "ALFA GIULIETTA",
+        "GIULIETTA",
+        "GIULIETTA 16 JTD"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 11536,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56b6b5d446d64f786c10",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIETTA VELOCE JTDM-2 S-A"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3aa347a6f636f6cf2e2c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 110,
+      "commercialNames": [
+        "ALFA GIULIETTA",
+        "GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe5a9421b3a508789d4a",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "commercialNames": [
+        "ALFA GIULIETTA",
+        "GIULIETTA",
+        "GIULIETTA 20 JTD TCT"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1143,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e5f2db57316124f5bd9",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIETTA SPECIALE TB",
+        "GIULIETTA SPORT TB",
+        "GIULIETTA SUPER TB",
+        "GIULIETTA TB"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 218,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d94d5804847ae8e1171",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 88,
+      "commercialNames": [
+        "Alfa Giulietta",
+        "ALFA GIULIETTA",
+        "GIULIETTA",
+        "GIULIETTA 14"
+      ],
+      "sourceMakeNames": [
+        "Alfa Romeo",
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 12943,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f3d2d1b79c296d88ec9",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "commercialNames": [
+        "GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a49e037502963515195",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1742,
+      "powerKw": 177,
+      "commercialNames": [
+        "ALFA GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d7dd382c3303237391b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2143,
+      "powerKw": 88,
+      "commercialNames": [
+        "GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d28467414a36525f063",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta",
+      "modelId": "alfa-romeo/giulietta",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1742,
+      "powerKw": 173,
+      "commercialNames": [
+        "ALFA GIULIETTA"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2dcc380ae503fc55f67c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta Sprint",
+      "modelId": "alfa-romeo/giulietta-sprint",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIETTA SPRINT JTDM-2",
+        "GIULIETTA SPRINT JTDM-2 S-A"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45f7c85f032762afc338",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Giulietta Sprint",
+      "modelId": "alfa-romeo/giulietta-sprint",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "GIULIETTA SPRINT TB"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 448,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-704d2145ad39c0086cdf",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "GTV",
+      "modelId": "alfa-romeo/gtv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3179,
+      "powerKw": 177,
+      "commercialNames": [
+        "ALFA ROMEO GTV"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50d4d7a9a7d14c453e6b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 239,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe16a2977a8184fbcb8e",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR",
+        "JUNIOR E"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 123,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a3df423db3ec5677cfe",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 4579,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9ceea1363dd8e6475db",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 207,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 543,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a984150f71b79b72b9a6",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR",
+        "JUNIOR 1.2"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 30204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c5d8c9220211342e4b0",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 73,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8112452e7b538860eb73",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 46,
+      "commercialNames": [
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a53dba8ef47751e988f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1f24b323f1af1cffda2",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df2e57709b2c417ec5f5",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR",
+        "JUNIOR E"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 59,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-790873eaaf45728e5aad",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Junior",
+      "modelId": "alfa-romeo/junior",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "ALFA ROMEO JUNIOR",
+        "JUNIOR"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 587,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dea83d858401d133eb9f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Spider",
+      "modelId": "alfa-romeo/spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1962,
+      "powerKw": 93,
+      "commercialNames": [
+        "SPIDER"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93f00a09c0172adbda08",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Spider",
+      "modelId": "alfa-romeo/spider",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1962,
+      "powerKw": 90,
+      "commercialNames": [
+        "SPIDER"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1512fecf4dfc197a452",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 206,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4db23da9affa465cdf06",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": null,
+      "commercialNames": [
+        "STELVIO",
+        "STELVIO LUSSO TI TD AWD AUTO",
+        "STELVIO MILANO ED TD AWD AUTO",
+        "STELVIO NERO EDIZIONE TD AWD A",
+        "STELVIO SPECIALE TD AWD AUTO",
+        "STELVIO SPRINT TD AWD AUTO",
+        "STELVIO SUPER TB AWD AUTO",
+        "STELVIO SUPER TD AWD AUTO",
+        "STELVIO TI TD AWD AUTO",
+        "STELVIO VELOCE TD AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 303,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c647ae4f1cf993b509af",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 118,
+      "commercialNames": [
+        "STELVIO",
+        "STELVIO / 2.2 / JTDM CA RWD SW",
+        "STELVIO / 22 / JTDM CA RWD SW",
+        "STELVIO 2.2",
+        "STELVIO 22 JTDM CA RWD SW",
+        "STELVIO VAN"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 14526,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0f603a771b10b81a447",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 140,
+      "commercialNames": [
+        "ALFA ROMEO STELVIO",
+        "STELVIO",
+        "STELVIO / 2.2 / JTDM CA AWD SW",
+        "STELVIO 22 JTDM CA AWD SW",
+        "STELVIO 22 JTDM CA RWD SW"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 25831,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb88956736082d0e3dec",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 154,
+      "commercialNames": [
+        "ALFA ROMEO STELVIO",
+        "STELVIO",
+        "STELVIO / 2.2 /",
+        "STELVIO / 2.2 / JTDM CA AWD SW",
+        "STELVIO / 22 / JTDM CA AWD SW",
+        "STELVIO 2.2",
+        "STELVIO 22 JTDM CA AWD SW",
+        "STELVIO QUADRIFOGLIO",
+        "STELVIO, STELVIO QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 37249,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e616c58db27197d7eef2",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1955,
+      "powerKw": null,
+      "commercialNames": [
+        "STELVIO MILANO ED TB AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-953975489526980610ab",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "STELVIO",
+        "STELVIO LUSSO TI TB AWD AUTO",
+        "STELVIO MILANO ED TB AWD AUTO",
+        "STELVIO NERO EDIZIONE TB AWD A",
+        "STELVIO SPECIALE TB AWD AUTO",
+        "STELVIO SPRINT TB AWD AUTO",
+        "STELVIO SUPER TB AWD AUTO",
+        "STELVIO TI TB AWD AUTO",
+        "STELVIO VELOCE TB AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 1363,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b950d1f8d58cacca79b0",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d231d10eda3906ed6e7",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 148,
+      "commercialNames": [
+        "STELVIO",
+        "Stelvio",
+        "STELVIO / 2.0 / TURBO CA AWD SW",
+        "STELVIO 20 TURBO CA AWD SW"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO",
+        "Alfa Romeo"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 7845,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d8ab72cabfb999809fc",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 184,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 51,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8c551c4b0392adea720",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 206,
+      "commercialNames": [
+        "ALFA ROMEO STELVIO",
+        "STELVIO",
+        "Stelvio",
+        "STELVIO / 2.0 /",
+        "STELVIO / 2.0 / CA AWD SW",
+        "STELVIO / 2.0 / TURBO CA AWD SW",
+        "STELVIO / 20 / CA AWD SW",
+        "STELVIO / 20 / TURBO CA AWD SW",
+        "STELVIO 2.0",
+        "STELVIO 2.0 CA AWD SW",
+        "STELVIO 20 TURBO CA AWD SW"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 18145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f72b03241c86920eee3",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": null,
+      "commercialNames": [
+        "STELVIO QUADRIFOGLIO",
+        "STELVIO V6 BT Q-RIFOGLIO AWD A",
+        "STELVIO V6 BT QFGLO ARR AWD A",
+        "STELVIO V6 BT QFGLO NRNG AWD A"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 281,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c55d21ec73ea89cb046e",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": 375,
+      "commercialNames": [
+        "STELVIO",
+        "STELVIO / 29 / V6 QUADRIFOGLIO AWD",
+        "Stelvio Quadrifoglio",
+        "STELVIO QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO",
+        "Alfa Romeo"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 3288,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fe630d029de7b90bc02",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2891,
+      "powerKw": 383,
+      "commercialNames": [
+        "STELVIO",
+        "STELVIO QUADRIFOGLIO \" RACING\"",
+        "STELVIO QUADRIFOGLIO \" RACING\"\"\"",
+        "STELVIO QUADRIFOGLIO \"ALFA ROMEO RACING\"",
+        "STELVIO QUADRIFOGLIO \"ALFA ROMEO RACING\"\"\""
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc4c024b868e0c1c73f9",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 132,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a19d27211b5a4c301e85",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 67,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59b842d1b3a37cd7e797",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 75,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb3ac5ca9db3d86e08bb",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 84,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0679d629624881b070d",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 110,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5026e413b8b8b7f84760",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 170,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30856f5ff40d899bf8cc",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 13,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f71ff106a1e003d252b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 49,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f27fe31617eafcd50592",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbf37d310285799e8208",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bcb3ec1c1aa5341c425",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37fdcdb74cff0e606736",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-557e9b0be8d982b6e3d0",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c2b7232e8d88d6b5221",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71e2d4c16aea0b8cc347",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3ea9db2c78e0bd31766",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfd163655f4f21c1f5f4",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c15ab70898d18ce604b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 137,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c54bcaa4df1e092f4871",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 145,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-883d618c387e9afbf164",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 185,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d73c86f76b98e503beba",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 210,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d685067a7438f7376ed",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 270,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98b4c9d6988ec49dfe2c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 280,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4aa7645967269ceac185",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 320,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe276e8dc4f221599998",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2891,
+      "powerKw": 67,
+      "commercialNames": [
+        "STELVIO QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59432cd1358ca8cda1f2",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2891,
+      "powerKw": 382,
+      "commercialNames": [
+        "STELVIO",
+        "STELVIO / 2.9 /",
+        "STELVIO 2.9",
+        "STELVIO QUADRIFOGLIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef6db5e2eb510309d74f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Stelvio",
+      "modelId": "alfa-romeo/stelvio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2143,
+      "powerKw": 85,
+      "commercialNames": [
+        "STELVIO"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2287b2d8de41bd0ec7b8",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfd582112ae3e99ad391",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1469,
+      "powerKw": 117,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fed5fab4b5e84f76d6f1",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "TONALE",
+        "TONALE / 1.6 / MULTIJET",
+        "TONALE / 16 / MULTIJET",
+        "TONALE 1.6",
+        "TONALE 1.6 MULTIJET"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 25373,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea7f285be9ce96f1a272",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 116,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85816cbb16df151cbf8b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "ALFA ROMEO TONALE",
+        "TONALE",
+        "TONALE / 1.5 / MILD HYBRID",
+        "TONALE / 15 / MILD HYBRID"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 17633,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e752ec820ab576465c2c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1469,
+      "powerKw": 117,
+      "commercialNames": [
+        "TONALE",
+        "TONALE / 1.5 / MILD HYBRID",
+        "TONALE / 15 / MILD HYBRID",
+        "TONALE 1.5",
+        "TONALE 1.5 MILD HYBRID"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 22317,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52d4715bfccc0fe168c1",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "TONALE PS002",
+        "TONALE VP391"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dcad812a7ce96e3b317",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "TONALE",
+        "TONALE / 1.3 /",
+        "TONALE / 1.3 / PHEV",
+        "TONALE / 13 /",
+        "TONALE / 13 / PHEV",
+        "TONALE 1.3",
+        "TONALE-VELOCE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 10531,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9683db96b02db9b0c2aa",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1469,
+      "powerKw": 160,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6b053c75cfbe48bef99",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": 81,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d74feb9cd553fa47100",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": null,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 175,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e990bcb629e48ef3aa5e",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 11,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a65e1eb1e810f868ef8",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 15,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2231283cbd3553cdb9c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 61,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08ab04c2a09706707a9f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 67,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7383213a92d6c5eafc0",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 68,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67e2f00123e56dfe1615",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 69,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfab0810ce638ca3aac8",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 70,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0ad08f4b23675109d2d",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 72,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6a66fafc41d2c26ffb5",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 73,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a686aabbfec7ee3a88f",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 75,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07c2ad7dc1a053f07673",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 81,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-094389dd880fa5ae3172",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 84,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d232d48f34f072b7d3c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 85,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2b4e44620dd17c993a8",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 88,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84fbdfec53aea4f3a371",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 90,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d046fd3c3b3be5de128",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 91,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0c534c93c1f94b732ac",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 95,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ad5041c7e533c9d8f2c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 110,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbb3d9160c6b31c08285",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 112,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef5d62e0bf116c2dfb9a",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 114,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49fb49a6045cad42507e",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 116,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2abf9315d56b1fcb1af",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 118,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa9ef971024061e49678",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 120,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b70b325cc9e4ed0f75df",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 131,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb3faea3a869e22b126b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 132,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-235c6e023f75d9a80091",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 136,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e22759d62b4a4554b01",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 140,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2a14b103a52e1157dce",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 150,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e73fbee8faef70ff3d7",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 180,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed7a1077dbb35b48329a",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 210,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16fba9bbae599efddbf5",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 228,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3652610bbba807a8dca0",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 310,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-082c3dce0eb8aa8af1d1",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2556e2409292251093b3",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 67,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78b5e515562390b16f28",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 70,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50e8cfa58f16b756f931",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 81,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec6eac54382fe3bfde03",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 84,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fc8d5ab80207bcbf1d2",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 85,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1d21027504721dc8e43",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 91,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc31e5b13e3f7aad1341",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 94,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bee2a56f8102d9e37e3c",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 95,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f442f98f01b008bf7519",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 373,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12d9f45443f661d08814",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7437d18b2b98c384f611",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 112,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85f40dd2eb634bf0c9e3",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 116,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f10bd5d4200a58bb6212",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 118,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-380db83d515f6b6da789",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 147,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5a59f9e2453588a01b3",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a51e12f9d5abf40bd75",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b82bf2e8eaee6d345eb",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1469,
+      "powerKw": 117,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-350fa087c224d65edc7b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7c9875dc3a308800044",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-356a7483f9f26200c07b",
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "canonicalModel": "Tonale",
+      "modelId": "alfa-romeo/tonale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 117,
+      "commercialNames": [
+        "TONALE"
+      ],
+      "sourceMakeNames": [
+        "ALFA ROMEO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fa0e7d07001a68dabe5",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "B3",
+      "modelId": "alpina/b3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 340,
+      "commercialNames": [
+        "ALPINA B3",
+        "B3"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b225b6f006969a8e8f1",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "B3",
+      "modelId": "alpina/b3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 364,
+      "commercialNames": [
+        "ALPINA B3"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4f308a3a3bc69146730",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "B3",
+      "modelId": "alpina/b3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 389,
+      "commercialNames": [
+        "ALPINA B3 GT",
+        "ALPINA B3 GT TOURING"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b7bcb48f943c9fa8bd2",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "B3 Touring",
+      "modelId": "alpina/b3-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 364,
+      "commercialNames": [
+        "B3 TOURING"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73e9e2912029832a8eca",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "B7",
+      "modelId": "alpina/b7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 447,
+      "commercialNames": [
+        "B7"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-605e1e55101bda797ab9",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "Bmw Alpina B3 GT",
+      "modelId": "alpina/bmw-alpina-b3-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 389,
+      "commercialNames": [
+        "BMW ALPINA B3 GT",
+        "BMW ALPINA B3 GT TOURING"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 360,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57dcc27005fced121fb4",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "Bmw Alpina B3 GT",
+      "modelId": "alpina/bmw-alpina-b3-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "BMW ALPINA B3 GT",
+        "BMW ALPINA B3 GT TOURING"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7de2ff244e85c50e52c3",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "Bmw Alpina B3 Touring",
+      "modelId": "alpina/bmw-alpina-b3-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 340,
+      "commercialNames": [
+        "BMW ALPINA B3 TOURING",
+        "BMW ALPINA B3 Touring"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 538,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4dccc54e693632f2b611",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "Bmw Alpina B3 Touring",
+      "modelId": "alpina/bmw-alpina-b3-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 364,
+      "commercialNames": [
+        "BMW ALPINA B3 TOURING"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 313,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8113eb00c1682fab7969",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "Bmw Alpina B5 Touring",
+      "modelId": "alpina/bmw-alpina-b5-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 457,
+      "commercialNames": [
+        "BMW ALPINA B5 TOURING AL",
+        "BMW ALPINA B5 TOURING ALL",
+        "BMW ALPINA B5 TOURING ALLRAD"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5307c506a16bf1dacd9e",
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "canonicalModel": "Bmw Alpina D3",
+      "modelId": "alpina/bmw-alpina-d3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 261,
+      "commercialNames": [
+        "BMW ALPINA D3",
+        "BMW ALPINA D3 S",
+        "BMW ALPINA D3 S LIMOUSINE",
+        "BMW ALPINA D3 S TOURING",
+        "BMW ALPINA D3 TOURING"
+      ],
+      "sourceMakeNames": [
+        "ALPINA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 770,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2dcdd9fb28b0a3ac2e67",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110",
+      "modelId": "alpine-cars/a110",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "A110",
+        "A110 LEGENDE AUTO",
+        "A110 PURE AUTO",
+        "A110 S AUTO"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 118,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c2be3c3f2b912007981",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110",
+      "modelId": "alpine-cars/a110",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 185,
+      "commercialNames": [
+        "A110",
+        "A110 / 1.8 / 16V AUT.",
+        "A110 Legende"
+      ],
+      "sourceMakeNames": [
+        "ALPINE",
+        "Alpine"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 6297,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc4a93fd8345988bdee1",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110",
+      "modelId": "alpine-cars/a110",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 215,
+      "commercialNames": [
+        "A110"
+      ],
+      "sourceMakeNames": [
+        "ALPINE",
+        "Alpine"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2862,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0f8fde5c738b159c509",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110",
+      "modelId": "alpine-cars/a110",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 221,
+      "commercialNames": [
+        "A110",
+        "A110 / 1.8 / 16V AUT.",
+        "A110 1.8 16V AUT."
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 8667,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85ccd210ed3a38ff35a7",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110R",
+      "modelId": "alpine-cars/a110r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 221,
+      "commercialNames": [
+        "A110 R",
+        "A110R",
+        "A110R 1.8 16V AUT."
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 956,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82a9c22a814f4851481b",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110R",
+      "modelId": "alpine-cars/a110r",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "A110R"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e0365dcf2bd81c6c4d7",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A110R",
+      "modelId": "alpine-cars/a110r",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 239,
+      "commercialNames": [
+        "A110 R ULTIME"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-882dcb8e39c807c4dcd7",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A290",
+      "modelId": "alpine-cars/a290",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 78,
+      "commercialNames": [
+        "A290"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 614,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94bac4ba19d0a07977b7",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A290",
+      "modelId": "alpine-cars/a290",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "A290"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1745,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffe6f567c6c07c6de431",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A290",
+      "modelId": "alpine-cars/a290",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "A290"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3982,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a927b2c1019facf2f834",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A290",
+      "modelId": "alpine-cars/a290",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "A290"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-861df46086f50b79ab34",
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "canonicalModel": "A390",
+      "modelId": "alpine-cars/a390",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 295,
+      "commercialNames": [
+        "A390"
+      ],
+      "sourceMakeNames": [
+        "ALPINE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 90,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-049989818de14caf30fd",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB4",
+      "modelId": "aston-martin/db4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4662,
+      "powerKw": 280,
+      "commercialNames": [
+        "DB4 GT",
+        "DB4 GT ZAGATO"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0ec515abac54a41c82e",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB5",
+      "modelId": "aston-martin/db5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3995,
+      "powerKw": 210,
+      "commercialNames": [
+        "ASTON MARTIN DB5"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26fc1d675cbdd15aca59",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB9",
+      "modelId": "aston-martin/db9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5935,
+      "powerKw": 336,
+      "commercialNames": [
+        "DB9"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36dcad7f2d7f73fc8fb3",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3982,
+      "powerKw": 375,
+      "commercialNames": [
+        "DB11 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b072ea355c3b410d649",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3982,
+      "powerKw": null,
+      "commercialNames": [
+        "DB11 V8 AUTO",
+        "DB11 V8 VOLANTE AUTO"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 410,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff4b17f593249257b742",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3982,
+      "powerKw": 373,
+      "commercialNames": [
+        "DB11"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64bbdf27c625ed4b451d",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3982,
+      "powerKw": 375,
+      "commercialNames": [
+        "DB 11",
+        "DB11",
+        "DB11 Volante",
+        "DB11 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN",
+        "ASTON-MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 593,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4991571587718be2a88b",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3985,
+      "powerKw": 375,
+      "commercialNames": [
+        "DB11 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bb7c024997ddd2d5059",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5204,
+      "powerKw": null,
+      "commercialNames": [
+        "DB11 AMR V12 AUTO"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 108,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a10d57aa642fe01fa288",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5204,
+      "powerKw": 470,
+      "commercialNames": [
+        "DB 11 AMR",
+        "DB11",
+        "DB11 AMR"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN",
+        "Aston Martin"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 207,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e3cd550e5a788d441f2",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3982,
+      "powerKw": 393,
+      "commercialNames": [
+        "DB11",
+        "DB11 VOLANTE",
+        "DB11 Volante"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 94,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-223d1c624059b382125c",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB11",
+      "modelId": "aston-martin/db11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3982,
+      "powerKw": 394,
+      "commercialNames": [
+        "DB11",
+        "DB11 COUPE",
+        "DB11 VOLANTE",
+        "DB11 Volante"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-555c4ede74cbfce78d5f",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB12",
+      "modelId": "aston-martin/db12",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3982,
+      "powerKw": 500,
+      "commercialNames": [
+        "DB 12 /",
+        "DB12",
+        "DB12 COUPE",
+        "DB12 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 863,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8631484a908317677589",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB12",
+      "modelId": "aston-martin/db12",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3982,
+      "powerKw": 276,
+      "commercialNames": [
+        "DB12"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea293d95b60e6f0457b8",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB12",
+      "modelId": "aston-martin/db12",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3982,
+      "powerKw": 375,
+      "commercialNames": [
+        "DB12"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c4d76f81e4b6c0562a5",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB12",
+      "modelId": "aston-martin/db12",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3902,
+      "powerKw": 600,
+      "commercialNames": [
+        "DB12 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c74a26051ad49ca8862",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB12",
+      "modelId": "aston-martin/db12",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3982,
+      "powerKw": null,
+      "commercialNames": [
+        "DB12",
+        "DB12 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b8c1d25db8d284c1c25",
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "canonicalModel": "DB12",
+      "modelId": "aston-martin/db12",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3982,
+      "powerKw": 489,
+      "commercialNames": [
+        "DB12 VOLANTE"
+      ],
+      "sourceMakeNames": [
+        "ASTON MARTIN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

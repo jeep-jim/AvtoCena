@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-audi-tt-rs-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Audi official MediaCenter: TT RS Coupé",
+          "publisher": "AUDI AG",
+          "url": "https://www.audi-mediacenter.com/en/photos/detail/audi-tt-rs-coupe-31249",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Audi's official MediaCenter identifies TT RS Coupé. Body and transmission suffixes remain exact MLIT source spellings."
+        },
+        {
+          "id": "src-bmw-6-series-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "BMW Group official archive: new BMW 6 Series Gran Turismo",
+          "publisher": "BMW AG",
+          "url": "https://www.press.bmwgroup.com/global/article/detail/T0308711EN/the-new-bmw-6-series-gran-turismo",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "BMW Group's official archive identifies the 6 Series model family. Body and engine suffixes remain source spellings."
+        },
+        {
+          "id": "src-bmw-7-series-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "BMW Group official archive: new BMW 7 Series",
+          "publisher": "BMW AG",
+          "url": "https://www.press.bmwgroup.com/global/article/detail/T0221224EN/the-new-bmw-7-series",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "BMW Group's official archive identifies the 7 Series model family. Engine and wheelbase suffixes remain source spellings."
+        },
+        {
+          "id": "src-bmw-8-series-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "BMW Group official archive: all-new BMW 8 Series Coupé",
+          "publisher": "BMW AG",
+          "url": "https://www.press.bmwgroup.com/global/article/detail/T0281744EN/the-all-new-bmw-8-series-coupe",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "BMW Group's official archive identifies the 8 Series model family. Body and engine suffixes remain source spellings."
+        },
+        {
+          "id": "src-mercedes-benz-g-class-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Mercedes-Benz official media: G-Class family",
+          "publisher": "Mercedes-Benz AG",
+          "url": "https://media.mercedes-benz.com/en/article/a8c745a2-842e-4479-a8c5-26ba3bec2964",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Mercedes-Benz's official media site identifies the G-Class model family. Powertrain and AMG suffixes remain exact source spellings."
+        },
+        {
+          "id": "src-mercedes-benz-r-class-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Mercedes-Benz public archive: R-Class",
+          "publisher": "Mercedes-Benz AG",
+          "url": "https://mercedes-benz-publicarchive.com/marsClassic/en/instance/print/R-Class.xhtml?ls=L2RlL2luc3RhbmNlL2tvLnhodG1sP3JlbElkPTEwMDEmZnJvbU9pZD00NTMzMjEmcmVzdWx0SW5mb1R5cGVJZD0xNzUmdmlld1R5cGU9dGh1bWJzJnNvcnREZWZpbml0aW9uPW1hbnVhbHNvcnQtMSZvaWQ9NDUzMzIxJnRodW1iU2NhbGVJbmRleD0xJnJvd0NvdW50c0luZGV4PTUmZnJvbUluZm9UeXBlSWQ9MjI0NQ%21%21&oid=177993303&rs=1",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Mercedes-Benz's public archive identifies the R-Class family. Technical values and production boundaries are not copied into this identity-only batch."
+        },
+        {
+          "id": "src-mercedes-benz-s-class-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Mercedes-Benz official media: new S-Class",
+          "publisher": "Mercedes-Benz AG",
+          "url": "https://media.mercedes-benz.com/en/press-kit/71dc2a9c-34c7-47e0-a264-d39d89b85d4c/article/8e671658-cf56-45c3-8ba7-15e997dee179",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Mercedes-Benz's official media site identifies the S-Class model family. Powertrain, wheelbase, body and AMG labels remain exact source spellings."
+        },
+        {
+          "id": "src-mini-paceman-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "BMW Group official archive: MINI Paceman",
+          "publisher": "BMW AG",
+          "url": "https://www.press.bmwgroup.com/global/article/detail/T0131303EN/the-mini-paceman",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "BMW Group's official MINI archive identifies Paceman. Cooper, Cooper S, diesel and JCW labels remain source spellings below the model identity."
+        },
+        {
+          "id": "src-mlit-passenger-17eb63071fe553b9",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001267467.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001267467.xlsx",
+          "documentId": "001267467.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-b4ce99ffb4f29b3a",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 000234263.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/000234263.xlsx",
+          "documentId": "000234263.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi/tt-rs",
+          "brandId": "audi",
+          "canonicalName": "TT RS",
+          "slug": "tt-rs",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "TTRS Coupe",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-af6f209ef438d450",
+                "src-mlit-passenger-cd4512da88914640"
+              ]
+            },
+            {
+              "value": "TTRS Coupé (S-tronic)",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-03695627075c4949",
+                "src-mlit-passenger-0b325d96c5e125e6",
+                "src-mlit-passenger-2bd0a7a42563e495",
+                "src-mlit-passenger-65bee60935816e91",
+                "src-mlit-passenger-6dd68f2f31bda8d3",
+                "src-mlit-passenger-9ecbf8dcf7624986",
+                "src-mlit-passenger-bcc8fbbf6cf03723"
+              ]
+            },
+            {
+              "value": "TTRS Roadster",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-af6f209ef438d450",
+                "src-mlit-passenger-cd4512da88914640"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-tt-rs-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/6-series",
+          "brandId": "bmw",
+          "canonicalName": "6 Series",
+          "slug": "6-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "BMW 630i グラン ツーリスモ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-112544ae3266913f",
+                "src-mlit-passenger-94752914c4875e20",
+                "src-mlit-passenger-cd4512da88914640"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-bmw-6-series-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2018, 2019, 2020.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/7-series",
+          "brandId": "bmw",
+          "canonicalName": "7 Series",
+          "slug": "7-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "BMW 740i",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-0c731e231146eca7",
+                "src-mlit-passenger-112544ae3266913f",
+                "src-mlit-passenger-17eb63071fe553b9",
+                "src-mlit-passenger-24cc8153255a1871",
+                "src-mlit-passenger-269745b829bef442",
+                "src-mlit-passenger-2e18513621227dae",
+                "src-mlit-passenger-828379cbbcd3910c",
+                "src-mlit-passenger-8efefde3954f1c86",
+                "src-mlit-passenger-90a3365aaa448efb",
+                "src-mlit-passenger-94192db29984183e",
+                "src-mlit-passenger-94752914c4875e20",
+                "src-mlit-passenger-aaa32dd92f225205",
+                "src-mlit-passenger-af6f209ef438d450",
+                "src-mlit-passenger-b4ce99ffb4f29b3a",
+                "src-mlit-passenger-cd4512da88914640",
+                "src-mlit-passenger-d5b6430c97f6106b",
+                "src-mlit-passenger-d6852ab65d2071f7",
+                "src-mlit-passenger-dfc1d652c4d2274c",
+                "src-mlit-passenger-e86e2169ba52022e"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-bmw-7-series-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/8-series",
+          "brandId": "bmw",
+          "canonicalName": "8 Series",
+          "slug": "8-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "BMW 840i クーペ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-828379cbbcd3910c",
+                "src-mlit-passenger-c597c8d08b1b82f7"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-bmw-8-series-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/g-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "G-Class",
+          "slug": "g-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "G350d",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-073d4d7c85aebd69",
+                "src-mlit-passenger-200aa531d3a11bed",
+                "src-mlit-passenger-3a4c98b8689d0706",
+                "src-mlit-passenger-4b604fa86f742500",
+                "src-mlit-passenger-678c2005a0e63b4f",
+                "src-mlit-passenger-6eba5c4bb14a8494",
+                "src-mlit-passenger-b60d6436954a12b3",
+                "src-mlit-passenger-b7785551256457e2",
+                "src-mlit-passenger-d1f03531cf04dd25",
+                "src-mlit-passenger-e69856093cf0a1c5",
+                "src-mlit-passenger-f7a1fc4f30a6aeef"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mercedes-benz-g-class-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2016, 2017, 2018, 2019, 2020, 2021, 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/r-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "R-Class",
+          "slug": "r-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "R350 4MATIC",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-03695627075c4949",
+                "src-mlit-passenger-0b325d96c5e125e6",
+                "src-mlit-passenger-2bd0a7a42563e495",
+                "src-mlit-passenger-65bee60935816e91",
+                "src-mlit-passenger-6dd68f2f31bda8d3",
+                "src-mlit-passenger-9ecbf8dcf7624986",
+                "src-mlit-passenger-bcc8fbbf6cf03723",
+                "src-mlit-passenger-da32a6d5e0bd376e"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mercedes-benz-r-class-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/s-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "S-Class",
+          "slug": "s-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "S450",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-112544ae3266913f",
+                "src-mlit-passenger-828379cbbcd3910c",
+                "src-mlit-passenger-90a3365aaa448efb",
+                "src-mlit-passenger-94752914c4875e20",
+                "src-mlit-passenger-cd4512da88914640"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mercedes-benz-s-class-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2018, 2019, 2020, 2021, 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mini/paceman",
+          "brandId": "mini",
+          "canonicalName": "Paceman",
+          "slug": "paceman",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "MINI Cooper ペースマン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-2e18513621227dae",
+                "src-mlit-passenger-94192db29984183e",
+                "src-mlit-passenger-af6f209ef438d450"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mini-paceman-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

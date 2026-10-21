@@ -1,0 +1,33 @@
+name: China parameter response diagnostic (no publication)
+on:
+  push:
+    branches: [feat/catalog-china-saved-evidence-v1-20260906]
+    paths:
+      - .github/workflows/catalog-china-parameter-diagnostic-branch.yml
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      PILOT_MARKETS: china
+      PILOT_SAMPLE_LIMIT: '3'
+      PILOT_REQUEST_LIMIT: '8'
+      PILOT_TIMEOUT_MS: '15000'
+      PILOT_RESPONSE_EVIDENCE: '1'
+      PILOT_REPORT: china-parameter-diagnostic.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx scripts/catalog-public-detail-calculation-pilot.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-parameter-diagnostic
+          path: china-parameter-diagnostic.json
+          retention-days: 14

@@ -1,0 +1,29 @@
+import {modelSearchName} from './model-search-name';
+const wordCache=new Map<string,string[]>();
+function modelWords(make:unknown,input:unknown){
+ const key=JSON.stringify([String(make??''),String(input??'')]);
+ const cached=wordCache.get(key);if(cached)return cached;
+ const words=modelSearchName(make,input).normalize('NFKC').toLocaleLowerCase('ru-RU').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean);
+ if(key.length<=1024){if(wordCache.size>=4096)wordCache.delete(wordCache.keys().next().value!);wordCache.set(key,words);}
+ return words;
+}
+/** Public discovery matches a base model plus any trailing version/trim.
+ * Keep token boundaries: A2 must not select A20, nor X5 select X50.
+ * This does not change the exact identity used for technical specifications.
+ */
+export function matchesCatalogModel(value: unknown, query: unknown, make?:unknown): boolean {
+  const selections = String(query ?? "").split("|").map(value => value.trim()).filter(Boolean);
+  if (selections.length > 1) return selections.some(selection => matchesCatalogModel(value, selection, make));
+  const requested = modelWords(make,query).join('');
+  if (!requested) return false;
+  let prefix = '';
+  for (const word of modelWords(make,value)) {
+    prefix += word;
+    if (prefix === requested) return true;
+    // Markets also attach letter badges without a separator: A4L, Q2L, X5M.
+    if (/\d$/.test(requested) && prefix.startsWith(requested)
+      && /^[a-z]+$/.test(prefix.slice(requested.length))) return true;
+    if (!requested.startsWith(prefix)) return false;
+  }
+  return false;
+}

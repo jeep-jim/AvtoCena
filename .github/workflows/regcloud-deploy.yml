@@ -1,0 +1,150 @@
+name: Regcloud — deploy production
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-deploy.json']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build existing application without production credentials
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: |
+          set -euo pipefail
+          docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" -t "avtocena-regcloud:$GITHUB_SHA" .
+          docker save "avtocena-regcloud:$GITHUB_SHA" | gzip -1 > "$RUNNER_TEMP/avtocena-image.tar.gz"
+          cd "$RUNNER_TEMP"
+          sha256sum avtocena-image.tar.gz > avtocena-image.tar.gz.sha256
+      - name: Install container runtime and load image (no application start)
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/staging/incoming/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(df --output=avail -k / | tail -1) -gt 8388608"
+          scp "${ssh_opts[@]}" "$RUNNER_TEMP/avtocena-image.tar.gz" "$RUNNER_TEMP/avtocena-image.tar.gz.sha256" "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote_dir' '$GITHUB_SHA'" <<'REMOTE'
+          set -euo pipefail
+          incoming=$1
+          release=$2
+          exec 9>/run/lock/avtocena-staging-prepare.lock
+          flock -n 9
+          cd "$incoming"
+          sha256sum -c avtocena-image.tar.gz.sha256
+          if ! command -v docker >/dev/null; then
+            export DEBIAN_FRONTEND=noninteractive
+            apt-get -o DPkg::Lock::Timeout=120 update
+            apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends docker.io
+          fi
+          systemctl enable --now docker
+          gzip -dc avtocena-image.tar.gz | docker load
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
+          docker version --format '{{.Server.Version}}'
+          docker image inspect --format 'Image ready: {{.Id}}; size {{.Size}} bytes' "avtocena-regcloud:$release"
+          # Remove only this run's transport archive after verified loading.
+          rm -- avtocena-image.tar.gz avtocena-image.tar.gz.sha256
+          echo 'Image loaded and verified'
+          REMOTE
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Prepare exact price indexes before activating the release
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          NODE_OPTIONS: --max-old-space-size=6144
+          AVTOCENA_RELEASE_SHA: ${{ github.sha }}
+        run: |
+          node --import tsx --input-type=module <<'WAIT'
+          const data=await import('./apps/web/lib/data.ts');
+          const getJsonStorage=data.getJsonStorage||data.default?.getJsonStorage;
+          if(typeof getJsonStorage!=='function')throw Error('storage_module_unavailable');
+          const storage=getJsonStorage(),deadline=Date.now()+40*60_000;
+          for (;;) {
+            const lock=await storage.readJson('catalog/import-lock.json',null);
+            const until=lock?.lockedUntil?Date.parse(lock.lockedUntil):0;
+            if (!Number.isFinite(until)) throw Error('publication_lock_invalid');
+            if (until<=Date.now()) break;
+            console.log('WAIT_FOR_PUBLICATION',JSON.stringify({operationType:lock.operationType,lockedUntil:lock.lockedUntil}));
+            if (Date.now()>=deadline) throw Error('publication_wait_deadline');
+            await new Promise(resolve=>setTimeout(resolve,30_000));
+          }
+          WAIT
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/archive-runtime-reference-sources.mjs
+          export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
+          npx tsx scripts/regcloud-verify-conditional-read.ts
+          npx tsx scripts/regcloud-prepare-prices.mjs
+          npx tsx scripts/prepare-catalog-colors.mjs
+          node --import tsx --input-type=module <<'CUTOVER'
+          const module=await import('./apps/web/lib/catalog/china-feed-cutover.ts');
+          await (module.applyChinaFeedCutover||module.default.applyChinaFeedCutover)();
+          console.log('China supplier switch applied');
+          CUTOVER
+      - name: Deploy with rollback and resource measurements
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '$(node scripts/catalog-calculation-version.mjs)'"
+      - name: Bound retained application releases after successful deployment
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 - --apply' < scripts/regcloud-release-retention.py
+      - name: Publish GPT completion notes for this installed release
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: npx tsx scripts/crm-gpt-release-report.ts

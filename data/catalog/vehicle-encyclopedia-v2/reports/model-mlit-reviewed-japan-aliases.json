@@ -1,0 +1,3956 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactMlitSourceNamesOnly": true,
+    "existingEnglishCanonicalRequiredForJapaneseAliases": true,
+    "newModelsRequireExactLatinScriptMlitIdentity": true,
+    "combinedMultiModelNamesExcluded": true,
+    "typeCodesNotPromotedToGenerations": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedModelIdentities": 92,
+    "updatedModels": 92,
+    "newModels": 9,
+    "acceptedSourceNames": 110,
+    "sourcesAdded": 0,
+    "referencedOfficialSources": 148
+  },
+  "accepted": [
+    {
+      "modelId": "toyota/86",
+      "canonicalName": "86",
+      "sourceName": "86 *2",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "DBA-ZN6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/c-hr",
+      "canonicalName": "C-HR",
+      "sourceName": "C-HR",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-NGX10",
+        "3BA-NGX50",
+        "6AA-ZYX11",
+        "DAA-ZYX10",
+        "DBA-NGX10",
+        "DBA-NGX50"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/fj-cruiser",
+      "canonicalName": "Fj Cruiser",
+      "sourceName": "FJクルーザー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "CBA-GSJ15W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5"
+      ]
+    },
+    {
+      "modelId": "toyota/gr86",
+      "canonicalName": "GR86",
+      "sourceName": "GR86",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-ZN8"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "toyota/gr-yaris",
+      "canonicalName": "Gr Yaris",
+      "sourceName": "GR ヤリス",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4BA-GXPA16",
+        "4BA-ZN6",
+        "5BA-MXPA12"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "toyota/iq",
+      "canonicalName": "iQ",
+      "sourceName": "iQ",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "DBA-KGJ10",
+        "DBA-NGJ10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485"
+      ]
+    },
+    {
+      "modelId": "toyota/rav4",
+      "canonicalName": "RAV4",
+      "sourceName": "RAV4",
+      "observedInventoryYears": [
+        2015,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-AXAH52",
+        "6AA-AXAH54",
+        "6AA-AXAN62",
+        "6AA-AXAN64",
+        "6BA-MXAA52",
+        "6BA-MXAA54",
+        "DBA-ACA31W",
+        "DBA-ACA36W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/sai",
+      "canonicalName": "Sai",
+      "sourceName": "SAI",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "DAA-AZK10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5"
+      ]
+    },
+    {
+      "modelId": "toyota/aqua",
+      "canonicalName": "Aqua",
+      "sourceName": "アクア",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-MXPK10",
+        "6AA-MXPK11",
+        "6AA-MXPK13",
+        "6AA-MXPK15",
+        "6AA-MXPK16",
+        "6AA-MXPK18",
+        "6AA-NHP10",
+        "6AA-NHP10H",
+        "DAA- NHP10",
+        "DAA-NHP10",
+        "DAA-NHP10H"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "toyota/auris",
+      "canonicalName": "Auris",
+      "sourceName": "オーリス",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "DAA-ZWE186H",
+        "DBA-NRE185H",
+        "DBA-NZE181H",
+        "DBA-NZE184H",
+        "DBA-ZRE186H"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5"
+      ]
+    },
+    {
+      "modelId": "toyota/camry",
+      "canonicalName": "Camry",
+      "sourceName": "カムリ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "6AA-AXVH70",
+        "6AA-AXVH75",
+        "DAA-AVV50",
+        "DAA-AXVH70"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/corolla",
+      "canonicalName": "Corolla",
+      "sourceName": "カローラ",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-NRE210",
+        "3BA-ZRE212",
+        "5BA-MZEA17",
+        "6AA-ZWE211",
+        "6AA-ZWE214",
+        "6AA-ZWE215",
+        "6AA-ZWE219"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/corolla-cross",
+      "canonicalName": "Corolla Cross",
+      "sourceName": "カローラクロス",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-ZSG10",
+        "4BA-MXGA10",
+        "6AA-MXGH15",
+        "6AA-ZVG11",
+        "6AA-ZVG13",
+        "6AA-ZVG15",
+        "6AA-ZVG16"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "toyota/corolla-sport",
+      "canonicalName": "Corolla Sport",
+      "sourceName": "カローラ スポーツ",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-NRE210H",
+        "3BA-NRE214H",
+        "6AA-ZWE211H",
+        "6AA-ZWE213H",
+        "6AA-ZWE219H",
+        "6BA-MZEA12H"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/corolla-touring",
+      "canonicalName": "Corolla Touring",
+      "sourceName": "カローラ ツーリング",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-NRE210W",
+        "3BA-ZRE212W",
+        "5BA-MZEA17W",
+        "6AA-ZWE211W",
+        "6AA-ZWE214W",
+        "6AA-ZWE215W",
+        "6AA-ZWE219W",
+        "6BA-MZEA12W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/sienta",
+      "canonicalName": "Sienta",
+      "sourceName": "シエンタ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-NCP175G",
+        "5BA-MXPC10G",
+        "5BA-MXPC12G",
+        "5BA-NSP170G",
+        "5BA-NSP172G",
+        "6AA-MXPL10G",
+        "6AA-MXPL12G",
+        "6AA-MXPL15G",
+        "6AA-NHP170G",
+        "DAA-NHP170G",
+        "DBA-NCP175G",
+        "DBA-NSP170G",
+        "DBA-NSP172G"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/supra",
+      "canonicalName": "Supra",
+      "sourceName": "スープラ",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "(注) *印の付いている通称名については、 Bayerische Motoren Werke AG (BMW)が製造事業者である",
+        "3BA-DB02",
+        "3BA-DB06",
+        "3BA-DB22",
+        "3BA-DB26",
+        "3BA-DB42",
+        "3BA-DB82",
+        "3BA-DB86"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3d1376771334af7e",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205"
+      ]
+    },
+    {
+      "modelId": "toyota/prius",
+      "canonicalName": "Prius",
+      "sourceName": "プリウス",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-MXWH60",
+        "6AA-MXWH65",
+        "6AA-ZVW40W",
+        "6AA-ZVW41W",
+        "6AA-ZVW51",
+        "6AA-ZVW55",
+        "6AA-ZVW60",
+        "6AA-ZVW65",
+        "DAA-ZVW40W",
+        "DAA-ZVW41W",
+        "DAA-ZVW50",
+        "DAA-ZVW51",
+        "DAA-ZVW55"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "toyota/yaris",
+      "canonicalName": "Yaris",
+      "sourceName": "ヤリス",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-KSP210",
+        "5BA-MXPA10",
+        "5BA-MXPA15",
+        "6AA-MXPH10",
+        "6AA-MXPH14",
+        "6AA-MXPH15",
+        "6AA-MXPH17"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "toyota/yaris-cross",
+      "canonicalName": "Yaris Cross",
+      "sourceName": "ヤリス クロス",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-MXPB10",
+        "5BA-MXPB15",
+        "6AA-MXPJ10",
+        "6AA-MXPJ15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "toyota/rush",
+      "canonicalName": "Rush",
+      "sourceName": "ラッシュ *",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "ABA-J200E",
+        "ABA-J210E"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "toyota/land-cruiser",
+      "canonicalName": "Land Cruiser",
+      "sourceName": "ランドクルーザー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "(注)*2印の付いている通称名については、株式会社SUBARUが製造事業者である。",
+        "3BA-TRJ250W",
+        "3BA-URJ202W",
+        "3BA-VJA300W",
+        "3DA-FJA300W",
+        "3DA-GDJ250W",
+        "3DA-GDJ76W",
+        "CBA-URJ202W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-f70840e7b69755b6",
+        "src-mlit-passenger-e05270ba60a465e6",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-8a4efee23e85a9fc",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-9c15f4a60f137f63",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "toyota/land-cruiser-prado",
+      "canonicalName": "Land Cruiser Prado",
+      "sourceName": "ランドクルーザー プラド",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-TRJ150W",
+        "3DA-GDJ150W",
+        "3DA-GDJ151W",
+        "CBA-TRJ150W",
+        "LDA-GDJ150W",
+        "LDA-GDJ151W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-1f5e280891b632e9",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-62ec16098377f384",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "toyota/jpn-taxi",
+      "canonicalName": "JPN TAXI",
+      "sourceName": "JPN TAXI",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-NTP10",
+        "DAA-NTP10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-eb3a084c787563a3",
+        "src-mlit-passenger-c5e9664bd7849c89",
+        "src-mlit-passenger-7695174a89800601",
+        "src-mlit-passenger-320a97aef9d80b04",
+        "src-mlit-passenger-d96c86ea873d8071",
+        "src-mlit-passenger-a0f33bcbe504e82d",
+        "src-mlit-passenger-afd9b5616867bd3a",
+        "src-mlit-passenger-95b6e9b6920d5270",
+        "src-mlit-passenger-8894dbf9add5f91c",
+        "src-mlit-passenger-bbff8d040a280f38",
+        "src-mlit-passenger-05a5050d057d46c3",
+        "src-mlit-passenger-831b51b1bfc0909e",
+        "src-mlit-passenger-7aaede12b72b40c0",
+        "src-mlit-passenger-669c7d2b1175fa28",
+        "src-mlit-passenger-2107dca85bf621bb",
+        "src-mlit-passenger-0a476ffb8183c345",
+        "src-mlit-passenger-3c111e6d7fe60338",
+        "src-mlit-passenger-d2c42b3191d3cd22",
+        "src-mlit-passenger-824e521c5b2e6f2a"
+      ]
+    },
+    {
+      "modelId": "honda/accord",
+      "canonicalName": "Accord",
+      "sourceName": "ACCORD",
+      "observedInventoryYears": [
+        2025
+      ],
+      "typeCodes": [
+        "6AA-CY2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-24cc8153255a1871"
+      ]
+    },
+    {
+      "modelId": "honda/accord",
+      "canonicalName": "Accord",
+      "sourceName": "アコード",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "6AA-CV3",
+        "DAA-CR7"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "honda/accord",
+      "canonicalName": "Accord",
+      "sourceName": "アコード ハイブリッド",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DAA-CR6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "honda/cr-v",
+      "canonicalName": "CR-V",
+      "sourceName": "CR-V",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "6AA-RT5",
+        "6AA-RT6",
+        "6BA-RW1",
+        "6BA-RW2",
+        "DBA-RM1",
+        "DBA-RM4",
+        "DBA-RW1",
+        "DBA-RW2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/cr-z",
+      "canonicalName": "CR-Z",
+      "sourceName": "CR-Z",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DAA-ZF2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "honda/freed",
+      "canonicalName": "Freed",
+      "sourceName": "FREED",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "5BA-GB5",
+        "5BA-GB6",
+        "6AA-GB7",
+        "6AA-GB8",
+        "6BA-GB5",
+        "6BA-GB6",
+        "DAA-GB7",
+        "DAA-GB8",
+        "DBA-GB5",
+        "DBA-GB6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/freed",
+      "canonicalName": "Freed",
+      "sourceName": "FREED+",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "5BA-GB5",
+        "5BA-GB6",
+        "6AA-GB7",
+        "6AA-GB8",
+        "6BA-GB5",
+        "6BA-GB6",
+        "DAA-GB7",
+        "DAA-GB8",
+        "DBA-GB5",
+        "DBA-GB6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/freed",
+      "canonicalName": "Freed",
+      "sourceName": "フリード",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-GT1",
+        "5BA-GT2",
+        "5BA-GT3",
+        "5BA-GT4",
+        "6AA-GT5",
+        "6AA-GT6",
+        "6AA-GT7",
+        "6AA-GT8",
+        "DAA-GP3",
+        "DBA-GB3",
+        "DBA-GB4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-459a32ac7a8cac79",
+        "src-mlit-passenger-062f229997b9eff5"
+      ]
+    },
+    {
+      "modelId": "honda/freed",
+      "canonicalName": "Freed",
+      "sourceName": "フリード スパイク",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DAA-GP3",
+        "DBA-GB3",
+        "DBA-GB4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-5fee9be36aef5b62"
+      ]
+    },
+    {
+      "modelId": "honda/grace",
+      "canonicalName": "Grace",
+      "sourceName": "GRACE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DAA-GM4",
+        "DAA-GM5",
+        "DBA-GM6",
+        "DBA-GM9"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "honda/insight",
+      "canonicalName": "Insight",
+      "sourceName": "インサイト",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "6AA-ZE4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/jade",
+      "canonicalName": "Jade",
+      "sourceName": "JADE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DAA-FR4",
+        "DBA-FR5"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "honda/legend",
+      "canonicalName": "Legend",
+      "sourceName": "LEGEND",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "6AA-KC2",
+        "DAA-KC2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/n-box",
+      "canonicalName": "N-BOX",
+      "sourceName": "N BOX",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-JF5",
+        "5BA-JF6",
+        "6BA-JF3",
+        "6BA-JF4",
+        "6BA-JF5",
+        "6BA-JF6",
+        "DBA-JF1",
+        "DBA-JF2",
+        "DBA-JF3",
+        "DBA-JF4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-004daf44b2946272",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-152b614a03568b0c",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-275e23d903d6ea87",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-34033dbedeb0adc2",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "honda/n-box",
+      "canonicalName": "N-BOX",
+      "sourceName": "N-BOX",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-JF5",
+        "5BA-JF6",
+        "6BA-JF3",
+        "6BA-JF4",
+        "6BA-JF5",
+        "6BA-JF6",
+        "DBA-JF1",
+        "DBA-JF2",
+        "DBA-JF3",
+        "DBA-JF4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-004daf44b2946272",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-152b614a03568b0c",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-275e23d903d6ea87",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-34033dbedeb0adc2",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "honda/n-box",
+      "canonicalName": "N-BOX",
+      "sourceName": "N-BOX +",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-JF5",
+        "5BA-JF6",
+        "6BA-JF3",
+        "6BA-JF4",
+        "6BA-JF5",
+        "6BA-JF6",
+        "DBA-JF1",
+        "DBA-JF2",
+        "DBA-JF3",
+        "DBA-JF4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-004daf44b2946272",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-152b614a03568b0c",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-275e23d903d6ea87",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-34033dbedeb0adc2",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "honda/n-one",
+      "canonicalName": "N-ONE",
+      "sourceName": "N-ONE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-JG3",
+        "5BA-JG4",
+        "6BA-JG3",
+        "6BA-JG4",
+        "DBA-JG1",
+        "DBA-JG2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-004daf44b2946272",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-34033dbedeb0adc2",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "honda/n-wgn",
+      "canonicalName": "N-WGN",
+      "sourceName": "N-WGN",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-JH3",
+        "5BA-JH4",
+        "6BA-JH3",
+        "6BA-JH4",
+        "DBA-JH1",
+        "DBA-JH2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-004daf44b2946272",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-34033dbedeb0adc2",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "honda/odyssey",
+      "canonicalName": "Odyssey",
+      "sourceName": "ODYSSEY",
+      "observedInventoryYears": [
+        2023,
+        2025
+      ],
+      "typeCodes": [
+        "6AA-RC5"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "honda/odyssey",
+      "canonicalName": "Odyssey",
+      "sourceName": "オデッセイ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "6AA-RC4",
+        "6BA-RC1",
+        "6BA-RC2",
+        "DAA-RC4",
+        "DBA-RC1",
+        "DBA-RC2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-2c4e7a4bb82666b8",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/prelude",
+      "canonicalName": "Prelude",
+      "sourceName": "PRELUDE",
+      "observedInventoryYears": [
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-BF1"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-459a32ac7a8cac79",
+        "src-mlit-passenger-062f229997b9eff5"
+      ]
+    },
+    {
+      "modelId": "honda/s660",
+      "canonicalName": "S660",
+      "sourceName": "S660",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "3BA-JW5",
+        "DBA-JW5"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-cff55f4fe5401003"
+      ]
+    },
+    {
+      "modelId": "honda/shuttle",
+      "canonicalName": "Shuttle",
+      "sourceName": "SHUTTLE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "6AA-GP7",
+        "6AA-GP8",
+        "6BA-GK8",
+        "6BA-GK9",
+        "DAA-GP7",
+        "DAA-GP8",
+        "DBA-GK8",
+        "DBA-GK9"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/vezel",
+      "canonicalName": "Vezel",
+      "sourceName": "VEZEL",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-RV4",
+        "6AA-RU3",
+        "6AA-RU4",
+        "6AA-RV5",
+        "6AA-RV6",
+        "6BA-RU1",
+        "6BA-RU2",
+        "6BA-RV3",
+        "6BA-RV4",
+        "DAA-RU3",
+        "DAA-RU4",
+        "DBA-RU1",
+        "DBA-RU2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-f76dd362812f82df",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-459a32ac7a8cac79",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/wr-v",
+      "canonicalName": "WR-V",
+      "sourceName": "WR-V",
+      "observedInventoryYears": [
+        2025
+      ],
+      "typeCodes": [
+        "5BA-DG5"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-24cc8153255a1871"
+      ]
+    },
+    {
+      "modelId": "honda/zr-v",
+      "canonicalName": "ZR-V",
+      "sourceName": "ZR-V",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-RZ3",
+        "5BA-RZ5",
+        "6AA-RZ4",
+        "6AA-RZ6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-459a32ac7a8cac79",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "honda/civic",
+      "canonicalName": "Civic",
+      "sourceName": "シビック",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-FL1",
+        "6AA-FL4",
+        "6BA-FL1",
+        "6BA-FL5",
+        "DBA-FC1"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-459a32ac7a8cac79",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "honda/fit",
+      "canonicalName": "Fit",
+      "sourceName": "フィット",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-GS4",
+        "5BA-GS5",
+        "5BA-GS6",
+        "5BA-GS7",
+        "6AA-GR3",
+        "6AA-GR4",
+        "6AA-GR6",
+        "6AA-GR8",
+        "6BA-GR1",
+        "6BA-GR2",
+        "6BA-GR5",
+        "6BA-GR7",
+        "DAA-GP5",
+        "DAA-GP6",
+        "DBA-GK3",
+        "DBA-GK4",
+        "DBA-GK5",
+        "DBA-GK6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-459a32ac7a8cac79",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "honda/vamos",
+      "canonicalName": "VAMOS",
+      "sourceName": "VAMOS",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-HM1",
+        "ABA-HM2"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-152b614a03568b0c",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-275e23d903d6ea87",
+        "src-mlit-passenger-f13d82dd215e8972"
+      ]
+    },
+    {
+      "modelId": "honda/vamos-hobio",
+      "canonicalName": "VAMOS Hobio",
+      "sourceName": "VAMOS Hobio",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-HM3",
+        "ABA-HM4"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-152b614a03568b0c",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-275e23d903d6ea87",
+        "src-mlit-passenger-f13d82dd215e8972"
+      ]
+    },
+    {
+      "modelId": "nissan/gt-r",
+      "canonicalName": "GT-R",
+      "sourceName": "GT-R",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "4BA-R35",
+        "DBA-R35"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "nissan/x-trail",
+      "canonicalName": "X-Trail",
+      "sourceName": "エクストレイル",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-HNT32",
+        "5AA-HT32",
+        "5BA-NT32",
+        "5BA-T32",
+        "6AA-SNT33",
+        "6AA-T33",
+        "DAA-HNT32",
+        "DAA-HT32",
+        "DBA-NT32",
+        "DBA-T32",
+        "LDA-DNT31"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-bf9abb9183034fb7",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-de70027e385f91a5",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-82e9658a5783215d",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-5f4f5febfa6752d7",
+        "src-mlit-passenger-1f5e280891b632e9",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-c586c0ecd02ea669",
+        "src-mlit-passenger-62ec16098377f384",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-66ff0f52be473d58",
+        "src-mlit-passenger-80bedeccd1f6dca2",
+        "src-mlit-passenger-371951746ee3954d",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/kicks",
+      "canonicalName": "Kicks",
+      "sourceName": "キックス",
+      "observedInventoryYears": [
+        2026
+      ],
+      "typeCodes": [
+        "6AA-P16",
+        "6AA-SNP16"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-371951746ee3954d",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/juke",
+      "canonicalName": "Juke",
+      "sourceName": "ジューク",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-F15",
+        "CBA-NF15",
+        "DBA-YF15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "nissan/note",
+      "canonicalName": "Note",
+      "sourceName": "ノート",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-E13",
+        "6AA-SNE13",
+        "DAA-HE12",
+        "DAA-SNE12",
+        "DBA-E12",
+        "DBA-NE12"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-90f41a4e69ee44f7",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-371951746ee3954d",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/z",
+      "canonicalName": "Z",
+      "sourceName": "フェアレディZ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-RZ34",
+        "4BA-Z34",
+        "5BA-RZ34",
+        "CBA-Z34"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-371951746ee3954d",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/dayz",
+      "canonicalName": "DAYZ",
+      "sourceName": "DAYZ",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4AA-B45W",
+        "4AA-B48W",
+        "5AA-B44W",
+        "5AA-B47W",
+        "5BA-B43W",
+        "5BA-B46W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-19e17d2dda4c2731",
+        "src-mlit-passenger-62437a6730cf71ea",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/dayz",
+      "canonicalName": "DAYZ",
+      "sourceName": "デイズ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "DBA-B21W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f"
+      ]
+    },
+    {
+      "modelId": "nissan/nv200",
+      "canonicalName": "NV200",
+      "sourceName": "NV200",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-M20",
+        "DBA-M20"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-371951746ee3954d",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/nv200",
+      "canonicalName": "NV200",
+      "sourceName": "NV200 バネット",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-M20",
+        "DBA-M20"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-371951746ee3954d",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "nissan/roox",
+      "canonicalName": "ROOX",
+      "sourceName": "ROOX",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4AA-B45A",
+        "4AA-B48A",
+        "4BA-BB2A",
+        "4BA-BB6A",
+        "5AA-B44A",
+        "5AA-B47A",
+        "5BA-BB1A",
+        "5BA-BB5A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-19e17d2dda4c2731",
+        "src-mlit-passenger-62437a6730cf71ea",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1",
+        "src-mlit-passenger-f14fef9166bd3a02"
+      ]
+    },
+    {
+      "modelId": "suzuki/sx4",
+      "canonicalName": "SX4",
+      "sourceName": "SX4",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "DBA-YA22S",
+        "DBA-YB22S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "suzuki/ignis",
+      "canonicalName": "Ignis",
+      "sourceName": "イグニス",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "5AA-FF21S",
+        "DAA-FF21S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "suzuki/vitara",
+      "canonicalName": "Vitara",
+      "sourceName": "エスクード",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "4BA-YEA1S",
+        "5AA-YEH1S",
+        "CBA-TDA4W",
+        "CBA-YEA1S",
+        "DBA-YD21S",
+        "DBA-YE21S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-07e29db11280085f",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-aaa32dd92f225205"
+      ]
+    },
+    {
+      "modelId": "suzuki/jimny",
+      "canonicalName": "Jimny",
+      "sourceName": "ジムニー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-JB64W",
+        "3BA-JB74W",
+        "3BA-JC74W",
+        "ABA-JB23W",
+        "ABA-JB43W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-4eb27bf1197af19c",
+        "src-mlit-passenger-42957f184a35fa0a",
+        "src-mlit-passenger-13f1943f7ffcbbba",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-152b614a03568b0c",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-275e23d903d6ea87",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-58f8a83211a2e488",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-3103c8bcb5f32eab",
+        "src-mlit-passenger-98ed273a30a89008",
+        "src-mlit-passenger-6060628ed203d5b8",
+        "src-mlit-passenger-90513084ff38373f",
+        "src-mlit-passenger-f859ea48a4a0d9cd",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-55df10fd58fc7e44",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-cff55f4fe5401003"
+      ]
+    },
+    {
+      "modelId": "suzuki/swift",
+      "canonicalName": "Swift",
+      "sourceName": "スイフト",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4BA-ZC33S",
+        "4BA-ZC83S",
+        "5AA-ZC43S",
+        "5AA-ZC53S",
+        "5AA-ZCEDS",
+        "5AA-ZD53S",
+        "5AA-ZDEDS",
+        "5BA-ZC83S",
+        "5BA-ZCDDS",
+        "5BA-ZD83S",
+        "5BA-ZDDDS",
+        "CBA-ZC32S",
+        "CBA-ZC33S",
+        "DAA-ZC43S",
+        "DAA-ZC53S",
+        "DAA-ZD53S",
+        "DBA-ZC13S",
+        "DBA-ZC72S",
+        "DBA-ZC83S",
+        "DBA-ZD72S",
+        "DBA-ZD83S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-4eb27bf1197af19c",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-6060628ed203d5b8",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "suzuki/baleno",
+      "canonicalName": "Baleno",
+      "sourceName": "バレーノ",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "CBA-WB42S",
+        "DBA-WB32S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-3",
+      "canonicalName": "CX-3",
+      "sourceName": "CX-3",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "3DA-DK8AW",
+        "3DA-DK8AY",
+        "3DA-DK8FW",
+        "3DA-DK8FY",
+        "5BA-DKLAW",
+        "5BA-DKLAY",
+        "5BA-DKLFW",
+        "5BA-DKLFY",
+        "6BA-DKEAW",
+        "6BA-DKEFW",
+        "LDA-DK5AW",
+        "LDA-DK5FW"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-2c4e7a4bb82666b8",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-e6d8332a8ae753e4",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-3",
+      "canonicalName": "CX-3",
+      "sourceName": "MAZDA CX-3",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-DK8AY",
+        "3DA-DK8FY",
+        "5BA-DKLAY",
+        "5BA-DKLFY"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-eb8fe3312f7e055d",
+        "src-mlit-passenger-01ad02e102a767b9",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-30",
+      "canonicalName": "CX-30",
+      "sourceName": "CX-30",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "3AA-DMFP",
+        "3DA-DM8P",
+        "5AA-DMEJ3P",
+        "5AA-DMFP",
+        "5BA-DMEP"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-30",
+      "canonicalName": "CX-30",
+      "sourceName": "MAZDA CX-30",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-DM8R",
+        "5AA-DM5K3R",
+        "5AA-DMEJ3R"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-dcab38fb541f0111",
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-8a4efee23e85a9fc",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-9c15f4a60f137f63",
+        "src-mlit-passenger-30c94bf6dc02a2ef"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-5",
+      "canonicalName": "CX-5",
+      "sourceName": "CX-5",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "3DA-KF2P",
+        "5BA-KF5P",
+        "6BA-KF5P",
+        "6BA-KFEP",
+        "DBA-KE5AW",
+        "DBA-KE5FW",
+        "DBA-KEEFW",
+        "DBA-KF5P",
+        "DBA-KFEP",
+        "LDA-KE2AW",
+        "LDA-KE2FW",
+        "LDA-KF2P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-bf9abb9183034fb7",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-de70027e385f91a5",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-e6d8332a8ae753e4",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-de7ed5f81961d4cf",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-7a762a165b8e85a3",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-5",
+      "canonicalName": "CX-5",
+      "sourceName": "MAZDA CX-5",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-KF2P",
+        "5AA-KMYSDP",
+        "6BA-KF5P",
+        "6BA-KFEP"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-515a44ce4b0eb5b4",
+        "src-mlit-passenger-51a0221b0befeef2",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-8a4efee23e85a9fc",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-9c15f4a60f137f63",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-0ea186f566975869",
+        "src-mlit-passenger-59c4d5983e8abcc9"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-60",
+      "canonicalName": "CX-60",
+      "sourceName": "CX-60",
+      "observedInventoryYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3CA-KH3R3P",
+        "3DA-KH3P",
+        "5BA-KH5P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-7a762a165b8e85a3",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-9c15f4a60f137f63",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-0ea186f566975869",
+        "src-mlit-passenger-59c4d5983e8abcc9"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-60",
+      "canonicalName": "CX-60",
+      "sourceName": "MAZDA CX-60",
+      "observedInventoryYears": [
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-KH3R3P",
+        "3DA-KH3P",
+        "5BA-KH5P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-515a44ce4b0eb5b4",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-8a4efee23e85a9fc"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-8",
+      "canonicalName": "CX-8",
+      "sourceName": "CX-8",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3DA-KG2P",
+        "5BA-KG5P",
+        "6BA-KG5P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3023e78d917295d1",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-e6d8332a8ae753e4",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-7a762a165b8e85a3",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-59c4d5983e8abcc9",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/cx-80",
+      "canonicalName": "CX-80",
+      "sourceName": "MAZDA CX-80",
+      "observedInventoryYears": [
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-KL3R3P",
+        "3DA-KL3P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-515a44ce4b0eb5b4",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-8a4efee23e85a9fc",
+        "src-mlit-passenger-9c15f4a60f137f63",
+        "src-mlit-passenger-0ea186f566975869"
+      ]
+    },
+    {
+      "modelId": "mazda/mazda2",
+      "canonicalName": "Mazda2",
+      "sourceName": "MAZDA 2",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-DJLFS",
+        "3DA-DJ5AS",
+        "3DA-DJ5FS",
+        "5BA-DJLAS",
+        "5BA-DJLFS",
+        "6BA-DJLAS",
+        "6BA-DJLFS"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-dcab38fb541f0111",
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-de7ed5f81961d4cf",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-7a762a165b8e85a3",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-59c4d5983e8abcc9",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/mazda2",
+      "canonicalName": "Mazda2",
+      "sourceName": "デミオ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "6BA-DJLAS",
+        "6BA-DJLFS",
+        "CBA-DJLFS",
+        "DBA-DJ3AS",
+        "DBA-DJ3FS",
+        "LDA-DJ5AS",
+        "LDA-DJ5FS"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-1f5e280891b632e9"
+      ]
+    },
+    {
+      "modelId": "mazda/mazda3",
+      "canonicalName": "MAZDA3",
+      "sourceName": "MAZDA 3",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-BPEP",
+        "3DA-BP8P",
+        "3DA-BP8R",
+        "5AA-BPEK3R",
+        "5AA-BPEP",
+        "5AA-BPFJ3P",
+        "5AA-BPFJ3R",
+        "5AA-BPLK3R",
+        "5BA-BPFP",
+        "6BA-BP5P",
+        "6BA-BP5R"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-dcab38fb541f0111",
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-8a4efee23e85a9fc",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-9c15f4a60f137f63",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/mazda3",
+      "canonicalName": "MAZDA3",
+      "sourceName": "アクセラ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "DAA-BYEFP",
+        "DBA-BM5AP",
+        "DBA-BM5AS",
+        "DBA-BM5FP",
+        "DBA-BM5FS",
+        "DBA-BMEFS",
+        "LDA-BM2AP",
+        "LDA-BM2AS",
+        "LDA-BM2FP",
+        "LDA-BM2FS",
+        "LDA-BMLFP",
+        "LDA-BMLFS"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-1f5e280891b632e9"
+      ]
+    },
+    {
+      "modelId": "mazda/mazda6",
+      "canonicalName": "MAZDA6",
+      "sourceName": "MAZDA 6",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3DA-GJ2AP",
+        "3DA-GJ2AW",
+        "3DA-GJ2FP",
+        "3DA-GJ2FW",
+        "5BA-GJ5FP",
+        "5BA-GJ5FW",
+        "6BA-GJ5FP",
+        "6BA-GJ5FW",
+        "6BA-GJEFP",
+        "6BA-GJEFW"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-82224b02e8434de1",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c3186373c4a4713b",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-30c94bf6dc02a2ef",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-8ddc88c3f6dd154f"
+      ]
+    },
+    {
+      "modelId": "mazda/mazda6",
+      "canonicalName": "MAZDA6",
+      "sourceName": "アテンザ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "3DA-GJ2AP",
+        "3DA-GJ2AW",
+        "3DA-GJ2FP",
+        "3DA-GJ2FW",
+        "6BA-GJ5FP",
+        "6BA-GJ5FW",
+        "6BA-GJEFP",
+        "6BA-GJEFW",
+        "DBA-GJ5FP",
+        "DBA-GJ5FW",
+        "DBA-GJEFP",
+        "DBA-GJEFW",
+        "LDA-GJ2AP",
+        "LDA-GJ2AW",
+        "LDA-GJ2FP",
+        "LDA-GJ2FW"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-ff365f9b2a72fc0d",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-1adc55ca2a616b7f",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-bcbeb1fef27db8b9",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-e6d8332a8ae753e4"
+      ]
+    },
+    {
+      "modelId": "mazda/mpv",
+      "canonicalName": "MPV",
+      "sourceName": "MPV",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "DBA-LY3P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485"
+      ]
+    },
+    {
+      "modelId": "mazda/mx-30",
+      "canonicalName": "MX-30",
+      "sourceName": "MX-30",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "5AA-DREJ3P"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "mazda/mx-30",
+      "canonicalName": "MX-30",
+      "sourceName": "MAZDA MX-30",
+      "observedInventoryYears": [
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-DREJ3R"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-dcab38fb541f0111",
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-ad0384c0bee6960e"
+      ]
+    },
+    {
+      "modelId": "mazda/mx-5",
+      "canonicalName": "MX-5",
+      "sourceName": "MAZDA ROADSTER",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-ND5RE",
+        "5BA-NDERE"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-74685803e76786ef",
+        "src-mlit-passenger-dd731b895e20bd8c",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "mazda/mx-5",
+      "canonicalName": "MX-5",
+      "sourceName": "ロードスター",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "5BA-ND5RC",
+        "5BA-NDERC",
+        "DBA-ND5RC",
+        "DBA-NDERC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "subaru/brz",
+      "canonicalName": "Brz",
+      "sourceName": "BRZ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-ZD8",
+        "4BA-ZC6",
+        "DBA-ZC6"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "subaru/wrx",
+      "canonicalName": "Wrx",
+      "sourceName": "WRX",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-VAG",
+        "5BA-VBH",
+        "CBA-VAB",
+        "DBA-VAG"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-efd9f8cee958c1c7",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "subaru/xv",
+      "canonicalName": "Xv",
+      "sourceName": "XV",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-GT3",
+        "5AA-GTE",
+        "DBA-GT3",
+        "DBA-GT7"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "subaru/impreza",
+      "canonicalName": "Impreza",
+      "sourceName": "インプレッサ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-GK2",
+        "3BA-GK3",
+        "3BA-GK6",
+        "3BA-GK7",
+        "3BA-GT2",
+        "3BA-GT3",
+        "3BA-GT6",
+        "3BA-GT7",
+        "3BA-GU6",
+        "3BA-GU7",
+        "5AA-GTE",
+        "5AA-GUD",
+        "5AA-GUE",
+        "DAA-GPE",
+        "DBA-GJ2",
+        "DBA-GJ3",
+        "DBA-GJ6",
+        "DBA-GJ7",
+        "DBA-GK2",
+        "DBA-GK3",
+        "DBA-GK6",
+        "DBA-GK7",
+        "DBA-GP2",
+        "DBA-GP3",
+        "DBA-GP6",
+        "DBA-GP7",
+        "DBA-GT2",
+        "DBA-GT3",
+        "DBA-GT6",
+        "DBA-GT7"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-efd9f8cee958c1c7",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "subaru/crosstrek",
+      "canonicalName": "Crosstrek",
+      "sourceName": "クロストレック",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-GUD",
+        "5AA-GUE",
+        "5AA-GUF"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-efd9f8cee958c1c7",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed"
+      ]
+    },
+    {
+      "modelId": "subaru/justy",
+      "canonicalName": "Justy",
+      "sourceName": "ジャスティ",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-M900F",
+        "5BA-M910F",
+        "DBA-M900F",
+        "DBA-M910F"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "subaru/forester",
+      "canonicalName": "Forester",
+      "sourceName": "フォレスター",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-SL5",
+        "4BA-SK5",
+        "5AA-SKE",
+        "5AA-SLG",
+        "5BA-SK9",
+        "DBA-SJ5",
+        "DBA-SJG"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-efd9f8cee958c1c7",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "subaru/legacy",
+      "canonicalName": "Legacy",
+      "sourceName": "レガシィ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4BA-BS9",
+        "4BA-BT5",
+        "DBA-BM9",
+        "DBA-BMG",
+        "DBA-BMM",
+        "DBA-BN9",
+        "DBA-BR9",
+        "DBA-BRF",
+        "DBA-BRG",
+        "DBA-BRM",
+        "DBA-BS9"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-efd9f8cee958c1c7",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "subaru/levorg",
+      "canonicalName": "Levorg",
+      "sourceName": "レヴォーグ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-VN5",
+        "4BA-VN5",
+        "5AA-VNF",
+        "5BA-VNH",
+        "DBA-VM4",
+        "DBA-VMG"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-efd9f8cee958c1c7",
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-8ee42da64747e260",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/delica-mini",
+      "canonicalName": "Delica Mini",
+      "sourceName": "DELICA MINI",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4AA-B35A",
+        "4AA-B38A",
+        "4BA-BA2A",
+        "4BA-BA6A",
+        "5AA-B34A",
+        "5AA-B37A",
+        "5BA-BA1A",
+        "5BA-BA5A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-57127ade4cf27c50",
+        "src-mlit-passenger-af983edf19674dc3",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-55df10fd58fc7e44",
+        "src-mlit-passenger-9531e6ae2b871190"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/rvr",
+      "canonicalName": "RVR",
+      "sourceName": "RVR",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "5BA-GA4W",
+        "DBA-GA3W",
+        "DBA-GA4W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-58f8a83211a2e488",
+        "src-mlit-passenger-9f0671fc63541edb",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/outlander",
+      "canonicalName": "Outlander",
+      "sourceName": "アウトランダー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "DBA-GF7W",
+        "DBA-GF8W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/eclipse-cross",
+      "canonicalName": "Eclipse Cross",
+      "sourceName": "エクリプス クロス",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-GK9W",
+        "5BA-GK1W",
+        "DBA-GK1W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-65f8223d18573774",
+        "src-mlit-passenger-869a40a6c3feefc5",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-62ec16098377f384",
+        "src-mlit-passenger-77a77212f33126c1",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-8ddc88c3f6dd154f",
+        "src-mlit-passenger-66ff0f52be473d58"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/galant",
+      "canonicalName": "Galant",
+      "sourceName": "ギャラン",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "CBA-CX4A",
+        "CBA-CY4A",
+        "DBA-CX3A",
+        "DBA-CX4A",
+        "DBA-CX6A",
+        "DBA-CY3A",
+        "DBA-CY4A",
+        "DBA-CY6A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-58f8a83211a2e488",
+        "src-mlit-passenger-9f0671fc63541edb",
+        "src-mlit-passenger-636840c6f9474da2"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/mirage",
+      "canonicalName": "Mirage",
+      "sourceName": "ミラージュ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-A03A",
+        "DBA-A03A",
+        "DBA-A05A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3b91cbaae0a0b192",
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b3dc174d5fee3b80",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/ek",
+      "canonicalName": "eK",
+      "sourceName": "eK",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4AA-B35W",
+        "4AA-B38W",
+        "5AA-B34W",
+        "5AA-B37W",
+        "5BA-B33W",
+        "5BA-B36W",
+        "DBA-B11W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-57127ade4cf27c50",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-af983edf19674dc3",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-55df10fd58fc7e44",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "mitsubishi/ek-space",
+      "canonicalName": "eK SPACE",
+      "sourceName": "eK SPACE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4AA-B35A",
+        "4AA-B38A",
+        "5AA-B34A",
+        "5AA-B37A",
+        "5BA-BA1A",
+        "5BA-BA5A",
+        "DBA-B11A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-57127ade4cf27c50",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-af983edf19674dc3",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-55df10fd58fc7e44",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    },
+    {
+      "modelId": "daihatsu/tanto",
+      "canonicalName": "Tanto",
+      "sourceName": "タント",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-LA650S",
+        "5BA-LA660S",
+        "6BA-LA650S",
+        "6BA-LA660S",
+        "DBA-LA600S",
+        "DBA-LA610S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-eba2e67c2979bb93",
+        "src-mlit-passenger-8a3c23026f67b82f",
+        "src-mlit-passenger-eb369f28ab9f1709",
+        "src-mlit-passenger-f13d82dd215e8972",
+        "src-mlit-passenger-0a08b4157aca6203",
+        "src-mlit-passenger-8799770c54d7d78f",
+        "src-mlit-passenger-db106101d7d4ed04",
+        "src-mlit-passenger-57d7963763dc73d1",
+        "src-mlit-passenger-fefd359dc42f8a6d",
+        "src-mlit-passenger-d8ea99797e11ef1d",
+        "src-mlit-passenger-a4045ab0a2a7418f",
+        "src-mlit-passenger-3165bf519f826129",
+        "src-mlit-passenger-d9f1ba4a8bb0c331",
+        "src-mlit-passenger-6651bcb387ac8297",
+        "src-mlit-passenger-c4a65a8e4f14eec6",
+        "src-mlit-passenger-a63e12c27a2c101c",
+        "src-mlit-passenger-9531e6ae2b871190",
+        "src-mlit-passenger-cff55f4fe5401003",
+        "src-mlit-passenger-04eef249cd02b1b1"
+      ]
+    }
+  ]
+}

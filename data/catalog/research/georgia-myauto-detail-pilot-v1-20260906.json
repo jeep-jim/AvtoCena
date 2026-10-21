@@ -1,0 +1,60 @@
+{
+  "version": 3,
+  "completed": true,
+  "checkedAt": "2026-09-06T23:53:39.017Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 15,
+  "sampleLimit": 10,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "georgia",
+      "requests": [
+        {
+          "origin": "https://www.myauto.ge",
+          "path": "/en/main",
+          "method": "GET",
+          "status": 403,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "sourceId": "myauto_georgia_list",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "stopped": true,
+      "status": "blocked_or_failed",
+      "error": "myauto_list_routes_failed:[url]",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

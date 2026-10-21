@@ -1,0 +1,22 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {ChatDialog} from './ChatDialog';
+import type {NotificationReplyTarget} from '@/lib/notification-reply';
+export function NotificationReply({target,text,title}:{target?:NotificationReplyTarget;text:string;title:string}){
+ const [open,setOpen]=useState(false),[draft,setDraft]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[sent,setSent]=useState(false);
+ const operation=useRef('');
+ const [threads,setThreads]=useState<{id:string;title:string}[]>([]),[thread,setThread]=useState('');
+ useEffect(()=>{if(!open||target?.kind!=='notice')return;let active=true;fetch('/api/crm/chat',{cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok)throw Error(d.error);if(active)setThreads((d.threads||[]).filter((t:{kind:string})=>['team','room'].includes(t.kind)));}).catch(()=>{if(active)setError('Не удалось загрузить доступные переписки.');});return()=>{active=false;};},[open,target?.kind]);
+ if(!target)return null;
+ async function send(){
+  if(!target||busy||!draft.trim()||(target.kind==='notice'&&!thread))return;
+  operation.current||=crypto.randomUUID();setBusy(true);setError('');
+  try{
+   const body=target.kind==='notice'?{thread,noticeId:target.noticeId,text:draft,operationId:operation.current}:target.kind==='chat'?{thread:target.thread,replyToId:target.messageId,text:draft,operationId:operation.current}:{type:target.type,id:target.id,replyTo:target.messageId,text:draft,operationId:operation.current};
+   const response=await fetch(target.kind==='discussion'?'/api/crm/discussion':'/api/crm/chat',{method:'POST',signal:AbortSignal.timeout(20000),headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+   const data=await response.json();if(!response.ok)throw Error(data.error||'Не удалось отправить ответ');
+   setDraft('');operation.current='';setSent(true);setOpen(false);window.dispatchEvent(new Event('avtocena:crm-change'));
+  }catch(e){setError(e instanceof Error&&!['TypeError','AbortError','TimeoutError'].includes(e.name)?e.message:'Не удалось связаться с сервером. Повторите отправку.');}finally{setBusy(false);}
+ }
+ return <><button type="button" className="ac-notice-reply" onClick={()=>{setOpen(true);setError('');setSent(false);}}>Ответить</button>{sent&&<span role="status">Ответ отправлен</span>}{open&&<ChatDialog title="Ответ на сообщение" onClose={()=>{if(!busy)setOpen(false);}}><form onSubmit={e=>{e.preventDefault();void send();}}>{target.kind==='notice'&&<label className="ac-notice-draft">Куда отправить ответ<select required value={thread} onChange={e=>{setThread(e.target.value);operation.current='';}}><option value="">Выберите переписку</option>{threads.map(t=><option key={t.id} value={t.id}>{t.title}</option>)}</select></label>}<blockquote className="ac-notice-quote"><strong>{title}</strong><p>{text}</p></blockquote><label className="ac-notice-draft">Ваш ответ<textarea autoFocus required maxLength={target.kind==='discussion'?2000:3000} value={draft} disabled={busy} onChange={e=>{setDraft(e.target.value);operation.current='';}} onKeyDown={e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();void send();}}}/></label>{error&&<p role="alert">{error}</p>}<button className="ac-notice-send" disabled={busy||!draft.trim()||(target.kind==='notice'&&!thread)}>{busy?'Отправляем…':'Отправить ответ'}</button></form></ChatDialog>}<style>{`.ac-notice-reply{font-size:13px;text-decoration:underline;padding:8px;margin-right:8px}.ac-notice-quote{border-left:3px solid #ef4444;padding:10px;background:var(--ac-surface-2);font-size:13px;max-height:180px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}.ac-notice-draft{display:grid;gap:8px;margin-top:16px}.ac-notice-draft select{padding:10px;border:1px solid var(--ac-border);background:var(--ac-surface);color:var(--ac-text)}.ac-notice-draft textarea{min-height:100px;padding:12px;border:1px solid var(--ac-border);border-radius:10px;background:var(--ac-surface-2);color:var(--ac-text);width:100%;resize:vertical}.ac-notice-send{display:block;background:#ef4444;color:white;border-radius:10px;padding:12px 18px;margin-top:14px}.ac-chat-dialog{position:fixed;inset:0;margin:auto;width:min(460px,calc(100vw - 24px));max-height:85dvh;overflow:auto;padding:20px;border:1px solid var(--ac-border);border-radius:18px;background:var(--ac-surface);color:var(--ac-text)}.ac-chat-dialog::backdrop{background:#0008}.ac-chat-dialog>header{display:flex;justify-content:space-between;gap:16px;margin-bottom:16px}`}</style></>;
+}

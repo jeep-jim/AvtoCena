@@ -1,0 +1,38 @@
+name: Regcloud — inspect page errors
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-page-error.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read bounded error categories without customer data
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,collections,json; s=sys.stdin.read(); print("ERROR_CATEGORIES",json.dumps(collections.Counter(re.findall(r"(?:Error: |code: [\"\x27])([a-zA-Z][a-zA-Z0-9_]{3,80})",s)))); print("DIGESTS",json.dumps(collections.Counter(re.findall(r"digest: [\"\x27]([0-9]{4,20})",s)))); print("COUNTS",{p:s.count(p) for p in ["TypeError","object_storage_response_timeout","home_initial_catalog_failed","home_initial_pricing_failed","green_invalid_snapshot","ETIMEDOUT","ECONNRESET","fetch failed","Failed to find Server Action","ChunkLoadError"]})'
+          docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,json; s=sys.stdin.read(); lines=s.splitlines(); out=[]; patterns=["Cannot", "digest:"]; [(out.append(re.sub(r"https?://[^ \n]+", "[url]", line)[:300])) for line in lines if any(p in line for p in patterns) and " at " not in line]; print("ERROR_DETAILS",json.dumps(out[-25:]))'
+          docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,json; lines=sys.stdin.read().splitlines(); out=[]; [(out.append(re.sub(r"https?://[^ \n]+", "[url]", line)[:260])) for line in lines if re.match(r"^\s*(?:⨯\s*)?(?:Error:|AjesUnavailable|at |reason:|digest:)",line)]; print("ERROR_STACKS",json.dumps(out[-90:]))'
+          docker logs --since 2h --tail 12000 avtocena-production 2>&1 | python3 -c 'import sys,re,json; lines=sys.stdin.read().splitlines(); out=[]; [(out.append([re.sub(r"https?://[^ \n]+", "[url]", x)[:260] for x in lines[max(0,i-12):i+1] if re.search(r"Error| at |reason:|digest:",x)])) for i,line in enumerate(lines) if "digest:" in line]; print("DIGEST_STACKS",json.dumps(out[-12:]))'
+          docker exec avtocena-production node -e 'const fs=require("fs");for(const [name,pos] of [["4678",11993],["8115",2169]]){const s=fs.readFileSync("apps/web/.next/server/chunks/"+name+".js","utf8");console.log("STATIC_CODE",name,s.slice(pos-200,pos+250))}' || true
+          docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
+          REMOTE

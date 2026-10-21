@@ -1,0 +1,749 @@
+{
+  "version": 1,
+  "date": "2026-09-07",
+  "initialRun": "34083757152",
+  "completionRun": "34084620827",
+  "productionWrites": false,
+  "japanIncluded": false,
+  "photoStorage": "source_urls_only",
+  "maxOffersPerSource": 200,
+  "maxPagesPerSource": 5,
+  "maxRequestsPerSource": 350,
+  "markets": [
+    {
+      "market": "korea",
+      "counts": {
+        "returnedRows": 199,
+        "duplicateRows": 12,
+        "uniqueNormalizedRows": 187,
+        "unexaminedRows": 0,
+        "examined": 187,
+        "allowedYearExamined": 141,
+        "calculated": 88,
+        "allowedYearCalculated": 76,
+        "passingAllFilters": 76,
+        "detailWorkBlocked": 0
+      },
+      "sources": [
+        {
+          "sourceId": "encar_direct",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/korea/encar_direct/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 5,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 100,
+            "duplicateRows": 12,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 88,
+            "unexaminedRows": 0,
+            "examined": 88,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 54,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 88
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "powerHp:missing:peak_power_missing": 88,
+            "certifiedPower:missing:certified_30min_power_missing": 8,
+            "engineCc:ambiguous:explicit_semantic_ambiguity": 2
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "kcar_korea_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/korea/kcar_korea_open/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 105,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": 100,
+            "adapterRejectedRows": 1,
+            "adapterUnexaminedRows": 0,
+            "returnedRows": 99,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 99,
+            "unexaminedRows": 0,
+            "examined": 99,
+            "detailWorkBlocked": 0,
+            "calculated": 88,
+            "allowedYearExamined": 87,
+            "allowedYearCalculated": 76,
+            "passingAllFilters": 76,
+            "failures": {
+              "verified_specifications_required": 11
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 88,
+          "missingFields": {
+            "certifiedPower:missing:certified_30min_power_missing": 11,
+            "engineCc:ambiguous:explicit_semantic_ambiguity": 4
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        }
+      ],
+      "provisionalExpenses": true,
+      "acceptedAfterCardDeduplication": 76
+    },
+    {
+      "market": "europe",
+      "counts": {
+        "returnedRows": 194,
+        "duplicateRows": 4,
+        "uniqueNormalizedRows": 190,
+        "unexaminedRows": 0,
+        "examined": 190,
+        "allowedYearExamined": 190,
+        "calculated": 167,
+        "allowedYearCalculated": 167,
+        "passingAllFilters": 156,
+        "detailWorkBlocked": 0
+      },
+      "sources": [
+        {
+          "sourceId": "mobile_de_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/europe/mobile_de_open/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 106,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": 114,
+            "adapterRejectedRows": 13,
+            "adapterUnexaminedRows": 0,
+            "returnedRows": 101,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 101,
+            "unexaminedRows": 0,
+            "examined": 101,
+            "detailWorkBlocked": 0,
+            "calculated": 99,
+            "allowedYearExamined": 101,
+            "allowedYearCalculated": 99,
+            "passingAllFilters": 90,
+            "failures": {
+              "verified_specifications_required": 2
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 99,
+          "missingFields": {
+            "engineCc:ambiguous:unclassified_field_provenance": 2
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "autoscout_europe_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/europe/autoscout_europe_open/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 94,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 93,
+            "duplicateRows": 4,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 89,
+            "unexaminedRows": 0,
+            "examined": 89,
+            "detailWorkBlocked": 0,
+            "calculated": 68,
+            "allowedYearExamined": 89,
+            "allowedYearCalculated": 68,
+            "passingAllFilters": 66,
+            "failures": {
+              "verified_specifications_required": 20,
+              "needs_customs_data": 1
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 68,
+          "missingFields": {
+            "certifiedPower:missing:certified_30min_power_missing": 18,
+            "fuelPowertrain:ambiguous:explicit_semantic_ambiguity": 1,
+            "engineCc:missing:engine_cc_missing": 2,
+            "powerHp:missing:peak_power_missing": 1
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        }
+      ],
+      "provisionalExpenses": true,
+      "acceptedAfterCardDeduplication": 155
+    },
+    {
+      "market": "china",
+      "counts": {
+        "returnedRows": 310,
+        "duplicateRows": 0,
+        "uniqueNormalizedRows": 310,
+        "unexaminedRows": 86,
+        "examined": 224,
+        "allowedYearExamined": 214,
+        "calculated": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "detailWorkBlocked": 107
+      },
+      "sources": [
+        {
+          "sourceId": "autohome_used_china_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/china/autohome_used_china_open/report.json",
+          "status": "stopped_by_source_response",
+          "error": null,
+          "requestCount": 3,
+          "counts": {
+            "pages": 1,
+            "sourceListingRows": 24,
+            "adapterRejectedRows": 0,
+            "adapterUnexaminedRows": 0,
+            "returnedRows": 24,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 24,
+            "unexaminedRows": 0,
+            "examined": 24,
+            "detailWorkBlocked": 23,
+            "calculated": 0,
+            "allowedYearExamined": 14,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 1,
+              "pilot_request_outside_envelope": 23
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "engineCc:missing:engine_cc_missing": 1
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "dongchedi_china_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/china/dongchedi_china_open/report.json",
+          "status": "blocked_or_failed",
+          "error": "dongchedi_public_inventory_requires_login_or_permitted_partner_feed",
+          "requestCount": 0,
+          "counts": {
+            "pages": 0,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 0,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 0,
+            "unexaminedRows": 0,
+            "examined": 0,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 0,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {},
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {},
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "guazi_china_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/china/guazi_china_open/report.json",
+          "status": "blocked_or_failed",
+          "error": "yandex_bridge_http_503_guazi_1_guazi_source_blocked_bot_challenge",
+          "requestCount": 1,
+          "counts": {
+            "pages": 0,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 0,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 0,
+            "unexaminedRows": 0,
+            "examined": 0,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 0,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {},
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {},
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "autohome_new_china_open",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/china/autohome_new_china_open/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 350,
+          "counts": {
+            "pages": 2,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 286,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 286,
+            "unexaminedRows": 86,
+            "examined": 200,
+            "detailWorkBlocked": 84,
+            "calculated": 0,
+            "allowedYearExamined": 200,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 116,
+              "pilot_request_outside_envelope": 84
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "engineCc:ambiguous:explicit_semantic_ambiguity": 98,
+            "powerHp:ambiguous:non_exact_power_provenance": 59,
+            "certifiedPower:missing:certified_30min_power_missing": 101,
+            "powerHp:missing:peak_power_missing": 42
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        }
+      ],
+      "provisionalExpenses": false,
+      "acceptedAfterCardDeduplication": 0
+    },
+    {
+      "market": "uae",
+      "counts": {
+        "returnedRows": 242,
+        "duplicateRows": 4,
+        "uniqueNormalizedRows": 238,
+        "unexaminedRows": 0,
+        "examined": 238,
+        "allowedYearExamined": 212,
+        "calculated": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "detailWorkBlocked": 0
+      },
+      "sources": [
+        {
+          "sourceId": "dubizzle_uae_open",
+          "runId": "34084620827",
+          "codeSha": "0f336ade40a71f866a7ed14bfd5869875b625ba9",
+          "report": "data/catalog/research/five-market-trial-20260907/34084620827/uae/dubizzle_uae_open/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 5,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 124,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 124,
+            "unexaminedRows": 0,
+            "examined": 124,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 98,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 124
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "engineCc:ambiguous:explicit_semantic_ambiguity": 104,
+            "powerHp:ambiguous:explicit_semantic_ambiguity": 121,
+            "certifiedPower:missing:certified_30min_power_missing": 13,
+            "engineCc:missing:engine_cc_missing": 14,
+            "powerHp:missing:peak_power_missing": 3,
+            "engineCc:ambiguous:unclassified_field_provenance": 1
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "dubicars_uae_exact",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/uae/dubicars_uae_exact/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 155,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 118,
+            "duplicateRows": 4,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 114,
+            "unexaminedRows": 0,
+            "examined": 114,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 114,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 114
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "engineCc:ambiguous:explicit_semantic_ambiguity": 109,
+            "powerHp:missing:peak_power_missing": 30,
+            "certifiedPower:missing:certified_30min_power_missing": 9,
+            "powerHp:ambiguous:explicit_semantic_ambiguity": 1,
+            "engineCc:missing:engine_cc_missing": 4
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        }
+      ],
+      "provisionalExpenses": true,
+      "acceptedAfterCardDeduplication": 0
+    },
+    {
+      "market": "georgia",
+      "counts": {
+        "returnedRows": 124,
+        "duplicateRows": 50,
+        "uniqueNormalizedRows": 74,
+        "unexaminedRows": 0,
+        "examined": 74,
+        "allowedYearExamined": 74,
+        "calculated": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "detailWorkBlocked": 0
+      },
+      "sources": [
+        {
+          "sourceId": "myauto_georgia_list",
+          "runId": "34083757152",
+          "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f",
+          "report": "data/catalog/research/five-market-trial-20260907/34083757152/georgia/myauto_georgia_list/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 5,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 82,
+            "duplicateRows": 50,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 32,
+            "unexaminedRows": 0,
+            "examined": 32,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 32,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 32
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "engineCc:ambiguous:unclassified_field_provenance": 31,
+            "powerHp:missing:peak_power_missing": 32,
+            "certifiedPower:missing:certified_30min_power_missing": 13
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        },
+        {
+          "sourceId": "autopapa_georgia_open",
+          "runId": "34084620827",
+          "codeSha": "0f336ade40a71f866a7ed14bfd5869875b625ba9",
+          "report": "data/catalog/research/five-market-trial-20260907/34084620827/georgia/autopapa_georgia_open/report.json",
+          "status": "listing_received",
+          "error": null,
+          "requestCount": 5,
+          "counts": {
+            "pages": 5,
+            "sourceListingRows": null,
+            "adapterRejectedRows": null,
+            "adapterUnexaminedRows": null,
+            "returnedRows": 42,
+            "duplicateRows": 0,
+            "normalizationRejected": 0,
+            "uniqueNormalizedRows": 42,
+            "unexaminedRows": 0,
+            "examined": 42,
+            "detailWorkBlocked": 0,
+            "calculated": 0,
+            "allowedYearExamined": 42,
+            "allowedYearCalculated": 0,
+            "passingAllFilters": 0,
+            "failures": {
+              "verified_specifications_required": 42
+            },
+            "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+          },
+          "arithmeticChecked": 0,
+          "missingFields": {
+            "powerHp:missing:peak_power_missing": 39,
+            "fuelPowertrain:missing:fuel_or_powertrain_missing": 1,
+            "certifiedPower:missing:certified_30min_power_missing": 5
+          },
+          "productionBaseline": {
+            "catalog/manifest.json": {
+              "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+              "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+            },
+            "markets/markets.json": {
+              "etag": "\"19d121881eced830ecab4af105a02735\"",
+              "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+            },
+            "fees/exchange-rates.json": {
+              "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+              "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+            }
+          }
+        }
+      ],
+      "provisionalExpenses": true,
+      "acceptedAfterCardDeduplication": 0
+    }
+  ],
+  "totals": {
+    "returnedRows": 1069,
+    "duplicateRows": 70,
+    "uniqueNormalizedRows": 999,
+    "unexaminedRows": 86,
+    "examined": 913,
+    "allowedYearExamined": 831,
+    "calculated": 255,
+    "allowedYearCalculated": 243,
+    "passingAllFilters": 232,
+    "detailWorkBlocked": 107
+  },
+  "arithmeticFailures": [],
+  "intentionallyHiddenPrices": [
+    {
+      "sourceId": "autoscout_europe_open",
+      "sourceOfferId": "b3e483c9-6192-4250-b8d0-d9c61269b4e2",
+      "reason": "above_public_price_limit",
+      "totalRub": 39412600
+    },
+    {
+      "sourceId": "autoscout_europe_open",
+      "sourceOfferId": "5343bd28-232f-4c21-9f4f-ac2d62d48eea",
+      "reason": "above_public_price_limit",
+      "totalRub": 15337776
+    }
+  ],
+  "limitations": [
+    "Bounded source-order experiment; not a full-market inventory or an extrapolation of available cars.",
+    "Counts identify source listings, not unique physical vehicles across different websites.",
+    "86 additional normalized Autohome rows were outside the 200-listing examination cap.",
+    "All 255 completed calculations use actual provisional runtime defaults: Korea/Europe have no active production CRM profiles.",
+    "Source image URLs were checked structurally; visual gallery acceptance and production publication remain open.",
+    "Bridge request counts measure Actions-to-bridge calls; upstream bridge traffic is not visible here.",
+    "Initial generic envelope errors on Autohome mean a source stop (used) or the 350-request cap (new); the original reports are preserved."
+  ],
+  "acceptedAfterCardDeduplication": 231,
+  "cardDuplicates": [
+    {
+      "keptId": "ccba1663335d838443c104df",
+      "removedId": "fc9c2dd773d5856f1431ff18",
+      "market": "europe",
+      "sourceId": "mobile_de_open",
+      "coverIdentity": "img.classistatic.de/api/v1/mo-prod/images/a6/a6f112ac-7aa0-4225-add5-66f84bb7ec6f"
+    }
+  ],
+  "arithmeticChecked": 255
+}

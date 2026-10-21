@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "completed": true,
+  "checkedAt": "2026-09-07T00:38:35.939Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 100,
+  "sampleLimit": 50,
+  "pageLimit": 3,
+  "markets": [
+    {
+      "market": "korea",
+      "requests": [
+        {
+          "origin": "https://api.kcar.com",
+          "path": "/bc/search/list/drct",
+          "method": "POST",
+          "status": null
+        }
+      ],
+      "sourceId": "kcar_korea_open",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "status": "blocked_or_failed",
+      "error": "The operation was aborted due to timeout",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    }
+  ],
+  "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

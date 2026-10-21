@@ -1,0 +1,167 @@
+name: Apply buyer gallery ZIP once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/apply-buyer-gallery-zip-once.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: buyer-gallery-zip-once
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Fetch staged ZIP chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin buyer-gallery-upload-zip
+          mapfile -t chunks < <(git ls-tree -r --name-only origin/buyer-gallery-upload-zip .gallery-upload/zip | LC_ALL=C sort)
+          if [ "${#chunks[@]}" -eq 0 ]; then
+            echo "No staged ZIP chunks found" >&2
+            exit 1
+          fi
+          : > /tmp/buyers.b64
+          for f in "${chunks[@]}"; do
+            git show "origin/buyer-gallery-upload-zip:${f}" >> /tmp/buyers.b64
+          done
+          base64 -d /tmp/buyers.b64 > /tmp/buyers.zip
+          echo "83296554da7404d10ec4302b4a6c249d3013510a864561c75a60fdf22ad7818b  /tmp/buyers.zip" | sha256sum -c -
+
+      - name: Verify ZIP and install photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import hashlib
+
+          expected = {
+              16: (40923, (1280, 826)),
+              17: (38449, (1280, 960)),
+              18: (37094, (1280, 992)),
+              19: (36709, (1280, 960)),
+              20: (38598, (1280, 951)),
+              21: (40824, (1280, 922)),
+              22: (35377, (1280, 960)),
+              23: (39817, (1195, 896)),
+              24: (39337, (1280, 963)),
+          }
+
+          def jpeg_size(data: bytes):
+              if data[:2] != b'\xff\xd8':
+                  raise ValueError('not jpeg')
+              i = 2
+              sof = {0xC0,0xC1,0xC2,0xC3,0xC5,0xC6,0xC7,0xC9,0xCA,0xCB,0xCD,0xCE,0xCF}
+              while i + 3 < len(data):
+                  if data[i] != 0xFF:
+                      i += 1
+                      continue
+                  while i < len(data) and data[i] == 0xFF:
+                      i += 1
+                  if i >= len(data):
+                      break
+                  marker = data[i]
+                  i += 1
+                  if marker in {0xD8, 0xD9} or 0xD0 <= marker <= 0xD7:
+                      continue
+                  if i + 1 >= len(data):
+                      break
+                  length = int.from_bytes(data[i:i+2], 'big')
+                  if marker in sof:
+                      h = int.from_bytes(data[i+3:i+5], 'big')
+                      w = int.from_bytes(data[i+5:i+7], 'big')
+                      return (w, h)
+                  if length < 2:
+                      break
+                  i += length
+              raise ValueError('jpeg dimensions not found')
+
+          zip_path = Path('/tmp/buyers.zip')
+          if hashlib.sha256(zip_path.read_bytes()).hexdigest() != '83296554da7404d10ec4302b4a6c249d3013510a864561c75a60fdf22ad7818b':
+              raise SystemExit('ZIP SHA256 mismatch')
+
+          out = Path('apps/web/public/buyers')
+          out.mkdir(parents=True, exist_ok=True)
+          with ZipFile(zip_path) as zf:
+              names = {Path(n).name: n for n in zf.namelist() if not n.endswith('/')}
+              for number, (wanted_size, wanted_dims) in expected.items():
+                  key = f'{number}.jpg'
+                  if key not in names:
+                      raise SystemExit(f'{key} missing from ZIP')
+                  data = zf.read(names[key])
+                  actual = (len(data), jpeg_size(data))
+                  wanted = (wanted_size, wanted_dims)
+                  if actual != wanted:
+                      raise SystemExit(f'{key} mismatch: {actual} != {wanted}')
+                  (out / key).write_bytes(data)
+                  print(f'{key}: {actual[0]} bytes, {actual[1][0]}x{actual[1][1]}')
+          PY
+
+      - name: Update gallery count only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/home/HomePageClient.tsx')
+          s = p.read_text(encoding='utf-8')
+          old = 'const buyers = Array.from({ length: 16 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          new = 'const buyers = Array.from({ length: 24 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          if old in s:
+              if s.count(old) != 1:
+                  raise SystemExit('Unexpected duplicate buyer-count line')
+              s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+          elif new not in s:
+              raise SystemExit('Buyer-count line not found in expected form')
+          PY
+
+      - name: Assert BuyerGallery logic untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(git hash-object apps/web/components/home/BuyerGallery.tsx)"
+          test "$actual" = "11511c3184cb80776feec332a06e7191d5ad618c"
+          test -z "$(git diff --name-only -- apps/web/components/home/BuyerGallery.tsx)"
+
+      - name: Commit photos and remove one-shot workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          workflow='.github/workflows/apply-buyer-gallery-zip-once.yml'
+          rm -f "$workflow"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/public/buyers/16.jpg apps/web/public/buyers/17.jpg apps/web/public/buyers/18.jpg apps/web/public/buyers/19.jpg apps/web/public/buyers/20.jpg apps/web/public/buyers/21.jpg apps/web/public/buyers/22.jpg apps/web/public/buyers/23.jpg apps/web/public/buyers/24.jpg apps/web/components/home/HomePageClient.tsx "$workflow"
+          git diff --cached --name-only
+          if git diff --cached --name-only | grep -Fx 'apps/web/components/home/BuyerGallery.tsx'; then
+            echo 'BuyerGallery.tsx must not be changed' >&2
+            exit 1
+          fi
+          git commit -m 'Add optimized buyer delivery photos 16-24'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Dispatch production deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run deploy-yandex.yml --ref main

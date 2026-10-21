@@ -1,0 +1,8483 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 16,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "oldsmobile:f85",
+      "make": "Oldsmobile",
+      "model": "F85",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:holiday",
+      "make": "Oldsmobile",
+      "model": "Holiday",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:intrigue",
+      "make": "Oldsmobile",
+      "model": "Intrigue",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:ninetyeightregency",
+      "make": "Oldsmobile",
+      "model": "Ninety Eight Regency",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:ninetyeight",
+      "make": "Oldsmobile",
+      "model": "Ninety-Eight",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:omega",
+      "make": "Oldsmobile",
+      "model": "Omega",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:regency",
+      "make": "Oldsmobile",
+      "model": "Regency",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:rocket",
+      "make": "Oldsmobile",
+      "model": "Rocket",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:rocket88",
+      "make": "Oldsmobile",
+      "model": "Rocket 88",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:runabout",
+      "make": "Oldsmobile",
+      "model": "Runabout",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:series66",
+      "make": "Oldsmobile",
+      "model": "Series 66",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:silhouette",
+      "make": "Oldsmobile",
+      "model": "Silhouette",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:starfire",
+      "make": "Oldsmobile",
+      "model": "Starfire",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:starfire98holiday",
+      "make": "Oldsmobile",
+      "model": "Starfire 98 Holiday",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:super88",
+      "make": "Oldsmobile",
+      "model": "Super 88",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:super88holiday",
+      "make": "Oldsmobile",
+      "model": "Super 88 Holiday",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:tornado",
+      "make": "Oldsmobile",
+      "model": "Tornado",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:toronado",
+      "make": "Oldsmobile",
+      "model": "Toronado",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:vistacruiser",
+      "make": "Oldsmobile",
+      "model": "Vista Cruiser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "omoda:e5",
+      "make": "OMODA",
+      "model": "E5",
+      "aliases": [
+        "E5"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "omoda",
+        "modelId": "omoda/e5",
+        "canonicalMake": "OMODA",
+        "canonicalModel": "E5"
+      }
+    },
+    {
+      "key": "omoda:omoda5",
+      "make": "OMODA",
+      "model": "Omoda 5",
+      "aliases": [
+        "OMODA 5",
+        "OMODA5"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "omoda",
+        "modelId": "omoda/omoda-5",
+        "canonicalMake": "OMODA",
+        "canonicalModel": "Omoda 5"
+      }
+    },
+    {
+      "key": "omoda:omoda7",
+      "make": "OMODA",
+      "model": "Omoda 7",
+      "aliases": [
+        "OMODA 7"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "omoda",
+        "modelId": "omoda/omoda-7",
+        "canonicalMake": "OMODA",
+        "canonicalModel": "Omoda 7"
+      }
+    },
+    {
+      "key": "omoda:omoda9",
+      "make": "OMODA",
+      "model": "Omoda 9",
+      "aliases": [
+        "OMODA 9",
+        "OMODA9"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "omoda",
+        "modelId": "omoda/omoda-9",
+        "canonicalMake": "OMODA",
+        "canonicalModel": "Omoda 9"
+      }
+    },
+    {
+      "key": "omoda:omodae5",
+      "make": "Omoda",
+      "model": "Omoda E5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "omoda",
+        "modelId": null,
+        "canonicalMake": "OMODA",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:adam",
+      "make": "Opel",
+      "model": "Adam",
+      "aliases": [
+        "ADAM"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/adam",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Adam"
+      }
+    },
+    {
+      "key": "opel:admiral",
+      "make": "Opel",
+      "model": "Admiral",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:agila",
+      "make": "Opel",
+      "model": "Agila",
+      "aliases": [
+        "AGILA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/agila",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Agila"
+      }
+    },
+    {
+      "key": "opel:ampera",
+      "make": "Opel",
+      "model": "Ampera",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:amperae",
+      "make": "Opel",
+      "model": "Ampera-e",
+      "aliases": [
+        "AMPERA-E"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/ampera-e",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Ampera-e"
+      }
+    },
+    {
+      "key": "opel:antara",
+      "make": "Opel",
+      "model": "Antara",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:ascona",
+      "make": "Opel",
+      "model": "Ascona",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:astra",
+      "make": "Opel",
+      "model": "Astra",
+      "aliases": [
+        "ASTRA",
+        "NUEVO ASTRA 5P EDITION 1.2T XHL MT6 S/S 110 HP (81",
+        "NUEVO ASTRA 5P EDITION 1.2T XHT MT6 S/S 130 HP (96",
+        "NUEVO ASTRA 5P EDITION 1.5D DTH MT6 S/S 130 HP (96",
+        "NUEVO ASTRA 5P EDITION 1.6T HYBRID AT8 S/S 180 HP",
+        "NUEVO ASTRA 5P EDITION 1.6T PHEV AT8 180 HP (132KW",
+        "NUEVO ASTRA 5P ELEGANCE 1.2T XHT AT8 S/S 130 HP (9",
+        "NUEVO ASTRA 5P ELEGANCE 1.2T XHT MT6 S/S 130 HP (9",
+        "NUEVO ASTRA 5P ELEGANCE 1.5D DTH AT8 S/S 130 HP (9",
+        "NUEVO ASTRA 5P ELEGANCE 1.5D DTH MT6 S/S 130 HP (9",
+        "NUEVO ASTRA 5P ELEGANCE 1.6T HYBRID AT8 S/S 180 HP",
+        "NUEVO ASTRA 5P ELEGANCE 1.6T PHEV AT8 180 HP (132K",
+        "NUEVO ASTRA 5P GS 1.2T XHT AT8 S/S 130 HP (96KW)",
+        "NUEVO ASTRA 5P GS 1.2T XHT MT6 S/S 130 HP (96KW)",
+        "NUEVO ASTRA 5P GS 1.5D DTH AT8 S/S 130 HP (96KW)",
+        "NUEVO ASTRA 5P GS 1.5D DTH MT6 S/S 130 HP (96KW)",
+        "NUEVO ASTRA 5P GS 1.6T HYBRID AT8 S/S 180 HP (132K",
+        "NUEVO ASTRA 5P GS 1.6T PHEV AT8 180 HP (132KW)",
+        "NUEVO ASTRA 5P GS LINE 1.2T XHT AT8 S/S 130 HP (96",
+        "NUEVO ASTRA 5P GS LINE 1.2T XHT MT6 S/S 130 HP (96",
+        "NUEVO ASTRA 5P GS LINE 1.5D DTH AT8 S/S 130 HP (96",
+        "NUEVO ASTRA 5P GS LINE 1.5D DTH MT6 S/S 130 HP (96",
+        "NUEVO ASTRA 5P GS LINE 1.6T PHEV AT8 180 HP (132KW",
+        "NUEVO ASTRA 5P ULTIMATE 1.2T XHT AT8 S/S 130 HP (9",
+        "NUEVO ASTRA 5P ULTIMATE 1.5D DTH AT8 S/S 130 HP (9",
+        "NUEVO ASTRA 5P ULTIMATE 1.6T PHEV AT8 180 HP (132K",
+        "NUEVO ASTRA GS 16T PLUG-IN HYBRID AT8 S/S 180 CV",
+        "NUEVO ASTRA PHEV 5P EDITION 16T HYBRID AT8 S/S 18",
+        "NUEVO ASTRA PHEV 5P ELEGANCE 16T HYBRID AT8 S/S 1",
+        "NUEVO ASTRA PHEV 5P GS 16T HYBRID AT8 S/S 180 HP",
+        "NUEVO ASTRA PHEV 5P GSE 16T HYBRID AT8 S/S 225 CV",
+        "NUEVO ASTRA ST GS 12T XHT AT8 S/S 130 CV (96KW)",
+        "NUEVO ASTRA ST GS LINE 12T XHT AT8 S/S 130 HP (96",
+        "NUEVO ASTRA ST GS LINE 15D DTH AT8 S/S 130 HP (96",
+        "NUEVO ASTRA ST ULTIMATE 16T PHEV AT8 180 HP (132K"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/astra",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Astra"
+      }
+    },
+    {
+      "key": "opel:calibra",
+      "make": "Opel",
+      "model": "Calibra",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:cascada",
+      "make": "Opel",
+      "model": "Cascada",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:city",
+      "make": "Opel",
+      "model": "City",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:combo",
+      "make": "Opel",
+      "model": "Combo",
+      "aliases": [
+        "COMBO LIFE",
+        "E-COMBO LIFE",
+        "NUEVO COMBO 100 CV 1.5 TD S/S MT6 6.4",
+        "NUEVO COMBO ELECTRIC 100KW & 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC 100KW 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC GS 100KW & 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC GS 100KW 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC XL 100KW & 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC XL 100KW 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC XL GS 100KW & 50KWH BATERIA",
+        "NUEVO COMBO ELECTRIC XL GS 100KW 50KWH BATERIA",
+        "NUEVO COMBO GS 100 CV 1.5 TD S S MT6 6.4",
+        "NUEVO COMBO GS 130 CV 1.5 TD S S AT8 A AAA6.4",
+        "NUEVO COMBO GS 130 CV 1.5 TD S/S AT8 6.4",
+        "NUEVO COMBO GS 130 CV 1.5 TD S/S MT6 6.4",
+        "NUEVO COMBO XL 100 CV 1.5 TD S S MT6 6.4",
+        "NUEVO COMBO XL 130 CV 1.5 TD S S AT8 6.4",
+        "NUEVO COMBO XL GS 130 CV 1.5 TD S S AT8 6.4",
+        "NUEVO COMBO XL GS 130 CV 1.5 TD S/S MT6 6.4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/combo",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Combo"
+      }
+    },
+    {
+      "key": "opel:commodore",
+      "make": "Opel",
+      "model": "Commodore",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:corsa",
+      "make": "Opel",
+      "model": "Corsa",
+      "aliases": [
+        "CORSA",
+        "OPEL CORSA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/corsa",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Corsa"
+      }
+    },
+    {
+      "key": "opel:crossland",
+      "make": "Opel",
+      "model": "Crossland",
+      "aliases": [
+        "CROSSLAND",
+        "CROSSLANDX"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/crossland",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Crossland"
+      }
+    },
+    {
+      "key": "opel:diplomat",
+      "make": "Opel",
+      "model": "Diplomat",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:frontera",
+      "make": "Opel",
+      "model": "Frontera",
+      "aliases": [
+        "FRONTERA"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/frontera",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Frontera"
+      }
+    },
+    {
+      "key": "opel:grandland",
+      "make": "Opel",
+      "model": "Grandland",
+      "aliases": [
+        "GRANDLAND",
+        "GRANDLANDX",
+        "NUEVO GRANDLAND BASIC EDITION 1.2T XHT HYBRID EDCT",
+        "NUEVO GRANDLAND EDITION 1.2T XHT HYBRID EDCT6 S/S",
+        "NUEVO GRANDLAND EDITION 1.6T PLUG-IN HYBRID EDCT7",
+        "NUEVO GRANDLAND EDITION ELECTRIC 73KWH 213 CV (156",
+        "NUEVO GRANDLAND GS 1.2T XHT HYBRID EDCT6 S S 145 C",
+        "NUEVO GRANDLAND GS 1.2T XHT HYBRID EDCT6 S/S 136 C",
+        "NUEVO GRANDLAND GS 1.6T PLUG-IN HYBRID EDCT7 S S 1",
+        "NUEVO GRANDLAND GS ELECTRIC 73KWH 213 CV (156KW)",
+        "NUEVO GRANDLAND GS ELECTRIC 82KWH 213 CV (156KW)",
+        "OPEL GRANDLAND"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/grandland",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Grandland"
+      }
+    },
+    {
+      "key": "opel:gt",
+      "make": "Opel",
+      "model": "GT",
+      "aliases": [],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:insignia",
+      "make": "Opel",
+      "model": "Insignia",
+      "aliases": [
+        "INSIGNIA",
+        "INSIGNIASPORTSTOURER",
+        "OPEL INSIGNIA"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/insignia",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Insignia"
+      }
+    },
+    {
+      "key": "opel:kadett",
+      "make": "Opel",
+      "model": "Kadett",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:kapitan",
+      "make": "Opel",
+      "model": "Kapitan",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:karl",
+      "make": "Opel",
+      "model": "Karl",
+      "aliases": [
+        "KARL / VIVA",
+        "KARL ROCKS / VIVA ROCKS",
+        "KARL VIVA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/karl",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Karl"
+      }
+    },
+    {
+      "key": "opel:manta",
+      "make": "Opel",
+      "model": "Manta",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:meriva",
+      "make": "Opel",
+      "model": "Meriva",
+      "aliases": [
+        "MERIVA"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/meriva",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Meriva"
+      }
+    },
+    {
+      "key": "opel:mokka",
+      "make": "Opel",
+      "model": "Mokka",
+      "aliases": [
+        "Opel Mokka"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/mokka",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Mokka"
+      }
+    },
+    {
+      "key": "opel:mokkaelectric",
+      "make": "Opel",
+      "model": "Mokka Electric",
+      "aliases": [
+        "MOKKA ELECTRIC EDITION BEV 50KWH 136 CV (100KW)",
+        "MOKKA ELECTRIC GS BEV 50KWH 136 CV (100KW)",
+        "MOKKA ELECTRIC GS BEV 54KWH 156 CV (115KW)",
+        "MOKKA ELECTRIC ULTIMATE BEV 50KWH 136 CV (100KW)",
+        "MOKKA ELECTRIC ULTIMATE BEV 54KWH 156 CV (115KW)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/mokka-electric",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Mokka Electric"
+      }
+    },
+    {
+      "key": "opel:monterey",
+      "make": "Opel",
+      "model": "Monterey",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:monza",
+      "make": "Opel",
+      "model": "Monza",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:movano",
+      "make": "Opel",
+      "model": "Movano",
+      "aliases": [
+        "MOVANO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/movano",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Movano"
+      }
+    },
+    {
+      "key": "opel:olympia",
+      "make": "Opel",
+      "model": "Olympia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:omega",
+      "make": "Opel",
+      "model": "Omega",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:rekord",
+      "make": "Opel",
+      "model": "Rekord",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:roadster",
+      "make": "Opel",
+      "model": "Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:senator",
+      "make": "Opel",
+      "model": "Senator",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:signum",
+      "make": "Opel",
+      "model": "Signum",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:sintra",
+      "make": "Opel",
+      "model": "Sintra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:speedster",
+      "make": "Opel",
+      "model": "Speedster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:tigra",
+      "make": "Opel",
+      "model": "Tigra",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:vectra",
+      "make": "Opel",
+      "model": "Vectra",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": null,
+        "canonicalMake": "Opel",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "opel:vivaro",
+      "make": "Opel",
+      "model": "Vivaro",
+      "aliases": [
+        "VIVARO",
+        "VIVARO ? VIVARO LIFE",
+        "VIVARO ? VIVARO LIFE ? ZAFIRA",
+        "VIVARO / 1.5 / CDTI",
+        "VIVARO / VIVARO LIFE / ZAFIRA LIFE",
+        "VIVARO 2.0 CDTI AUT.",
+        "VIVARO 20 CDTI",
+        "VIVARO B",
+        "VIVARO COMBI 180CV 2.0 TD S S AT8 6.4",
+        "VIVARO COMBI 180CV 2.0 TD S S AT8 AA6.4",
+        "VIVARO COMBI 2.0 D AUT.",
+        "VIVARO COMBI ELECTRIC M MOTOR 100 KW + 75 KWH BATE",
+        "VIVARO COMBI ELECTRIC MOTOR 100 KW + 50 KWH BATERI",
+        "VIVARO COMBI ELECTRIC MOTOR 100 KW + 75 KWH BATERI",
+        "VIVARO COMBI L 1.5 DIE",
+        "VIVARO COMBI L 1.5 DIESEL ?6.3 120 CV",
+        "VIVARO COMBI L 1.5 DIESEL ?6.3 120 CV MT6",
+        "VIVARO COMBI L 2.0 D AUT.",
+        "VIVARO COMBI L 2.0 DIE",
+        "VIVARO COMBI L 2.0 DIESEL ?6.3 145 CV",
+        "VIVARO COMBI L 2.0 DIESEL ?6.3 145 CV MT6",
+        "VIVARO COMBI L1 COMBI",
+        "VIVARO COMBI L1 COMBI 1.5 DIESEL 120 CV 6V",
+        "VIVARO COMBI L2 COMBI 1.5 DIESEL 120 CV 6V",
+        "VIVARO COMBI L3 COMBI 1.5 DIESEL 120 CV 6V",
+        "VIVARO COMBI L3 COMBI 2.0 DIESEL 145 CV 6V",
+        "VIVARO COMBI M 1.5 DIESEL ?6.3 120 CV",
+        "VIVARO COMBI M 1.5 DIESEL ?6.3 120 CV MT6",
+        "VIVARO COMBI M 180CV 2.0 TD S S EAT8 6.4",
+        "VIVARO COMBI M 2.0 DIE",
+        "VIVARO COMBI M 2.0 DIESEL ?6.3 145 CV",
+        "VIVARO COMBI M 2.0 DIESEL ?6.3 145 CV MT6",
+        "VIVARO COMBI XL 180CV 2.0 TD S S AT8 6.4",
+        "VIVARO COMBI XL 180CV 2.0 TD S S AT8 AA6.4",
+        "VIVARO COMBI XL 180CV 2.0 TD S S EAT8 6.4",
+        "Vivaro Electric",
+        "VIVARO ELECTRIC COMBI L EXPRESS BEV 230 100KW / 13",
+        "VIVARO ELECTRIC COMBI L EXPRESS BEV 330 100KW / 13",
+        "VIVARO I VIVARO LIFE I ZAFIRA",
+        "VIVARO LIFE",
+        "VIVARO LIFE EDITION S/S",
+        "VIVARO LIFE EDITION TURBO D SS",
+        "VIVARO LIFE ELITE S/S",
+        "VIVARO LIFE ELITE S/S AUTO",
+        "VIVARO LIFE ZAFIRA LIFE",
+        "VIVARO ZAFIRA",
+        "Vivaro-e",
+        "VIVARO-E / L",
+        "VIVARO-E COMBI L BEV 230 100KW / 136 CV 2023",
+        "VIVARO-E COMBI L BEV 330 100KW / 136 CV",
+        "VIVARO-E COMBI L BEV 330 100KW / 136 CV 2023",
+        "VIVARO-E COMBI L1 COMBI BEV 230 100KW / 136 CV",
+        "VIVARO-E COMBI L2 COMBI BEV 330 100KW / 136 CV",
+        "VIVARO-E COMBI M BEV 230 100KW / 136 CV",
+        "VIVARO-E COMBI M BEV 230 100KW / 136 CV 2023",
+        "VIVARO-E COMBI M BEV 330 100KW / 136 CV",
+        "VIVARO-E COMBI M BEV 330 100KW / 136 CV 2023",
+        "VIVARO-E COMBI M EXPRESS BEV 230 100KW / 136 CV",
+        "VIVARO-E COMBI M EXPRESS BEV 330 100KW / 136 CV",
+        "VIVARO-E LIFE COMBI",
+        "VIVARO-E LIFE EDITION",
+        "VIVARO/ZAFIRA L"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/vivaro",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Vivaro"
+      }
+    },
+    {
+      "key": "opel:zafira",
+      "make": "Opel",
+      "model": "Zafira",
+      "aliases": [
+        "ZAFIRA"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/zafira",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Zafira"
+      }
+    },
+    {
+      "key": "opel:zafiralife",
+      "make": "Opel",
+      "model": "Zafira Life",
+      "aliases": [
+        "NUEVO ZAFIRA 180CV 2.0 TD S/S AT8 6.4",
+        "NUEVO ZAFIRA ELECTRIC MOTOR 100 KW + 75 KWH BATERI",
+        "NUEVO ZAFIRA ELECTRIC XL GS MOTOR 100 KW + 75 KWH",
+        "NUEVO ZAFIRA ELECTRIC XL MOTOR 100 KW + 75 KWH BAT",
+        "NUEVO ZAFIRA GS 180CV 2.0 TD S/S AT8 6.4",
+        "NUEVO ZAFIRA XL 180CV 2.0 TD S/S AT8 6.4",
+        "NUEVO ZAFIRA XL GS 180CV 2.0 TD S/S AT8 6.4",
+        "ZAFIRA LIFE",
+        "ZAFIRALIFE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "opel",
+        "modelId": "opel/zafira-life",
+        "canonicalMake": "Opel",
+        "canonicalModel": "Zafira Life"
+      }
+    },
+    {
+      "key": "ora:goodcat",
+      "make": "ORA",
+      "model": "Good Cat",
+      "aliases": [
+        "GOOD CAT",
+        "ORA GOOD CAT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ora",
+        "modelId": "ora/good-cat",
+        "canonicalMake": "ORA",
+        "canonicalModel": "Good Cat"
+      }
+    },
+    {
+      "key": "oshan:x7",
+      "make": "Oshan",
+      "model": "X7",
+      "aliases": [
+        "Oshan X7",
+        "Changan Oshan X7"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "oshan",
+        "modelId": "oshan/x7",
+        "canonicalMake": "Oshan",
+        "canonicalModel": "X7"
+      }
+    },
+    {
+      "key": "packard:110",
+      "make": "Packard",
+      "model": "110",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:120",
+      "make": "Packard",
+      "model": "120",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:250",
+      "make": "Packard",
+      "model": "250",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:400",
+      "make": "Packard",
+      "model": "400",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:526",
+      "make": "Packard",
+      "model": "526",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:626",
+      "make": "Packard",
+      "model": "626",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:640",
+      "make": "Packard",
+      "model": "640",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:733",
+      "make": "Packard",
+      "model": "733",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:caribbean",
+      "make": "Packard",
+      "model": "Caribbean",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:clipper",
+      "make": "Packard",
+      "model": "Clipper",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:clippersuper",
+      "make": "Packard",
+      "model": "Clipper Super",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:customeight",
+      "make": "Packard",
+      "model": "Custom Eight",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:mayfair",
+      "make": "Packard",
+      "model": "Mayfair",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:patrician",
+      "make": "Packard",
+      "model": "Patrician",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:super8",
+      "make": "Packard",
+      "model": "Super 8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:superclipper",
+      "make": "Packard",
+      "model": "Super Clipper",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:supereight",
+      "make": "Packard",
+      "model": "Super Eight",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:touring",
+      "make": "Packard",
+      "model": "Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:twelve",
+      "make": "Packard",
+      "model": "Twelve",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "packard:twinsix",
+      "make": "Packard",
+      "model": "Twin Six",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "pagani:huayra",
+      "make": "Pagani",
+      "model": "Huayra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panhard:24bt",
+      "make": "Panhard",
+      "model": "24BT",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panhard:dyna",
+      "make": "Panhard",
+      "model": "Dyna",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panhard:pl17",
+      "make": "Panhard",
+      "model": "PL17",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panhard:pl17tigre",
+      "make": "Panhard",
+      "model": "PL17 Tigre",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panther:kallista",
+      "make": "Panther",
+      "model": "Kallista",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panther:kallista16l",
+      "make": "Panther",
+      "model": "Kallista 1.6L",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panther:kallista28l",
+      "make": "Panther",
+      "model": "Kallista 2.8L",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "panther:lima",
+      "make": "Panther",
+      "model": "Lima",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:alza",
+      "make": "Perodua",
+      "model": "Alza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:aruz",
+      "make": "Perodua",
+      "model": "Aruz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:ativa",
+      "make": "Perodua",
+      "model": "Ativa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:axia",
+      "make": "Perodua",
+      "model": "Axia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:bezza",
+      "make": "Perodua",
+      "model": "Bezza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:myvi",
+      "make": "Perodua",
+      "model": "Myvi",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "perodua:traz",
+      "make": "Perodua",
+      "model": "Traz",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "peugeot:1007",
+      "make": "Peugeot",
+      "model": "1007",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:104",
+      "make": "Peugeot",
+      "model": "104",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:106",
+      "make": "Peugeot",
+      "model": "106",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:107",
+      "make": "Peugeot",
+      "model": "107",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/107",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "107"
+      }
+    },
+    {
+      "key": "peugeot:108",
+      "make": "Peugeot",
+      "model": "108",
+      "aliases": [
+        "PEUGEOT 108"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/108",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "108"
+      }
+    },
+    {
+      "key": "peugeot:2008",
+      "make": "Peugeot",
+      "model": "2008",
+      "aliases": [
+        "N 2008",
+        "N2008 ACTIVE BLUEHDI 130 S&S EAT8",
+        "N2008 ACTIVE ELECTRICO 156 (115 KW)",
+        "N2008 ACTIVE PURETECH 100 S&S 6 VEL MAN",
+        "N2008 ACTIVE PURETECH 100 SS 6 VEL. MAN.",
+        "N2008 ALLURE BLUEHDI 130 S&S EAT8",
+        "N2008 ALLURE ELECTRICO 156 (115 KW)",
+        "N2008 ALLURE PURETECH 100 S&S 6 VEL MAN",
+        "N2008 ALLURE PURETECH 130 S&S EAT8",
+        "N2008 FIRST EDITION ELECTRICO 156 (115 KW)",
+        "N2008 GT BLUEHDI 130 S&S EAT8",
+        "N2008 GT ELECTRICO 156 (115 KW)",
+        "N2008 GT PURETECH 130 S&S EAT8",
+        "NUEVO 2008 ACTIVE GASOLINA 100 S&S 6 VEL. MAN.",
+        "NUEVO 2008 ACTIVE GASOLINA 100 SS 6 VEL. MAN.",
+        "NUEVO 2008 ACTIVE HYBRID 136 EDCS6",
+        "NUEVO 2008 ACTIVE PURETECH 100 S&S 6 VEL. MAN.",
+        "NUEVO 2008 ACTIVE PURETECH 100 SS 6 VEL. MAN.",
+        "NUEVO 2008 ALLURE GASOLINA 100 S&S 6 VEL. MAN",
+        "NUEVO 2008 ALLURE GASOLINA 100 SS 6 VEL. MAN",
+        "NUEVO 2008 ALLURE GASOLINA 130 S&S EAT8",
+        "NUEVO 2008 ALLURE GASOLINA 130 SS EAT8",
+        "NUEVO 2008 ALLURE HYBRID 136 EDCS6",
+        "NUEVO 2008 ALLURE PURETECH 100 S&S 6 VEL. MAN",
+        "NUEVO 2008 ALLURE PURETECH 100 SS 6 VEL. MAN",
+        "NUEVO 2008 ALLURE PURETECH 130 S&S EAT8",
+        "NUEVO 2008 ALLURE PURETECH 130 SS EAT8",
+        "NUEVO 2008 GT GASOLINA 130 S&S EAT8",
+        "NUEVO 2008 GT GASOLINA 130 SS EAT8",
+        "NUEVO 2008 GT HYBRID 136 EDCS6",
+        "NUEVO 2008 GT PURETECH 130 S&S EAT8",
+        "Peugeot 2008"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/2008",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "2008"
+      }
+    },
+    {
+      "key": "peugeot:2008gtpremiumev",
+      "make": "Peugeot",
+      "model": "2008 GT Premium EV",
+      "aliases": [
+        "2008 GT PREMIUM EV"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/2008-gt-premium-ev",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "2008 GT Premium EV"
+      }
+    },
+    {
+      "key": "peugeot:201",
+      "make": "Peugeot",
+      "model": "201",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:202",
+      "make": "Peugeot",
+      "model": "202",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:203",
+      "make": "Peugeot",
+      "model": "203",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:204",
+      "make": "Peugeot",
+      "model": "204",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:205",
+      "make": "Peugeot",
+      "model": "205",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/205",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "205"
+      }
+    },
+    {
+      "key": "peugeot:206",
+      "make": "Peugeot",
+      "model": "206",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/206",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "206"
+      }
+    },
+    {
+      "key": "peugeot:207",
+      "make": "Peugeot",
+      "model": "207",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/207",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "207"
+      }
+    },
+    {
+      "key": "peugeot:208",
+      "make": "Peugeot",
+      "model": "208",
+      "aliases": [
+        "N208",
+        "NUEVO 208 5P ACTIVE GASOLINA 100 S&S 6 VEL MAN",
+        "NUEVO 208 5P ACTIVE GASOLINA 100 SS 6 VEL MAN",
+        "NUEVO 208 5P ACTIVE GASOLINA 75 S&S 5 VEL MAN",
+        "NUEVO 208 5P ACTIVE GASOLINA 75 SS 5 VEL MAN",
+        "NUEVO 208 5P ACTIVE HYBRID 100 EDCS6",
+        "NUEVO 208 5P ACTIVE PURETECH 100 S&S 6 VEL MAN",
+        "NUEVO 208 5P ACTIVE PURETECH 100 SS 6 VEL MAN",
+        "NUEVO 208 5P ACTIVE PURETECH 75 S&S 5 VEL MAN",
+        "NUEVO 208 5P ACTIVE PURETECH 75 SS 5 VEL MAN",
+        "NUEVO 208 5P ALLURE GASOLINA 100 S&S 6 VEL. MAN",
+        "NUEVO 208 5P ALLURE GASOLINA 100 SS 6 VEL. MAN",
+        "NUEVO 208 5P ALLURE HYBRID 100 EDCS6",
+        "NUEVO 208 5P ALLURE PURETECH 100 S&S 6 VEL. MAN",
+        "NUEVO 208 5P ALLURE PURETECH 100 SS 6 VEL. MAN",
+        "NUEVO 208 5P GT GASOLINA 100 S&S 6 VEL. MAN",
+        "NUEVO 208 5P GT GASOLINA 100 SS 6 VEL. MAN",
+        "NUEVO 208 5P GT HYBRID 100 EDCS6",
+        "NUEVO 208 5P GT HYBRID 136 EDCS6",
+        "NUEVO 208 5P GT PURETECH 100 S&S 6 VEL. MAN",
+        "NUEVO 208 5P GT PURETECH 100 SS 6 VEL. MAN",
+        "Peugeot 208"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/208",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "208"
+      }
+    },
+    {
+      "key": "peugeot:222",
+      "make": "Peugeot",
+      "model": "222",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:230l",
+      "make": "Peugeot",
+      "model": "230L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:3008",
+      "make": "Peugeot",
+      "model": "3008",
+      "aliases": [
+        "E-3008",
+        "E-3008 ALLURE ELECTRICO 210 (157 KW)",
+        "E-3008 ALLURE ELECTRICO 230 (170 KW) LONG RANGE",
+        "E-3008 ELECTRICO 325 (240 KW) DUAL MOTOR (LAUNCH E",
+        "E-3008 GT ELECTRICO 210 (157 KW)",
+        "E-3008 GT ELECTRICO 230 (170 KW) LONG RANGE",
+        "E-3008 GT EXCLUSIVE ELECTRICO 325 (240 KW) DUAL MO",
+        "N 3008",
+        "NUEVO 3008 ALLURE HYBRID 136 EDCS6",
+        "NUEVO 3008 ALLURE HYBRID 145 E-DCS6",
+        "NUEVO 3008 ALLURE PLUG-IN HYBRID 195 E-DCS7",
+        "NUEVO 3008 GT HYBRID 136 EDCS6",
+        "NUEVO 3008 GT HYBRID 145 E-DCS6",
+        "NUEVO 3008 GT PLUG-IN HYBRID 195 E-DCS7",
+        "NUEVO E-3008 ALLURE ELECTRICO 157 KW (210 CV)",
+        "NUEVO E-3008 ALLURE ELECTRICO 210 (157 KW)",
+        "NUEVO E-3008 GT ELECTRICO 157 KW (210 CV)",
+        "NUEVO E-3008 GT ELECTRICO 210 (157 KW)",
+        "Peugeot 3008"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/3008",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "3008"
+      }
+    },
+    {
+      "key": "peugeot:301",
+      "make": "Peugeot",
+      "model": "301",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/301",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "301"
+      }
+    },
+    {
+      "key": "peugeot:302",
+      "make": "Peugeot",
+      "model": "302",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:304",
+      "make": "Peugeot",
+      "model": "304",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:305",
+      "make": "Peugeot",
+      "model": "305",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:306",
+      "make": "Peugeot",
+      "model": "306",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:307",
+      "make": "Peugeot",
+      "model": "307",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/307",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "307"
+      }
+    },
+    {
+      "key": "peugeot:308",
+      "make": "Peugeot",
+      "model": "308",
+      "aliases": [
+        "E-308",
+        "E-308 5P ALLURE ELECTRICO 156 (115 KW)",
+        "E-308 5P GT ELECTRICO 156 (115 KW)",
+        "E-308 5P STYLE ELECTRICO 156 (115 KW)",
+        "E-308 SW ALLURE ELECTRICO 156 (115 KW)",
+        "E-308 SW GT ELECTRICO 156 (115 KW)",
+        "E-308 SW STYLE ELECTRICO 156 (115 KW)",
+        "NUEVO 308 5P ACTIVE PACK BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 5P ACTIVE PACK BLUEHDI 130 S&S MAN",
+        "NUEVO 308 5P ACTIVE PACK HYBRID 180 EEAT8",
+        "NUEVO 308 5P ACTIVE PACK PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 5P ACTIVE PACK PURETECH 110 S&S MAN",
+        "NUEVO 308 5P ACTIVE PACK PURETECH 130 S&S 6 VEL. M",
+        "NUEVO 308 5P ACTIVE PACK PURETECH 130 S&S EAT8",
+        "NUEVO 308 5P ACTIVE PACK PURETECH 130 S&S MAN",
+        "NUEVO 308 5P ALLURE BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 5P ALLURE BLUEHDI 130 S&S MAN",
+        "NUEVO 308 5P ALLURE HYBRID 145 EDCS6",
+        "NUEVO 308 5P ALLURE HYBRID 180 EEAT8",
+        "NUEVO 308 5P ALLURE PACK BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 5P ALLURE PACK BLUEHDI 130 S&S MAN",
+        "NUEVO 308 5P ALLURE PACK HYBRID 180 EEAT8",
+        "NUEVO 308 5P ALLURE PACK PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 5P ALLURE PACK PURETECH 130 S&S 6 VEL. M",
+        "NUEVO 308 5P ALLURE PACK PURETECH 130 S&S EAT8",
+        "NUEVO 308 5P ALLURE PACK PURETECH 130 S&S MAN",
+        "NUEVO 308 5P ALLURE PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 5P ALLURE PLUG-IN HYBRID 195 E-DCT7",
+        "NUEVO 308 5P ALLURE PURETECH 130 S&S 6 VEL. MAN",
+        "NUEVO 308 5P ALLURE PURETECH 130 S&S EAT8",
+        "NUEVO 308 5P ALLURE PURETECH 130 S&S MAN",
+        "NUEVO 308 5P GT BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 5P GT EXCLUSIVE HYBRID 145 EDCS6",
+        "NUEVO 308 5P GT EXCLUSIVE PLUG-IN HYBRID 195 E-DCT",
+        "NUEVO 308 5P GT HYBRID 145 EDCS6",
+        "NUEVO 308 5P GT HYBRID 180 EEAT8",
+        "NUEVO 308 5P GT HYBRID 225 EEAT8",
+        "NUEVO 308 5P GT PACK BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 5P GT PACK HYBRID 180 EEAT8",
+        "NUEVO 308 5P GT PACK HYBRID 225 EEAT8",
+        "NUEVO 308 5P GT PACK PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 5P GT PACK PLUG-IN HYBRID 225 EEAT8",
+        "NUEVO 308 5P GT PACK PURETECH 130 S&S EAT8",
+        "NUEVO 308 5P GT PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 5P GT PLUG-IN HYBRID 195 E-DCT7",
+        "NUEVO 308 5P GT PLUG-IN HYBRID 225 EEAT8",
+        "NUEVO 308 5P GT PURETECH 130 S&S EAT8",
+        "NUEVO 308 5P STYLE HYBRID 145 EDCS6",
+        "NUEVO 308 5P STYLE PLUG-IN HYBRID 195 E-DCT7",
+        "NUEVO 308 SW ACTIVE PACK BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 SW ACTIVE PACK BLUEHDI 130 S&S MAN",
+        "NUEVO 308 SW ACTIVE PACK HYBRID 180 EEAT8",
+        "NUEVO 308 SW ACTIVE PACK PLUG-IN HYBRID 180 E-EAT8",
+        "NUEVO 308 SW ACTIVE PACK PURETECH 110 S&S MAN",
+        "NUEVO 308 SW ACTIVE PACK PURETECH 130 S&S 6 VEL. M",
+        "NUEVO 308 SW ACTIVE PACK PURETECH 130 S&S EAT8",
+        "NUEVO 308 SW ACTIVE PACK PURETECH 130 S&S MAN",
+        "NUEVO 308 SW ACTIVE PACK PURETECH 130 SS 6 VEL. M",
+        "NUEVO 308 SW ALLURE BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 SW ALLURE BLUEHDI 130 S&S MAN",
+        "NUEVO 308 SW ALLURE HYBRID 145 EDCS6",
+        "NUEVO 308 SW ALLURE HYBRID 180 EEAT8",
+        "NUEVO 308 SW ALLURE PACK BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 SW ALLURE PACK BLUEHDI 130 S&S MAN",
+        "NUEVO 308 SW ALLURE PACK HYBRID 180 EEAT8",
+        "NUEVO 308 SW ALLURE PACK PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 SW ALLURE PACK PURETECH 130 S&S 6 VEL. M",
+        "NUEVO 308 SW ALLURE PACK PURETECH 130 S&S EAT8",
+        "NUEVO 308 SW ALLURE PACK PURETECH 130 S&S MAN",
+        "NUEVO 308 SW ALLURE PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 SW ALLURE PLUG-IN HYBRID 195 E-DCT7",
+        "NUEVO 308 SW ALLURE PURETECH 130 S&S 6 VEL. MAN",
+        "NUEVO 308 SW ALLURE PURETECH 130 S&S EAT8",
+        "NUEVO 308 SW ALLURE PURETECH 130 S&S MAN",
+        "NUEVO 308 SW GT BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 SW GT EXCLUSIVE HYBRID 145 EDCS6",
+        "NUEVO 308 SW GT HYBRID 145 EDCS6",
+        "NUEVO 308 SW GT HYBRID 180 EEAT8",
+        "NUEVO 308 SW GT HYBRID 225 EEAT8",
+        "NUEVO 308 SW GT PACK BLUEHDI 130 S&S EAT8",
+        "NUEVO 308 SW GT PACK HYBRID 180 EEAT8",
+        "NUEVO 308 SW GT PACK HYBRID 225 EEAT8",
+        "NUEVO 308 SW GT PACK PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 SW GT PACK PLUG-IN HYBRID 225 EEAT8",
+        "NUEVO 308 SW GT PACK PURETECH 130 S&S EAT8",
+        "NUEVO 308 SW GT PLUG-IN HYBRID 180 EEAT8",
+        "NUEVO 308 SW GT PLUG-IN HYBRID 195 E-DCT7",
+        "NUEVO 308 SW GT PLUG-IN HYBRID 225 E-EAT8",
+        "NUEVO 308 SW GT PURETECH 130 S&S EAT8",
+        "NUEVO 308 SW STYLE HYBRID 145 EDCS6",
+        "PEUGEOT 308"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/308",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "308"
+      }
+    },
+    {
+      "key": "peugeot:309",
+      "make": "Peugeot",
+      "model": "309",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:4007",
+      "make": "Peugeot",
+      "model": "4007",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:4008",
+      "make": "Peugeot",
+      "model": "4008",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/4008",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "4008"
+      }
+    },
+    {
+      "key": "peugeot:403",
+      "make": "Peugeot",
+      "model": "403",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:404",
+      "make": "Peugeot",
+      "model": "404",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:405",
+      "make": "Peugeot",
+      "model": "405",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:406",
+      "make": "Peugeot",
+      "model": "406",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/406",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "406"
+      }
+    },
+    {
+      "key": "peugeot:407",
+      "make": "Peugeot",
+      "model": "407",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/407",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "407"
+      }
+    },
+    {
+      "key": "peugeot:408",
+      "make": "Peugeot",
+      "model": "408",
+      "aliases": [
+        "E-408 ALLURE ELECTRICO 210 (157KW)",
+        "E-408 GT ELECTRICO 210 (157KW)",
+        "NUEVO 408 ALLURE HYBRID 136 EDCS6",
+        "NUEVO 408 ALLURE PACK PLUG-IN HYBRID 180 E-EAT8",
+        "NUEVO 408 ALLURE PACK PLUG-IN HYBRID 225 E-EAT8",
+        "NUEVO 408 ALLURE PACK PURETECH 130 S&S EAT8",
+        "NUEVO 408 ALLURE PACK PURETECH 130 SS EAT8",
+        "NUEVO 408 ALLURE PLUG-IN HYBRID 180 E-EAT8",
+        "NUEVO 408 ALLURE PURETECH 130 S&S EAT8",
+        "NUEVO 408 ALLURE PURETECH 130 SS EAT8",
+        "NUEVO 408 FIRST EDITIÓN PLUG-IN HYBRID 225 E-EAT8",
+        "NUEVO 408 GT GASOLINA 130 S&S EAT8",
+        "NUEVO 408 GT HYBRID 136 EDCS6",
+        "NUEVO 408 GT PLUG-IN HYBRID 180 E-EAT8",
+        "NUEVO 408 GT PLUG-IN HYBRID 225 E-EAT8",
+        "NUEVO 408 GT PURETECH 130 S&S EAT8",
+        "NUEVO 408 GT PURETECH 130 SS EAT8"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/408",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "408"
+      }
+    },
+    {
+      "key": "peugeot:5008",
+      "make": "Peugeot",
+      "model": "5008",
+      "aliases": [
+        "N5008",
+        "NUEVO 5008 ALLURE HYBRID 136 EDCS6",
+        "NUEVO 5008 ALLURE HYBRID 145 EDCS6",
+        "NUEVO 5008 ALLURE PLUG-IN HYBRID 195 E-DCT7",
+        "NUEVO 5008 GT HYBRID 136 EDCS6",
+        "NUEVO 5008 GT HYBRID 145 EDCS6",
+        "NUEVO 5008 GT PLUG-IN HYBRID 195 E-DCT7",
+        "Peugeot 5008"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/5008",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "5008"
+      }
+    },
+    {
+      "key": "peugeot:504",
+      "make": "Peugeot",
+      "model": "504",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:505",
+      "make": "Peugeot",
+      "model": "505",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:508",
+      "make": "Peugeot",
+      "model": "508",
+      "aliases": [
+        "N 508 5P ALLURE BLUEHDI 130 S&S EAT8",
+        "N 508 5P ALLURE BLUEHDI 130 SS EAT8",
+        "N 508 5P ALLURE PLUG-IN HYBRID 180 E-EAT8",
+        "N 508 5P ALLURE PLUG-IN HYBRID 225 E-EAT8",
+        "N 508 5P ALLURE PURETECH 130 S&S EAT8",
+        "N 508 5P ALLURE PURETECH 130 SS EAT8",
+        "N 508 5P GT BLUEHDI 130 S&S EAT8",
+        "N 508 5P GT BLUEHDI 130 SS EAT8",
+        "N 508 5P GT PLUG-IN HYBRID 180 E-EAT8",
+        "N 508 5P GT PLUG-IN HYBRID 225 E-EAT8",
+        "N 508 5P GT PURETECH 130 S&S EAT8",
+        "N 508 5P GT PURETECH 130 SS EAT8",
+        "N 508 5P PSE PLUG-IN HYBRID 360 E-EAT8",
+        "N 508 SW ALLURE BLUEHDI 130 S&S EAT8",
+        "N 508 SW ALLURE BLUEHDI 130 SS EAT8",
+        "N 508 SW ALLURE GASOLINA 130 S&S EAT8",
+        "N 508 SW ALLURE PLUG-IN HYBRID 180 E-EAT8",
+        "N 508 SW ALLURE PLUG-IN HYBRID 225 E-EAT8",
+        "N 508 SW ALLURE PURETECH 130 S&S EAT8",
+        "N 508 SW ALLURE PURETECH 130 SS EAT8",
+        "N 508 SW GT BLUEHDI 130 S&S EAT8",
+        "N 508 SW GT BLUEHDI 130 SS EAT8",
+        "N 508 SW GT PLUG-IN HYBRID 180 E-EAT8",
+        "N 508 SW GT PLUG-IN HYBRID 225 E-EAT8",
+        "N 508 SW GT PURETECH 130 S&S EAT8",
+        "N 508 SW GT PURETECH 130 SS EAT8",
+        "N 508 SW PSE PLUG-IN HYBRID 360 E-EAT8",
+        "N508",
+        "N508 ACT1.6THP165S&S",
+        "N508 ACTIVE 1.6",
+        "N508 ACTIVE 2.0",
+        "PEUGEOT 508"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/508",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "508"
+      }
+    },
+    {
+      "key": "peugeot:604",
+      "make": "Peugeot",
+      "model": "604",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:605",
+      "make": "Peugeot",
+      "model": "605",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:607",
+      "make": "Peugeot",
+      "model": "607",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:806",
+      "make": "Peugeot",
+      "model": "806",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:807",
+      "make": "Peugeot",
+      "model": "807",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/807",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "807"
+      }
+    },
+    {
+      "key": "peugeot:bipper",
+      "make": "Peugeot",
+      "model": "Bipper",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:boxer",
+      "make": "Peugeot",
+      "model": "Boxer",
+      "aliases": [
+        "BOXER",
+        "BOXER 335 BLUEHDI",
+        "BOXER 335 L3 BLUEHDI",
+        "BOXER 335 PRO L2H2 BHDI",
+        "BOXER 435 PRO L4H2 BLUEHDI",
+        "BOXER KOMBI 33 22 HDI L1H1",
+        "BOXER KOMBI 33 22 HDI L2H2",
+        "BOXER MINIBUS 33 22 HDI L2H2",
+        "BOXER VAN",
+        "E-Boxer",
+        "PEUGEOT BOXER",
+        "PEUGEOT BOXER L2H2"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/boxer",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Boxer"
+      }
+    },
+    {
+      "key": "peugeot:e2008",
+      "make": "Peugeot",
+      "model": "E-2008",
+      "aliases": [
+        "NUEVO E-2008 ACTIVE ELECTRICO 136 (100 KW)",
+        "NUEVO E-2008 ACTIVE ELECTRICO 156 (115 KW)",
+        "NUEVO E-2008 ALLURE ELECTRICO 136 (100 KW)",
+        "NUEVO E-2008 ALLURE ELECTRICO 156 (115 KW)",
+        "NUEVO E-2008 GT ELECTRICO 136 (100 KW)",
+        "NUEVO E-2008 GT ELECTRICO 156 (115 KW)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/e-2008",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "E-2008"
+      }
+    },
+    {
+      "key": "peugeot:e208",
+      "make": "Peugeot",
+      "model": "E-208",
+      "aliases": [
+        "NUEVO E-208 5P ACTIVE ELECTRICO 136 (100 KW)",
+        "NUEVO E-208 5P ALLURE ELECTRICO 136 (100 KW)",
+        "NUEVO E-208 5P GT ELECTRICO 136 (100 KW)",
+        "NUEVO E-208 5P GT ELECTRICO 156 (115 KW)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/e-208",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "E-208"
+      }
+    },
+    {
+      "key": "peugeot:e5008",
+      "make": "Peugeot",
+      "model": "E-5008",
+      "aliases": [
+        "NUEVO E-5008 ALLURE ELECTRICO 210 (157 KW)",
+        "NUEVO E-5008 GT ELECTRICO 210 (157 KW)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/e-5008",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "E-5008"
+      }
+    },
+    {
+      "key": "peugeot:expert",
+      "make": "Peugeot",
+      "model": "Expert",
+      "aliases": [
+        "E-EXPERT",
+        "E-EXPERT COMBI ELECTRICO 100KW BATER?A 50 KWH COMP",
+        "E-EXPERT COMBI ELECTRICO 100KW BATER?A 50 KWH STAN",
+        "E-EXPERT COMBI ELECTRICO 100KW BATER?A 75 KWH LONG",
+        "E-EXPERT COMBI ELECTRICO 100KW BATER?A 75 KWH STAN",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERIA 50 KWH STAN",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERIA 50KWH LONG",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERIA 75 KWH LONG",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERIA 75 KWH STAN",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERY 50 KWH STAN",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERY 50KWH LONG",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERY 75 KWH LONG",
+        "E-EXPERT COMBI ELECTRICO 100KW BATERY 75 KWH STAN",
+        "EXPERT",
+        "NUEVO E-EXPERT COMBI ELECTRICO 100KW BATERIA 50 KW",
+        "NUEVO E-EXPERT COMBI ELECTRICO 100KW BATERIA 75 KW",
+        "NUEVO EXPERT COMBI BLUEHDI 180 S&S EAT8 LONG",
+        "NUEVO EXPERT COMBI BLUEHDI 180 S&S EAT8 STANDARD",
+        "NUEVO EXPERT COMBI BLUEHDI 180 SS EAT8 LONG",
+        "NUEVO EXPERT COMBI BLUEHDI 180 SS EAT8 STANDARD"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/expert",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Expert"
+      }
+    },
+    {
+      "key": "peugeot:horizon",
+      "make": "Peugeot",
+      "model": "Horizon",
+      "aliases": [
+        "HORIZON RE",
+        "HORIZON RS",
+        "HORIZON RS PLUS"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/horizon",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Horizon"
+      }
+    },
+    {
+      "key": "peugeot:independence",
+      "make": "Peugeot",
+      "model": "Independence",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:ion",
+      "make": "Peugeot",
+      "model": "Ion",
+      "aliases": [
+        "ION",
+        "iOn"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/ion",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Ion"
+      }
+    },
+    {
+      "key": "peugeot:j5",
+      "make": "Peugeot",
+      "model": "J5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:landtrek",
+      "make": "Peugeot",
+      "model": "Landtrek",
+      "aliases": [
+        "LANDTREK"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/landtrek",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Landtrek"
+      }
+    },
+    {
+      "key": "peugeot:partner",
+      "make": "Peugeot",
+      "model": "Partner",
+      "aliases": [
+        "E-Partner",
+        "PARTNER",
+        "PARTNER S L2 BLUEHDI",
+        "PARTNER TEPEE OUTDOOR BLUE HDI"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/partner",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Partner"
+      }
+    },
+    {
+      "key": "peugeot:ranch",
+      "make": "Peugeot",
+      "model": "Ranch",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:rcz",
+      "make": "Peugeot",
+      "model": "RCZ",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": null,
+        "canonicalMake": "Peugeot",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "peugeot:rifter",
+      "make": "Peugeot",
+      "model": "Rifter",
+      "aliases": [
+        "E-RIFTER",
+        "E-RIFTER ACTIVE PACK LONG 100 KW",
+        "E-RIFTER ACTIVE PACK STANDARD 100 KW",
+        "E-RIFTER ALLURE LONG 100 KW",
+        "E-RIFTER ALLURE PACK LONG 100 KW",
+        "E-RIFTER ALLURE PACK STANDARD 100 KW",
+        "E-RIFTER ALLURE STANDARD 100 KW",
+        "E-RIFTER GT LONG 100 KW",
+        "E-RIFTER GT STANDARD 100 KW",
+        "NUEVO E-RIFTER ALLURE LONG 100 KW",
+        "NUEVO E-RIFTER ALLURE STANDARD 100 KW",
+        "NUEVO E-RIFTER GT LONG 100 KW",
+        "NUEVO E-RIFTER GT STANDARD 100 KW",
+        "NUEVO RIFTER ALLURE BLUEHDI 100 S&S 6 VEL. MAN STA",
+        "NUEVO RIFTER ALLURE BLUEHDI 100 SS 6 VEL. MAN LON",
+        "NUEVO RIFTER ALLURE BLUEHDI 100 SS 6 VEL. MAN STA",
+        "NUEVO RIFTER ALLURE BLUEHDI 130 S&S 6 VEL. MAN LON",
+        "NUEVO RIFTER ALLURE BLUEHDI 130 SS 6 VEL. MAN LON",
+        "NUEVO RIFTER ALLURE BLUEHDI 130 SS EAT8 LONG",
+        "NUEVO RIFTER GT BLUEHDI 130 S&S EAT8 LONG",
+        "NUEVO RIFTER GT BLUEHDI 130 S&S EAT8 STANDARD",
+        "NUEVO RIFTER GT BLUEHDI 130 SS EAT8 LONG",
+        "NUEVO RIFTER GT BLUEHDI 130 SS EAT8 STANDARD",
+        "RIFTER",
+        "リフター"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/rifter",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Rifter"
+      }
+    },
+    {
+      "key": "peugeot:traveller",
+      "make": "Peugeot",
+      "model": "Traveller",
+      "aliases": [
+        "E-TRAVELLER",
+        "E-TRAVELLER ACTIVE",
+        "E-TRAVELLER ACTIVE EL?CTRICO 100 KW BATER?A 75 KWH",
+        "E-TRAVELLER ACTIVE ELECTRICO 100 KW BATERY 75 KWH",
+        "E-TRAVELLER ALLURE EL?CTRICO 100 KW BATER?A 75 KWH",
+        "E-TRAVELLER ALLURE ELECTRICO 100 KW BATERY 75 KWH",
+        "E-TRAVELLER BUSINESS EL?CTRICO 100 KW BATER?A 50 K",
+        "E-TRAVELLER BUSINESS EL?CTRICO 100 KW BATER?A 75 K",
+        "E-TRAVELLER BUSINESS ELECTRICO 100 KW BATERIA 50 K",
+        "E-TRAVELLER BUSINESS ELECTRICO 100 KW BATERIA 75 K",
+        "E-TRAVELLER BUSINESS ELECTRICO 100 KW BATERY 50 K",
+        "E-TRAVELLER BUSINESS ELECTRICO 100 KW BATERY 75 K",
+        "E-TRAVELLER BUSINESS VIP ELECTRICO 100 KW BATERIA",
+        "E-TRAVELLER BUSINESS VIP ELECTRICO 100 KW BATERY",
+        "NUEVO E-TRAVELLER BUSINESS ELECTRICO 100 KW BATERI",
+        "NUEVO E-TRAVELLER BUSINESS VIP ELECTRICO 100 KW BA",
+        "NUEVO TRAVELLER BUSINESS BLUEHDI 180 S&S EAT8 LONG",
+        "NUEVO TRAVELLER BUSINESS BLUEHDI 180 S&S EAT8 STAN",
+        "NUEVO TRAVELLER BUSINESS BLUEHDI 180 SS EAT8 LONG",
+        "NUEVO TRAVELLER BUSINESS BLUEHDI 180 SS EAT8 STAN",
+        "NUEVO TRAVELLER BUSINESS VIP BLUEHDI 180 S&S EAT8",
+        "NUEVO TRAVELLER BUSINESS VIP BLUEHDI 180 SS EAT8",
+        "PEUGEOT TRAVELLER",
+        "TRAVELLER"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "peugeot",
+        "modelId": "peugeot/traveller",
+        "canonicalMake": "Peugeot",
+        "canonicalModel": "Traveller"
+      }
+    },
+    {
+      "key": "pgo:cevennes",
+      "make": "PGO",
+      "model": "Cevennes",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "piaggio:ape",
+      "make": "Piaggio",
+      "model": "Ape",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "pininfarina:spider",
+      "make": "Pininfarina",
+      "model": "Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "plymouth:acclaim",
+      "make": "Plymouth",
+      "model": "Acclaim",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:baracuda",
+      "make": "Plymouth",
+      "model": "Baracuda",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:barracuda",
+      "make": "Plymouth",
+      "model": "Barracuda",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:barracudaformulas",
+      "make": "Plymouth",
+      "model": "Barracuda Formula S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:barracudagran",
+      "make": "Plymouth",
+      "model": "Barracuda Gran",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:barracudanotchback",
+      "make": "Plymouth",
+      "model": "Barracuda Notchback",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:belvedere",
+      "make": "Plymouth",
+      "model": "Belvedere",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:belverdere",
+      "make": "Plymouth",
+      "model": "Belverdere",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:breeze",
+      "make": "Plymouth",
+      "model": "Breeze",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:business",
+      "make": "Plymouth",
+      "model": "Business",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:colt",
+      "make": "Plymouth",
+      "model": "Colt",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:cranbrook",
+      "make": "Plymouth",
+      "model": "Cranbrook",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:cuda",
+      "make": "Plymouth",
+      "model": "Cuda",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:customsuburban",
+      "make": "Plymouth",
+      "model": "Custom Suburban",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:deluxe",
+      "make": "Plymouth",
+      "model": "De Luxe",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:duster",
+      "make": "Plymouth",
+      "model": "Duster",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:duster340",
+      "make": "Plymouth",
+      "model": "Duster 340",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:fury",
+      "make": "Plymouth",
+      "model": "Fury",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:fury2",
+      "make": "Plymouth",
+      "model": "Fury 2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:fury3",
+      "make": "Plymouth",
+      "model": "Fury 3",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:furygran",
+      "make": "Plymouth",
+      "model": "Fury Gran",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:furyvip",
+      "make": "Plymouth",
+      "model": "Fury Vip",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:granfury",
+      "make": "Plymouth",
+      "model": "Gran Fury",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:grandvoyager",
+      "make": "Plymouth",
+      "model": "Grand Voyager",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:gtx",
+      "make": "Plymouth",
+      "model": "Gtx",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:horizon",
+      "make": "Plymouth",
+      "model": "Horizon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:laser",
+      "make": "Plymouth",
+      "model": "Laser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:neon",
+      "make": "Plymouth",
+      "model": "Neon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:p15",
+      "make": "Plymouth",
+      "model": "P15",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:p7",
+      "make": "Plymouth",
+      "model": "P7",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:p8",
+      "make": "Plymouth",
+      "model": "P8",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:pf",
+      "make": "Plymouth",
+      "model": "Pf",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:pj",
+      "make": "Plymouth",
+      "model": "Pj",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:plaza",
+      "make": "Plymouth",
+      "model": "Plaza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:prowler",
+      "make": "Plymouth",
+      "model": "Prowler",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:roadrunner",
+      "make": "Plymouth",
+      "model": "Road Runner",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:satelite",
+      "make": "Plymouth",
+      "model": "Satelite",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:satellite",
+      "make": "Plymouth",
+      "model": "Satellite",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:satellitesebringplus",
+      "make": "Plymouth",
+      "model": "Satellite Sebring Plus",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:savoy",
+      "make": "Plymouth",
+      "model": "Savoy",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:scamp",
+      "make": "Plymouth",
+      "model": "Scamp",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:specialdeluxe",
+      "make": "Plymouth",
+      "model": "Special De Luxe",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:sportfury",
+      "make": "Plymouth",
+      "model": "Sport Fury",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:suburban",
+      "make": "Plymouth",
+      "model": "Suburban",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:trailduster",
+      "make": "Plymouth",
+      "model": "Trail Duster",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:u",
+      "make": "Plymouth",
+      "model": "U",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:valiant",
+      "make": "Plymouth",
+      "model": "Valiant",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:valiant100",
+      "make": "Plymouth",
+      "model": "Valiant 100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:valiantduster",
+      "make": "Plymouth",
+      "model": "Valiant Duster",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:valiantscamp",
+      "make": "Plymouth",
+      "model": "Valiant Scamp",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:valiantsignet",
+      "make": "Plymouth",
+      "model": "Valiant Signet",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:volare",
+      "make": "Plymouth",
+      "model": "Volare",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "plymouth:voyager",
+      "make": "Plymouth",
+      "model": "Voyager",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "plymouth",
+        "modelId": null,
+        "canonicalMake": "Plymouth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "polaris:rzrpror",
+      "make": "Polaris",
+      "model": "Rzr Pro R",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "polestar:polestar1",
+      "make": "Polestar",
+      "model": "Polestar 1",
+      "aliases": [
+        "1",
+        "POLESTAR 1",
+        "POLESTAR 1 PHEV AWD AUTO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "polestar",
+        "modelId": "polestar/polestar-1",
+        "canonicalMake": "Polestar",
+        "canonicalModel": "Polestar 1"
+      }
+    },
+    {
+      "key": "polestar:polestar2",
+      "make": "Polestar",
+      "model": "Polestar 2",
+      "aliases": [
+        "2",
+        "2 BST EDITION 230",
+        "2 BST EDITION 270",
+        "POLESTAR 2"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "polestar",
+        "modelId": "polestar/polestar-2",
+        "canonicalMake": "Polestar",
+        "canonicalModel": "Polestar 2"
+      }
+    },
+    {
+      "key": "polestar:polestar3",
+      "make": "Polestar",
+      "model": "Polestar 3",
+      "aliases": [
+        "3",
+        "POLESTAR 3"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "polestar",
+        "modelId": "polestar/polestar-3",
+        "canonicalMake": "Polestar",
+        "canonicalModel": "Polestar 3"
+      }
+    },
+    {
+      "key": "polestar:polestar4",
+      "make": "Polestar",
+      "model": "Polestar 4",
+      "aliases": [
+        "4",
+        "POLESTAR 4",
+        "PS4"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "polestar",
+        "modelId": "polestar/polestar-4",
+        "canonicalMake": "Polestar",
+        "canonicalModel": "Polestar 4"
+      }
+    },
+    {
+      "key": "polskifiat:126p",
+      "make": "Polski-Fiat",
+      "model": "126P",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "pontiac:6000",
+      "make": "Pontiac",
+      "model": "6000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:acadian",
+      "make": "Pontiac",
+      "model": "Acadian",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:astre",
+      "make": "Pontiac",
+      "model": "Astre",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:aztek",
+      "make": "Pontiac",
+      "model": "Aztek",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:beaumont",
+      "make": "Pontiac",
+      "model": "Beaumont",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:bonneville",
+      "make": "Pontiac",
+      "model": "Bonneville",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:catalina",
+      "make": "Pontiac",
+      "model": "Catalina",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:chief",
+      "make": "Pontiac",
+      "model": "Chief",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:chieftain",
+      "make": "Pontiac",
+      "model": "Chieftain",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:executive",
+      "make": "Pontiac",
+      "model": "Executive",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:fiero",
+      "make": "Pontiac",
+      "model": "Fiero",
+      "aliases": [
+        "FIERO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": "pontiac/fiero",
+        "canonicalMake": "Pontiac",
+        "canonicalModel": "Fiero"
+      }
+    },
+    {
+      "key": "pontiac:firebird",
+      "make": "Pontiac",
+      "model": "Fire Bird",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:firefly",
+      "make": "Pontiac",
+      "model": "Firefly",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:g3",
+      "make": "Pontiac",
+      "model": "G3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:g5",
+      "make": "Pontiac",
+      "model": "G5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:g6",
+      "make": "Pontiac",
+      "model": "G6",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": "pontiac/g6",
+        "canonicalMake": "Pontiac",
+        "canonicalModel": "G6"
+      }
+    },
+    {
+      "key": "pontiac:g8",
+      "make": "Pontiac",
+      "model": "G8",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:grandam",
+      "make": "Pontiac",
+      "model": "Grand Am",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:grandprix",
+      "make": "Pontiac",
+      "model": "Grand Prix",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:grandsafari",
+      "make": "Pontiac",
+      "model": "Grand Safari",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:grandville",
+      "make": "Pontiac",
+      "model": "Grand Ville",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:gto",
+      "make": "Pontiac",
+      "model": "Gto",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:laurentian",
+      "make": "Pontiac",
+      "model": "Laurentian",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "pontiac:lemans",
+      "make": "Pontiac",
+      "model": "Le Mans",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "pontiac",
+        "modelId": null,
+        "canonicalMake": "Pontiac",
+        "canonicalModel": null
+      }
+    }
+  ]
+}

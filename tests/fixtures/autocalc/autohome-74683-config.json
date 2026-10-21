@@ -1,0 +1,624 @@
+{
+  "message": "<span class='hs_kw23_configfG'></span>",
+  "result": {
+    "paramtypeitems": [
+      {
+        "name": "基本参数",
+        "paramitems": [
+          {
+            "displaytype": 0,
+            "id": -1,
+            "name": "车型<span class='hs_kw66_configfG'></span>",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "RAV4荣放 2026款 2.0L 四驱<span class='hs_kw13_configfG'></span><span class='hs_kw57_configfG'></span><span class='hs_kw8_configfG'></span>"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "RAV4荣放 2026款 2.0L 两驱<span class='hs_kw13_configfG'></span><span class='hs_kw57_configfG'></span><span class='hs_kw8_configfG'></span>"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "RAV4荣放 2026款 双擎 2.0L 两驱精英<span class='hs_kw8_configfG'></span>"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "RAV4荣放 2026款 双擎 2.0L 两驱<span class='hs_kw13_configfG'></span><span class='hs_kw57_configfG'></span><span class='hs_kw8_configfG'></span>"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "RAV4荣放 2026款 双擎 2.5L 四驱<span class='hs_kw13_configfG'></span><span class='hs_kw57_configfG'></span><span class='hs_kw8_configfG'></span>"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "RAV4荣放 2026款 双擎 2.5L 四驱旗舰<span class='hs_kw8_configfG'></span>"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1149,
+            "name": "能源类型",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "汽油"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "汽油"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "油电混合"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "油电混合"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "油电混合"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "油电混合"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 8453,
+            "name": "上市<span class='hs_kw33_configfG'></span>",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "2025.11"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "2025.11"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "2025.11"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "2025.11"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "2025.11"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "2025.11"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1185,
+            "name": "最大功率(kW)",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "126"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "126"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "144"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "144"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "174"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "174"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1147,
+            "name": "车身结构",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "5门5座SUV"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "5门5座SUV"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "5门5座SUV"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "5门5座SUV"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "5门5座SUV"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "5门5座SUV"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1150,
+            "name": "发动机",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "2.0L 171马力 L4"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "2.0L 171马力 L4"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "2.0L 152马力 L4"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "2.0L 152马力 L4"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "2.5L 185马力 L4"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "2.5L 185马力 L4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "车身",
+        "paramitems": [
+          {
+            "displaytype": 0,
+            "id": 1147,
+            "name": "车身结构",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "SUV"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "SUV"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "SUV"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "SUV"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "SUV"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "SUV"
+              }
+            ]
+          },
+          {
+            "displaytype": 1,
+            "id": 1173,
+            "name": "座位数(个)",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [
+                  {
+                    "optiontype": 1,
+                    "price": 0,
+                    "subname": "",
+                    "subvalue": "5"
+                  }
+                ],
+                "value": ""
+              },
+              {
+                "specid": 75763,
+                "sublist": [
+                  {
+                    "optiontype": 1,
+                    "price": 0,
+                    "subname": "",
+                    "subvalue": "5"
+                  }
+                ],
+                "value": ""
+              },
+              {
+                "specid": 75764,
+                "sublist": [
+                  {
+                    "optiontype": 1,
+                    "price": 0,
+                    "subname": "",
+                    "subvalue": "5"
+                  }
+                ],
+                "value": ""
+              },
+              {
+                "specid": 75765,
+                "sublist": [
+                  {
+                    "optiontype": 1,
+                    "price": 0,
+                    "subname": "",
+                    "subvalue": "5"
+                  }
+                ],
+                "value": ""
+              },
+              {
+                "specid": 75766,
+                "sublist": [
+                  {
+                    "optiontype": 1,
+                    "price": 0,
+                    "subname": "",
+                    "subvalue": "5"
+                  }
+                ],
+                "value": ""
+              },
+              {
+                "specid": 74690,
+                "sublist": [
+                  {
+                    "optiontype": 1,
+                    "price": 0,
+                    "subname": "",
+                    "subvalue": "5"
+                  }
+                ],
+                "value": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "发动机",
+        "paramitems": [
+          {
+            "displaytype": 0,
+            "id": 1182,
+            "name": "<span class='hs_kw15_configfG'></span>(mL)",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "1987"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "1987"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "1987"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "1987"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "2487"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "2487"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1294,
+            "name": "最大马力(Ps)",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "171"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "171"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "152"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "152"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "185"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "185"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1185,
+            "name": "最大功率(kW)",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "126"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "126"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "112"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "112"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "136"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "136"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1149,
+            "name": "能源类型",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "汽油"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "汽油"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "油电混合"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "油电混合"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "油电混合"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "油电混合"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "变速箱",
+        "paramitems": [
+          {
+            "displaytype": 0,
+            "id": 1265,
+            "name": "简称",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "CVT无级变速(模拟10挡)"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "CVT无级变速(模拟10挡)"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "E-CVT无级变速"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "E-CVT无级变速"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "E-CVT无级变速"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "E-CVT无级变速"
+              }
+            ]
+          },
+          {
+            "displaytype": 0,
+            "id": 1230,
+            "name": "变速箱类型",
+            "valueitems": [
+              {
+                "specid": 74683,
+                "sublist": [],
+                "value": "无级变速箱(CVT)"
+              },
+              {
+                "specid": 75763,
+                "sublist": [],
+                "value": "无级变速箱(CVT)"
+              },
+              {
+                "specid": 75764,
+                "sublist": [],
+                "value": "电子无级变速箱(E-CVT)"
+              },
+              {
+                "specid": 75765,
+                "sublist": [],
+                "value": "电子无级变速箱(E-CVT)"
+              },
+              {
+                "specid": 75766,
+                "sublist": [],
+                "value": "电子无级变速箱(E-CVT)"
+              },
+              {
+                "specid": 74690,
+                "sublist": [],
+                "value": "电子无级变速箱(E-CVT)"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "seriesid": 0,
+    "specid": 74683,
+    "speclist": [
+      {
+        "showstate": -1,
+        "specid": 74683,
+        "specstate": 20
+      },
+      {
+        "showstate": -1,
+        "specid": 75763,
+        "specstate": 20
+      },
+      {
+        "showstate": -1,
+        "specid": 75764,
+        "specstate": 20
+      },
+      {
+        "showstate": -1,
+        "specid": 75765,
+        "specstate": 20
+      },
+      {
+        "showstate": -1,
+        "specid": 75766,
+        "specstate": 20
+      },
+      {
+        "showstate": -1,
+        "specid": 74690,
+        "specstate": 20
+      }
+    ]
+  },
+  "returncode": "0",
+  "taskid": "16f4c799-5cf7-4507-9596-d7c3dfc0fe9e",
+  "time": "2026-10-01 18:51:24"
+}

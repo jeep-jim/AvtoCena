@@ -1,0 +1,7197 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 9,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-98c922e7b5506c1bb68c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 215,
+      "commercialNames": [
+        "AUDI TT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1421d8a62495a766124c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 235,
+      "commercialNames": [
+        "AUDI TT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3b15cfcdfd05fb8bb34",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2480,
+      "powerKw": 294,
+      "commercialNames": [
+        "AUDI TT",
+        "AUDI TT RS",
+        "TT",
+        "TT RS COUP",
+        "TT RS Coup-",
+        "TT RS COUP-",
+        "TT RS Coup?",
+        "TT RS COUP?",
+        "TT RS COUP1",
+        "TT RS COUP1",
+        "TT RS Coupe",
+        "TT RS Coupé",
+        "TT RS COUPE",
+        "TT RS COUPÉ",
+        "TT RS CoupÊ",
+        "TT RS Roadster",
+        "TT RS ROADSTER"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 34,
+      "registrations": 3776,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00881934760b684c3018",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 169,
+      "commercialNames": [
+        "TT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-749e64fe7acdb46c4a93",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1781,
+      "powerKw": 132,
+      "commercialNames": [
+        "AUDI TT ROADSTER"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f911490838baaab49d0b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1781,
+      "powerKw": 153,
+      "commercialNames": [
+        "TT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b763ea5e5dc4c9b2d782",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TT",
+      "modelId": "audi/tt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2480,
+      "powerKw": 394,
+      "commercialNames": [
+        "TT RS COUPE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af14ffc523014145a966",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TTS",
+      "modelId": "audi/tts",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "TTS BLACK ED TFSI QUATTRO S-A",
+        "TTS TFSI QUATTRO S-A",
+        "TTS VORSPRUNG TFSI QUATTRO S-A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 680,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71ab7465e99ecacb6727",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TTS",
+      "modelId": "audi/tts",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 225,
+      "commercialNames": [
+        "TTS",
+        "TTS COUP",
+        "TTS COUPE",
+        "TTS COUPÉ",
+        "TTS ROADSTER"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4b49f5e38cf5fea744d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TTS",
+      "modelId": "audi/tts",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 235,
+      "commercialNames": [
+        "TTS",
+        "TTS / COUPE 20 / TFSI Q AUT",
+        "TTS COUP",
+        "TTS Coup-",
+        "TTS COUP-",
+        "TTS Coup?",
+        "TTS COUP?",
+        "TTS COUP‚",
+        "TTS COUPE",
+        "TTS COUPÉ",
+        "TTS Coupé",
+        "TTS ROADSTER",
+        "TTS Roadster",
+        "TTS ROADTSER"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 2253,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b6983e0cbd14125d02f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "TTS",
+      "modelId": "audi/tts",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 145,
+      "commercialNames": [
+        "TTS Coup?"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a75ae30c2ca6a3da542",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "BJ30",
+      "modelId": "baic/bj30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 113,
+      "commercialNames": [
+        "BJ 30",
+        "BJ30"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 90,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-819a344a5cc1f0b9e657",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "BJ30",
+      "modelId": "baic/bj30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 113,
+      "commercialNames": [
+        "BJ30"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6100792a4844b9a61615",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "BJ30E",
+      "modelId": "baic/bj30e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 113,
+      "commercialNames": [
+        "BJ30E"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6364b47dc22babaec22e",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "BJ40",
+      "modelId": "baic/bj40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1967,
+      "powerKw": 172,
+      "commercialNames": [
+        "BJ40 PRO"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-691d55cc8823fca64792",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "BJ60",
+      "modelId": "baic/bj60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1997,
+      "powerKw": 188,
+      "commercialNames": [
+        "BJ60"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48aa45e8480d411fa9fe",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "BJ60",
+      "modelId": "baic/bj60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1997,
+      "powerKw": 188,
+      "commercialNames": [
+        "BJ60"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3629777fc2967e102aaa",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X7",
+      "modelId": "baic/x7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "X7"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 65,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98a0bbb265fb39e3a487",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X7",
+      "modelId": "baic/x7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "X7"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 263,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bdf3240818a8e47928d",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X7",
+      "modelId": "baic/x7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "X7"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 410,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebfabe68e8c99ea18a76",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 82,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d5f4ae943fc97c480cf",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98bea794a95e7a33f903",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 444,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05f8050f75af4f7123fc",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9e5409994713d6af29e",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "NG",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d75108608c3883e64166",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51e2c328645ee61288a3",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 72,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb1d82f94fb0550206cf",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95264cf31645b4916faa",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 166,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3901ff7b00519b00d73",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d583bcffd9ac72c13884",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87ca997baa7bf006145c",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X35",
+      "modelId": "baic/x35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "unknown",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X35"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9102f3ba98b850307cbe",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 236,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c05be43585b7611c3032",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d5a0600b99b7f94eb3e",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb536499c39b61d39c5d",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5dc5a8795812752a437",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "X55",
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea02a88d73e1dc7a1875",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "ng",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c6702f79c878c8d0754",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 755,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61f82d2d0208bb1758e7",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 53,
+      "commercialNames": [
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5851131872036d7b56f",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dad68b45b839a5bd33a",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b74ab1208580396df34",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8749a43b750933eb4575",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ddc3072461e6df074a6",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a30351c8ad89f74c496",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 73,
+      "commercialNames": [
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3235428b4163b5741e8",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04692e8d0a7dd2d27f7c",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed23565a5962c10d0e1d",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab5f40d15f718518e893",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e1ffeae06e80c2534f5",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "X55",
+        "X55 X5",
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1500,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc1d8236fceb1bb3c33e",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 140,
+      "commercialNames": [
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bebe6e665d952028bc5",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 225,
+      "commercialNames": [
+        "X55/X5"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39874ad56d6357ef5161",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 130,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5142db4dc58339df3a69",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1489,
+      "powerKw": 130,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32921c19840fe3c48400",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 130,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-377b9977082c86e1a7c7",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 10,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14f2f41929425eef8044",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b7f0866f5af475b97a2",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83e23f63ab743c267e31",
+      "brandId": "baic",
+      "brand": "BAIC",
+      "canonicalModel": "X55",
+      "modelId": "baic/x55",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "X55"
+      ],
+      "sourceMakeNames": [
+        "BAIC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 654,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07ab9381529f06e1cf91",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "Bentayga Hybrid"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02b1888cb5eb4ca7faac",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "BENTAYGA",
+        "BENTAYGA AZURE HYBRID",
+        "BENTAYGA HYBRID",
+        "Bentayga Hybrid",
+        "BENTAYGA S HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 92,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-714749ef847b476a7cdb",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "BENTAYGA AZURE V8",
+        "BENTAYGA EXTENDED WHEELBASE V8",
+        "BENTAYGA S V8",
+        "BENTAYGA SPEED",
+        "BENTAYGA V8",
+        "BENTAYGA V8 AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 842,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f9f61127c7335d70a2d",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "BENTAYGA",
+        "BENTAYGA (S/AZURE) V8",
+        "BENTAYGA AZURE",
+        "BENTAYGA AZURE V8",
+        "BENTAYGA EWB AZURE",
+        "BENTAYGA EXTENDED",
+        "BENTAYGA EXTENDED WAV8",
+        "BENTAYGA EXTENDED WH",
+        "BENTAYGA EXTENDED WHEELB",
+        "BENTAYGA EXTENDED WHEELBASE",
+        "BENTAYGA EXTENDED WHEELBASE AZ",
+        "BENTAYGA EXTENDED WHEELBASE AZUR V8",
+        "BENTAYGA EXTENDED WHEELBASE AZURE V",
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8",
+        "BENTAYGA EXTENDED WHEELBASE AZUREV8",
+        "BENTAYGA EXTENDED WHEELBASE MU",
+        "BENTAYGA EXTENDED WHEELBASE MULLINE",
+        "BENTAYGA EXTENDED WHEELBASE MULLINER V8",
+        "BENTAYGA EXTENDED WHEELBASE V8",
+        "BENTAYGA EXTENDEDWHEELBASE AZURE V8",
+        "BENTAYGA EXTENDET WH",
+        "Bentayga S",
+        "BENTAYGA S V8",
+        "BENTAYGA V8",
+        "BENTAYGA V8 BENTAYGA S V8 BENT",
+        "BENTLEY BENTAYGA"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 61,
+      "registrations": 2827,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc0aee173042797b3b55",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": null,
+      "commercialNames": [
+        "BENTAYGA SPEED AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9c42c749b1006f96ac3",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 467,
+      "commercialNames": [
+        "BENTAYGA",
+        "BENTAYGA SPEED",
+        "BENTAYGA V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 82,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f9d695866c98fb7690e",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "BENTAYGA HYBRID",
+        "BENTAYGA V6 HYBRID AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14a6ce49f05127660f53",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 60,
+      "commercialNames": [
+        "BENTAYGA HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb84da1e3c941a8bcdfd",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "BENTAYGA",
+        "BENTAYGA AZURE HYBRID",
+        "BENTAYGA HYBRID",
+        "BENTAYGA HYBRID BENTAYGA S HYB",
+        "BENTAYGA HYBRID-BENTAYGA S HYB",
+        "BENTAYGA HYBRIDBENTAYGA S HYB",
+        "BENTAYGA HYDRID",
+        "BENTAYGA ODYSSEAN EDITION",
+        "BENTAYGA S HYBRID",
+        "BENTLEY BENTAYGA HYBRID"
+      ],
+      "sourceMakeNames": [
+        "Bentley",
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 1001,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6aaa77b74a31f2210583",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 344,
+      "commercialNames": [
+        "BENTAYGA"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47a62d740cc1757a4544",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "Bentayga Hybrid"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1735aca9bf08d1822096",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3966,
+      "powerKw": 404,
+      "commercialNames": [
+        "BENTAYGA V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5ee8f6faaa4ca702bef",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 107,
+      "commercialNames": [
+        "BENTAYGA V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a8a130509dd13cad771",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 150,
+      "commercialNames": [
+        "BENTAYGA V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3f05a4bffc6f00ab967",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 150,
+      "commercialNames": [
+        "BENTAYGA SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5bf2f24a89f135911e03",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 94,
+      "commercialNames": [
+        "Bentayga Hybrid"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b093638b16fad43e7233",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 67,
+      "commercialNames": [
+        "BENTAYGA AZURE V8",
+        "BENTAYGA S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-862a1f1d63a6fa045181",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 68,
+      "commercialNames": [
+        "BENTAYGA AZURE V8",
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-088c304303a39386bf62",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 70,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e275408cd5beaff73081",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 80,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba16c18316f5166189a5",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 81,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29c88681e91ebdd8f470",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 85,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d29ee6c1794e2de10e05",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 91,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1599fd2847a0476091e",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 95,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8",
+        "BENTAYGA V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b6d20e464841aca86d7",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 120,
+      "commercialNames": [
+        "BENTAYGA S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-102fbe305bdf7de60549",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 131,
+      "commercialNames": [
+        "BENTAYGA S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f19a5e807cf0b716fe76",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 148,
+      "commercialNames": [
+        "BENTAYGA AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-594cac4701d76b9228e2",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 173,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33ef05de4dcdf60a1242",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 210,
+      "commercialNames": [
+        "BENTAYGA EXTENDED WHEELBASE AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f48cf8ac0a9d890d9fe",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "BENTAYGA ODYSSEAN EDITION"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41add1da4e0f6f2777d7",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "BENTAYGA"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01bfaa939036582519e5",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Bentayga",
+      "modelId": "bentley/bentayga",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 478,
+      "commercialNames": [
+        "BENTAYGA SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7182b8a04d59da299dee",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental",
+      "modelId": "bentley/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "CONTINENTAL",
+        "CONTINENTAL G V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 69,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eede2feecda04fb04111",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental",
+      "modelId": "bentley/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 467,
+      "commercialNames": [
+        "CONTINENTAL"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 44,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9f37dd3a52e153eb14a",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental",
+      "modelId": "bentley/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 485,
+      "commercialNames": [
+        "CONTINENTAL"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d328dfffe6294f4dd883",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental",
+      "modelId": "bentley/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CONTINENTAL"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e91e51a69e6afe144931",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental",
+      "modelId": "bentley/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "CONTINENTAL"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-241286e5ccdb6b994088",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental Flying Spur",
+      "modelId": "bentley/continental-flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": null,
+      "commercialNames": [
+        "CONTINENTAL FLYING SPUR W12 A"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 322,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f2089f19afd663fcc58",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "Continental GT V8",
+        "Continental GT V8 Convert"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c281c289d785113874b",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "CONTINENTAL GT",
+        "CONTINENTAL GT AZURE V8",
+        "CONTINENTAL GT MULLINER",
+        "CONTINENTAL GT SPEED",
+        "CONTINENTAL GT V8",
+        "CONTINENTAL GT V8 AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 825,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3b32c4be57df274cca1",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "BENTLEY CONTINENTAL GT V8 CONVERTIBLE",
+        "CONTINENTAL GT",
+        "CONTINENTAL GT (S/MULLINER/AZU",
+        "CONTINENTAL GT / AZURE V8 /",
+        "CONTINENTAL GT AZURE",
+        "CONTINENTAL GT AZURE V8",
+        "CONTINENTAL GT CONVERTIBLE",
+        "CONTINENTAL GT MULLINER V",
+        "CONTINENTAL GT MULLINER V8",
+        "CONTINENTAL GT S",
+        "CONTINENTAL GT S V8",
+        "CONTINENTAL GT V8",
+        "CONTINENTAL GT V8 /",
+        "CONTINENTAL GT V8 CO",
+        "CONTINENTAL GT V8 CONTINENTAL",
+        "CONTINENTAL GT V8 CONV",
+        "CONTINENTAL GT V8 CONVER",
+        "Continental GT V8 CONVERIBLE",
+        "Continental GT V8 Convert",
+        "CONTINENTAL GT V8 CONVERT",
+        "CONTINENTAL GT V8 CONVERTIBLE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 51,
+      "registrations": 2583,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46731e300f260f561fea",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5948,
+      "powerKw": 467,
+      "commercialNames": [
+        "CONTINENTAL GT"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcaea93f3475f8ac80d8",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": null,
+      "commercialNames": [
+        "CONTINENTAL GT AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 436,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5411e66910c1aeb3a8d5",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 467,
+      "commercialNames": [
+        "CONTINENTAL GT",
+        "CONTINENTAL GT CONV",
+        "CONTINENTAL GT CONVERTIB",
+        "Continental GT Convertibl",
+        "CONTINENTAL GT CONVERTIBLE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 699,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec0d16ed83d3c89b2420",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5998,
+      "powerKw": 467,
+      "commercialNames": [
+        "CONTINENTAL GT"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b76defb9c15feaa3cbcf",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 107,
+      "commercialNames": [
+        "CONTINENTAL GT V8",
+        "CONTINENTAL GT V8 CONVERTIBLE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d1c35d128442dfef55c",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 107,
+      "commercialNames": [
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7d0f64fcb894023e6a5",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 485,
+      "commercialNames": [
+        "CONTINENTAL GT",
+        "CONTINENTAL GT MULLINER W",
+        "CONTINENTAL GT MULLINER W12",
+        "CONTINENTAL GT SPEED",
+        "CONTINENTAL GT SPEED CON",
+        "CONTINENTAL GT SPEED CONV",
+        "Continental GT Speed Conv",
+        "CONTINENTAL GT SPEED CONVERTIB",
+        "CONTINENTAL GT SPEED CONVERTIBLE",
+        "CONTINENTAL GT SPEED CONVERTIBLE /",
+        "CONTINENTAL GT SPEED EDITION",
+        "CONTINENTAL GT SPEED EDITION 12",
+        "CONTINENTAL GT W12"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 915,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afa7a813c43ae0027fb1",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 405,
+      "commercialNames": [
+        "Continental GT V8 Convertible"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb44c34c7f51994f9958",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 62,
+      "commercialNames": [
+        "CONTINENTAL GT S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6efb9c0eb49314f2299",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 67,
+      "commercialNames": [
+        "CONTINENTAL GT AZURE V8",
+        "CONTINENTAL GT V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4144b8c85cfc0a1e99a9",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 69,
+      "commercialNames": [
+        "CONTINENTAL GT V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25861c54e0a69df157d9",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 90,
+      "commercialNames": [
+        "CONTINENTAL GT S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43ee5cc0cb718fe85619",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 110,
+      "commercialNames": [
+        "CONTINENTAL GT V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca3d880dfffaf45a923b",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5950,
+      "powerKw": 67,
+      "commercialNames": [
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c649c0d27cf6f7fdc69d",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5950,
+      "powerKw": 114,
+      "commercialNames": [
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2be000a862f35d62aba6",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CONTINENTAL GT MULLINER",
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-852c02c1643b52d4c456",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CONTINENTAL GT",
+        "CONTINENTAL GT MULLI",
+        "CONTINENTAL GT MULLINER",
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 523,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02efb3525dc8e851b859",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 80,
+      "commercialNames": [
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5afd49ce5db32514ad8f",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 140,
+      "commercialNames": [
+        "CONTINENTAL GT SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87d5c6b9297081c66916",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "CONTINENTAL GT",
+        "CONTINENTAL GT AZURE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab3fc610f29aeaa59c28",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "CONTINENTAL GT MULLINER"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-608aefbfc86cf9f687ae",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GT",
+      "modelId": "bentley/continental-gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "CONTINENTAL GT",
+        "CONTINENTAL GT AZURE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 101,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81c43807af805dad7e3e",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 467,
+      "commercialNames": [
+        "Continental GTC"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21f1fccc81134a24126d",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "CONTINENTAL GTC",
+        "Continental GTC Azure V8",
+        "CONTINENTAL GTC AZURE V8",
+        "CONTINENTAL GTC AZURE V9",
+        "CONTINENTAL GTC MULLINER",
+        "CONTINENTAL GTC MULLINER V8",
+        "CONTINENTAL GTC S",
+        "CONTINENTAL GTC S V8",
+        "CONTINENTAL GTC V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e6d0a550816b6fe22bf",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 485,
+      "commercialNames": [
+        "CONTINENTAL GTC MULLINER",
+        "CONTINENTAL GTC MULLINER W12",
+        "CONTINENTAL GTC SPEE",
+        "CONTINENTAL GTC SPEED",
+        "CONTINENTAL GTC SPEED EDITION",
+        "CONTINENTAL GTC SPEED EDITION 12",
+        "CONTINENTAL GTC W12"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 188,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67b37010bfc1d6b4d2b1",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5998,
+      "powerKw": 412,
+      "commercialNames": [
+        "CONTINENTAL GTC"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92df5a2220b60b831a47",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "CONTINENTAL GTC AZURE V8",
+        "CONTINENTAL GTC MULLINER",
+        "CONTINENTAL GTC MULLINER V8",
+        "CONTINENTAL GTC SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6d3c558ecc658d64d20",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5950,
+      "powerKw": 81,
+      "commercialNames": [
+        "CONTINENTAL GTC SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5b2d8d1b9f5b7184ca3",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "CONTINENTAL GTC S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24c3d198cdbfa809576e",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CONTINENTAL GTC MULLINER",
+        "CONTINENTAL GTC SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dcaf07fca50a8d93393",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CONTINENTAL GTC",
+        "CONTINENTAL GTC MULL",
+        "CONTINENTAL GTC MULLINER",
+        "CONTINENTAL GTC SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 301,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1bfe488a07c79d6b034",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "CONTINENTAL GTC",
+        "CONTINENTAL GTC AZURE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b99223abae37a01b3ef8",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Continental GTC",
+      "modelId": "bentley/continental-gtc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "CONTINENTAL GTC",
+        "CONTINENTAL GTC AZURE",
+        "CONTINENTAL GTC S"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17dd06a11276c4d9c978",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR AZURE V8",
+        "FLYING SPUR MULLINER",
+        "FLYING SPUR SPEED",
+        "FLYING SPUR V8 AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 67,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ae08679b0bf27c59f6f",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR AZURE V8",
+        "FLYING SPUR MULLINER V8",
+        "FLYING SPUR S V8",
+        "FLYING SPUR V8",
+        "FLYING SPUR V8 S"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 1019,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5b47138e073bc4659ff",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 467,
+      "commercialNames": [
+        "Flying Spur",
+        "FLYING SPUR",
+        "FLYING SPUR MULLINER",
+        "Flying Spur Mulliner W12",
+        "FLYING SPUR MULLINER W12",
+        "FLYING SPUR S SPEED",
+        "FLYING SPUR S SPEED EDITION 12",
+        "FLYING SPUR SPEED",
+        "FLYING SPUR SPEED EDITION",
+        "FLYING SPUR SPEED EDITION 12",
+        "FLYING SPUR V8",
+        "FLYING SPUR W12"
+      ],
+      "sourceMakeNames": [
+        "Bentley",
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 868,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c05f34fbd891af180e52",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 5950,
+      "powerKw": 467,
+      "commercialNames": [
+        "FLYING SPUR",
+        "Flying Spur"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-574c17c9868022ed64d6",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 373,
+      "commercialNames": [
+        "BENTLEY FLYING SPUR V8",
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-738db6e7d7bdb067ab07",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 80,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-443ac38c37882c30702b",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 107,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d246072aaceb6a7549e4",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 110,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4f3b1dc4616258fa5ed",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 135,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f599bd3d41716b544e62",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 150,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f76480a882aacd55051e",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 400,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9ea759c2d6e2c597574",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 107,
+      "commercialNames": [
+        "FLYING SPUR"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd346a7b61cccf47ab8a",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5950,
+      "powerKw": 447,
+      "commercialNames": [
+        "FLYING SPUR"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7594c43c3b69a08a2ef8",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 306,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR AZURE HYBRID",
+        "FLYING SPUR HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3b155c7c39b3861f51f",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2894,
+      "powerKw": 103,
+      "commercialNames": [
+        "FLYING SPUR HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a27d3769255b81dd634",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2894,
+      "powerKw": 306,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR (S) (AZURE) (MULLI",
+        "FLYING SPUR AZURE HYBRID",
+        "Flying Spur Hybrid",
+        "FLYING SPUR HYBRID",
+        "FLYING SPUR HYBRID FLYING SPUR",
+        "FLYING SPUR MULLINER HYBRID",
+        "FLYING SPUR S HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 255,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d836c56d538b502e7e81",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 68,
+      "commercialNames": [
+        "FLYING SPUR AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b6d25eba61d16992c4d",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 74,
+      "commercialNames": [
+        "FLYING SPUR S V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20153e8f8590e622c4d4",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 116,
+      "commercialNames": [
+        "FLYING SPUR V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6c26c81242a1d41cb42",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 140,
+      "commercialNames": [
+        "FLYING SPUR AZURE V8"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd846bc6cd37af84469d",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5950,
+      "powerKw": 51,
+      "commercialNames": [
+        "FLYING SPUR SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-619611057db70d468e5e",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5950,
+      "powerKw": 132,
+      "commercialNames": [
+        "FLYING SPUR MULLINER W12"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4de55a0b5a77a2fb183",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": null,
+      "powerKw": 409,
+      "commercialNames": [
+        "FLYING SPUR"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5b726275416639118cb",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2894,
+      "powerKw": null,
+      "commercialNames": [
+        "FLYING SPUR AZURE HYBRID",
+        "FLYING SPUR S HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e627c381dd6939ff511",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2894,
+      "powerKw": 61,
+      "commercialNames": [
+        "FLYING SPUR HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0607fd06669e5ac6dc78",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2894,
+      "powerKw": 68,
+      "commercialNames": [
+        "FLYING SPUR AZURE HYBRID"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33b17d06bce49f7e77f4",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "FLYING SPUR MULLINER",
+        "FLYING SPUR SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d6cb82c9f2f31df650c",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR MULLINER",
+        "FLYING SPUR SPEED",
+        "FLYING SPUR SPEED MULLINE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 150,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cfa272b92535020d925",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR AZURE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e911ba75f491272bdaa",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 80,
+      "commercialNames": [
+        "FLYING SPUR MULLINER"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b2cf0a97ad9f5f2cb88",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Flying Spur",
+      "modelId": "bentley/flying-spur",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 382,
+      "commercialNames": [
+        "FLYING SPUR",
+        "FLYING SPUR AZURE",
+        "FLYING SPUR SPEED MULLINE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99a3e45beb0d79138633",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Mulsanne",
+      "modelId": "bentley/mulsanne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6752,
+      "powerKw": null,
+      "commercialNames": [
+        "MULSANNE EWB V8 AUTO",
+        "MULSANNE SPEED V8 AUTO",
+        "MULSANNE V8 AUTO"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3e97c92195b092357d0",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Mulsanne",
+      "modelId": "bentley/mulsanne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6752,
+      "powerKw": 377,
+      "commercialNames": [
+        "MULSANNE",
+        "MULSANNE EXTENDED WHEELBASE"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba58dd0d5af0897976db",
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "canonicalModel": "Mulsanne",
+      "modelId": "bentley/mulsanne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6752,
+      "powerKw": 395,
+      "commercialNames": [
+        "MULSANNE",
+        "MULSANNE SPEED"
+      ],
+      "sourceMakeNames": [
+        "BENTLEY"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 49,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0db944183f9f8e5f5834",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1496,
+      "powerKw": null,
+      "commercialNames": [
+        "116D M SPORT",
+        "116D M SPORT AUTO",
+        "116D SE",
+        "116D SE AUTO",
+        "116D SPORT",
+        "116D SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2390,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ce2e2ba9a69af8e4b69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1496,
+      "powerKw": 70,
+      "commercialNames": [
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20ab1493208dc951c91a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1496,
+      "powerKw": 85,
+      "commercialNames": [
+        "116 / / D",
+        "116 D",
+        "116D",
+        "116d",
+        "116D 5-T?RER F40 B37",
+        "116D 5-T³RER F40 B37",
+        "116D 5-TÜRER F40 B37",
+        "116D 5-TURER F40 B37",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 87716,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa1777136e7754640594",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "118D",
+        "120",
+        "120D",
+        "120D M SPORT AUTO",
+        "120D SPORT AUTO",
+        "120D XDRIVE M SPORT AUTO",
+        "120D XDRIVE SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 977,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab67cebdf3e259231958",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "116D",
+        "SERIE1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0427ac5821849f92956f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 90,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bef60d629129aa4b952d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "118d",
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 377,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c5e22ac941c88345ce9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "118 / / D",
+        "118 / / D AUT",
+        "118 / / D AUT.",
+        "118 D",
+        "118 D AUT",
+        "118 D AUT.",
+        "118d",
+        "118D",
+        "120",
+        "120 / / D AUT.",
+        "120 D AUT.",
+        "120D",
+        "120D 5-TURER F70 B47",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 102612,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ec470480b1d0f606e85",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "120",
+        "120D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c61712fcc5b4d08930a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "120D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f185001012bf36ae7de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "118D",
+        "120 / / D AUT.",
+        "120 / / D XDRIVE AUT.",
+        "120 D XDRIVE AUT",
+        "120 XDRIVE",
+        "120D",
+        "120D 5-TÜRER F40 B47",
+        "120d xDrive",
+        "120D XDRIVE",
+        "120D XDRIVE 5-T?RER F40 B47",
+        "120D XDRIVE 5-T³RER F40 B47",
+        "120D XDRIVE 5-TÜRER F40 B47",
+        "120D XDRIVE 5-TURER F40 B47",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 22472,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf3bba73716da7d4e807",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "118I",
+        "118I M SPORT",
+        "118I M SPORT AUTO",
+        "118I M SPORT SHADOW EDITION",
+        "118I SE",
+        "118I SE AUTO",
+        "118I SPORT",
+        "118I SPORT AUTO",
+        "120",
+        "120D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 16873,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0213368463a7d8c8a874",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 80,
+      "commercialNames": [
+        "116 / / I",
+        "116 I",
+        "116I",
+        "116i",
+        "116I 5-T³RER F20 B38",
+        "116I 5-TÜRER F40 B38",
+        "116I 5-TURER F40 B38",
+        "116I BMW",
+        "118I",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 36221,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-871c9e8f0de4765c15dc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "118 / / I",
+        "118 I",
+        "118I",
+        "118i",
+        "118I 5-TÜRER F40 B38",
+        "118I 5-TURER F40 B38",
+        "120",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 126516,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd96cf50e6c99d6a455b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 103,
+      "commercialNames": [
+        "118 / / I",
+        "118 I",
+        "118I",
+        "118I 5-T³RER F40 B38",
+        "118I 5-TÜRER F40 B38",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 87010,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92f14ebc31a3be6fe5bc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 141,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c5e836edbdcf9bc2666",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 225,
+      "commercialNames": [
+        "M1 35I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 49,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70910d3d4c6e5f6dc2a8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "120I",
+        "M135I XDRIVE AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3461,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-850679d92b906c54e573",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "120 / / I AUT",
+        "120 / / I AUT.",
+        "120i",
+        "120I",
+        "120I 5-TÜRER F40 B48",
+        "120I 5-TURER F40 B48",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 19709,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8a0fc883b596424ddaa",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "120i",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62fafaf545b34e06399d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 195,
+      "commercialNames": [
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 242,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc6f29d473c30750b152",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 225,
+      "commercialNames": [
+        "118I",
+        "M1 35I XDRIVE",
+        "M135I XDRIVE",
+        "M135i xDrive",
+        "M135I XDRIVE 5-T³RER F40 B48",
+        "M135I XDRIVE 5-TÜRER F40 B48",
+        "M135I XDRIVE 5-TURER F40 B48",
+        "SERIE 1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 21057,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8855dcf90cc72db5c56",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 105,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9110e38d789e23a619f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 130,
+      "commercialNames": [
+        "120D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fb46841f03d6fe82996",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 141,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f56ffa3585ab3d97117",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "116I",
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8e912895d261ee93209",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "118I",
+        "120",
+        "120 / / AUT.",
+        "120 5-TURER F70 B38",
+        "120 AUT."
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 41694,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3c9b9916cbaf5a720b1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 160,
+      "commercialNames": [
+        "116I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15da61f7f147b5c2ac40",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "116I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a72267b6e98bb9fef8c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 105,
+      "commercialNames": [
+        "118I",
+        "SERIE 1 (118I CABRIO)"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcd49a953ef349fdc677",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "116I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fdfabbacceedad65b82",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 90,
+      "commercialNames": [
+        "116I",
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4c51823d5591902a889",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd1c06e95cb18b656399",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-569bddcad74c20ab6200",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc7c532b2adfd07c4381",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e6358131eb28a971dfe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 75,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdcde032e9adba6e3833",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01959df4d689ce541888",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 131,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b160e2dd496feccffb0f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1e85f456af4d85bb12c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 52,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47a043524d16ba616cdb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f9f522df77f67bbae0f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "116I",
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6d7e0dfd784f018e4d0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 68,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f379b3fca8bdd28b2e1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 69,
+      "commercialNames": [
+        "118I",
+        "120"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad7bb3e9ff707dafd29e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e77486c888279da40f9b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 72,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ebf54abac5ed9e181c8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 73,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c864dc5587229cf2ef08",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-326bc202529787e98415",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-221496187d76400f4f7d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70853a7a3cc83b9e2df4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-167e31ed8388b1deed12",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "116I",
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ee90623a847f0e89689",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ec218524a947d7b6610",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 91,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9b00e8b67524c1e0b1b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 92,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e5b5835a17eeff5d53f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 95,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98fff248dd82fb2c9f92",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "116I",
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f610ca18637c936bdfd0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b563029867adc5c5a2d6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 114,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9810ba503b914cadf6e9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 116,
+      "commercialNames": [
+        "116I",
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-308839a467f4262dff30",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 117,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d589af0188946b7c8fe7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 120,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce6917522ddc6b70f17a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 131,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f73b642a4d10794d1ad1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 132,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb2a437353a56fb43644",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 136,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a92aae0c1acf6db718e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 137,
+      "commercialNames": [
+        "116I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa2812a5c33a09f21497",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 140,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55195c6b80112472ed34",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 141,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-485490c5d5929a69de00",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 147,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d674c0263d7de4e5c7f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 148,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f51dad85131d077e298",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a854e125290663f5660",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 180,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-406a35ef554cbe223215",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 185,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e207004f1c38fd1855f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 200,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5274d072dcb3745f2bd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 206,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c476f89607935d53ad15",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 221,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4abeaad33896ab432367",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 245,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c32cbfb26e16a5d2f6e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 258,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-514f2d4f59e963111e5a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 324,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a23ee834867bf1ff2ec2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 441,
+      "commercialNames": [
+        "118I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4cf018fb341cb6267cc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "118D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+name: Verify sticky catalog controls
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/CatalogFilters.tsx'
+      - 'apps/web/components/catalog/StickyCatalogControls.tsx'
+      - 'apps/web/components/catalog/sticky-catalog-controls.css'
+      - 'tests/browser/sticky-catalog*'
+      - '.github/workflows/verify-sticky-catalog.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs scripts/build-model-search-index.mjs
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/model-suggestion-search.test.ts tests/catalog-filter-search.test.ts tests/autocalc-model-suggestions.test.ts
+      - run: npx tsc -p apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/model-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify sticky chips, sorting and green corner
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/model-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/sticky-catalog.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sticky-catalog
+          path: artifacts/sticky-catalog-*/*.png

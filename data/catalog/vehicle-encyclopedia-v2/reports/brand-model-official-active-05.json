@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 9,
+    "newBrands": 4,
+    "newModels": 7,
+    "newGenerations": 3,
+    "newVariants": 3
+  },
+  "brandIds": [
+    "audi-china",
+    "icaur",
+    "jac-yiwei",
+    "lepas"
+  ],
+  "modelIds": [
+    "audi-china/e5-sportback",
+    "icaur/v23",
+    "icaur/v27",
+    "jac-yiwei/3",
+    "lepas/l4",
+    "lepas/l6",
+    "lepas/l8"
+  ],
+  "generationIds": [
+    "audi-china/e5-sportback/adp",
+    "icaur/v23/current-global-2026",
+    "jac-yiwei/3/current-china-2026"
+  ],
+  "variantIds": [
+    "icaur/v23/current-global-2026/59-93-kwh",
+    "icaur/v23/current-global-2026/81-76-kwh",
+    "jac-yiwei/3/current-china-2026/505-km"
+  ],
+  "policy": {
+    "priorityWindow": "Active China/global passenger vehicles, 2020-2026",
+    "officialManufacturerSourcesOnly": true,
+    "ambiguousBrandAliasesRemainUnsafe": true,
+    "icarAndIcaurNotMergedWithoutOfficialEvidence": true,
+    "promotionalMaximumsNotPromotedToVariants": true,
+    "missingTechnicalValuesNotDerived": true,
+    "sourceTracedLogoPairRequired": true,
+    "automaticPublicationReady": false
+  }
+}

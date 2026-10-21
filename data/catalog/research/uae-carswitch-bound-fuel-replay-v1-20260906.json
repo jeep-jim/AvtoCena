@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-09-07T00:00:25.313Z",
+  "productionWrites": false,
+  "mode": "offline_replay_of_captured_public_detail",
+  "url": "https://carswitch.com/abudhabi/used-car/mg/rx5/2024/851255",
+  "sourceSha256": "6907b19d911f35056d3cc824dce3f0dda9e402d2d6eaf82c6c0253ae476b68b5",
+  "sourceOfferId": "851255",
+  "fuel": "petrol",
+  "powertrainKind": "combustion",
+  "engineCc": null,
+  "powerHp": null,
+  "galleryUrls": 10,
+  "evidence": {
+    "fuel": {
+      "source": "carswitch_exact_detail_vehicleEngine_fuelType",
+      "rawValues": [
+        "Petrol"
+      ],
+      "status": "exact",
+      "value": "petrol"
+    },
+    "engineCc": {
+      "source": "carswitch_exact_detail_vehicleEngine_engineDisplacement",
+      "rawValues": [
+        "1.5"
+      ],
+      "status": "ambiguous"
+    }
+  },
+  "fields": {
+    "year": {
+      "state": "exact",
+      "reason": "valid_source_year",
+      "provenance": "source_evidence"
+    },
+    "fuelPowertrain": {
+      "state": "exact",
+      "reason": "usable_fuel_powertrain",
+      "provenance": "source_evidence"
+    },
+    "engineCc": {
+      "state": "ambiguous",
+      "reason": "explicit_semantic_ambiguity",
+      "provenance": "source_evidence"
+    },
+    "powerHp": {
+      "state": "missing",
+      "reason": "peak_power_missing",
+      "provenance": "none"
+    },
+    "certifiedPower": {
+      "state": "not_applicable",
+      "reason": "combustion_vehicle",
+      "provenance": "none"
+    }
+  },
+  "conclusion": "Bound source fuel is recovered. Unitless displacement 1.5 is not exact cc; horsepower is absent. This detail is not ready for a complete price calculation."
+}

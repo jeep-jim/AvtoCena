@@ -1,0 +1,2567 @@
+{
+  "schemaVersion": 1,
+  "id": "autohome-china-core",
+  "authority": "established_automotive_catalog",
+  "fetchedAt": "2026-08-22T10:47:52.620Z",
+  "status": "partial",
+  "counts": {
+    "brands": 396,
+    "seriesDiscovered": 3938,
+    "series": 2114,
+    "seriesFetched": 2143,
+    "variants2020Plus": 17924,
+    "seriesFailed": 1795,
+    "variantsRejectedMissingOrOutsideYearWindow": 261
+  },
+  "errors": [
+    {
+      "seriesId": 15,
+      "seriesName": "宝来经典",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 16,
+      "seriesName": "捷达",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 19,
+      "seriesName": "奥迪A4",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 45,
+      "seriesName": "兰德酷路泽",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 56,
+      "seriesName": "奔驰C级(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 57,
+      "seriesName": "奔驰M级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 76,
+      "seriesName": "爱迪尔",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 86,
+      "seriesName": "夏朗",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 89,
+      "seriesName": "派力奥",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 90,
+      "seriesName": "西耶那",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 91,
+      "seriesName": "周末风",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 99,
+      "seriesName": "标致307",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 107,
+      "seriesName": "普瑞维亚",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 109,
+      "seriesName": "花冠",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 126,
+      "seriesName": "菱帅",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 144,
+      "seriesName": "高尔",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 148,
+      "seriesName": "奥迪TT",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 149,
+      "seriesName": "桑塔纳经典",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 155,
+      "seriesName": "乐驰",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 159,
+      "seriesName": "宝马X5(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 168,
+      "seriesName": "Boxster",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 170,
+      "seriesName": "特锐",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 179,
+      "seriesName": "阿尔法·罗密欧156",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 184,
+      "seriesName": "标致206(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 185,
+      "seriesName": "标致407",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 186,
+      "seriesName": "标致607",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 192,
+      "seriesName": "威霆(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 206,
+      "seriesName": "丰田RAV4(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 207,
+      "seriesName": "桑塔纳志俊",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 210,
+      "seriesName": "甲壳虫",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 224,
+      "seriesName": "辉腾",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 231,
+      "seriesName": "里程",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 233,
+      "seriesName": "时韵",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 235,
+      "seriesName": "奔驰CLK级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 237,
+      "seriesName": "奔驰SL级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 266,
+      "seriesName": "阿斯顿·马丁DB9",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 267,
+      "seriesName": "奔驰SLK级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 270,
+      "seriesName": "宝马6系",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 271,
+      "seriesName": "宝马X3(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 277,
+      "seriesName": "标致307(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 300,
+      "seriesName": "唯雅诺(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 306,
+      "seriesName": "雅致",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 308,
+      "seriesName": "法拉利575M",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 317,
+      "seriesName": "宝马3系(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 334,
+      "seriesName": "普拉多(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 344,
+      "seriesName": "荣御",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 359,
+      "seriesName": "法拉利F430",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 360,
+      "seriesName": "开迪",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 361,
+      "seriesName": "法拉利360",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 367,
+      "seriesName": "法拉利612",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 368,
+      "seriesName": "Passat",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 370,
+      "seriesName": "奥迪A3(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 371,
+      "seriesName": "普锐斯",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 372,
+      "seriesName": "高尔夫(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 373,
+      "seriesName": "宝马1系(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 375,
+      "seriesName": "锐志",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 390,
+      "seriesName": "威航",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 401,
+      "seriesName": "阿尔法·罗密欧GT",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 407,
+      "seriesName": "比亚迪F3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 415,
+      "seriesName": "Cayman",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 417,
+      "seriesName": "福莱尔",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 430,
+      "seriesName": "大众Eos",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 437,
+      "seriesName": "标致206",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 449,
+      "seriesName": "思迪",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 459,
+      "seriesName": "法拉利599",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 465,
+      "seriesName": "派朗",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 467,
+      "seriesName": "奔驰GL级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 469,
+      "seriesName": "奔驰R级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 489,
+      "seriesName": "比亚迪S8",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 498,
+      "seriesName": "麦柯斯",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 505,
+      "seriesName": "雅力士",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 509,
+      "seriesName": "奥迪A6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 513,
+      "seriesName": "FJ 酷路泽",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 525,
+      "seriesName": "林荫大道",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 539,
+      "seriesName": "迈腾(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 540,
+      "seriesName": "比亚迪F6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 542,
+      "seriesName": "博悦",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 543,
+      "seriesName": "朋多",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 544,
+      "seriesName": "领雅",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 545,
+      "seriesName": "森雅",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 549,
+      "seriesName": "汉兰达(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 550,
+      "seriesName": "兰德酷路泽(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 554,
+      "seriesName": "景逸",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 557,
+      "seriesName": "Tiguan",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 560,
+      "seriesName": "猛士",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 561,
+      "seriesName": "奥丁",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 562,
+      "seriesName": "御轩",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 574,
+      "seriesName": "凯领",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 575,
+      "seriesName": "酷搏",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 576,
+      "seriesName": "锋哲",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 577,
+      "seriesName": "蒙迪欧-致胜",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 579,
+      "seriesName": "比亚迪F0",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 592,
+      "seriesName": "昂科雷",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 593,
+      "seriesName": "奥迪Q5(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 595,
+      "seriesName": "奔驰GLK级(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 601,
+      "seriesName": "菲亚特500",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 602,
+      "seriesName": "酷威",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 606,
+      "seriesName": "V3菱悦",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 631,
+      "seriesName": "迈特威",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 632,
+      "seriesName": "奔腾B50",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 640,
+      "seriesName": "标致207(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 650,
+      "seriesName": "奥迪A1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 659,
+      "seriesName": "嘉年华",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 669,
+      "seriesName": "尚酷",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 675,
+      "seriesName": "宝马X1(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 676,
+      "seriesName": "California T",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 683,
+      "seriesName": "奔驰CL级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 688,
+      "seriesName": "标致207",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 689,
+      "seriesName": "标致308(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 694,
+      "seriesName": "锋范经典",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 700,
+      "seriesName": "大众CC",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 723,
+      "seriesName": "INSIGHT",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 724,
+      "seriesName": "标致3008(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 762,
+      "seriesName": "威飒(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 780,
+      "seriesName": "大众up!",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 790,
+      "seriesName": "东风风神S30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 798,
+      "seriesName": "比亚迪M6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 812,
+      "seriesName": "奥迪Q5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 822,
+      "seriesName": "V12 Vantage",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 826,
+      "seriesName": "Passat领驭",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 852,
+      "seriesName": "骑士S12",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 859,
+      "seriesName": "思铂睿",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 874,
+      "seriesName": "途观",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 875,
+      "seriesName": "凯越",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 877,
+      "seriesName": "标致308",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 882,
+      "seriesName": "皇冠",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 884,
+      "seriesName": "拉共达Taraf",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 889,
+      "seriesName": "法拉利458",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 897,
+      "seriesName": "本田CR-Z",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 900,
+      "seriesName": "飞度(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 901,
+      "seriesName": "慕尚",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 914,
+      "seriesName": "奔驰SLS级AMG",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 923,
+      "seriesName": "Rapide",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 927,
+      "seriesName": "比亚迪G3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 940,
+      "seriesName": "比亚迪F3R",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 951,
+      "seriesName": "帅客",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 963,
+      "seriesName": "凯美瑞(海外)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 964,
+      "seriesName": "红杉",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 965,
+      "seriesName": "战旗",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 966,
+      "seriesName": "陆霸",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 982,
+      "seriesName": "英朗",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 983,
+      "seriesName": "SIENNA",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 997,
+      "seriesName": "比亚迪G3R",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 1006,
+      "seriesName": "东风风神H30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2005,
+      "seriesName": "Sprinter",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2034,
+      "seriesName": "唯雅诺",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2047,
+      "seriesName": "标致RCZ",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2073,
+      "seriesName": "918 Spyder",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2085,
+      "seriesName": "比亚迪L3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2088,
+      "seriesName": "比亚迪S6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2091,
+      "seriesName": "比亚迪G6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2126,
+      "seriesName": "北京BW007",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2168,
+      "seriesName": "歌诗图",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2197,
+      "seriesName": "奔驰S级AMG",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2236,
+      "seriesName": "宝骏630",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2237,
+      "seriesName": "逸致",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2244,
+      "seriesName": "杰路驰",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2252,
+      "seriesName": "北京汽车E系列",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2261,
+      "seriesName": "法拉利FF",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2262,
+      "seriesName": "菲跃",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2264,
+      "seriesName": "奥迪Q3(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2275,
+      "seriesName": "Virage",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2310,
+      "seriesName": "奔腾B90",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2354,
+      "seriesName": "坦途",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2387,
+      "seriesName": "宝马i8",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2388,
+      "seriesName": "宝马i3(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2444,
+      "seriesName": "博速 S级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2446,
+      "seriesName": "博速 SLK级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2447,
+      "seriesName": "博速 CLS",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2453,
+      "seriesName": "探索者6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2454,
+      "seriesName": "探索者Ⅱ",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2455,
+      "seriesName": "探索者Ⅲ",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2472,
+      "seriesName": "标致4008(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2475,
+      "seriesName": "小超人",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2477,
+      "seriesName": "希旺",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2478,
+      "seriesName": "福瑞达",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2482,
+      "seriesName": "北汽威旺306",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2490,
+      "seriesName": "东风小康V07S",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2491,
+      "seriesName": "东风小康V21",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2494,
+      "seriesName": "东风小康V22",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2495,
+      "seriesName": "东风小康V27",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2498,
+      "seriesName": "东风小康K06",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2499,
+      "seriesName": "东风小康K17",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2500,
+      "seriesName": "东风小康K07",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2501,
+      "seriesName": "东风小康K07II",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2512,
+      "seriesName": "锐骐多功能车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2530,
+      "seriesName": "得利卡",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2556,
+      "seriesName": "东风风神A60",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2562,
+      "seriesName": "奔驰GLK级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2564,
+      "seriesName": "凌特",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2575,
+      "seriesName": "博速 M级",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2607,
+      "seriesName": "HIACE",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2619,
+      "seriesName": "标致3008",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2682,
+      "seriesName": "F12berlinetta",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2683,
+      "seriesName": "博速 smart fortwo",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2719,
+      "seriesName": "奔驰CLS AMG",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2721,
+      "seriesName": "奔驰SLK级AMG",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2722,
+      "seriesName": "奔驰M级AMG",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2725,
+      "seriesName": "宝马1系M",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2726,
+      "seriesName": "宝马M5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2727,
+      "seriesName": "宝马M6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2730,
+      "seriesName": "奥迪S3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2731,
+      "seriesName": "奥迪RS 3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2740,
+      "seriesName": "奥迪TTS",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2741,
+      "seriesName": "奥迪TT RS",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2742,
+      "seriesName": "景逸SUV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2744,
+      "seriesName": "东风小康V29",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2767,
+      "seriesName": "菲翔",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2769,
+      "seriesName": "V5菱致",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2776,
+      "seriesName": "V6菱仕",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2787,
+      "seriesName": "绅宝D70",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2791,
+      "seriesName": "绅宝D50",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2806,
+      "seriesName": "速锐",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2833,
+      "seriesName": "奔驰GL级AMG",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2846,
+      "seriesName": "V12 Zagato",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2847,
+      "seriesName": "宝马5系GT",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2863,
+      "seriesName": "翼虎",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2871,
+      "seriesName": "翼搏",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2894,
+      "seriesName": "雄狮",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2895,
+      "seriesName": "雄师F16",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2896,
+      "seriesName": "昂科拉",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2901,
+      "seriesName": "俊风CV03",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2943,
+      "seriesName": "北汽威旺205",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2944,
+      "seriesName": "思锐",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2959,
+      "seriesName": "陆铃",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2960,
+      "seriesName": "越铃",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2963,
+      "seriesName": "宝马3系GT",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 2990,
+      "seriesName": "风行CM7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3000,
+      "seriesName": "奔腾X80",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3016,
+      "seriesName": "LaFerrari",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3058,
+      "seriesName": "昌河福运",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3059,
+      "seriesName": "比亚迪S7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3068,
+      "seriesName": "标致301",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3079,
+      "seriesName": "奔驰GLA(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3086,
+      "seriesName": "风光",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3103,
+      "seriesName": "朗行",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3104,
+      "seriesName": "杰德",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3119,
+      "seriesName": "东风风神E30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3126,
+      "seriesName": "YARiS L 致炫",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3128,
+      "seriesName": "景逸X5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3166,
+      "seriesName": "虎视",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3175,
+      "seriesName": "致胜",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3191,
+      "seriesName": "北汽威旺M20",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3192,
+      "seriesName": "伊思坦纳",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3197,
+      "seriesName": "朗境",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3221,
+      "seriesName": "战旗皮卡",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3231,
+      "seriesName": "北汽威旺307",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3234,
+      "seriesName": "标致2008",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3267,
+      "seriesName": "致悦",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3278,
+      "seriesName": "奔驰SLC",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3279,
+      "seriesName": "俊风",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3283,
+      "seriesName": "比亚迪G5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3284,
+      "seriesName": "北汽幻速S2",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3291,
+      "seriesName": "宝马M8",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3302,
+      "seriesName": "宝马2系旅行车(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3343,
+      "seriesName": "宝骏610",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3347,
+      "seriesName": "福睿斯",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3361,
+      "seriesName": "北汽幻速S3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3412,
+      "seriesName": "宝骏730",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3414,
+      "seriesName": "景逸X3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3416,
+      "seriesName": "凯路威",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3417,
+      "seriesName": "绅宝X65",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3426,
+      "seriesName": "北汽幻速S6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3427,
+      "seriesName": "绅宝D60",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3428,
+      "seriesName": "北汽威旺T205-D",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3461,
+      "seriesName": "东风风神L60",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3463,
+      "seriesName": "东风A9",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3493,
+      "seriesName": "东风风神A30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3504,
+      "seriesName": "成功V1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3505,
+      "seriesName": "成功V2",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3506,
+      "seriesName": "成功K1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3507,
+      "seriesName": "成功K2",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3508,
+      "seriesName": "成功X1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3533,
+      "seriesName": "北汽新能源EV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3537,
+      "seriesName": "北汽新能源ES210",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3557,
+      "seriesName": "绅宝D20",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3632,
+      "seriesName": "标致308S",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3633,
+      "seriesName": "揽福",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3634,
+      "seriesName": "东南DX7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3637,
+      "seriesName": "东风风度MX6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3661,
+      "seriesName": "北汽幻速H2",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3673,
+      "seriesName": "绅宝D80",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3677,
+      "seriesName": "宝骏560",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3693,
+      "seriesName": "金牛座",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3695,
+      "seriesName": "奔腾B30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3712,
+      "seriesName": "北汽007",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3714,
+      "seriesName": "北汽幻速H6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3716,
+      "seriesName": "东风皮卡",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3720,
+      "seriesName": "法拉利488",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3726,
+      "seriesName": "宝马2系多功能旅行车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3754,
+      "seriesName": "雄师F22",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3774,
+      "seriesName": "宝骏330",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3780,
+      "seriesName": "宋",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3781,
+      "seriesName": "元",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3785,
+      "seriesName": "景逸XV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3786,
+      "seriesName": "东风风神AX3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3789,
+      "seriesName": "风行S500",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3792,
+      "seriesName": "风行F600",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3794,
+      "seriesName": "绅宝CC",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3795,
+      "seriesName": "绅宝X55",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3800,
+      "seriesName": "北京越野BJ20",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3828,
+      "seriesName": "风光360",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3830,
+      "seriesName": "风光350",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3839,
+      "seriesName": "绅宝X25",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3851,
+      "seriesName": "Fortuner",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3859,
+      "seriesName": "哥瑞",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3874,
+      "seriesName": "北汽幻速H3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3876,
+      "seriesName": "锋范",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3884,
+      "seriesName": "北汽新能源EU",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3913,
+      "seriesName": "宝沃BX7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3916,
+      "seriesName": "北汽威旺M30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3922,
+      "seriesName": "北汽昌河Q25",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3925,
+      "seriesName": "风光370",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3928,
+      "seriesName": "绅宝X35",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3941,
+      "seriesName": "宝马2系旅行车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3964,
+      "seriesName": "高尔夫·嘉旅",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3970,
+      "seriesName": "风行SX6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3980,
+      "seriesName": "北汽昌河Q35",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3984,
+      "seriesName": "东风风度MX5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 3993,
+      "seriesName": "宝骏E100",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4009,
+      "seriesName": "北汽威旺S50",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4015,
+      "seriesName": "北汽新能源EX",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4027,
+      "seriesName": "GTC4Lusso",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4046,
+      "seriesName": "宝沃BX5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4061,
+      "seriesName": "北汽威旺M35",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4069,
+      "seriesName": "奔腾X40",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4073,
+      "seriesName": "比亚迪e5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4077,
+      "seriesName": "宝骏310",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4086,
+      "seriesName": "东南DX3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4097,
+      "seriesName": "东风风神AX5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4104,
+      "seriesName": "北汽新能源EH",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4120,
+      "seriesName": "上汽大通MAXUS D90",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4137,
+      "seriesName": "北汽幻速H2V",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4141,
+      "seriesName": "福瑞达K21",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4154,
+      "seriesName": "北汽威旺M50F",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4164,
+      "seriesName": "比速T3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4166,
+      "seriesName": "宝骏510",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4171,
+      "seriesName": "宝马1系",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4173,
+      "seriesName": "比速M3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4179,
+      "seriesName": "竞瑞",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4204,
+      "seriesName": "C-TREK蔚领",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4208,
+      "seriesName": "北汽昌河M70",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4238,
+      "seriesName": "电咖·EV10",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4239,
+      "seriesName": "VELITE 5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4255,
+      "seriesName": "传祺GA3S PHEV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4260,
+      "seriesName": "威驰FS",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4261,
+      "seriesName": "博速 smart forfour",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4264,
+      "seriesName": "北汽新能源EC",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4276,
+      "seriesName": "北汽幻速S5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4279,
+      "seriesName": "宋MAX",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4291,
+      "seriesName": "传祺GE3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4298,
+      "seriesName": "比速T5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4310,
+      "seriesName": "北汽幻速H5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4314,
+      "seriesName": "法拉利812",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4325,
+      "seriesName": "奥迪A3新能源(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4330,
+      "seriesName": "大众e-up!",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4333,
+      "seriesName": "比亚迪F3新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4338,
+      "seriesName": "上汽大通MAXUS EG10",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4345,
+      "seriesName": "宝马7系新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4348,
+      "seriesName": "宝马X5新能源(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4350,
+      "seriesName": "宝马5系新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4353,
+      "seriesName": "元新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4355,
+      "seriesName": "高尔夫新能源(进口)",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4356,
+      "seriesName": "宝马X1新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4383,
+      "seriesName": "东风风神AX4",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4386,
+      "seriesName": "蒙迪欧新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4392,
+      "seriesName": "宝骏310W",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4394,
+      "seriesName": "宋新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4403,
+      "seriesName": "宝沃BXi7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4423,
+      "seriesName": "景逸X6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4460,
+      "seriesName": "奥迪Q7新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4487,
+      "seriesName": "别克GL6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4488,
+      "seriesName": "北斗星X5E",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4502,
+      "seriesName": "北汽幻速S7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4506,
+      "seriesName": "北汽昌河A6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4511,
+      "seriesName": "道达V8",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4520,
+      "seriesName": "宝沃BX6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4524,
+      "seriesName": "Portofino",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4526,
+      "seriesName": "奥迪A6L新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4533,
+      "seriesName": "成功V2E",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4552,
+      "seriesName": "阅朗",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4553,
+      "seriesName": "北汽威旺M60",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4560,
+      "seriesName": "御风S16",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4584,
+      "seriesName": "奔腾B30EV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4587,
+      "seriesName": "宝骏530",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4599,
+      "seriesName": "北汽昌河Q7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4606,
+      "seriesName": "宝骏360",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4632,
+      "seriesName": "东南DX3新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4740,
+      "seriesName": "俊风E11K",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4769,
+      "seriesName": "爱驰U5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4799,
+      "seriesName": "风光580新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4801,
+      "seriesName": "帅客新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4802,
+      "seriesName": "唐",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4808,
+      "seriesName": "风行M6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4812,
+      "seriesName": "北汽威旺407EV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4832,
+      "seriesName": "卡罗拉双擎E+",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4837,
+      "seriesName": "雷凌双擎E+",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4857,
+      "seriesName": "宝沃BX3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4858,
+      "seriesName": "俊风ER30",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4890,
+      "seriesName": "宝骏E200",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4900,
+      "seriesName": "秦Pro",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4901,
+      "seriesName": "东南A5翼舞",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4908,
+      "seriesName": "宝骏RS-5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4921,
+      "seriesName": "风行T5L",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4923,
+      "seriesName": "智行",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4938,
+      "seriesName": "大乘G70S",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4943,
+      "seriesName": "大乘G60S",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4944,
+      "seriesName": "大乘E20",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4950,
+      "seriesName": "奔腾X40新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4953,
+      "seriesName": "俊风E17",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 4972,
+      "seriesName": "秦Pro新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5001,
+      "seriesName": "富康ES500",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5009,
+      "seriesName": "比亚迪e1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5015,
+      "seriesName": "大乘G60E",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5021,
+      "seriesName": "北京EX3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5029,
+      "seriesName": "蔚揽新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5040,
+      "seriesName": "高尔夫·纯电",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5059,
+      "seriesName": "北汽新能源EC3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5064,
+      "seriesName": "比亚迪S2",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5069,
+      "seriesName": "大乘G60",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5070,
+      "seriesName": "风光ix7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5084,
+      "seriesName": "宝骏RC-5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5094,
+      "seriesName": "宝来·纯电",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5095,
+      "seriesName": "北汽新能源EC5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5120,
+      "seriesName": "上汽大通MAXUS EUNIQ 5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5128,
+      "seriesName": "奥迪A8新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5141,
+      "seriesName": "法拉利F8",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5178,
+      "seriesName": "宋Pro",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5181,
+      "seriesName": "成功BEV6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5190,
+      "seriesName": "朗逸纯电",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5200,
+      "seriesName": "昂科拉GX",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5243,
+      "seriesName": "上汽大通MAXUS EUNIQ 6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5250,
+      "seriesName": "标致508L新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5257,
+      "seriesName": "风光E3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5270,
+      "seriesName": "丰田C-HR EV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5271,
+      "seriesName": "奕泽E进擎",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5308,
+      "seriesName": "东南DX5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5317,
+      "seriesName": "奔腾T33",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5324,
+      "seriesName": "SF90",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5326,
+      "seriesName": "车驰Daily",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5327,
+      "seriesName": "车驰T系列",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5336,
+      "seriesName": "宝骏RC-6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5342,
+      "seriesName": "宝骏RM-5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5345,
+      "seriesName": "东风风神EX1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5365,
+      "seriesName": "秦",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5373,
+      "seriesName": "宝骏RS-3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5383,
+      "seriesName": "福克斯Active",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5384,
+      "seriesName": "风光580Pro",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5390,
+      "seriesName": "上汽大通MAXUS RG10",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5408,
+      "seriesName": "比德文E3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5414,
+      "seriesName": "标致4008新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5429,
+      "seriesName": "御风房车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5446,
+      "seriesName": "奕炫EV",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5456,
+      "seriesName": "北汽EV5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5457,
+      "seriesName": "北汽EV2",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5470,
+      "seriesName": "铂驰NV系列",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5497,
+      "seriesName": "风光E1",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5501,
+      "seriesName": "铂驰SP系列",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5529,
+      "seriesName": "标致e2008",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5544,
+      "seriesName": "铂驰T系列",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5558,
+      "seriesName": "途岳新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5559,
+      "seriesName": "宝骏E300",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5584,
+      "seriesName": "微蓝7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5587,
+      "seriesName": "北汽小猫",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5642,
+      "seriesName": "爱驰U6",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5652,
+      "seriesName": "北京U5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5709,
+      "seriesName": "北汽大猫",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5716,
+      "seriesName": "天美汽车ET5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5727,
+      "seriesName": "上汽大通MAXUS D90 Pro",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5751,
+      "seriesName": "上汽大通MAXUS EUNIQ 7",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5760,
+      "seriesName": "宋PLUS",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5765,
+      "seriesName": "奥迪e-tron",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5782,
+      "seriesName": "成功K3",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5783,
+      "seriesName": "成功K4",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5803,
+      "seriesName": "北京X5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5834,
+      "seriesName": "大通T90",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5873,
+      "seriesName": "福瑞达K12S",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 5913,
+      "seriesName": "上汽大通MAXUS G20房车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 6053,
+      "seriesName": "宝骏Valli",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 6084,
+      "seriesName": "成功K32",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 6325,
+      "seriesName": "东风风神E60",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 6392,
+      "seriesName": "嘉远KOMI",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 6658,
+      "seriesName": "大通T90房车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 6828,
+      "seriesName": "东南DX8",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 7374,
+      "seriesName": "创维D07K",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 7750,
+      "seriesName": "飞碟HW5",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 7773,
+      "seriesName": "奔驰Arocs 2036/2053",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 7774,
+      "seriesName": "德国MAN TGM",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 7776,
+      "seriesName": "阿娜亚依维柯",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8096,
+      "seriesName": "创维磐石",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8182,
+      "seriesName": "阿娜亚猛士MS600",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8317,
+      "seriesName": "奔驰Aetgo 1023",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8441,
+      "seriesName": "212 T01新能源",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8541,
+      "seriesName": "北方逐梦",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8550,
+      "seriesName": "佰斯威旅居车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8557,
+      "seriesName": "飞翔福特舒野",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8578,
+      "seriesName": "迈巴赫VLS",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8695,
+      "seriesName": "阁瑞斯B型房车",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8722,
+      "seriesName": "托卡尔",
+      "error": "config_json_missing"
+    },
+    {
+      "seriesId": 8753,
+      "seriesName": "宝马iX5",
+      "error": "config_json_missing"
+    }
+  ],
+  "notes": [
+    "Low-rate bulk collection: one brand index call, one public brand page per brand, and one config page per series. 2 workers overlap network waits, while each worker waits DELAY*CONCURRENCY so the aggregate theoretical request rate does not exceed the former sequential pacing. No IP spoofing, CAPTCHA bypass, account use, or high-rate spec-by-spec requests.",
+    "Only variants with an explicit model year 2020+ are retained; a historical series is not added to the China model denominator unless at least one retained 2020+ variant proves it intersects the required window."
+  ],
+  "files": [
+    "brands-0001.json",
+    "series-0001.json",
+    "series-0002.json",
+    "series-0003.json",
+    "series-0004.json",
+    "series-0005.json",
+    "variants-0001.json",
+    "variants-0002.json",
+    "variants-0003.json",
+    "variants-0004.json",
+    "variants-0005.json",
+    "variants-0006.json",
+    "variants-0007.json",
+    "variants-0008.json",
+    "variants-0009.json",
+    "variants-0010.json",
+    "variants-0011.json",
+    "variants-0012.json",
+    "variants-0013.json",
+    "variants-0014.json",
+    "variants-0015.json",
+    "variants-0016.json",
+    "variants-0017.json",
+    "variants-0018.json",
+    "variants-0019.json",
+    "variants-0020.json",
+    "variants-0021.json",
+    "variants-0022.json",
+    "variants-0023.json",
+    "variants-0024.json",
+    "variants-0025.json",
+    "variants-0026.json",
+    "variants-0027.json",
+    "variants-0028.json",
+    "variants-0029.json",
+    "variants-0030.json",
+    "variants-0031.json",
+    "variants-0032.json",
+    "variants-0033.json",
+    "variants-0034.json",
+    "variants-0035.json",
+    "variants-0036.json"
+  ],
+  "contentDigest": "ca397e2f57fce8e142590642b5bc641def8e659a3391075e8ebc5dc2346502e3"
+}

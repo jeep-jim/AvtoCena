@@ -1,0 +1,308 @@
+name: Catalog independent market worker
+on:
+  workflow_call:
+    inputs:
+      market:
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.policy.outputs.run }}
+      reuse_run_id: ${{ steps.policy.outputs.reuse_run_id }}
+      collect_markets: ${{ steps.policy.outputs.collect_markets }}
+      publish_markets: ${{ steps.policy.outputs.publish_markets }}
+      publish_matrix: ${{ steps.policy.outputs.publish_matrix }}
+      reset_cursors: ${{ steps.policy.outputs.reset_cursors }}
+      recover_paid_snapshot: ${{ steps.policy.outputs.recover_paid_snapshot }}
+      autohome_reuse_run_id: ${{ steps.policy.outputs.autohome_reuse_run_id }}
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - id: policy
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          TARGET_MARKET: ${{ inputs.market }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import { catalogRefreshDue } from './scripts/lib/catalog-refresh-schedule.mjs';
+          const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
+          const {collectionMarketEnabled}=await import('./apps/web/lib/catalog/collection-controls-schema.ts');
+          const controls=await readCollectionControls();
+          const market = process.env.TARGET_MARKET;
+          const policy = JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
+          const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market);
+          const run = !paused && (['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
+          if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets[market]}`);
+          const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
+          if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
+          const reuse = marker.reuseRunId || '';
+          const autohomeReuse = marker.autohomeReuseRunId || '';
+          if (autohomeReuse && (market !== 'china' || String(autohomeReuse) !== '37907216966' || reuse)) throw Error('invalid_autohome_reuse');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`autohome_reuse_run_id=${autohomeReuse}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
+          if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
+          if (marker.recoverPaidSnapshot && (!reuse || market !== 'china')) throw Error('invalid_paid_snapshot_recovery');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`recover_paid_snapshot=${marker.recoverPaidSnapshot === true}\n`);
+          const allowed = [market];
+          const publish = marker.publishMarkets || allowed;
+          if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`publish_matrix=${JSON.stringify(publish)}\n`);
+          const collect = reuse ? (marker.refreshMarkets || []) : publish;
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`publish_markets=${publish.join(' ')}\n`);
+          if (!Array.isArray(collect) || collect.some(market => !allowed.includes(market)) || new Set(collect).size !== collect.length) throw Error('invalid_refresh_markets');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`collect_markets=${JSON.stringify(collect)}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${run}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`reuse_run_id=${reuse}\n`);
+          JS
+  collect:
+    needs: plan
+    if: needs.plan.outputs.run == 'true' && needs.plan.outputs.collect_markets != '[]'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      # Keep source collectors concurrent inside one market, not five markets.
+      max-parallel: 1
+      matrix:
+        market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
+    env:
+      CATALOG_INTAKE_MARKET: ${{ matrix.market }}
+      AUTO_API_DUBICARS_KEY: ${{ matrix.market == 'uae' && secrets.AUTO_API_DUBICARS_KEY || '' }}
+      AUTO_API_CHE168_KEY: ${{ matrix.market == 'china' && secrets.AUTO_API_CHE168_KEY || '' }}
+      # Fresh owner markers start at page 1. Subsequent budget slices resume only
+      # committed cursors; access failures are never resumed past the refusal.
+      CATALOG_INTAKE_RESUME: ${{ needs.plan.outputs.reset_cursors != 'true' && '1' || '0' }}
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'korea' && '18000000' || '12600000' }}
+      CATALOG_INTAKE_MAX_ROWS_PER_SOURCE: '100000'
+      CATALOG_SOURCE_INVENTORY_MODE: '1'
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
+      CATALOG_SOURCE_TIMEOUT_MS: '25000'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
+      CATALOG_MAX_IMAGES_PER_OFFER: '30'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Read owner source switches before provider access
+        id: sources
+        run: node --import tsx scripts/catalog-collection-plan.mjs
+      - name: Preserve the complete Che168 file in private storage
+        if: steps.sources.outputs.feed == 'true'
+        run: node --import tsx scripts/catalog-che168-snapshot-archive.mjs
+      - name: Verify paid Che168 access before collection
+        if: steps.sources.outputs.feed == 'true'
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          const {assertCollectionEnabled}=await import('./apps/web/lib/catalog/collection-controls.ts');
+          await assertCollectionEnabled('che168_feed');
+          import {autoApiChe168Client, autoApiPage} from './scripts/lib/auto-api-che168-client.mjs';
+          const request = autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY});
+          const page = autoApiPage(await request('offers', {page:1, year_from:new Date(Date.now()+7*3600000).getUTCFullYear()-6}), 1);
+          if (!page.items.length) throw Error('auto_api_empty_preflight');
+          console.log(JSON.stringify({provider:'auto_api_che168',access:'ok',sampleRows:page.items.length}));
+          JS
+      - name: Restore the verified same-day Autohome collection
+        if: steps.sources.outputs.feed == 'true' && needs.plan.outputs.autohome_reuse_run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-intake-china
+          path: autohome-saved-intake
+          run-id: ${{ needs.plan.outputs.autohome_reuse_run_id }}
+          github-token: ${{ github.token }}
+      - name: Validate only saved Autohome observations before reuse
+        if: steps.sources.outputs.feed == 'true' && needs.plan.outputs.autohome_reuse_run_id != ''
+        run: node --import tsx scripts/catalog-restore-autohome-intake.mjs
+      - name: Collect listing, exact detail and technical tables
+        if: steps.sources.outputs.parsers != ''
+        env:
+          # China HTML sources require the owner switch; never fallback on feed failure.
+          CATALOG_INTAKE_SOURCE_IDS: ${{ steps.sources.outputs.parsers }}
+          CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'china' && '1800000' || matrix.market == 'korea' && '18000000' || '12600000' }}
+        run: node --import tsx scripts/catalog-source-intake.mjs
+      - name: Sync Che168 from the complete CSV and then only committed changes
+        if: steps.sources.outputs.feed == 'true'
+        run: node --import tsx scripts/catalog-auto-api-che168-bulk-intake.mjs
+      - name: Sync all Dubicars through the paid API
+        if: steps.sources.outputs.dubicars_feed == 'true'
+        run: node --import tsx scripts/catalog-auto-api-dubicars-intake.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-intake-${{ matrix.market }}
+          path: catalog-intake-${{ matrix.market }}/
+          overwrite: true
+          retention-days: 14
+  publish:
+    needs: [plan, collect]
+    # Paid China must finish both snapshot and changes. A refusal, exhausted
+    # budget or schema drift cannot publish a partially collected paid feed.
+    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (!contains(fromJSON('["china","uae"]'), inputs.market) || needs.collect.result == 'success' || needs.plan.outputs.reuse_run_id != '')
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    # Each market gets its own budget; a large Georgia publish must not consume
+    # Europe's turn. The workflow and object-store publication locks are retained.
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        market: ${{ fromJSON(needs.plan.outputs.publish_matrix) }}
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_SELLER_INVENTORY: '1'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_PUBLICATION_DRY_RUN: '0'
+      CATALOG_PUBLICATION_PROGRESS: '1'
+      CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
+      CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
+      # Zero removes count quotas in publication; intake remains bounded per slice.
+      CATALOG_REBUILD_TARGET_PER_SOURCE: '0'
+      CATALOG_PUBLISH_TARGET_PER_MARKET: '10000'
+      CATALOG_PUBLISH_MAX_PER_MARKET: '0'
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
+      CATALOG_PRIORITY_MAX_TOTAL_RUB: '15000000'
+      CATALOG_V2_PRIORITY_TARGET: '8000'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: ${{ matrix.market == 'china' && '2' || '4' }}
+      CATALOG_READ_CONCURRENCY: ${{ matrix.market == 'china' && '2' || '4' }}
+      CATALOG_INDEX_WRITE_CONCURRENCY: '8'
+      CATALOG_PUBLISH_LOCK_WAIT_MS: '14400000'
+      CATALOG_PUBLISH_LOCK_TTL_MS: '1800000'
+      CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: '300000'
+      NODE_OPTIONS: ${{ matrix.market == 'china' && '--max-old-space-size=24576' || '--max-old-space-size=12288' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Reserve additional memory for China publication
+        if: matrix.market == 'china'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # This runner is disposable. Swap belongs to the publication worker,
+          # not the production web container or catalog object storage.
+          available_kib=$(df --output=avail /mnt | tail -1 | tr -d ' ')
+          test "$available_kib" -gt 27262976
+          sudo fallocate -l 24G /mnt/catalog-publication.swap
+          sudo chmod 600 /mnt/catalog-publication.swap
+          sudo mkswap /mnt/catalog-publication.swap
+          sudo swapon /mnt/catalog-publication.swap
+          free -m
+      - name: Report publication resource budget
+        run: |
+          free -m
+          df -h .
+          node -e 'console.log(JSON.stringify({heapLimitMiB:Math.round(require("node:v8").getHeapStatistics().heap_size_limit/1048576),availableMiB:Math.round(require("node:os").freemem()/1048576)}))'
+      - name: Restore collected observations without repeating source requests
+        uses: actions/download-artifact@v4
+        if: needs.plan.outputs.reuse_run_id != ''
+        with:
+          pattern: catalog-intake-${{ matrix.market }}
+          path: catalog-intake-input
+          run-id: ${{ needs.plan.outputs.reuse_run_id }}
+          github-token: ${{ github.token }}
+      - name: Overlay explicitly refreshed markets
+        uses: actions/download-artifact@v4
+        if: contains(fromJSON(needs.plan.outputs.collect_markets), matrix.market)
+        with:
+          pattern: catalog-intake-${{ matrix.market }}
+          path: catalog-intake-input
+      - name: Check reserve before durable Che168 recovery
+        if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
+        env:
+          CATALOG_REBUILD_INPUT_DIR: catalog-intake-input
+        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
+      - name: Validate and recover completed legacy paid snapshot
+        if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
+        env:
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          CHE168_RECOVERY_ARTIFACT_RUN_ID: ${{ needs.plan.outputs.reuse_run_id }}
+        run: node --import tsx scripts/catalog-auto-api-che168-recover.mjs
+      - run: node --import tsx scripts/catalog-intake-to-publication.mjs
+      - name: Check bucket reserve without deleting objects
+        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
+      - name: Publish markets through calculation and retention guards
+        env:
+          CATALOG_PUBLISH_MARKETS: ${{ matrix.market }}
+        shell: bash
+        run: |
+          failures=0
+          for market in $CATALOG_PUBLISH_MARKETS; do
+            node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
+            export CATALOG_REBUILD_MARKETS="$market"
+            export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
+            if node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-publish-market.mjs; then
+              node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
+            else
+              failures=$((failures + 1))
+            fi
+          done
+          test "$failures" -eq 0
+      - name: Record collection and publication outcome even after failure
+        if: always()
+        env:
+          CATALOG_REBUILD_MARKETS: ${{ matrix.market }}
+          CATALOG_REBUILD_PUBLISH_REPORT: catalog-weekly-${{ matrix.market }}-publish-report.json
+        run: node --import tsx scripts/record-market-refresh.mjs
+      - name: Audit the active catalog after all market publications
+        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-quality-rebuild-reports-${{ matrix.market }}
+          path: |
+            catalog-storage-maintenance.json
+            catalog-storage-preview.json
+            catalog-storage-cleanup-report.json
+            catalog-weekly-*.json
+            catalog-refresh-outcome-*.json
+            catalog-storage-preflight.json
+            catalog-visible-calculation-coverage.json
+          overwrite: true
+          retention-days: 14

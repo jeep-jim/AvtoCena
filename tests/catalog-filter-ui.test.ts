@@ -1,0 +1,76 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+import { catalogFilterOptions } from "../apps/web/lib/catalog/filter-options";
+
+test("selected catalog filters stay visible even when the result facet is empty", () => {
+  const options = [
+    { value: "", label: "Любой кузов" },
+    { value: "sedan", label: "Седан" },
+    { value: "suv", label: "Кроссовер" },
+  ];
+  assert.deepEqual(catalogFilterOptions(options, [], "sedan"), [options[0], options[1]]);
+  assert.equal(catalogFilterOptions(options, [], "custom-body")[1]?.value, "custom-body");
+});
+
+test("electric filter loads one facet response instead of every catalog page", () => {
+  const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
+  assert.match(source, /fuel=\$\{encodeURIComponent\(fuel\)\}&pageSize=1&includeFacets=1/);
+  assert.doesNotMatch(source, /Array\.from\(\{ length: pages - 1/);
+});
+
+test("catalog filters apply automatically and show the active query", () => {
+  const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
+  assert.match(source, /router\.push/);
+  assert.match(source, /catalogQuery/);
+  // Explicit close action complements automatic application; it is not a second submit gate.
+  assert.match(source, /type="button" data-ac-react-close="1" onClick=\{\(\) => setMobileOpen\(false\)\}[^>]*>Показать автомобили/);
+  assert.doesNotMatch(source, /type="submit"/);
+  assert.match(source, /aria-label="Выбранные параметры"/);
+  assert.doesNotMatch(source, /key=\{`desktop-\$\{formKey\}`\}/, "a completed response must not remount the active input");
+  assert.doesNotMatch(source, /key=\{`mobile-\$\{formKey\}`\}/, "server responses must not remount the open mobile sheet");
+});
+
+test("catalog filters use direct range inputs, quick presets and a real mobile bottom sheet", () => {
+  const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
+  const page = fs.readFileSync("apps/web/components/catalog/CatalogContent.tsx", "utf8");
+  const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
+  const template = fs.readFileSync("apps/web/app/(public)/template.tsx", "utf8");
+  assert.match(source, /ac-range-input-box/);
+  assert.match(source, /placeholder="Не важно"/);
+  assert.match(source, /Быстрый выбор/);
+  assert.match(source, /до 3 млн/);
+  assert.match(source, /aria-label=\{`\$\{title\}: от`\}/);
+  assert.match(source, /aria-label=\{`\$\{title\}: до`\}/);
+  assert.doesNotMatch(source, /type="range"/);
+  assert.doesNotMatch(source, /ac-dual-range/);
+  assert.match(source, /ac-mobile-filter-backdrop fixed inset-0[^\n]*flex items-end/);
+  assert.match(source, /ac-mobile-filter-sheet/);
+  assert.match(source, /rounded-t-\[30px\]/);
+  assert.match(source, /ac-filter-chip/);
+  assert.match(source, /Ещё фильтры/);
+  assert.match(source, /aria-label="Расширенные фильтры"/);
+  assert.match(source, /totalRubDesc/);
+  assert.match(source, /yearAsc/);
+  assert.doesNotMatch(source, /FilterActions/);
+  assert.doesNotMatch(source, /Показать<\/button>/);
+  // Shared sorting behavior is covered by catalog-sort-color and compact-sort tests.
+  assert.match(template, /ac-home-filter-drawer::before/);
+  assert.match(template, /align-items: flex-end/);
+});
+
+test("the single public catalog search route owns filtered facets and live rates", () => {
+  assert.equal(fs.existsSync("apps/web/app/api/catalog/search/route.ts"), false);
+  const route = fs.readFileSync("apps/web/app/(public)/api/catalog/search/route.ts", "utf8");
+  assert.match(route, /readCatalogFacets\(query\)/);
+  assert.match(route, /includeRates/);
+  assert.match(route, /hasPrice/);
+});
+
+test("cards show documented power labels and hide unpriced rows unless a qualified selector exists", () => {
+  const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
+  assert.match(card, /catalogPowerDisplay\(normalizedOffer\)/);
+  assert.match(card, /powerDisplay\.thirtyMinuteLabel/);
+  assert.match(card, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
+  assert.match(card, /hasModificationSelection\(offer\)/);
+});

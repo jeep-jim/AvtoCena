@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 2,
+    "newGenerations": 1,
+    "newVariants": 5
+  },
+  "modelId": "wuling/xingchen",
+  "canonicalName": "Asta",
+  "generationIds": [
+    "wuling/xingchen/ice-launch-2021"
+  ],
+  "variantIds": [
+    "wuling/xingchen/ice-launch-2021/1-5t-mt-dynamic",
+    "wuling/xingchen/ice-launch-2021/1-5t-mt-starlight",
+    "wuling/xingchen/ice-launch-2021/1-5t-cvt-star-ray",
+    "wuling/xingchen/ice-launch-2021/1-5t-cvt-star-shine",
+    "wuling/xingchen/ice-launch-2021/1-5t-cvt-star-glory"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "exactOfficialGradeList": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "noUnverifiedEngineCcOrPower": true,
+    "noUnverifiedManualGearCount": true,
+    "automaticPublicationReady": false
+  }
+}

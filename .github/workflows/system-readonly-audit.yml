@@ -1,0 +1,50 @@
+name: System — owner requested read-only audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/system-readonly-audit.json']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts
+      - name: Bundle diagnostic without production secrets
+        run: |
+          node --input-type=module <<'JS'
+          import {build} from 'esbuild';
+          await build({entryPoints:['scripts/system-readonly-audit.ts'],outfile:'/tmp/system-readonly-audit.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          JS
+      - name: Read selected saved vehicle fields only
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file" /tmp/system-readonly-audit.cjs' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'docker exec -i avtocena-production node' < /tmp/system-readonly-audit.cjs
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          df -h /
+          free -m
+          uptime
+          docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}} started={{.State.StartedAt}} memoryLimit={{.HostConfig.Memory}}' avtocena-production
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          systemctl is-active nginx
+          systemctl is-active certbot.timer
+          openssl x509 -in /etc/letsencrypt/live/avtocena.com/cert.pem -noout -dates
+          docker logs --since 2h --tail 3000 avtocena-production 2>&1 | python3 -c 'import sys,json; s=sys.stdin.read(); print("AUDIT_LOG_COUNTS",json.dumps({p:s.count(p) for p in ["heap out of memory","Reached heap limit","FATAL ERROR","object_storage_response_timeout","home_initial_catalog_failed","home_initial_pricing_failed","quota_exhausted","visitor_restricted","TypeError:"]}))'
+          REMOTE

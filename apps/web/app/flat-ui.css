@@ -1,0 +1,167 @@
+html *,html *::before,html *::after{box-shadow:none!important;text-shadow:none!important}
+.glass,.ac-filter-panel,.ac-result-summary,.ac-catalog-card,.ac-offer-price-panel,.ac-offer-spec-tile,.ac-offer-breakdown,.ac-offer-status,.ac-offer-form,.ac-search-menu,.ac-filter-dropdown,.ac-catalog-filter-drawer,.ac-price-trend-popover,.ac-executor-block,.ac-executor-logo,.ac-mobile-rates{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
+html[data-theme="light"] .ac-page-copy{--ac-surface:#f7f8fb;--ac-surface-2:#e6eaf1;--ac-surface-3:#dce2ea}
+
+/* Дилерский лендинг доступен из подвала, но не показывается покупателю в верхнем меню. */
+.ac-public-header nav[aria-label="Основная навигация"] a[href="/dealers"]{display:none!important}
+
+/* Красные действия всегда сохраняют белый текст в обеих темах. */
+.dealer-primary-button,.dealer-primary-button *{color:#fff!important;-webkit-text-fill-color:#fff!important}
+
+/* CRM: полноценные две темы. */
+.crm-root{background:#07080d;color:#fff}
+html[data-theme="light"] .crm-root{background:#edf1f6!important;color:#171b23!important}
+html[data-theme="light"] .crm-root .glass{background:#f8f9fb!important;color:#171b23!important}
+html[data-theme="light"] .crm-root [class*="text-white/"]{color:#5d687a!important}
+html[data-theme="light"] .crm-root h1,html[data-theme="light"] .crm-root h2,html[data-theme="light"] .crm-root h3,html[data-theme="light"] .crm-root .font-black{color:#171b23}
+html[data-theme="light"] .crm-root nav a:not([aria-current="page"]),html[data-theme="light"] .crm-root header form button,html[data-theme="light"] .crm-root .crm-theme-toggle,html[data-theme="light"] .crm-root .crm-user-chip{background:#e2e7ee!important;border-color:transparent!important;color:#374153!important}
+html[data-theme="light"] .crm-root .avto-button,html[data-theme="light"] .crm-root nav a[aria-current="page"],html[data-theme="light"] .crm-root button[class*="bg-red-"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
+html[data-theme="light"] .crm-root input,html[data-theme="light"] .crm-root select,html[data-theme="light"] .crm-root textarea{background:#e6eaf1!important;color:#171b23!important;border-color:rgba(35,42,55,.12)!important}
+html[data-theme="light"] .crm-root input::placeholder,html[data-theme="light"] .crm-root textarea::placeholder{color:#788397!important}
+html[data-theme="light"] .crm-root details>summary{color:#171b23!important}
+html[data-theme="light"] .crm-root details>summary svg{color:#4b5565!important}
+html[data-theme="light"] .crm-root [class*="bg-white/["]{background:#e9edf3!important}
+html[data-theme="light"] .crm-root [class*="bg-black/"]{background:#e8ecf2!important}
+html[data-theme="light"] .crm-root [class*="text-emerald-"]{color:#20a85e!important}
+html[data-theme="light"] .crm-root [class*="text-amber-"]{color:#8a5a00!important}
+html[data-theme="light"] .crm-root [class*="bg-amber-"]{background:#fff4d8!important}
+html[data-theme="light"] .crm-root [class*="bg-red-500/15"],html[data-theme="light"] .crm-root [class*="bg-red-500/20"]{background:#f8dfe2!important}
+html[data-theme="light"] .crm-root [class*="text-red-300"],html[data-theme="light"] .crm-root [class*="text-red-400"]{color:#c91e2a!important}
+
+/* Статусы заявок — насыщенные и читаемые. */
+.dealer-status-chip,.demo-status{border:1px solid transparent;letter-spacing:.01em}
+.dealer-status-chip--new,.demo-status--new{background:rgba(32,168,94,.2)!important;color:#20a85e!important;border-color:rgba(32,168,94,.48)!important}
+.dealer-status-chip--work,.demo-status--work{background:rgba(234,179,8,.22)!important;color:#fde047!important;border-color:rgba(250,204,21,.32)!important}
+.dealer-status-chip--ready,.demo-status--ready{background:rgba(14,165,233,.22)!important;color:#7dd3fc!important;border-color:rgba(56,189,248,.32)!important}
+.dealer-status-chip--deal,.demo-status--deal{background:rgba(239,68,68,.22)!important;color:#fca5a5!important;border-color:rgba(248,113,113,.32)!important}
+.dealer-status-chip--late,.demo-status--late{background:rgba(249,115,22,.22)!important;color:#fdba74!important;border-color:rgba(251,146,60,.32)!important}
+
+/* Лендинг дилеров: все тёмные демонстрационные блоки получают читаемую светлую версию. */
+html[data-theme="light"] .ac-dealers-page{background:#eef2f7!important;color:#171b23!important}
+html[data-theme="light"] .ac-dealers-page section{border-color:rgba(35,42,55,.1)!important}
+html[data-theme="light"] .ac-dealers-page [class*="bg-[#12151d]"],
+html[data-theme="light"] .ac-dealers-page [class*="bg-[#151821]"],
+html[data-theme="light"] .ac-dealers-page [class*="bg-[#0c0e14]"]{background:#fff!important;color:#171b23!important}
+html[data-theme="light"] .ac-dealers-page [class*="text-white/"]{color:#596579!important}
+html[data-theme="light"] .ac-dealers-page h1,html[data-theme="light"] .ac-dealers-page h2,html[data-theme="light"] .ac-dealers-page h3{color:#171b23!important}
+html[data-theme="light"] .ac-dealers-page input,html[data-theme="light"] .ac-dealers-page textarea{background:#e9edf3!important;color:#171b23!important}
+html[data-theme="light"] .ac-dealers-page input::placeholder,html[data-theme="light"] .ac-dealers-page textarea::placeholder{color:#748096!important}
+html[data-theme="light"] .ac-dealers-page [class*="bg-white/["]{background:#e9edf3!important}
+html[data-theme="light"] .ac-dealers-page [class*="bg-black/25"]{background:#eef1f5!important}
+html[data-theme="light"] .ac-dealers-page [class*="text-emerald-"]{color:#20a85e!important}
+html[data-theme="light"] .ac-dealers-page .dealer-hero-preview{background:#fff!important;color:#171b23!important;border-color:#dce3ec!important}
+html[data-theme="light"] .ac-dealers-page .dealer-metric-card{background:#e5eaf1!important;color:#171b23!important}
+html[data-theme="light"] .ac-dealers-page .dealer-application-card{background:#e1e7ef!important;color:#171b23!important;border:1px solid #d3dbe6!important}
+html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card{background:linear-gradient(145deg,#fff1f2 0%,#ffffff 52%,#f3f6fa 100%)!important;color:#171b23!important;border-color:#f3a4aa!important}
+html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card [class*="text-white/"]{color:#536176!important}
+html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-note{background:#e6ebf2!important;color:#253044!important}
+@media(min-width:1024px){.ac-dealers-page section.border-y[class*="bg-[#0c0e14]"]>div.grid{align-items:flex-start!important}}
+
+/* Фирменный логотип TopAvto: используем готовый файл, а не перерисованный SVG. */
+.topavto-logo{overflow:hidden!important;background:#0c0e14 url('/brands/topavto-logo.png') center/contain no-repeat!important;color:transparent!important}
+.topavto-logo svg{visibility:hidden!important}
+html[data-theme="light"] .topavto-logo{background-color:#0c0e14!important;border-color:#d7dee8!important}
+
+/* Единый аккуратный знак верификации для карточки компании, возможностей и тарифа. */
+.dealer-verified-icon{display:inline-grid!important;place-items:center!important;flex:none!important;overflow:visible!important;background:currentColor!important;color:#ff353d!important;border:0!important;border-radius:0!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5 3.44 9.2 1 12l2.44 2.79-.34 3.7 3.61.81L8.6 22.5 12 21.03l3.4 1.47 1.89-3.19 3.61-.81-.34-3.7L23 12z'/%3E%3C/svg%3E") center/contain no-repeat!important;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5 3.44 9.2 1 12l2.44 2.79-.34 3.7 3.61.81L8.6 22.5 12 21.03l3.4 1.47 1.89-3.19 3.61-.81-.34-3.7L23 12z'/%3E%3C/svg%3E") center/contain no-repeat!important}
+.dealer-verified-icon svg{display:none!important}
+.dealer-verified-icon::after{content:"";display:block;width:38%;height:21%;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-8%) rotate(-45deg);transform-origin:center}
+.dealer-verified-icon--positive{color:#20a85e!important}
+html[data-theme="light"] .dealer-verified-icon{background:currentColor!important;border:0!important}
+
+/* Светлая демо-CRM: карточки, статусы и уведомления не бледнеют. */
+html[data-theme="light"] .dealer-demo-shell .demo-metric-card{border:1px solid #dbe2eb!important}
+html[data-theme="light"] .dealer-status-chip--new,html[data-theme="light"] .demo-status--new{background:rgba(32,168,94,.14)!important;color:#20a85e!important;border-color:rgba(32,168,94,.45)!important}
+html[data-theme="light"] .dealer-status-chip--work,html[data-theme="light"] .demo-status--work{background:#fff0b8!important;color:#795500!important;border-color:#e8cc65!important}
+html[data-theme="light"] .dealer-status-chip--ready,html[data-theme="light"] .demo-status--ready{background:#cfeeff!important;color:#075f8c!important;border-color:#86cbea!important}
+html[data-theme="light"] .dealer-status-chip--deal,html[data-theme="light"] .demo-status--deal{background:#ffd6d9!important;color:#a41621!important;border-color:#efa1a8!important}
+html[data-theme="light"] .dealer-status-chip--late,html[data-theme="light"] .demo-status--late{background:#ffe0c5!important;color:#91420b!important;border-color:#efae78!important}
+html[data-theme="light"] .dealer-demo-toast{background:#fff!important;color:#171b23!important;border:1px solid #d9e0e9!important}
+
+.ac-brand-rail{background:var(--ac-surface,#12151d)}
+html[data-theme="light"] .ac-brand-rail{background:#f7f8fb}
+.ac-brand-logo-tile{background:var(--ac-surface-2,#20242e)}
+html[data-theme="light"] .ac-brand-logo-tile{background:#e6eaf1}
+html[data-theme="light"] .ac-currency-rates-strip .ac-currency-rate-tile{background:var(--ac-surface-2,#e6eaf1)!important}
+.ac-brand-logo-tile img{max-width:64px;max-height:38px}
+
+/* 07.08.2026 — финальная спокойная dark-палитра: серо-сине-графитовая, без чёрного и ярко-синего. */
+html:not([data-theme="light"]):not([data-theme="light"]){--ac-page-bg:#1a2029;--ac-panel:#222b38;--ac-panel-2:#293444;--ac-surface:#222b38;--ac-surface-2:#293444;--ac-surface-3:#313d4f}
+html:not([data-theme="light"]):not([data-theme="light"]) body,
+html:not([data-theme="light"]):not([data-theme="light"]) body main.ac-page-copy,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-page-copy,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-catalog-page,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page,
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root{background:#1a2029!important;background-color:#1a2029!important;background-image:none!important}
+
+/* Шапка остаётся отдельным тёмным стеклом. */
+html:not([data-theme="light"]):not([data-theme="light"]) body :is(.ac-public-header,.ac-catalog-sticky){background:rgba(20,27,37,.72)!important;background-color:rgba(20,27,37,.72)!important;background-image:none!important;border-bottom:1px solid rgba(255,255,255,.055)!important;-webkit-backdrop-filter:blur(18px) saturate(130%)!important;backdrop-filter:blur(18px) saturate(130%)!important}
+
+/* Панели на главной/каталоге — тот же оттенок, что у верхнего фильтра. */
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-filter-panel,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-currency-rates-strip,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-brand-rail,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-executor-block,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-result-summary,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-panel,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-price-panel,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-form,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-spec-tile,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-breakdown,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-offer-status{background:#222b38!important;background-color:#222b38!important;background-image:none!important}
+
+/* Ряд автомобилей не должен образовывать общую подложку вокруг карточек. */
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-home-market-rail,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-catalog-market-rail:not([data-catalog-view="list"] *),
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-result-rail{background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important}
+
+/* Демо CRM и авторизованная CRM получают ту же тёмную систему поверхностей. */
+html:not([data-theme="light"]):not([data-theme="light"]) body .dealer-demo-shell{--demo-panel:#222b38!important;--demo-card:#293444!important;--demo-soft:rgba(255,255,255,.065)!important;--demo-avatar:rgba(255,255,255,.12)!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body .dealer-demo-window,
+html:not([data-theme="light"]):not([data-theme="light"]) body .dealer-demo-shell .demo-metric-card{background:#222b38!important;background-color:#222b38!important;background-image:none!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root .glass,
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root [class*="bg-[#07080d]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root [class*="bg-[#0c0e14]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root [class*="bg-[#101116]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root [class*="bg-[#12151d]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root [class*="bg-[#181c25]"]{background:#222b38!important;background-color:#222b38!important;background-image:none!important}
+
+/* В демо убираем сценарные всплывающие уведомления: будущая логика будет другой. */
+.dealer-demo-toast{display:none!important}
+
+/* Новый текст подсказки без вмешательства в форму/логику. */
+html .ac-home-page .ac-home-hero>div:first-child>p:first-of-type{font-size:0!important}
+html .ac-home-page .ac-home-hero>div:first-child>p:first-of-type::after{content:"Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.";font-size:20px;font-weight:500;line-height:1.45;color:rgba(255,255,255,.75)}
+html[data-theme="light"] .ac-home-page .ac-home-hero>div:first-child>p:first-of-type::after{color:var(--ac-muted)!important}
+@media(max-width:1023px){html .ac-home-page .ac-home-hero>div:first-child>p:first-of-type{font-size:inherit!important}html .ac-home-page .ac-home-hero>div:first-child>p:first-of-type::after{content:none!important}}
+html .ac-home-page>div.fixed section:has(h2)>p{font-size:0!important}
+html .ac-home-page>div.fixed section:has(h2)>p::after{content:"Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.";font-size:16px;font-weight:500;line-height:1.75;color:var(--ac-muted)}
+
+
+/* UI polish coverage and dealer surfaces */
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#12151d]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#151821]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#0c0e14]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page .dealer-metric-card,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page .dealer-hero-preview{background:#222b38!important;background-color:#222b38!important;background-image:none!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page section.relative.overflow-hidden>div.absolute.inset-0{background:transparent!important;background-image:none!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-home-market-rail:empty::after{content:"Предложения этого рынка загружаются";display:flex;min-height:92px;align-items:center;padding:0 1rem;color:rgba(255,255,255,.5);font-size:13px;font-weight:800}
+html[data-theme="light"] body .ac-home-market-rail:empty::after{content:"Предложения этого рынка загружаются";display:flex;min-height:92px;align-items:center;padding:0 1rem;color:#657086;font-size:13px;font-weight:800}
+.crm-reminder-bell{position:relative}.crm-reminder-due{color:#ef4444!important}.crm-reminder-bell .ac-staff-badge{position:absolute;top:-5px;right:-6px}.crm-reminder-popover{position:absolute;z-index:160;right:0;top:52px;width:360px;max-width:calc(100vw - 24px);max-height:65dvh;overflow:auto;padding:16px;background:var(--ac-surface,#273343);color:var(--ac-text,#fff);border:1px solid var(--ac-border,#64748b);border-radius:18px;box-shadow:0 12px 40px #0003}.crm-reminder-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--ac-border,#64748b);font-size:13px}.crm-reminder-row a{flex:1;min-width:0;overflow-wrap:anywhere}.crm-reminder-row strong,.crm-reminder-row span,.crm-reminder-row time{display:block}.crm-reminder-row time{font-size:11px;color:var(--ac-muted,#9ca3af);margin-top:4px}.crm-reminder-row button{min-width:44px;min-height:44px;border-radius:12px;background:var(--ac-surface-2,#344156)}
+@media(max-width:767px){.crm-reminder-popover{position:fixed;right:12px;top:72px}.crm-reminder-editor input{max-width:100%}}
+
+/* Характеристики собственных автомобилей: видимые границы и подписи. */
+.ac-dealer-offer .ac-offer-spec-tile{background:var(--ac-surface);border:1px solid var(--ac-border)}
+html[data-theme="light"] .ac-dealer-offer .ac-offer-spec-tile{background:#fff!important;border-color:#d5dce5!important}
+
+/* One desktop canvas; cards and controls retain their surface colors. */
+@media(min-width:768px){
+ html[data-theme="light"],html[data-theme="light"] body,
+ html[data-theme="light"] body .ac-page-copy,
+ html[data-theme="light"] body .crm-root,
+ html[data-theme="light"] body .ac-dealers-page,
+ html[data-theme="light"] body .dealer-profile {
+   background:var(--ac-page-bg,#edf0f6)!important;
+   background-image:none!important;
+ }
+}

@@ -1,0 +1,583 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-abarth-124-spider-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Abarth official archive: 124 Spider",
+          "publisher": "Stellantis N.V.",
+          "url": "https://www.media.stellantis.com/uk-en/abarth/press/124-spider-makes-dynamic-debut-as-abarth-showcases-future-and-past-at-goodwood",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Abarth's official media archive identifies the 124 Spider. Specifications and production boundaries are not copied into this identity-only batch."
+        },
+        {
+          "id": "src-dodge-nitro-nhtsa-vpic-2026",
+          "type": "government_registry",
+          "title": "NHTSA vPIC manufacturer record: Dodge Nitro",
+          "publisher": "National Highway Traffic Safety Administration",
+          "url": "https://vpic.nhtsa.dot.gov/decoder/Manufacturer/Details/?IsExport=True&id=994",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "United States",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official NHTSA manufacturer database lists Nitro under Dodge. The Japanese spelling is separately backed by exact MLIT observations."
+        },
+        {
+          "id": "src-land-rover-freelander-2-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Land Rover official archive: Freelander 2",
+          "publisher": "Jaguar Land Rover Limited",
+          "url": "https://media.landrover.com/news/2014/03/land-rover-introduces-new-hse-luxury-and-xs-specifications-freelander-2",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Land Rover's official media archive identifies Freelander 2. Grades and production boundaries are not copied."
+        },
+        {
+          "id": "src-lexus-gs-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Lexus official archive: new GS lineup in Japan",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/detail/159124",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Toyota's official global newsroom identifies GS as the Lexus model family. Powertrain suffixes are retained only as exact MLIT source spellings."
+        },
+        {
+          "id": "src-lexus-hs-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Lexus official archive: HS250h launch in Japan",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://global.toyota/en/detail/309306",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Toyota's official global newsroom identifies HS250h. HS is staged as the English model family while the full badge remains an exact MLIT source spelling."
+        },
+        {
+          "id": "src-mlit-passenger-03695627075c4949",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 5.8.Gimport_1015.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/5.8.Gimport_1015.xls",
+          "documentId": "5.8.Gimport_1015.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-2bd0a7a42563e495",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001741613.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001741613.xls",
+          "documentId": "001741613.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-65bee60935816e91",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001337995.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001337995.xls",
+          "documentId": "001337995.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-bcc8fbbf6cf03723",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001282808.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001282808.xls",
+          "documentId": "001282808.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-da32a6d5e0bd376e",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001474456.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/jidosha/content/001474456.xls",
+          "documentId": "001474456.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-volvo-xc70-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Volvo Cars official archive: XC70",
+          "publisher": "Volvo Car Corporation",
+          "url": "https://www.media.volvocars.com/global/en-gb/media/pressreleases/4978",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Volvo Cars' official media archive identifies XC70. Production boundaries are not inferred from the archive article or MLIT inventory observations."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "abarth/124-spider",
+          "brandId": "abarth",
+          "canonicalName": "124 Spider",
+          "slug": "124-spider",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Abarth 124 Spider",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-0c731e231146eca7",
+                "src-mlit-passenger-112544ae3266913f",
+                "src-mlit-passenger-2e18513621227dae",
+                "src-mlit-passenger-94752914c4875e20",
+                "src-mlit-passenger-af6f209ef438d450",
+                "src-mlit-passenger-cd4512da88914640"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-abarth-124-spider-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2016, 2017, 2018, 2019, 2020, 2023.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dodge/nitro",
+          "brandId": "dodge",
+          "canonicalName": "Nitro",
+          "slug": "nitro",
+          "aliases": [
+            {
+              "value": "Nitro",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "United States",
+              "sourceIds": [
+                "src-dodge-nitro-nhtsa-vpic-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "ナイトロ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-03695627075c4949",
+                "src-mlit-passenger-0b325d96c5e125e6",
+                "src-mlit-passenger-112544ae3266913f",
+                "src-mlit-passenger-2e18513621227dae",
+                "src-mlit-passenger-65bee60935816e91",
+                "src-mlit-passenger-6dd68f2f31bda8d3",
+                "src-mlit-passenger-94192db29984183e",
+                "src-mlit-passenger-94752914c4875e20",
+                "src-mlit-passenger-9ecbf8dcf7624986",
+                "src-mlit-passenger-af6f209ef438d450",
+                "src-mlit-passenger-bcc8fbbf6cf03723",
+                "src-mlit-passenger-cd4512da88914640"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-dodge-nitro-nhtsa-vpic-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "land-rover/freelander-2",
+          "brandId": "land-rover",
+          "canonicalName": "Freelander 2",
+          "slug": "freelander-2",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "フリーランダー 2",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-03695627075c4949",
+                "src-mlit-passenger-0b325d96c5e125e6",
+                "src-mlit-passenger-65bee60935816e91",
+                "src-mlit-passenger-6dd68f2f31bda8d3",
+                "src-mlit-passenger-9ecbf8dcf7624986",
+                "src-mlit-passenger-bcc8fbbf6cf03723"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-land-rover-freelander-2-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lexus/gs",
+          "brandId": "lexus",
+          "canonicalName": "GS",
+          "slug": "gs",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "GS200t",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada"
+              ]
+            },
+            {
+              "value": "GS250",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-60a79e46229b4485"
+              ]
+            },
+            {
+              "value": "GS300",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90"
+              ]
+            },
+            {
+              "value": "GS300h",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90"
+              ]
+            },
+            {
+              "value": "GS350",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90"
+              ]
+            },
+            {
+              "value": "GS450h",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-lexus-gs-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lexus/hs",
+          "brandId": "lexus",
+          "canonicalName": "HS",
+          "slug": "hs",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "HS250h",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-lexus-hs-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volvo/xc70",
+          "brandId": "volvo",
+          "canonicalName": "XC70",
+          "slug": "xc70",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ボルボXC70",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-03695627075c4949",
+                "src-mlit-passenger-0b325d96c5e125e6",
+                "src-mlit-passenger-2bd0a7a42563e495",
+                "src-mlit-passenger-2e18513621227dae",
+                "src-mlit-passenger-65bee60935816e91",
+                "src-mlit-passenger-6dd68f2f31bda8d3",
+                "src-mlit-passenger-94192db29984183e",
+                "src-mlit-passenger-9ecbf8dcf7624986",
+                "src-mlit-passenger-bcc8fbbf6cf03723",
+                "src-mlit-passenger-da32a6d5e0bd376e"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-volvo-xc70-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

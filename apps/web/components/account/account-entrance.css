@@ -1,0 +1,438 @@
+@font-face{font-family:AcEntranceInter;font-style:normal;font-display:swap;font-weight:100 900;src:url('/fonts/inter-cyrillic-wght-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:AcEntranceInter;font-style:normal;font-display:swap;font-weight:100 900;src:url('/fonts/inter-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* The supplied login composition. Mobile density is adapted without replacing its artwork. */
+.account-original-design{--intro-text:#e6ebf5;--intro-title:#fff;--intro-muted:#8a94b8;--intro-dim:#6a7492;--intro-line:rgba(255,255,255,.08);--intro-card:rgba(255,255,255,.04);--intro-panel:#101729;--intro-left:#0d1425;--intro-right:#0a101f;max-width:1240px;color:var(--intro-text);font-family:AcEntranceInter,Arial,sans-serif}
+.account-original-design .account-entrance-heading{padding:0 8px;margin-bottom:20px}
+.account-original-design .entrance-eyebrow{display:flex;align-items:center;gap:8px;color:var(--intro-muted);font-size:12px;font-weight:600;margin-bottom:10px}
+.account-original-design .entrance-eyebrow>span{width:6px;height:6px;border-radius:50%;background:#ffc947;box-shadow:0 0 10px #ffc947}
+.account-original-design .account-entrance-heading h1{font-size:clamp(24px,3vw,36px);line-height:1.15;letter-spacing:-.02em;font-weight:700;color:var(--intro-title);margin:0 0 6px}
+.account-original-design .account-entrance-heading p{color:var(--intro-muted);font-size:14px;line-height:1.5;margin:0;min-height:21px}
+.account-original-design .account-login-main{grid-template-columns:1.15fr 1fr;border:1px solid var(--intro-line);border-radius:28px;overflow:hidden;background:var(--intro-panel);gap:0;align-items:stretch;box-shadow:0 40px 100px -40px rgba(0,0,0,.4)}
+.account-original-design .account-welcome{padding:32px 34px 16px;min-height:660px;background:linear-gradient(180deg,var(--intro-left),var(--intro-right));border-radius:0;align-items:stretch;min-width:0}
+.account-original-design .account-welcome:not(.has-banner)::before{content:none}
+.account-original-design .account-login-form{padding:56px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--intro-panel);color:var(--intro-text)}
+.account-original-design .account-kicker{color:var(--intro-muted);font-size:12.5px;font-weight:600;opacity:1}
+.account-original-design .account-form-heading h2,.account-original-design .account-login-form>h2{font-size:28px;line-height:1.2;letter-spacing:-.02em;font-weight:700;color:var(--intro-title);margin:10px 0 26px}
+.account-original-design .account-tabs{background:var(--intro-card);border:1px solid var(--intro-line);border-radius:12px;padding:5px;gap:6px;margin:0 0 26px}
+.account-original-design .account-tabs button{padding:11px 16px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--intro-muted)}
+.account-original-design .account-tabs button[aria-pressed=true]{background:var(--intro-line);color:var(--intro-title)}
+.account-original-design .account-login-form form{gap:16px}
+.account-original-design .account-login-form label{font-size:12.5px;font-weight:600;color:var(--intro-muted);gap:8px}
+.account-original-design .account-login-form input:not([type=checkbox]),.account-original-design .account-login-form textarea{border-radius:12px;background:var(--intro-card);border:1px solid var(--intro-line);color:var(--intro-text);padding:15px 18px;font-size:14.5px;width:100%;min-width:0;outline:none}
+.account-original-design .account-login-form .account-password-field input{padding-right:46px}
+.account-original-design .account-login-form input:focus,.account-original-design .account-login-form textarea:focus{border-color:rgba(255,201,71,.5);box-shadow:0 0 0 3px rgba(255,201,71,.08)}
+.account-original-design .account-login-form input::placeholder,.account-original-design .account-login-form textarea::placeholder{color:var(--intro-dim)}
+.account-original-design .account-primary{background:linear-gradient(135deg,#ffc947,#ffb020);color:#0f1420;border-radius:12px;padding:16px 24px;font-size:15px;font-weight:700;box-shadow:0 12px 32px -10px rgba(255,201,71,.5)}
+.account-original-design .account-text-button{color:var(--intro-muted)}
+.account-original-design .account-muted{color:var(--intro-muted)}
+.account-original-design .account-roles{gap:8px}
+.account-original-design .account-roles>button{border:1px solid transparent;border-radius:12px;padding:12px;background:transparent!important;color:var(--intro-text)}
+.account-original-design .account-roles>button[aria-pressed=true]{border-color:rgba(255,201,71,.3);background:var(--intro-card)!important}
+.account-original-design .account-role-art{width:36px;height:36px;color:var(--intro-muted)}
+.account-original-design .account-roles small{color:var(--intro-muted)}
+.account-original-design .account-role-heading{margin:24px 0 10px}
+.account-scenes{position:relative;display:flex;flex-direction:column;flex:1;width:100%;min-width:0;color:var(--intro-text)}
+.account-scenes .demo-stage{min-height:520px;touch-action:pan-y}
+.account-scenes .account-scene{position:absolute;inset:0}
+.account-scenes .scene{width:100%;padding:14px 6px;box-sizing:border-box}
+.account-scenes .account-scene-controls{width:100%;margin-top:auto}
+.account-scenes .steps-bar{width:100%;padding:18px 4px 8px}
+.account-scenes .scene-navigation{display:flex;align-items:center;justify-content:flex-end;gap:2px;color:var(--intro-muted);min-height:28px}
+.account-scenes .scene-navigation>span{font-size:10px;margin-right:auto}
+.account-scenes .scene-navigation button{display:grid;place-items:center;width:28px;height:28px;border-radius:50%}
+.account-scenes .scene-navigation button:hover{background:var(--intro-line);color:#ffc947}
+.account-scenes button:focus-visible{outline:2px solid #ffc947;outline-offset:3px}
+.account-scenes .scene-notice{position:absolute;z-index:20;left:0;right:0;bottom:78px;border:1px solid rgba(255,201,71,.4);background:var(--intro-panel);border-radius:12px;padding:14px 36px 14px 14px;font-size:12px;line-height:1.5;box-shadow:0 8px 30px #0004}
+.account-scenes .scene-notice button{position:absolute;right:8px;top:8px;font-size:20px;width:24px;height:24px}
+.account-scenes .chat-name::after{content:'на связи';text-transform:none;letter-spacing:normal}
+.account-scenes .contract-title,.account-scenes .docs-title,.account-scenes .notif-title,.account-scenes .review-stars-label,.account-scenes .contract-viewer-sign-label{text-transform:none;letter-spacing:normal}
+.account-scenes .contract-viewer{max-width:calc(100% - 12px)}
+.account-scenes .contract-status{white-space:nowrap;font-size:10px}
+.account-scenes .contract-arena{max-width:220px}
+.account-scenes .review-textarea{min-height:60px;resize:none}
+.account-scenes .doc-info{min-width:0}
+.account-scenes .track-header-left{min-width:0}
+.account-scenes .track-header-title{overflow-wrap:anywhere}
+.account-scenes[data-paused=true] *,.account-scenes[data-paused=true] *::before,.account-scenes[data-paused=true] *::after{animation-play-state:paused!important}
+/* A stopped carousel must still show its content, including reduced-motion users. */
+.account-scenes[data-reduced=true] *,.account-scenes[data-reduced=true] *::before,.account-scenes[data-reduced=true] *::after{animation:none!important;transition:none!important}
+.account-scenes[data-reduced=true] .chat-msg,.account-scenes[data-reduced=true] .chat-typing,.account-scenes[data-reduced=true] .chat-actions,.account-scenes[data-reduced=true] .doc-card,.account-scenes[data-reduced=true] .media-tile,.account-scenes[data-reduced=true] .notif-item{opacity:1;transform:none}
+.account-scenes[data-reduced=true] .contract-signature{stroke-dashoffset:0}
+.account-scenes[data-reduced=true] .contract-pen{opacity:0}
+.account-scenes[data-reduced=true] .contract-viewer-check{opacity:0}
+html[data-theme=light] .account-original-design{--intro-text:#26354a;--intro-title:#162337;--intro-muted:#566986;--intro-dim:#64748b;--intro-line:rgba(29,48,78,.12);--intro-card:rgba(255,255,255,.7);--intro-panel:#f6f8fc;--intro-left:#edf2fa;--intro-right:#e5ecf7;color:var(--intro-text)}
+html[data-theme=light] .account-original-design .account-login-main{background:var(--intro-panel)}
+html[data-theme=light] .account-scenes .chat-bubble,html[data-theme=light] .account-scenes .doc-card,html[data-theme=light] .account-scenes .notif-item,html[data-theme=light] .account-scenes .review-dealer,html[data-theme=light] .account-scenes .track-stat{background:rgba(255,255,255,.55);border-color:var(--intro-line)}
+html[data-theme=light] .account-scenes .chat-msg--out .chat-bubble{background:rgba(255,201,71,.12);border-color:rgba(174,118,0,.25)}
+html[data-theme=light] .account-scenes .chat-name,html[data-theme=light] .account-scenes .chat-chip,html[data-theme=light] .account-scenes .doc-status--new,html[data-theme=light] .account-scenes .doc-bar-percent,html[data-theme=light] .account-scenes .track-stat-val{color:#855900}
+html[data-theme=light] .account-scenes .chat-chip--green,html[data-theme=light] .account-scenes .review-dealer-badge{color:#137b45}
+html[data-theme=light] .account-scenes .media-tile--photo{background:linear-gradient(135deg,#c9d6ed,#b5c5e0)}
+html[data-theme=light] .account-scenes .media-tile--photo svg{stroke:#34517d}
+@media(max-width:1000px) and (min-width:761px){.account-original-design .account-welcome{padding:24px 18px;min-height:620px}.account-original-design .account-login-form{padding:32px 24px}.account-scenes .demo-stage{min-height:490px}.account-scenes .chat-msg{max-width:100%}.account-scenes .track-point-wrap{min-width:0}.account-scenes .track-pin-label{font-size:10px}}
+@media(max-width:760px){
+ .account-original-design .account-entrance-heading{padding:0;margin-bottom:10px}
+ .account-original-design .entrance-eyebrow{font-size:10px;margin-bottom:5px}
+ .account-original-design .account-entrance-heading h1{font-size:23px;margin-bottom:4px;min-height:27px}
+ .account-original-design .account-entrance-heading p{font-size:12px;line-height:1.4;min-height:34px}
+ .account-original-design .account-login-main{grid-template-columns:1fr;border:0;border-radius:0;background:var(--intro-panel)!important;box-shadow:none;overflow:visible}
+ .account-original-design .account-welcome{padding:0 8px;min-height:0;border-radius:0;background:transparent}
+ .account-original-design .account-welcome.has-banner{min-height:280px;padding:20px;border-radius:16px}
+ .account-original-design .account-login-form{padding:12px 0 0;background:transparent}
+ .account-original-design .account-form-heading h2,.account-original-design .account-login-form>h2{font-size:21px;margin:3px 0 12px}
+ .account-original-design .account-form-heading .account-kicker{display:none}
+ .account-original-design .account-tabs{margin-bottom:14px;padding:4px}
+ .account-original-design .account-tabs button{padding:8px;font-size:13px}
+ .account-original-design .account-login-form form{gap:12px}
+ .account-original-design .account-login-form input:not([type=checkbox]),.account-original-design .account-login-form textarea{font-size:16px;padding:12px;min-height:46px}
+ .account-original-design .account-login-form .account-password-field input{padding-right:40px}
+ .account-original-design .account-password-toggle{right:0;width:36px}
+ .account-original-design .account-login-form[data-mode=login] form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .account-original-design .account-login-form[data-mode=login] form>label{min-width:0}
+ .account-original-design .account-login-form[data-mode=login] form>:not(label){grid-column:1/-1}
+ .account-original-design .account-primary{min-height:48px;padding:12px}
+ .account-original-design .account-role-heading{margin-top:22px}
+ .account-original-design .account-roles{grid-template-columns:1fr;gap:4px}
+ .account-original-design .account-roles>button{padding:8px 0}
+ .account-scenes .demo-stage{flex:none;height:clamp(280px,39svh,330px);min-height:0;border-radius:0}
+ .account-scenes .scene{padding:8px 0}
+ .account-scenes .steps-bar{padding:12px 4px 6px}
+ .account-scenes .step-node{width:26px;height:26px;font-size:10px}
+ .account-scenes .step-connector{min-width:8px}
+ .account-scenes .scene-navigation>span{font-size:9px}
+ .account-scenes .scene-navigation{min-height:24px}
+ .account-scenes .scene-navigation button{width:30px;height:26px}
+ .account-scenes .chat-msg{gap:8px;max-width:95%}
+ .account-scenes .chat-avatar{width:30px;height:30px;font-size:11px}
+ .account-scenes .chat-bubble{padding:9px 11px}
+ .account-scenes .chat-text{font-size:12px;line-height:1.45}
+ .account-scenes .scene-chat{gap:8px}
+ .account-scenes .chat-typing{padding:7px 10px;margin-left:38px}
+ .account-scenes .chat-actions{margin-top:8px;gap:6px}
+ .account-scenes .chat-chip{padding:6px 9px;font-size:10px}
+ .account-scenes .contract-viewer{width:280px;max-height:275px;padding:10px 12px}
+ .account-scenes .contract-viewer-header{padding-bottom:6px;margin-bottom:6px}
+ .account-scenes .contract-viewer-title{font-size:11px}
+ .account-scenes .contract-viewer-body{font-size:9px;line-height:1.4}
+ .account-scenes .contract-viewer-line{margin-bottom:4px}
+ .account-scenes .contract-viewer-footer{padding-top:6px;margin-top:5px;min-height:42px}
+ .account-scenes .contract-viewer-sign-label{font-size:8px}
+ .account-scenes .contract-arena{max-width:170px;height:100px}
+ .account-scenes .contract-file{width:65px;padding:8px 5px}
+ .account-scenes .contract-status{bottom:0;max-width:100%;font-size:9px;padding:4px 8px}
+ .account-scenes .track-header{padding:9px;gap:6px}
+ .account-scenes .track-header-title{font-size:11px}
+ .account-scenes .track-header-sub{font-size:9px}
+ .account-scenes .track-header-eta{font-size:10px;padding:5px 7px;white-space:nowrap}
+ .account-scenes .track-header-icon{width:28px;height:28px}
+ .account-scenes .track-point-wrap{min-width:0}
+ .account-scenes .track-pin-marker{width:28px;height:28px}
+ .account-scenes .track-point-wrap.is-active .track-pin-marker{width:32px;height:32px}
+ .account-scenes .track-pin-marker svg{width:13px;height:13px}
+ .account-scenes .track-pin-label{font-size:9px}
+ .account-scenes .track-pin-label small{font-size:8px}
+ .account-scenes .track-truck{width:34px;height:24px}
+ .account-scenes .track-stat{padding:8px 3px}
+ .account-scenes .track-stat-val{font-size:11px}
+ .account-scenes .track-stat-label{font-size:9px}
+ .account-scenes .flag-svg{width:12px;height:8px}
+ .account-scenes .scene-docs{gap:7px}
+ .account-scenes .docs-title{font-size:10px}
+ .account-scenes .doc-card{padding:8px 10px;gap:10px}
+ .account-scenes .doc-icon{width:28px;height:28px}
+ .account-scenes .doc-name{font-size:11px}
+ .account-scenes .doc-status{font-size:10px}
+ .account-scenes .media-grid{gap:5px;grid-template-columns:repeat(4,minmax(0,1fr))}
+ .account-scenes .media-tile{aspect-ratio:auto;height:44px;border-radius:8px}
+ .account-scenes .media-tile svg{width:17px;height:17px}
+ .account-scenes .media-tile-badge{font-size:8px}
+ .account-scenes .scene-docs .chat-actions{margin-top:0}
+ .account-scenes .scene-notifs{gap:8px}
+ .account-scenes .notif-bell{width:48px;height:48px;margin-bottom:2px}
+ .account-scenes .notif-bell svg{width:25px;height:25px}
+ .account-scenes .notif-bell-badge{width:18px;height:18px;font-size:10px}
+ .account-scenes .notif-title{display:none}
+ .account-scenes .notif-item{padding:9px 10px;gap:9px}
+ .account-scenes .notif-icon{width:27px;height:27px}
+ .account-scenes .notif-name{font-size:11px}
+ .account-scenes .notif-text{font-size:10px;line-height:1.4}
+ .account-scenes .notif-time{font-size:9px;margin-top:2px}
+ .account-scenes .scene-review{gap:7px}
+ .account-scenes .review-header{display:none}
+ .account-scenes .review-dealer{padding:8px;gap:8px}
+ .account-scenes .review-dealer-avatar{width:30px;height:30px;font-size:11px}
+ .account-scenes .review-dealer-name{font-size:11px}
+ .account-scenes .review-dealer-role{font-size:9px}
+ .account-scenes .review-dealer-badge{font-size:9px;padding:4px 6px}
+ .account-scenes .review-stars-label{font-size:10px}
+ .account-scenes .review-star{width:34px;height:34px}
+ .account-scenes .review-star svg{width:20px;height:20px}
+ .account-scenes .review-tags{gap:4px}
+ .account-scenes .review-tag{padding:4px 6px;font-size:9px}
+ .account-scenes .review-textarea{padding:9px;min-height:38px;font-size:11px}
+ .account-scenes .review-submit{font-size:12px;padding:10px}
+}
+
+.account-scenes .track-truck{transition:none}
+.account-scenes[data-paused=true] .chat-msg,.account-scenes[data-paused=true] .chat-typing,.account-scenes[data-paused=true] .chat-actions,.account-scenes[data-paused=true] .track-header,.account-scenes[data-paused=true] .track-map,.account-scenes[data-paused=true] .track-stats,.account-scenes[data-paused=true] .doc-card,.account-scenes[data-paused=true] .media-tile,.account-scenes[data-paused=true] .notif-item,.account-scenes[data-paused=true] .review-star{animation:none;opacity:1;transform:none}
+
+@media(max-width:760px){.account-scenes .scene-docs{padding:0;gap:5px}.account-scenes .docs-chips{margin-top:2px;gap:5px}.account-scenes .media-grid{margin-top:2px}.account-scenes .doc-name{margin-bottom:2px}.account-scenes .doc-card{padding:6px 8px}.account-scenes .pin-city{font-size:9px}.account-scenes[data-role=blogger] .track-pin-label small,.account-scenes[data-role=supplier] .track-pin-label small{font-size:7px}}
+
+.account-original-design button,.account-original-design input,.account-original-design textarea,.account-scenes .contract-viewer{font-family:inherit}
+@media(min-width:761px){.account-original-design .account-welcome{min-height:700px}.account-scenes .scene-docs{padding:4px 2px}.account-scenes .demo-stage{min-height:550px}}
+html[data-theme=light] .account-scenes .step-node{background:#fff8;border-color:#778ba844}
+html[data-theme=light] .account-scenes .step-node.is-active{background:linear-gradient(135deg,#ffc947,#ffb020);border-color:#ffc947;color:#0f1420}
+html[data-theme=light] .account-scenes .step-node.is-done{color:#137b45;border-color:#23925c77;background:#d6f1e5}
+html[data-theme=light] .account-scenes .step-connector{background:#7c8ba733}
+html[data-theme=light] .account-scenes .step-connector.is-done{background:#23925c77}
+.account-scenes[data-reduced=true] .doc-bar::after{width:68%}
+
+.account-recovery{position:fixed;inset:0;margin:auto;width:min(520px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--intro-line);border-radius:24px;padding:32px;background:var(--intro-panel);color:var(--intro-text);box-shadow:0 30px 100px #0008}
+.account-recovery::backdrop{background:rgba(5,10,20,.72);backdrop-filter:blur(6px)}
+.account-recovery h2{font-size:24px;font-weight:700;line-height:1.25;color:var(--intro-title);padding-right:24px;margin:0 0 12px}
+.account-recovery>.account-muted{margin-bottom:24px;line-height:1.5;font-size:14px}
+.account-recovery form{display:grid;gap:16px}
+.account-recovery label{display:grid;gap:8px;font-size:13px;color:var(--intro-muted)}
+.account-recovery input:not([type=radio]){width:100%;min-width:0;background:var(--intro-card);border:1px solid var(--intro-line);border-radius:12px;color:var(--intro-text);padding:14px 16px;font-size:16px}
+.account-recovery .account-password-field input{padding-right:48px}
+.account-recovery fieldset{min-width:0;border:0;margin:0;padding:0}
+.account-recovery legend{font-size:13px;color:var(--intro-muted);margin-bottom:10px}
+.account-recovery .recovery-channels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.account-recovery .recovery-channel{position:relative;align-content:start;justify-items:center;text-align:center;cursor:pointer;padding:14px 5px;border:1px solid var(--intro-line);border-radius:12px;background:var(--intro-card);gap:8px}
+.account-recovery .recovery-channel input{position:absolute;opacity:0;width:1px;height:1px}
+.account-recovery .recovery-channel small{font-size:10px;line-height:1.4}
+.account-recovery .recovery-channel[data-selected=true]{border-color:#d7a22e;background:rgba(255,201,71,.1);color:var(--intro-title)}
+.account-recovery .recovery-channel:focus-within{outline:2px solid #d7a22e;outline-offset:3px}
+.account-recovery .recovery-close{position:absolute;right:12px;top:12px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;color:var(--intro-muted)}
+.account-recovery button:focus-visible,.account-recovery a:focus-visible,.account-recovery input:focus-visible{outline:2px solid #d7a22e;outline-offset:3px}
+.account-recovery button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:480px){.account-recovery{padding:24px 16px;border-radius:18px}.account-recovery h2{font-size:21px}.account-recovery .recovery-channel strong{font-size:12px}}
+
+/* Stable scene content and readable, open mobile composition. */
+.account-scenes .demo-stage,.account-scenes .scene{overflow:visible}
+.account-scenes .scene-event-layer{height:100%;width:100%}
+.account-scenes .chat-stream{display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:285px}
+.account-scenes .chat-stream .chat-msg{display:none;animation-delay:0s!important}
+.account-scenes .chat-stream .chat-msg.is-visible{display:flex}
+.account-scenes .contract-signature,.account-scenes .contract-signature.is-signing,.account-scenes .contract-signature path{animation:none!important;transition:none;stroke-dasharray:none}
+.account-scenes .contract-viewer-line{transition:opacity .35s,transform .35s}
+.account-scenes .track-arrival{min-height:38px;display:flex;align-items:center;justify-content:center;border:1px solid #4ade8055;background:#4ade8014;border-radius:10px;color:#4ade80;font-size:13px;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.account-scenes .track-arrival.is-visible{opacity:1;transform:none}
+.account-scenes .notification-window{height:282px;overflow:hidden;padding:4px 0}
+.account-scenes .notification-stream{display:flex;flex-direction:column;gap:10px;transition:transform .65s cubic-bezier(.2,.7,.3,1)}
+.account-scenes .notification-stream .notif-item{height:84px;min-height:84px;animation:none!important;opacity:1;transform:none;box-sizing:border-box}
+.account-scenes .notif-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.account-scenes .review-rating{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px;color:#ffc947}
+.account-scenes .review-rating strong{font-size:58px;font-weight:800;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.account-scenes .review-rating span{font-size:12px;color:var(--intro-muted)}
+.account-scenes .review-star{animation:none!important;opacity:1;transform:none;transition:background .3s,box-shadow .3s,transform .3s}
+.account-scenes .review-star.is-filled{transform:translateY(-4px);box-shadow:0 5px 18px #ffc94733}
+.account-original-design .account-login-form .ac-login-card{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;border-radius:0!important}
+.account-original-design .account-roles>button{background:var(--intro-card)!important;border-color:var(--intro-line);padding:14px}
+.account-original-design .account-roles>button>svg:last-child{display:none}
+.account-original-design .account-mobile-login{display:none}
+.account-original-design .account-login-form{scroll-margin-top:82px}
+.account-original-design .account-coming-soon{padding:60px 24px;display:grid;justify-items:center;gap:18px;border:1px solid var(--intro-line);border-radius:24px;background:var(--intro-card);text-align:center}
+.account-original-design .account-coming-soon h2{font-size:26px;font-weight:700}
+.account-original-design .account-dealer-benefits{margin-top:24px}
+.account-original-design .account-dealer-benefits h2{font-size:20px;font-weight:700;margin-bottom:14px}
+.account-original-design .account-dealer-benefits ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0;list-style:none}
+.account-original-design .account-dealer-benefits li{padding:14px;border-radius:12px;background:var(--intro-card);border:1px solid var(--intro-line);font-size:13px;line-height:1.5}
+html[data-theme=light] .account-scenes .chat-bubble{background:#dce6f7;border-color:#b9cce8}
+html[data-theme=light] .account-scenes .chat-msg--out .chat-bubble{background:#fff0c9;border-color:#e5c977}
+html[data-theme=light] .account-scenes .doc-card{background:#dfe9fb;border-color:#bbcee9}
+html[data-theme=light] .account-scenes .doc-card--new{background:#dceee3;border-color:#a9ceb8}
+html[data-theme=light] .account-scenes .doc-card--upload{background:#fff0d1;border-color:#ddc68f}
+html[data-theme=light] .account-scenes .notif-item{background:#dae7f8;border-color:#b4cce6}
+html[data-theme=light] .account-scenes .notif-item:first-child{background:#dcefe4;border-color:#acd1bd}
+html[data-theme=light] .account-scenes .notif-item--highlight{background:#fff0ce;border-color:#dabd72}
+html[data-theme=light] .account-scenes .review-tag,html[data-theme=light] .account-scenes .review-textarea,html[data-theme=light] .account-scenes .review-star{background:#dce6f4;border-color:#b4c9e2;color:#3c5575}
+html[data-theme=light] .account-scenes .review-star.is-filled{background:#ffe6a4;border-color:#cf9b24;color:#9b6800}
+html[data-theme=light] .account-scenes .review-rating{color:#986400}
+html[data-theme=light] .account-scenes .track-header,html[data-theme=light] .account-scenes .track-stat{background:#dce7f7;border-color:#b5cbe5}
+html[data-theme=light] .account-scenes .track-arrival{background:#d3eddc;border-color:#a4cbb3;color:#1b7045}
+html[data-theme=light] .account-original-design .account-roles>button,html[data-theme=light] .account-original-design .account-dealer-benefits li{background:#dce6f2!important;border-color:#b9cbe0}
+@media(max-width:760px){
+ .account-original-design .account-mobile-login{display:block;width:100%;margin:0 0 16px}
+ .account-original-design .account-welcome{padding:0;overflow:visible}
+ .account-scenes .demo-stage{height:auto;min-height:365px;flex:0 0 auto;overflow:visible}
+ .account-scenes .scene-event-layer{height:auto}
+ .account-scenes .account-scene{position:relative;inset:auto}
+ .account-scenes .scene{height:auto;min-height:365px;padding:12px 0;overflow:visible;justify-content:center}
+ .account-scenes .scene-contract{height:365px;width:100%;padding:0}
+ .account-scenes .contract-viewer{width:min(100%,340px);max-width:100%;height:330px;max-height:none;padding:14px}
+ .account-scenes .contract-viewer-body{font-size:10px;line-height:1.45}
+ .account-scenes .contract-status{bottom:0}
+ .account-scenes .scene-notifs{padding:8px 0;width:100%}
+ .account-scenes .notif-hero{padding-top:8px}
+ .account-scenes .notif-bell{overflow:visible}
+ .account-scenes .notification-window{height:258px}
+ .account-scenes .notification-stream .notif-item{height:76px;min-height:76px}
+ .account-scenes .notification-stream{gap:10px}
+ .account-scenes .scene-review{height:auto;width:100%}
+ .account-scenes .review-rating strong{font-size:50px}
+ .account-scenes .review-header{display:block}
+ .account-scenes .review-header-icon{display:none}
+ .account-scenes .review-stars-label{display:none}
+ .account-scenes .review-tags{justify-content:center}
+ .account-scenes .review-textarea{min-height:54px}
+ .account-scenes .chat-stream{min-height:270px}
+ .account-original-design .account-login-form{padding-top:20px;scroll-margin-top:80px;background:transparent!important}
+ .account-original-design .account-roles>button{padding:12px}
+ .account-original-design .account-dealer-benefits ul{grid-template-columns:1fr}
+}
+.account-scenes .contract-intro.is-hidden{visibility:hidden}
+@media(max-width:760px){.account-scenes .contract-file{display:none}.account-scenes .chat-msg{max-width:100%}.account-scenes .track-stat{min-width:0}}
+html[data-theme=light] .account-scenes :is(.doc-status--new,.doc-icon,.doc-bar-percent,.contract-status){color:#805600}
+html[data-theme=light] .account-scenes .doc-icon--blue{color:#315c91}
+html[data-theme=light] .account-scenes .media-tile--video{background:linear-gradient(135deg,#ead8e9,#d9c0d8);color:#674568}
+html[data-theme=light] .account-scenes .contract-status{background:#dcefe4;border-color:#9bc6ad;color:#216343}
+
+.account-original-design .account-dealer-benefits>p{font-size:13px;line-height:1.6;margin-top:14px;max-width:900px}
+
+/* Theme-specific appearance keeps the original scenes above the selected background. */
+.account-original-design .account-welcome:not(.has-banner){background-color:var(--entrance-dark-color);background-image:var(--entrance-dark-image);background-size:cover;background-position:center}
+html[data-theme=light] .account-original-design .account-welcome:not(.has-banner){background-color:var(--entrance-light-color);background-image:var(--entrance-light-image)}
+.account-original-design .account-roles>button[aria-pressed=true],html[data-theme=light] .account-original-design .account-roles>button[aria-pressed=true]{background:#315d8d!important;border-color:#82baff;color:#fff;box-shadow:0 0 0 2px #82baff33}
+.account-original-design .account-roles>button[aria-pressed=true] :is(small,.account-role-art){color:#dfedff}
+.account-scenes .media-tile-badge{color:#fff!important;background:#263449cc}
+.account-scenes .media-tile{overflow:hidden}
+.account-media-thumbnail{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.account-scenes .media-tile[data-video=true]::before{content:'▶';font-size:26px;color:white}
+.account-scenes .media-tile[data-video=true]>svg{display:none}
+.account-scenes .contract-handshake{animation:none;transition:opacity .5s,transform .5s}
+.account-scenes .scene-contract.is-complete .contract-handshake{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.account-scenes .scene-contract.is-complete .contract-file{opacity:0!important;animation:none!important}
+.account-original-design .account-login-form[hidden]{display:none}
+.entrance-media-preview{position:relative;min-width:0;padding:64px 24px 24px;display:flex;flex-direction:column;justify-content:center;gap:20px;background:var(--intro-panel)}
+.entrance-media-close{position:absolute;right:16px;top:16px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--intro-card);color:var(--intro-title)}
+.entrance-media-preview h2,.entrance-media-dialog h2{font-size:18px;color:var(--intro-title);padding-right:32px}
+:is(.entrance-media-preview,.entrance-media-dialog)>:is(img,video){width:100%;max-height:560px;object-fit:contain;border-radius:12px}
+.entrance-media-dialog{margin:auto;padding:64px 16px 24px;border:1px solid var(--intro-line);border-radius:20px;width:calc(100% - 24px);max-height:90dvh;background:var(--intro-panel);color:var(--intro-text)}
+.entrance-media-dialog::backdrop{background:#081524cc;backdrop-filter:blur(6px)}
+body:has(.entrance-media-dialog[open]){overflow:hidden}
+.entrance-dealer-preview{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;min-width:0}
+.entrance-dealer-preview>p{font-size:12px;color:var(--intro-text)}
+.entrance-dealer-preview .dealer-live-preview{width:min(100%,390px);border:1px solid var(--intro-line);border-radius:24px;overflow:hidden;background:var(--intro-panel)}
+.entrance-dealer-preview iframe{display:block;border:0;width:100%;height:600px}
+@media(max-width:760px){.entrance-media-preview{display:none}.account-original-design .account-login-form[hidden]{display:flex}.entrance-dealer-preview{padding:16px 0}.entrance-dealer-preview iframe{height:540px}.account-original-design .account-welcome:not(.has-banner){border-radius:18px}.account-scenes{padding:0 10px}}
+
+.account-scenes .chat-bubble{border:0;background:#295476}.account-scenes .chat-msg--out .chat-bubble{border:0;background:#255949;color:#effff7}html[data-theme=light] .account-scenes .chat-bubble{border:0;background:#e7f2ff}html[data-theme=light] .account-scenes .chat-msg--out .chat-bubble{border:0;background:#d4efe2;color:#194c37}
+
+.account-original-design .account-selected-role{display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:26px;width:100%}
+.account-original-design .account-selected-icon{display:grid;place-items:center;width:96px;height:96px;border-radius:50%;background:#ffc947;color:#15283d;overflow:hidden}
+.account-original-design .account-selected-icon img{width:100%;height:100%;object-fit:contain}
+.account-original-design .account-selected-title{position:relative;display:grid;grid-template-columns:76px minmax(0,1fr) 76px;align-items:center;gap:4px;width:100%;min-height:36px}
+.account-original-design .account-selected-title h2{grid-column:2;font-size:22px;font-weight:700;line-height:1.2;text-align:center;margin:0;color:var(--intro-title)}
+.account-original-design .account-role-back{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--intro-muted);justify-self:start;white-space:nowrap}
+.account-original-design .account-coming-icon{width:96px;height:96px;object-fit:contain}
+@media(max-width:760px){
+ .account-original-design .account-login-main{width:100vw;max-width:none;margin-inline:calc(50% - 50vw);border:0;border-radius:28px;overflow:hidden;box-shadow:none}
+ .account-original-design .account-login-form{padding:28px 20px 32px!important;background:var(--intro-panel)!important;border-radius:0 0 28px 28px}
+ .account-original-design .account-welcome:not(.has-banner),.account-original-design .account-welcome.has-banner{border-radius:28px;overflow:hidden}
+ .account-original-design .account-selected-role{gap:14px;margin-bottom:22px}
+ .account-original-design .account-selected-icon{width:80px;height:80px}
+ .account-original-design .account-selected-title{grid-template-columns:58px minmax(0,1fr) 58px}
+ .account-original-design .account-selected-title h2{font-size:20px}
+ .account-original-design .account-role-back{font-size:12px}
+ .account-original-design .account-coming-soon{width:100vw;margin-inline:calc(50% - 50vw);border:0;border-radius:0 0 28px 28px}
+}
+
+.account-original-design .account-error{color:#b4233b;font-weight:500}
+[data-theme="dark"] .account-original-design .account-error{color:#ff9aaa}
+.account-original-design .account-login-form input[aria-invalid="true"]{border-color:#c33750}
+
+.account-mobile-actions{display:none}
+@media(max-width:760px){
+ .account-mobile-actions{display:flex;gap:12px;margin:16px 0;align-items:stretch}
+ .account-mobile-actions>*{flex:1;min-width:0}
+ .account-mobile-actions .account-mobile-login{margin:0;width:auto;min-height:48px}
+ .account-mobile-actions .scene-navigation{display:flex;align-items:center;justify-content:space-evenly;min-height:48px;height:100%;border:1px solid var(--intro-title);border-radius:12px;color:var(--intro-title);background:transparent}
+ .account-mobile-actions .scene-navigation button{display:grid;place-items:center;flex:1;min-height:46px}
+ .account-scenes .scene-navigation{display:none}
+}
+
+/* Fixed scene viewport: switching steps must not move the login form. */
+html:not([data-theme=light]) .account-original-design{--intro-panel:#1a2029}
+.account-original-design .account-entrance-heading{min-height:90px}
+.account-scenes .chat-stream{justify-content:flex-start}
+.account-scenes .scene-contract.is-complete .contract-intro{position:absolute;inset:0}
+.account-scenes .scene-contract.is-complete :is(.contract-title,.contract-parties,.contract-bridge){display:none}
+.account-scenes .scene-contract.is-complete .contract-arena{position:absolute;inset:0;max-width:none;height:100%}
+.account-scenes .scene-contract.is-complete .contract-handshake{width:132px;height:132px;font-size:76px;animation:acHandshakeShake 1.1s ease-in-out infinite}
+@keyframes acHandshakeShake{0%,100%{transform:translate(-50%,-50%) rotate(-7deg)}50%{transform:translate(-50%,calc(-50% + 9px)) rotate(7deg)}}
+@media(prefers-reduced-motion:reduce){.account-scenes .scene-contract.is-complete .contract-handshake{animation:none}}
+@media(max-width:760px){
+ .account-original-design .account-entrance-heading{min-height:0;margin-bottom:0}
+ .account-original-design .account-entrance-heading h1{min-height:0;font-size:clamp(20px,5.9vw,23px);margin-bottom:6px}
+ .account-original-design .account-entrance-heading p{min-height:2.8em}
+ .account-mobile-actions{margin:12px 0}
+ .account-original-design .account-welcome{min-height:0;height:430px;padding:0 0 12px}
+ .account-scenes{height:100%;min-height:0;flex:none;padding:0 12px}
+ .account-scenes .demo-stage{height:374px;min-height:374px;flex:0 0 374px;overflow:hidden}
+ .account-scenes .scene-event-layer,.account-scenes .account-scene{position:absolute;inset:0;height:100%}
+ .account-scenes .scene{height:100%;min-height:0;padding:12px 0;overflow:hidden}
+ .account-scenes .scene-contract{height:100%}
+ .account-scenes .account-scene-controls{margin:0;flex:none}
+ .account-scenes .steps-bar{padding:10px 0 8px}
+ .account-scenes .chat-stream{min-height:0;gap:8px}
+ .account-scenes .scene-chat{gap:8px}
+}
+
+html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a2029!important;background-color:#1a2029!important}
+
+.account-scenes .media-tile[hidden]{display:none}
+.account-scenes .account-media-thumbnail{pointer-events:none}
+.account-scenes .media-tile[data-video=true]::before{position:relative;z-index:2;text-shadow:0 1px 6px #000}
+.account-scenes .media-tile:has(.account-media-thumbnail)>svg{display:none}
+
+.account-scenes .scene-contract.is-complete .contract-status{bottom:28px;white-space:nowrap;z-index:6}
+.account-scenes .contract-file--dealer,.account-scenes .contract-file--client,.account-scenes .contract-file-check,.account-scenes .party-connector::after,.account-scenes .contract-bridge{animation-duration:3s;animation-iteration-count:1;animation-fill-mode:forwards}
+.account-original-design .account-partner-layout{margin-top:24px}
+.account-original-design .account-role-heading{margin-top:0}
+@media(min-width:761px){
+ .account-original-design .account-partner-layout.is-dealer{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:start}
+ .account-original-design .account-partner-layout.is-dealer .account-dealer-benefits{margin-top:0}
+ .account-original-design .account-partner-layout.is-dealer .account-dealer-benefits ul{grid-template-columns:1fr}
+ .account-original-design .account-partner-layout.is-dealer .account-roles{grid-template-columns:1fr}
+ .account-original-design .account-roles{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* Keep the dealer viewport whole: customer scene height must not crop its dock. */
+.account-dealer-register{display:flex;align-items:center;justify-content:center;width:100%;max-width:460px;min-height:48px;margin:12px auto 0;padding:12px 16px;border:1px solid var(--intro-line);border-radius:12px;font-size:14px;font-weight:650;color:var(--intro-title);text-decoration:none}
+.account-dealer-register:hover{background:var(--intro-card)}
+.account-dealer-register:focus-visible{outline:2px solid #ffc947;outline-offset:3px}
+@media(max-width:760px){
+ .account-original-design .account-login-main:has(.entrance-dealer-preview){border:0;border-radius:0;overflow:visible;background:transparent;box-shadow:none}
+ .account-original-design .account-welcome:has(.entrance-dealer-preview){height:auto;min-height:0;padding:0;border-radius:0;overflow:visible;background:transparent!important}
+ .entrance-dealer-preview{padding:0}
+ .entrance-dealer-preview .dealer-live-preview{width:100%;max-width:none;border:0;border-radius:0;background:transparent}
+ .entrance-dealer-preview iframe{height:min(720px,calc(100svh - 100px));min-height:460px}
+ .account-original-design .account-login-main:has(.entrance-dealer-preview)>.account-login-form{border-radius:0 0 24px 24px}
+}
+
+@media(max-width:760px){
+ .entrance-dealer-preview .dealer-inline-preview{overflow:visible}
+ .entrance-dealer-preview .dealer-inline-preview>.dealer-profile{padding:0;overflow:visible}
+ .entrance-dealer-preview .dealer-inline-preview .dealer-dock{position:sticky;bottom:0;margin:0;z-index:45}
+}
+
+/* The inline phone profile must not inherit the entrance artwork text widths. */
+@media(max-width:760px){
+ .account-welcome .entrance-dealer-preview .dealer-profile p{max-width:none;padding-right:0}
+ .account-welcome .entrance-dealer-preview .dealer-identity-divider{width:100%}
+ .account-welcome .entrance-dealer-preview .dealer-identity-title h1{padding:0;margin:0;text-align:center}
+ .entrance-dealer-preview .dealer-inline-preview .dealer-dock{border-radius:24px 24px 0 0}
+ .entrance-dealer-preview[data-dock-at-end="true"] .dealer-inline-preview .dealer-dock{border-radius:0 0 24px 24px}
+ /* Clip the sticky cover too, without creating a scroll container around the dock. */
+ .entrance-dealer-preview[data-dock-at-end="true"] .dealer-inline-preview{clip-path:inset(0 round 0 0 24px 24px)}
+}
+
+.recovery-methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.account-recovery .recovery-method{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:18px 10px;min-height:138px;border:2px solid;border-radius:15px;background:var(--intro-card);color:var(--intro-title);text-align:center;cursor:pointer}
+.account-recovery .recovery-method strong{font-size:16px}.recovery-method span{font-size:12px;line-height:1.4}
+.account-recovery .recovery-method-telegram{border-color:#168ac1}.recovery-method-telegram svg{color:#168ac1}
+.account-recovery .recovery-method-support{border-color:#e8b72d}.recovery-method-support svg{color:#b78109}
+.account-recovery .recovery-method-telegram[aria-pressed=true]{background:color-mix(in srgb,#168ac1 15%,var(--intro-card));box-shadow:0 0 0 1px #168ac1}
+.account-recovery .recovery-method-support[aria-pressed=true]{background:color-mix(in srgb,#e8b72d 15%,var(--intro-card));box-shadow:0 0 0 1px #e8b72d}
+.account-recovery label.recovery-consent{display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-size:12px}.account-recovery .recovery-consent input{width:18px;min-width:18px;height:18px;padding:0;margin-top:3px}.recovery-consent a{text-decoration:underline}
+.recovery-request-success{display:grid;gap:16px;font-size:14px;line-height:1.6}.recovery-request-success h3{font-size:18px;font-weight:700}.recovery-request-success svg{color:#24966c}

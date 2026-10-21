@@ -1,0 +1,38 @@
+name: Regcloud — inspect disk usage
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-disk-audit.json']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read filesystem and container sizes without changing server data
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          df -B1 /
+          docker exec avtocena-production node -e 'const e=process.env; console.log("STORAGE_ROUTING", JSON.stringify({driver:e.JSON_STORAGE_DRIVER,regObjectEndpoint:e.YC_OBJECT_STORAGE_ENDPOINT==="https://s3.regru.cloud",bucketConfigured:!!e.YC_OBJECT_STORAGE_BUCKET,prefixConfigured:!!e.YC_OBJECT_STORAGE_PREFIX}));'
+          lsblk -b -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT
+          du -x -B1 -d1 /var /opt /tmp /root 2>/dev/null | sort -n
+          docker system df
+          docker ps -a --size --format '{{.Names}} | {{.Image}} | {{.Status}} | {{.Size}}'
+          docker image ls --format '{{.Repository}}:{{.Tag}} | {{.ID}} | {{.Size}} | {{.CreatedAt}}'
+          journalctl --disk-usage
+          REMOTE

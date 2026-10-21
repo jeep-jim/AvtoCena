@@ -1,0 +1,7114 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 66,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-5d6a3b21f2e1d89951f7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 294,
+      "commercialNames": [
+        "BOXSTER 6",
+        "BOXSTER GTS",
+        "BOXSTER GTS 4.0",
+        "BOXSTER GTS 40"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 67,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-083b606cab3a55d3aacc",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3436,
+      "powerKw": 228,
+      "commercialNames": [
+        "BOXSTER S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c619e425e1127572f66",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3436,
+      "powerKw": 243,
+      "commercialNames": [
+        "BOXSTER GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-609d3fec8f5df56b2646",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3995,
+      "powerKw": 294,
+      "commercialNames": [
+        "Boxster 25 Years",
+        "Boxster 25 Years GTS",
+        "BOXSTER GTS 4.0",
+        "BOXSTER GTS 40"
+      ],
+      "sourceMakeNames": [
+        "Porsche",
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-deb9b853486f638801d3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3995,
+      "powerKw": 309,
+      "commercialNames": [
+        "Boxster 718 Spyder"
+      ],
+      "sourceMakeNames": [
+        "Porsche"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd65c36c7aa3e31401ef",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 360,
+      "commercialNames": [
+        "BOXSTER",
+        "BOXSTER S",
+        "BOXSTER TOP"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 191,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d0cea6b2fb77b10f2ff",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 260,
+      "commercialNames": [
+        "BOXSTER"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2a414e55aa67ca5c7aa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "BOXSTER S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28211b17f6d40afa55ed",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "BOXSTER"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba6d083faf56c76bf3a0",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Boxster",
+      "modelId": "porsche/boxster",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "BOXSTER",
+        "BOXSTER S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62e8ba0b374976c19971",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4134,
+      "powerKw": 283,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE DIESEL",
+        "CAYENNE S DIESEL"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a1c6fec6b5a4797cd2a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "Cayenne Hybrid"
+      ],
+      "sourceMakeNames": [
+        "Porsche"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f50932793ce3f123db9f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE S",
+        "CAYENNE V6 S AUTO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 993,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab3a1bac383caa01568c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 324,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE",
+        "CAYENNE S",
+        "CAYENNE S / / AUT."
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 3585,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e1cd27f953e9fe6fa1a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 342,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3db643e1c14ffc4b2b5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE E-HYBRID",
+        "CAYENNE S E-HYBRID",
+        "CAYENNE V6 AUTO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1930,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4c2ac2d30ef9213b3c0",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 60,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e238df1572f9f1562419",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE / / AUT",
+        "CAYENNE / / AUT.",
+        "CAYENNE 30",
+        "CAYENNE AUT",
+        "CAYENNE COUPE",
+        "CAYENNE E HIBRID",
+        "Cayenne E-Hybrid",
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 14387,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c72cf035c6f2b056b3e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3598,
+      "powerKw": 220,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80e0c5dad5e868802e9f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 338,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 62,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5713cbd1735167b56e9d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 404,
+      "commercialNames": [
+        "CAYENNE TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 76,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae793b7596297bf072e1",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE GTS",
+        "CAYENNE GTS AUTO",
+        "CAYENNE S",
+        "CAYENNE TURBO E-HIBRYD",
+        "CAYENNE TURBO E-HYBRID",
+        "CAYENNE TURBO GT",
+        "CAYENNE V8 TURBO AUTO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 758,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9ec1cbf43644369616b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 338,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE GTS",
+        "CAYENNE GTS / / AUT",
+        "CAYENNE GTS / / AUT.",
+        "CAYENNE GTS COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 6213,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d7fb3edd3cfc18fd880",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE TURBO",
+        "CAYENNE TURBO COUPA",
+        "CAYENNE TURBO COUPE",
+        "CAYENNE TURBO S E-HYBRID",
+        "Cayenne Turbo S E-Hybrid",
+        "CAYENNE V8 GT COUPE",
+        "CAYENNE V8 GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 1734,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b5a678a40aef4fc7fa6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 470,
+      "commercialNames": [
+        "CAYENNE V8 GT COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 54,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ccd2d8a19c3fcc5b759",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 471,
+      "commercialNames": [
+        "CAYENNE GTS",
+        "CAYENNE TURBO",
+        "Cayenne Turbo GT",
+        "CAYENNE TURBO GT",
+        "CAYENNE TURBO GT / / AUT",
+        "CAYENNE TURBO GT / / AUT.",
+        "CAYENNE TURBO GT COUPA",
+        "CAYENNE TURBOGT",
+        "CAYENNE V8 TURBO GT COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 1735,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e00d2667cad90d086e3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4511,
+      "powerKw": 383,
+      "commercialNames": [
+        "CAYENNE TURBO S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28b0d67ceb83a8b102a4",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4806,
+      "powerKw": 419,
+      "commercialNames": [
+        "CAYENNE TURBO S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-216232a1b4b9944282bb",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5df82fb8c731620c0ac3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE E-HYBRID",
+        "CAYENNE E-HYBRID COUPE",
+        "CAYENNE E-HYBRID COUPE PLATINUM EDITION",
+        "CAYENNE E-HYBRID PLATINUM EDITION",
+        "CAYENNE V6 E-HYBRID AUTO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 3203,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9859f8d60ad1534e76fa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 60,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 924,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a006399676b8b82e233b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE",
+        "CAYENNE COUPE E-HYBRID PLATINUM EDITION",
+        "CAYENNE E",
+        "CAYENNE E HYBRID",
+        "Cayenne E-Hybid Coupe",
+        "CAYENNE E-HYBR",
+        "CAYENNE E-HYBR.",
+        "Cayenne E-Hybrid",
+        "CAYENNE E-HYBRID",
+        "CAYENNE E-HYBRID / / AUT",
+        "CAYENNE E-HYBRID / / AUT.",
+        "CAYENNE E-HYBRID AUT",
+        "Cayenne E-Hybrid Coupe",
+        "Cayenne E-Hybrid Coupe Platinum Edition",
+        "CAYENNE E-HYBRID COUPE PLATINUM EDITION",
+        "Cayenne E-Hybrid Platinum Edition",
+        "CAYENNE E-HYBRID PLATINUM EDITION",
+        "Cayenne E-Hybride",
+        "Cayenne E-Hyrbid",
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE",
+        "Porsche"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 45146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2aeaf6f1a44f8aef08f7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 404,
+      "commercialNames": [
+        "CAYENNE TURBO S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-270bfc1be24bf51d7167",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE TURBO S E-HYBRID",
+        "CAYENNE TURBO S E-HYBRID AUTO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 373,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61ba76cb0744d7737925",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3996,
+      "powerKw": 60,
+      "commercialNames": [
+        "CAYENNE TURBO S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 162,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dcc33ade5adf45604fa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3996,
+      "powerKw": 404,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE E-HYBR",
+        "CAYENNE TURBO",
+        "CAYENNE TURBO COUPE",
+        "CAYENNE TURBO S",
+        "CAYENNE TURBO S E - HYBRID",
+        "CAYENNE TURBO S E HY",
+        "CAYENNE TURBO S E HYBRID",
+        "CAYENNE TURBO S E-HYBRID",
+        "Cayenne Turbo S E-Hybrid",
+        "CAYENNE TURBO S E-HYBRID / / AUT.",
+        "CAYENNE TURBO S E-HYBRID AUT",
+        "CAYENNE TURBO S E-HYBRID COUPE",
+        "Cayenne Turbo S E-Hybrid Coupe",
+        "CAYENNE TURBO S-PHEV"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE",
+        "Porsche"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 3535,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5be1196ad96f84e9550d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b68a35d971b790d25d70",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE DIESEL"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44cdfe2ec6c8419411c3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4134,
+      "powerKw": 281,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38cb85ab901e8d37a4c6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f30ef7f6224f4f83f9e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 260,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE / / AUT",
+        "CAYENNE / / AUT.",
+        "CAYENNE AUT.",
+        "CAYENNE COUPE",
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 6346,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b7d9ad7eb08fb1a257b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3598,
+      "powerKw": 213,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-073fc6ed3d36b91c83c3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 309,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a672968949ffdefb5c7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 349,
+      "commercialNames": [
+        "CAYENNE COUPE V8S",
+        "CAYENNE V8S",
+        "CAYENNE V8S COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 87,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bdf8f210b77fd349f98",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 485,
+      "commercialNames": [
+        "CAYENNE TURBO GT COUPE",
+        "CAYENNE V8 TURBO GT COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 47,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a2b1bc908b842ad470e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82bf31145f7985f9e94e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 350,
+      "commercialNames": [
+        "Cayenne E-Hybrid",
+        "Cayenne E-Hybrid Coup?",
+        "Cayenne E-Hybrid Coupe",
+        "Cayenne E-Hybrid Coupe Platinum Edition",
+        "CAYENNE E-HYBRID COUPE PLATINUM EDITION",
+        "Cayenne E-Hybrid Platinum Edition"
+      ],
+      "sourceMakeNames": [
+        "Porsche",
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 139,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6598f3b152dc384e0a94",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 360,
+      "commercialNames": [
+        "Cayenne E-Hybrid"
+      ],
+      "sourceMakeNames": [
+        "Porsche"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6247b9a9fddfe5434166",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 410,
+      "commercialNames": [
+        "Cayenne E-Hybrid Coup?",
+        "Cayenne E-Hybrid Coupe",
+        "Cayenne E-Hybrid Coupe Platinum Edition"
+      ],
+      "sourceMakeNames": [
+        "Porsche",
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08fa1a85edc79b4118d2",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 450,
+      "commercialNames": [
+        "Cayenne E-Hybrid",
+        "Cayenne E-Hybrid Coup?",
+        "Cayenne E-Hybrid Platinum Edition"
+      ],
+      "sourceMakeNames": [
+        "Porsche",
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0404c8c0021c6c69425b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 324,
+      "commercialNames": [
+        "Cayenne"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f174b9987ef13b1967e2",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": null,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f81e467a4c0107485be",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 368,
+      "commercialNames": [
+        "CAYENNE V8 GTS",
+        "CAYENNE V8 GTS COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 57,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72b41d6410abc6bb63e3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4511,
+      "powerKw": 331,
+      "commercialNames": [
+        "CAYENNE TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17cbc43071ae8ca4db00",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2598,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2146641f23ac6e14da13",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2894,
+      "powerKw": 224,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9b7665160f64f553240",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 100,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e28a664c02300f50a37a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 224,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE",
+        "CAYENNE E HYBRID",
+        "CAYENNE E-",
+        "CAYENNE E-HYB",
+        "CAYENNE E-HYBIRD",
+        "CAYENNE E-HYBR",
+        "CAYENNE E-HYBR.",
+        "CAYENNE E-HYBRID",
+        "CAYENNE E-HYBRID / / AUT",
+        "CAYENNE E-HYBRID / / AUT.",
+        "CAYENNE E-HYBRID AUT.",
+        "CAYENNE E-HYBRID COUPA",
+        "CAYENNE E-HYBRID COUPE",
+        "CAYENNE E-HYBRIDE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 25438,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a144e139d7bea2ffa98",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 260,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE",
+        "CAYENNE E-HYBRID",
+        "CAYENNE S E HYBRID",
+        "CAYENNE S E-HYBRID",
+        "CAYENNE S E-HYBRID / / AUT.",
+        "CAYENNE S E-HYBRID AUT.",
+        "CAYENNE S E-HYBRID COUPE",
+        "CAYENNE S E-HYBRID COUPE BLACK EDITION"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 7546,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-409800b4ce28303aab44",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 510,
+      "commercialNames": [
+        "Cayenne E-Hybrid Coupe"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5bd7b92a0d1f261565c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE TURBO",
+        "CAYENNE TURBO COUPE",
+        "CAYENNE TURBO COUPE GT",
+        "CAYENNE TURBO E - HYBRID",
+        "CAYENNE TURBO E HYBRID",
+        "CAYENNE TURBO E- HYBRID",
+        "CAYENNE TURBO E-HYBRID",
+        "CAYENNE TURBO E-HYBRID / / AUT.",
+        "CAYENNE TURBO E-HYBRID AUT.",
+        "CAYENNE TURBO E-HYBRID COUPE",
+        "CAYENNE TURBO E-HYBRID COUPE INKL. GT-PAKKE",
+        "CAYENNE TURBO S COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 4096,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1859f64e873b1320afaa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3996,
+      "powerKw": 504,
+      "commercialNames": [
+        "Cayenne Turbo S E-Hybrid Coupe"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64efaed0f774a807dbaa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 193,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0f440ea5c5cde9da237",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2295,
+      "powerKw": 250,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-753159d2bc4604bc3b6e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4252f210cdaccfbe2d3",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 68,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b15ff36fe2adb75bb78",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 73,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06e549b3ac0ae7717e4e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 81,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e056056bcd44af0fd890",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 85,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b10d5a0390ecc7b761c7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 95,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-009cc8d5e41f134ab702",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 96,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-781068ea9ec1295a3258",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 110,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c5bd3a10902caf9acd0",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 136,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f2e2d8c3e5f9a26052d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 243,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-429d3f1acc016fb0533a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 49,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-441db8f1526737e479f8",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 53,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-838dda8a7ca41f5aba8f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 61,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eca4ddff17a5f6068eb",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9794f5f9427243f2c06e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 68,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfe98f232ada6de94dd9",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 69,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ad0f965621b37736725",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 70,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cb77f2f4b4a4bd13ec7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 72,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90dbb7d2b574c979a3aa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 74,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e664e6eefb0d314655d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee61d654407e41a9e895",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 84,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a881a4d287a70d1f5220",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16cee1219c7787bfba71",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 88,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e83531b9aa85bb2f47db",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 90,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-caad15bc9a682e44c392",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 91,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e619e3944673d3919794",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 92,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f52654e6002d3f62122",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-834f464a8e5656eec7eb",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 96,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cfc220b3e85b0f8f9be",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b26a214215585bec3974",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 112,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-903bc1679c1362deba37",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 114,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bc2a7456b9c3621fe85",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 116,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b66b4584f23f6b99c96",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 117,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86253ca8d733e12c390f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 121,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ef08038141cde0300e7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 130,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE E-HYBRIDE",
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ca54a0fafed92cc249c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 131,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b65d71ff4af38dd19a00",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 132,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c5e41b9df236f2e9e1a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 135,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92b5d37d68daf550b03a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 137,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e7decc7eb9bb4ea6b05",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 140,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-835f073d6c302ef491fa",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ca18a238b917205cb33",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 170,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd5b7b71122b854703a1",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef36a23adbb61d7182ff",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 338,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8dd6b844baae87d4a0ee",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 430,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c58d17aa2ed006f59218",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 450,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-765e8aa15c519e771826",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3995,
+      "powerKw": 404,
+      "commercialNames": [
+        "CAYENNE TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5fd3392efd1d2989fa5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 51,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e94907319f970b363046",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAYENNE GTS",
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1cf2ffedd6f94c38186",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 68,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4591c3053a2c3e2ba2b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 69,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f24302615d34c91e6bfc",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 80,
+      "commercialNames": [
+        "CAYENNE TURBO GT"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b36715f1f21acd375d6e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 81,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c41a9f15ba8091bb636c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 84,
+      "commercialNames": [
+        "CAYENNE TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75ecd190772b5385433d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 90,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e54f4a1bccb4b3e9db18",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 110,
+      "commercialNames": [
+        "CAYENNE GTS",
+        "CAYENNE TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0a67efd1d1fa85cf492",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 112,
+      "commercialNames": [
+        "CAYENNE TURBO GT"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be0e419397ba60ff8ea8",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 116,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c97329410c73c2ce1f6f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 131,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cee789f516e9dc32d65",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 155,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d9c5747759c483bf75f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 185,
+      "commercialNames": [
+        "CAYENNE S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a7d263a03e1c7f2efa5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 245,
+      "commercialNames": [
+        "CAYENNE TURBO GT"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b565d0584aa9baf6c82c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 349,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE V8S",
+        "CAYENNE S",
+        "CAYENNE S / / AUT",
+        "CAYENNE S / / AUT.",
+        "CAYENNE S AUT.",
+        "CAYENNE S COUPE",
+        "CAYENNE V8S",
+        "CAYENNE V8S COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 3651,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85b5e0c162273d54b421",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 487,
+      "commercialNames": [
+        "CAYENNE V8 TURBO GT COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b0647d9089deb4788a7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 59,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-644364e6ee7c95463a39",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 61,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ced5aa3d390dc587b89",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36b853a5358c82b185de",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 68,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-216ad9fd1d0a96bc934d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 70,
+      "commercialNames": [
+        "CAYENNE E-HYBRID",
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e878569d529d349a5838",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 72,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea33013b42d73097c4ab",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b836b55aa4036c33b5e4",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 84,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d51c1b98373d8f44d75",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9d37ad478290da152a8",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 91,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a954f0bb3a85b2ed17a7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-910f7f2a64f8a4a6af0e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 96,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf9a048cee904bf3376b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1945cdcb01e63724c76a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 114,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11d34c4935a944b33ef9",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 116,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d637f08c41e83e68f2d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 121,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16df3cda1aaa9250f6fe",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 130,
+      "commercialNames": [
+        "CAYENNE E HYBRID",
+        "CAYENNE E-HYBRID",
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3755cc3218843c99b07",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 131,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05420ec54f0da49ed5cb",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 132,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73a1a15b48174a80a1af",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 140,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e14c6a575bd8eb85a323",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22a1dcf82dfae4da7ced",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 180,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24ff3999f7527d39419e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee9610857671d74925be",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 253,
+      "commercialNames": [
+        "CAYENNE E-HYBRID COUPE PLATINUM EDITION",
+        "CAYENNE E-HYBRID PLATINUM EDITION"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6152f02777ee3b61435",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 430,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bac14ee2c0063c239011",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 68,
+      "commercialNames": [
+        "CAYENNE TURBO S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1392f628e14a8b103be",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 81,
+      "commercialNames": [
+        "CAYENNE TURBO S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38429ab9f8fd73e2627d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE COUPE",
+        "CAYENNE S",
+        "CAYENNE S COUPE",
+        "CAYENNE TOP",
+        "CAYENNE TOP S",
+        "CAYENNE TURBO COUPE",
+        "CAYENNE TURBO GT COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 384,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a55b8347d3247b99147b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bae934a14794cf14b9ee",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 400,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 54,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57a1156eff51fd3214f4",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 500,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE TOP"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37107db1f70bf0bbf1c6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 800,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec376dda6e57b2944f07",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 260,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80cb9f8e83aa11848fa2",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 224,
+      "commercialNames": [
+        "CAYENNE E HYBRID",
+        "CAYENNE E-HYBRID",
+        "CAYENNE E-HYBRID COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 260,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8655c8b0f14bbd2dd357",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 260,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5be1080449fb8b3a2bd5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 368,
+      "commercialNames": [
+        "CAYENNE",
+        "CAYENNE GTS",
+        "CAYENNE GTS / / AUT.",
+        "CAYENNE GTS AUT.",
+        "CAYENNE GTS COUPE",
+        "CAYENNE S",
+        "CAYENNE V8 GTS",
+        "CAYENNE V8 GTS COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 3046,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c34e17c9e1eb6c347d6f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "CAYENNE TURBO E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22ef8fc4778cc7dc61f6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 441,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4b5959069de6aa72726",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 234,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5598a3af974dfa3ff92",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 354,
+      "commercialNames": [
+        "CAYENNE E-HYBRID",
+        "CAYENNE E-HYBRID COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 210,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-101ced122697993728df",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 382,
+      "commercialNames": [
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c178d1823c1466cacf5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 390,
+      "commercialNames": [
+        "CAYENNE S E-HYBRID",
+        "CAYENNE S E-HYBRID COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46378f1a1e03b82e0757",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 441,
+      "commercialNames": [
+        "CAYENNE TURBO E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f60578a98ab76a14b44",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 130,
+      "commercialNames": [
+        "CAYENNE TURBO E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff1f6389d9c72eba6885",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 224,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1db3ce44da42251b8011",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 571,
+      "commercialNames": [
+        "CAYENNE TURBO E-HYBRID",
+        "CAYENNE TURBO E-HYBRID COUPE",
+        "CAYENNE TURBO E-HYBRID COUPE WITH GT PACKAGE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2f294ed241e1e5a27f6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb636d714658193d4ff8",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 290,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0917a7c0be264bc1fb1c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3669,
+      "powerKw": 368,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebc32cf90e2e067d451b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 357,
+      "commercialNames": [
+        "CAYENNE GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-114bcd650d7d8fcf5693",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 46,
+      "commercialNames": [
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ce73e00d2cb251c3e91",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 69,
+      "commercialNames": [
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-596eaa911ef28801a86d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 74,
+      "commercialNames": [
+        "CAYENNE E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aca3d8fd3c46598affb2",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 230,
+      "commercialNames": [
+        "CAYENNE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-757b882b27e2bbfa6b1b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 490,
+      "commercialNames": [
+        "CAYENNE S E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac34f7910d08627612a9",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 74,
+      "commercialNames": [
+        "CAYENNE TURBO E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9607233c640ab2484b9c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 85,
+      "commercialNames": [
+        "CAYENNE TURBO E-HYBRID"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ada27e873a7cd939a74e",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayenne",
+      "modelId": "porsche/cayenne",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 357,
+      "commercialNames": [
+        "CAYENNE TURBO GT COUPE"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bcf128f2d4254d18390",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1988,
+      "powerKw": 220,
+      "commercialNames": [
+        "CAYMAN",
+        "CAYMAN STYLE EDITION",
+        "CAYMAN T",
+        "PORSCHE CAYMAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb97a35bbcb7fe7d7abc",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 309,
+      "commercialNames": [
+        "CAYMAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3641dfc3fea1cedc8da",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2497,
+      "powerKw": 257,
+      "commercialNames": [
+        "CAYMAN S",
+        "Cayman S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7192703fd180f9fc3d5d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 294,
+      "commercialNames": [
+        "CAYMAN GTS",
+        "CAYMAN GTS 40"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70ee62900ba195b081a7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3800,
+      "powerKw": 283,
+      "commercialNames": [
+        "CAYMAN GT4"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06cf3e77497d75ce28c1",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3995,
+      "powerKw": 309,
+      "commercialNames": [
+        "CAYMAN",
+        "CAYMAN GT4",
+        "CAYMAN GT4 PDK"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea35702655a9089c5724",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1988,
+      "powerKw": 184,
+      "commercialNames": [
+        "CAYMAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c80afc3a9c672581b237",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": 368,
+      "commercialNames": [
+        "CAYMAN GT4 RS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3ef52f999ea51988fd9",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 260,
+      "commercialNames": [
+        "CAYMAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d85077208ebc2433cd4c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "CAYMAN S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-616fa3c974f5f4500e0a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 360,
+      "commercialNames": [
+        "CAYMAN TOP"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d253bc9d97c194c19304",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3995,
+      "powerKw": 294,
+      "commercialNames": [
+        "CAYMAN GTS",
+        "CAYMAN GTS 4.0"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4bf3dd5d97f3e692eb5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "CAYMAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee193f9cabbd97494ba4",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Cayman",
+      "modelId": "porsche/cayman",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "CAYMAN TOP"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbcdf780c5f17652e3fb",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 190,
+      "commercialNames": [
+        "MACAN S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d79844088e35b5d862b9",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "MACAN",
+        "MACAN S-A",
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2268,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d7dfaba3d73589b7190",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "MACAN",
+        "Macan",
+        "MACAN / / AUT.",
+        "MACAN AUT",
+        "MACAN GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 19057,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30e3e10f772b1232341d",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "MACAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f56f6a5df7fc3b8d7079",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "MACAN",
+        "Macan",
+        "MACAN / / AUT",
+        "MACAN / / AUT.",
+        "MACAN S",
+        "Macan T",
+        "MACAN T",
+        "MACAN T / / AUT",
+        "MACAN T / / AUT.",
+        "PORSCHE MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 27584,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f609186d822b91aaa02",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": null,
+      "commercialNames": [
+        "MACAN GTS",
+        "MACAN GTS S-A",
+        "MACAN S",
+        "MACAN TURBO S-A"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2280,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0191817c553b2119cd1",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 280,
+      "commercialNames": [
+        "MACAN",
+        "MACAN GTS",
+        "MACAN GTS / / AUT.",
+        "MACAN S",
+        "MACAN S / / AUT",
+        "MACAN S / / AUT."
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 19564,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b852b4830e0bb57023a1",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 324,
+      "commercialNames": [
+        "MACAN",
+        "MACAN GTS",
+        "Macan GTS",
+        "MACAN GTS / / AUT",
+        "MACAN GTS / / AUT.",
+        "MACAN GTS AWD",
+        "MACAN TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 12672,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f265550e93c8e067eddf",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2984,
+      "powerKw": 280,
+      "commercialNames": [
+        "Macan GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fee55378ed4722987194",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "MACAN S S-A"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3246,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e250a064307e40448f9b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 260,
+      "commercialNames": [
+        "MACAN",
+        "Macan S",
+        "MACAN S",
+        "MACAN S / / AUT.",
+        "MACAN S AUT",
+        "PORSCHE MACAN S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 8786,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c8e25b260b3181c293f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2997,
+      "powerKw": 260,
+      "commercialNames": [
+        "MACAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25f8225353d992f45aa5",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2997,
+      "powerKw": 280,
+      "commercialNames": [
+        "MACAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a874790d74fca2236652",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "MACAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-523b3f4d6835a4166e2a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 155,
+      "commercialNames": [
+        "MACAN BEV 4S",
+        "MACAN BEV GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 271,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65ad84990f691bd4c07f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "MACAN BEV TURBO",
+        "MACAN E TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 523,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a8c94193c758d677198",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 183,
+      "commercialNames": [
+        "MACAN"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bbd1ae55bc87bc2e8d7",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "MACAN",
+        "MACAN / /",
+        "MACAN 4",
+        "MACAN BEV",
+        "MACAN BEV 2",
+        "MACAN BEV 4",
+        "MACAN BEV2"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 763,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0735e7707d5e8cdf3e6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "MACAN 4",
+        "MACAN BEV TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-362acb15c139dc815412",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 270,
+      "commercialNames": [
+        "MACAN H2"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37878b026d5046b30790",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 390,
+      "commercialNames": [
+        "MACAN E TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aef296b3477f8b9cad66",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 430,
+      "commercialNames": [
+        "MACAN",
+        "MACAN H2",
+        "MACAN H2 TURBO",
+        "MACAN TURBO"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3575,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66ec322a5eed21fb6f72",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 51,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f220619fe03069b3b13c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 61,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-217d5abc6b59c517d05b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 67,
+      "commercialNames": [
+        "MACAN",
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33ea566da66fcbd99da1",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 68,
+      "commercialNames": [
+        "MACAN",
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e32b90b4e5909027f04",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 69,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da38de66cc20967f58ca",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 72,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f83e0ec8cb427d6964f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 73,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69ea49b9020e1ba5916f",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 81,
+      "commercialNames": [
+        "MACAN",
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bbe15bcfd443bbc7339",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 85,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9783b0230b3eaaa095e0",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 90,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84a9fd810a401f920c1b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 92,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d82e316d4b7219c6200",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 95,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b7ecb9e320558571920",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "MACAN",
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16603fd97fc0ac186955",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 112,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81ed7f3af58d65a1480c",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 115,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-361e1943324b3a5b00f2",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 116,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fbb6123d9d2715c5b9b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 120,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d0f6bd50cdf9bd3c500",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 131,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e29c987618b8740a975a",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 132,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02c86a0d95a252813653",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 135,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-692791cc694b946ab0a8",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-820c58485924472bf371",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 147,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fd72c3b6b5ed93685e6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 170,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f852f1cb7005de00a5f6",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 210,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1952dab956a62f2c8c09",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 250,
+      "commercialNames": [
+        "MACAN T"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2204d864a1080e4b3c0b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 61,
+      "commercialNames": [
+        "MACAN GTS"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d5f85eed2f5b60f69b9",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 66,
+      "commercialNames": [
+        "MACAN S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f52cd8589ad43fd8167b",
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "canonicalModel": "Macan",
+      "modelId": "porsche/macan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 67,
+      "commercialNames": [
+        "MACAN GTS",
+        "MACAN S"
+      ],
+      "sourceMakeNames": [
+        "PORSCHE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

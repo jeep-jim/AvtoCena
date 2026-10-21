@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-hyundai-elexio-china-launch-2025",
+          "type": "manufacturer",
+          "title": "Hyundai Motor Launches All-New ELEXIO SUV and Unveils New Energy Vehicle Strategy for China",
+          "publisher": "Hyundai Motor Company",
+          "url": "https://www.hyundai.com/worldwide/en/newsroom/detail/0000001035",
+          "documentId": null,
+          "documentDate": "2025-10-30",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm",
+            "rangeStandard"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official launch record. The stated 88.1 kWh value is retained in evidence notes but is not mapped to gross, usable or rated battery capacity because the manufacturer does not identify that basis."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "hyundai/elexio",
+          "brandId": "hyundai",
+          "canonicalName": "ELEXIO",
+          "slug": "elexio",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "羿欧",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-hyundai-elexio-china-launch-2025",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Hyundai's official launch identifies ELEXIO as an all-new all-electric SUV for China in 2025."
+            }
+          ],
+          "researchNotes": [
+            "The localized Chinese source spelling is search-only and cannot replace the English public name ELEXIO.",
+            "Review-only until the model cover and publication review are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "hyundai/elexio/e-gmp",
+          "modelId": "hyundai/elexio",
+          "name": "E-GMP",
+          "aliases": [],
+          "platformCodes": [
+            "E-GMP"
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-hyundai-elexio-china-launch-2025",
+              "fields": [
+                "name",
+                "platformCodes",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The launch states that ELEXIO is an SUV built on Hyundai's E-GMP platform; the launch date bounds this first observed generation to 2025."
+            }
+          ],
+          "researchNotes": [
+            "No internal platform or generation code is inferred beyond the explicitly named E-GMP architecture."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "hyundai/elexio/e-gmp/china-722-km-cltc",
+          "modelId": "hyundai/elexio",
+          "generationId": "hyundai/elexio/e-gmp",
+          "faceliftId": null,
+          "name": "722 km CLTC",
+          "aliases": [],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "rangeKm": 722,
+          "rangeStandard": "CLTC",
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-hyundai-elexio-china-launch-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official launch pairs the ELEXIO with a 722 km CLTC range and an 88.1 kWh battery. Capacity is deliberately not mapped because gross, usable and rated basis are unspecified."
+            }
+          ],
+          "researchNotes": [
+            "Review-only manufacturer specification; production pricing remains disconnected.",
+            "No motor output, drive layout, charging power or 30-minute power is inferred from this launch record."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

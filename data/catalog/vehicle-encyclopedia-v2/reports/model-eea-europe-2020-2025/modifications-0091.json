@@ -1,0 +1,7022 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 91,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-7961e3acb94c9489da82",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "XC40",
+        "XC40 / BEV / AUT AWD",
+        "XC40 EX40",
+        "XC40 RECHARGE 300 KW",
+        "XC40/EX40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 14970,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c043d1ab7cea157e181",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1447,
+      "powerKw": null,
+      "commercialNames": [
+        "XC40 INSCRIPTION PRO T3 AUTO",
+        "XC40 INSCRIPTION T3 AUTO",
+        "XC40 MOMENTUM PRO T3 AUTO",
+        "XC40 MOMENTUM T3 AUTO",
+        "XC40 R-DESIGN T3 AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c337fbfb478302cde7f8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": null,
+      "commercialNames": [
+        "XC40 INSCRIPTION PRO T3",
+        "XC40 INSCRIPTION PRO T3 AUTO",
+        "XC40 INSCRIPTION T3",
+        "XC40 INSCRIPTION T3 AUTO",
+        "XC40 MOMENTUM CORE T2",
+        "XC40 MOMENTUM PRO T3",
+        "XC40 MOMENTUM PRO T3 AUTO",
+        "XC40 MOMENTUM T3",
+        "XC40 MOMENTUM T3 AUTO",
+        "XC40 R-DESIGN PRO T2",
+        "XC40 R-DESIGN PRO T3",
+        "XC40 R-DESIGN PRO T3 AUTO",
+        "XC40 R-DESIGN T3",
+        "XC40 R-DESIGN T3 AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 10341,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b03593921e5a6eee9c2",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 95,
+      "commercialNames": [
+        "XC40",
+        "XC40 / 1.5 / T / AUT. FWD",
+        "XC40 / 1.5 / T / MAN FWD",
+        "XC40 / 15 / T / AUT FWD",
+        "XC40 15 T AUT FWD",
+        "XC40 15 T MAN FWD",
+        "XC40 MOMENTUM CORE T2",
+        "XC40 R-DESIGN PRO T2"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 74278,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-504e1bb0eabfac7f1203",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 115,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 90,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0426047f4f43ce7f1b4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 120,
+      "commercialNames": [
+        "VOLVO XC40",
+        "XC 40",
+        "XC40",
+        "XC40 / 1.5 / T / AUT. FWD",
+        "XC40 15 T AUT FWD",
+        "XC40 INSCRIPTION PRO T3",
+        "XC40 INSCRIPTION PRO T3 AUTO",
+        "XC40 INSCRIPTION T3",
+        "XC40 INSCRIPTION T3 AUTO",
+        "XC40 MOMENTUM PRO T3",
+        "XC40 MOMENTUM PRO T3 AUTO",
+        "XC40 MOMENTUM T3",
+        "XC40 MOMENTUM T3 AUTO",
+        "XC40 R-DESIGN PRO T3",
+        "XC40 R-DESIGN PRO T3 AUTO",
+        "XC40 R-DESIGN T3",
+        "XC40 R-DESIGN T3 AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 21,
+      "registrations": 81294,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d910051df3d47103c0fe",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 132,
+      "commercialNames": [
+        "XC40",
+        "XC40 T5 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 601,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3bc85f9ad2718085dd0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC 40",
+        "XC40",
+        "XC40 INSCRIPTION B4 MHEV AUTO",
+        "XC40 INSCRIPTION B4 MHEV AWD A",
+        "XC40 INSCRIPTION B5 MHEV AWD A",
+        "XC40 INSCRIPTION PRO B4 MHEV A",
+        "XC40 INSCRIPTION PRO T4 AUTO",
+        "XC40 INSCRIPTION PRO T4 AWD A",
+        "XC40 INSCRIPTION PRO T5 AWD A",
+        "XC40 INSCRIPTION T4 AUTO",
+        "XC40 INSCRIPTION T4 AWD AUTO",
+        "XC40 INSCRIPTION T5 AWD AUTO",
+        "XC40 INSCRPT PRO B4 MHEV AWD A",
+        "XC40 INSCRPT PRO B5 MHEV AWD A",
+        "XC40 MOMENTUM B4 MHEV AUTO",
+        "XC40 MOMENTUM B4 MHEV AWD AUTO",
+        "XC40 MOMENTUM PRO T4 AUTO",
+        "XC40 MOMENTUM PRO T4 AWD AUTO",
+        "XC40 MOMENTUM T4 AUTO",
+        "XC40 MOMENTUM T4 AWD AUTO",
+        "XC40 R-DESIGN B4 MHEV AUTO",
+        "XC40 R-DESIGN B4 MHEV AWD AUTO",
+        "XC40 R-DESIGN B5 MHEV AWD AUTO",
+        "XC40 R-DESIGN PRO B4 MHEV AUTO",
+        "XC40 R-DESIGN PRO T4 AUTO",
+        "XC40 R-DESIGN PRO T4 AWD AUTO",
+        "XC40 R-DESIGN PRO T5 AWD AUTO",
+        "XC40 R-DESIGN T4 AUTO",
+        "XC40 R-DESIGN T4 AWD AUTO",
+        "XC40 R-DESIGN T5 AWD AUTO",
+        "XC40 RDESIGN PRO B4 MHEV AWD A",
+        "XC40 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 12671,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7bf133cf1eded03fee9",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 140,
+      "commercialNames": [
+        "XC40",
+        "XC40 20 T AUT AWD",
+        "XC40 20 T AUT FWD",
+        "XC40 INSCRIPTION PRO T4 AUTO",
+        "XC40 INSCRIPTION PRO T4 AWD A",
+        "XC40 INSCRIPTION T4 AUTO",
+        "XC40 INSCRIPTION T4 AWD AUTO",
+        "XC40 MOMENTUM PRO T4 AUTO",
+        "XC40 MOMENTUM PRO T4 AWD AUTO",
+        "XC40 MOMENTUM T4 AUTO",
+        "XC40 MOMENTUM T4 AWD AUTO",
+        "XC40 R-DESIGN PRO T4 AUTO",
+        "XC40 R-DESIGN PRO T4 AWD AUTO",
+        "XC40 R-DESIGN T4 AUTO",
+        "XC40 R-DESIGN T4 AWD AUTO",
+        "XC40 T4"
+      ],
+      "sourceMakeNames": [
+        "Volvo",
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 18,
+      "registrations": 10060,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c47a1a2b7fc1ee3d1c7",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 145,
+      "commercialNames": [
+        "XC 40",
+        "XC40",
+        "XC40 / 2.0 / T / AUT. AWD",
+        "XC40 / 2.0 / T / AUT. FWD",
+        "XC40 / 20 / T / AUT AWD",
+        "XC40 / 20 / T / AUT FWD",
+        "XC40 2.0 T AUT. FWD",
+        "XC40 20 T AUT AWD",
+        "XC40 INSCRIPTION B4 MHEV AUTO",
+        "XC40 INSCRIPTION B4 MHEV AWD A",
+        "XC40 INSCRIPTION D3",
+        "XC40 INSCRIPTION PRO B4 MHEV A",
+        "XC40 INSCRPT PRO B4 MHEV AWD A",
+        "XC40 MOMENTUM B4 MHEV AUTO",
+        "XC40 MOMENTUM B4 MHEV AWD AUTO",
+        "XC40 R-DESIGN B4 MHEV AUTO",
+        "XC40 R-DESIGN B4 MHEV AWD AUTO",
+        "XC40 R-DESIGN PRO B4 MHEV AUTO",
+        "XC40 RDESIGN PRO B4 MHEV AWD A",
+        "XC40 T5 TWIN ENGINE",
+        "XC40/EX40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 53404,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88b83d54e399bb950063",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 182,
+      "commercialNames": [
+        "XC40",
+        "XC40 B5 AWD",
+        "XC40 INSCRIPTION PRO T5 AWD A",
+        "XC40 INSCRIPTION T5 AWD AUTO",
+        "XC40 R-DESIGN PRO T5 AWD AUTO",
+        "XC40 R-DESIGN T5 AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 921,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2dacfc35e157bb13918b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC40",
+        "XC40 INSCRIPTION B5 MHEV AWD A",
+        "XC40 INSCRIPTION PRO T5 AWD A",
+        "XC40 INSCRIPTION T5 AWD AUTO",
+        "XC40 INSCRPT PRO B5 MHEV AWD A",
+        "XC40 R-DESIGN B5 MHEV AWD AUTO",
+        "XC40 R-DESIGN PRO T5 AWD AUTO",
+        "XC40 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 1554,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffbb9db7e9379dcd413f",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": null,
+      "commercialNames": [
+        "XC40 INSCRIPT PRO T5 RCHARGE A",
+        "XC40 INSCRIPTION EXP T4RCHRG A",
+        "XC40 INSCRIPTION PRO T5 PHEV A",
+        "XC40 INSCRIPTION T4 RECHARGE A",
+        "XC40 INSCRIPTION T5 PHEV AUTO",
+        "XC40 INSCRIPTION T5 RECHARGE A",
+        "XC40 R-DESIGN PRO T5 PHEV AUTO",
+        "XC40 R-DESIGN T4 RECHARGE AUTO",
+        "XC40 R-DESIGN T5 PHEV AUTO",
+        "XC40 R-DESIGN T5 RECHARGE AUTO",
+        "XC40 RDESIGN PRO T5 RECHARGE A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 3546,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50bd48697d24cf8b2f08",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 30,
+      "commercialNames": [
+        "XC40",
+        "XC40 T5 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2536,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49aca16dbe67a7dc0c11",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 95,
+      "commercialNames": [
+        "XC40",
+        "XC40 / 1.5 / T / AUT. FWD",
+        "XC40 / 15 / T / AUT FWD",
+        "XC40 INSCRIPTION EXP T4RCHRG A",
+        "XC40 INSCRIPTION T4 RECHARGE A",
+        "XC40 R-DESIGN T4 RECHARGE AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 65405,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a127814589e0d7a9dd6",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 132,
+      "commercialNames": [
+        "XC40",
+        "XC40 / 1.5 / T / AUT. FWD",
+        "XC40 / 15 / T / AUT FWD",
+        "XC40 15 T AUT FWD",
+        "XC40 INSCRIPT PRO T5 RCHARGE A",
+        "XC40 INSCRIPTION PRO T5 PHEV A",
+        "XC40 INSCRIPTION T5 PHEV AUTO",
+        "XC40 INSCRIPTION T5 RECHARGE A",
+        "XC40 R-DESIGN PRO T5 PHEV AUTO",
+        "XC40 R-DESIGN T5 PHEV AUTO",
+        "XC40 R-DESIGN T5 RECHARGE AUTO",
+        "XC40 RDESIGN PRO T5 RECHARGE A",
+        "XC40 T5 TWIN ENGINE",
+        "XC40 T5 Twin Engine",
+        "XC40 T5 TWIN ENGINE 15 T AUT FWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 92678,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb89aae124c5d789cf94",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 143,
+      "commercialNames": [
+        "XC40",
+        "XC40 INSCRIPT PRO T5 RCHARGE A",
+        "XC40 RDESIGN PRO T5 RECHARGE A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 530,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d1b5b591e910b7a8097",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd6e17b347f6155d7f82",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 132,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faa842b689452425a2ce",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "XC40",
+        "XC40 / BEV / AUT FWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 36783,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d79d8eed16c729047a1",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC 40",
+        "XC40",
+        "XC40 / 2.0 / T / AUT. FWD",
+        "XC40 / 20 / T / AUT FWD",
+        "XC40 2.0 T AUT. FWD",
+        "XC40 EX40",
+        "XC40/EX40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 91171,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffed95ffd5c3fa5d1304",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 185,
+      "commercialNames": [
+        "XC40 T5 AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6643f52f0d9b63abad7",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-624c0939e59f787fe530",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6531abf498ca946395e0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 95,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2153eeaf622f547302d0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cbe703d8f02720677f4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28b75104148803efa3d1",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 110,
+      "commercialNames": [
+        "XC40",
+        "XC40 T3"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 265,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1efffd81be7744e4507a",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 181,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f1b27c28001a8fc85d8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 183,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dac1c088b334c1c5d66b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 60,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fdb629c71d0632a12d4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 30,
+      "commercialNames": [
+        "XC40 RECHARGE 300 KW"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fb133dcffccd310e1b9",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "XC40",
+        "XC40 EX40",
+        "XC40/EX40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 4630,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1b02b598781e2dd8cab",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 178,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d540e011251a2d0b6a52",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 185,
+      "commercialNames": [
+        "XC40",
+        "XC40 / BEV / AUT RWD",
+        "XC40 EX40",
+        "XC40/EX40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 21699,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d5aa48be7143f56fe1a",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c85746ffebb9a3a37e8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 238,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 862,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fed45875c1e31a855f76",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 301,
+      "commercialNames": [
+        "XC40",
+        "XC40 / BEV / AUT AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6077,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9dd3c79e69b939596d40",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7df357de8bb4b45d52ee",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": null,
+      "powerKw": 185,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cb4b25a15563a99e30e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 429,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1d4b82c9952fdb153ba",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 164,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b4d1f08f91773eb6cbc",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 128,
+      "commercialNames": [
+        "XC40",
+        "XC40 / BEV / AUT. RWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1126,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c7b4c547cebcb31fb35",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cafd060145dba4a43da",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 183,
+      "commercialNames": [
+        "XC40",
+        "XC40 / BEV / AUT. AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 603,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0f33ac0f2d644d58a1b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 13,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-834c58e8a43ed626de46",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1477,
+      "powerKw": 9,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-850165159b3ff92568ec",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 145,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c215a261d55f4d913a5",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1960,
+      "powerKw": 145,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7c17d43168ad0a22102",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 58,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af0e584fabf27333fed0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 62,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24b0104079ad0873095a",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 85,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-285924370b8c0046022a",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 88,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dff2058a0cfbff3fe233",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 92,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43496b819960288de87e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 115,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86023d2ef7940759c191",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 124,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88cdc1d79e728894b12b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3f6d38f14b7f68cf4c2",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC40",
+      "modelId": "volvo/xc40",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC40"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3b46b7def203967a9f8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC60 INSCRIPTION B4 AWD AUTO",
+        "XC60 INSCRIPTION B4 MHEV AUTO",
+        "XC60 INSCRIPTION B4 MHEV AWD A",
+        "XC60 INSCRIPTION B5 AWD AUTO",
+        "XC60 INSCRIPTION B5 MHEV AUTO",
+        "XC60 INSCRIPTION B5 MHEV AWD A",
+        "XC60 INSCRIPTION D4 AUTO",
+        "XC60 INSCRIPTION D4 AWD AUTO",
+        "XC60 INSCRIPTION PRO B4 AWD A",
+        "XC60 INSCRIPTION PRO B4 MHEV A",
+        "XC60 INSCRIPTION PRO B5 AWD A",
+        "XC60 INSCRIPTION PRO B5 MHEV A",
+        "XC60 INSCRPT PRO B4 MHEV AWD A",
+        "XC60 INSCRPT PRO B5 MHEV AWD A",
+        "XC60 MOMENTUM B4 AWD AUTO",
+        "XC60 MOMENTUM B4 MHEV AUTO",
+        "XC60 MOMENTUM B4 MHEV AWD AUTO",
+        "XC60 MOMENTUM B5 MHEV AUTO",
+        "XC60 MOMENTUM B5 MHEV AWD AUTO",
+        "XC60 MOMENTUM D4 AUTO",
+        "XC60 MOMENTUM PRO B4 AWD AUTO",
+        "XC60 MOMENTUM PRO B5 MHEV AUTO",
+        "XC60 MOMENTUM PRO B5MHEV AWD A",
+        "XC60 MOMENTUM PRO D4 AUTO",
+        "XC60 R-DESIGN B4 AWD AUTO",
+        "XC60 R-DESIGN B4 MHEV AUTO",
+        "XC60 R-DESIGN B4 MHEV AWD AUTO",
+        "XC60 R-DESIGN B5 AWD AUTO",
+        "XC60 R-DESIGN B5 MHEV AUTO",
+        "XC60 R-DESIGN B5 MHEV AWD AUTO",
+        "XC60 R-DESIGN B6 MHEV AWD AUTO",
+        "XC60 R-DESIGN D4 AUTO",
+        "XC60 R-DESIGN PRO B4 AWD AUTO",
+        "XC60 R-DESIGN PRO B5 AWD AUTO",
+        "XC60 R-DESIGN PRO B5 MHEV AUTO",
+        "XC60 R-DESIGN PRO B6MHEV AWD A",
+        "XC60 RDESIGN PRO B4 MHEV AWD A",
+        "XC60 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 38,
+      "registrations": 4292,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e718ccdf6622d475870d",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 110,
+      "commercialNames": [
+        "XC60",
+        "XC60 20 TD MAN FWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2920,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53cdfd687eea9770a6e1",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2242,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7a0aee3981f87306d62",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 133,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6630c1672f4bdec22db",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 140,
+      "commercialNames": [
+        "VOLVO XC60",
+        "XC60",
+        "XC60 20 TD AUT AWD",
+        "XC60 20 TD AUT FWD",
+        "XC60 INSCRIPTION D4 AUTO",
+        "XC60 INSCRIPTION D4 AWD AUTO",
+        "XC60 MOMENTUM D4 AUTO",
+        "XC60 MOMENTUM PRO D4 AUTO",
+        "XC60 R-DESIGN D4 AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 19332,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c1d06bb52b82ea3a233",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 145,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 / 2.0 / TD / AUT. AWD",
+        "XC60 / 2.0 / TD / AUT. FWD",
+        "XC60 / 20 / TD / AUT AWD",
+        "XC60 2.0 TD AUT. AWD",
+        "XC60 20 TD AUT AWD",
+        "XC60 B4",
+        "XC60 II",
+        "XC60 INSCRIPTION B4 AWD AUTO",
+        "XC60 INSCRIPTION B4 MHEV AUTO",
+        "XC60 INSCRIPTION B4 MHEV AWD A",
+        "XC60 INSCRIPTION PRO B4 AWD A",
+        "XC60 INSCRIPTION PRO B4 MHEV A",
+        "XC60 INSCRPT PRO B4 MHEV AWD A",
+        "XC60 MOMENTUM B4 AWD AUTO",
+        "XC60 MOMENTUM B4 MHEV AUTO",
+        "XC60 MOMENTUM B4 MHEV AWD AUTO",
+        "XC60 MOMENTUM PRO B4 AWD AUTO",
+        "XC60 R-DESIGN B4 AWD AUTO",
+        "XC60 R-DESIGN B4 MHEV AUTO",
+        "XC60 R-DESIGN B4 MHEV AWD AUTO",
+        "XC60 R-DESIGN PRO B4 AWD AUTO",
+        "XC60 RDESIGN PRO B4 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 129089,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e90dd238a89ace32dbc",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 147,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-061b8d3377e171fbf665",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC60",
+        "XC60 / 2.0 / TD / AUT. AWD",
+        "XC60 / 20 / TD / AUT AWD",
+        "XC60 20 TD AUT AWD",
+        "XC60 INSCRIPTION B5 AWD AUTO",
+        "XC60 INSCRIPTION B5 MHEV AWD A",
+        "XC60 INSCRIPTION PRO B5 AWD A",
+        "XC60 INSCRPT PRO B5 MHEV AWD A",
+        "XC60 R-DESIGN B5 AWD AUTO",
+        "XC60 R-DESIGN B5 MHEV AWD AUTO",
+        "XC60 R-DESIGN PRO B5 AWD AUTO",
+        "XC60 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 17558,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f19a7b059fcb3ff771bd",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fb9e9bb0dd1f838c5ad",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 220,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13b29a3c039e76ff896b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1984,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c40ae1cc9f7ad0a16903",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2000,
+      "powerKw": 140,
+      "commercialNames": [
+        "VOLVO XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6d7eb42009dd36f199c",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2400,
+      "powerKw": 158,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4889312b5213718ebe20",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47e9635e02ae70bab261",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 EDITION T4 AUTO",
+        "XC60 INSCRIPTION B5 MHEV AUTO",
+        "XC60 INSCRIPTION B5 MHEV AWD A",
+        "XC60 INSCRIPTION PRO B5 MHEV A",
+        "XC60 INSCRIPTION PRO T5 AWD A",
+        "XC60 INSCRIPTION T5 AUTO",
+        "XC60 INSCRIPTION T5 AWD AUTO",
+        "XC60 INSCRPT PRO B5 MHEV AWD A",
+        "XC60 MOMENTUM B5 MHEV AUTO",
+        "XC60 MOMENTUM B5 MHEV AWD AUTO",
+        "XC60 MOMENTUM PRO T5 AUTO",
+        "XC60 MOMENTUM PRO T5 AWD AUTO",
+        "XC60 MOMENTUM T5 AUTO",
+        "XC60 MOMENTUM T5 AWD AUTO",
+        "XC60 R-DESIGN B5 MHEV AUTO",
+        "XC60 R-DESIGN B5 MHEV AWD AUTO",
+        "XC60 R-DESIGN B6 MHEV AWD AUTO",
+        "XC60 R-DESIGN PRO B5 MHEV AUTO",
+        "XC60 R-DESIGN PRO B6MHEV AWD A",
+        "XC60 R-DESIGN PRO T5 AUTO",
+        "XC60 R-DESIGN PRO T5 AWD AUTO",
+        "XC60 R-DESIGN PRO T6 AWD AUTO",
+        "XC60 R-DESIGN T5 AUTO",
+        "XC60 R-DESIGN T5 AWD AUTO",
+        "XC60 R-DESIGN T6 AWD AUTO",
+        "XC60 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 8656,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cb1b398e9806ada0add",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 110,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-027c8f1b96961ec3f3df",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 140,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 EDITION T4 AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5176,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d2cd0f4eb24e9acb668",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 145,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 / 2.0 / T / AUT. FWD",
+        "XC60 / 20 / T / AUT FWD",
+        "XC60 2.0 T AUT. FWD",
+        "XC60 20 T AUT FWD",
+        "XC60 AUT FWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 26985,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d9c16fbaf64dfa7cd6e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 155,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 303,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3af57113f5ed674eb8ae",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 180,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f835469f1d92a53ab19",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 - USA",
+        "XC60 / 2.0 / T / AUT. AWD",
+        "XC60 / 20 / T / AUT AWD",
+        "XC60 2.0 T AUT. AWD",
+        "XC60 20 T AUT AWD",
+        "XC60 20 T AWD",
+        "XC60 B5",
+        "XC60 B5 AWD",
+        "XC60 INSCRIPTION B5 MHEV AUTO",
+        "XC60 INSCRIPTION B5 MHEV AWD A",
+        "XC60 INSCRIPTION PRO B5 MHEV A",
+        "XC60 INSCRIPTION PRO T5 AWD A",
+        "XC60 INSCRIPTION T5 AUTO",
+        "XC60 INSCRIPTION T5 AWD AUTO",
+        "XC60 INSCRPT PRO B5 MHEV AWD A",
+        "XC60 MOMENTUM B5 MHEV AUTO",
+        "XC60 MOMENTUM B5 MHEV AWD AUTO",
+        "XC60 MOMENTUM PRO B5 MHEV AUTO",
+        "XC60 MOMENTUM PRO B5MHEV AWD A",
+        "XC60 MOMENTUM PRO T5 AUTO",
+        "XC60 MOMENTUM PRO T5 AWD AUTO",
+        "XC60 MOMENTUM T5 AUTO",
+        "XC60 MOMENTUM T5 AWD AUTO",
+        "XC60 R-DESIGN B5 MHEV AUTO",
+        "XC60 R-DESIGN B5 MHEV AWD AUTO",
+        "XC60 R-DESIGN PRO B5 MHEV AUTO",
+        "XC60 R-DESIGN PRO T5 AUTO",
+        "XC60 R-DESIGN PRO T5 AWD AUTO",
+        "XC60 R-DESIGN T5 AUTO",
+        "XC60 R-DESIGN T5 AWD AUTO",
+        "XC60 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 43,
+      "registrations": 45800,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c7ed039f4357948e608",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 186,
+      "commercialNames": [
+        "VOLVO XC 60",
+        "VOLVO XC60",
+        "XC60",
+        "XC60 R-DESIGN T5 AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1446,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cac8cef227a622b8bdf",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 220,
+      "commercialNames": [
+        "XC60",
+        "XC60 / 20 / T / AUT AWD",
+        "XC60 R-DESIGN B6 MHEV AWD AUTO",
+        "XC60 R-DESIGN PRO B6MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1546,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6117b64cd5f216ece034",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 223,
+      "commercialNames": [
+        "XC60",
+        "XC60 T8 Twin Engine"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 340,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1b1930c4cb73d32e0ca",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 228,
+      "commercialNames": [
+        "XC60",
+        "XC60 R-DESIGN PRO T6 AWD AUTO",
+        "XC60 R-DESIGN T6 AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 738,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff6ad1066193a5ddf605",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 233,
+      "commercialNames": [
+        "XC60",
+        "XC60 T8 Twin Engine",
+        "XC60 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b158d5fbbb64b4796bbc",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 235,
+      "commercialNames": [
+        "XC60",
+        "XC60 T6 AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfdaa195018e5b73d42a",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 240,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69e0f1a5086e2a00525a",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2953,
+      "powerKw": 224,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bef9b4315d46139301eb",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC60",
+        "XC60 INSCRIPT T6 RCHARGE AWD A",
+        "XC60 INSCRIPTION T8 PHEV AWD A",
+        "XC60 INSCRP PRO T8RECHRG AWD A",
+        "XC60 INSCRPT EXP T6RCHRG AWD A",
+        "XC60 INSCRPT PRO T8 PHEV AWD A",
+        "XC60 P-STR ENGRD T8RCHRG AWD A",
+        "XC60 PSTAR ENGRD T8 PHEV AWD A",
+        "XC60 R-DESIGN T6 RCHARG AWD A",
+        "XC60 R-DESIGN T8 PHEV AWD AUTO",
+        "XC60 RDESGN PRO T8 RCHRG AWD A",
+        "XC60 RDESIGN PRO T8 PHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 2086,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6fec9ec89ef751a7ad3",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 28,
+      "commercialNames": [
+        "XC60",
+        "XC60 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 591,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3315e3c47141fd01f3a8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 186,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 / 2.0 / T / AUT. AWD",
+        "XC60 / 2.0 / T / AUT. FWD",
+        "XC60 / 20 / T / AUT AWD",
+        "XC60 2.0 T AUT. AWD",
+        "XC60 II",
+        "XC60 INSCRIPT T6 RCHARGE AWD A",
+        "XC60 INSCRPT EXP T6RCHRG AWD A",
+        "XC60 R-DESIGN T6 RCHARG AWD A",
+        "XC60."
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 179971,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc5e8b78cf2aca6a3196",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 223,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 / 2.0 / T / AUT. AWD",
+        "XC60 INSCRIPTION T8 PHEV AWD A",
+        "XC60 INSCRP PRO T8RECHRG AWD A",
+        "XC60 INSCRPT PRO T8 PHEV AWD A",
+        "XC60 R-DESIGN T8 PHEV AWD AUTO",
+        "XC60 RDESGN PRO T8 RCHRG AWD A",
+        "XC60 RDESIGN PRO T8 PHEV AWD A",
+        "XC60 T8 TWIN E",
+        "XC60 T8 TWIN ENGINE",
+        "XC60 T8 Twin Engine",
+        "XC60 T8 TWIN ENGINE 20 T AUT AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 15,
+      "registrations": 36563,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eac377cb65754d559533",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 233,
+      "commercialNames": [
+        "XC60",
+        "XC60 INSCRIPTION T8 PHEV AWD A",
+        "XC60 INSCRP PRO T8RECHRG AWD A",
+        "XC60 INSCRPT PRO T8 PHEV AWD A",
+        "XC60 P-STR ENGRD T8RCHRG AWD A",
+        "XC60 PSTAR ENGRD T8 PHEV AWD A",
+        "XC60 R-DESIGN T8 PHEV AWD AUTO",
+        "XC60 RDESGN PRO T8 RCHRG AWD A",
+        "XC60 RDESIGN PRO T8 PHEV AWD A",
+        "XC60 T8 TWIN E",
+        "XC60 T8 TWIN ENGINE",
+        "XC60 T8 Twin Engine"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 3427,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b56c9f6df6e3cf2091d3",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 235,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0edfac46586ad40f78ac",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 298,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6af89877f649266412bf",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1961,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cfe15b5a281aa73db6e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 145,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-717adb10ca31b2f03f46",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-332c7a97a3a0cab3a156",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 196,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cd646da30f4ebcec8f8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 65,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8ea3423088ee5ac2a81",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 225,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b88c60e227ab7ac7b9b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 228,
+      "commercialNames": [
+        "XC 60",
+        "XC60",
+        "XC60 / 2.0 / T / AUT. AWD",
+        "XC60 / 20 / T / AUT AWD",
+        "XC60 2.0 T AUT. AWD",
+        "XC60 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 35583,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93b8548a93c81a6de157",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 180,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58763c2dfe6ab653b852",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2400,
+      "powerKw": 133,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-791923d7c94660e601ab",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 183,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c6ff0ac44dd35c4099e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 183,
+      "commercialNames": [
+        "XC60",
+        "XC60 B5",
+        "XC60 B6",
+        "XC60 B7"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 406,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8acdbab11c471b50dfc8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 187,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9c75ffa5746ee1b5c05",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1969,
+      "powerKw": 162,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bee00036f86bcc4d650e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1984,
+      "powerKw": 100,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4162d5656f13c06c4cba",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c38c09ca9a803c9ad8d4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 13,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36a48cbe1754e74f67bd",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03d79ddd0de95277b1a1",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 58,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5cab6bc07e61c735dd3",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 62,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdeb28a02c20ed21ebdb",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 124,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-baaa9f23264c9e079d36",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 69,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5399c8f3075cdbcc09c",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 74,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec37f776af0db74c5ce4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 85,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-681c07a1a6f20147814c",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC60",
+      "modelId": "volvo/xc60",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 335,
+      "commercialNames": [
+        "XC60"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8cbc05c3cbcd80a2b46",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC90 B5 AWD AUTO",
+        "XC90 B5 MHEV AWD AUTO",
+        "XC90 INSCRIPTION B5 AWD AUTO",
+        "XC90 INSCRIPTION B5 MHEV AWD A",
+        "XC90 INSCRIPTION B6 MHEV AWD A",
+        "XC90 INSCRIPTION PRO B5 AWD A",
+        "XC90 INSCRPT PRO B5 MHEV AWD A",
+        "XC90 INSCRPT PRO B6 MHEV AWD A",
+        "XC90 MOMENTUM B5 AWD AUTO",
+        "XC90 MOMENTUM B5 MHEV AWD AUTO",
+        "XC90 MOMENTUM PRO B5 AWD AUTO",
+        "XC90 MOMENTUM PRO B5MHEV AWD A",
+        "XC90 R-DESIGN B5 AWD AUTO",
+        "XC90 R-DESIGN B5 MHEV AWD AUTO",
+        "XC90 R-DESIGN B6 MHEV AWD AUTO",
+        "XC90 R-DESIGN D5 P-PULSE AWD A",
+        "XC90 R-DESIGN PRO B5 AWD AUTO",
+        "XC90 R-DESIGN PRO B6MHEV AWD A",
+        "XC90 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 19,
+      "registrations": 3180,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0108d2b9c9c6ccc3f1d",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC90",
+        "XC90 / 2.0 / TD / AUT. AWD",
+        "XC90 / 20 / TD / AUT AWD",
+        "XC90 2.0 TD AUT. AWD",
+        "XC90 20 TD AUT AWD",
+        "XC90 B5 AWD AUTO",
+        "XC90 B5 MHEV AWD AUTO",
+        "XC90 INSCRIPTION B5 AWD AUTO",
+        "XC90 INSCRIPTION B5 MHEV AWD A",
+        "XC90 INSCRIPTION PRO B5 AWD A",
+        "XC90 INSCRPT PRO B5 MHEV AWD A",
+        "XC90 MOMENTUM B5 AWD AUTO",
+        "XC90 MOMENTUM B5 MHEV AWD AUTO",
+        "XC90 MOMENTUM PRO B5 AWD AUTO",
+        "XC90 R-DESIGN B5 AWD AUTO",
+        "XC90 R-DESIGN B5 MHEV AWD AUTO",
+        "XC90 R-DESIGN D5 P-PULSE AWD A",
+        "XC90 R-DESIGN PRO B5 AWD AUTO",
+        "XC90 RDESIGN PRO B5 MHEV AWD A",
+        "XC90 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 53863,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e1ead709219d2cc9a99",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 177,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd56d7fe5d0e1bd98025",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 220,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8200d2c6175f89a9700f",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC90",
+        "XC90 B6 MHEV AWD AUTO",
+        "XC90 II",
+        "XC90 INSCRIPTION B5 MHEV AWD A",
+        "XC90 INSCRIPTION B6 MHEV AWD A",
+        "XC90 INSCRIPTION PRO T5 AWD A",
+        "XC90 INSCRIPTION PRO T6 AWD A",
+        "XC90 INSCRIPTION T5 AWD AUTO",
+        "XC90 INSCRIPTION T6 AWD AUTO",
+        "XC90 INSCRPT PRO B5 MHEV AWD A",
+        "XC90 INSCRPT PRO B6 MHEV AWD A",
+        "XC90 MOMENTUM B5 MHEV AWD AUTO",
+        "XC90 MOMENTUM PRO T5 AWD AUTO",
+        "XC90 MOMENTUM T5 AWD AUTO",
+        "XC90 R-DESIGN B5 MHEV AWD AUTO",
+        "XC90 R-DESIGN B6 MHEV AWD AUTO",
+        "XC90 R-DESIGN PRO B6MHEV AWD A",
+        "XC90 R-DESIGN PRO T5 AWD AUTO",
+        "XC90 R-DESIGN PRO T6 AWD AUTO",
+        "XC90 R-DESIGN T5 AWD AUTO",
+        "XC90 R-DESIGN T6 AWD AUTO",
+        "XC90 RDESIGN PRO B5 MHEV AWD A",
+        "XC90 T6 AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 2286,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28dc29ecd23002935dca",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c33619510049ae501d2",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC 90",
+        "XC90",
+        "XC90 / 20 / T / AUT AWD",
+        "XC90 2.0 T AUT. AWD",
+        "XC90 B5 AWD",
+        "XC90 INSCRIPTION B5 MHEV AWD A",
+        "XC90 INSCRIPTION PRO T5 AWD A",
+        "XC90 INSCRIPTION T5 AWD AUTO",
+        "XC90 INSCRPT PRO B5 MHEV AWD A",
+        "XC90 MOMENTUM B5 MHEV AWD AUTO",
+        "XC90 MOMENTUM PRO B5MHEV AWD A",
+        "XC90 MOMENTUM PRO T5 AWD AUTO",
+        "XC90 MOMENTUM T5 AWD AUTO",
+        "XC90 R-DESIGN B5 MHEV AWD AUTO",
+        "XC90 R-DESIGN PRO T5 AWD AUTO",
+        "XC90 R-DESIGN T5 AWD AUTO",
+        "XC90 RDESIGN PRO B5 MHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 7735,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cb6e7d28d724078dac1",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 220,
+      "commercialNames": [
+        "XC 90",
+        "XC90",
+        "XC90 B6 MHEV AWD AUTO",
+        "XC90 INSCRIPTION B6 MHEV AWD A",
+        "XC90 INSCRPT PRO B6 MHEV AWD A",
+        "XC90 R-DESIGN B6 MHEV AWD AUTO",
+        "XC90 R-DESIGN PRO B6MHEV AWD A",
+        "XC90 T6 AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 1687,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f10ba814ebbd5e4e1d3",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 223,
+      "commercialNames": [
+        "XC90",
+        "XC90 T8 Twin Engine"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 265,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a20245d26faeea967b5",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 228,
+      "commercialNames": [
+        "XC90",
+        "XC90 INSCRIPTION PRO T6 AWD A",
+        "XC90 INSCRIPTION T6 AWD AUTO",
+        "XC90 R-DESIGN PRO T6 AWD AUTO",
+        "XC90 R-DESIGN T6 AWD AUTO",
+        "XC90 T6 AWD AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1203,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53ac0555ef52d35e5a02",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 233,
+      "commercialNames": [
+        "XC 90",
+        "XC90",
+        "XC90 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2ed99d40613de5ab916",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 235,
+      "commercialNames": [
+        "XC 90",
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a33bc7fb84f9c41c84a0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 240,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b303ba411d8233a9f79e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": null,
+      "commercialNames": [
+        "XC90",
+        "XC90 INSCRIPT PRO T8 PHEV A A",
+        "XC90 INSCRIPTION T8 PHEV AWD A",
+        "XC90 INSCRP PRO T8RCHRGE AWD A",
+        "XC90 INSCRPT T8 RCHARGE AWD A",
+        "XC90 MOMENTUM T8 PHEV AWD AUTO",
+        "XC90 MOMENTUM T8 RCHRG AWD A",
+        "XC90 R-DESIGN T8 PHEV AWD AUTO",
+        "XC90 R-DESIGN T8 RCHARGE AWD A",
+        "XC90 RDESGN PRO T8 RCHRG AWD A",
+        "XC90 RDESIGN PRO T8 PHEV AWD A"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 1642,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f791cb6d905b13c71d3",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 28,
+      "commercialNames": [
+        "XC90",
+        "XC90 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 520,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b05fd76f55230c1c4222",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 223,
+      "commercialNames": [
+        "XC90",
+        "XC90 / 2.0 / T / AUT. AWD",
+        "XC90 20 T AUT AWD",
+        "XC90 INSCRIPT PRO T8 PHEV A A",
+        "XC90 INSCRIPTION T8 PHEV AWD A",
+        "XC90 INSCRP PRO T8RCHRGE AWD A",
+        "XC90 INSCRPT T8 RCHARGE AWD A",
+        "XC90 MOMENTUM T8 PHEV AWD AUTO",
+        "XC90 MOMENTUM T8 RCHRG AWD A",
+        "XC90 R-DESIGN T8 PHEV AWD AUTO",
+        "XC90 R-DESIGN T8 RCHARGE AWD A",
+        "XC90 RDESGN PRO T8 RCHRG AWD A",
+        "XC90 RDESIGN PRO T8 PHEV AWD A",
+        "XC90 T8",
+        "XC90 T8 TWIN ENGINE",
+        "XC90 T8 Twin Engine",
+        "XC90 T8 TWIN ENGINE 20 T AUT AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 20,
+      "registrations": 42880,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5d78354da337d1ab1d0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 233,
+      "commercialNames": [
+        "XC90",
+        "XC90 INSCRIPT PRO T8 PHEV A A",
+        "XC90 INSCRIPTION T8 PHEV AWD A",
+        "XC90 INSCRP PRO T8RCHRGE AWD A",
+        "XC90 INSCRPT T8 RCHARGE AWD A",
+        "XC90 R-DESIGN T8 RCHARGE AWD A",
+        "XC90 RDESGN PRO T8 RCHRG AWD A",
+        "XC90 RDESIGN PRO T8 PHEV AWD A",
+        "XC90 RECHARGE T8 ULTIMATE BRIGHT THEME 7P",
+        "XC90 T8",
+        "XC90 T8 AWD",
+        "XC90 T8 EAWD",
+        "XC90 T8 RECHARGE EAWD",
+        "XC90 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 1521,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7c1262209ab8340420e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1989,
+      "powerKw": 223,
+      "commercialNames": [
+        "XC90 T8 TWIN ENGINE"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc3627ebb8056811e62e",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2400,
+      "powerKw": 120,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-815ea465be207dab21e4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2401,
+      "powerKw": 136,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-200742c1d118fcaa97ab",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 88,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74d6692ca00740740cfa",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 232,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4d0645cd2beb39dd0d4",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 236,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3feec193de625fda4b62",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3192,
+      "powerKw": null,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83d23af5453caf58f502",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1969,
+      "powerKw": 228,
+      "commercialNames": [
+        "XC 90",
+        "XC90",
+        "XC90 / 2.0 / T / AUT. AWD",
+        "XC90 2.0 T AUT. AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 61602,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc8f36bf44d878e68025",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 180,
+      "commercialNames": [
+        "XC90",
+        "XC90 / 2.0 / TD / AUT. AWD"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 285,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0acd87a66ae828637951",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09c810312da9ef91bf72",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1969,
+      "powerKw": 228,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c64eb67c72da00cc6f24",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 183,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0751f143ecbea39afd0",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1969,
+      "powerKw": 187,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fbb4cd06efb0c22e9ea",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1969,
+      "powerKw": 165,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dcb1780a249f8ef4543",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 231,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9263244fe9fa83d218d9",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 107,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6b7e42642fe95dbbefc",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": null,
+      "powerKw": 173,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-896b19a3b92b93a73332",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 13,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-312271e4b0b77452e49d",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 184,
+      "commercialNames": [
+        "XC90",
+        "XC90 B5"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 112,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-151846ae871d70bf027b",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 220,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed560e8f291cf1ccbef9",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 58,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e62661b7e8ba711cebd8",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 111,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fc226832630d6482d3d",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1969,
+      "powerKw": 335,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cc9b1cae607dcd0ff60",
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "canonicalModel": "XC90",
+      "modelId": "volvo/xc90",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1969,
+      "powerKw": 250,
+      "commercialNames": [
+        "XC90"
+      ],
+      "sourceMakeNames": [
+        "VOLVO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd45cc5cf837d9110811",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Courage",
+      "modelId": "voyah/courage",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "COURAGE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-931ee9c7f823089a43b1",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Courage",
+      "modelId": "voyah/courage",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "COURAGE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-108228423ae6553923a9",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Courage",
+      "modelId": "voyah/courage",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "COURAGE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 380,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e952dbd39243e7b4a9e",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Courage",
+      "modelId": "voyah/courage",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 215,
+      "commercialNames": [
+        "COURAGE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0b06c3ce7e010af750d",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Courage",
+      "modelId": "voyah/courage",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "COURAGE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d65bdf63336f2f1cd64b",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Free",
+      "modelId": "voyah/free",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "Free",
+        "FREE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 115,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f2ca027420043587f41",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Free",
+      "modelId": "voyah/free",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 360,
+      "commercialNames": [
+        "FREE",
+        "VOYAH FREE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 845,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8101bf129e16c191301",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Free",
+      "modelId": "voyah/free",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "FREE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b21217de408c7853278",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Free",
+      "modelId": "voyah/free",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "FREE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-baf4bc888042711114f3",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Free",
+      "modelId": "voyah/free",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "FREE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35d9f6e84954d12e588b",
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "canonicalModel": "Free",
+      "modelId": "voyah/free",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 260,
+      "commercialNames": [
+        "FREE"
+      ],
+      "sourceMakeNames": [
+        "VOYAH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19df0cfb1a6f60a356ae",
+      "brandId": "willys",
+      "brand": "Willys",
+      "canonicalModel": "CJ-3B",
+      "modelId": "willys/cj-3b",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2161,
+      "powerKw": 53,
+      "commercialNames": [
+        "WILLYS CJ-3B"
+      ],
+      "sourceMakeNames": [
+        "WILLYS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-753704cdba2787222612",
+      "brandId": "xiaomi",
+      "brand": "Xiaomi",
+      "canonicalModel": "SU7 Max",
+      "modelId": "xiaomi/su7-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "XIAOMI SU7 MAX"
+      ],
+      "sourceMakeNames": [
+        "XIAOMI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80f6c3e7a44ed472d3db",
+      "brandId": "xiaomi",
+      "brand": "Xiaomi",
+      "canonicalModel": "SU7 Max",
+      "modelId": "xiaomi/su7-max",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 495,
+      "commercialNames": [
+        "XIAOMI SU7 MAX"
+      ],
+      "sourceMakeNames": [
+        "XIAOMI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8542f9369d2928c48202",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 50,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c589725ad158c927e1b1",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "G6",
+        "G6 ILI XPENG G6 ILI XPENG G6 ILI XIAOPENG G6 ILI X"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2826908a3fe65d36851a",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 344,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba7bd13b270448a19c44",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 73,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85e4125bfdfdf0a9eabb",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3a58660740d5a2293c6",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6830,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e7a0c74ac23de5cbb05",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8662e03ca0db4c79478b",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 350,
+      "commercialNames": [
+        "G6",
+        "G6-XPENG G6-XPENG G6-XIAOPENG"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2499,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbdfe408fb791060fe73",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 405,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8841a9ed592db3b00c38",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 218,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3407,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8b4b3cceeec0d336e14",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 258,
+      "commercialNames": [
+        "G6"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d22fd586c400d403563",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G6",
+      "modelId": "xpeng/g6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 358,
+      "commercialNames": [
+        "G6",
+        "G6-XPENG G6-XPENG G6-XIAOPENG"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1430,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a57d97171be0fd78a12f",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1745d2284700109a61c5",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1007,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff27a08804c274ba4822",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "G9",
+        "XPENG G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5470,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e72c5a7fad9185d0349",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 405,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3210,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-362d33ef1ea909cda786",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 407,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-201cce22bcd75e6efc82",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 20,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-596b731829775922f119",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7df3d47e9ffb2e5d8a07",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff48bbad3b1349121d81",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 233,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e97b1f947e81d6dd72a",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 350,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bf3fb8a39db00e4bc13",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-600f5a145bea4733b8a6",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bcf662474d1b3a44d97",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 165,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8651f0c000ea9ab15c18",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b7bf46eaffe76c47b8b",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 218,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-476f7568b5a0eee4b17a",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 258,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1143,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aafca2081041f64bd365",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "G9",
+      "modelId": "xpeng/g9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 423,
+      "commercialNames": [
+        "G9"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 823,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2038ae00c8c5498e8cd1",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4352f6aad3c2ce8d509d",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 196,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 124,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e6fcdc48e0f075d7cc7",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 316,
+      "commercialNames": [
+        "P7",
+        "P7 PERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 342,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2dfa6b4635507adf810",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 124,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f12332e656dcb54c306c",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc4163329ae4f58132ec",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "P7",
+        "P7-P7I"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 159,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84a9e9d3a580376a3e4c",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 203,
+      "commercialNames": [
+        "P7",
+        "P7,P7I"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 393,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58578501cbd480a36efb",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 348,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 120,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-381e2fb4cb5554003504",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 405,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71f55e1272d74817a8b8",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 20,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78ae38f2b1e5e50081f3",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cf936a611ffda35e2c5",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7",
+      "modelId": "xpeng/p7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 437,
+      "commercialNames": [
+        "P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-395b10d7a58085296383",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "P7I"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ead41746d49c25248d1e",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 203,
+      "commercialNames": [
+        "P7I",
+        "P7I P7",
+        "P7I, P7",
+        "P7I,P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 159,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a71b99ce62f0fca28757",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 348,
+      "commercialNames": [
+        "P7I",
+        "P7I P7",
+        "P7I-P7",
+        "P7I, P7",
+        "P7I,P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a29de69635a37abce7ef",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "P7I P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1113d50f84002bc903eb",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "P7I",
+        "P7I ILI P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-118a56204ffd6f294ca0",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "P7I,P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42124d1502885bd29377",
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "canonicalModel": "P7I",
+      "modelId": "xpeng/p7i",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 405,
+      "commercialNames": [
+        "P7I,P7"
+      ],
+      "sourceMakeNames": [
+        "XPENG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cee4463c26928e5d08d0",
+      "brandId": "yudo",
+      "brand": "Yudo",
+      "canonicalModel": "3",
+      "modelId": "yudo/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "YUDO 3"
+      ],
+      "sourceMakeNames": [
+        "YUDO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 367,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32191c2eae3d222d0139",
+      "brandId": "yudo",
+      "brand": "Yudo",
+      "canonicalModel": "3",
+      "modelId": "yudo/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 30,
+      "commercialNames": [
+        "YUDO 3"
+      ],
+      "sourceMakeNames": [
+        "YUDO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-760893a40f9e216065a9",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "001",
+      "modelId": "zeekr/001",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "001"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 541,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6183d2a6b117ede215d2",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "001",
+      "modelId": "zeekr/001",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 400,
+      "commercialNames": [
+        "001",
+        "ZEEKR 001 BEV AUT"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1695,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9bbfc6b9450db30aa32",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "001",
+      "modelId": "zeekr/001",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ZEEKR 001"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-060f8c50fcb0b1d7276e",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "001",
+      "modelId": "zeekr/001",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "001",
+        "001 AWD"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d94b9683f2e7ff25f65b",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "7X",
+      "modelId": "zeekr/7x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 103,
+      "commercialNames": [
+        "7X"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f41d0ad55fbd4c585570",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "7X",
+      "modelId": "zeekr/7x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "7X",
+        "ZEEKR 7X AWD"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba3664c1f3609417baab",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "7X",
+      "modelId": "zeekr/7x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "7X"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 987,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3041c32733a35f0967e",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "7X",
+      "modelId": "zeekr/7x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 475,
+      "commercialNames": [
+        "7X"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2141,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b37aa749f968514f384f",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "X",
+      "modelId": "zeekr/x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "X"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1328,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86a76d3698115166231d",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "X",
+      "modelId": "zeekr/x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 315,
+      "commercialNames": [
+        "X"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 768,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f222f943bec4e4432a4",
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "canonicalModel": "X",
+      "modelId": "zeekr/x",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "X"
+      ],
+      "sourceMakeNames": [
+        "ZEEKR"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

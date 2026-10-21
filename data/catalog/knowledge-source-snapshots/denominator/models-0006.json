@@ -1,0 +1,8025 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 6,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "dodge:coronetroyallancer",
+      "make": "Dodge",
+      "model": "Coronet Royal Lancer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:custom",
+      "make": "Dodge",
+      "model": "Custom",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:custom880",
+      "make": "Dodge",
+      "model": "Custom 880",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:customroyal",
+      "make": "Dodge",
+      "model": "Custom Royal",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:dr",
+      "make": "Dodge",
+      "model": "D.r",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:d100",
+      "make": "Dodge",
+      "model": "D100",
+      "aliases": [],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:d11",
+      "make": "Dodge",
+      "model": "D11",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:d2",
+      "make": "Dodge",
+      "model": "D2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:d22",
+      "make": "Dodge",
+      "model": "D22",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:d24",
+      "make": "Dodge",
+      "model": "D24",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:dakota",
+      "make": "Dodge",
+      "model": "Dakota",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:dart",
+      "make": "Dodge",
+      "model": "Dart",
+      "aliases": [
+        "DART"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/dart",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Dart"
+      }
+    },
+    {
+      "key": "dodge:daytona",
+      "make": "Dodge",
+      "model": "Daytona",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:deluxe",
+      "make": "Dodge",
+      "model": "Deluxe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:demon",
+      "make": "Dodge",
+      "model": "Demon",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:diplomat",
+      "make": "Dodge",
+      "model": "Diplomat",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:du",
+      "make": "Dodge",
+      "model": "Du",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:durango",
+      "make": "Dodge",
+      "model": "Durango",
+      "aliases": [
+        "DODGE DURANGO",
+        "DURANGO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/durango",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Durango"
+      }
+    },
+    {
+      "key": "dodge:four",
+      "make": "Dodge",
+      "model": "Four",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:grandcaravan",
+      "make": "Dodge",
+      "model": "Grand Caravan",
+      "aliases": [
+        "DODGE GRAND CARAVAN",
+        "GRAND CARAVAN"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/grand-caravan",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Grand Caravan"
+      }
+    },
+    {
+      "key": "dodge:hornet",
+      "make": "Dodge",
+      "model": "Hornet",
+      "aliases": [
+        "HORNET"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/hornet",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Hornet"
+      }
+    },
+    {
+      "key": "dodge:intrepid",
+      "make": "Dodge",
+      "model": "Intrepid",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:journey",
+      "make": "Dodge",
+      "model": "Journey",
+      "aliases": [
+        "DODGE JOURNEY",
+        "JOURNEY"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/journey",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Journey"
+      }
+    },
+    {
+      "key": "dodge:kingsway",
+      "make": "Dodge",
+      "model": "Kingsway",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:lancer",
+      "make": "Dodge",
+      "model": "Lancer",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:magnum",
+      "make": "Dodge",
+      "model": "Magnum",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:matador",
+      "make": "Dodge",
+      "model": "Matador",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:mirada",
+      "make": "Dodge",
+      "model": "Mirada",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:monaco",
+      "make": "Dodge",
+      "model": "Monaco",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:neon",
+      "make": "Dodge",
+      "model": "Neon",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:nitro",
+      "make": "Dodge",
+      "model": "Nitro",
+      "aliases": [
+        "Nitro",
+        "ナイトロ"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/nitro",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Nitro"
+      }
+    },
+    {
+      "key": "dodge:omni",
+      "make": "Dodge",
+      "model": "Omni",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:phoenix",
+      "make": "Dodge",
+      "model": "Phoenix",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:pioneer",
+      "make": "Dodge",
+      "model": "Pioneer",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:polara",
+      "make": "Dodge",
+      "model": "Polara",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:polara880",
+      "make": "Dodge",
+      "model": "Polara 880",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:raider",
+      "make": "Dodge",
+      "model": "Raider",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ram",
+      "make": "Dodge",
+      "model": "Ram",
+      "aliases": [
+        "RAM"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/ram",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Ram"
+      }
+    },
+    {
+      "key": "dodge:ram1500van",
+      "make": "Dodge",
+      "model": "Ram 1500 Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ram2500",
+      "make": "Dodge",
+      "model": "Ram 2500",
+      "aliases": [
+        "RAM 2500"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": "dodge/ram-2500",
+        "canonicalMake": "Dodge",
+        "canonicalModel": "Ram 2500"
+      }
+    },
+    {
+      "key": "dodge:ram2500van",
+      "make": "Dodge",
+      "model": "Ram 2500 Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ram3500",
+      "make": "Dodge",
+      "model": "Ram 3500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ram3500van",
+      "make": "Dodge",
+      "model": "Ram 3500 Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ramb250",
+      "make": "Dodge",
+      "model": "Ram B250",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ramcharger",
+      "make": "Dodge",
+      "model": "Ram Charger",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ramsrt10",
+      "make": "Dodge",
+      "model": "Ram Srt-10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ramvan",
+      "make": "Dodge",
+      "model": "Ram Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:ramvanwagon",
+      "make": "Dodge",
+      "model": "Ram Van Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:royal",
+      "make": "Dodge",
+      "model": "Royal",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:royalmonaco",
+      "make": "Dodge",
+      "model": "Royal Monaco",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:shadow",
+      "make": "Dodge",
+      "model": "Shadow",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:sierra",
+      "make": "Dodge",
+      "model": "Sierra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:spirit",
+      "make": "Dodge",
+      "model": "Spirit",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:srt4",
+      "make": "Dodge",
+      "model": "Srt-4",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:stregis",
+      "make": "Dodge",
+      "model": "St.regis",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:standardsix",
+      "make": "Dodge",
+      "model": "Standard Six",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:stealth",
+      "make": "Dodge",
+      "model": "Stealth",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:stratus",
+      "make": "Dodge",
+      "model": "Stratus",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:superbee",
+      "make": "Dodge",
+      "model": "Super Bee",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:tourer",
+      "make": "Dodge",
+      "model": "Tourer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:touring",
+      "make": "Dodge",
+      "model": "Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:victory",
+      "make": "Dodge",
+      "model": "Victory",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:victorysix",
+      "make": "Dodge",
+      "model": "Victory Six",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:viper",
+      "make": "Dodge",
+      "model": "Viper",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:wayfarer",
+      "make": "Dodge",
+      "model": "Wayfarer",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:wc",
+      "make": "Dodge",
+      "model": "Wc",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:wc51",
+      "make": "Dodge",
+      "model": "WC51",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:wc52",
+      "make": "Dodge",
+      "model": "WC52",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:wc56",
+      "make": "Dodge",
+      "model": "WC56",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dodge:wc57",
+      "make": "Dodge",
+      "model": "WC57",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "modelId": null,
+        "canonicalMake": "Dodge",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dongfeng:box",
+      "make": "Dongfeng",
+      "model": "Box",
+      "aliases": [
+        "BOX",
+        "BOX / /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "dongfeng",
+        "modelId": "dongfeng/box",
+        "canonicalMake": "Dongfeng",
+        "canonicalModel": "Box"
+      }
+    },
+    {
+      "key": "donkervoort:d8gto",
+      "make": "Donkervoort",
+      "model": "D8GTO",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": null,
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "donkervoort:f22",
+      "make": "Donkervoort",
+      "model": "F22",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": "donkervoort/f22",
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": "F22"
+      }
+    },
+    {
+      "key": "donkervoort:gto",
+      "make": "Donkervoort",
+      "model": "GTO",
+      "aliases": [
+        "GTO-INDIVIDUAL",
+        "GTO-INDIVIDUAL SERIES",
+        "GTO-JD70"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": "donkervoort/gto",
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": "GTO"
+      }
+    },
+    {
+      "key": "donkervoort:gtors",
+      "make": "Donkervoort",
+      "model": "Gto-RS",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "donkervoort",
+        "modelId": null,
+        "canonicalMake": "Donkervoort",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "dr:10ev",
+      "make": "DR",
+      "model": "1.0 EV",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/1-0-ev",
+        "canonicalMake": "DR",
+        "canonicalModel": "1.0 EV"
+      }
+    },
+    {
+      "key": "dr:30",
+      "make": "DR",
+      "model": "3.0",
+      "aliases": [
+        "DR 30",
+        "DR3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/3-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "3.0"
+      }
+    },
+    {
+      "key": "dr:40",
+      "make": "DR",
+      "model": "4.0",
+      "aliases": [
+        "DR 4.0",
+        "DR4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/4-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "4.0"
+      }
+    },
+    {
+      "key": "dr:50",
+      "make": "DR",
+      "model": "5.0",
+      "aliases": [
+        "DR 5",
+        "DR 50"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/5-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "5.0"
+      }
+    },
+    {
+      "key": "dr:60",
+      "make": "DR",
+      "model": "6.0",
+      "aliases": [
+        "DR 6.0",
+        "DR6"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/6-0",
+        "canonicalMake": "DR",
+        "canonicalModel": "6.0"
+      }
+    },
+    {
+      "key": "dr:70phev",
+      "make": "DR",
+      "model": "7.0 PHEV",
+      "aliases": [
+        "DR7.0"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/7-0-phev",
+        "canonicalMake": "DR",
+        "canonicalModel": "7.0 PHEV"
+      }
+    },
+    {
+      "key": "dr:dr7h",
+      "make": "DR",
+      "model": "DR 7H",
+      "aliases": [
+        "DR 7H"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/7h",
+        "canonicalMake": "DR",
+        "canonicalModel": "DR 7H"
+      }
+    },
+    {
+      "key": "dr:drarte3",
+      "make": "DR",
+      "model": "DR ART e3",
+      "aliases": [
+        "DR ART E3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/art-e3",
+        "canonicalMake": "DR",
+        "canonicalModel": "DR ART e3"
+      }
+    },
+    {
+      "key": "dr:dreq1",
+      "make": "DR",
+      "model": "DR eQ1",
+      "aliases": [
+        "DR EQ1"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/eq1",
+        "canonicalMake": "DR",
+        "canonicalModel": "DR eQ1"
+      }
+    },
+    {
+      "key": "dr:f35",
+      "make": "DR",
+      "model": "F35",
+      "aliases": [
+        "F35"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/f35",
+        "canonicalMake": "DR",
+        "canonicalModel": "F35"
+      }
+    },
+    {
+      "key": "dr:pk8",
+      "make": "DR",
+      "model": "PK8",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "modelId": "dr-automobiles/pk8",
+        "canonicalMake": "DR",
+        "canonicalModel": "PK8"
+      }
+    },
+    {
+      "key": "dsautomobiles:ds3",
+      "make": "DS Automobiles",
+      "model": "DS 3",
+      "aliases": [
+        "3",
+        "3 BLUEHDI",
+        "3 CROSSBACK",
+        "3 CROSSBACKN",
+        "DS 3 BLUEHDI 130 AUTOMATICO BASTILLE",
+        "DS 3 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE",
+        "DS 3 BLUEHDI 130 AUTOMATICO RIVOLI",
+        "DS 3 BLUEHDI130 AUTOMATICO PERFORMANCE LINE+",
+        "DS 3 BLUEHDI130 OPERA",
+        "DS 3 CROSSBACK",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL BASTILLE",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL MONTMARTRE",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL PERFORMANCE LINE",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL ROOFS OF PARIS",
+        "DS 3 CROSSBACK BLUEHDI 110 MANUAL SO CHIC",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOM?TICO BASTILLE",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOM?TICO PERFORMANCE",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOM?TICO RIVOLI",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOMATICO BASTILLE",
+        "DS 3 CROSSBACK BLUEHDI 130 AUTOMATICO PERFORMANCE",
+        "DS 3 CROSSBACK BLUEHDI 130 LOUVRE",
+        "DS 3 CROSSBACK E-TENSE BASTILLE",
+        "DS 3 CROSSBACK E-TENSE GRAND CHIC",
+        "DS 3 CROSSBACK E-TENSE PERFORMANCE LINE",
+        "DS 3 CROSSBACK E-TENSE PERFORMANCE LINE +",
+        "DS 3 CROSSBACK E-TENSE RIVOLI",
+        "DS 3 CROSSBACK LA PREMIERE EV",
+        "DS 3 CROSSBACK PRESTIGE EV",
+        "DS 3 CROSSBACK PRFRMNC LINE EV",
+        "DS 3 CROSSBACK PURETECH 100 MANUAL BASTILLE",
+        "DS 3 CROSSBACK PURETECH 100 MANUAL PERFORMANCE LI",
+        "DS 3 CROSSBACK PURETECH 100 MANUAL PERFORMANCE LIN",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO BASTILLE",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO CONNECTED C",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO FAUBOURG",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO GRAND CHIC",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO PERFORMANCE",
+        "DS 3 CROSSBACK PURETECH 130 AUTOM?TICO RIVOLI",
+        "DS 3 CROSSBACK PURETECH 130 AUTOMATICO BASTILLE",
+        "DS 3 CROSSBACK PURETECH 130 AUTOMATICO PERFORMANCE",
+        "DS 3 CROSSBACK PURETECH 155 AUTOM?TICO RIVOLI",
+        "DS 3 CROSSBACK ULTRA PRSTGE EV",
+        "DS 3 E-TENSE ESPRIT DE VOYAGE",
+        "DS 3 E-TENSE ETOILE",
+        "DS 3 E-TENSE PERFORMANCE LINE",
+        "DS 3 ETENSE OPERA",
+        "DS 3 HYBRID 136 ANTOINE DE SAINT EXUPERY",
+        "DS 3 HYBRID 136 ETOILE",
+        "DS 3 HYBRID 136 PALLAS",
+        "DS 3 HYBRID 136 PERFORMANCE LINE",
+        "DS 3 HYBRID ANTOINE DE SAINT EXUPERY",
+        "DS 3 HYBRID EDITION FRANCE",
+        "DS 3 HYBRID ETOILE",
+        "DS 3 HYBRID PALLAS",
+        "DS 3 PURETECH 100 MANUAL BASTILLE",
+        "DS 3 PURETECH 100 MANUAL PERFORMANCE LINE",
+        "DS 3 PURETECH 130 AUTOMATICO ANTOINE DE SAINT EXUP",
+        "DS 3 PURETECH 130 AUTOMATICO BASTILLE",
+        "DS 3 PURETECH 130 AUTOMATICO ESPRIT DE VOYAGE",
+        "DS 3 PURETECH 130 AUTOMATICO PERFORMANCE LINE",
+        "DS 3 PURETECH 130 AUTOMATICO PERFORMANCE LINE+",
+        "DS 3 PURETECH 130 AUTOMATICO RIVOLI",
+        "DS 3 PURETECH 130 OPERA",
+        "DS3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-3",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 3"
+      }
+    },
+    {
+      "key": "dsautomobiles:ds4",
+      "make": "DS Automobiles",
+      "model": "DS 4",
+      "aliases": [
+        "4",
+        "4 BLUEHDI",
+        "4 CROSS",
+        "4 E-TENSE",
+        "4 PURETECH",
+        "DS4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-4",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 4"
+      }
+    },
+    {
+      "key": "dsautomobiles:ds5",
+      "make": "DS Automobiles",
+      "model": "DS 5",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-5",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 5"
+      }
+    },
+    {
+      "key": "dsautomobiles:ds7",
+      "make": "DS Automobiles",
+      "model": "DS 7",
+      "aliases": [
+        "7",
+        "7 (X74 MCA)",
+        "7 CROSSBACK",
+        "DS 7 BLUE HDI 130 AUTOMATICO ANTOINE DE SAINT EXUP",
+        "DS 7 BLUEHDI 130 AUTOMATICO ANTOINE DE SAINT EXUPE",
+        "DS 7 BLUEHDI 130 AUTOMATICO BASTILLE",
+        "DS 7 BLUEHDI 130 AUTOMATICO ETOILE",
+        "DS 7 BLUEHDI 130 AUTOMATICO OPERA",
+        "DS 7 BLUEHDI 130 AUTOMATICO PALLAS",
+        "DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE",
+        "DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE +",
+        "DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE PLUS",
+        "DS 7 BLUEHDI 130 AUTOMATICO RIVOLI",
+        "DS 7 BLUEHDI 130 EDITION FRANCE",
+        "DS 7 BLUEHDI 130 ETOILE",
+        "DS 7 BLUEHDI 130 JULES VERNE",
+        "DS 7 BLUEHDI 130 PALLAS",
+        "DS 7 BLUEHDI EDITION FRANCE",
+        "DS 7 BLUEHDI ETOILE",
+        "DS 7 BLUEHDI PALLAS",
+        "DS 7 CROSSBACK",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO BASTILLE",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO BASTILLE +",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO PERFORMANCE",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOM?TICO RIVOLI",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOMATICO BASTILLE +",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOMATICO PERFORMANCE",
+        "DS 7 CROSSBACK BLUEHDI 130 AUTOMATICO RIVOLI",
+        "DS 7 CROSSBACK E-TENSE",
+        "DS 7 CROSSBACK E-TENSE 225 BASTILLE +",
+        "DS 7 CROSSBACK E-TENSE 225 LIGNE NOIRE",
+        "DS 7 CROSSBACK E-TENSE 225 PERFORMANCE LINE",
+        "DS 7 CROSSBACK E-TENSE 225 PERFORMANCE LINE (SOLO",
+        "DS 7 CROSSBACK E-TENSE 225 PERFORMANCE LINE +",
+        "DS 7 CROSSBACK E-TENSE 225 RIVOLI",
+        "DS 7 CROSSBACK E-TENSE 225 RIVOLI (SOLO STOCK)",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 BASTILLE +",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 LIGNE NOIRE",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 LOUVRE",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 PERFORMANCE LINE",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 PERFORMANCE LINE +",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 RIVOLI",
+        "DS 7 CROSSBACK E-TENSE 300 4X4 RIVOLI (SOLO STOCK)",
+        "DS 7 CROSSBACK PURETECH 130 AUTOM?TICO BASTILLE",
+        "DS 7 CROSSBACK PURETECH 130 AUTOM?TICO BASTILLE +",
+        "DS 7 CROSSBACK PURETECH 130 AUTOM?TICO PERFORMANCE",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO BASTILLE +",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO PERFORMANCE",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO RIVOLI",
+        "DS 7 CROSSBACK PURETECH 180 AUTOM?TICO RIVOLI (SOL",
+        "DS 7 CROSSBACK PURETECH 180 AUTOMATICO PERFORMANCE",
+        "DS 7 CROSSBACK PURETECH 180 AUTOMATICO RIVOLI (SOL",
+        "DS 7 E-TENSE",
+        "DS 7 E-TENSE 225 ANTOINE DE SAINT EXUPERY",
+        "DS 7 E-TENSE 225 BASTILLE",
+        "DS 7 E-TENSE 225 OPERA",
+        "DS 7 E-TENSE 225 PERFORMANCE LINE",
+        "DS 7 E-TENSE 225 PERFORMANCE LINE +",
+        "DS 7 E-TENSE 225 PERFORMANCE LINE PLUS",
+        "DS 7 E-TENSE 225 RIVOLI",
+        "DS 7 E-TENSE 360 4X4 PERFORMANCE LINE PLUS",
+        "DS 7 E-TENSE 4X4 300 ANTOINE DE SAINT EXUPERY",
+        "DS 7 E-TENSE 4X4 300 COLLECTION ASE",
+        "DS 7 E-TENSE 4X4 300 ESPRIT DE VOYAGE",
+        "DS 7 E-TENSE 4X4 300 OPERA",
+        "DS 7 E-TENSE 4X4 300 PERFORMANCE LINE",
+        "DS 7 E-TENSE 4X4 300 PERFORMANCE LINE +",
+        "DS 7 E-TENSE 4X4 300 RIVOLI",
+        "DS 7 E-TENSE 4X4 360 ANTOINE DE SAINT EXUPERY",
+        "DS 7 E-TENSE 4X4 360 OPERA",
+        "DS 7 E-TENSE 4X4 360 PERFORMANCE LINE +",
+        "DS 7 E-TENSE 4X4 360 RIVOLI",
+        "DS 7 ETENSE 225 ESPRIT DE VOYAGE",
+        "DS 7 PLUG-IN HYBRID 225 ANTOINE DE SAINT EXUPERY",
+        "DS 7 PLUG-IN HYBRID 225 EDITION FRANCE",
+        "DS 7 PLUG-IN HYBRID 225 ETOILE",
+        "DS 7 PLUG-IN HYBRID 225 JULES VERNE",
+        "DS 7 PLUG-IN HYBRID 225 PALLAS",
+        "DS 7 PLUG-IN HYBRID 300 EDITION FRANCE",
+        "DS 7 PLUG-IN HYBRID 300 ETOILE",
+        "DS 7 PLUG-IN HYBRID 300 JULES VERNE",
+        "DS 7 PLUG-IN HYBRID 300 PALLAS",
+        "DS 7 PLUG-IN HYBRID 360 PERFORMANCE",
+        "DS 7 PLUG-IN HYBRID AWD 300 ANTOINE DE SAINT EXUPE",
+        "DS 7 PLUG-IN HYBRID AWD 300 ETOILE",
+        "DS 7 PLUG-IN HYBRID AWD 300 PALLAS",
+        "DS 7 PLUG-IN HYBRID AWD 360 ANTOINE DE SAINT EXUPE",
+        "DS 7 PLUG-IN HYBRID AWD 360 PERFORMANCE",
+        "DS7",
+        "NUEVO DS 7 BLUEHDI 130 AUTOM?TICO BASTILLE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOM?TICO PERFORMANCE LINE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOM?TICO RIVOLI",
+        "NUEVO DS 7 BLUEHDI 130 AUTOMATICO BASTILLE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOMATICO PERFORMANCE LINE",
+        "NUEVO DS 7 BLUEHDI 130 AUTOMATICO RIVOLI",
+        "NUEVO DS 7 E-TENSE 225 BASTILLE",
+        "NUEVO DS 7 E-TENSE 225 OPERA",
+        "NUEVO DS 7 E-TENSE 225 PERFORMANCE LINE",
+        "NUEVO DS 7 E-TENSE 225 PERFORMANCE LINE +",
+        "NUEVO DS 7 E-TENSE 225 RIVOLI",
+        "NUEVO DS 7 E-TENSE 4X4 300 BASTILLE",
+        "NUEVO DS 7 E-TENSE 4X4 300 OPERA",
+        "NUEVO DS 7 E-TENSE 4X4 300 PERFORMANCE LINE",
+        "NUEVO DS 7 E-TENSE 4X4 300 PERFORMANCE LINE +",
+        "NUEVO DS 7 E-TENSE 4X4 300 RIVOLI",
+        "NUEVO DS 7 E-TENSE 4X4 360 LA PREMIERE",
+        "NUEVO DS 7 E-TENSE 4X4 360 OPERA",
+        "NUEVO DS 7 E-TENSE 4X4 360 PERFORMANCE LINE +",
+        "NUEVO DS 7 OPERA E-TENSE 225",
+        "NUEVO DS 7 OPERA E-TENSE 300 4X4",
+        "NUEVO DS 7 PERFORMANCE LINE + E-TENSE 225",
+        "NUEVO DS 7 PERFORMANCE LINE + E-TENSE 300 4X4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-7",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 7"
+      }
+    },
+    {
+      "key": "dsautomobiles:ds9",
+      "make": "DS Automobiles",
+      "model": "DS 9",
+      "aliases": [
+        "9",
+        "9 E-TENSE",
+        "9 PURETECH",
+        "DS 9 E-TENSE",
+        "DS 9 E-TENSE 225 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 225 RIVOLI +",
+        "DS 9 E-TENSE 250 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 250 RIVOLI +",
+        "DS 9 E-TENSE 360 4X4 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 360 4X4 RIVOLI +",
+        "DS 9 E-TENSE 4X4 360 PERFORMANCE LINE +",
+        "DS 9 E-TENSE 4X4 360 RIVOLI +",
+        "DS 9 ETENSE 250 OPERA",
+        "DS 9 ETENSE 250 PERFORMANCE LINE+",
+        "DS 9 ETENSE 250 RIVOLI+",
+        "DS 9 ETENSE 360 4X4 OPERA",
+        "DS 9 PURETECH 225 AUTOM?TICO RIVOLI +",
+        "DS 9 PURETECH 225 AUTOMATICO RIVOLI +",
+        "DS9"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-9",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 9"
+      }
+    },
+    {
+      "key": "dsautomobiles:dsn4",
+      "make": "DS Automobiles",
+      "model": "DS N°4",
+      "aliases": [
+        "DS N.4 1.2 AUT.",
+        "N 4",
+        "N 4 E-TENSE ETOILE ALCANTARA",
+        "N 4 HYBRID ETOILE ALCANTARA",
+        "N 4 HYBRID ETOILE CUERO NAPPA",
+        "N 4 HYBRID JULES VERNE",
+        "N 4 HYBRID PALLAS",
+        "N 4 PLUG-IN HYBRID ETOILE ALCANTARA"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-4",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°4"
+      }
+    },
+    {
+      "key": "dsautomobiles:dsn8",
+      "make": "DS Automobiles",
+      "model": "DS N°8",
+      "aliases": [
+        "N 8",
+        "N 8 AWD LONG RANGE ETOILE",
+        "N 8 FWD ETOILE",
+        "N 8 FWD LONG RANGE ETOILE",
+        "N 8 FWD LONG RANGE JULES VERNE",
+        "N 8 FWD PALLAS"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-8",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°8"
+      }
+    },
+    {
+      "key": "ds:ds3",
+      "make": "DS",
+      "model": "DS 3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-3",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 3"
+      }
+    },
+    {
+      "key": "ds:ds5",
+      "make": "DS",
+      "model": "DS 5",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-5",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 5"
+      }
+    },
+    {
+      "key": "ds:ds7",
+      "make": "DS",
+      "model": "DS 7",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-7",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 7"
+      }
+    },
+    {
+      "key": "ds:ds9",
+      "make": "DS",
+      "model": "DS 9",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-9",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS 9"
+      }
+    },
+    {
+      "key": "ds:dsn4",
+      "make": "DS",
+      "model": "DS N°4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-4",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°4"
+      }
+    },
+    {
+      "key": "ds:dsn8",
+      "make": "DS",
+      "model": "DS N°8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "modelId": "ds-automobiles/ds-n-8",
+        "canonicalMake": "DS Automobiles",
+        "canonicalModel": "DS N°8"
+      }
+    },
+    {
+      "key": "ego:ewavex",
+      "make": "e.GO",
+      "model": "e.wave X",
+      "aliases": [
+        "E.WAVE X"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ego-mobile",
+        "modelId": "ego-mobile/e-wave-x",
+        "canonicalMake": "e.GO",
+        "canonicalModel": "e.wave X"
+      }
+    },
+    {
+      "key": "ego:life",
+      "make": "e.GO",
+      "model": "Life",
+      "aliases": [
+        "E.GO LIFE FIRST EDITION",
+        "EGO LIFE FIRST EDITION",
+        "LIFE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ego-mobile",
+        "modelId": "ego-mobile/life",
+        "canonicalMake": "e.GO",
+        "canonicalModel": "Life"
+      }
+    },
+    {
+      "key": "eagle:summit",
+      "make": "Eagle",
+      "model": "Summit",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "eagle:summitwagon",
+      "make": "Eagle",
+      "model": "Summit Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "eagle:talon",
+      "make": "Eagle",
+      "model": "Talon",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "eagle:vision",
+      "make": "Eagle",
+      "model": "Vision",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "eagle",
+        "modelId": null,
+        "canonicalMake": "Eagle",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ebro:s400",
+      "make": "EBRO",
+      "model": "S400",
+      "aliases": [
+        "S400 HEV"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ebro",
+        "modelId": "ebro/s400",
+        "canonicalMake": "EBRO",
+        "canonicalModel": "S400"
+      }
+    },
+    {
+      "key": "ebro:s700",
+      "make": "EBRO",
+      "model": "S700",
+      "aliases": [
+        "S700 PHEV"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ebro",
+        "modelId": "ebro/s700",
+        "canonicalMake": "EBRO",
+        "canonicalModel": "S700"
+      }
+    },
+    {
+      "key": "ebro:s700hev",
+      "make": "EBRO",
+      "model": "S700 HEV",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ebro",
+        "modelId": null,
+        "canonicalMake": "EBRO",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ebro:s800",
+      "make": "EBRO",
+      "model": "S800",
+      "aliases": [
+        "S800",
+        "S800 PHEV"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ebro",
+        "modelId": "ebro/s800",
+        "canonicalMake": "EBRO",
+        "canonicalModel": "S800"
+      }
+    },
+    {
+      "key": "ebro:s900",
+      "make": "EBRO",
+      "model": "S900",
+      "aliases": [
+        "S900 PHEV"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ebro",
+        "modelId": "ebro/s900",
+        "canonicalMake": "EBRO",
+        "canonicalModel": "S900"
+      }
+    },
+    {
+      "key": "edsel:citation",
+      "make": "Edsel",
+      "model": "Citation",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "edsel:corsair",
+      "make": "Edsel",
+      "model": "Corsair",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "edsel:pacer",
+      "make": "Edsel",
+      "model": "Pacer",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "edsel:ranger",
+      "make": "Edsel",
+      "model": "Ranger",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "edsel:villager",
+      "make": "Edsel",
+      "model": "Villager",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "elaris:pio",
+      "make": "Elaris",
+      "model": "Pio",
+      "aliases": [
+        "ELARIS PIO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "elaris",
+        "modelId": "elaris/pio",
+        "canonicalMake": "Elaris",
+        "canonicalModel": "Pio"
+      }
+    },
+    {
+      "key": "emc:quattro",
+      "make": "EMC",
+      "model": "Quattro",
+      "aliases": [
+        "EMC QUATTRO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "emc",
+        "modelId": "emc/quattro",
+        "canonicalMake": "EMC",
+        "canonicalModel": "Quattro"
+      }
+    },
+    {
+      "key": "emc:sei",
+      "make": "EMC",
+      "model": "Sei",
+      "aliases": [
+        "EMC SEI"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "emc",
+        "modelId": "emc/sei",
+        "canonicalMake": "EMC",
+        "canonicalModel": "Sei"
+      }
+    },
+    {
+      "key": "emc:sette",
+      "make": "EMC",
+      "model": "Sette",
+      "aliases": [
+        "EMC SETTE"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "emc",
+        "modelId": "emc/sette",
+        "canonicalMake": "EMC",
+        "canonicalModel": "Sette"
+      }
+    },
+    {
+      "key": "emc:wave2",
+      "make": "EMC",
+      "model": "Wave 2",
+      "aliases": [
+        "WAVE 2"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "emc",
+        "modelId": "emc/wave-2",
+        "canonicalMake": "EMC",
+        "canonicalModel": "Wave 2"
+      }
+    },
+    {
+      "key": "emc:wave3",
+      "make": "EMC",
+      "model": "Wave 3",
+      "aliases": [
+        "WAVE 3",
+        "WAVE 3 GPL"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "emc",
+        "modelId": "emc/wave-3",
+        "canonicalMake": "EMC",
+        "canonicalModel": "Wave 3"
+      }
+    },
+    {
+      "key": "eonyx:cargo",
+      "make": "EONYX",
+      "model": "Cargo",
+      "aliases": [],
+      "bodyTypes": [
+        "van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "eonyx",
+        "modelId": "eonyx/cargo",
+        "canonicalMake": "EONYX",
+        "canonicalModel": "Cargo"
+      }
+    },
+    {
+      "key": "eonyx:city",
+      "make": "EONYX",
+      "model": "City",
+      "aliases": [],
+      "bodyTypes": [
+        "microcar"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "eonyx",
+        "modelId": "eonyx/city",
+        "canonicalMake": "EONYX",
+        "canonicalModel": "City"
+      }
+    },
+    {
+      "key": "eonyx:pickup",
+      "make": "EONYX",
+      "model": "Pickup",
+      "aliases": [],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "eonyx",
+        "modelId": "eonyx/pickup",
+        "canonicalMake": "EONYX",
+        "canonicalModel": "Pickup"
+      }
+    },
+    {
+      "key": "essex:super6",
+      "make": "Essex",
+      "model": "Super 6",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "essex:supersix",
+      "make": "Essex",
+      "model": "Super Six",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "eunos:cosmo",
+      "make": "Eunos",
+      "model": "Cosmo",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "eunos:roadster",
+      "make": "Eunos",
+      "model": "Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "evo:3",
+      "make": "EVO",
+      "model": "3",
+      "aliases": [
+        "EVO3",
+        "EVO3 ELECTRIC"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "modelId": "evo/3",
+        "canonicalMake": "EVO",
+        "canonicalModel": "3"
+      }
+    },
+    {
+      "key": "evo:4",
+      "make": "EVO",
+      "model": "4",
+      "aliases": [
+        "EVO CUATRO",
+        "EVO4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "modelId": "evo/4",
+        "canonicalMake": "EVO",
+        "canonicalModel": "4"
+      }
+    },
+    {
+      "key": "evo:5",
+      "make": "EVO",
+      "model": "5",
+      "aliases": [
+        "EVO 5",
+        "EVO5"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "modelId": "evo/5",
+        "canonicalMake": "EVO",
+        "canonicalModel": "5"
+      }
+    },
+    {
+      "key": "evo:6",
+      "make": "EVO",
+      "model": "6",
+      "aliases": [
+        "EVO 6",
+        "EVO6"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "modelId": "evo/6",
+        "canonicalMake": "EVO",
+        "canonicalModel": "6"
+      }
+    },
+    {
+      "key": "evo:7",
+      "make": "EVO",
+      "model": "7",
+      "aliases": [
+        "EVO 7",
+        "EVO7",
+        "EVO7 SPORT"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "modelId": "evo/7",
+        "canonicalMake": "EVO",
+        "canonicalModel": "7"
+      }
+    },
+    {
+      "key": "evo:spazio",
+      "make": "EVO",
+      "model": "Spazio",
+      "aliases": [
+        "EVO SPAZIO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "modelId": "evo/spazio",
+        "canonicalMake": "EVO",
+        "canonicalModel": "Spazio"
+      }
+    },
+    {
+      "key": "evolute:ijet",
+      "make": "EVOLUTE",
+      "model": "i-JET",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "modelId": "evolute/i-jet",
+        "canonicalMake": "EVOLUTE",
+        "canonicalModel": "i-JET"
+      }
+    },
+    {
+      "key": "evolute:ijoy",
+      "make": "EVOLUTE",
+      "model": "i-JOY",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "modelId": "evolute/i-joy",
+        "canonicalMake": "EVOLUTE",
+        "canonicalModel": "i-JOY"
+      }
+    },
+    {
+      "key": "evolute:ipro",
+      "make": "EVOLUTE",
+      "model": "i-PRO",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "modelId": "evolute/i-pro",
+        "canonicalMake": "EVOLUTE",
+        "canonicalModel": "i-PRO"
+      }
+    },
+    {
+      "key": "evolute:isky",
+      "make": "EVOLUTE",
+      "model": "i-SKY",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "modelId": "evolute/i-sky",
+        "canonicalMake": "EVOLUTE",
+        "canonicalModel": "i-SKY"
+      }
+    },
+    {
+      "key": "evolute:ispace",
+      "make": "EVOLUTE",
+      "model": "i-SPACE",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "modelId": "evolute/i-space",
+        "canonicalMake": "EVOLUTE",
+        "canonicalModel": "i-SPACE"
+      }
+    },
+    {
+      "key": "evolute:ivan",
+      "make": "EVOLUTE",
+      "model": "i-VAN",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "modelId": "evolute/i-van",
+        "canonicalMake": "EVOLUTE",
+        "canonicalModel": "i-VAN"
+      }
+    },
+    {
+      "key": "excalibur:phaeton",
+      "make": "Excalibur",
+      "model": "Phaeton",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "exeed:et5",
+      "make": "EXEED",
+      "model": "ET5",
+      "aliases": [
+        "星途 ET5"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "exeed",
+        "modelId": "exeed/et5",
+        "canonicalMake": "EXEED",
+        "canonicalModel": "ET5"
+      }
+    },
+    {
+      "key": "exeed:ex7",
+      "make": "EXEED",
+      "model": "EX7",
+      "aliases": [
+        "星途 EX7"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "exeed",
+        "modelId": "exeed/ex7",
+        "canonicalMake": "EXEED",
+        "canonicalModel": "EX7"
+      }
+    },
+    {
+      "key": "exlantix:es",
+      "make": "Exlantix",
+      "model": "ES",
+      "aliases": [
+        "ES",
+        "EXLANTIX ES"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "exlantix",
+        "modelId": "exlantix/es",
+        "canonicalMake": "Exlantix",
+        "canonicalModel": "ES"
+      }
+    },
+    {
+      "key": "exlantix:et",
+      "make": "Exlantix",
+      "model": "ET",
+      "aliases": [
+        "ET"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "exlantix",
+        "modelId": "exlantix/et",
+        "canonicalMake": "Exlantix",
+        "canonicalModel": "ET"
+      }
+    },
+    {
+      "key": "faw:ehs9",
+      "make": "FAW",
+      "model": "E-HS9",
+      "aliases": [
+        "EHS9"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "faw",
+        "modelId": "faw/e-hs9",
+        "canonicalMake": "FAW",
+        "canonicalModel": "E-HS9"
+      }
+    },
+    {
+      "key": "faw:hongqiehs7",
+      "make": "FAW",
+      "model": "Hongqi EHS7",
+      "aliases": [
+        "HONGQI EHS7"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "faw",
+        "modelId": "faw/hongqi-ehs7",
+        "canonicalMake": "FAW",
+        "canonicalModel": "Hongqi EHS7"
+      }
+    },
+    {
+      "key": "ferrari:12cilindri",
+      "make": "Ferrari",
+      "model": "12CILINDRI",
+      "aliases": [
+        "12 CILINDRI",
+        "FERRARI 12 CILINDRI",
+        "FERRARI 12CILINDRI"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/12cilindri",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "12CILINDRI"
+      }
+    },
+    {
+      "key": "ferrari:12cilindrispider",
+      "make": "Ferrari",
+      "model": "12CILINDRI Spider",
+      "aliases": [
+        "12CILINDRI SPIDER",
+        "FERRARI 12 CILINDRI SPIDER",
+        "FERRARI 12CILINDRI SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/12cilindri-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "12CILINDRI Spider"
+      }
+    },
+    {
+      "key": "ferrari:166",
+      "make": "Ferrari",
+      "model": "166",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:250",
+      "make": "Ferrari",
+      "model": "250",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:250gte",
+      "make": "Ferrari",
+      "model": "250 GT/E",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:275",
+      "make": "Ferrari",
+      "model": "275",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:296",
+      "make": "Ferrari",
+      "model": "296",
+      "aliases": [
+        "296 GTS",
+        "FERRARI 296 GTS"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/296",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "296"
+      }
+    },
+    {
+      "key": "ferrari:296gtb",
+      "make": "Ferrari",
+      "model": "296 GTB",
+      "aliases": [
+        "FERRARI 296 GTB"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/296-gtb",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "296 GTB"
+      }
+    },
+    {
+      "key": "ferrari:296speciale",
+      "make": "Ferrari",
+      "model": "296 Speciale",
+      "aliases": [
+        "296 SPECIALE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/296-speciale",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "296 Speciale"
+      }
+    },
+    {
+      "key": "ferrari:296specialea",
+      "make": "Ferrari",
+      "model": "296 Speciale A",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:308",
+      "make": "Ferrari",
+      "model": "308",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:308gt4",
+      "make": "Ferrari",
+      "model": "308 GT4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:308gtb",
+      "make": "Ferrari",
+      "model": "308 GTB",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:308gtbi",
+      "make": "Ferrari",
+      "model": "308 GTBi",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:308gts",
+      "make": "Ferrari",
+      "model": "308 GTS",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:308gtsi",
+      "make": "Ferrari",
+      "model": "308 GTSi",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:328",
+      "make": "Ferrari",
+      "model": "328",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:328gtb",
+      "make": "Ferrari",
+      "model": "328 GTB",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:330",
+      "make": "Ferrari",
+      "model": "330",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:348",
+      "make": "Ferrari",
+      "model": "348",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:348spider",
+      "make": "Ferrari",
+      "model": "348 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:348tb",
+      "make": "Ferrari",
+      "model": "348 TB",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:348ts",
+      "make": "Ferrari",
+      "model": "348 TS",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:355",
+      "make": "Ferrari",
+      "model": "355",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:360",
+      "make": "Ferrari",
+      "model": "360",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:360challengestradale",
+      "make": "Ferrari",
+      "model": "360 Challenge Stradale",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:360modena",
+      "make": "Ferrari",
+      "model": "360 Modena",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:360modenaspider",
+      "make": "Ferrari",
+      "model": "360 Modena Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:360spider",
+      "make": "Ferrari",
+      "model": "360 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:365",
+      "make": "Ferrari",
+      "model": "365",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:365gt42plus2",
+      "make": "Ferrari",
+      "model": "365 GT4 2+2",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:365gt",
+      "make": "Ferrari",
+      "model": "365GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:400",
+      "make": "Ferrari",
+      "model": "400",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:400i",
+      "make": "Ferrari",
+      "model": "400 I",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:412",
+      "make": "Ferrari",
+      "model": "412",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:430",
+      "make": "Ferrari",
+      "model": "430",
+      "aliases": [
+        "FERRARI 430 SCUDERIA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/430",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "430"
+      }
+    },
+    {
+      "key": "ferrari:456",
+      "make": "Ferrari",
+      "model": "456",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:456gt",
+      "make": "Ferrari",
+      "model": "456 GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:456gtgta",
+      "make": "Ferrari",
+      "model": "456 GT/Gta",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:458",
+      "make": "Ferrari",
+      "model": "458",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:458italia",
+      "make": "Ferrari",
+      "model": "458 Italia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:458speciale",
+      "make": "Ferrari",
+      "model": "458 Speciale",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:458spider",
+      "make": "Ferrari",
+      "model": "458 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:488",
+      "make": "Ferrari",
+      "model": "488",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/488",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "488"
+      }
+    },
+    {
+      "key": "ferrari:488gtb",
+      "make": "Ferrari",
+      "model": "488 GTB",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/488-gtb",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "488 GTB"
+      }
+    },
+    {
+      "key": "ferrari:488pista",
+      "make": "Ferrari",
+      "model": "488 Pista",
+      "aliases": [
+        "488 PISTA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/488-pista",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "488 Pista"
+      }
+    },
+    {
+      "key": "ferrari:488pistaspider",
+      "make": "Ferrari",
+      "model": "488 Pista Spider",
+      "aliases": [
+        "488 PISTA SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/488-pista-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "488 Pista Spider"
+      }
+    },
+    {
+      "key": "ferrari:488spider",
+      "make": "Ferrari",
+      "model": "488 Spider",
+      "aliases": [
+        "488 SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/488-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "488 Spider"
+      }
+    },
+    {
+      "key": "ferrari:512",
+      "make": "Ferrari",
+      "model": "512",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:512bb",
+      "make": "Ferrari",
+      "model": "512 BB",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:512tr",
+      "make": "Ferrari",
+      "model": "512 TR",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:550",
+      "make": "Ferrari",
+      "model": "550",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:550maranello",
+      "make": "Ferrari",
+      "model": "550 Maranello",
+      "aliases": [
+        "550 MARANELLO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/550-maranello",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "550 Maranello"
+      }
+    },
+    {
+      "key": "ferrari:575",
+      "make": "Ferrari",
+      "model": "575",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:575mmaranello",
+      "make": "Ferrari",
+      "model": "575 M Maranello",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:575m",
+      "make": "Ferrari",
+      "model": "575M",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:599",
+      "make": "Ferrari",
+      "model": "599",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:599gtb",
+      "make": "Ferrari",
+      "model": "599 GTB",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:599gtbfiorano",
+      "make": "Ferrari",
+      "model": "599 GTB Fiorano",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:599gto",
+      "make": "Ferrari",
+      "model": "599 GTO",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:612",
+      "make": "Ferrari",
+      "model": "612",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:612scaglietti",
+      "make": "Ferrari",
+      "model": "612 Scaglietti",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:812",
+      "make": "Ferrari",
+      "model": "812",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/812",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "812"
+      }
+    },
+    {
+      "key": "ferrari:812competizione",
+      "make": "Ferrari",
+      "model": "812 Competizione",
+      "aliases": [
+        "812 COMPETIZIONE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/812-competizione",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "812 Competizione"
+      }
+    },
+    {
+      "key": "ferrari:812competizionea",
+      "make": "Ferrari",
+      "model": "812 Competizione A",
+      "aliases": [
+        "812 COMPETIZIONE A"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/812-competizione-a",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "812 Competizione A"
+      }
+    },
+    {
+      "key": "ferrari:812superfast",
+      "make": "Ferrari",
+      "model": "812 Superfast",
+      "aliases": [
+        "812 SUPERFAST"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/812-superfast",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "812 Superfast"
+      }
+    },
+    {
+      "key": "ferrari:849testarossa",
+      "make": "Ferrari",
+      "model": "849 Testarossa",
+      "aliases": [
+        "FERRARI 849 TESTAROSSA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/849-testarossa",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "849 Testarossa"
+      }
+    },
+    {
+      "key": "ferrari:amalfi",
+      "make": "Ferrari",
+      "model": "Amalfi",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:california",
+      "make": "Ferrari",
+      "model": "California",
+      "aliases": [
+        "CALIFORNIA"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/california",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "California"
+      }
+    },
+    {
+      "key": "ferrari:californiat",
+      "make": "Ferrari",
+      "model": "California T",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:daytona",
+      "make": "Ferrari",
+      "model": "Daytona",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:daytonasp3",
+      "make": "Ferrari",
+      "model": "Daytona SP3",
+      "aliases": [
+        "DAYTONA SP3",
+        "FERRARI DAYTONA SP3"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/daytona-sp3",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Daytona SP3"
+      }
+    },
+    {
+      "key": "ferrari:dino",
+      "make": "Ferrari",
+      "model": "Dino",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:dino208gt4",
+      "make": "Ferrari",
+      "model": "Dino 208GT4",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:dino246",
+      "make": "Ferrari",
+      "model": "Dino 246",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:dino246gt",
+      "make": "Ferrari",
+      "model": "Dino 246 GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:dino308gt4",
+      "make": "Ferrari",
+      "model": "Dino 308 GT4",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:dinogt",
+      "make": "Ferrari",
+      "model": "Dino GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:enzoferrari",
+      "make": "Ferrari",
+      "model": "Enzo Ferrari",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f430spider",
+      "make": "Ferrari",
+      "model": "F 430 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f12",
+      "make": "Ferrari",
+      "model": "F12",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f12berlinetta",
+      "make": "Ferrari",
+      "model": "F12 Berlinetta",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f12tdf",
+      "make": "Ferrari",
+      "model": "F12 Tdf",
+      "aliases": [
+        "F 12 TDF"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/f12-tdf",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "F12 Tdf"
+      }
+    },
+    {
+      "key": "ferrari:f355",
+      "make": "Ferrari",
+      "model": "F355",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f355berlinetta",
+      "make": "Ferrari",
+      "model": "F355 Berlinetta",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f355berlinettagts",
+      "make": "Ferrari",
+      "model": "F355 Berlinetta/GTS",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f355355f1",
+      "make": "Ferrari",
+      "model": "F355/355 F1",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f40",
+      "make": "Ferrari",
+      "model": "F40",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f430",
+      "make": "Ferrari",
+      "model": "F430",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f430scuderia",
+      "make": "Ferrari",
+      "model": "F430 Scuderia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f50",
+      "make": "Ferrari",
+      "model": "F50",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f512m",
+      "make": "Ferrari",
+      "model": "F512M",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:f8",
+      "make": "Ferrari",
+      "model": "F8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/f8",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "F8"
+      }
+    },
+    {
+      "key": "ferrari:f8spider",
+      "make": "Ferrari",
+      "model": "F8 Spider",
+      "aliases": [
+        "F8 SPIDER",
+        "F8 SPIDER / /"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/f8-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "F8 Spider"
+      }
+    },
+    {
+      "key": "ferrari:f8tributo",
+      "make": "Ferrari",
+      "model": "F8 Tributo",
+      "aliases": [
+        "F8 TRIBUTO",
+        "F8 TRIBUTO / /"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/f8-tributo",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "F8 Tributo"
+      }
+    },
+    {
+      "key": "ferrari:f80",
+      "make": "Ferrari",
+      "model": "F80",
+      "aliases": [
+        "FERRARI F80"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/f80",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "F80"
+      }
+    },
+    {
+      "key": "ferrari:ff",
+      "make": "Ferrari",
+      "model": "FF",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:gtc4lusso",
+      "make": "Ferrari",
+      "model": "GTC4Lusso",
+      "aliases": [
+        "GTC 4LUSSO",
+        "GTC4 Lusso",
+        "GTC4 LUSSO",
+        "GTC4LUSSO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/gtc4lusso",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "GTC4Lusso"
+      }
+    },
+    {
+      "key": "ferrari:gtc4lussot",
+      "make": "Ferrari",
+      "model": "GTC4Lusso T",
+      "aliases": [
+        "GTC4 Lusso T",
+        "GTC4 LUSSO T",
+        "GTC4 LussoT",
+        "GTC4LUSSO T",
+        "GTC4LUSSOT",
+        "GTC4LussoT"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/gtc4lusso-t",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "GTC4Lusso T"
+      }
+    },
+    {
+      "key": "ferrari:laferrari",
+      "make": "Ferrari",
+      "model": "LaFerrari",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:mondial",
+      "make": "Ferrari",
+      "model": "Mondial",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:mondial8",
+      "make": "Ferrari",
+      "model": "Mondial 8",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:mondialqv",
+      "make": "Ferrari",
+      "model": "Mondial QV",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    }
+  ]
+}

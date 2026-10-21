@@ -1,0 +1,6562 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 72,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "标致:标致508",
+      "make": "标致",
+      "model": "标致508",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M07/31/15/120x90_0_q95_autohomecar__ChxoHmfPEBqAKVEcACcS8ty_c_E522.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "森雅牌:ca6437a6",
+      "make": "森雅牌",
+      "model": "CA6437A6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457",
+      "make": "森雅牌",
+      "model": "CA6457",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca64571",
+      "make": "森雅牌",
+      "model": "CA64571",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457a",
+      "make": "森雅牌",
+      "model": "CA6457A",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457a1",
+      "make": "森雅牌",
+      "model": "CA6457A1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457a6",
+      "make": "森雅牌",
+      "model": "CA6457A6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457a6a",
+      "make": "森雅牌",
+      "model": "CA6457A6A",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457hev",
+      "make": "森雅牌",
+      "model": "CA6457HEV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "混合动力多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457m6",
+      "make": "森雅牌",
+      "model": "CA6457M6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca6457m6a",
+      "make": "森雅牌",
+      "model": "CA6457M6A",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途乘用车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca7157m6",
+      "make": "森雅牌",
+      "model": "CA7157M6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "轿车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "森雅牌:ca7157m6a1",
+      "make": "森雅牌",
+      "model": "CA7157M6A1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "轿车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "橙仕:橙仕01",
+      "make": "橙仕",
+      "model": "橙仕01",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g30/M0B/7C/34/120x90_0_q95_autohomecar__ChwFlGIhzm2AXUyWABu0L5hxwL4071.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "橙仕:橙仕x2",
+      "make": "橙仕",
+      "model": "橙仕X2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g30/M03/71/2D/120x90_0_q95_autohomecar__ChxknGIhbtGAMyD0AB4mhrtNEVg053.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "橙仕:橙仕x5",
+      "make": "橙仕",
+      "model": "橙仕X5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M05/4A/94/120x90_0_q95_autohomecar__ChxkPWaDvjiARMTrAAhXhg8N6wU717.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "橙仕:橙仕x6",
+      "make": "橙仕",
+      "model": "橙仕X6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M09/27/E6/120x90_0_q95_autohomecar__Chtk2WbymjSAQY9YABF3dtZiuT4441.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "橙仕:橙仕x7",
+      "make": "橙仕",
+      "model": "橙仕X7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g26/M07/A9/5E/120x90_0_q95_autohomecar__ChxkjmR9g-yAYOfMABpSjXfbPyw918.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉5",
+      "make": "欧拉",
+      "model": "欧拉5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M00/43/61/120x90_0_q95_autohomecar__ChxpVWoaoTCAF81HACnm3NtoUnw350.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉5ev",
+      "make": "欧拉",
+      "model": "欧拉5 EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M08/9A/BE/120x90_0_q95_autohomecar__ChxpWGjVF9OAYEULAHFqYXPpEEU013.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉5旅行车",
+      "make": "欧拉",
+      "model": "欧拉5旅行车",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉5旅行车新能源",
+      "make": "欧拉",
+      "model": "欧拉5旅行车新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉5运动款ev",
+      "make": "欧拉",
+      "model": "欧拉5运动款 EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉7",
+      "make": "欧拉",
+      "model": "欧拉7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉好猫",
+      "make": "欧拉",
+      "model": "欧拉好猫",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g24/M08/A7/19/120x90_0_q95_autohomecar__Chtk3WhC8gyADfriABERyYXzvZ0250.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉好猫gt",
+      "make": "欧拉",
+      "model": "欧拉好猫GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g30/M05/52/1B/120x90_0_q95_autohomecar__ChxknGRUj66ASPVpACCPwimsBDM132.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉芭蕾猫",
+      "make": "欧拉",
+      "model": "欧拉芭蕾猫",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g25/M00/BC/F6/120x90_0_q95_autohomecar__ChtliGUwn26AK8oSAA-_jpiWDkk968.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧拉:欧拉闪电猫",
+      "make": "欧拉",
+      "model": "欧拉闪电猫",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M04/C6/0F/120x90_0_q95_autohomecar__ChtlxWU_JYuAIrzUABv05MeWQcI802.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "欧铃汽车:活越神童01",
+      "make": "欧铃汽车",
+      "model": "活越神童01",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M04/F3/BC/120x90_0_q95_autohomecar__ChtlyGfMXX2AKn7CAB_BapzcgrA697.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:元plus",
+      "make": "比亚迪",
+      "model": "元PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:元pro",
+      "make": "比亚迪",
+      "model": "元Pro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:元up",
+      "make": "比亚迪",
+      "model": "元UP",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:唐l",
+      "make": "比亚迪",
+      "model": "唐L",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:唐新能源",
+      "make": "比亚迪",
+      "model": "唐新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:夏",
+      "make": "比亚迪",
+      "model": "夏",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:大唐",
+      "make": "比亚迪",
+      "model": "大唐",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:大汉",
+      "make": "比亚迪",
+      "model": "大汉",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:宋ldmi",
+      "make": "比亚迪",
+      "model": "宋L DM-i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:宋lev",
+      "make": "比亚迪",
+      "model": "宋L EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:宋max新能源",
+      "make": "比亚迪",
+      "model": "宋MAX新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:宋plus新能源",
+      "make": "比亚迪",
+      "model": "宋PLUS新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:宋pro新能源",
+      "make": "比亚迪",
+      "model": "宋Pro新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:宋ultra",
+      "make": "比亚迪",
+      "model": "宋Ultra",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:护卫舰07",
+      "make": "比亚迪",
+      "model": "护卫舰07",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪d1",
+      "make": "比亚迪",
+      "model": "比亚迪D1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪e2",
+      "make": "比亚迪",
+      "model": "比亚迪e2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M00/DA/96/120x90_0_q95_autohomecar__ChxoHWXx3J6AelXYACiFwyUIgTU311.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪e3",
+      "make": "比亚迪",
+      "model": "比亚迪e3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M05/3D/74/120x90_0_q95_autohomecar__ChtlxWguwP6AWlnYABLpkjxkY5g366.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪e6",
+      "make": "比亚迪",
+      "model": "比亚迪e6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪e7",
+      "make": "比亚迪",
+      "model": "比亚迪e7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M06/3E/A9/120x90_0_q95_autohomecar__ChxpVmizAqCALCPZABalifxnf0E801.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪e9",
+      "make": "比亚迪",
+      "model": "比亚迪e9",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:比亚迪m9",
+      "make": "比亚迪",
+      "model": "比亚迪M9",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:汉",
+      "make": "比亚迪",
+      "model": "汉",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:汉l",
+      "make": "比亚迪",
+      "model": "汉L",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海狮05dmi",
+      "make": "比亚迪",
+      "model": "海狮05 DM-i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海狮05ev",
+      "make": "比亚迪",
+      "model": "海狮05 EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海狮06",
+      "make": "比亚迪",
+      "model": "海狮06",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海狮07dmi",
+      "make": "比亚迪",
+      "model": "海狮07 DM-i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海狮07ev",
+      "make": "比亚迪",
+      "model": "海狮07 EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海狮08",
+      "make": "比亚迪",
+      "model": "海狮08",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豚",
+      "make": "比亚迪",
+      "model": "海豚",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M0B/23/F8/120x90_0_q95_autohomecar__Chtk2WaOlqSAAYd7ACtSf-gZcys451.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹",
+      "make": "比亚迪",
+      "model": "海豹",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹05dmi",
+      "make": "比亚迪",
+      "model": "海豹05 DM-i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M0A/1F/F6/120x90_0_q95_autohomecar__ChxpVmjeRwyAXL9IACu4nEvs08k019.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹06",
+      "make": "比亚迪",
+      "model": "海豹06",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M08/E2/93/120x90_0_q95_autohomecar__ChxpVWp0AdaAYWZOAB8oPkxA0No088.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹06dmi旅行版",
+      "make": "比亚迪",
+      "model": "海豹06 DM-i旅行版",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M01/72/FC/120x90_0_q95_autohomecar__ChxpWGnD8lmADzUoACiHhs8Ly5Y242.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹06gt",
+      "make": "比亚迪",
+      "model": "海豹06GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M01/A3/C3/120x90_0_q95_autohomecar__ChxpWGnI1m2AT30KACP6bi2PpIA567.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹07dmi",
+      "make": "比亚迪",
+      "model": "海豹07 DM-i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M05/9A/A1/120x90_0_q95_autohomecar__ChxpV2ilj0iADMhLACbh777AY1Q696.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹07ev",
+      "make": "比亚迪",
+      "model": "海豹07 EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M08/BB/04/120x90_0_q95_autohomecar__ChxpV2nLH9CAH0kcACnUQT26R3A585.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海豹08",
+      "make": "比亚迪",
+      "model": "海豹08",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:海鸥",
+      "make": "比亚迪",
+      "model": "海鸥",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M05/0E/08/120x90_0_q95_autohomecar__ChxpVWoVY42AUbRKACWgcJ0km0U154.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:秦l",
+      "make": "比亚迪",
+      "model": "秦L",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M00/7E/17/120x90_0_q95_autohomecar__ChxpWGjn2j2ABTdsADExI1Cf9ks312.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:秦max",
+      "make": "比亚迪",
+      "model": "秦MAX",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:秦plus",
+      "make": "比亚迪",
+      "model": "秦PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M02/3A/F4/120x90_0_q95_autohomecar__ChxpV2jNEMaABcN4ACY09vvH7xE431.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:秦新能源",
+      "make": "比亚迪",
+      "model": "秦新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M0B/4E/CA/120x90_0_q95_autohomecar__ChxkPWa75aOABgZaABCpEJ0K2cg239.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比亚迪:驱逐舰05",
+      "make": "比亚迪",
+      "model": "驱逐舰05",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M0A/ED/D4/120x90_0_q95_autohomecar__ChxoHWXdsNeAVo8RACTAsKzvLbs909.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "比克汽车:比克兴熠",
+      "make": "比克汽车",
+      "model": "比克兴熠",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g3/M04/3E/04/120x90_0_q95_autohomecar__ChsEm1-rmKyARSuAABA-JufJyY0874.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "永强牌:yq5030xpdev",
+      "make": "永强牌",
+      "model": "YQ5030XPDEV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "纯电动配电车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5040tsyz",
+      "make": "永强牌",
+      "model": "YQ5040TSYZ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "宿营车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5040xgc",
+      "make": "永强牌",
+      "model": "YQ5040XGC",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "电力工程车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5040xjl",
+      "make": "永强牌",
+      "model": "YQ5040XJL",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "计量车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5040xrqf1",
+      "make": "永强牌",
+      "model": "YQ5040XRQF1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5041tsyz",
+      "make": "永强牌",
+      "model": "YQ5041TSYZ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "宿营车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5070xrqj1",
+      "make": "永强牌",
+      "model": "YQ5070XRQJ1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5110xrqq1",
+      "make": "永强牌",
+      "model": "YQ5110XRQQ1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5120xrql3",
+      "make": "永强牌",
+      "model": "YQ5120XRQL3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5120xrqq1",
+      "make": "永强牌",
+      "model": "YQ5120XRQQ1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5120xryq2",
+      "make": "永强牌",
+      "model": "YQ5120XRYQ2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃液体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5180tpsz",
+      "make": "永强牌",
+      "model": "YQ5180TPSZ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "大流量排水抢险车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5180xpdz",
+      "make": "永强牌",
+      "model": "YQ5180XPDZ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "配电车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5180xrql2",
+      "make": "永强牌",
+      "model": "YQ5180XRQL2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5180xrqq2",
+      "make": "永强牌",
+      "model": "YQ5180XRQQ2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃气体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5180xryl2",
+      "make": "永强牌",
+      "model": "YQ5180XRYL2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃液体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5181xzwq2",
+      "make": "永强牌",
+      "model": "YQ5181XZWQ2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "杂项危险物品厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5250xdyz",
+      "make": "永强牌",
+      "model": "YQ5250XDYZ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "电源车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5260xryq2",
+      "make": "永强牌",
+      "model": "YQ5260XRYQ2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃液体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5260xzwl2",
+      "make": "永强牌",
+      "model": "YQ5260XZWL2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "杂项危险物品厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5310xryq1",
+      "make": "永强牌",
+      "model": "YQ5310XRYQ1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃液体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq5320xryq2",
+      "make": "永强牌",
+      "model": "YQ5320XRYQ2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "易燃液体厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq9291gyyt2",
+      "make": "永强牌",
+      "model": "YQ9291GYYT2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "铝合金运油半挂车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "永强牌:yq9400gryt2n",
+      "make": "永强牌",
+      "model": "YQ9400GRYT2N",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "铝合金易燃液体罐式运输半挂车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "汇天:汇天陆地航母",
+      "make": "汇天",
+      "model": "汇天陆地航母",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M08/1A/C3/120x90_0_q95_autohomecar__ChxpVWl7eF6AfsIAADy398XULhU983.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江南汽车:江南u2",
+      "make": "江南汽车",
+      "model": "江南U2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g24/M06/D1/2D/120x90_0_q95_autohomecar__Chtk3WPp11-AWBAoABloPppjeZ8585.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:van宝路",
+      "make": "江汽集团",
+      "model": "Van宝路",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M0A/65/6C/120x90_0_q95_autohomecar__ChxkPWc4ZDOACPJRABdeUwcrSso731.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:多米ev1",
+      "make": "江汽集团",
+      "model": "多米EV1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M09/7E/4D/120x90_0_q95_autohomecar__ChxoHmXq21yAKgAzAB78yrCs-JM678.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:恺达ex6",
+      "make": "江汽集团",
+      "model": "恺达EX6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g27/M0A/2A/CF/120x90_0_q95_autohomecar__ChxkmWTu9B6AOaIlAEcvlfn067A444.png"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:恺达u7",
+      "make": "江汽集团",
+      "model": "恺达U7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M05/45/CD/120x90_0_q95_autohomecar__Chtk2WdlSQaAIQFzAF0bnTFF9ds879.png"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:悍途",
+      "make": "江汽集团",
+      "model": "悍途",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M07/DA/BB/120x90_0_q95_autohomecar__ChxpVWoQFLKAVHNEAEP7Yo6qlMw677.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:悍途新能源",
+      "make": "江汽集团",
+      "model": "悍途新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M03/1D/CB/120x90_0_q95_autohomecar__ChxpWGixHDKATzxSABUYgZfhdBY206.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:星锐",
+      "make": "江汽集团",
+      "model": "星锐",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g27/M08/BE/46/120x90_0_q95_autohomecar__ChsEbGNCPJOAau-_AEG8miOELqM498.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:星锐ev",
+      "make": "江汽集团",
+      "model": "星锐EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M03/04/F6/120x90_0_q95_autohomecar__ChxoHmWuQ_6ARWYNAA9yppEZYQY548.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮iev7",
+      "make": "江汽集团",
+      "model": "江淮iEV7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g27/M00/E4/BE/120x90_0_q95_autohomecar__ChtlxmTmN32ARpwOACkiUugBIyk251.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮ieva50",
+      "make": "江汽集团",
+      "model": "江淮iEVA50",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g28/M02/64/E0/120x90_0_q95_autohomecar__ChsEfWA93iyAPTCnACLKpmnAb9o809.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮t6",
+      "make": "江汽集团",
+      "model": "江淮T6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M09/4D/E3/120x90_0_q95_autohomecar__Chtk2Wb0tIOAdqJ4ACsQ3cZnyPY547.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮t6ev",
+      "make": "江汽集团",
+      "model": "江淮T6 EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮t8",
+      "make": "江汽集团",
+      "model": "江淮T8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M03/A7/D7/120x90_0_q95_autohomecar__ChxoHWYGKfiAaNJ8ADIH_G01gMM218.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮t8新能源",
+      "make": "江汽集团",
+      "model": "江淮T8新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮卡拉",
+      "make": "江汽集团",
+      "model": "江淮卡拉",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M03/16/D4/120x90_0_q95_autohomecar__ChxoHmWzZtGAEwWWAFip5Wf0dqE512.png"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:江淮征程ev",
+      "make": "江汽集团",
+      "model": "江淮征程EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M0A/51/B3/120x90_0_q95_autohomecar__ChxoHWXVpMyAZ2VsAGDvRMI2KXU238.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江汽集团:蓝猫",
+      "make": "江汽集团",
+      "model": "蓝猫",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M09/84/A0/120x90_0_q95_autohomecar__ChxkPmZywSCAb7-QABOCalr1AyM609.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮汽车:江淮a5plus",
+      "make": "江淮汽车",
+      "model": "江淮A5 PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M06/0F/D4/120x90_0_q95_autohomecar__CjIFVmSKWk-ADCAeACXWiEljSzc876.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮汽车:江淮qxphev",
+      "make": "江淮汽车",
+      "model": "江淮QX PHEV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g28/M04/92/2A/120x90_0_q95_autohomecar__CjIFVGTsFBSAH919ABsW0cYquXg915.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮汽车:江淮x8e家",
+      "make": "江淮汽车",
+      "model": "江淮X8 E家",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M02/24/6D/120x90_0_q95_autohomecar__ChxkPmdkF-mATu8KACQsekcZwDo762.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮汽车:江淮x8plus",
+      "make": "江淮汽车",
+      "model": "江淮X8 PLUS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g28/M01/1F/2B/120x90_0_q95_autohomecar__CjIFVGVYJnGASemZACdjiHeds5o481.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风e3",
+      "make": "江淮瑞风",
+      "model": "瑞风E3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M0A/09/B1/120x90_0_q95_autohomecar__ChxpVmleUBuAONedACabBJocavk759.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风e4",
+      "make": "江淮瑞风",
+      "model": "瑞风E4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M05/B9/3B/120x90_0_q95_autohomecar__ChxpWGmxLWqAV-uHABz-4hs6jVE661.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风l5",
+      "make": "江淮瑞风",
+      "model": "瑞风L5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风l6max",
+      "make": "江淮瑞风",
+      "model": "瑞风L6 MAX",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风m3",
+      "make": "江淮瑞风",
+      "model": "瑞风M3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g30/M01/30/BC/120x90_0_q95_autohomecar__CjIFU2V31VqAOvgjADWuwu3lgWc119.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风m3phev",
+      "make": "江淮瑞风",
+      "model": "瑞风M3 PHEV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M00/DD/C2/120x90_0_q95_autohomecar__ChxkPWcXaUuAO-MoAD6zqbJnuzk679.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风m4",
+      "make": "江淮瑞风",
+      "model": "瑞风M4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M09/2C/B5/120x90_0_q95_autohomecar__ChxpVmnV_UKAArUdADm_SgfEzxU237.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风rf8",
+      "make": "江淮瑞风",
+      "model": "瑞风RF8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g33/M0A/8A/16/120x90_0_q95_autohomecar__ChxpVWnd9cCAIkAjABl0R7ezt8A824.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮瑞风:瑞风rf8phev",
+      "make": "江淮瑞风",
+      "model": "瑞风RF8 PHEV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M05/28/C4/120x90_0_q95_autohomecar__ChxpV2m8NwWAT8WiACV78PoQc0k965.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮钇为:爱跑",
+      "make": "江淮钇为",
+      "model": "爱跑",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M04/6C/09/120x90_0_q95_autohomecar__ChxoHmYKI7OAce8ZADZl5PDJ24M651.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮钇为:钇为3",
+      "make": "江淮钇为",
+      "model": "钇为3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g28/M00/A6/CE/120x90_0_q95_autohomecar__ChxkmmgaxPqAWVdDAGVBa5QYhug299.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江淮钇为:钇为花仙子",
+      "make": "江淮钇为",
+      "model": "钇为花仙子",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M01/89/40/120x90_0_q95_autohomecar__ChxkPmZnv8GAPiU6AErJn6bNi4Q272.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:e福顺",
+      "make": "江铃",
+      "model": "E福顺",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g30/M06/E0/2C/120x90_0_q95_autohomecar__ChxknGfksYiAX0TcAApH5KOtsO0003.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:e福顺小卡",
+      "make": "江铃",
+      "model": "E福顺小卡",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M06/BC/F2/120x90_0_q95_autohomecar__ChxoHWerITSAcPblAAXW3L16ZFY965.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:e路顺",
+      "make": "江铃",
+      "model": "E路顺",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:e路顺v6",
+      "make": "江铃",
+      "model": "E路顺V6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M00/38/DC/120x90_0_q95_autohomecar__ChxoHmX5L4yANMnBABieRKAK2Jo237.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:e顺达",
+      "make": "江铃",
+      "model": "E顺达",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M03/46/AD/120x90_0_q95_autohomecar__ChxkPmc27h-ABhFGAADNNgbSz6M157.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:乐行e路达",
+      "make": "江铃",
+      "model": "乐行E路达",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M07/EE/8E/120x90_0_q95_autohomecar__CjIFVmSrznaAedWGAAZ8xx07zJU517.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:凯锐ev",
+      "make": "江铃",
+      "model": "凯锐EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M06/F5/1E/120x90_0_q95_autohomecar__ChxkjmTsVA6AQidZAATq8K7lAm0932.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:域虎",
+      "make": "江铃",
+      "model": "域虎",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M05/7B/93/120x90_0_q95_autohomecar__ChxkPWg0dTiAfVIoAG-WZOTgEyU799.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:域虎7",
+      "make": "江铃",
+      "model": "域虎7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:域虎9",
+      "make": "江铃",
+      "model": "域虎9",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:域虎9多功能车",
+      "make": "江铃",
+      "model": "域虎9多功能车",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g25/M03/54/8B/120x90_0_q95_autohomecar__ChwFj2JBjUqAY3rTAAZSByQnwko871.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:域虎ev",
+      "make": "江铃",
+      "model": "域虎EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:大道",
+      "make": "江铃",
+      "model": "大道",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M03/3D/93/120x90_0_q95_autohomecar__ChtpWGnrIB6ABU-UADALd-s173Q008.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:大道新能源",
+      "make": "江铃",
+      "model": "大道新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M08/4B/31/120x90_0_q95_autohomecar__ChxoHWZXGGuANxxJACrvLUiQI24104.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:宝典",
+      "make": "江铃",
+      "model": "宝典",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M06/83/78/120x90_0_q95_autohomecar__ChxoHWgI6luACQWUACA21Y7xEwQ761.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:江铃凯运",
+      "make": "江铃",
+      "model": "江铃凯运",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M04/77/2D/120x90_0_q95_autohomecar__ChxpVmmqmfGAERIOABZJdPsunIE266.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:江铃福顺",
+      "make": "江铃",
+      "model": "江铃福顺",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g28/M09/5E/E3/120x90_0_q95_autohomecar__Chtlx2THnNqAfaikACPb6zpFR4M080.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:特顺",
+      "make": "江铃",
+      "model": "特顺",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:特顺ev",
+      "make": "江铃",
+      "model": "特顺EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:顺达",
+      "make": "江铃",
+      "model": "顺达",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M02/3E/3E/120x90_0_q95_autohomecar__Chtk2Wgqq3aAPLuZABHj4zE_DcE224.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃:顺达ev",
+      "make": "江铃",
+      "model": "顺达EV",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g25/M07/24/77/120x90_0_q95_autohomecar__ChxkqWTsVDGANFt-AAVVvooU8Tg380.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃晶马汽车:e路福",
+      "make": "江铃晶马汽车",
+      "model": "E路福",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g25/M09/D9/74/120x90_0_q95_autohomecar__ChtliGU1wvWAKJfyABynWBPAbUE463.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃晶马汽车:福运",
+      "make": "江铃晶马汽车",
+      "model": "福运",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M03/A5/FB/120x90_0_q95_autohomecar__ChxkPmax5iqAXgOzAB-DAgXE-Lg993.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃晶马汽车:福运新能源",
+      "make": "江铃晶马汽车",
+      "model": "福运新能源",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g25/M04/BB/AD/120x90_0_q95_autohomecar__CjIFV2U1zNaAUi38ACOjDURwsfo523.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:易至ev2",
+      "make": "江铃集团新能源",
+      "model": "易至EV2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g25/M09/9E/7C/120x90_0_q95_autohomecar__CjIFV2VNoKmABYNnABfE2dsK7YI318.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:易至ev3",
+      "make": "江铃集团新能源",
+      "model": "易至EV3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M06/0B/22/120x90_0_q95_autohomecar__ChxpVmoVKRCACw28ADI7Ab2QBsU958.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:羿",
+      "make": "江铃集团新能源",
+      "model": "羿",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g25/M02/9E/D7/120x90_0_q95_autohomecar__CjIFV2VNpd6AKdK3ABqtpjWM898621.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:羿驰01",
+      "make": "江铃集团新能源",
+      "model": "羿驰01",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M05/26/5E/120x90_0_q95_autohomecar__ChtlyGd3n_mAenMkAG7ULAWXzH8077.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:羿驰05",
+      "make": "江铃集团新能源",
+      "model": "羿驰05",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M0B/73/81/120x90_0_q95_autohomecar__ChxpVWnuybSAcubNAC56n2WNrg4027.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:羿驰05s",
+      "make": "江铃集团新能源",
+      "model": "羿驰05S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M0B/CA/F1/120x90_0_q95_autohomecar__ChxpWGj_WweAHAN0ABRiwaZbmo8414.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "江铃集团新能源:颐驰06",
+      "make": "江铃集团新能源",
+      "model": "颐驰06",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃勒汽车:沃勒f150猛禽凌枭",
+      "make": "沃勒汽车",
+      "model": "沃勒F-150猛禽凌枭",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M05/8F/95/120x90_0_q95_autohomecar__Chto52k5Wp6ATHo1ACIz8AIUoks209.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃勒汽车:沃勒游骑侠ranger旅居车",
+      "make": "沃勒汽车",
+      "model": "沃勒游骑侠Ranger旅居车",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M02/92/E9/120x90_0_q95_autohomecar__ChxpV2iMVFCAXspQAA_P3xSg61k964.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃em90",
+      "make": "沃尔沃",
+      "model": "沃尔沃EM90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M0B/C1/EA/120x90_0_q95_autohomecar__ChxkPmZ9hpiAfA8AACa2zvwJG1c299.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃es90",
+      "make": "沃尔沃",
+      "model": "沃尔沃ES90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M08/D1/05/120x90_0_q95_autohomecar__ChxpWGopJpiATDPMAChyuH_laY4817.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃ex30",
+      "make": "沃尔沃",
+      "model": "沃尔沃EX30",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M07/19/6E/120x90_0_q95_autohomecar__ChtlyGZWB6OAdedJACZrqYg8-Ag510.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃ex90",
+      "make": "沃尔沃",
+      "model": "沃尔沃EX90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M06/73/C6/120x90_0_q95_autohomecar__ChtpWGncwsOAWrn9AEuFk5-mzpg772.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃s60",
+      "make": "沃尔沃",
+      "model": "沃尔沃S60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M0A/6C/6D/120x90_0_q95_autohomecar__ChtpWGoFoDeAVfZiAB9XeIsnPQg848.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃s60插电式混动",
+      "make": "沃尔沃",
+      "model": "沃尔沃S60插电式混动",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃s90",
+      "make": "沃尔沃",
+      "model": "沃尔沃S90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g27/M02/D2/8F/120x90_0_q95_autohomecar__CjIFVWgmkQmAIjOvADAf8CdPC_w059.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃s90插电式混动",
+      "make": "沃尔沃",
+      "model": "沃尔沃S90插电式混动",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M06/D9/E3/120x90_0_q95_autohomecar__ChtlyGgWG62AS6XPAFWifYLJ_uA039.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃v60",
+      "make": "沃尔沃",
+      "model": "沃尔沃V60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g26/M0A/20/91/120x90_0_q95_autohomecar__ChtlxWTjNN-ANg_RABCSSdHaqkI731.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃v90",
+      "make": "沃尔沃",
+      "model": "沃尔沃V90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g32/M03/6C/7D/120x90_0_q95_autohomecar__Chtk2WdD7y-AbLD7ADBYw8JSvIs030.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃xc40",
+      "make": "沃尔沃",
+      "model": "沃尔沃XC40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g28/M01/40/32/120x90_0_q95_autohomecar__ChxkmmhK9PCAIwWRAD_0mYGrcS8201.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃xc60",
+      "make": "沃尔沃",
+      "model": "沃尔沃XC60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M0B/3C/87/120x90_0_q95_autohomecar__ChxpVWphlKOAe72NACRTxA7W5JI032.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃xc60插电式混动",
+      "make": "沃尔沃",
+      "model": "沃尔沃XC60插电式混动",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M09/65/F8/120x90_0_q95_autohomecar__ChtpWGlMtP2ASGhPACF4KTmMJv8796.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃xc70插电式混动",
+      "make": "沃尔沃",
+      "model": "沃尔沃XC70插电式混动",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M07/DA/C7/120x90_0_q95_autohomecar__ChxpVmn4CmSAHeRSACYMmZC6yhY236.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃xc90",
+      "make": "沃尔沃",
+      "model": "沃尔沃XC90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M00/0A/A1/120x90_0_q95_autohomecar__ChtlyGf_bt-AUieIAC8fY-YN9LQ788.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃尔沃:沃尔沃xc90插电式混动",
+      "make": "沃尔沃",
+      "model": "沃尔沃XC90插电式混动",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M05/C1/B9/120x90_0_q95_autohomecar__ChtlyGfLAi2ADpc3ADIrpDQTauE149.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃森威尔:沃森威尔1917宿营车",
+      "make": "沃森威尔",
+      "model": "沃森威尔1917宿营车",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M01/E5/33/120x90_0_q95_autohomecar__ChxpV2kpebKAJFIuAFjrvJ-8zTw340.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃森威尔:沃森威尔福特黑武士",
+      "make": "沃森威尔",
+      "model": "沃森威尔福特黑武士",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g30/M05/83/57/120x90_0_q95_autohomecar__CjIFU2V1h-GAcVz_ADYUymfQVf8741.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沃森威尔:沃森威尔路咖啡",
+      "make": "沃森威尔",
+      "model": "沃森威尔路咖啡",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g26/M06/F2/47/120x90_0_q95_autohomecar__ChtlxWgRlEyAeSn_ACNl-UiOM54271.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沙龙汽车:机甲龙",
+      "make": "沙龙汽车",
+      "model": "机甲龙",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g29/M01/7A/22/120x90_0_q95_autohomecar__ChsFVWMIIRiAQorAABI7kwTWUo8684.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "沪尊牌:cal1030c1dg1e5",
+      "make": "沪尊牌",
+      "model": "CAL1030C1DG1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途货车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1030c1dg2e5",
+      "make": "沪尊牌",
+      "model": "CAL1030C1DG2E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "多用途货车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1040c0cd1e5",
+      "make": "沪尊牌",
+      "model": "CAL1040C0CD1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1040dcre51",
+      "make": "沪尊牌",
+      "model": "CAL1040DCRE5-1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1040pcre5",
+      "make": "沪尊牌",
+      "model": "CAL1040PCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1041dcre5",
+      "make": "沪尊牌",
+      "model": "CAL1041DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1081dcre5",
+      "make": "沪尊牌",
+      "model": "CAL1081DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1082c1a1e5",
+      "make": "沪尊牌",
+      "model": "CAL1082C1A1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1082c1a1e5d",
+      "make": "沪尊牌",
+      "model": "CAL1082C1A1E5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1101dcre5",
+      "make": "沪尊牌",
+      "model": "CAL1101DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1110c2a1e5",
+      "make": "沪尊牌",
+      "model": "CAL1110C2A1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1110c2a1e5d",
+      "make": "沪尊牌",
+      "model": "CAL1110C2A1E5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1160c2gf1e5",
+      "make": "沪尊牌",
+      "model": "CAL1160C2GF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1250c3kf4e5",
+      "make": "沪尊牌",
+      "model": "CAL1250C3KF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal1310c4mf6e5",
+      "make": "沪尊牌",
+      "model": "CAL1310C4MF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal2041dcre5",
+      "make": "沪尊牌",
+      "model": "CAL2041DCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "越野载货汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3040c1d1e5",
+      "make": "沪尊牌",
+      "model": "CAL3040C1D1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3040c1d1e5d",
+      "make": "沪尊牌",
+      "model": "CAL3040C1D1E5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3041c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3041C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3042c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3042C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3043c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3043C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3044c2ff1e5",
+      "make": "沪尊牌",
+      "model": "CAL3044C2FF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3120c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3120C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3121c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3121C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3160c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3160C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3161c1df1e5",
+      "make": "沪尊牌",
+      "model": "CAL3161C1DF1E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3251c2gf3e5",
+      "make": "沪尊牌",
+      "model": "CAL3251C2GF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3251c2kf3e5",
+      "make": "沪尊牌",
+      "model": "CAL3251C2KF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3251c3kf4e5",
+      "make": "沪尊牌",
+      "model": "CAL3251C3KF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3252c2gf3e5",
+      "make": "沪尊牌",
+      "model": "CAL3252C2GF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3252c2kf3e5",
+      "make": "沪尊牌",
+      "model": "CAL3252C2KF3E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3252c3kf4e5",
+      "make": "沪尊牌",
+      "model": "CAL3252C3KF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3310c3kf6e5",
+      "make": "沪尊牌",
+      "model": "CAL3310C3KF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3311c4mf6e5",
+      "make": "沪尊牌",
+      "model": "CAL3311C4MF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3312c4mf6e5",
+      "make": "沪尊牌",
+      "model": "CAL3312C4MF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3312c4nf6e5",
+      "make": "沪尊牌",
+      "model": "CAL3312C4NF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3312c4pf6e5",
+      "make": "沪尊牌",
+      "model": "CAL3312C4PF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal3313c4lf6e5",
+      "make": "沪尊牌",
+      "model": "CAL3313C4LF6E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸汽车底盘",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4180c3ff4e5",
+      "make": "沪尊牌",
+      "model": "CAL4180C3FF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4250c4gf4e5",
+      "make": "沪尊牌",
+      "model": "CAL4250C4GF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4251c4gf4e5",
+      "make": "沪尊牌",
+      "model": "CAL4251C4GF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4251q4f4e6",
+      "make": "沪尊牌",
+      "model": "CAL4251Q4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4252c4gf4e5",
+      "make": "沪尊牌",
+      "model": "CAL4252C4GF4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4252q4f4e6",
+      "make": "沪尊牌",
+      "model": "CAL4252Q4F4E6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal4253c4f4e5",
+      "make": "沪尊牌",
+      "model": "CAL4253C4F4E5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "半挂牵引车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5030tyhe5",
+      "make": "沪尊牌",
+      "model": "CAL5030TYHE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "路面养护车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5040ccydcre5",
+      "make": "沪尊牌",
+      "model": "CAL5040CCYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5040ccydcre51",
+      "make": "沪尊牌",
+      "model": "CAL5040CCYDCRE5-1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5040xxydcre5",
+      "make": "沪尊牌",
+      "model": "CAL5040XXYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5040xxydcre51",
+      "make": "沪尊牌",
+      "model": "CAL5040XXYDCRE5-1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041ccydcre5",
+      "make": "沪尊牌",
+      "model": "CAL5041CCYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041ctye5",
+      "make": "沪尊牌",
+      "model": "CAL5041CTYE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "桶装垃圾运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041tpbe5",
+      "make": "沪尊牌",
+      "model": "CAL5041TPBE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "平板运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041tqzdcre5",
+      "make": "沪尊牌",
+      "model": "CAL5041TQZDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "清障车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041xcce5",
+      "make": "沪尊牌",
+      "model": "CAL5041XCCE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "餐车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041xlcdcre5",
+      "make": "沪尊牌",
+      "model": "CAL5041XLCDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "冷藏车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041xlje5",
+      "make": "沪尊牌",
+      "model": "CAL5041XLJE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "旅居车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041xxydcre5",
+      "make": "沪尊牌",
+      "model": "CAL5041XXYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5041zlje5",
+      "make": "沪尊牌",
+      "model": "CAL5041ZLJE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "自卸式垃圾车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5081ccydcre5",
+      "make": "沪尊牌",
+      "model": "CAL5081CCYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "仓栅式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5081tsle5",
+      "make": "沪尊牌",
+      "model": "CAL5081TSLE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "扫路车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5081txce5",
+      "make": "沪尊牌",
+      "model": "CAL5081TXCE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "吸尘车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    },
+    {
+      "sourceKey": "沪尊牌:cal5081xxydcre5",
+      "make": "沪尊牌",
+      "model": "CAL5081XXYDCRE5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": [
+        {
+          "value": "厢式运输车",
+          "language": "zh",
+          "source": "miit"
+        }
+      ]
+    }
+  ]
+}

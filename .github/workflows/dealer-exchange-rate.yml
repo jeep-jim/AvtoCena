@@ -1,0 +1,16 @@
+name: Refresh dealer USD rate
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Refresh cached ProFinance quote
+        run: |
+          curl --fail --silent --show-error --max-time 40 --retry 2 https://avtocena.com/api/dealers/exchange-rate -o rate.json
+          node -e 'const r=require("./rate.json"); if(!r.quote || r.error) { console.error(r.error || "No dealer exchange rate"); process.exit(1); } console.log("USD/RUB", r.quote.value, "quote time", r.quote.quoteAt);'

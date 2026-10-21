@@ -1,0 +1,236 @@
+import {SESSION_COOKIE_MAX_AGE, persistentSessionFields, sessionTimeValid, sessionNeedsRenewal} from "./lib/session-policy";
+import {isPlatformTeam} from "./lib/platform-access";
+import { NextRequest, NextResponse } from "next/server";
+
+const COOKIE_NAME = "avtocena_session";
+const DOCS_COOKIE_NAME = "avtocena_cpa_docs";
+
+type SessionPayload = {
+  id: string;
+  role: "owner" | "admin" | "manager" | "partner" | "dealer";
+  companyId?: string;
+  exp: number;
+  persistent?: boolean;
+  renewedAt?: number;
+  partnerCode?: string;
+};
+
+function authSecret() {
+  const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+  return secret || (process.env.NODE_ENV === "production" ? null : "avtocena-dev-secret-change-me");
+}
+
+function base64url(bytes: ArrayBuffer | Uint8Array) {
+  const array = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  let binary = "";
+  array.forEach((byte) => { binary += String.fromCharCode(byte); });
+  return btoa(binary).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+}
+
+function decodeBase64url(value: string) {
+  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = normalized.padEnd(normalized.length + ((4 - (normalized.length % 4)) % 4), "=");
+  return atob(padded);
+}
+
+async function signPayload(encodedPayload: string) {
+  const secret = authSecret();
+  if (!secret) return null;
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey("raw", encoder.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(encodedPayload));
+  return base64url(signature);
+}
+
+async function getSession(request: NextRequest): Promise<SessionPayload | null> {
+  const raw = request.cookies.get(COOKIE_NAME)?.value;
+  if (!raw || !raw.includes(".")) return null;
+  const [encodedPayload, signature, ...extra] = raw.split(".");
+  if (!encodedPayload || !signature || extra.length) return null;
+  const expected = await signPayload(encodedPayload);
+  if (!expected || expected !== signature) return null;
+  try {
+    const payload = JSON.parse(decodeBase64url(encodedPayload)) as SessionPayload;
+    if (!sessionTimeValid(payload)) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+function isCrmRole(role?: string | null) { return role === "owner" || role === "admin" || role === "manager"; }
+function isAdminRole(role?: string | null) { return role === "owner" || role === "admin"; }
+function isPartnerRole(role?: string | null) { return role === "owner" || role === "admin" || role === "partner"; }
+function wantsJson(pathname: string) { return pathname.startsWith("/api/"); }
+
+function isBrowserFormNavigation(request: NextRequest) {
+  const accept = request.headers.get("accept") || "";
+  const mode = request.headers.get("sec-fetch-mode") || "";
+  return request.method !== "GET" && (mode === "navigate" || accept.includes("text/html"));
+}
+
+function denyOrRedirect(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  if (wantsJson(pathname) && !isBrowserFormNavigation(request)) {
+    return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
+  }
+  const url = request.nextUrl.clone();
+  url.pathname = "/login";
+  url.search = "";
+  url.searchParams.set("next", `${request.nextUrl.pathname}${request.nextUrl.search}`);
+  url.searchParams.set("error", "auth_required");
+  return NextResponse.redirect(url, { status: request.method === "GET" ? 307 : 303 });
+}
+
+function hasValidCpaDocsKey(request: NextRequest) {
+  const expected = process.env.CPA_DOCS_KEY || process.env.CPA_API_SECRET || "";
+  if (!expected) return false;
+  const queryKey = request.nextUrl.searchParams.get("key") || request.nextUrl.searchParams.get("secret");
+  const bearer = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+  const saved = request.cookies.get(DOCS_COOKIE_NAME)?.value;
+  return queryKey === expected || bearer === expected || saved === expected;
+}
+
+function allowWithDocsCookie(request: NextRequest) {
+  const response = NextResponse.next();
+  const expected = process.env.CPA_DOCS_KEY || process.env.CPA_API_SECRET || "";
+  const queryKey = request.nextUrl.searchParams.get("key") || request.nextUrl.searchParams.get("secret");
+  if (expected && queryKey === expected) {
+    response.cookies.set(DOCS_COOKIE_NAME, expected, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 14,
+    });
+  }
+  return response;
+}
+
+async function routeRequest(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Only explicit stock requests redirect to Green Corner. Paid auctions use
+  // their own live section and must not inherit the retired-source redirect.
+  if ((request.method === "GET" || request.method === "HEAD") && request.nextUrl.searchParams.get("stock") === "green" &&
+      (pathname === "/cars/japan" || (pathname === "/cars" && request.nextUrl.searchParams.get("market")?.toLowerCase() === "japan"))) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/cars/green";
+    for (const key of ["stock", "auctionGrade", "auctionDateFrom", "auctionDateTo", "page"]) url.searchParams.delete(key);
+    url.searchParams.set("market", "japan");
+    url.searchParams.set("stock", "green");
+    return NextResponse.redirect(url, 307);
+  }
+
+  const legacyOffer=pathname.match(/^\/cars\/offer\/([^/]+)$/);
+  if ((request.method === 'GET' || request.method === 'HEAD') && legacyOffer && !legacyOffer[1].includes('--') && !legacyOffer[1].startsWith('special_')) {
+    const url=request.nextUrl.clone();
+    url.pathname=`/api/catalog/offer-redirect/${legacyOffer[1]}`;
+    return NextResponse.rewrite(url);
+  }
+
+  if (pathname === "/" && request.method === "GET" && request.nextUrl.searchParams.get("lead") === "1") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/request";
+    url.searchParams.delete("lead");
+    return NextResponse.redirect(url, { status: 307 });
+  }
+
+  if (pathname === "/api/cpa" && request.method === "POST") return NextResponse.next();
+  if (pathname === "/api/partners" && request.method === "POST") return NextResponse.next();
+
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/favicon") ||
+    pathname.startsWith("/manifest") ||
+    pathname.startsWith("/brands") ||
+    pathname.startsWith("/icons") ||
+    pathname.startsWith("/logo") ||
+    pathname === "/login" ||
+    pathname.startsWith("/api/auth") ||
+    pathname === "/api/health" ||
+    pathname === "/api/avtocena" ||
+    pathname.startsWith("/auto") ||
+    pathname === "/" ||
+    pathname === "/results" ||
+    pathname === "/partner/landing"
+  ) return NextResponse.next();
+
+  const session = await getSession(request);
+
+  // Unreleased dealer marketing pages are private; crawlers must see a real 404.
+  // Do not block these URLs in robots.txt: bots need to observe their removal.
+  if (pathname === "/dealers/demo") {
+    const headers = { "X-Robots-Tag": "noindex, nofollow, noarchive", "Cache-Control": "private, no-store" };
+    if (request.nextUrl.searchParams.get("preview") === "1" && isPlatformTeam(session)) {
+      return NextResponse.next({ headers });
+    }
+    return new NextResponse('<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Страница не найдена — АвтоЦена</title></head><body style="font-family:system-ui;text-align:center;padding:12vh 24px"><h1>Страница не найдена</h1><p>Воспользуйтесь каталогом автомобилей.</p><a href="/cars">Перейти в каталог</a></body></html>', { status: 404, headers: { ...headers, "Content-Type": "text/html; charset=utf-8" } });
+  }
+
+  if (pathname === "/api/partners/payout-request") {
+    if (session?.role === "partner" || (isPlatformTeam(session) && isPartnerRole(session?.role))) return NextResponse.next();
+    return denyOrRedirect(request);
+  }
+
+  if (pathname === "/partner/api" || pathname.startsWith("/partner/api/")) {
+    if ((isPlatformTeam(session) && isAdminRole(session?.role)) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
+    return denyOrRedirect(request);
+  }
+
+  if (session?.role === "dealer" && /^\/api\/crm\/dealers\/[a-zA-Z0-9_-]+\/(showcase|media|market-quote)$/.test(pathname)) return NextResponse.next();
+  // The handler verifies dealer approval, workspace and client ownership.
+  if (session?.role === "dealer" && pathname === "/api/crm/customer-access") return NextResponse.next();
+  if (pathname === "/crm" || pathname.startsWith("/crm/") || pathname.startsWith("/api/crm")) {
+    if (session && isPlatformTeam(session)) return NextResponse.next();
+    if(session && !wantsJson(pathname)) return NextResponse.redirect(new URL("/dealer-cabinet",request.url));
+    return denyOrRedirect(request);
+  }
+
+  if (pathname === "/partner" || pathname.startsWith("/partner/")) {
+    if (session?.role === "partner" || (isPlatformTeam(session) && isPartnerRole(session?.role))) return NextResponse.next();
+    return denyOrRedirect(request);
+  }
+
+  if (pathname === "/api/leads" && request.method === "GET") {
+    if (isPlatformTeam(session)) return NextResponse.next();
+    return denyOrRedirect(request);
+  }
+
+  if (pathname === "/api/partners") {
+    if (isPlatformTeam(session)) return NextResponse.next();
+    return denyOrRedirect(request);
+  }
+
+  if (pathname === "/api/cpa") {
+    if ((isPlatformTeam(session) && isAdminRole(session?.role)) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
+    return denyOrRedirect(request);
+  }
+
+  return NextResponse.next();
+}
+
+export const config = { matcher: ["/((?!.*\\..*).*)"] };
+
+export async function middleware(request: NextRequest) {
+  const response = await routeRequest(request);
+  // Never overwrite logout/login responses, errors, or redirects with a renewed cookie.
+  if (request.method !== "GET" || response.status >= 300 || /\/(?:login|logout)(?:\/|$)/.test(request.nextUrl.pathname)) return response;
+  for (const [name, prefix] of [[COOKIE_NAME, ""], ["avtocena_customer", "customer:"]] as const) {
+    const raw = request.cookies.get(name)?.value;
+    if (!raw) continue;
+    try {
+      const [body, signature, ...extra] = raw.split(".");
+      if (!body || !signature || extra.length || await signPayload(prefix + body) !== signature) continue;
+      const payload = JSON.parse(decodeBase64url(body));
+      if (!sessionTimeValid(payload, !!prefix) || !sessionNeedsRenewal(payload)) continue;
+      // Only a still-valid legacy token is migrated. Expired tokens are never revived.
+      const nextBody = base64url(new TextEncoder().encode(JSON.stringify({...payload, ...persistentSessionFields()})));
+      const nextSignature = await signPayload(prefix + nextBody);
+      if (!nextSignature) continue;
+      response.cookies.set(name, nextBody + "." + nextSignature, {httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: SESSION_COOKIE_MAX_AGE});
+      response.headers.set("Cache-Control", "private, no-store");
+    } catch { /* A malformed cookie cannot establish or renew a session. */ }
+  }
+  return response;
+}

@@ -1,0 +1,7234 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 80,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-62b8c2724e0bec4ea66c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "C-HR",
+        "C-HR / 2,0 / CVT HIBRID",
+        "C-HR / 2.0 / CVT AWD HIBRID",
+        "C-HR / 2.0 / CVT HIBRID",
+        "C-HR 2 0 HYBRID 2WD",
+        "C-HR 2,0 HYBRID 2WD",
+        "C-HR 2.0 CVT AWD HIBRID",
+        "C-HR 2.0 CVT HIBRID",
+        "C-HR 2.0 HYBRID 2WD",
+        "C-HR 20 CVT HIBRID",
+        "TOYOTA C-HR",
+        "TOYOTA CH-R"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 213965,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c65a6ba6018f35334a1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "C-HR",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 556,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00d71f1c8f4cd9fe37ed",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 37,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a109b08a87c12a5ed36e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 48,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bebc8e710a86de1ad2e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "C-HR",
+        "TOYOTA C-HR",
+        "TOYOTA CH-R"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1279,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1ca0529b452cf084255",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ea98a706833a94b294f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1587,
+      "powerKw": 72,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-130c8c6c4aa75311fb55",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 53,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfb0c35d5203f022c6e4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 109,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00dc1217f9bd43cf9ad0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82c435988cc0fab3e803",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 113,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 530,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08fd18c4e412f540094c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2000,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb24955d52057e682a0c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 12,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-116a6d4f310aecec4713",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 111,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a675543ab0ee19e679fe",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1978,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13f8893c3c92ab76313b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 92,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f413a898147ed09004cc",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 111,
+      "commercialNames": [
+        "C-HR",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1afad3a252a747df9a26",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 111,
+      "commercialNames": [
+        "C-HR",
+        "C-HR / 2.0 / CVT PHEV",
+        "C-HR 2.0 CVT PHEV",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 38827,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4edcea8e9e44e0c1c8a",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 120,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1841,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae9f05381d3e7d16ab23",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "TOYOTA C-HR+"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d81a4535754a45f924e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0397a31a5c5dbb0bfac0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 58,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ac01cd8061f2c0cb73c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 69,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4b920f3c313943c1542",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 70,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3d4cbaa0d845d40c160",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 85,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d015d16924ee5fb3a2e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 115,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da5399b48156a8a59847",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 83,
+      "commercialNames": [
+        "C-HR",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3eec5d56ecc78b74bcfb",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 98,
+      "commercialNames": [
+        "C-HR",
+        "C-HR 2.0 CVT HIBRID",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 160,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e862108493589d89d2eb",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 120,
+      "commercialNames": [
+        "C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c50ec41219cf1d32048",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8891f911cf9883b5ac9e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": null,
+      "commercialNames": [
+        "C-HR",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e67733d31bb6c3246f4a",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 98,
+      "commercialNames": [
+        "TOYOTA C-HR",
+        "TOYOTA CH-R"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b80b1cda6742fc20cee6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "C-HR",
+      "modelId": "toyota/c-hr",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 113,
+      "commercialNames": [
+        "C-HR 2.0 PLUG-IN HIBRID",
+        "TOYOTA C-HR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1053,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df258e557053c5751e26",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": null,
+      "commercialNames": [
+        "CAMRY",
+        "CAMRY DESIGN VVT-I CVT",
+        "CAMRY EXCEL VVT-I CVT",
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2744,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17958504e1e3d3756755",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 131,
+      "commercialNames": [
+        "CAMRY",
+        "CAMRY / 2.5 / HIBRID",
+        "CAMRY 2 5",
+        "CAMRY 2,5",
+        "CAMRY 2.5",
+        "CAMRY 25 HIBRID",
+        "CAMRY HYBRID",
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 52577,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c67ef16712f2e182d81d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 131,
+      "commercialNames": [
+        "CAMRY",
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 488,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36e79d729b75f71475c9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 131,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-845884d02794440a35ee",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 48,
+      "commercialNames": [
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d982c6fc81f30b36a1e8",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 149,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f04595c3387fecf19446",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2494,
+      "powerKw": 133,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-393f3a6d69a65de579be",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2362,
+      "powerKw": 116,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8b8cdc8ab6fdcc82809",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2467,
+      "powerKw": null,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f1862f6bf72c551c892",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 151,
+      "commercialNames": [
+        "CAMRY",
+        "CAMRY LE",
+        "CAMRY SE"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06d1fd1b311e3837d8b5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 221,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dc74710a565c955924e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2495,
+      "powerKw": 160,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b14719883037af4a6ae",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1997,
+      "powerKw": 106,
+      "commercialNames": [
+        "CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31f14952125de6672386",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 137,
+      "commercialNames": [
+        "CAMRY",
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2643,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81d91b14aa6177281355",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2487,
+      "powerKw": null,
+      "commercialNames": [
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a1a598f913b66e65ae6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Camry",
+      "modelId": "toyota/camry",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2487,
+      "powerKw": 137,
+      "commercialNames": [
+        "TOYOTA CAMRY"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 332,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8dd40a086d2d2eb5a78a",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Chaser",
+      "modelId": "toyota/chaser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "CHASER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc31d6d6ecabd1dd249b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-681933074857b722c907",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1598,
+      "powerKw": 97,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 379,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84075d72a09d788057f1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 175,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a45c04461cd9cf2e318b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0265306f3649245e34c1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA DESIGN VVT-I",
+        "COROLLA ICON TECH VVT-I",
+        "COROLLA ICON VVT-I"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 144,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d6c7dd88a8a746cf1f1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA / 1.2T /",
+        "COROLLA / 1.2T / CVT",
+        "COROLLA / 1.2T / TS",
+        "COROLLA / 1.2T / TS CVT",
+        "COROLLA 1 2 TURBO",
+        "COROLLA 1 2 TURBO TOURING SPOR",
+        "COROLLA 1,2 TURBO",
+        "COROLLA 1,2 TURBO TOURING SPOR",
+        "COROLLA 1.2 TURBO",
+        "COROLLA 1.2 TURBO TOURING SPOR",
+        "COROLLA 12T",
+        "COROLLA 12T TS",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 27881,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-736b0cf90253f29023b9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1329,
+      "powerKw": 73,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0517d3e5586546ad9d0d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1490,
+      "powerKw": 92,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA / 1.5 /",
+        "COROLLA / 1.5 / CVT",
+        "COROLLA /1,5 /",
+        "COROLLA /1,5/",
+        "COROLLA /1,5/ CVT",
+        "COROLLA /1.5 /",
+        "COROLLA 1.5",
+        "COROLLA 1.5 CVT",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 40591,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56f52d8ec082daa42257",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 97,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA / 1.6 /",
+        "COROLLA 16",
+        "COROLLA 16 CVT",
+        "COROLLA SEDAN LIMOUSINE 1 6 V",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 22506,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-328673f26aeb5cb3537e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA DESIGN HEV CVT",
+        "COROLLA DESIGN VVT-I HEV CVT",
+        "COROLLA EXCEL HEV CVT",
+        "COROLLA EXCEL VVT-I HEV CVT",
+        "COROLLA GR SPORT HEV CVT",
+        "COROLLA ICON HEV CVT",
+        "COROLLA ICON TECH HEV CVT",
+        "COROLLA ICON TECH VVTI HEV CVT",
+        "COROLLA ICON VVT-I HEV CVT",
+        "COROLLA TREK HEV CVT",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 31933,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e1a7c5bdb604dbfd481",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA / 1,8 / HIBRID CVT",
+        "COROLLA / 1.8 / HIBRID CVT",
+        "COROLLA / 1.8 / TS HIBRID CVT",
+        "COROLLA /1,8/ HIBRID CVT",
+        "COROLLA 1 8 HYBRID",
+        "COROLLA 1 8 HYBRID TOURING SPO",
+        "COROLLA 1,8 HYBRID",
+        "COROLLA 1,8 HYBRID TOURING SPO",
+        "COROLLA 1.8 HIBRID CVT",
+        "COROLLA 1.8 HYBRID",
+        "COROLLA 1.8 HYBRID TOURING SPO",
+        "COROLLA 1.8 TS HIBRID CVT",
+        "COROLLA 18 HIBRID CVT",
+        "COROLLA 18 TS HIBRID CVT",
+        "COROLLA LIMOUSINE 1,8 VVT-I",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 698356,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4503327e3ae100abe07",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 102,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c33f24a7856642efc900",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1800,
+      "powerKw": 97,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1579958a106e5f231048",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA DESIGN HEV CVT",
+        "COROLLA DESIGN VVT-I HEV CVT",
+        "COROLLA EXCEL HEV CVT",
+        "COROLLA EXCEL VVT-I HEV CVT",
+        "COROLLA GR SPORT HEV CVT",
+        "COROLLA ICON HEV CVT",
+        "COROLLA ICON TECH HEV CVT",
+        "COROLLA TREK HEV CVT",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 9513,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94e6bc70c9662d707fa2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA / 2.0 / HIBRID CVT",
+        "COROLLA / 2.0 / HIBRID CVT AWD",
+        "COROLLA / 2.0 / TS HIBRID CVT",
+        "COROLLA 2 0 HYBRID",
+        "COROLLA 2 0 HYBRID TOURING SPO",
+        "COROLLA 2,0 HYBRID",
+        "COROLLA 2,0 HYBRID TOURING SPO",
+        "COROLLA 2.0 HIBRID CVT",
+        "COROLLA 2.0 HIBRID CVT AWD",
+        "COROLLA 2.0 HYBRID",
+        "COROLLA 2.0 HYBRID TOURING SPO",
+        "COROLLA 2.0 TS HIBRID CVT",
+        "COROLLA 20 HIBRID CVT",
+        "COROLLA 20 TS HIBRID CVT",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 209789,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6628a7ddafe58c220a37",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 125,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8980f82958e1d1493506",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 138,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f66d1b145bdcb9e3f5a3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 37,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92d6462dadf82975c49e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 4110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27e92d4e01af365d7f26",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 619,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ef0143baf960168a24b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46e7dccc804105118607",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bb8e74ef9fd948de1f9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1490,
+      "powerKw": 92,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 170,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7001c78f66f1b7499f9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1794,
+      "powerKw": 95,
+      "commercialNames": [
+        "COROLLA VERSO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cf0d93e73642b4409a6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 37,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04da7e83a461393cd489",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 97,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4002d3490618ed978af",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 180,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f8b1bf545f11da65c93",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e0721ab44d9a6d16bb3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5da02722e022dbb1802",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a763f99243b7a0e778ba",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 98,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa3619cb3b6899159f9e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 113,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4813,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dfb6440982ebeb7805f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1618,
+      "powerKw": 224,
+      "commercialNames": [
+        "COROLLA GR",
+        "TOYOTA COROLLA GR"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51c6a3b6d321bf320a7a",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 70,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17c13aef02b79cbce933",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 126,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80cee5aa99051a94c7a0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 144,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6bc913c4632ded8cbb1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 68,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6079596fc47dd93f355f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 12,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3e977aa1a8ed4f825b6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 49,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9391ec12fb37426d57d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 68,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89b882ad745353e47f61",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 83,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-476b4eeddaa6be215bac",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f1e39dbdf0cb8ea22e1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4847b25c9d4f38f6f9c1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 117,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe98a81f862da556e333",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": null,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0d3b5105b4c85cc59e3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 58,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fd1aaa041159e7107d4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 85,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b210aea66d845f8bb519",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 112,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55d4643057798591abec",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 152,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d58ebd691c3a3cdea16c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 74,
+      "commercialNames": [
+        "COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39ffa848dff56d098150",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 98,
+      "commercialNames": [
+        "COROLLA",
+        "COROLLA 2.0 HIBRID CVT",
+        "COROLLA 2.0 HIBRID CVT AWD",
+        "COROLLA 2.0 TS HIBRID CVT",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10435,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c86bca35143133fda504",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51920859e0c49da8d7b5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": null,
+      "commercialNames": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23b1845e6ee7e75a7d94",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla",
+      "modelId": "toyota/corolla",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 98,
+      "commercialNames": [
+        "TOYOTA COROLLA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 124,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9270b71535329bafc79",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla Cross",
+      "modelId": "toyota/corolla-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "COROLLA CROSS",
+        "TOYOTA COROLLA CROSS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 339,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-415ce46d3b16a7123ebb",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla Cross",
+      "modelId": "toyota/corolla-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA CROSS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1616,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c50bbd80d22667a6ad88",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla Cross",
+      "modelId": "toyota/corolla-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "TOYOTA COROLLA CROSS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fb3acb9424575c19a85",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla Cross",
+      "modelId": "toyota/corolla-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 98,
+      "commercialNames": [
+        "COROLLA CROSS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc5022e188157946194d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corolla Touring",
+      "modelId": "toyota/corolla-touring",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "COROLLA TOURING SPORTS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ed0a3d96668d4d1e734",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corona",
+      "modelId": "toyota/corona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "CORONA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d5eb37fb5661080ad68",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Corsa",
+      "modelId": "toyota/corsa",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "CORSA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f12348989dfde33035e0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 200,
+      "commercialNames": [
+        "FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4db837e967466e9502d5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3956,
+      "powerKw": 200,
+      "commercialNames": [
+        "FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bdb83c5e3f020dfe9af",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 190,
+      "commercialNames": [
+        "FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3405137a1a1078b83fd8",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 194,
+      "commercialNames": [
+        "FJ CRUISER",
+        "TOYOTA FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb01af7cdddec9a6e254",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3965,
+      "powerKw": 194,
+      "commercialNames": [
+        "FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6699a7c7d2f658e4361",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4000,
+      "powerKw": 190,
+      "commercialNames": [
+        "FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e814a7f0f2a4f2b7b2b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Fj Cruiser",
+      "modelId": "toyota/fj-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3956,
+      "powerKw": 197,
+      "commercialNames": [
+        "FJ CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0898913f9966b1a6a83",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Supra",
+      "modelId": "toyota/gr-supra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 190,
+      "commercialNames": [
+        "GR SUPRA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37725f61ca5464cd6aeb",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Supra",
+      "modelId": "toyota/gr-supra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 250,
+      "commercialNames": [
+        "GR SUPRA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e50cae7a2529d0da78f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Supra",
+      "modelId": "toyota/gr-supra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 294,
+      "commercialNames": [
+        "GR SUPRA"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbfb5383237321a204fa",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Yaris",
+      "modelId": "toyota/gr-yaris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1618,
+      "powerKw": null,
+      "commercialNames": [
+        "GR YARIS 4WD",
+        "GR YARIS CIRCUIT 4WD",
+        "TOYOTA GR YARIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 214,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da9e2bcc4a7a1b539869",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Yaris",
+      "modelId": "toyota/gr-yaris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1618,
+      "powerKw": 192,
+      "commercialNames": [
+        "GR YARIS",
+        "GR YARIS 1 6",
+        "GR YARIS 1,6",
+        "GR YARIS 1.6",
+        "GR YARIS 16",
+        "TOYOTA GR YARIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 18705,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b595817b28a354362ef7",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Yaris",
+      "modelId": "toyota/gr-yaris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1618,
+      "powerKw": 206,
+      "commercialNames": [
+        "GR YARIS",
+        "GR YARIS / 1.6 / 4WD",
+        "GR YARIS / 1.6 / 4WD AUT",
+        "GR YARIS 1.6 4WD",
+        "GR YARIS 1.6 4WD AUT",
+        "GR YARIS AERO PERFORMANCE",
+        "TOYOTA GR YARIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 3908,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c3d4387b131305e8ec6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Yaris",
+      "modelId": "toyota/gr-yaris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1618,
+      "powerKw": 211,
+      "commercialNames": [
+        "TOYOTA GR YARIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca8773bcf8879dcf1590",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Yaris",
+      "modelId": "toyota/gr-yaris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1681,
+      "powerKw": 192,
+      "commercialNames": [
+        "TOYOTA GR YARIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7ae2f6a56e2b4076969",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Gr Yaris",
+      "modelId": "toyota/gr-yaris",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1608,
+      "powerKw": 192,
+      "commercialNames": [
+        "GR YARIS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a46d64fe8d26e8363559",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GR86",
+      "modelId": "toyota/gr86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2387,
+      "powerKw": 173,
+      "commercialNames": [
+        "GR 86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb25f215c8981cf728d6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GR86",
+      "modelId": "toyota/gr86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2387,
+      "powerKw": 172,
+      "commercialNames": [
+        "GR 86",
+        "GR86",
+        "TOYOTA GR 86",
+        "TOYOTA GR 86 /",
+        "TOYOTA GR86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 3804,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e114432e08d561f0b06",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GT",
+      "modelId": "toyota/gt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "GT 86 2 0 BOXER D4-S"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-130058447b39d91daa49",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GT86",
+      "modelId": "toyota/gt86",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "GT86 CLUB SERIES BLUE ED D4S A",
+        "GT86 D-4S",
+        "GT86 PRO D-4S AUTO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdf6d669bb05cdb5b1d0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GT86",
+      "modelId": "toyota/gt86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "GT86",
+        "TOYOTA GT86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 169,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18337e04b2303583e61d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GT86",
+      "modelId": "toyota/gt86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "GT86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 208,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdee2798b3cc4da6bb0d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "GT86",
+      "modelId": "toyota/gt86",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "GT86"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 214,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26a3005897cb7d7a4718",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 140,
+      "commercialNames": [
+        "HIGHLANDER",
+        "HIGHLANDER / 2.5 / 4WD HIBRID",
+        "HIGHLANDER 2,5 HYBRID",
+        "HIGHLANDER 2.5 4WD HIBRID",
+        "HIGHLANDER 2.5 HYBRID",
+        "HIGHLANDER HYBRID",
+        "TOYOTA HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 23308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a5bf9d53bb093ede882",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 179,
+      "commercialNames": [
+        "HIGHLANDER",
+        "TOYOTA HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a5d904ba6a3a4e679bb",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3311,
+      "powerKw": null,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bdaa0f7f2898f5357b6b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 220,
+      "commercialNames": [
+        "HIGHLANDER",
+        "HIGHLANDER LE",
+        "HIGHLANDER XLE AWD"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2e83b0e203d2b4a2f03",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 228,
+      "commercialNames": [
+        "HIGHLANDER XLE AWD"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff74f02be8581d63b730",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3458,
+      "powerKw": 220,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72b3e14585b6aaebf0b2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 182,
+      "commercialNames": [
+        "HIGHLANDER HYBRID LIMITED"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17124dcf1e5c3f3214f0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 201,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8582fa9233404c937980",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOYOTA HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 73,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53fbe0b6351045817eea",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3303,
+      "powerKw": 155,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5b5c4500c7d25f792f5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 205,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25c7784ae60e56541221",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3500,
+      "powerKw": 199,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cb7e3c67513f214a93b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2393,
+      "powerKw": 205,
+      "commercialNames": [
+        "HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb307f3756b49f0cfb09",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2400,
+      "powerKw": 198,
+      "commercialNames": [
+        "HIGHLANDER AWD",
+        "HIGHLANDER XLE"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6eb9b5a17fc0dc3ac395",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2393,
+      "powerKw": 195,
+      "commercialNames": [
+        "HIGHLANDER",
+        "HIGHLANDER XLE",
+        "TOYOTA HIGHLANDER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70a42110166052d580a2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Highlander",
+      "modelId": "toyota/highlander",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2393,
+      "powerKw": 198,
+      "commercialNames": [
+        "HIGHLANDER LE AWD",
+        "HIGHLANDER XLE"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-497c0d3d9f9e6f2cf64c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Hilux",
+      "modelId": "toyota/hilux",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2393,
+      "powerKw": null,
+      "commercialNames": [
+        "HILUX ACTIVE D-4D 4WD DCB",
+        "HILUX ACTIVE D-4D 4WD ECB"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d16061eca9d1bbee69a1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Hilux",
+      "modelId": "toyota/hilux",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOYOTA HILUX"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-116481ae3907e155ba99",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Hilux",
+      "modelId": "toyota/hilux",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 144,
+      "commercialNames": [
+        "TOYOTA HILUX"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40825fbc6661cff3a710",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "iQ",
+      "modelId": "toyota/iq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 50,
+      "commercialNames": [
+        "IQ"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0d289b44af96620f40b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "iQ",
+      "modelId": "toyota/iq",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1329,
+      "powerKw": 72,
+      "commercialNames": [
+        "IQ"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf3a607278590b005975",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2755,
+      "powerKw": null,
+      "commercialNames": [
+        "LAND CRUISER",
+        "LAND CRUISER ACTIVE D-4D AUTO",
+        "LAND CRUISER ICON D-4D AUTO",
+        "LAND CRUISER INVINCIBLE D-4D A",
+        "LAND CRUISER UTILITY D-4D",
+        "LAND CRUISER UTILITY D-4D AUTO",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 741,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edd49000455b5c6e52a3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2755,
+      "powerKw": 130,
+      "commercialNames": [
+        "LAND CRUISER",
+        "LAND CRUISER (150 SERIES)",
+        "LAND CRUISER / 2.8 / D AUT.",
+        "LAND CRUISER 2 8 D-4D 4WD",
+        "LAND CRUISER 2,8 D-4D 4WD",
+        "LAND CRUISER 28 D",
+        "LAND CRUISER 28 D AUT",
+        "LAND CRUISER 150",
+        "LAND CRUISER 150 SERIES",
+        "LAND CRUISER(150 SERIES)",
+        "LANDCRUISER",
+        "TOYOTA LAND CRUISER",
+        "TOYOTA LAND CRUISER (150",
+        "TOYOTA LAND CRUISER (150 SERIE",
+        "TOYOTA LAND CRUISER (150 SERIES)",
+        "TOYOTA LAND CRUISER 150",
+        "TOYOTA LAND CRUISER 150 SERIES",
+        "TOYOTA LAND CRUISER(150 SERIES)"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 29,
+      "registrations": 6698,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5571978a1d87f40348cd",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2755,
+      "powerKw": 150,
+      "commercialNames": [
+        "LAND CRUISER",
+        "LAND CRUISER (150 SERIES)",
+        "LAND CRUISER (150SERIES)",
+        "LAND CRUISER / 2.8 / D",
+        "LAND CRUISER / 2.8 / D AUT.",
+        "LAND CRUISER 2 8 D-4D 4WD",
+        "LAND CRUISER 2,8 D-4D 4WD",
+        "LAND CRUISER 2.8 D-4D 4WD",
+        "LAND CRUISER 28 D AUT",
+        "LAND CRUISER 150",
+        "LAND CRUISER SORTIMO",
+        "LAND CRUISER(150 SERIES)",
+        "LANDCRUISER",
+        "TOYOTA LAND CRUISER",
+        "TOYOTA LAND CRUISER (150",
+        "TOYOTA LAND CRUISER (150 SERIE",
+        "TOYOTA LAND CRUISER (150 SERIES)",
+        "TOYOTA LAND CRUISER (150SERIES)",
+        "TOYOTA LAND CRUISER 150",
+        "TOYOTA LAND CRUISER 150 SERIES",
+        "TOYOTA LAND CRUISER SERIE 150",
+        "TOYOTA LAND CRUISER(150 SERIES)",
+        "TOYOTA LANDCRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 63,
+      "registrations": 25234,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-277592e6ab8e23e0938c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4461,
+      "powerKw": 186,
+      "commercialNames": [
+        "LAND CRUISER 200"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37703f7e20961e8c1bbe",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 170,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fdedd9d868ce7aa87ce",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 202,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51b678a4d89b0fa919d8",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4608,
+      "powerKw": 227,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER 200 V8"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88257b7a47cf3da0936c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5663,
+      "powerKw": 284,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-979068cc9a8326886489",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3445,
+      "powerKw": 305,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LAND CRUISER",
+        "TOYOTA LANDCRUISER 300"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9606c0c56c258e99976",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 167,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 112,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0deba26b760109855114",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 192,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9595fe86c1809a9ce79f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 199,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8d0ad1a106c9a8c1b07",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5663,
+      "powerKw": 280,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a05da5fe3da9cd602407",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2755,
+      "powerKw": 148,
+      "commercialNames": [
+        "TOYOTA LANDCRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9861037c0c1834f64d4b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3346,
+      "powerKw": 150,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33c652aadd6e1dfcc442",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3346,
+      "powerKw": 227,
+      "commercialNames": [
+        "LAND CRUISER 300 SERIES"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0ccd915b100f0a04cd2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4164,
+      "powerKw": 125,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d0ce0115dd029354151",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4664,
+      "powerKw": null,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77cff0ba99fc1b204c9d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3346,
+      "powerKw": 150,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6bd2465a4c2d076eafa",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 67,
+      "commercialNames": [
+        "LAND CRUISER(150 SERIES)",
+        "TOYOTA LAND CRUISER (150 SERIES)"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50280d6d539b1647e1e6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 110,
+      "commercialNames": [
+        "LAND CRUISER (150 SERIES)"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ee29759058eedec9b02",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 132,
+      "commercialNames": [
+        "LAND CRUISER (150 SERIES)"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9643abb261364bf5cc3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3346,
+      "powerKw": 220,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1dc82ded2e111911e5d9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3346,
+      "powerKw": 225,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0345d77cf4ca59059c70",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3346,
+      "powerKw": 302,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc97a3df32bcde8deb88",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 4461,
+      "powerKw": 150,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe73fb9556d61a683eb3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 4461,
+      "powerKw": 151,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7290080d5389e0963c48",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 4461,
+      "powerKw": 166,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d5e1e77ea2705784d0f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3956,
+      "powerKw": 168,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3cddd4bd1dc5c4f4572",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 16,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LANDCRUISER 150",
+        "TOYOTA LANDCRUISER(1"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fac1d38ce5faeeec03ae",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 151,
+      "commercialNames": [
+        "LAND CRUISER",
+        "LAND CRUISER / 2.8 / 4WD AUT.",
+        "LAND CRUISER 2.8 4WD AUT.",
+        "LAND CRUISER 250",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 8273,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3a97c757d35187f1c0d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2800,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER",
+        "TOYOTA LAND CRUISER 250"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01281f44858b978957a2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "e85",
+      "engineCc": 2755,
+      "powerKw": 151,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 539,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61600d16e6871acb55b5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2393,
+      "powerKw": 243,
+      "commercialNames": [
+        "LAND CRUISER I-FORCE MAX"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1f627d8f8c7ba68bf6c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2755,
+      "powerKw": 151,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16dc644b80d79d725fa3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 58,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24d67e6dd8dc9b50df6f",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2755,
+      "powerKw": 118,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12f45193b47cd5814b54",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3346,
+      "powerKw": 224,
+      "commercialNames": [
+        "LAND CRUISER TLC300"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86e84039857f72830e93",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3445,
+      "powerKw": 294,
+      "commercialNames": [
+        "LAND CRUISER 300 SERIES"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cb44de2f36c4a1accf3",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2755,
+      "powerKw": 151,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00c9ebcb090a248abfca",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2393,
+      "powerKw": 199,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-521a9518d8b00c745f50",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2755,
+      "powerKw": null,
+      "commercialNames": [
+        "LAND CRUISER",
+        "TOYOTA LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b03b82849c41cc3982a6",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3445,
+      "powerKw": 294,
+      "commercialNames": [
+        "LAND CRUISER 300 SERIES"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ec2e531941bb8e5a705",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3445,
+      "powerKw": 307,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4096fdd90edab6c988c4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2393,
+      "powerKw": 200,
+      "commercialNames": [
+        "LAND CRUISER"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6230f2a19ef247d892c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser Prado",
+      "modelId": "toyota/land-cruiser-prado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2755,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER PRADO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f03ee7663c286d590bf",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser Prado",
+      "modelId": "toyota/land-cruiser-prado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3956,
+      "powerKw": 202,
+      "commercialNames": [
+        "LAND CRUISER PRADO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5aea65c952bcac0dfc9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser Prado",
+      "modelId": "toyota/land-cruiser-prado",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2754,
+      "powerKw": 150,
+      "commercialNames": [
+        "LAND CRUISER PRADO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f90cb6770f4097a0bec",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser Prado",
+      "modelId": "toyota/land-cruiser-prado",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2393,
+      "powerKw": 199,
+      "commercialNames": [
+        "LAND CRUISER PRADO 250"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e87d22392bf7bf5e903",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Land Cruiser V8",
+      "modelId": "toyota/land-cruiser-v8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5663,
+      "powerKw": 284,
+      "commercialNames": [
+        "TOYOTA LAND CRUISER V8"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e8f600317fe2886c988",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 95,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b9a742f79735ace5129",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2e60d87fc9706c08d23",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MIRAI",
+        "MIRAI FUEL CELL CVT",
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1197,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b11754144810ac67fdd5",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "MIRAI",
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 242,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8155660abd41e6b7a5d1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "MIRAI",
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 94,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cec97ddb817a4fa9dd20",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 48,
+      "commercialNames": [
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 310,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9583d033d52662f53dd4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 134,
+      "commercialNames": [
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a22eb554eead4cbbe1de",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 48,
+      "commercialNames": [
+        "MIRAI",
+        "MIRAI FCEV",
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 464,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06afb366fd989915daa4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 134,
+      "commercialNames": [
+        "MIRAI",
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2119,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3197d48f2688b823ad1c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 48,
+      "commercialNames": [
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d863637a29eb429d56b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": 242,
+      "powerKw": 134,
+      "commercialNames": [
+        "MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1bd7a2f0d9e8bf7d78e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "hydrogen",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOYOTA MIRAI"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b94dabe7ff39c30c55b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 100,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3039339b40bd3c241220",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3165c684550e4c0663b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1797,
+      "powerKw": null,
+      "commercialNames": [
+        "PRIUS PLUS EXCEL TSS HEV CVT",
+        "PRIUS PLUS ICON TSS HEV CVT"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2781,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67448804288f18266df4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "PRIUS ACTIVE VVT-I CVT",
+        "PRIUS BNESS ED + VVT-I AWD CVT",
+        "PRIUS BUSINESS ED + VVT-I CVT",
+        "PRIUS BUSINESS EDTN VVT-I CVT",
+        "PRIUS EXCEL VVT-I CVT"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 857,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a03b2c806741a1986f8e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "PRIUS",
+        "PRIUS 1 8 VVT-I HYBRID",
+        "PRIUS 1 8 VVT-I HYBRID 4WD",
+        "PRIUS 1,8 VVT-I HYBRID 4WD",
+        "PRIUS PHV",
+        "TOYOTA PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 6382,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31e8fc715fd0d90c7dd2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "PRIUS",
+        "PRIUS HYBRID",
+        "PRIUS PLUS",
+        "PRIUS PLUS 1 8 VVT-I HYBRID",
+        "PRIUS PLUS 1,8 VVT-I HYBRID",
+        "PRIUS PLUS 18 HIBRID CVT",
+        "PRIUS+",
+        "TOYOTA PRIUS PLUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 22634,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-107e4a004fdb58008761",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 98,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4791a693260dbd7a63c",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "PRIUS BUSINESS ED + PHEV CVT",
+        "PRIUS EXCEL PHEV CVT"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 826,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9db3f857b09cb7d1e2e4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 37,
+      "commercialNames": [
+        "TOYOTA PRIUS PHV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40162909ddacf37192e1",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "PRIUS / 1.8 / PLUG-IN HYBRID",
+        "PRIUS 1 8 VVT-I PLUGIN HYBRID",
+        "PRIUS 1,8 VVT-I PLUGIN HYBRID",
+        "PRIUS 1.8 VVT-I PLUGIN HYBRID",
+        "PRIUS 18 PLUG-IN HYBRID",
+        "PRIUS PHV",
+        "TOYOTA PRIUS PHV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 5013,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf2ec0e1a5277853a050",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 76,
+      "commercialNames": [
+        "TOYOTA PRIUS PHV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 49,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2da68118e46f8a4385d9",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fdb6ffc38180bfa7cf0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 89,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0b76a3a957314f223e0",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "PRIUS PLUG-IN HYBRID"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83979b14470a7527e108",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 100,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c898fa4a72c8bed2aca",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": 111,
+      "commercialNames": [
+        "PRIUS PHEV",
+        "TOYOTA PRIUS PHEV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 138,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d37cc36736d42640fb2",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 111,
+      "commercialNames": [
+        "PRIUS",
+        "PRIUS / 2.0 / PLUG-IN HYBRID",
+        "PRIUS 2.0 PLUG-IN HYBRID",
+        "PRIUS PHEV",
+        "PRIUS PLUG-IN",
+        "TOYOTA PRIUS PHEV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 5474,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5943528ab4196f18f75",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1987,
+      "powerKw": 120,
+      "commercialNames": [
+        "TOYOTA PRIUS PHEV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84298e2f0409cca37274",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1987,
+      "powerKw": null,
+      "commercialNames": [
+        "PRIUS PHEV",
+        "TOYOTA PRIUS PHEV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 73,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec927759c328e1df2643",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius",
+      "modelId": "toyota/prius",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1798,
+      "powerKw": 73,
+      "commercialNames": [
+        "PRIUS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a221c9b77444e2e213e4",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Prius Prime",
+      "modelId": "toyota/prius-prime",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 89,
+      "commercialNames": [
+        "PRIUS PRIME"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b259a2ef954f9f934e10",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "PROACE CITY VERO",
+        "PROACE VERSO",
+        "PROACE VERSO COMBI L1 D-4D",
+        "PROACE VERSO SHUTTLE L1 D-4D"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 137,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ea8e116f1d6dee7c01e",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "PROACE",
+        "PROACE 15 D",
+        "PROACE CIT",
+        "PROACE CITY",
+        "PROACE FT-STYLE WAV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1592,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dc712a4629de1812d82",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 88,
+      "commercialNames": [
+        "PROACE",
+        "PROACE / 1.5 / D",
+        "PROACE 1 5 D 120 MEDIUM",
+        "PROACE 1 5D120 COMBI LANG",
+        "PROACE 1,5 D 120 MEDIUM",
+        "PROACE 15 D",
+        "PROACE VERSO 1 5 D 120 FAMILY",
+        "PROACE VERSO 1,5 D 120 FAMILY",
+        "PROACE VERSO 1,5D 120 COMPACT",
+        "PROACE VERSO 1,5D 120 MEDIUM",
+        "PROACE VERSO 1.5D 120 COMPACT",
+        "PROACE VERSO 1.5D 120 MEDIUM"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 14047,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1187a1c1af8e82d40ffd",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "PROACE",
+        "PROACE CITY",
+        "PROACE CITY AMF-BRUNS",
+        "PROACE F-STYLE WAV",
+        "PROACE FT-STYLE WAV"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 1326,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a13942a61ff49a08488",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": null,
+      "commercialNames": [
+        "PROACE",
+        "PROACE VERSO",
+        "PROACE VERSO FAMILY L0 D-4D",
+        "PROACE VERSO FAMILY L0 D-4D A",
+        "PROACE VERSO FAMILY L1 D-4D",
+        "PROACE VERSO FAMILY L1 D-4D A",
+        "PROACE VERSO SHUTTLE L1 D-4D",
+        "PROACE VERSO SHUTTLE L2 D-4D",
+        "PROACE VERSO VIP L2 D-4D AUTO"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 928,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b72cbdd29570a3288222",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 90,
+      "commercialNames": [
+        "PROACE"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1191,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9a1efb25787d4120c2d",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 106,
+      "commercialNames": [
+        "PROACE",
+        "PROACE / 2.0 / D",
+        "PROACE / 2.0 / D AUT",
+        "PROACE / PROACE VERSO",
+        "PROACE 2,0 D 145 COMBI LANG",
+        "PROACE 2.0 D",
+        "PROACE 2.0 D 145 COMBI MEDIUM",
+        "PROACE EUROBILITY",
+        "PROACE EUROMOBILITY",
+        "PROACE OR PROACE VERSO",
+        "PROACE PROACE VERSO",
+        "PROACE VERSO",
+        "PROACE VERSO 2,0D 145 LANG",
+        "PROACE VERSO 2,0D 145 MEDIUM",
+        "PROACE VERSO 2.0D 145 LANG",
+        "PROACE VERSO 2.0D 145 MEDIUM"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 26160,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b01aec6764d1c3bd755b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 110,
+      "commercialNames": [
+        "PROACE",
+        "PROACE / 2.0 / D",
+        "PROACE 2 0 D 150 MEDIUM",
+        "PROACE 20 D",
+        "PROACE VERSO 2 0 D 150 COMPACT",
+        "PROACE VERSO 2 0 D 150 FAMILY",
+        "PROACE VERSO 2 0 D 150 LANG",
+        "PROACE VERSO 2 0D150 FAMILY ME",
+        "PROACE VERSO 2,0 D 150 FAMILY",
+        "PROACE VERSO 2,0 D 150 LANG",
+        "PROACE VERSO 2,0D150 FAMILY ME"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 6645,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8235c62d3454543593b",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1997,
+      "powerKw": 130,
+      "commercialNames": [
+        "Proace",
+        "PROACE",
+        "PROACE / 2.0 / D AUT",
+        "PROACE / PROACE VERSO",
+        "PROACE 2.0 D AUT",
+        "PROACE 20 D AUT",
+        "PROACE AMF-BRUNS",
+        "PROACE OR PROACE VERSO",
+        "PROACE PROACE VERSO",
+        "PROACE VERSO",
+        "PROACE VERSO 2 0 D 180 FAMILY",
+        "PROACE VERSO 2 0 D 180 VIP MED",
+        "PROACE VERSO 2,0 D 180 FAMILY",
+        "PROACE VERSO 2,0 D 180 LANG",
+        "PROACE VERSO 2,0 D 180 MEDIUM",
+        "PROACE VERSO 2,0 D 180 VIP MED",
+        "PROACE VERSO 2.0 D 180 FAMILY",
+        "PROACE VERSO 2.0 D 180 LANG",
+        "PROACE VERSO 2.0 D 180 MEDIUM"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 30525,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df4e92d01b647962d720",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1997,
+      "powerKw": 90,
+      "commercialNames": [
+        "PROACE"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d053148aea5ca3d55b29",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "PROACE",
+        "PROACE CIT",
+        "PROACE CITY",
+        "PROACE CITY AMF-BRUNS",
+        "PROACE CITY VE."
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 406,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16d5255364b2ff60cf38",
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "canonicalModel": "Proace",
+      "modelId": "toyota/proace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1199,
+      "powerKw": 96,
+      "commercialNames": [
+        "PROACE",
+        "PROACE CITY",
+        "PROACE CITY AMF-BRUNS"
+      ],
+      "sourceMakeNames": [
+        "TOYOTA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 362,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

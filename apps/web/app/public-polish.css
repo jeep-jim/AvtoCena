@@ -1,0 +1,532 @@
+:root {
+  --ac-page-bg: #1a2029;
+  --ac-bg: var(--ac-page-bg);
+  --ac-surface: #11141c;
+  --ac-surface-2: #181b24;
+  --ac-surface-3: #20232d;
+  --ac-border: rgba(255,255,255,.08);
+  --ac-text: #fff;
+  --ac-muted: rgba(255,255,255,.56);
+  --ac-accent: #ff303d;
+}
+
+.ac-result-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 44vw);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 2px 2px 10px;
+}
+.ac-result-rail > * { scroll-snap-align: start; }
+
+.ac-search-select,
+.ac-filter-input,
+.ac-native-select,
+.soft-input { border: 1px solid var(--ac-border) !important; }
+
+/* One star silhouette everywhere, including the header and mobile drawer. */
+.ac-favorite-header > svg,
+.ac-drawer-nav-link[href="/favorites"] svg { display: none !important; }
+.ac-favorite-header::before,
+.ac-drawer-nav-link[href="/favorites"] span:last-child::before {
+  content: "";
+  display: block;
+  width: 23px;
+  height: 23px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.7L14.85 8.5L21.25 9.43L16.62 13.94L17.71 20.31L12 17.31L6.29 20.31L7.38 13.94L2.75 9.43L9.15 8.5L12 2.7Z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.7L14.85 8.5L21.25 9.43L16.62 13.94L17.71 20.31L12 17.31L6.29 20.31L7.38 13.94L2.75 9.43L9.15 8.5L12 2.7Z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.ac-favorite-header { color: #ef3340 !important; }
+.ac-favorite-header > span { color: #fff !important; }
+.ac-drawer-nav-link[href="/favorites"] span:last-child { color: #ef3340 !important; }
+
+/* Red buttons stay vivid without a second red cloud below them. */
+.avto-button,
+.avto-button:hover,
+.avto-button:focus-visible,
+.ac-mobile-drawer a[href="/login"] {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* A muted graphite CTA fits both homepage themes. */
+.ac-home-page { --ac-home-cta: #3b475b; --ac-home-cta-hover: #48566c; }
+html[data-theme="light"] .ac-home-page { --ac-home-cta: #465267; --ac-home-cta-hover: #39455a; }
+.ac-home-page #form .avto-button,
+.ac-home-page #form .avto-button:hover,
+.ac-home-page #form .avto-button:focus-visible,
+.ac-home-page #form .avto-button:active {
+  background: var(--ac-home-cta) !important;
+  border-color: var(--ac-home-cta) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+.ac-home-page #form .avto-button:hover,
+.ac-home-page #form .avto-button:focus-visible {
+  background: var(--ac-home-cta-hover) !important;
+  border-color: var(--ac-home-cta-hover) !important;
+}
+
+/* Price state is explicit: red up, green down, neutral when unchanged. */
+.ac-price--up,
+.is-up .ac-price-trend-delta,
+.is-up .ac-price-trend-arrow { color: #ef3340 !important; }
+.ac-price--down,
+.is-down .ac-price-trend-delta,
+.is-down .ac-price-trend-arrow { color: #31b765 !important; }
+.ac-price--flat { color: var(--ac-text) !important; }
+.is-flat .ac-price-trend-arrow { color: var(--ac-muted) !important; }
+.ac-price-trend-panel.is-up { background: #30181f !important; }
+.ac-price-trend-panel.is-down { background: #102d21 !important; }
+.ac-price-trend-panel.is-flat { background: var(--ac-surface-2) !important; }
+
+/* The key asset belongs only to the homepage hero. */
+@media (min-width: 1100px) {
+  .ac-home-page .ac-home-hero { position: relative; }
+  .ac-home-page .ac-home-hero::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: clamp(180px, 17vw, 300px);
+    aspect-ratio: 1.35;
+    background: url('/key-logo.png') center/contain no-repeat;
+    transform: translate(-50%, -50%) rotate(-4deg);
+    pointer-events: none;
+    filter: drop-shadow(0 18px 22px rgba(0,0,0,.26));
+    z-index: 2;
+  }
+}
+
+/* Use the richer cabinet background on the public dark theme too. */
+html:not([data-theme="light"]) .ac-page-copy {
+  background:
+    radial-gradient(circle at 16% -7%, rgba(227,27,35,.30), transparent 34rem),
+    radial-gradient(circle at 88% 12%, rgba(255,198,43,.13), transparent 29rem),
+    linear-gradient(135deg, #05060a 0%, #0d1019 48%, #05060a 100%) !important;
+}
+
+/* Homepage catalog controls and cards. */
+section[data-demo-enabled] .ac-filter-input {
+  padding-right: 44px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M5 7L9 11L13 7' stroke='%23989BA5' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
+}
+section[data-demo-enabled] > div:first-child .avto-button {
+  font-size: 0 !important;
+}
+section[data-demo-enabled] > div:first-child .avto-button::after {
+  content: "Показать";
+  font-size: 14px;
+  font-weight: 900;
+}
+section[data-demo-enabled] .ac-catalog-card .p-4 > div:first-child > span {
+  display: none !important;
+}
+section[data-demo-enabled] .ac-catalog-card .p-4 > div:first-child {
+  justify-content: flex-start !important;
+}
+.ac-catalog-card .ac-favorite-button {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Main images in the quick-offer modal open in a dedicated fullscreen preview. */
+.ac-offer-panel > div:first-child > img { cursor: zoom-in; }
+.ac-image-lightbox img { cursor: zoom-out; }
+
+/* Keep the lead form one column; no phantom second field on wide screens. */
+.ac-offer-lead-form {
+  grid-template-columns: minmax(0,1fr) !important;
+}
+.ac-offer-lead-form > * {
+  grid-column: 1 / -1 !important;
+  min-width: 0;
+}
+
+html[data-theme="light"] {
+  --ac-page-bg: #edf0f6;
+  --ac-surface: #f8f9fb;
+  --ac-surface-2: #edf0f5;
+  --ac-surface-3: #e3e7ee;
+  --ac-border: rgba(30,36,48,.17);
+  --ac-text: #171b24;
+  --ac-muted: #596273;
+  --ac-accent: #c91f2d;
+}
+
+html[data-theme="light"] body {
+  background: linear-gradient(180deg,#eef1f6 0%,#e4e8ef 52%,#dfe4ec 100%) !important;
+}
+html[data-theme="light"] .ac-page-copy { color: var(--ac-text) !important; }
+html[data-theme="light"] .ac-page-copy [class~="text-white"] { color: var(--ac-text) !important; }
+html[data-theme="light"] .ac-page-copy [class*="text-white/"] { color: var(--ac-muted) !important; }
+html[data-theme="light"] .ac-on-image,
+html[data-theme="light"] .ac-on-image * { color: #fff !important; }
+
+html[data-theme="light"] .ac-filter-panel,
+html[data-theme="light"] .ac-result-summary,
+html[data-theme="light"] .ac-offer-panel,
+html[data-theme="light"] .ac-catalog-card,
+html[data-theme="light"] .ac-favorites-card {
+  background: var(--ac-surface) !important;
+  border: 1px solid rgba(30,36,48,.1) !important;
+  box-shadow: 0 12px 34px rgba(38,43,57,.09) !important;
+}
+
+html[data-theme="light"] .ac-filter-input,
+html[data-theme="light"] .ac-native-select,
+html[data-theme="light"] .ac-search-select,
+html[data-theme="light"] .soft-input,
+html[data-theme="light"] .ac-summary-item,
+html[data-theme="light"] .ac-offer-panel [class*="bg-white/"] {
+  background: var(--ac-surface-2) !important;
+  border-color: var(--ac-border) !important;
+  color: var(--ac-text) !important;
+}
+html[data-theme="light"] #form .soft-input,
+html[data-theme="light"] #form .ac-search-select {
+  background: var(--ac-surface-2) !important;
+  border-color: var(--ac-border) !important;
+  color: var(--ac-text) !important;
+}
+html[data-theme="light"] input::placeholder { color: #737d8e !important; opacity: 1; }
+
+html[data-theme="light"] .ac-search-menu {
+  background: #f8f9fb !important;
+  border-color: rgba(30,36,48,.14) !important;
+  color: #171b24 !important;
+  box-shadow: 0 18px 48px rgba(38,43,57,.18) !important;
+}
+html[data-theme="light"] .ac-search-menu * { color: inherit; }
+html[data-theme="light"] .ac-search-menu .ac-search-box,
+html[data-theme="light"] .ac-search-menu input {
+  background: #e7ebf1 !important;
+  border-color: rgba(30,36,48,.12) !important;
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-search-menu input::placeholder { color: #747e8e !important; }
+html[data-theme="light"] .ac-search-menu button:not([class*="bg-red-500"]) { color: #303744 !important; }
+html[data-theme="light"] .ac-search-menu button:not([class*="bg-red-500"]):hover { background: #e8ecf2 !important; }
+html[data-theme="light"] .ac-search-menu button[class*="bg-red-500"] { color: #fff !important; }
+
+html[data-theme="light"] .ac-price--up { color: #c91f2d !important; }
+html[data-theme="light"] .ac-price--down { color: #168a59 !important; }
+html[data-theme="light"] .ac-price--flat { color: #171b24 !important; }
+html[data-theme="light"] .ac-price-trend-panel.is-up { background: #f4e3e6 !important; }
+html[data-theme="light"] .ac-price-trend-panel.is-down { background: #e1f1e8 !important; }
+html[data-theme="light"] .ac-price-trend-panel.is-flat { background: #edf0f5 !important; }
+html[data-theme="light"] .ac-catalog-card [class*="text-red-"]:not(.ac-price):not(.ac-favorite-button),
+html[data-theme="light"] .ac-offer-panel [class*="text-red-"]:not(.ac-price):not(.ac-favorite-button) { color: #626c7b !important; }
+html[data-theme="light"] .ac-favorite-button { color: #d92534 !important; }
+
+html[data-theme="light"] :is(.ac-public-header,.ac-catalog-sticky) {
+  background: rgba(248,249,251,.95) !important;
+  border-bottom: 1px solid rgba(30,36,48,.1) !important;
+  box-shadow: 0 6px 20px rgba(31,35,48,.08) !important;
+}
+html[data-theme="light"] .ac-public-header .ac-brand-mark {
+  --ac-mark-panel: #202228;
+  --ac-mark-symbol: #fff;
+  --ac-mark-divider: #0e0f12;
+}
+html[data-theme="light"] .ac-icon-button {
+  color: #7a8392 !important;
+  background: #e7eaf0 !important;
+}
+html[data-theme="light"] .ac-favorite-header { background: #f1e4e6 !important; }
+html[data-theme="light"] .ac-favorite-header > span { color: #fff !important; }
+
+/* The TopAvto logo with black lettering is used only on the light theme. */
+html[data-theme="light"] img[src="/brands/topavto-logo.png"] {
+  content: url('/brands/topavto-logo-black.png');
+}
+
+html[data-theme="light"] .ac-mobile-drawer {
+  background: #f8f9fb !important;
+  color: #171b24 !important;
+  box-shadow: -18px 0 58px rgba(31,36,49,.18) !important;
+}
+html[data-theme="light"] .ac-mobile-drawer [class~="text-white"],
+html[data-theme="light"] .ac-mobile-drawer [class*="text-white/"] { color: #3f4755 !important; }
+html[data-theme="light"] .ac-mobile-drawer .ac-drawer-nav-link,
+html[data-theme="light"] .ac-mobile-drawer [class*="bg-white/"] {
+  background: #e9edf3 !important;
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-mobile-drawer .ac-brand-mark {
+  --ac-mark-panel: #202228;
+  --ac-mark-symbol: #fff;
+  --ac-mark-divider: #0e0f12;
+}
+
+html[data-theme="light"] .avto-button,
+html[data-theme="light"] .avto-button * { color:#fff !important; }
+html[data-theme="light"] .ac-alternative-note {
+  background:#f7eed5 !important;
+  color:#604b16 !important;
+  border:1px solid #dbc273 !important;
+}
+
+html[data-theme="light"] main section > div[class*="bg-white/[0.035]"],
+html[data-theme="light"] main section > div[class*="bg-white/[0.045]"] {
+  background: #eef1f5 !important;
+  border: 1px solid rgba(30,36,48,.1) !important;
+  color: #4f5969 !important;
+}
+
+/* The offer modal is rendered through a portal, so it needs its own light-theme scope. */
+html[data-theme="light"] .ac-offer-panel {
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-offer-panel [class~="text-white"] {
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-offer-panel [class*="text-white/"] {
+  color: #586273 !important;
+}
+html[data-theme="light"] .ac-offer-panel .ac-on-image,
+html[data-theme="light"] .ac-offer-panel .ac-on-image * {
+  color: #fff !important;
+}
+html[data-theme="light"] .ac-offer-panel [class*="border-white/"] {
+  border-color: rgba(30,36,48,.13) !important;
+}
+html[data-theme="light"] .ac-offer-panel a[href*="/cars/offer/"] {
+  background: #dfe3ea !important;
+  border: 1px solid rgba(30,36,48,.11) !important;
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-offer-panel a[href*="/cars/offer/"]:hover {
+  background: #d4d9e2 !important;
+}
+
+/* Complete partner-area light theme, including the portal form. */
+html:not([data-theme="light"]) .ac-partner-page {
+  background:
+    radial-gradient(circle at 15% -10%, rgba(227,27,35,.30), transparent 34rem),
+    radial-gradient(circle at 88% 14%, rgba(255,198,43,.13), transparent 29rem),
+    linear-gradient(135deg, #05060a 0%, #0d1019 48%, #05060a 100%);
+}
+html[data-theme="light"] .ac-partner-page {
+  background:
+    radial-gradient(circle at 14% -8%, rgba(201,31,45,.10), transparent 31rem),
+    radial-gradient(circle at 88% 15%, rgba(205,154,45,.09), transparent 26rem),
+    linear-gradient(180deg,#eef1f6 0%,#e3e7ee 100%) !important;
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-partner-page [class~="text-white"],
+html[data-theme="light"] .ac-partner-modal [class~="text-white"] {
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-partner-page [class*="text-white/"],
+html[data-theme="light"] .ac-partner-modal [class*="text-white/"] {
+  color: #596273 !important;
+}
+html[data-theme="light"] .ac-partner-page [class*="text-red-"],
+html[data-theme="light"] .ac-partner-modal [class*="text-red-"] {
+  color: #c91f2d !important;
+}
+html[data-theme="light"] .ac-partner-page .glass {
+  background: linear-gradient(145deg,#f9fafc 0%,#edf0f5 100%) !important;
+  border: 1px solid rgba(30,36,48,.11) !important;
+  box-shadow: 0 16px 44px rgba(38,43,57,.10) !important;
+  backdrop-filter: none !important;
+}
+html[data-theme="light"] .ac-partner-page section.relative.overflow-hidden {
+  background: linear-gradient(135deg,#f8f9fb 0%,#eceff4 58%,#e8e1e2 100%) !important;
+  border-color: rgba(30,36,48,.11) !important;
+  box-shadow: 0 18px 48px rgba(38,43,57,.11) !important;
+}
+html[data-theme="light"] .ac-partner-page [class*="bg-white/"],
+html[data-theme="light"] .ac-partner-modal [class*="bg-white/"] {
+  background: #e8ecf2 !important;
+}
+html[data-theme="light"] .ac-partner-page [class*="border-white/"],
+html[data-theme="light"] .ac-partner-modal [class*="border-white/"] {
+  border-color: rgba(30,36,48,.15) !important;
+}
+html[data-theme="light"] .ac-partner-page [class*="bg-red-"],
+html[data-theme="light"] .ac-partner-page [class*="bg-red-"] *,
+html[data-theme="light"] .ac-partner-modal .avto-button,
+html[data-theme="light"] .ac-partner-modal .avto-button * {
+  color: #fff !important;
+}
+html[data-theme="light"] .ac-partner-page img {
+  filter: none !important;
+}
+html[data-theme="light"] .ac-partner-modal {
+  background: #f8f9fb !important;
+  border-color: rgba(30,36,48,.13) !important;
+  color: #171b24 !important;
+  box-shadow: 0 24px 80px rgba(28,33,44,.22) !important;
+}
+html[data-theme="light"] .ac-partner-modal input,
+html[data-theme="light"] .ac-partner-modal textarea,
+html[data-theme="light"] .ac-partner-modal .soft-input {
+  background: #e9edf3 !important;
+  border-color: rgba(30,36,48,.16) !important;
+  color: #171b24 !important;
+}
+html[data-theme="light"] .ac-partner-modal input::placeholder,
+html[data-theme="light"] .ac-partner-modal textarea::placeholder {
+  color: #747e8f !important;
+}
+
+@media (min-width: 768px) {
+  .ac-result-rail {
+    grid-auto-flow: initial;
+    grid-auto-columns: initial;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    overflow: visible;
+  }
+}
+@media (min-width: 1200px) { .ac-result-rail { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+
+/* Grade colors belong to the badge, not the page theme. */
+.ac-grade-guide-chip--green { background: #20a85e; color: #fff; }
+.ac-grade-guide-chip--violet { background: #7751d2; color: #fff; }
+.ac-grade-guide-chip--amber { background: #f5ad29; color: #352500; }
+.ac-grade-guide-chip--red { background: #be3545; color: #fff; }
+html body .ac-page-copy .ac-japan-badge {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html body .ac-page-copy .ac-japan-badge--amber {
+  color: #352500 !important;
+  -webkit-text-fill-color: #352500 !important;
+}
+
+/* These controls need their own visible surface in both themes. */
+html[data-theme="light"] .ac-specifications-trigger {
+  background: #fff !important;
+}
+.ac-vehicle-research-link {
+  background: var(--ac-surface-2);
+  color: var(--ac-text);
+  text-decoration: none;
+}
+html[data-theme="light"] .ac-vehicle-research-link {
+  background: #fff;
+}
+.ac-vehicle-research-link:hover {
+  background: var(--ac-surface-3);
+}
+.ac-vehicle-research-link img {
+  filter: none;
+  opacity: 1;
+}
+@media (max-width: 767px) {
+  .ac-market-rail { grid-auto-columns: minmax(232px, 72vw) !important; }
+  .ac-result-rail { margin-right:-1rem; padding-right:1rem; }
+  .ac-catalog-card { border-radius: 1.15rem !important; }
+  section[data-demo-enabled] > div:first-child .avto-button::after { font-size: 13px; }
+}
+
+html body .ac-attached-editor .ac-research-compact { background: var(--ac-surface-3); }
+
+html body input.ac-unified-checkbox { appearance: none; width: 24px; height: 24px; flex-shrink: 0; border-radius: 8px; border: 1px solid rgba(103,113,130,.55); background: var(--ac-surface-3); cursor: pointer; display: grid; place-content: center; }
+html body input.ac-unified-checkbox:checked { background: #facc15; border-color: #facc15; }
+html body input.ac-unified-checkbox:checked::after { content: "✓"; color: #273343; font-size: 14px; font-weight: 900; }
+html body input.ac-unified-checkbox:focus-visible { outline: 2px solid var(--ac-text); outline-offset: 3px; }
+.ac-pagination { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; }
+.ac-pagination a, .ac-pagination > span { display:flex; align-items:center; justify-content:center; flex:0 0 auto; min-width:36px; height:40px; padding:0 8px; border-radius:8px; font-size:14px; font-weight:800; }
+html body .ac-pagination a { background:var(--ac-surface-2); color:var(--ac-text); border:1px solid var(--ac-border); }
+html body .ac-pagination a[aria-current="page"] { background:#94a3b8; color:#101827; border-color:#94a3b8; }
+html[data-theme="light"] body .ac-pagination a[aria-current="page"] { background:#334155; color:#fff; border-color:#334155; }
+.ac-pagination a:hover { filter:brightness(1.15); }
+.ac-pagination [aria-disabled="true"] { opacity:.35; }
+.ac-pagination .ac-page-extra { display:none; }
+@media(min-width:768px) { .ac-pagination .ac-page-extra { display:flex; } }
+
+/* Delivery remains a distinct card in both themes. */
+html[data-theme="light"] body .ac-offer-page [data-city-delivery] { background:#fff!important; border:1px solid #ced5df; }
+html body .ac-offer-page .ac-cost-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:baseline; column-gap:8px; padding-block:8px; font-size:12px; font-weight:500; color:var(--ac-text); }
+.ac-cost-label { display:flex; align-items:baseline; gap:8px; min-width:0; }
+.ac-cost-label::after { content:""; flex:1; min-width:12px; border-bottom:1px dotted var(--ac-border); }
+.ac-cost-amount { white-space:nowrap; font-weight:500; }
+.ac-seller-help { display:flex; flex-direction:column; align-items:center; gap:5px; width:30%; max-width:106px; min-width:75px; flex-shrink:0; text-align:center; font-size:9px; line-height:1.25; color:var(--ac-muted); }
+.ac-seller-price-row { align-items:center; flex-wrap:nowrap!important; gap:8px!important; }
+.ac-seller-price-row > .ac-price { font-size:clamp(24px,7.5vw,36px); }
+
+/* Japan fixed-stock accents stay legible after both theme enhancers run. */
+html body .ac-page-copy .ac-green-button,
+html[data-theme="light"] body .ac-page-copy .ac-green-button {
+ background:var(--ac-stock-accent)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:0!important;text-decoration:none!important;
+}
+html body .ac-page-copy .ac-green-heading {color:var(--ac-stock-accent)!important;-webkit-text-fill-color:var(--ac-stock-accent)!important;}
+html[data-theme="light"] body .ac-page-copy .ac-green-heading {color:var(--ac-stock-accent)!important;-webkit-text-fill-color:var(--ac-stock-accent)!important;}
+.ac-japan-sections a {display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:48px;padding:12px 8px;border-radius:12px;text-align:center;line-height:1.25;font-size:clamp(11px,3.2vw,14px);white-space:nowrap;}
+html body .ac-page-copy .ac-auction-button {background:#b91c1c!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+.ac-japan-sections a[aria-current="page"] {box-shadow:0 0 0 2px var(--ac-surface),0 0 0 4px var(--ac-muted);}
+.ac-japan-sections a:hover,.ac-green-button:hover {filter:brightness(1.1);}
+.ac-japan-sections a:focus-visible,.ac-green-button:focus-visible {outline:2px solid var(--ac-text);outline-offset:3px;}
+
+/* The directory follows the page theme; only the current letter is accented. */
+html body .ac-page-copy .ac-directory-toolbar {background:var(--ac-page-bg,#edf0f6); }
+html body .ac-page-copy .ac-directory-letter {background:#3d4652!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html[data-theme="light"] body .ac-page-copy .ac-directory-letter {background:#dce1e8!important;color:#4b5563!important;-webkit-text-fill-color:#4b5563!important;}
+html body .ac-page-copy .ac-directory-letter[aria-current="location"] {background:#ff3347!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+
+html[data-theme="light"] body .ac-page-copy .ac-directory-search {background:#fff!important;}
+.ac-directory-search input::-webkit-search-cancel-button,
+.ac-directory-search input::-webkit-search-decoration {display:none;-webkit-appearance:none;}
+:root {--ac-stock-accent:#20a85e;}
+html[data-theme="light"] {--ac-stock-accent:#168a59;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab {background:var(--ac-surface-2)!important;color:var(--ac-muted)!important;-webkit-text-fill-color:var(--ac-muted)!important;box-shadow:none;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab[aria-current="page"] {background:var(--ac-text)!important;color:var(--ac-surface)!important;-webkit-text-fill-color:var(--ac-surface)!important;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab-auction[aria-current="page"] {background:#b91c1c!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab-green[aria-current="page"] {background:var(--ac-stock-accent)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+
+html[data-theme="light"] .ac-offer-updated { background:#fff!important; border:1px solid var(--ac-border); }
+
+.ac-green-intro{display:grid;gap:24px;align-items:start}
+.ac-green-delivery{position:relative;display:flex;align-items:center;gap:20px;min-height:174px;padding:28px 155px 28px 24px;border-radius:22px;background:var(--ac-surface-2);color:var(--ac-text)}
+.ac-green-delivery p{font-size:19px;font-weight:650;line-height:1.45;margin:0}
+.ac-green-delivery p button{color:#20a85e;text-decoration:underline;text-underline-offset:3px;font-weight:inherit}
+.ac-green-delivery-pin{width:62px;height:76px;flex-shrink:0;color:#20a85e}
+.ac-green-delivery>img{position:absolute;right:24px;bottom:0;width:140px;height:160px;object-fit:contain;object-position:bottom}
+.ac-green-delivery-close{position:absolute;right:12px;top:10px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#20a85e;color:#102c20;font-size:24px;line-height:1}
+@media(min-width:1280px){.ac-green-intro{grid-template-columns:minmax(0,42fr) minmax(0,58fr);gap:32px}.ac-green-delivery{height:100%;min-height:174px}}
+@media(max-width:767px){.ac-green-delivery{min-height:146px;padding:20px 100px 20px 16px;gap:10px;border-radius:18px}.ac-green-delivery p{font-size:14px;line-height:1.45}.ac-green-delivery-pin{width:34px;height:44px}.ac-green-delivery>img{width:94px;height:118px;right:8px}.ac-green-delivery-close{right:8px;top:8px;width:28px;height:28px}}
+
+.ac-green-intro .ac-japan-sections{margin-top:0}
+.ac-green-delivery p{font-family:Arial,sans-serif;font-weight:600}
+
+@media(max-width:767px) {
+ .ac-pagination {width:100%;flex-wrap:nowrap;gap:4px;justify-content:space-between;}
+ .ac-pagination a,.ac-pagination > span {flex:1 1 0;min-width:0;padding:0;height:44px;}
+ .ac-pagination .ac-page-extra {display:none;}
+}
+
+/* The catalogue button uses the same bands, motion and label as the header. */
+.ac-catalog-more { position:relative; isolation:isolate; overflow:hidden; }
+.ac-catalog-more__candy {
+  position:absolute; inset:0 -64px; pointer-events:none;
+  background:repeating-linear-gradient(120deg,#ff353d 0 34px,#fff 34px 52px);
+  opacity:.58; animation:ac-catalog-candy-sweep .86s linear infinite;
+  will-change:transform; box-shadow:inset 0 -1px 0 rgba(0,0,0,.18);
+}
+.ac-catalog-more__label {
+  position:relative; z-index:1; display:inline-block; white-space:nowrap;
+  border:1px solid rgba(255,255,255,.30); border-radius:999px;
+  background:rgba(12,18,30,.56); color:#fff; -webkit-text-fill-color:#fff;
+  padding:7px 13px; font-size:12px; font-weight:900; line-height:1;
+  letter-spacing:.04em; box-shadow:0 3px 10px rgba(0,0,0,.16);
+  backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
+}
+.ac-catalog-more[aria-busy="true"] { padding-top:9px; padding-bottom:9px; }
+@keyframes ac-catalog-candy-sweep {
+  from { transform:translate3d(-60px,0,0); }
+  to { transform:translate3d(0,0,0); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ac-catalog-more__candy { animation:none; }
+}

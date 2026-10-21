@@ -1,0 +1,7304 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 12,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-fdce2765a0f7b314f238",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 230,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0874df285f3f19ef3971",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 145,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 84,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87c3b4813798a7076b3a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1988,
+      "powerKw": 140,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75f999ffd205632c3e49",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 145,
+      "commercialNames": [
+        "520D",
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aada1b4ce7743c72926a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 155,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9325dd2da31bea45c5f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 120,
+      "commercialNames": [
+        "530E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ae7a692e221655d6841",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 140,
+      "commercialNames": [
+        "530E",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23f0b15efd3cb21bc5df",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina",
+      "modelId": "bmw/alpina",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "ALPINA D5 BITURBO AUTO",
+        "ALPINA XD3 BITURBO AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdcc5f35c2448b79b2b3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina",
+      "modelId": "bmw/alpina",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 364,
+      "commercialNames": [
+        "BMW ALPINA B4 GRAN COUPE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-018e6d962a08cdc3b84f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina",
+      "modelId": "bmw/alpina",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": 290,
+      "commercialNames": [
+        "BMW ALPINA XD3"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c37115c988a095f8d661",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B3",
+      "modelId": "bmw/alpina-b3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "ALPINA B3 BITURBO AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c38691b8c6d1e3b8392e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B3",
+      "modelId": "bmw/alpina-b3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 364,
+      "commercialNames": [
+        "BMW ALPINA B3 TOURING"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-392482c35ed2fc6f7049",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B3",
+      "modelId": "bmw/alpina-b3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 389,
+      "commercialNames": [
+        "ALPINA B3 GT"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b74592c6d16e5e58fd5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B5",
+      "modelId": "bmw/alpina-b5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "ALPINA B5 BITURBO AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b526c65f3d45e95e3426",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B5",
+      "modelId": "bmw/alpina-b5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": null,
+      "commercialNames": [
+        "ALPINA B5 BITURBO AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e1b730b9c76a9ca9419",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B5",
+      "modelId": "bmw/alpina-b5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 457,
+      "commercialNames": [
+        "ALPINA B5 ALLRAD"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-143125a327418f66fb38",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina B7",
+      "modelId": "bmw/alpina-b7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": 447,
+      "commercialNames": [
+        "ALPINA B7"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ad1038aa29858cfa264",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Alpina XB7",
+      "modelId": "bmw/alpina-xb7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4395,
+      "powerKw": 457,
+      "commercialNames": [
+        "ALPINA XB7",
+        "BMW ALPINA XB7"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4137da3aba78228d5a19",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Clubman Cooper",
+      "modelId": "bmw/clubman-cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "CLUBMAN COOPER D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-628aa302e0ddff3247b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Clubman Cooper",
+      "modelId": "bmw/clubman-cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "CLUBMAN COOPER SD"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83e2280994938eadd062",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Clubman Cooper",
+      "modelId": "bmw/clubman-cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "CLUBMAN COOPER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b7eda1703feb8ba2279",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Clubman Cooper",
+      "modelId": "bmw/clubman-cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "CLUBMAN COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fb4d95363289fcb6a21",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 125,
+      "commercialNames": [
+        "COOPER SD"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6f418ebb764247b55a0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be6b28cf9cf51c7e655d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 100,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a82ce4c4a9cf6d1cd3e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 44,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9aeae49e11e882ff26cf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "COOPER",
+        "COOPER E",
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 204,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75d2e9a57eba54d68b22",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "COOPER",
+        "COOPER COUNTRYMAN"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 49,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5201ffe52deb1ac5126a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1989,
+      "powerKw": 150,
+      "commercialNames": [
+        "COOPER COUNTRYMAN S ALL4"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7386ac370e436d12a089",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "COOPER E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6ac666a3657f4affc79",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "COOPER E",
+        "COOPER SE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03ff74a2ab586e7e2c84",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee7383e77d291b20f7b7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f4098960bccdd65029e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 170,
+      "commercialNames": [
+        "COOPER JCW"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 99,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ce5bd980729bd301e1f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0c36b58ccbb5cc29e5d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper",
+      "modelId": "bmw/cooper",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "COOPER ONE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41ed16c51c236a6f8c36",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3f63d5cb0eb9944b66e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 141,
+      "commercialNames": [
+        "COOPER S",
+        "COOPER S ALL4"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 179,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8a9c401a1094427ec13",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eea7becab3eeac752042",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37dfce00c7acb904fa22",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 154,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4137cdc8f4574459c5d1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-387c8b25e385261b7d50",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "Cooper S",
+      "modelId": "bmw/cooper-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "COOPER S"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c297e07bc08aa32d4a9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "i3",
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW i",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 29662,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-247e5ef174a6bc914db5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "i3",
+        "I3",
+        "I3 (120AH)",
+        "I3 / / AUT",
+        "I3 / / AUT.",
+        "I3 30",
+        "I3 AUT",
+        "I3 EDRIVE BEV I01 IB1"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 15235,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5617955ca677608cf44",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 103,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d28a71ff2cbb85ba0962",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5b6d2fd8123bfebe4dd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "I 3",
+        "I3",
+        "i3"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 13823,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5841d93b52ff71dac8bf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "I3",
+        "I3 40 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3310c7deef0944c028a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 141,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-852bb8caf85571d2787b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 185,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ead7d30558eccf1b6e3a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d9156ab7c53f362d694",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 302,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc74bfb7def391107707",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": 647,
+      "powerKw": 75,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04154c5d8fb31b45f5e5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 647,
+      "powerKw": null,
+      "commercialNames": [
+        "i3",
+        "I3 REX (120AH)"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW i"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e45f706197fa15057bde",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 647,
+      "powerKw": 28,
+      "commercialNames": [
+        "i3",
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6394c034259c58e2507",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 647,
+      "powerKw": 75,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c6bfc91090e4c9cf19d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "I3 E DRIVE 35L"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef15b2c79345917c9898",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 647,
+      "powerKw": 125,
+      "commercialNames": [
+        "i3"
+      ],
+      "sourceMakeNames": [
+        "BMW i"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ed8901a54f0b0211507",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "I3 E DRIVE 40L"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4acbfd78273c7c31e901",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 42,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f4a27c464780d9b05de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22ddacb39deff1f7ffd4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "I3"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-575e99705f4c50c40dd9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "I3",
+        "I3 40L"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51f6d1232d18a8bed6da",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "I3 50 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 115,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22cb41772eac19b12274",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i3",
+      "modelId": "bmw/i3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "I3 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ddd39ec35492104ce3b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 221,
+      "commercialNames": [
+        "I4 80 SDRIVE GRAN COUPE",
+        "I4 80 XDRIVE GRAN COUPE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73862991732e6e3d288a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 442,
+      "commercialNames": [
+        "I4",
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50 XDRIVE GRAN COUPE",
+        "I4 M60 XDRIVE",
+        "I4 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 4036,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89e2b372819e178b7ee9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "i4 eDrive40",
+        "I4 EDRIVE40",
+        "i4 M50",
+        "I4 M50",
+        "I4 M50 XDRIVE",
+        "I4 M60 XDRIVE",
+        "I4 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 2233,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5ad740a47ab546215a5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "I4 / / EDRIVE40 AUT",
+        "I4 / / EDRIVE40 AUT.",
+        "I4 EDRIVE 40",
+        "I4 EDRIVE40",
+        "i4 eDrive40",
+        "I4 EDRIVE40 AUT.",
+        "I4 EDRIVE40 GRAN COUPE",
+        "I4 EDRIVE40 GRAN COUPE G26 HA0"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 4646,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a93766312ff86ddbd2d5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "I4",
+        "I4 / / XDRIVE40 AUT.",
+        "I4 DDRIVE 40",
+        "I4 EDRIVE 35",
+        "I4 EDRIVE 40",
+        "I4 M50",
+        "i4 M50",
+        "I4 M50 / / AUT",
+        "I4 M50 / / AUT.",
+        "I4 M50 / / XDRIVE AUT.",
+        "I4 M50 AUT.",
+        "I4 M50 XDRIVE",
+        "I4 M50 XDRIVE AUT.",
+        "I4 M50 XDRIVE GRAN COUPE",
+        "I4 M50 XDRIVE GRAN COUPE G26 X",
+        "I4 M60 XDRIVE",
+        "I4 XDRIVE40",
+        "I4 XDRIVE40 AUT.",
+        "I4 XDRIVE40 GRAN COUPE G26 XE2"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 43,
+      "registrations": 4147,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87a75a04e658b3e47889",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "i4 M50",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 60,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbc0f3cc7bf2aa48d185",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "I4",
+        "I4 E DRIVE 40",
+        "I4 EDRIVE 40",
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "i4 eDrive40",
+        "I4 M50",
+        "I4 M50 XDRIVE",
+        "I4 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 48834,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01f2416b26ad25434ebb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 400,
+      "commercialNames": [
+        "I4",
+        "i4 M50",
+        "I4 M50",
+        "I4 M50 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 24404,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bae4980753c708030bf5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "I4",
+        "I4 / / EDRIVE35 AUT",
+        "I4 / / EDRIVE35 AUT.",
+        "I4 EDRIVE 35",
+        "I4 EDRIVE35",
+        "I4 EDRIVE35 AUT.",
+        "I4 EDRIVE35 GRAN COUPE G26 HA0",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 2019,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22b603830bb21e473807",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "i4 M50",
+        "I4 M50",
+        "I4 M50 XDRIVE",
+        "I4 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 6964,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-638cf6bece365b294499",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "I4",
+        "I4 DDRIVE 35",
+        "I4 EDRIVE 35",
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50 XDRIVE",
+        "I4 M60 XDRIVE",
+        "I4 XDRIVE35"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 21924,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fb1756d8788f136cb59",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 25,
+      "commercialNames": [
+        "I4 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-704bcfb41323a1002fc9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a508febccba6e9deec25",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 62,
+      "commercialNames": [
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a35d903e209db873e8e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb06bb8e72661198e169",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f5697cf75c93a21cbb5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51a97f34344acf4f4980",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-adc3d4a5751dfb90f065",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "I4 EDRIVE35"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d362ee7316d626064c6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57817a0976cb0572483e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a757e98fa9a85759c69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE35 AUT.",
+        "I4 EDRIVE35 GRAN COUPE",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b96b21aa5da81d7dc481",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bca9ccae96ff469db01b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f93fdb6e97f5a28def04",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e03d5e21d4c478ee4637",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55fedb378e4c7d975f7c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad24c33eea10ddb44cb8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99177a64d9a1c0bb4887",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f9f40f45341999b1002",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75ed15bf094e458f4ddb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cac801dbec213fafa6ad",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 121,
+      "commercialNames": [
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83d9400c351bbb1d24d9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "I4 EDRIVE35"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-474a897a3dddd4287898",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6501d8edd46ff198b9e4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46e0e38617d03e3ab121",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "I4 EDRIVE40",
+        "I4 M60 XDRIVE",
+        "I4 M60 XDRIVE AUT.",
+        "I4 M60 XDRIVE GRAN COUPE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 101,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be54bfb0f77fad6f4d52",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 201,
+      "commercialNames": [
+        "I4"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15dd6f5a45820e7d114f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 243,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ffabda4caaf2869fc6e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67dfeb4d093ba7708229",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 390,
+      "commercialNames": [
+        "I4 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0c531a1237f6b8f107a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "I4 EDRIVE35"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3aaba1089f375a40d17",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 240,
+      "commercialNames": [
+        "I4 M50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdbeb55605f4a8e3438d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 285,
+      "commercialNames": [
+        "I4 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b3810f4111e3a481736",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 295,
+      "commercialNames": [
+        "I4",
+        "I4 EDRIVE40",
+        "I4 M60 XDRIVE",
+        "I4 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2821,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a22eaf1e531de8cc660",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "I4 EDRIVE35"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5af7c647f5ff8a722de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i4",
+      "modelId": "bmw/i4",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "I4 EDRIVE35",
+        "I4 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a7388b5fc9bd1561ae0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "I5 EDRIVE 35L",
+        "I5 EDRIVE 40L"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a436e6041907ded20dc0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "I5 M50",
+        "I5 M50 XDRIVE",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE 40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 211,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17fe83f55e768ae5234b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "I5 40",
+        "I5 DDRIVE 40",
+        "I5 EDRIVE 40",
+        "I5 XDRIVE 40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 164,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8fa2c9be3c951b1607e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 155,
+      "commercialNames": [
+        "I5 EDRIVE 35L"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c247bdd6eed07fd44a42",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "I5 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 88,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b83f7d83de0310a64a9b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "I5",
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 618,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31759cd40462e166ce8b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "I5 EDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6998bb33f1f83badf102",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "I5",
+        "I5 / / EDRIVE 40 AUT",
+        "I5 / / EDRIVE 40 AUT.",
+        "I5 / TOURING / EDRIVE 40 AUT.",
+        "I5 EDRIVE 40",
+        "I5 EDRIVE 40 AUT.",
+        "I5 EDRIVE40",
+        "I5 EDRIVE40 LIMOUSINE",
+        "I5 EDRIVE40 LIMOUSINE G60 HA0",
+        "I5 EDRIVE40 TOURING",
+        "I5 EDRIVE40 TOURING G61 HA0",
+        "I5 TOURING EDRIVE 40 AUT."
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 1582,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ab83e154028dba62ca7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 127,
+      "commercialNames": [
+        "I5",
+        "I5 / / XDRIVE 40 AUT.",
+        "I5 / M60 / XDRIVE AUT",
+        "I5 / M60 / XDRIVE AUT.",
+        "I5 / M60 TOURING / XDRIVE AUT.",
+        "I5 EDRIVE40",
+        "I5 M60 TOURING XDRIVE AUT.",
+        "I5 M60 XDRIVE",
+        "I5 M60 XDRIVE LIMOUSINE G60 XE",
+        "I5 M60 XDRIVE TOURING G61 XE2",
+        "I5 TOURING XDRIVE 40 AUT.",
+        "I5 XDRIVE 40 AUT.",
+        "I5 XDRIVE40",
+        "I5 XDRIVE40 LIMOUSINE G60 XE2",
+        "I5 XDRIVE40 TOURING"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 809,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86f5f91abedefb090cc4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 192,
+      "commercialNames": [
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 129,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb5dbd557ddcf67ce120",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "I5",
+        "I5 40",
+        "I5 EDRIVE 40",
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 28354,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99d66c7395f335ae131c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 258,
+      "commercialNames": [
+        "I5 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc841833c4218812f4b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 420,
+      "commercialNames": [
+        "I5 EDRIVE 40",
+        "I5 XDRIVE 40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a168cb93e89be954a22b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 442,
+      "commercialNames": [
+        "I5",
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4861,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d1938d063956a4fbfd2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5a5501f9f355f4697cc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 290,
+      "commercialNames": [
+        "I5",
+        "I5 EDRIVE 40",
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE 40",
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 6037,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bfdc990913fd2f4c195",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 M60 XDRIVE LIMOUSINE",
+        "I5 M60 XDRIVE TOURING",
+        "I5 TOURING XDRIVE 40 AUT.",
+        "I5 XDRIVE 40 AUT.",
+        "I5 XDRIVE40",
+        "I5 XDRIVE40 LIMOUSINE",
+        "I5 XDRIVE40 TOURING"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 492,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c6189c8bb43b682e501",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d795ac29f9660cbe0b8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ccd1c34084b293a9d87",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 335,
+      "commercialNames": [
+        "I5 XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c71085deb57a140f8875",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i5",
+      "modelId": "bmw/i5",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 410,
+      "commercialNames": [
+        "I5 40 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a652dda09b4ce9b533d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "I7 M60 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea81e455ea083bfb3ad2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 500,
+      "commercialNames": [
+        "I7 50 XDRIVE",
+        "I7 M60",
+        "I7 M60 XDRIVE",
+        "I7 M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 99,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3081561343f58d03ea22",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "I7 EDRIVE50",
+        "I7 M70 XDRIVE",
+        "I7 XDRIVE50",
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 257,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc2933939af62a2e0cec",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "I7 / / XDRIVE 60 AUT",
+        "I7 / / XDRIVE 60 AUT.",
+        "I7 / / XDRIVE60 AUT.",
+        "I7 / M70 / XDRIVE AUT.",
+        "I7 M70 XDRIVE",
+        "I7 M70 XDRIVE LIMOUSINE G70 XE",
+        "i7 xDrive60",
+        "I7 XDRIVE60",
+        "I7 XDRIVE60 AUT.",
+        "I7 XDRIVE60 G70 XE2"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 440,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c5317d1cd5a50689030",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "I7 EDRIVE50",
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 156,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cf148f74b12aff07de8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 400,
+      "commercialNames": [
+        "I7",
+        "I7 50 XDRIVE",
+        "I7 XDRIVE",
+        "I7 XDRIVE 60",
+        "i7 xDrive60",
+        "I7 XDRIVE60",
+        "I7 XDRVIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 3138,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-749093f05c664b8ceedf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 26,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c8152f183f765fc75c6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "I7 M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d56f9df1abaf0df6c53d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80b4a8090943b9d21aa4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5cbd65f217b660f82785",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a500a8cd597c5914a9a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-004eaa85c319c578a883",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "I7 EDRIVE50",
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1971f4b8abbe0b220a4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97ce9ef2e8a34303c9a0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cf1aff45e538340881c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99c456ff59bc491d66b7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "I7 M70 XDRIVE",
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78d8cb470a0e250f0e38",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7456d2712c2f292df76a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39b0ac5b4642909a6c6c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "I7 M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f929d1fb1a589f69424c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47b5caed0469541f86f0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70db65dc64f45d209514",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 125,
+      "commercialNames": [
+        "I7 / / EDRIVE 50 AUT",
+        "I7 EDRIVE 50",
+        "I7 EDRIVE50",
+        "I7 EDRIVE50 LIMOUSINE G70 HA0"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 50,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44b8c53ebe9036c142ba",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51d6d82cd3b90cd0bc42",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a4b15cc59dab2f24196",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6bc15d9cdfee8cf448e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 335,
+      "commercialNames": [
+        "I7",
+        "I7 50 XDRIVE",
+        "I7 EDRIVE 50",
+        "I7 EDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 1812,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad7f39d1f00dba479f20",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 405,
+      "commercialNames": [
+        "I7 XDRIVE 60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ba7ee3106c0c8f85201",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 485,
+      "commercialNames": [
+        "I7",
+        "I7 M70 XDRIVE",
+        "I7 XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 522,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-358de67d50d3b32fd9a7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 550,
+      "commercialNames": [
+        "I7 M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f307f782ef1f3fc0325a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 420,
+      "commercialNames": [
+        "I7 50 XDRIVE",
+        "I7 XDRIVE 60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e1fed79ef37684b8c04",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "I7 M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c22f711c989abf0597d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 435,
+      "commercialNames": [
+        "I7 M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c443ac97ab2b550b3eb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i7",
+      "modelId": "bmw/i7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": null,
+      "commercialNames": [
+        "I7 EDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41e3377d2a77f3923546",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i8",
+      "modelId": "bmw/i8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 170,
+      "commercialNames": [
+        "I8"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09a1d9a9af0a3be75685",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i8",
+      "modelId": "bmw/i8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "I8"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 94,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6aded23b5aecb436551a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i8",
+      "modelId": "bmw/i8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 75,
+      "commercialNames": [
+        "I8"
+      ],
+      "sourceMakeNames": [
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37db01f84aa3a7f0e319",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "i8",
+      "modelId": "bmw/i8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 170,
+      "commercialNames": [
+        "BMW I8 ROADSTER XB2 I15",
+        "i8",
+        "I8",
+        "I8 SPYDER"
+      ],
+      "sourceMakeNames": [
+        "BMW",
+        "BMW I"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1066,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f85ab9454fd28f5e1358",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 49,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d48a4e860b9b85cece8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 129,
+      "commercialNames": [
+        "IX DRIVE 50",
+        "IX XDRIVE 45",
+        "IX XDRIVE 50",
+        "IX XDRIVE 60",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 522,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33624fe579c5ec6a8228",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "IX",
+        "IX M60",
+        "IX M70 XDRIVE",
+        "IX XDRIVE30",
+        "iX xDrive40",
+        "IX XDRIVE40",
+        "IX XDRIVE45",
+        "IX XDRIVE50",
+        "IX XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 4523,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a04ae2335a0f315af69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 102,
+      "commercialNames": [
+        "IX / / XDRIVE40 AUT",
+        "IX / / XDRIVE40 AUT.",
+        "IX XDRIVE 40",
+        "IX XDRIVE40",
+        "IX XDRIVE40 AUT.",
+        "IX XDRIVE40 I20 XE2",
+        "iX xDrive50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 3145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b39616ce3724aa04aa9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "IX",
+        "IX / / XDRIVE50 AUT",
+        "IX / / XDRIVE50 AUT.",
+        "IX 50 XDRIVE",
+        "iX M60",
+        "IX M60",
+        "IX M60 / / AUT",
+        "IX M60 / / AUT.",
+        "IX M60 I20 XE2",
+        "IX M60 XDRIVE",
+        "IX XDRIVE 50",
+        "IX XDRIVE40",
+        "IX XDRIVE50",
+        "iX xDrive50",
+        "IX XDRIVE50 I20 XE2"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 1727,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a27f51996d57e5cd3ce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 186,
+      "commercialNames": [
+        "IX M60",
+        "IX M70 XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 165,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4646038f6f2714121af1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "iX xDrive40",
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 720,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f87bb66e01bf934ef3d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "iX xDrive50",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 144,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eafd35d16bc64fd707f6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 240,
+      "commercialNames": [
+        "IX",
+        "IX M60",
+        "IX XDRIVE 40",
+        "iX xDrive40",
+        "IX XDRIVE40",
+        "IX XDRIVE50",
+        "IX XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 18291,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff7a38304e1cbd412e04",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 385,
+      "commercialNames": [
+        "IX",
+        "IX XDRIVE 50",
+        "IX XDRIVE40",
+        "iX xDrive50",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 9908,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cd2e10678a64e107456",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "IX",
+        "IX M70 XDRIVE",
+        "IX M70 XDRIVE I20",
+        "IX XDRIVE 60",
+        "iX xDrive40",
+        "IX XDRIVE50",
+        "IX XDRIVE60",
+        "IX XDRIVE60 AUT.",
+        "IX XDRIVE60 I20"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 249,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-895893a6e10027879eae",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "IX M60",
+        "IX M70 XDRIVE",
+        "IX XDRIVE40",
+        "IX XDRIVE45",
+        "iX xDrive50",
+        "IX XDRIVE50",
+        "IX XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 7444,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df5743664783ba8e9714",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 285,
+      "commercialNames": [
+        "iX xDrive50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee5a1c5a9b944cf8f72e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 397,
+      "commercialNames": [
+        "IX",
+        "iX M60",
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1983,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be20e865b8127362712a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef9e4f5abd736b78e138",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77c8f1b01a69cfd034a3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6e57756b74ce894bff7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ca8bb7e6fc5c06a8c1f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c76278060247e0cfb3f0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44b58721675d01595462",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f8411c08300a231b8ea",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "IX M60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a04d5cd24014023a2a5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "IX M60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b48244c28a3db518c107",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1493f8b4b803ff7c636a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8f117fec44831823a7a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-806a7ad42e61fa4f5f9e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9220298af1b85ca0cf32",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7e298fff1afa9700785",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54f6bd77b6e350755c0a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42b1a02c59565a5e4a95",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e5f50601b9c712aed35",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-125ced0a4aac31dee0a3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4be8bc32613c9283cc3d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e603ce92f90ff9a5d9b3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d2678ea8a7b8880f320",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 121,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25e7c174ba3279b07105",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e5579504a3b3c406b56",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 137,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2500ecb240a7bf27968e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 148,
+      "commercialNames": [
+        "IX M60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eede822e0cacb2f11e3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0112825647e109309b18",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "IX",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-761eefe6aff58bfa3441",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 224,
+      "commercialNames": [
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d60c3ec105a41c5e6dfe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 228,
+      "commercialNames": [
+        "IX M60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b977d5f3bac54bbc3499",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 245,
+      "commercialNames": [
+        "IX M60",
+        "IX XDRIVE50"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32d250ef9612768b76e8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 360,
+      "commercialNames": [
+        "IX M60"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c93c74692eec24f15d7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 124,
+      "commercialNames": [
+        "IX XDRIVE40"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19f8964b715e01178c4b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "IX XDRIVE45",
+        "IX XDRIVE45 AUT.",
+        "IX XDRIVE45 I20"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 436,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ea59272bffe6a4896f6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 300,
+      "commercialNames": [
+        "IX",
+        "IX M70 XDRIVE",
+        "IX XDRIVE 45",
+        "IX XDRIVE45",
+        "IX XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 4125,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05e93a189515dfa2dd9b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 400,
+      "commercialNames": [
+        "IX",
+        "IX M70 XDRIVE",
+        "IX XDRIVE 60",
+        "IX XDRIVE45",
+        "IX XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 4291,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66b9377168eb332bcb6d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX",
+      "modelId": "bmw/ix",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 485,
+      "commercialNames": [
+        "IX",
+        "IX M70 XDRIVE",
+        "IX XDRIVE60"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 569,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69522da71d41242bfbdb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "IX1",
+        "IX1 EDRIVE20",
+        "IX1 X XDRIVE 30",
+        "IX1 XDRIVE20",
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-add8ff999610f8dc2684",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 94,
+      "commercialNames": [
+        "IX1 / XDRIVE30 / AUT",
+        "IX1 / XDRIVE30 / AUT.",
+        "IX1 X XDRIVE 30",
+        "IX1 XDRIVE30",
+        "IX1 XDRIVE30 U11 XE2"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 2811,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8dc4b9b875bdf312cc0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "IX1 EDRIVE 20",
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c7e37da8aad3021b3ec",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "IX1 EDRIVE 20",
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 3059,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2998dc083ea5169f396",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "IX1",
+        "IX1 EDRIVE",
+        "IX1 EDRIVE 30",
+        "IX1 XDRIVE 30",
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 29991,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f411bd27730d04908398",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78d45c9fc1ff02cc3d56",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3700d553ced309df6fc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "IX1 / EDRIVE20 / AUT",
+        "IX1 / EDRIVE20 / AUT.",
+        "IX1 EDRIVE20",
+        "IX1 EDRIVE20 AUT.",
+        "IX1 EDRIVE20 U11 HB0"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 6823,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1a358cc2909e9271b80",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ee5c18d2b3127333c93",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2ca93dd75e4e6e676df",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cae694229e14c4b6f0c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c24f043fa04d47bbecc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8024d205cde26c8607a5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7269c458dbc01ac6c2ed",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-176d1bb31a277a12111c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-514387911d8b98583a32",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0802595f8603d1253649",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c829a241ce00f21f26e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 104,
+      "commercialNames": [
+        "IX1",
+        "IX1 / XDRIVE30 / AUT",
+        "IX1 / XDRIVE30 / AUT.",
+        "IX1 XDRIVE 30",
+        "IX1 XDRIVE30",
+        "IX1 XDRIVE30 AUT.",
+        "IX1 XDRIVE30 U11 XE2"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 2855,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f597f5ef306a7a3b2b6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83f5149e9af7293a7d1f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb448f196798132eb96d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b91f68d6d0d2119a8d4c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1eb7045f70448dfb5bf9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c263f07c9f6459546e07",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-571ee9c20b3b9c919442",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "IX1",
+        "IX1 EDRIVE 20",
+        "IX1 EDRIVE20",
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 70966,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a55742cbae5eb76dc16d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 220,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4d2efdf7950e53ec19c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "IX1",
+        "IX1 EDRIVE20",
+        "IX1 XDRIVE",
+        "IX1 XDRIVE 30",
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 28274,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fec3879f7aaef03ec7e5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "iX1",
+      "modelId": "bmw/ix1",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 460,
+      "commercialNames": [
+        "IX1 XDRIVE30"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

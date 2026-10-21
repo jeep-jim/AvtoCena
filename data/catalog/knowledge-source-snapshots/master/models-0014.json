@@ -1,0 +1,6624 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 14,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "bmw:x3m40i",
+      "make": "BMW",
+      "model": "X3 M40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x3m50xdrive",
+      "make": "BMW",
+      "model": "X3 M50 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x3m50ixdrive",
+      "make": "BMW",
+      "model": "X3 M50i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x3xdrive30e",
+      "make": "BMW",
+      "model": "X3 xDrive30e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x3xdrive30i",
+      "make": "BMW",
+      "model": "X3 xDrive30i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x4",
+      "make": "BMW",
+      "model": "X4",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/x4",
+        "canonicalMake": "BMW",
+        "canonicalModel": "X4"
+      },
+      "aliases": [
+        "BMW X4",
+        "BMW X4 M",
+        "BMW X4 M40i",
+        "BMW X4 xDrive 20d",
+        "BMW X4 xDrive 28i",
+        "BMW X4 xDrive 30i",
+        "BMW X4 xDrive 35i"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x4m",
+      "make": "BMW",
+      "model": "X4 M",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x4mcompetition",
+      "make": "BMW",
+      "model": "X4 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x4m40i",
+      "make": "BMW",
+      "model": "X4 M40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x4m40ixdrive",
+      "make": "BMW",
+      "model": "X4 M40i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x4xdrive30i",
+      "make": "BMW",
+      "model": "X4 xDrive30i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5",
+      "make": "BMW",
+      "model": "X5",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/x5",
+        "canonicalMake": "BMW",
+        "canonicalModel": "X5"
+      },
+      "aliases": [
+        "BMW X5M",
+        "BMW X5 M50i",
+        "BMW X5 M60i xDrive",
+        "BMW X5M Competition",
+        "BMW X5 xDrive 35d",
+        "BMW X5 xDrive 35i",
+        "BMW X5 xDrive 40d",
+        "BMW X5 xDrive 50i"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5m",
+      "make": "BMW",
+      "model": "X5 M",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5mcompetition",
+      "make": "BMW",
+      "model": "X5 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5m50i",
+      "make": "BMW",
+      "model": "X5 M50i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5m60i",
+      "make": "BMW",
+      "model": "X5 M60i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5m60ixdrive",
+      "make": "BMW",
+      "model": "X5 M60i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5xdrive40i",
+      "make": "BMW",
+      "model": "X5 xDrive40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5xdrive45e",
+      "make": "BMW",
+      "model": "X5 xDrive45e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5xdrive50e",
+      "make": "BMW",
+      "model": "X5 xDrive50e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x5xdrive50i",
+      "make": "BMW",
+      "model": "X5 xDrive50i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6",
+      "make": "BMW",
+      "model": "X6",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/x6",
+        "canonicalMake": "BMW",
+        "canonicalModel": "X6"
+      },
+      "aliases": [
+        "BMW X6M",
+        "BMW X6 M50i",
+        "BMW X6 M60i xDrive",
+        "BMW X6M Competition",
+        "BMW X6 xDrive 35d",
+        "BMW X6 xDrive 35i",
+        "BMW X6 xDrive 50i"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6m",
+      "make": "BMW",
+      "model": "X6 M",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6mcompetition",
+      "make": "BMW",
+      "model": "X6 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6m50i",
+      "make": "BMW",
+      "model": "X6 M50i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6m60i",
+      "make": "BMW",
+      "model": "X6 M60i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6m60ixdrive",
+      "make": "BMW",
+      "model": "X6 M60i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x6xdrive40i",
+      "make": "BMW",
+      "model": "X6 xDrive40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x7",
+      "make": "BMW",
+      "model": "X7",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/x7",
+        "canonicalMake": "BMW",
+        "canonicalModel": "X7"
+      },
+      "aliases": [
+        "BMW X7",
+        "BMW X7 M50i",
+        "BMW X7 M60i xDrive",
+        "BMW X7 xDrive 35d",
+        "BMW X7 xDrive 40d"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x7m50i",
+      "make": "BMW",
+      "model": "X7 M50i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x7m60i",
+      "make": "BMW",
+      "model": "X7 M60i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x7m60ixdrive",
+      "make": "BMW",
+      "model": "X7 M60i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x7xdrive40i",
+      "make": "BMW",
+      "model": "X7 xDrive40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:x7xdrive50i",
+      "make": "BMW",
+      "model": "X7 xDrive50i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:xm",
+      "make": "BMW",
+      "model": "XM",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/xm",
+        "canonicalMake": "BMW",
+        "canonicalModel": "XM"
+      },
+      "aliases": [
+        "BMW XM"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:xmlabel",
+      "make": "BMW",
+      "model": "XM Label",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:xmlabelred",
+      "make": "BMW",
+      "model": "XM Label Red",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z1",
+      "make": "BMW",
+      "model": "Z1",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z3",
+      "make": "BMW",
+      "model": "Z3",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/z3",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Z3"
+      },
+      "aliases": [
+        "BMW Z3 M ROADSTER",
+        "Z3 20"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z4",
+      "make": "BMW",
+      "model": "Z4",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/z4",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Z4"
+      },
+      "aliases": [
+        "BMW Z4 M40i",
+        "BMW Z4 sDrive 20i",
+        "BMW Z4 sDrive 35i",
+        "BMW Z4 sDrive 35is"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z4m40i",
+      "make": "BMW",
+      "model": "Z4 M40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z4m40iroadster",
+      "make": "BMW",
+      "model": "Z4 M40i Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z4sdrive30i",
+      "make": "BMW",
+      "model": "Z4 sDrive30i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z4sdrive30iroadster",
+      "make": "BMW",
+      "model": "Z4 sDrive30i Roadster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:z8",
+      "make": "BMW",
+      "model": "Z8",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "sa"
+      ],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw120",
+      "make": "BMW코리아(주)",
+      "model": "BMW 120",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw120i",
+      "make": "BMW코리아(주)",
+      "model": "BMW 120i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw218dactivetourer",
+      "make": "BMW코리아(주)",
+      "model": "BMW 218d Active Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw220grancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 220 Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw220iactivetourer",
+      "make": "BMW코리아(주)",
+      "model": "BMW 220i Active Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw220igrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 220i Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw228xdrivegrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 228 xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw320d",
+      "make": "BMW코리아(주)",
+      "model": "BMW 320d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw320dtouring",
+      "make": "BMW코리아(주)",
+      "model": "BMW 320d Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw320dxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 320d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw320e",
+      "make": "BMW코리아(주)",
+      "model": "BMW 320e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw320i",
+      "make": "BMW코리아(주)",
+      "model": "BMW 320i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw320itouring",
+      "make": "BMW코리아(주)",
+      "model": "BMW 320i Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw330e",
+      "make": "BMW코리아(주)",
+      "model": "BMW 330e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw420dgrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 420d Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw420iconvertible",
+      "make": "BMW코리아(주)",
+      "model": "BMW 420i Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw420icoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 420i Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw420igrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 420i Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw430iconvertible",
+      "make": "BMW코리아(주)",
+      "model": "BMW 430i Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw430icoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW 430i Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw520i",
+      "make": "BMW코리아(주)",
+      "model": "BMW 520i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw523d",
+      "make": "BMW코리아(주)",
+      "model": "BMW 523d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw523dxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 523d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw530e",
+      "make": "BMW코리아(주)",
+      "model": "BMW 530e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw530exdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 530e xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw530i",
+      "make": "BMW코리아(주)",
+      "model": "BMW 530i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw530ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 530i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw550exdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 550e xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw620d",
+      "make": "BMW코리아(주)",
+      "model": "BMW 620d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw620dxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 620d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw630ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 630i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw640ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 640i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw740dxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 740d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw740i",
+      "make": "BMW코리아(주)",
+      "model": "BMW 740i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw740ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 740i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmw750exdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW 750e xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi4edrive40",
+      "make": "BMW코리아(주)",
+      "model": "BMW i4 eDrive40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi4m50",
+      "make": "BMW코리아(주)",
+      "model": "BMW i4 M50",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi4m50xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW i4 M50 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi4m60xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW i4 M60 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi5edrive40",
+      "make": "BMW코리아(주)",
+      "model": "BMW i5 eDrive40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi5edrive401920",
+      "make": "BMW코리아(주)",
+      "model": "BMW i5 eDrive40 (19\", 20\")",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi5m60xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW i5 M60 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi5xdrive40",
+      "make": "BMW코리아(주)",
+      "model": "BMW i5 xDrive40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi760xdrive45인승",
+      "make": "BMW코리아(주)",
+      "model": "BMW i7 60 xDrive(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi7edrive50",
+      "make": "BMW코리아(주)",
+      "model": "BMW i7 eDrive50",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi7m70xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW i7 M70 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi7m70xdrive45인승",
+      "make": "BMW코리아(주)",
+      "model": "BMW i7 M70 xDrive (4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwi7xdrive60",
+      "make": "BMW코리아(주)",
+      "model": "BMW i7 xDrive60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwixm60",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX M60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwixm70xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX M70 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwixxdrive40",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX xDrive40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwixxdrive45",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX xDrive45",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwixxdrive50",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX xDrive50",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwixxdrive60",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX xDrive60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix1edrive20",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX1 eDrive20",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix1xdrive30",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX1 xDrive30",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix2edrive20",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX2 eDrive20",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix2xdrive30",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX2 xDrive30",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix350xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX3 50 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix350xdrivese",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX3 50 xDrive SE",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwix3msport",
+      "make": "BMW코리아(주)",
+      "model": "BMW iX3 M Sport",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm135xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M135 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm135ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M135i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm2",
+      "make": "BMW코리아(주)",
+      "model": "BMW M2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm235xdrivegrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M235 xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm235ixdrivegrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M235i xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm240ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M240i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm3competitionmxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M3 Competition M xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm3competitionmxdrivetouring",
+      "make": "BMW코리아(주)",
+      "model": "BMW M3 Competition M xDrive Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm3competitiontouringmxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M3 Competition Touring M xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm3cstouringmxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M3 CS Touring M xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm340i",
+      "make": "BMW코리아(주)",
+      "model": "BMW M340i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm340ixdrivetouring",
+      "make": "BMW코리아(주)",
+      "model": "BMW M340i xDrive Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm4competitionconvertiblemxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M4 Competition Convertible M xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm4competitionmxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M4 Competition M xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm4competitionmxdriveconvertible",
+      "make": "BMW코리아(주)",
+      "model": "BMW M4 Competition M xDrive Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm4competitionmxdrivecoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M4 Competition M xDrive Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm4cs",
+      "make": "BMW코리아(주)",
+      "model": "BMW M4 CS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm440ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW M440i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm440ixdriveconvertible",
+      "make": "BMW코리아(주)",
+      "model": "BMW M440i xDrive Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm440ixdrivecoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M440i xDrive Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm5",
+      "make": "BMW코리아(주)",
+      "model": "BMW M5",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm5competitionpackage",
+      "make": "BMW코리아(주)",
+      "model": "BMW M5 Competition Package",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm5cs",
+      "make": "BMW코리아(주)",
+      "model": "BMW M5 CS",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm5touring",
+      "make": "BMW코리아(주)",
+      "model": "BMW M5 Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm8grancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M8 Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm8grancoupecompetition",
+      "make": "BMW코리아(주)",
+      "model": "BMW M8 Gran Coupe Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm850ixdrivecoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M850i xDrive Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwm850ixdrivegrancoupe",
+      "make": "BMW코리아(주)",
+      "model": "BMW M850i xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx1m35ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X1 M35i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx1sdrive18d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X1 sDrive18d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx1sdrive20i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X1 sDrive20i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx1xdrive20i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X1 xDrive20i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx2m35i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X2 M35i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx2m35ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X2 M35i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx2sdrive18d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X2 sDrive18d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx2xdrive20i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X2 xDrive20i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx320xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 20 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx320dxdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 20d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx330xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 30 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx3mcompetition",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx3m40i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 M40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx3m50xdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 M50 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx3xdrive20d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 xDrive20d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx3xdrive20i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 xDrive20i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx3xdrive30e",
+      "make": "BMW코리아(주)",
+      "model": "BMW X3 xDrive30e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx4mcompetition",
+      "make": "BMW코리아(주)",
+      "model": "BMW X4 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx4m40i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X4 M40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx4xdrive20d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X4 xDrive20d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx4xdrive20i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X4 xDrive20i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx4xdrive30d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X4 xDrive30d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5m",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 M",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5mcompetition",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5m60ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 M60i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5xdrive30d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 xDrive30d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5xdrive30d75인승",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 xDrive30d (7/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5xdrive40d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 xDrive40d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5xdrive40d75인승",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 xDrive40d (7/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5xdrive40i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 xDrive40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx5xdrive50e",
+      "make": "BMW코리아(주)",
+      "model": "BMW X5 xDrive50e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6m",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 M",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6mcompetition",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6m60ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 M60i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6xdrive30dmsport",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 xDrive30d M Sport",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6xdrive40d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 xDrive40d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6xdrive40dmsport",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 xDrive40d M Sport",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx6xdrive40imsport",
+      "make": "BMW코리아(주)",
+      "model": "BMW X6 xDrive40i M Sport",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx7m60ixdrive",
+      "make": "BMW코리아(주)",
+      "model": "BMW X7 M60i xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx7xdrive40d",
+      "make": "BMW코리아(주)",
+      "model": "BMW X7 xDrive40d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx7xdrive40d76인승",
+      "make": "BMW코리아(주)",
+      "model": "BMW X7 xDrive40d (7/6인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwx7xdrive40i",
+      "make": "BMW코리아(주)",
+      "model": "BMW X7 xDrive40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwxm",
+      "make": "BMW코리아(주)",
+      "model": "BMW XM",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwxm50e",
+      "make": "BMW코리아(주)",
+      "model": "BMW XM 50e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwxmlabel",
+      "make": "BMW코리아(주)",
+      "model": "BMW XM Label",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwz4m40i",
+      "make": "BMW코리아(주)",
+      "model": "BMW Z4 M40i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:bmwz4sdrive20i",
+      "make": "BMW코리아(주)",
+      "model": "BMW Z4 sDrive20i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:miniacemane",
+      "make": "BMW코리아(주)",
+      "model": "MINI Aceman E",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:miniacemanse",
+      "make": "BMW코리아(주)",
+      "model": "MINI Aceman SE",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicooper",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicooperc",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicoopercconvertible",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper C Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicoopercfivedoor",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper C Five-door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicooperconvertible",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicoopercountryman",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper Countryman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicooperfivedoor",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper five-door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicoopers",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicoopersconvertible",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper S Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicooperscountrymanall4",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper S Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicoopersfivedoor",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper S five-door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicooperse",
+      "make": "BMW코리아(주)",
+      "model": "MINI Cooper SE",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicountrymane",
+      "make": "BMW코리아(주)",
+      "model": "MINI Countryman E",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicountrymansall4",
+      "make": "BMW코리아(주)",
+      "model": "MINI Countryman S ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minicountrymanseall4",
+      "make": "BMW코리아(주)",
+      "model": "MINI Countryman SE ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minijohncooperworks",
+      "make": "BMW코리아(주)",
+      "model": "MINI John Cooper Works",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minijohncooperworksacemane",
+      "make": "BMW코리아(주)",
+      "model": "MINI John Cooper Works Aceman E",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minijohncooperworksclubmanall4my23",
+      "make": "BMW코리아(주)",
+      "model": "MINI John Cooper Works Clubman ALL4(MY23~)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minijohncooperworksconvertible",
+      "make": "BMW코리아(주)",
+      "model": "MINI John Cooper Works Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minijohncooperworkscountrymanall4",
+      "make": "BMW코리아(주)",
+      "model": "MINI John Cooper Works Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:minijohncooperworkse",
+      "make": "BMW코리아(주)",
+      "model": "MINI John Cooper Works E",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceblackbadgespectre",
+      "make": "BMW코리아(주)",
+      "model": "Rolls Royce Black Badge Spectre",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceghostblackbadge",
+      "make": "BMW코리아(주)",
+      "model": "Rolls Royce Ghost Black Badge",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceghostewb",
+      "make": "BMW코리아(주)",
+      "model": "Rolls Royce Ghost EWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycephantomewb",
+      "make": "BMW코리아(주)",
+      "model": "Rolls Royce Phantom EWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycespectre",
+      "make": "BMW코리아(주)",
+      "model": "Rolls Royce Spectre",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceblackbadgecullinan45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Black Badge Cullinan(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceblackbadgeghost",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Black Badge Ghost",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceblackbadgeghost45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Black Badge Ghost(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycecullinan",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Cullinan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycecullinanblackbadge",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Cullinan Black Badge",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycecullinan45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Cullinan(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceghost",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Ghost",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceghostextended",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Ghost Extended",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceghostextended45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Ghost Extended(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroyceghost45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Ghost(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycephantom",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Phantom",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycephantomextended",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Phantom Extended",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycephantomextended45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Phantom Extended(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:rollsroycephantom45인승",
+      "make": "BMW코리아(주)",
+      "model": "Rolls-Royce Phantom(4/5인승)",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw코리아주:x5mcompetition",
+      "make": "BMW코리아(주)",
+      "model": "X5 M Competition",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "korea"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "승용차"
+      ],
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bond:bug",
+      "make": "Bond",
+      "model": "Bug",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bond:equipe",
+      "make": "Bond",
+      "model": "Equipe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bond:minicar",
+      "make": "Bond",
+      "model": "Minicar",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "borgward:bx7",
+      "make": "Borgward",
+      "model": "BX7",
+      "canonical": {
+        "brandId": "borgward",
+        "modelId": "borgward/bx7",
+        "canonicalMake": "Borgward",
+        "canonicalModel": "BX7"
+      },
+      "aliases": [
+        "BX7 S",
+        "BX7 TS"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "borgward:isabella",
+      "make": "Borgward",
+      "model": "Isabella",
+      "canonical": {
+        "brandId": "borgward",
+        "modelId": null,
+        "canonicalMake": "Borgward",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "borgward:isabellats",
+      "make": "Borgward",
+      "model": "Isabella Ts",
+      "canonical": {
+        "brandId": "borgward",
+        "modelId": null,
+        "canonicalMake": "Borgward",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bravia:swan",
+      "make": "Bravia",
+      "model": "Swan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bravia:swan636",
+      "make": "Bravia",
+      "model": "Swan 636",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bricklin:sv1",
+      "make": "Bricklin",
+      "model": "SV1",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:400",
+      "make": "Bristol",
+      "model": "400",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:401",
+      "make": "Bristol",
+      "model": "401",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:402",
+      "make": "Bristol",
+      "model": "402",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:403",
+      "make": "Bristol",
+      "model": "403",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:405",
+      "make": "Bristol",
+      "model": "405",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:406",
+      "make": "Bristol",
+      "model": "406",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:407",
+      "make": "Bristol",
+      "model": "407",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:408",
+      "make": "Bristol",
+      "model": "408",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:409",
+      "make": "Bristol",
+      "model": "409",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:410",
+      "make": "Bristol",
+      "model": "410",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:411",
+      "make": "Bristol",
+      "model": "411",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:beaufighter",
+      "make": "Bristol",
+      "model": "Beaufighter",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:blenheim3",
+      "make": "Bristol",
+      "model": "Blenheim 3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bristol:brigand",
+      "make": "Bristol",
+      "model": "Brigand",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:brescia",
+      "make": "Bugatti",
+      "model": "Brescia",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": null,
+        "canonicalMake": "Bugatti",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bugatti:centodieci",
+      "make": "Bugatti",
+      "model": "Centodieci",
+      "canonical": {
+        "brandId": "bugatti",
+        "modelId": "bugatti/centodieci",
+        "canonicalMake": "Bugatti",
+        "canonicalModel": "Centodieci"
+      },
+      "aliases": [
+        "BUGATTI CENTODIECI"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

@@ -1,0 +1,7014 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 41,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-0aafc60b3a05656a3b81",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 55,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e058cbd16775397bcb86",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 67,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b47b9cefc9d2f701e03",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 69,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b62a2f5d1bb59582d06c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "AVENGER",
+        "AVENGER / 1.2 /",
+        "AVENGER / 1.2 / 4X2 FWD",
+        "AVENGER / 12 /",
+        "AVENGER / 12 / 4X2 FWD",
+        "AVENGER 1.2",
+        "JEEP AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 151603,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de05815663a4a53e58c2",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 81,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ce1b25fb25d80218335",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 85,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d27f0a31e3d140bc89e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 95,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7595b04394ad5c23b006",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 110,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29409b80a9f5e7b8173a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 131,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c1cecdcfc364eb16c78",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 132,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9244f8487983d2b34f01",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 140,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bcd42460e4eb861cac53",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 250,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a12ccb31514a5d352b5",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 16,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16e89e7f766021e60f88",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ac96d47cb7ea0f512cf",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 46,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e41d04f126d03f21f6c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 58,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f052cf95ecaf7bb7432",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 62,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27b868123d0b0b028249",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "AVENGER",
+        "AVENGER 1.2"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6052,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0b98244e1004b5525c1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": null,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e53897db99ab0d8608b8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 74,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 511,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-500cccae0692e0363554",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Avenger",
+      "modelId": "jeep/avenger",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "AVENGER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b3e5d69f1138be3ab77",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 110,
+      "commercialNames": [
+        "CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f20e4e4276bb6e9987f",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 142,
+      "commercialNames": [
+        "CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-842173c7c4dd1dca0d2c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 143,
+      "commercialNames": [
+        "CHEROKEE",
+        "CHEROKEE LATITUDE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3636,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c4079680385fb9a61c6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 147,
+      "commercialNames": [
+        "JEEP CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92b02e394e95351e7cc9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 200,
+      "commercialNames": [
+        "CHEROKEE",
+        "CHEROKEE TRAILHAWK"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 584,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-476963c3c684e99b6599",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 200,
+      "commercialNames": [
+        "CHEROKEE TRAILHAWK"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e215909aaa93ccb3cee9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": null,
+      "commercialNames": [
+        "CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-730c2a87d0bc3e1902a1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": 134,
+      "commercialNames": [
+        "JEEP CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ff2311461c8ef690d82",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": 137,
+      "commercialNames": [
+        "CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad5efcfa13dbeebb3247",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3239,
+      "powerKw": 199,
+      "commercialNames": [
+        "CHEROKEE",
+        "CHEROKEE TRAILHAWK"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68a828251b67e490d2ec",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3239,
+      "powerKw": 200,
+      "commercialNames": [
+        "CHEROKEE",
+        "CHEROKEE LATITUDE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1f9d826290b1ae96518",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3240,
+      "powerKw": 199,
+      "commercialNames": [
+        "CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c099752b3506c7660e23",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee",
+      "modelId": "jeep/cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "commercialNames": [
+        "CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cac5669a6b7a93588eb6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Cherokee Sport",
+      "modelId": "jeep/cherokee-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": null,
+      "commercialNames": [
+        "CHEROKEE SPORT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b5233563570835a6b84",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "CJ-7",
+      "modelId": "jeep/cj-7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5000,
+      "powerKw": 112,
+      "commercialNames": [
+        "CJ7"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1e48e1c7eb7383a8c05",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Commander",
+      "modelId": "jeep/commander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "commercialNames": [
+        "COMMANDER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ca9217025657234950c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Commander",
+      "modelId": "jeep/commander",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4701,
+      "powerKw": 170,
+      "commercialNames": [
+        "COMMANDER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-482ca0cd1a35c721830a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 177,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d0daaef7ae5e3ee1b71",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 117,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9870b54c2be240f0e3ed",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23ecbb9facfc0160424e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS LIMITED M-JET II 4X2",
+        "COMPASS LONGITUDE M-JET II 4X2",
+        "COMPASS NIGHTEGLE M-JET II 4X2",
+        "COMPASS S MULTIJET II 4X2",
+        "COMPASS SPORT MULTIJET II 4X2"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 342,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4a39cd1d27fa02a768d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "Compass",
+        "COMPASS",
+        "COMPASS / 1.6 / JTD FWD HEA",
+        "COMPASS 16 JTD FWD",
+        "COMPASS 16 JTD FWD HEA"
+      ],
+      "sourceMakeNames": [
+        "Jeep",
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 40245,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6348dfb9ded45f70e8d9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS LIMITED MULTIJET II",
+        "COMPASS LIMITED MULTIJET II A",
+        "COMPASS LONGITUDE MULTIJET II",
+        "COMPASS NIGHTEAGLE MULTIJET II",
+        "COMPASS TRAILHAWK M-TIJET II A"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 318,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec5afc4e1218b91bc800",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS / 2.0 / JTD AWD",
+        "COMPASS 20 JTD 4X4",
+        "COMPASS 20 JTD AWD"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 16619,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d99c4648826b0604d628",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS 20 JTD 4X4"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 3996,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0b21b4ceebb5f2ea524",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2143,
+      "powerKw": 120,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed5cd122f1216d1f8bc7",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fa77a6f789b1fa66616",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47dfe137070bc3db2cf3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS / 1.3 / CA HEA",
+        "COMPASS / 1.3 / DDCT HEA",
+        "COMPASS / 1.3 / HEA",
+        "COMPASS / 13 / DDCT HEA",
+        "COMPASS 13 HEA",
+        "JEEP COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 20537,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-612d20b8f56112b867d2",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS / 1.3 / DDCT HEA",
+        "COMPASS 13 DDCT HEA"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 35680,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e543522f8dd30e50755e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 838,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73d46502be2c2a7afb05",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS LIMITED + M-AIR II A",
+        "COMPASS LIMITED M-AIR II 4X2",
+        "COMPASS LIMITED M-AIR II AUTO",
+        "COMPASS LONGITUDE M-AIR II 4X2",
+        "COMPASS LONGITUDE M-AIR II A",
+        "COMPASS NIGHTEGLE M-AIR II 4X2",
+        "COMPASS S MULTIAIR II AUTO"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2712,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49ab8f503dcc60cc6dac",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 100,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb6fe00040afabe65ca3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "Compass",
+        "COMPASS",
+        "COMPASS 14 FWD"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 9959,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7769788025273c819db8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "commercialNames": [
+        "COMPASS",
+        "Compass",
+        "COMPASS 14 AWD"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8199,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a510d38c1773420c90a1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79afbab7d27348a06064",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 118,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-968c1d1e395e9792b307",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2359,
+      "powerKw": 134,
+      "commercialNames": [
+        "JEEP COMPASS LATITUDE 4X4",
+        "JEEP COMPASS LIMITED 4X4",
+        "JEEP COMPASS SPORT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8339d4d4c3ef803a566b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 44,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df97ec6fec464a9d61f2",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS / 1.3 / 4X4 CA HYBRID",
+        "COMPASS / 13 / 4X4 CA HYBRID",
+        "COMPASS 4XE",
+        "COMPASS PHEV"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 44637,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2273adaa6c8fb1f4f220",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS / 1.3 /",
+        "COMPASS / 1.3 / 4X4 CA HYBRID",
+        "COMPASS / 1.3 / TRAILHAWK HYBRID",
+        "COMPASS / 13 / 4X4 CA HYBRID",
+        "COMPASS / 13 / TRAILHAWK HYBRID",
+        "COMPASS 4XE",
+        "COMPASS PHEV"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 43501,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14aeeaff676acfd8e558",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS",
+        "Compass",
+        "COMPASS / 1.6 / JTD HEA",
+        "COMPASS / 16 / JTD",
+        "COMPASS / 16 / JTD HEA",
+        "COMPASS VAN"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 52006,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c363338e873d657381b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0448ebc0f83c7c5d93e8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90f6c9044762f396dbca",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5678752a1a9ad0eb7a29",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75724825218826be14f9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS",
+        "COMPASS / 1.5 /",
+        "COMPASS / 15 /",
+        "COMPASS / 15 / DCT HYBRID",
+        "COMPASS 1.5",
+        "COMPASS 1.5 DCT HYBRID",
+        "JEEP COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 39381,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74c22c2aa7268704b364",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dbc26ba7a597621e16f",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1e2d7e464844cd90f9d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": 137,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ae71bbe9ce4341046eb",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2400,
+      "powerKw": 128,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f27bd25a3f284eb380e5",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2400,
+      "powerKw": 132,
+      "commercialNames": [
+        "COMPASS SPORT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5d6d4cced99a24df05d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 527,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b2b72a2efd6d5e81f19",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": 11,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21cef230c49ace24229d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1598,
+      "powerKw": 117,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6482e93352082fc7cdb3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f250f310ecf360f96b56",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 112,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5b76410d99247439f10",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": 184,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e4733002ea9bf6e565d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 454,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a048df77817083f2fc3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 11,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0a4dcb04209590fd4bc",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 49,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8df780fc2c32ba2f3623",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 55,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84b01448e314c96a0bd5",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 61,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5c21bc89af18dbfb065",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 67,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c24e1319585335ec9310",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 68,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ef1e851d0e75284616c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 69,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89e460e968f8bc75ac7e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 70,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-350a4aee43fe78adc7ec",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 81,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a2d80ba8a1aaf0e0c61",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 84,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f825fd6d6843451a2ba8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 85,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e78e7e978a56d49a4a36",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 88,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-908793b0dcf0027b1cad",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 90,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3ca2635d6421f00daf8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 91,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f67fabd87e51c67ae1a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 95,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae34645db35e8f674a72",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 110,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-698d7ea7d37e2adad3f3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 112,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c35a56b509ce04d4a821",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 114,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d48864d5599ffc3a6b7",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 115,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84223ccee391e8af0c8f",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 117,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e293dfd465f80566988",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 118,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0693eba997455ea481a7",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 120,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5abe1fac550b0f18df4",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 121,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62eeb76c4db2231398ca",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 125,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d475f571989c5533c4a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 132,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88c7b400cd8185d03e8f",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 135,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6c89cfb746d18f32e21",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 137,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-96dd7563bc5053ca3f3b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 140,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc0962cb8b6c59491f96",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 147,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5571d2510e0aba72acce",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 150,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-018139a3ef8fe0fef577",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 173,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-270cc14df13f8c3c7aa2",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 174,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8075803a1bd9a86fd211",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 187,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcdfbc768bb68b7cd48c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 221,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-823677ffb90d540b637a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 250,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75564b12ad72c62d9ff6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 258,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38cdbebafd1a8838f83e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 270,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9aaad709d8c26d587e3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4ea2dd2e7973ae96ce7",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 149,
+      "commercialNames": [
+        "JEEP COMPASS SPORT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cd3835b3ddeca38476b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 149,
+      "commercialNames": [
+        "JEEP COMPASS",
+        "JEEP COMPASS SPORT 4X4"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f713d5943f814a49b50b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2360,
+      "powerKw": 132,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0783a1f12023373a834e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfd415854acb4322d924",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 67,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0b78042724be86e5551",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 81,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2d2358026f9f3a31cd1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 84,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce89f09238b57e5c8289",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 147,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72f34bd014ed1a69ed88",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 210,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dab2c267433f13c09b02",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 320,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be3a9540e375a5b1f759",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 104,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0befa3e82d7e008f6447",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 157,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6fb3b499d13bb8cc3b82",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 170,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb62b18e12b9cc6a7c91",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1199,
+      "powerKw": 100,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 256,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8057b9edf12ce771b1ce",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8af8d96c2bb2b6514c94",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 62,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cd1ceee110f5853bc81",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bc740fe3cc36b1e3c87",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 58,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-748ce00499ccc1efe37a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 69,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22ba7418e46ebe62ae14",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Compass",
+      "modelId": "jeep/compass",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1332,
+      "powerKw": 118,
+      "commercialNames": [
+        "COMPASS"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f05bece1e2699a7d808e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Gladiator",
+      "modelId": "jeep/gladiator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 209,
+      "commercialNames": [
+        "GLADIATOR",
+        "JEEP GLADIATOR RUBICON"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10c579a85c2efb66df34",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Gladiator",
+      "modelId": "jeep/gladiator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "E85",
+      "engineCc": 3604,
+      "powerKw": 209,
+      "commercialNames": [
+        "GLADIATOR"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8e947e98fcd0ecf126d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": null,
+      "commercialNames": [
+        "GRAND CHEROKEE OLAND MJET II A",
+        "GRAND CHEROKEE SUMMIT MJT II A"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 112,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b463621c9b3d6582dcf0",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 140,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND-CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 124,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0baa234b5fe8c2257ac8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 184,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "Grand Cherokee",
+        "GRAND-CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6339,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9a81c615ab78e89ff6b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 3604,
+      "powerKw": 220,
+      "commercialNames": [
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a36d8f9d3fa9de4b36af",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 210,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE LIMITED",
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-135b5c062159ee39929d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 213,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c15ba941d8b3947e932",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 218,
+      "commercialNames": [
+        "GRAND CHEROKEE L",
+        "GRAND CHEROKEE L LAREDO",
+        "GRAND CHEROKEE L LIMITED",
+        "GRAND CHEROKEE LIMITED",
+        "GRAND CHEROKEE OVERLAND",
+        "GRAND CHEROKEE SUMMIT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a92997db24a2872c4bc3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 220,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE LAREDO",
+        "JEEP GRAND CHEROKEE",
+        "JEEP GRAND CHEROKEE L"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-318bafce3d97ce7972c1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6122,
+      "powerKw": 522,
+      "commercialNames": [
+        "Grand Cherokee Trackhawk"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64c3461e8fb0d508c025",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": null,
+      "commercialNames": [
+        "GRAND CHEROKEE TRACKHAWK SC A"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76c2ceb343d64bde68e0",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6166,
+      "powerKw": 522,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE TRACKHAWK",
+        "GRAND-CHEROKEE",
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 337,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a6fdaf1f6eac0722c42",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 344,
+      "commercialNames": [
+        "GRAND CHEROKEE SRT",
+        "GRAND-CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 528,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b26ccb2937c90a1d714",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "Grand Cherokee"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fe14de850be4608e507",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 216,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE OVERLAND",
+        "JEEP GRAND CHEROKEE",
+        "JEEP GRAND CHEROKEE L"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68a2ee216aca985554b9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 268,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE L",
+        "GRAND CHEROKEE L SUMMIT",
+        "GRAND CHEROKEE OVERLAND",
+        "GRAND CHEROKEE OVERLAND L",
+        "JEEP GRAND CHEROKEE",
+        "JEEP GRAND CHEROKEE L",
+        "JEEP GRAND CHEROKEE SUMMIT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 100,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4968a916736ea622227",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "E85",
+      "engineCc": 3604,
+      "powerKw": 218,
+      "commercialNames": [
+        "GRAND CHEROKEE L OVERLAND"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-166f0642289d8f74f473",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "E85",
+      "engineCc": 5654,
+      "powerKw": 268,
+      "commercialNames": [
+        "JEEP GRAND CHEROKEE L"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-548538ad0e3b0732ecf6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "LPG",
+      "engineCc": 5654,
+      "powerKw": 268,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE OVERLAND",
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5af41a345f9e019319de",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3600,
+      "powerKw": 216,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b77b72b14a84a0895aa",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 214,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-917501da07832aef14cf",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 216,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fe24201bd96df24a0c2",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3605,
+      "powerKw": 220,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e7020dac4aacfb9bd4d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5654,
+      "powerKw": 259,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb240f0493dc7596fd36",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 200,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE / 2.0 /",
+        "GRAND CHEROKEE 2.0",
+        "GRAND CHEROKEE 4XE",
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2468,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6f1fd5449c098d0cf4c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2987,
+      "powerKw": 181,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d6603226509deea5c5e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3604,
+      "powerKw": 210,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dbadc7df37cf66aabac",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 3604,
+      "powerKw": 216,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "GRAND CHEROKEE OVERLAND",
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-226e2b0d61cb60d70cf6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 200,
+      "commercialNames": [
+        "GRAND CHEROKEE",
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 66,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84943221b94e024497e9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3645,
+      "powerKw": 268,
+      "commercialNames": [
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0642987d7fe368944a5",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5664,
+      "powerKw": 268,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ac0424315502500b5ec",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a6a164693565eb1717e",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2604,
+      "powerKw": 216,
+      "commercialNames": [
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2b49fa354eff12bf328",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3604,
+      "powerKw": 268,
+      "commercialNames": [
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25fbbf8b0ca278d0d5c3",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Cherokee",
+      "modelId": "jeep/grand-cherokee",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3654,
+      "powerKw": 268,
+      "commercialNames": [
+        "JEEP GRAND CHEROKEE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e3b2f6c80428f62b2c9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Wagoneer",
+      "modelId": "jeep/grand-wagoneer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "LPG",
+      "engineCc": 6417,
+      "powerKw": 351,
+      "commercialNames": [
+        "GRAND WAGONEER",
+        "JEEP GRAND WAGONEER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7360e2fef82bb8e0e24",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Wagoneer",
+      "modelId": "jeep/grand-wagoneer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 6417,
+      "powerKw": 351,
+      "commercialNames": [
+        "GRAND WAGONEER",
+        "JEEP GRAND WAGONEER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4dff9cf6a7d411c7669",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Wagoneer",
+      "modelId": "jeep/grand-wagoneer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 6517,
+      "powerKw": 351,
+      "commercialNames": [
+        "GRAND WAGONEER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-880e1bb149a3ddd57cb9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Wagoneer",
+      "modelId": "jeep/grand-wagoneer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 5417,
+      "powerKw": 351,
+      "commercialNames": [
+        "GRAND WAGONEER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fb378d8331def84afd6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Wagoneer",
+      "modelId": "jeep/grand-wagoneer",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 313,
+      "commercialNames": [
+        "JEEP GRAND WAGONEER"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce8fb6f17b67ed722b27",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Grand Wagoneer",
+      "modelId": "jeep/grand-wagoneer",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 380,
+      "commercialNames": [
+        "GRAND WAGONEER L"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d04f9d9e685fd80bdb5d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Liberty",
+      "modelId": "jeep/liberty",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3701,
+      "powerKw": 174,
+      "commercialNames": [
+        "LIBERTY"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b65ef1147b7b84ed1ec4",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Patriot",
+      "modelId": "jeep/patriot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 118,
+      "commercialNames": [
+        "PATRIOT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cde44d93dfe89960a41c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Patriot",
+      "modelId": "jeep/patriot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 112,
+      "commercialNames": [
+        "PATRIOT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67dbfc29537373b89868",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Patriot",
+      "modelId": "jeep/patriot",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2359,
+      "powerKw": 125,
+      "commercialNames": [
+        "PATRIOT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-beed87a6862369f8564d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af262862b05f1e7c20c9",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 111,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d23292c4a5df75dee9c0",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e579eeb9e176602f98c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE LIMITED MULTIJET II",
+        "RENEGADE LIMITED MULTIJET II A",
+        "RENEGADE LONGITUDE MIJET II A",
+        "RENEGADE LONGITUDE MULTIJET II",
+        "RENEGADE NIGHT EAGLE MJET II"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 660,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55613224d29e2a3fa8fb",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 84,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1727,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22cdcbbbe12660be2c32",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "Renegade",
+        "RENEGADE",
+        "RENEGADE / 1.6 / JTD FWD",
+        "RENEGADE 16 JTD FWD",
+        "RENEGADE 16 JTD FWD DDCT"
+      ],
+      "sourceMakeNames": [
+        "Jeep",
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 39965,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b047add0b070a36bfe0a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 1.6 / JTD FWD",
+        "RENEGADE / 16 / JTD FWD"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 73744,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fc182c885d2e60291fb",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE LIMITED MJET II 4X4",
+        "RENEGADE LIMITED MJET II 4X4 A",
+        "RENEGADE LONGITUDE M-JET 4X4",
+        "RENEGADE TRAILHAWK MJETII 4X4A"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0ae1f6e895e88220583",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 103,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 2.0 / JTD 4WD",
+        "RENEGADE / 2.0 / JTD CA 4WD",
+        "RENEGADE 20 JTD 4WD",
+        "RENEGADE 20 JTD CA 4WD"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 10755,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74873979e9c717836045",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 125,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE 20 JTD CA 4WD TRAILHAWK"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 2118,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5924af2a315ff3cbf669",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d25bc090c11e3a30ce35",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e060d2d74f4e0d9f6b29",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE LIMITED",
+        "RENEGADE LONGITUDE",
+        "RENEGADE NIGHT EAGLE",
+        "RENEGADE SPORT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2055,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a35b1edd6b682712046a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 84,
+      "commercialNames": [
+        "JEEP RENEGADE",
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2152,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86f5e461f36da1dacd88",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 1.0 / FWD",
+        "RENEGADE / 10 / FWD",
+        "RENEGADE 10 FWD"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 99459,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b30d40c16a60e3c3e498",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE LIMITED AUTO",
+        "RENEGADE LONGITUDE AUTO",
+        "RENEGADE NIGHT EAGLE AUTO",
+        "RENEGADE S 4X4 AUTO",
+        "RENEGADE S AUTO",
+        "RENEGADE S LIMITED 4X4 AUTO",
+        "RENEGADE S LIMITED AUTO"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1165,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-491b8b9a103e797102bf",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 390,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b964d46b921afe286c2",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 110,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 1.3 / DDC FWD",
+        "RENEGADE / 1.3 / FWD DDCT",
+        "RENEGADE 13 FWD DDCT"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 26562,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e12d4e90b8dc8690636",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 111,
+      "commercialNames": [
+        "Renegade",
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "Jeep",
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5129,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4450363483a74046bada",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "Renegade",
+        "RENEGADE",
+        "RENEGADE / 1.3 / CA 4WD",
+        "RENEGADE 13 CA 4WD"
+      ],
+      "sourceMakeNames": [
+        "Jeep",
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2991,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5508326328e0b74be13b",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b937f8076e1c15fc402",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE LIMITED 4XE AUTO",
+        "RENEGADE LONGITUDE 4XE AUTO",
+        "RENEGADE TRAILHAWK 4XE AUTO"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 320,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f0f1352ece014be787f",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 44,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a6e15dc824a56f2661d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 1.3 / CA 4WD HYBRID",
+        "RENEGADE 13 CA 4WD HYBRID",
+        "RENEGADE PHEV"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 32745,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04a232b3036c8f8ced07",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 1.3 / CA 4WD HYBRID",
+        "RENEGADE / 1.3 / CA 4WD HYBRID TRAILHAWK",
+        "RENEGADE 1.3",
+        "RENEGADE 13 CA 4WD HYBRID",
+        "RENEGADE PHEV"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 20364,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4bd072d96d4d7270e86",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74076f5f738054927643",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca4252847096f327beb0",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 86,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a277d16d7a167f6db2d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d934fceabe7b11e0f98",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 132,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb59edad72e22febf088",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c40ac8e1d42ddfb37d6",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE",
+        "RENEGADE / 1.5 /",
+        "RENEGADE / 1.5 / FWD MILD HYBRID",
+        "RENEGADE / 15 / FWD MILD HYBRID",
+        "RENEGADE 1.5"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 35450,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2097a263cabc4954a0aa",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9025a9e02d64f0d2e003",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1500,
+      "powerKw": 130,
+      "commercialNames": [
+        "JEEP RENEGADE LIMITED"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da7e792717d5df60fa9a",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1956,
+      "powerKw": 88,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-11aa6019a9e0f3f86ae8",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1368,
+      "powerKw": 103,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-867aa560fb2c1ae2bb6c",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2360,
+      "powerKw": 136,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f82db323e22ee07157a5",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 46,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12b7ee26a9426d8b5579",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1332,
+      "powerKw": 94,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 60,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-947f49221f264dd1e1cf",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1469,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f286b409cbe393ab5219",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 61,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad35031389f2827132fe",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 67,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6864e91621ce4ae4f94",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 72,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a0e2399834c1b3c1cf5",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 79,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-311442dcb1c2f99605d1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 81,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efecc47ce706803423bf",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30b3f34efc58217edbeb",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 90,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e7cb6e57e6d031fe1ba",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 92,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b846d7e50ef8e7dd01f",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 95,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41a0a41d570d2aaaeb69",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 96,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-846ac5f891b5e0551673",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e50465e5ccb85b2b811",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 112,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-998f0a739e71888e1da1",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 114,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b63e3e9c356654ed27f0",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 116,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02c992fe2b2a58c2f074",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 117,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e314656e74cb0366767",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 120,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcedcd242f4fb5089872",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 132,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-888abde9700fd385757d",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 228,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec466e2cf0ff9b8cd2ae",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 999,
+      "powerKw": 280,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06da8fca03057b161a07",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1368,
+      "powerKw": 125,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90f9c2a47290b57f9fcb",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": null,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac5277b6829c7e22eae0",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 11,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5511a7be1afe51578fa7",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 51,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b185cc1b20a6fe4a2428",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 67,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68469abe61c0dc58e641",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 68,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f9c8d9de17b3c568548",
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "canonicalModel": "Renegade",
+      "modelId": "jeep/renegade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1469,
+      "powerKw": 69,
+      "commercialNames": [
+        "RENEGADE"
+      ],
+      "sourceMakeNames": [
+        "JEEP"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}
