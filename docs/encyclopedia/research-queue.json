@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-21T16:29:25.417Z",
+  "updatedAt": "2026-10-21T16:49:23.414507+00:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -209,7 +209,9 @@
         2022
       ],
       "variants": 124,
-      "status": "partial_applied"
+      "status": "partial_verified_fields",
+      "researchedVariants": 40,
+      "nextAction": "Historical years and ambiguous variants; certified 30-minute power and exact engine/mass require sources"
     },
     {
       "id": "b0972339b8a7f3fc37bf8d6b",
