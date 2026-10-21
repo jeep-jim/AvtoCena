@@ -104,7 +104,8 @@ function verifiedChangePage(payload, cursor, includeData=false) {
 }
 
 /** Full bootstrap or delta replay. Only the caller can commit after publication. */
-export async function collectAutoApiChe168({request, yearFrom, resume=null, onOffer, onRemoval, useChangeData=false, onPriceChange=async()=>false, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
+export async function collectAutoApiChe168({request, yearFrom, resume=null, onOffer, onRemoval, useChangeData=false, missingDetails=null, onPriceChange=async()=>false, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
+  if(missingDetails && (!useChangeData || typeof missingDetails.record!=='function' || typeof missingDetails.assertResolved!=='function'))throw Error('auto_api_invalid_missing_detail_handler');
   const startedAt = now();
   const mode=resume?'delta':'snapshot';
   const snapshotStartedAt=resume?.snapshotStartedAt || startedAt;
@@ -165,6 +166,7 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
         try { response=await request('offer', {inner_id: change.inner_id}); }
         catch(error){
           if(error?.message!=='auto_api_http_404')throw error;
+          if(missingDetails){await missingDetails.record(change);continue;}
           const removal=await confirmedLaterRemoval(change,next);
           await onRemoval(removal,startedAt);
           console.log(JSON.stringify({detail404ResolvedByExplicitRemoval:true}));
@@ -177,6 +179,7 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
     changes += page.items.length; cursor = next;
     await onProgress({pages, rows, changes, cursor, phase:'changes'});
   }
+  if(missingDetails)await missingDetails.assertResolved();
   return {startedAt, completedAt: now(), pages, rows, changes, cursor, initialCursor, mode, snapshotStartedAt, yearFrom};
 }
 

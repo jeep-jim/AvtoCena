@@ -1,3 +1,4 @@
+import {createChe168MissingDetails} from './lib/che168-missing-details.mjs';
 import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy.ts';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
 import fs from 'node:fs/promises';
@@ -58,6 +59,7 @@ try {
       return {kind:'quarantine',innerId:String(row.inner_id),reason,at};}
     return {kind:'offer',offer,at};
   };
+  const missingDetails=createChe168MissingDetails();
   const apply=async event=>{
     if(!Number.isSafeInteger(event?.event)||event.event<config.initialCursor-1)throw Error('auto_api_invalid_replica_event');
     if(event.kind==='offer'){
@@ -79,7 +81,8 @@ try {
         if(!isAutoApiChe168QuarantineReason(event.reason))throw Error('auto_api_invalid_replica_quarantine');
         quarantine.set(event.innerId,event.reason);
       }else{const id=stableOfferId(sourceId,event.innerId);withdrawals.set(id,{id,sourceId,sourceOfferId:event.innerId,market:'china',status:'removed',observedAt:event.at});quarantine.delete(event.innerId);}
-    }else throw Error('auto_api_invalid_replica_event');
+    }else if(event.kind!=='missing_detail')throw Error('auto_api_invalid_replica_event');
+    missingDetails.apply(event);
   };
   if(!resume){
     let rows=0;db.exec('BEGIN');
@@ -90,7 +93,7 @@ try {
     db.exec('COMMIT');
   }
   const initialCursor=resume?previous.cursor:config.initialCursor;
-  const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null})).digest('hex');
+  const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
   // Stable private working journal across runner failures, separate from the
   // committed publication cursor and the old legacy recovery artifact.
   const artifactRunId=BigInt(`0x${journalBinding.slice(0,14)}`).toString();
@@ -105,6 +108,7 @@ try {
   let completed;
   try{
     completed=await collectAutoApiChe168({request,yearFrom,resume:{cursor:journal.cursor,snapshotStartedAt:config.modifiedAt},useChangeData:true,
+      missingDetails:{record:async change=>{const event={kind:'missing_detail',innerId:String(change.inner_id),at:change.created_at,event:change.id};await apply(event);pageEvents.push(event);},assertResolved:()=>missingDetails.assertResolved()},
       onOffer:async(row,at,change)=>{const event={...normalized(row,at),event:change.id};await apply(event);pageEvents.push(event);},
       onRemoval:async change=>{const event={kind:'removed',innerId:String(change.inner_id),at:change.created_at,event:change.id};await apply(event);pageEvents.push(event);},
       onPriceChange:async change=>{
