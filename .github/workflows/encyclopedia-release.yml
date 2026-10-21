@@ -1,0 +1,127 @@
+name: Encyclopedia — release reviewed directory changes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/encyclopedia-release.json']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Verify reviewed encyclopedia-only change set
+        run: |
+          python3 - <<'CHECK'
+          import subprocess,re,json,urllib.request
+          baseline='a6161476bffac98c78a15dbb051d47143ee89728'
+          allowed={
+            'roadmap.md','apps/web/lib/encyclopedia/records.ts','apps/web/lib/encyclopedia/scope.ts',
+            'tests/permanent-encyclopedia.test.ts','docs/encyclopedia/logo-sources-2026-10-21.json',
+            '.github/workflows/encyclopedia-activate-prepared.yml','.github/market-runs/encyclopedia-activate-prepared.json',
+            '.github/workflows/encyclopedia-release.yml','.github/market-runs/encyclopedia-release.json',
+          }
+          changes=subprocess.check_output(['git','diff','--name-only',baseline,'HEAD'],text=True).splitlines()
+          bad=[x for x in changes if x not in allowed and not re.fullmatch(r'apps/web/public/brand-logos/local/(light|dark)/[a-z0-9-]+\.png',x)]
+          assert changes and not bad,bad
+          # No calculator, feed, storage driver, publisher, activation or rollback changes.
+          for path in ['scripts/regcloud-deploy-production.sh','scripts/regcloud-resource-sampler.py','scripts/regcloud-release-retention.py']:
+            assert subprocess.check_output(['git','show',baseline+':'+path])==subprocess.check_output(['git','show','HEAD:'+path]),path
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=20) as r:health=json.load(r)
+          assert health['releaseSha']==baseline,'Production changed; review required'
+          assert health['calculationVersion']=='4f82e9c79091ca5dc766e62584c7469dc5432be807575a5bee8edcc562f864c9','Calculator changed; review required'
+          print('Reviewed encyclopedia scope and logos only; retained calculator version and all deployment gates.')
+          CHECK
+      - name: Build existing application without production credentials
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: |
+          set -euo pipefail
+          docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" -t "avtocena-regcloud:$GITHUB_SHA" .
+          docker save "avtocena-regcloud:$GITHUB_SHA" | gzip -1 > "$RUNNER_TEMP/avtocena-image.tar.gz"
+          cd "$RUNNER_TEMP"
+          sha256sum avtocena-image.tar.gz > avtocena-image.tar.gz.sha256
+      - name: Install container runtime and load image (no application start)
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/staging/incoming/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'; test \$(df --output=avail -k / | tail -1) -gt 8388608"
+          scp "${ssh_opts[@]}" "$RUNNER_TEMP/avtocena-image.tar.gz" "$RUNNER_TEMP/avtocena-image.tar.gz.sha256" "root@151.248.113.177:$remote_dir/"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$remote_dir' '$GITHUB_SHA'" <<'REMOTE'
+          set -euo pipefail
+          incoming=$1
+          release=$2
+          exec 9>/run/lock/avtocena-staging-prepare.lock
+          flock -n 9
+          cd "$incoming"
+          sha256sum -c avtocena-image.tar.gz.sha256
+          if ! command -v docker >/dev/null; then
+            export DEBIAN_FRONTEND=noninteractive
+            apt-get -o DPkg::Lock::Timeout=120 update
+            apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends docker.io
+          fi
+          systemctl enable --now docker
+          gzip -dc avtocena-image.tar.gz | docker load
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "avtocena-regcloud:$release")" = "$release"
+          docker version --format '{{.Server.Version}}'
+          docker image inspect --format 'Image ready: {{.Id}}; size {{.Size}} bytes' "avtocena-regcloud:$release"
+          # Remove only this run's transport archive after verified loading.
+          rm -- avtocena-image.tar.gz avtocena-image.tar.gz.sha256
+          echo 'Image loaded and verified'
+          REMOTE
+      - name: Deploy with rollback and resource measurements
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          remote_dir="/opt/avtocena/releases/$GITHUB_SHA"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
+          scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-resource-sampler.py "root@151.248.113.177:$remote_dir/"
+          python3 - <<'HEALTH'
+          import urllib.request,json
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=20) as r:d=json.load(r)
+          assert d['releaseSha']=='a6161476bffac98c78a15dbb051d47143ee89728'
+          assert d['calculationVersion']=='4f82e9c79091ca5dc766e62584c7469dc5432be807575a5bee8edcc562f864c9'
+          HEALTH
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash '$remote_dir/regcloud-deploy-production.sh' '$GITHUB_SHA' '4f82e9c79091ca5dc766e62584c7469dc5432be807575a5bee8edcc562f864c9'"
+      - name: Bound retained application releases after successful deployment
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 - --apply' < scripts/regcloud-release-retention.py

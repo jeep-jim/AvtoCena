@@ -66,3 +66,22 @@ test('encyclopedia model identity and discovery are independent of country',asyn
  assert.deepEqual(filterModels(models,{make:'Toyota',year:'2021'}),models);
  assert.deepEqual(filterModels(models,{make:'Toyota',year:'2022'}),[],'technical filters still apply');
 });
+
+test('encyclopedia hides non-car records without deleting revisions; mixed makes retain cars',async()=>{
+ const {isEncyclopediaCar}=await import('../apps/web/lib/encyclopedia/scope');
+ for(const [make,model] of [['Harley-Davidson','Sportster'],['Yamaha','R1'],['KTM','1300R'],['Brabus','1300 R - KTM 1300'],['Isuzu','NQR'],['Toyota','Fork lift'],['Mitsubishi','Fuso Rosa']])assert.equal(isEncyclopediaCar({make,model}),false,`${make} ${model}`);
+ for(const [make,model] of [['KTM','X-Bow'],['Brabus','G800'],['Isuzu','D-Max'],['MAN','TGE'],['Honda','Civic'],['Suzuki','Jimny']])assert.equal(isEncyclopediaCar({make,model}),true,`${make} ${model}`);
+ const cwd=process.cwd(),root=await fs.mkdtemp(path.join(os.tmpdir(),'encyclopedia-scope-')),oldDriver=process.env.JSON_STORAGE_DRIVER;
+ try{
+  process.chdir(root);process.env.JSON_STORAGE_DRIVER='local';await fs.mkdir(path.join(root,'data'));
+  const b=createSnapshotBuilder(at);b.add(car);b.add({...car,make:'Yamaha',model:'R1'});b.add({...car,make:'KTM',model:'X-Bow'});
+  const manifest=await publishSnapshot(getJsonStorage(),b,'scope',0,at),hidden=manifest.models.find(x=>x.make==='Yamaha')!;
+  assert.equal((await readEncyclopedia())!.models.length,2);assert.equal(await readModel(hidden.id),null);
+  assert.ok(await getJsonStorage().readJson(hidden.key,null),'archived revision retained');
+  await assert.rejects(()=>createModel({make:'Yamaha',model:'R1'},owner),/только автомобили/);
+  const current=(await readModel(manifest.models.find(x=>x.make==='Toyota')!.id))!;
+  await assert.rejects(()=>editModel(current.id,{action:'model',revision:current.revision,make:'Harley-Davidson',model:'Sportster'},owner),/только автомобили/);
+  await editModel(current.id,{action:'model',revision:current.revision,make:'Toyota',model:'Corolla'},owner);
+  assert.equal((await getJsonStorage().readJson<any>(MANIFEST,null)).models.length,3,'editing visible records does not erase hidden originals');
+ }finally{process.chdir(cwd);if(oldDriver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=oldDriver;await fs.rm(root,{recursive:true,force:true});}
+});
