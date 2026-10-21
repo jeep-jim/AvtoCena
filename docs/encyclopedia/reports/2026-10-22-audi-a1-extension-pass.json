@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-10-22T03:22:09.665262+07:00",
+  "model": "Audi A1",
+  "newVariants": 81,
+  "newFields": 709,
+  "cumulativeVariants": 111,
+  "cumulativeFields": 979,
+  "untouchedVariants": 283,
+  "batches": [
+    {
+      "batch": "research-2026-10-22-audi-a1-2026",
+      "commit": "b96114ebfd07ec090f511f4ddf38204989bb8f55",
+      "workflowRun": 39668837764,
+      "job": 119460959216,
+      "variants": 54,
+      "fields": 486,
+      "readback": "2026-10-22-audi-a1-2026-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a1-history",
+      "commit": "f82f4db0f85ef8e3b3e332b4af8177003f7c4ee1",
+      "workflowRun": 39669245118,
+      "job": 119462399232,
+      "variants": 27,
+      "fields": 223,
+      "readback": "2026-10-22-audi-a1-history-readback.json"
+    }
+  ],
+  "integration": "not_implemented",
+  "retryReasons": {
+    "protected_reference_or_missing_trim": 110,
+    "dated_primary_source_not_retrieved": 116,
+    "missing_engine_badge_body_or_transmission": 25,
+    "exact_2022_derivative_source_missing": 25,
+    "observed_identity_conflict": 1,
+    "exact_2025_derivative_source_missing": 4,
+    "year_token_requires_identity_review": 2
+  }
+}
