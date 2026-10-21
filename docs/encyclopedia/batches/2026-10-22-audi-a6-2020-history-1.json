@@ -1,0 +1,458 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-2020-history-1",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9f2603dfc5909ad8f1a00190",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 35 TDI S-TR MATRIX+NAVI+APP+ACC+SHZ+RFK",
+      "expectedDigest": "262a5efe7cb0331f00f9dbd2eb8fe312d4f96a85364d29076e201322517bcd96",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f8224230a230b8e93e7f830c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 40 TDI sport 1.Hand PANO ACC",
+      "expectedDigest": "43852c0acf750b4628ed04e33e2ea993ea724f8b53535b0449cae73e78d9d6da",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "64592f65271a22e83e18c39b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 45 TDI quattro sport /ACC/1Hd/AHK/StHz",
+      "expectedDigest": "8aec921fc6e5ec15da759abec3c521aff13eed702da8788e072324fbb9a45407",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 170,
+        "powerHp": 231,
+        "icePowerKw": 170,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 170 кВт/231 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b4ac102c4885379e324c6de3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 3.0l 45 TDI quattro*LEDER*EL. HECK*TEMP",
+      "expectedDigest": "e7721f238b1092b9114d02fc4b790fc3bb859ba030bef4da2ef82597f0b7f310",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 170,
+        "powerHp": 231,
+        "icePowerKw": 170,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 170 кВт/231 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b21da1305843868df77f1553",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Lim. 45 TDI quattro sport, AHK, Matrix-LED,",
+      "expectedDigest": "a7a9bb498c52e4493a0ee25e0468eccc8745567834202810efce8bcf92c241b7",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 170,
+        "powerHp": 231,
+        "icePowerKw": 170,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Limousine 45 TDI: 2967 см³, ДВС 170 кВт/231 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "337f640271bcf7aeeda3a8db",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 50 TDI q. Tiptr. S-Line, AHK",
+      "expectedDigest": "7683f6bfae1324c5508f5d36a1117d7c51861d2309e133c35e8c5510c5bd5060",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 210,
+        "powerHp": 286,
+        "icePowerKw": 210,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Avant 50 TDI: 2967 см³, ДВС 210 кВт/286 PS, MHEV, 8-ступенчатая tiptronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "abac414c2ea0bcbe5bc737e4",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2020,
+      "trim": "Avant 55 TFSI quattro SPORT ACC PANO B&O",
+      "expectedDigest": "93d6fa625926c8f6da02a3a2f522f7ffd325f1b97b05390c1772cb4e139731f1",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2020-09-10, архивная копия. A6 C8 Avant 55 TFSI: 2995 см³, ДВС 250 кВт/340 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.157,158,159,160: двигатель/топливо/привод/КПП;стр.134:MHEV;стр.170:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Локальный заводской PDF прочитан; SHA256 указан в источнике.",
+        "additionalSources": [
+          {
+            "url": "https://www.konjunkturmotor.de/lima/5.0/audi/pdfs/60-katalog-09-2020.pdf",
+            "date": "2020-09-10",
+            "pages": [
+              134,
+              157,
+              158,
+              159,
+              160,
+              170
+            ],
+            "sha256": "a0f399d8ff7982641a8f0239517981cfaea90cbde9ff9b5d5374ecbe47e67352",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "downloaded factory PDF archive"
+          }
+        ]
+      }
+    }
+  ]
+}

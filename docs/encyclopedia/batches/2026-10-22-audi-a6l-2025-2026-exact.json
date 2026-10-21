@@ -1,0 +1,921 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6l-2025-2026-exact",
+  "entries": [
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "96d42c45c1f19051b8fef14d",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2026款 3.0T quattro 旗舰型",
+      "expectedDigest": "915499ee215192da7894c9f9fb9d55cf5949e6734feb95affb86ff36ebc3d081",
+      "patch": {
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "dct",
+        "grossVehicleWeightKg": 2630,
+        "trim": "3.0T quattro Flagship"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 3.0T quattro Flagship: 2995 см³, ДВС 270 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 367. Подтверждена разрешённая полная масса 2630 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "a6f3c6dd4a6412878fb72dbf",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2026款 2.0T quattro 尊享型",
+      "expectedDigest": "a1173d34d2162b6916702f40fa3afdd95e743a1b21e5ef9e669b30faad219f65",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "dct",
+        "grossVehicleWeightKg": 2595,
+        "trim": "2.0T quattro Exclusive"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 2.0T quattro Exclusive: 1984 см³, ДВС 200 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 272. Подтверждена разрешённая полная масса 2595 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "311889c8c0e5cf3517062aaf",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2.0T quattro 尊享型",
+      "expectedDigest": "9f7bbbe17a54419d38bcf94af03b24fde08bdbf605cbb670b24cb639795c4336",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2595,
+        "trim": "2.0T quattro Exclusive"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 2.0T quattro Exclusive: 1984 см³, ДВС 200 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 272. Подтверждена разрешённая полная масса 2595 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "7851001cbbbf56e6129f724e",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2.0T quattro 尊享型",
+      "expectedDigest": "cb1463b0572bb752836b98337cf658e33e39204ae2f7a5d69269496c85f0c4a1",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2595,
+        "trim": "2.0T quattro Exclusive"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 2.0T quattro Exclusive: 1984 см³, ДВС 200 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 272. Подтверждена разрешённая полная масса 2595 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "a4dda69bd2d019ac561b56b0",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2.0T 臻选型",
+      "expectedDigest": "ef49638e55763c099eb5ef090bceac55280fe232d81fc440466ad8244eff325b",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2420,
+        "trim": "2.0T Premium Selection"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 2.0T Premium Selection: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Подтверждена разрешённая полная масса 2420 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "ecfe65b087f08097a169793b",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2026款 2.0T 臻选型",
+      "expectedDigest": "15965f82ca26a57af391f4dae4ae750143a1360b908793697dbe195a586c7236",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "dct",
+        "grossVehicleWeightKg": 2420,
+        "trim": "2.0T Premium Selection"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 2.0T Premium Selection: 1984 см³, ДВС 150 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 204. Подтверждена разрешённая полная масса 2420 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "36107515e004896107e2d560",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2026,
+      "trim": "2026款 2.0T 尊享型",
+      "expectedDigest": "3cf01b745869192e4883a3a41edd8eee9d6c7e47d452059222b8c3d82dc4d3e0",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 200,
+        "powerHp": 272,
+        "icePowerKw": 200,
+        "drive": "fwd",
+        "transmission": "dct",
+        "grossVehicleWeightKg": 2430,
+        "trim": "2.0T Exclusive"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2026.01, стр.15; дата стр.20. Точная техническая версия 2.0T Exclusive: 1984 см³, ДВС 200 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 272. Подтверждена разрешённая полная масса 2430 кг, не снаряжённая. Цифровые индексы 40/45/55 старого поколения исключены. Наблюдаемые24PS/17.65кВт у точной версии2.0Tquattro не считаются мощностью ДВС;200кВт подтверждены заводской колонкой. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/202601/a6/%E5%85%A8%E6%96%B0%E5%A5%A5%E8%BF%AA_A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2026.01",
+            "pages": [
+              15,
+              20
+            ],
+            "sha256": "a23f3bf5e9b2d06c0fec48ab508f82baad6e8fbd937c948eedaed3f335fa10ac",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "347a8ae7d83484a0e46d47b9",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "40 TFSI Luxury Dynamic Type",
+      "expectedDigest": "eb0b6f16bee39f0651bec70ae9d7f5e0f6e6d025f2a2d7d12ae69efd790a2249",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "powerHp": 190,
+        "icePowerKw": 140,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 40 TFSI Luxury Dynamic Type: 1984 см³, ДВС 140 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 190. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "06866b0ba193efe64ec32906",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "40 TFSI 豪华动感型",
+      "expectedDigest": "1b5711b738f6364ab95dfabf38526933db98a6720436f707b21614404c0d7962",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "powerHp": 190,
+        "icePowerKw": 140,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "trim": "40 TFSI Luxury Dynamic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 40 TFSI Luxury Dynamic: 1984 см³, ДВС 140 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 190. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "346c1e9a6dace410574819ad",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "Facelift 40 TFSI Luxury Dynamic Type",
+      "expectedDigest": "892ffc567821b3406682bd23051d1b2926778e27ce73750bd0609dd61931d754",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 140,
+        "powerHp": 190,
+        "icePowerKw": 140,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия Facelift 40 TFSI Luxury Dynamic Type: 1984 см³, ДВС 140 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 190. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "40e0f4914429ba50be34b484",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "45 TFSI Select Dynamic Type",
+      "expectedDigest": "9bf2397975217af9b1d1257e1b52818d7699d25a9f1c948ba5929c2ca428de5b",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 45 TFSI Select Dynamic Type: 1984 см³, ДВС 180 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 245. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "5eae1a0b7cd40bc4975cc687",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "45 TFSI quattro Select Dynamic Type",
+      "expectedDigest": "7b8a062a3b806fbc4649cb997d17d9478df75bb31a96f7a6d50c965f75aa997b",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 45 TFSI quattro Select Dynamic Type: 1984 см³, ДВС 180 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 245. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "aad85ddfbb55c11a4e68b953",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "Facelift 45 TFSI Select Dynamic Type",
+      "expectedDigest": "b1fefc4b83cf7cf2e59e4139b15efb3e98992205664f57e4d1a984d8832f8bc9",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия Facelift 45 TFSI Select Dynamic Type: 1984 см³, ДВС 180 кВт, передний привод, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 245. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "75fad4d44fc62ca503b45271",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "45 TFSI quattro Select Dynamic Type + Premium Package",
+      "expectedDigest": "6681f69ae6ac0616fee9ec478fdf91ba16f7c9aad1b0a366a50a9d1aa71f52b9",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 45 TFSI quattro Select Dynamic Type + Premium Package: 1984 см³, ДВС 180 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 245. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "943e0f5f90f355304f37d22e",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "Facelift 45 TFSI quattro Select Dynamic Type",
+      "expectedDigest": "7c23f20caa89a1d7646ee4077f78c9ad9874b4dad7d75dbcd981096143814386",
+      "patch": {
+        "engineCc": 1984,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия Facelift 45 TFSI quattro Select Dynamic Type: 1984 см³, ДВС 180 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 245. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "8dba6eefd1708696c9ec7472",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "改款 55 TFSI quattro 尊享动感型",
+      "expectedDigest": "b2e95252cd5bf3b3ff880f5cb6ae2895007db2844cc63889ea8daff2782232f0",
+      "patch": {
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "drive": "awd",
+        "transmission": "automatic",
+        "trim": "55 TFSI quattro Exclusive Dynamic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "trim"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 55 TFSI quattro Exclusive Dynamic: 2995 см³, ДВС 250 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 340. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "trim"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e43873f0a3de40762a376dff",
+      "variantId": "8424835a8d7a2de07d0031b2",
+      "make": "Audi",
+      "model": "A6L",
+      "year": 2025,
+      "trim": "55 TFSI quattro Premium Dynamic Type",
+      "expectedDigest": "ef51e8fd213938258902e6029a56f6f30e9d732ceb9cbb2386ecd62efdf8c67d",
+      "patch": {
+        "engineCc": 2995,
+        "powerKw": 250,
+        "powerHp": 340,
+        "icePowerKw": 250,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "FAW Audi A6L, заводской PDF 2025.Q3/MY25, стр.10; дата стр.1. Точная техническая версия 55 TFSI quattro Premium Dynamic Type: 2995 см³, ДВС 250 кВт, quattro, 7-ступенчатая S tronic. PS вычислены из заводских кВт: round(kW / 0.73549875) = 340. Таблица содержит только снаряжённую массу; полная масса не заполнена. РедакцияMY25 не переносилась на2026 или более ранние годы. PDF и таблица визуально проверены. Тип гибридной установки, код двигателя, электрическая, системная и30-минутная мощности не подтверждены. Названия с китайским текстом переданы по-английски.",
+        "additionalSources": [
+          {
+            "url": "https://www.audi.cn/content/dam/OneWeb/faw_vw/pdf/2025/a6l_new/A6L_%E8%BD%A6%E5%9E%8B%E6%8A%98%E9%A1%B5.pdf",
+            "edition": "2025.Q3/MY25",
+            "pages": [
+              1,
+              10
+            ],
+            "sha256": "22c3b4196dc4b8a4934648642e4960a8aacdc65b750fd2f9f8d94eeee01ada04",
+            "fields": [
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ],
+            "publisher": "FAW-Volkswagen / Audi"
+          }
+        ]
+      }
+    }
+  ]
+}

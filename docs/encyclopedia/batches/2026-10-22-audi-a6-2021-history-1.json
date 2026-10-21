@@ -1,0 +1,4057 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-2021-history-1",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f562b63c6a7b5947c546477a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI Edition/Navi/Kamera/2.Hnd/Garant",
+      "expectedDigest": "c32c2d9c990974073dd1e7dceb85179c435d382803496077b540a9cc4582d8db",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fa594f515313ebb2a449c6c4",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI 1. Hand|Navi|8 Reifen|LED|HU neu",
+      "expectedDigest": "31d3ebf13eeaef94aaad45df12b2c4a1ee7c3c6dc4e5f8c31410d4cc77113e02",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "115bcf1f7e287a53328aac48",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI 1 Hand, Navi, Automatik, LED",
+      "expectedDigest": "28ad34de764cdf11122befdb39dd4d45338db68661a4f3d25a72ce92e5484530",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "36a0f98c6127a9e171609f53",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI S tronic sport Navi Leder Digita",
+      "expectedDigest": "3fb6fac83261118f8c0794014c468925244474cb77bc1922ccf60a952f88531f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2fd5d41b07538e134efb5743",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI design S-tronic,LED,Tour,AZV,Pan",
+      "expectedDigest": "85dfba52550b4d7788e1008eb44ef9d91bb188068734a2693afe1b7c4ea4453a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4eba91e91a19ce0408f8178d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI sport EXP € 19990.--",
+      "expectedDigest": "acabd640e39af3272b0f2663b5580ba7c0d201e124718a4b7317b57b2a7ca22b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "25c9dc7b6a15222f70439a96",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI sport LED Virtual Memory Kamera",
+      "expectedDigest": "d062aac8d8155682ab0f0a747064435b15da1bcbe3ba6b2ce77cf7b68fa880fa",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9fb466de2dfee8f6d88649e2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI SPORT ALCANTARA eSITZE NAVI+ VIR",
+      "expectedDigest": "821b8b81e7711f1b33d9390bedbbaa565363498c49af46892352ecd9cad9c37e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "caae9f91ae58114e8cea931f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI S-TR SPORT LED+NAVI+RFK+ACC+18\"",
+      "expectedDigest": "5465ef02e44e6c04dc62caa64f1b66f653d1457a519aab83188b2929de8f2e8a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "70e66d031fb3451e70cd2826",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI +ACC+NAVI+LED+PDC PLUS",
+      "expectedDigest": "cf3b6610ac5e730afd17fb4f7ff6e66d9ca239f1fff5e00c0ca9f323ec15b7bf",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ac785330e5326f34dd2dd11d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 35 TDI Design S tronic *NAV+*R-CAM*SHZ*",
+      "expectedDigest": "cac0b3a6ab74e542282bcd7e2326fd5d0e4904ab941f382bab4d46fc396e8d6c",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d90dd27c9d4de0fb50210c2b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI S tronic sport AHK*CARPLAY*LEDER",
+      "expectedDigest": "1c18701d1aaee7bd9378712881fb50a59d214d6123557c66906a91cecc497dda",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5c6aec6653aca7a998e86405",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant design 35 TDI S-Tronic Kamera/Navi/LED",
+      "expectedDigest": "48df4692bd238e4f3ad560e3747f7b1c0f07b2915fece9a7e4a0ffc2a516c1de",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7f5abbbe45ba6edb43e5a3d3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 35 TDI*B&O*LED*R-CAM*",
+      "expectedDigest": "f275a28ba087ba0daf73ce0012958c89c7fffa7e05fae8fcedf930884aed855f",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9be7cdf3545ba9cc88c0786a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant Sport 35 TDI S-Tronic Kamera/Navi/LED/",
+      "expectedDigest": "5927a6d6e1537ca3a38201da11f693b65083744fdc10a507724019d58ece825d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d8f29e9b0780b077ecf8eb83",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 35 TDI S tronic sport LED Navi",
+      "expectedDigest": "238cbce4df937b99774356cb20c8e7886eb59d92bee5fe74cff6f45f85889433",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "c877aecb68cc9f5f735b084b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant Sport 35 TDI S tronic ACC NAV LED VIRTU",
+      "expectedDigest": "5c706aab2aa2d308c1e21b3e82f8dea3400f8a3867f93fbbdcb177a138c6a082",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "027354727b5d7a40cda04805",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Limousine 35 TDI S-Tronic S-Line Navi/LED/19",
+      "expectedDigest": "a1a9359f256e0aa38c6c5ca4f3e2d41739225c9c89c280ac7ed01d269f376c49",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 120,
+        "powerHp": 163,
+        "icePowerKw": 120,
+        "transmission": "automatic",
+        "drive": "fwd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 35 TDI: 1968 см³, ДВС 120 кВт/163 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Передний привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "86a8320ce9f33193a22d6d90",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI SPORT HUD,KEYLESS,KAMERA,AHK,1HD",
+      "expectedDigest": "6ded9ce961b33a69574440f6fe271f297439fe218d86cca1e874c99999083872",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a30621e29fd1b4b6536eb8eb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI BUSINESS / LED / NAVI+",
+      "expectedDigest": "952cf191596970f424e5d9aecda229e5094e16afca79fd418de7a6cf363cbc73",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7562fb1cac9aacb7daf2869e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI S-LINE SPORT PLUS / LED, LEDER",
+      "expectedDigest": "e6bba2909c01f1b1dde05661e66cac453b3dbfffb35028e796f3a8f66d262377",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d80530c9076c1bb6b1ccbd3c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI Sport LEDER/RFK/NAVI+++",
+      "expectedDigest": "7b9814346738ebb8ef7b1ee456f9a84a18005109f5db79bec7414dedc78cbde9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "daffd30f92ddf4a5be964604",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI sport \"AHV\" EXP € 20990.-",
+      "expectedDigest": "1e6fa7adacf2170ec66ea08f8a1eaebdb674047b692e2d620b7cb5c8544b3264",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "126326ef217c327b00245a48",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro*MATRIX*AHK*VIRTUAL*NAVI-",
+      "expectedDigest": "c7633f3ca2e71a3950b58aba3a4aeefa66856213971ea61af27041106740448e",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1b875290e3db6210af2b59af",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "AVANT 40TDi Q S LINE CARPLAY/DSP/KAM./e-SITZE",
+      "expectedDigest": "5456050c69a8c80185bf827bdb2923ace87f00f19d12a5bcf655e82ea1d9768f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "776755cc5fd3d28300eb5e11",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Limo 40 TDI S-TRONIC ACC|SPUR|AMBI|MEMO",
+      "expectedDigest": "2f470c80e83fa6d5df426d8e14fe6209711688fd602e4371d2b1a6903c7979dc",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "bccd4ba4f4b5d8e8da674bf5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant Design A6 Avant 40 TDI S tronic Design",
+      "expectedDigest": "9961debcc97f7dedc911ea3ec111aef39fc62629b8995734bfb83673909adde3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f4eecc0c2e2b26ec938a8500",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI S-Line NAV+LED+PANO+AHK+19ZOLL",
+      "expectedDigest": "86fc80643248825c08560a9bb26a6f941abddd2a7c943c781219c303f859fdf3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "fae9bd5e5c0d3589f165cf07",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI sport S tronic ACC LED R-Kamera",
+      "expectedDigest": "076ce5d20f237a311d2c4e635dd783bb3b7eba3d5a64fef1b9285f6ddd8199a7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "e231290be799e551883ab2d5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI S tronic design/LED/RFK/AHK/Navi",
+      "expectedDigest": "ed376d676bbfe4c01a4c37516c9e89493e9c6c04b888867bb9ddcf23125d2bc6",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "02295a8f316ff640fc13e3bb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro S tronic design | LED |",
+      "expectedDigest": "c5e002e9d73e105d46fa8df23b89eaab8f03d6e75bc6c4319c37d59a51111395",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "574858be38bf6a6a03b288d8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro S-Line *LED*Virtual*Navi",
+      "expectedDigest": "b71f6196857a5974b5cbc3db241049f52e3109511d761381d068016c52513234",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "413bec2c853dc852c318c4f3",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro S tronic sport CarPlay|A",
+      "expectedDigest": "9bb7befd3d65343f663b2d50444f558e0e0cbcfa685e26a5c0b4c6997b2519f7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0bc262e16f54351d2a35cf67",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 40 TDI design",
+      "expectedDigest": "50968ad2ecaa23dedf669f853be67ca8964ff1317323315840c29cff59a4e65c",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7a77810c532e76f72e225e18",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Limousine 40 TDI S line Keyless Kamera Navi+",
+      "expectedDigest": "8077b6a35bab9f968dc05e1fa8db2219233dc866b557f664ce8927f8a3238ee7",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a7efd0b0031c9557013999a5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant Sport 40 TDI S-Tronic Virt.Cockpit/Kame",
+      "expectedDigest": "7d68656ce4e2eb2bc4d3e7fbdadc0108d57af9ba03445d5edec82e94c599b23a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ce822330191f88fa2247ab6b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro S-line LED/AHK/Kamera/As",
+      "expectedDigest": "ff7bdccc77bbcb3857aa23d552a890e857c3a686724ee0ff37e08e69469b2a17",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a7ea83adc79bad9a596b15e6",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro S tronic design AHK",
+      "expectedDigest": "26c7522eb6006ee7ee00ba13651b1d9fa7c3fed032a6b474bfb94d817deb00f6",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7dbb3e9236b6bee9a24388a2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI BUSINESS SPORT / VIRTUAL,4-ZONEN",
+      "expectedDigest": "3133473ef88501790accbbf3147565f8e7f5bea09fef3ba5289f2dc6cf4b7fbd",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3ee94deaa12c71d4f903adff",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI design S tronic",
+      "expectedDigest": "dd72a6fa56b743335e0fdd0bdab82e34de866ae8141d039853c2304f868bd53c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Привод не определён: подтверждены только одинаковые поля обеих заводских колонок FWD/quattro, привод не заполнен. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f6d4f85f9ed397196df5e936",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro HD Matrix Standheizung",
+      "expectedDigest": "f650fcf2d6bcd0d09a37466140d4ee9242323220bf5dbb6312676ee8f3be1378",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9afaf9842cd6c888daf92a6d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 40 TDI quattro sport Virtual ACC LED KAM",
+      "expectedDigest": "318d7b9e0293c0e2b74fb25b72be1aa37f4094c3ecbfe7cc72d8c70a739f954a",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "51b227f710e30cfec1f1a8eb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 40 TDI quattro sport AHK MATRIX-LED NAV",
+      "expectedDigest": "e2c865bac0ead3403e4fd0a339513fc9134a1775b71e89005bc30bf22749329f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 40 TDI: 1968 см³, ДВС 150 кВт/204 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b71a1c96542f1cc1a12729cb",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "45 TDI Av*quattro*AUTO*VIR*LED*NAVI*LEDER*AHK",
+      "expectedDigest": "6b9098d6c2fa540946fffe9c2c2736bb8d21638cc6fb41e94d953b839ba5053f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2710f1a124755f8b7b05321f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI S-Line Ext / virtual / optik-Pak",
+      "expectedDigest": "1c048eb9b2cfee36697de8e2ba93be9a6d8c2588a6e346e298da6f6db43cec07",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "70256e778d373572bf706812",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 45 TDI quattro S-Line Leder",
+      "expectedDigest": "29e2aef9152ae285c7eb9c647a8b756e1de9b04b6700298e9efb313ce0233c8f",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "53523a7be729507dd112448b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro S tronic sport | AHK |",
+      "expectedDigest": "039178fbd9347f225efbef542bf06edfedc23cadac23b9a836b520227137a0da",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1bba1d14911429e7c0f80776",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant sport 45 TDI quattro *AHK*LED*ACC*",
+      "expectedDigest": "b7aeff6a1414349fddc851ab9664a256d927ffc77604746f9b688b0939222930",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9c27bc34208aa40818af86c5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro design PANO/AHK/LED/ACC",
+      "expectedDigest": "d8f99de0221b0fd55ffa8204cef32bcf7ed03f945620c0ef4341f3f111fd9715",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f4eec6fc4f5a0d7b0c8d4265",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro Sport S-line HUD AHK",
+      "expectedDigest": "72b19fdc31045f185570fc33a5ecdab47b86c7e523e2e459967b0856e3ae9542",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6e9bfe8bad10741001b59d20",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "45 TDI quattro S tronic sport Avant sport",
+      "expectedDigest": "811b940f467bc2f4b743505b59f27bd90a017bc6668ef6c973e9e1395a7fa924",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "87b502cf7597265033603551",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 45 TDI quattro sport Matrix/Kam/ACC/SHZ",
+      "expectedDigest": "f880c04196373053d58c035935330a9359b5efbcf22342d13a7a9f8855bf4e85",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "48d7b25d2e2ac1d204264ba0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro *S-LINE*AHK*HUD*ACC*B&O*",
+      "expectedDigest": "d146b6adfb5e796b23e13d133f752ae77815ac60e1fc87b1c6724303277834d2",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1a46ac52d35929e06780c90c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro *HUD*PANO*MATRIX*AHK*ACC",
+      "expectedDigest": "14da7ac5c739be804434448e11fd4ed25161e4ddd9458f61daa0badd1a04db2a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0dd674bce285af65f60de133",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro S LINE Sport MATRIX AHK",
+      "expectedDigest": "17513d4be31d5ec53df8e6e7a188e46efe8656ad738ae54479fbfb6e57eeb3f3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "154325606a4f4f3b33e48dc1",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro sport S-tron MATRIX PANO",
+      "expectedDigest": "debfd59e62b10d3dfa7182dc71505c551ce45fd4838a1b90f4c36f904a47a2c9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9404fde774a30238967b2fec",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro S tronic AHK Navi",
+      "expectedDigest": "c05e27cc82fb5c00793c095b0b631e5fd9a515a6fc40a33e6f404b68898b8c06",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8783d266d3650260b8b72693",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro S-line sport*Head-Up*SHZ",
+      "expectedDigest": "8873c6befbe8459ff8716a42b6d7b15bfec8644f4392052e35422750e3a926e7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6eb8d37715bf0e465ddbc620",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro S-tronic Matrix Kamera",
+      "expectedDigest": "c06b463fe2c69a270729ee20b5f3425c0a47d4d5514814b94255df7bb49a9147",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "cc6edce6859024e97efeb076",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI Quattro S-Line NAV+LED+ACC+19ZO",
+      "expectedDigest": "f58b1ad20826fbba38ccc0c05ffbde02c8c014a9a95255d3fb087e15de80c4f0",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f5f75da382309925fbf0608c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Lim. 45 TDI quattro/Matrix/Kamera/Virtual/Shz",
+      "expectedDigest": "28a2e5b55c23cae4446f188c548a072925903b3e7c48b0530aa3ff1b22944af1",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Limousine 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "85371f2a03828451306fa0b8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI qu. S-Line *Navi*ACC*Head*Keyl.*",
+      "expectedDigest": "48f839aa8061f40b82915d7226076bacac2f75cbfb609a6abf1ca404d6858032",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8c360a9c354cfea8eb41d976",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro Design/B&O/DAB/Matrix",
+      "expectedDigest": "fc2de50c6b20fa7400dbf8ae4b8bbf29427535ad1234bae8786df422565510af",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ae4cae970a78198d0afb3e98",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2021,
+      "trim": "Avant 45 TDI quattro Sport MATRIX/LEDER/PANO",
+      "expectedDigest": "d80891210f6ded23c45221c56e755d1681bdc3cff4a4c8ca17df735f6d29b036",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerKw": 180,
+        "powerHp": 245,
+        "icePowerKw": 180,
+        "transmission": "automatic",
+        "drive": "awd"
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "transmission",
+        "drive"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, заводской прайс A6 от2021-05-03, архивная копия. A6 C8 Avant 45 TDI: 2967 см³, ДВС 180 кВт/245 PS, MHEV, 7-ступенчатая S tronic. Совпадают год редакции и записи, кузов, индекс, объём и мощность. Полный привод подтверждён. Стр.149,150,151,152: двигатель/топливо/привод/КПП;стр.126:MHEV;стр.164:дата. Полная масса, код двигателя, тяговая электрическая и30-минутная мощности не подтверждены. Архивный заводской документ прочитан в публичном веб-тексте; локальный PDF недоступен, его SHA256 не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://de.scribd.com/document/517531535/Preisliste-a6-Limousine-s6-Limousine-a6-Avant-s6-Avant-a6-Allroad-Quattro",
+            "date": "2021-05-03",
+            "pages": [
+              126,
+              149,
+              150,
+              151,
+              152,
+              164
+            ],
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "transmission",
+              "drive"
+            ],
+            "publisher": "AUDI AG",
+            "access": "publicly indexed factory document archive"
+          }
+        ]
+      }
+    }
+  ]
+}
