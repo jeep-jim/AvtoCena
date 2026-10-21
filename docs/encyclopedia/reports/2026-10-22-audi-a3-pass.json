@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-22T03:43:45.680443+07:00",
+  "model": "Audi A3",
+  "observedVariantsInspected": 1111,
+  "newVariants": 321,
+  "newFields": 2840,
+  "untouchedVariants": 790,
+  "byYear": {
+    "2025": 74,
+    "2026": 37,
+    "2023": 66,
+    "2024": 40,
+    "2022": 104
+  },
+  "retryReasons": {
+    "incomplete_technical_identity": 116,
+    "exact_2026_source_missing": 22,
+    "different_powertrain_or_body_source_required": 90,
+    "protected_reference_or_missing_trim": 217,
+    "year_token_requires_identity_review": 4,
+    "local_derivative_translation_and_source_required": 17,
+    "observed_identity_conflict": 33,
+    "exact_2024_source_missing": 7,
+    "exact_2023_source_missing": 74,
+    "dated_primary_table_or_exact_identity_not_confirmed": 210
+  },
+  "batches": [
+    {
+      "batch": "research-2026-10-22-audi-a3-2025-first",
+      "commit": "7ea32951527aef64512ac2f5b334136a31be45aa",
+      "workflowRun": 39669983124,
+      "job": 119464989989,
+      "variants": 56,
+      "fields": 504,
+      "readback": "2026-10-22-audi-a3-2025-first-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a3-2025-2026-extra",
+      "commit": "56922c02a41012de14bb59527f853b7f735e9aaa",
+      "workflowRun": 39670808372,
+      "job": 119467882436,
+      "variants": 55,
+      "fields": 486,
+      "readback": "2026-10-22-audi-a3-2025-2026-extra-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a3-history-1",
+      "commit": "d78d255f888f344c881599ebaccd525aac7c9a3a",
+      "workflowRun": 39671345416,
+      "job": 119469736278,
+      "variants": 64,
+      "fields": 576,
+      "readback": "2026-10-22-audi-a3-history-1-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a3-history-2",
+      "commit": "4a79337afb1052b6a7ecac773a9c32d419bbcca0",
+      "workflowRun": 39671766901,
+      "job": 119471189960,
+      "variants": 42,
+      "fields": 338,
+      "readback": "2026-10-22-audi-a3-history-2-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a3-2022-1",
+      "commit": "328f6e1964f7cd6799261975cf65de6f9490e5b9",
+      "workflowRun": 39672117791,
+      "job": 119472410029,
+      "variants": 64,
+      "fields": 576,
+      "readback": "2026-10-22-audi-a3-2022-1-readback.json"
+    },
+    {
+      "batch": "research-2026-10-22-audi-a3-2022-2",
+      "commit": "d4c47faf0ddbb1ef200b13fec7123d2440cd8f32",
+      "workflowRun": 39672340880,
+      "job": 119473183442,
+      "variants": 40,
+      "fields": 360,
+      "readback": "2026-10-22-audi-a3-2022-2-readback.json"
+    }
+  ],
+  "integration": "not_implemented"
+}
