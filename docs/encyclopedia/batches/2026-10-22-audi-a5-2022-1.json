@@ -1,0 +1,2310 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a5-2022-1",
+  "entries": [
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "dfceea1fa3b5b2d1625ee634",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 50 TDI Mild-Hybrid quattro Aut.*LED",
+      "expectedDigest": "c6c0bbf6cb1718357eca34112a7b334696070b26ef0f621a30469a7f41283421",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "e1fc91b2d6ec7b5819fc8e28",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI - 1.HAND / BUSINESS-PAKET",
+      "expectedDigest": "134ca6982b49a5fce40d3264a495a8c153b0cdd34467a70bb89f7c6064fdf135",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TFSI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 6-ступенчатая МКПП, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "c2cd844d629bbd5a0eb633fe",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI LED/MMI/Kamera/Assist/uvm.",
+      "expectedDigest": "9ba0ef813f14376f3c8d1d5b9af96bf1e914ec4783cc4fc15b6b829a530d6425",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TFSI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0af7764544b4df55d4d0566a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabrio S line 35 TFSI",
+      "expectedDigest": "6ed4f9c26aad3fadda98cf86303c57055f6252a772e0d5c9e5c9aad1ef22683f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 35 TFSI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d5c516de8079b6bdf45d793b",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 35 TFSI S Line S tronic - GARANTIE 12MOIS",
+      "expectedDigest": "a5d7b45685a42230b681f106f5df4c5440869ace80daa2afc38b368f0b8bc0db",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TFSI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 110 кВт / 150 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "39e495102cc676476372887d",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback advanced 35 TDI *AHK*19''*ab 289 €*",
+      "expectedDigest": "aee124801a2448a6e9e58eba0733dbade626ca22d178ba7e5af01d5d4b5467e4",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 35 TDI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "7a8ba3240af039a3580257ce",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupe 35 TDI|S-LINE|ALCANTARA|VIRTUAL|LED|",
+      "expectedDigest": "c79bc223cf48265c7853cd745317bbd385cce9c3eaedfa344fe2e9e64dbe7817",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 35 TDI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "13c2fc4ab5150d46c2d26617",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 35 TDI S line AHK*LED*Sound*Virtual",
+      "expectedDigest": "5b6a68568605cd76112715fd36e77a48084c35ff128b56f092d2b56d7bd3ae19",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "drive": "fwd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 35 TDI, MY2022. Заводской прайс AUDI AG от07.02.2022: 1968 см³, 120 кВт / 163 PS ДВС, передний привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "07f338a37921da74c020514c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 40 TDI quattro *Navi*Head-up*Klima*",
+      "expectedDigest": "b49480654033f1b1367f65f47f99ce8fc0095e2c5477226ffdba6aa548a45e72",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "574a8822b978c23422d5942e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 40 TFSI qu S LINE 18Z STANDHEIZ,ACC",
+      "expectedDigest": "f83455d79a8788186aa892be5884eccaa47138dbb55f1b4ccbe824b46f919f0c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "f57ad27f827b48431e18aa24",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 40 TFSI qu. S tronic S line Matrix/",
+      "expectedDigest": "2abadce8f6aa36459127632bae9fb66161d34aaf82fad1332c01c8ec1a5239d8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "1ec6e2ff00b8637afef6ad9e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback S line 40 TFSI quattro S tronic*vir",
+      "expectedDigest": "486a50cf60d34bcac9925ef887e7be71831bc59b1da9a42bf3c4f90496368830",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "b3ffdc180643272f470a68d4",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet 40 TFSI quattro advanced Navi Lede",
+      "expectedDigest": "6a88e0cebc8970c41c6e9934682853a9124108bffe10d0c6a31098063636a3d4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "7776f3b52c18e5fd0265d50b",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabriolet Advanced QU. 2.0 40TFSI S-Tronic",
+      "expectedDigest": "ae15e4e684469591d5074ccb55865224e520f668d73f554c4b20d5ffb9d9da20",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "0fceef6c749d5635e31929b5",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 40 TDI quattro S line 8-fach",
+      "expectedDigest": "88dedc503f58094d86b689424c9089e62d64d75db04919c9866550883b0f7fec",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "cac5eb28cdac15d63285bb60",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 40 TFSI S line quattro S-tronic Mat",
+      "expectedDigest": "d3847c7a3985b9090d6c60cb45749f48f0b076bec63a723a221ba0c9d924ec55",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "421264242588196a082871f3",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "SB 40 TDI quattro advanced Aut LED HEAD-UP AHK",
+      "expectedDigest": "d60990bcd826a65a21a6daf63933682bb3b8b71fdc79bc4e2ca9fbfc0ea569e9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1968 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "37c6cd1bf4b6e54b87d09a4e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 40 TFSI quattro*ACC*LED*RFK*DAB**",
+      "expectedDigest": "9fdfb1f24ec8b3595e6015cbc2d8c29ae55ce4b72813cd817cba9c79d0d4f3fa",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bd990a6fb195a357361ba8c9",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 40 TFSI Quattro Sline Competition Pano C",
+      "expectedDigest": "467b7a7ed487141256b9348e3726b1f605e9f9ce49ffaf24d2f3b638bd9b87f9",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 204,
+        "powerKw": 150,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 40 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 150 кВт / 204 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "289ae82b9f2cbd58f7bc9cea",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI quattro *LEDER*STDHZ*KAMERA",
+      "expectedDigest": "580aea4a518f4ff99eaea794664022ea6e1f9c89be2526b4b8bac305c566a765",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "66355251139e5371f2a35da8",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45TFSI qu S line COMP+ MATRIX AHK",
+      "expectedDigest": "4e0a6348e045606cdaf2bcb07e18a549b61cfbc7ea9394ba3e073fa9dd7d5709",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "d505dffaf06a41db9bc02fa9",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI quattro 3x S line Matrix/36",
+      "expectedDigest": "f21ba4fdfba68732dfa2c78f2b71f934ad77cdb2a76efb211941e454c1f0ad33",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "bb3bed00af9af635c9d9e442",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "45 TFSI S tronic quattro Sportb. S line",
+      "expectedDigest": "27466a30543230038087fe292ab098f9ef374806445f919786d099a2ceb389bd",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "1c81003cf61bf920db119ff9",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI S tronic quattro S line",
+      "expectedDigest": "a30a4a69c544fa328ff23dacf8d3e07a670c085bd68d24f79e1c3d03fc5b31df",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "1ab173b61b89a8300c9b888e",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI quattro S-tronic S line Mat",
+      "expectedDigest": "0e1f0d0df58138f96abf7104afc399953344fc84d6be73a82f6ec45a89aaa50a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "895f397235b1a221f653e3a2",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI quattro AHK°LED°NAVI°19\"LM",
+      "expectedDigest": "10ef80d6153f22b5e22e97c02e5cac6d7987d16cb704b5e9941d201b6a7b1672",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "ce4784f753c968a7a527e998",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI qu S Line Int Pano,B&O,Kame",
+      "expectedDigest": "4d70d29492dce8c3cd30bb3c4dfb774a313a456ae4bbe786ffd30dcf441b37dd",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "330575905baf412ec0a4c4e0",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 45 TFSI quattro S line Pano 20''",
+      "expectedDigest": "56f213a19d62aef3f317da049e7793feab45d2781a1d35de0a99b001d845c174",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "cbf08ec3466505479b3516dd",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Cabrio 45 TFSI qu. S line MATRIX-LED ACC NAVI",
+      "expectedDigest": "a717d3cb26057f79429a7f1e6fb2e69dc0ccc19dd2893ab18b4909abdef9160f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Cabriolet 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "9d3092f889f67dd97fe4ac76",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "SpB 45 TFSI Qu Black NAV+LED+AHK+VOCKPIT+PANO",
+      "expectedDigest": "5d47079551cda94a4d272742ace958c85774c56155d054be12aac207c9b1766f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 45 TFSI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "25e2f74e2abc8f32cc67d601",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupe S line 50 TDI quattro MATRIX/PANO/RFK++",
+      "expectedDigest": "d7ba687f156ca965b3a4502ab8d48b9d177f98f89eed00f88ca15e973c28c71d",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "6d6a773bc35b6426bf9c9b4c",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Coupe 50 TDI quattro S line*PANO*SHZ*MATRIX*",
+      "expectedDigest": "929e837b722f635fb4113420849f89ec6a4d5b295168cc3397ea3c718fe90157",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Coupe 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "a39e2dc1a54401335229507a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "SB 50 TDI qu. S line Matrix Kamera Carplay",
+      "expectedDigest": "dac2355835b4171639137ec7365bb0dffc00328bdd188dfbcc4658c8f80380fc",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "581254e32f7dac0533dd5d3a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 50 TDI quattro S line *MATRIX*LEDER",
+      "expectedDigest": "b684d8042e868acf714f226a00a2b53e4ec785482038b4b328e4167dff163512",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "752cd04b87d1f41d3a2bb78a",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 50 TDI qu S LINE MATRIX,KEYLESSGO",
+      "expectedDigest": "813dbad1de2825aa4555e0ac6559034d95a25f1519d2afb4f00be23554439e89",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "8cf3dbb7884fe919bce44c62",
+      "variantId": "77f0cca4477bce35ead35074",
+      "make": "Audi",
+      "model": "A5",
+      "year": 2022,
+      "trim": "Sportback 50 TDI quattro S line Matrix+AHK LE",
+      "expectedDigest": "b432f7b123f818d3db32fc147810abe3ac7bc1d7601266c9777a2e0fb9cf0e41",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 2967,
+        "powerHp": 286,
+        "powerKw": 210,
+        "icePowerKw": 210,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A5 Sportback 50 TDI quattro, MY2022. Заводской прайс AUDI AG от07.02.2022: 2967 см³, 210 кВт / 286 PS ДВС, полный привод, 8-ступенчатая tiptronic, MHEV. Совпадают год, кузов, двигатель и КПП; у40/45/50 требуется явно установленный привод. Полная масса и код двигателя не подтверждены; снаряжённая масса не подменяет полную, сеть12В/48В не подтверждает 30-минутную мощность.",
+        "additionalSources": [
+          {
+            "url": "https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4e9fea3d-af4a-4cf1-b91e-7d5eb05cceaa/original/as/preisliste_a5-sportback_a5-sportback-g-tron_s5-sportback_a5-cabriolet_s5-cabriolet_a5-coupe_s5-coupe.pdf",
+            "date": "2022-02-07",
+            "pages": [
+              1,
+              81,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              134
+            ],
+            "sha256": "019292a964c5bfbe0571d88410f5ac5af190ac50afc5e6087e7f7b19da8e765f",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
