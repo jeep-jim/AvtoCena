@@ -108,3 +108,8 @@
 - /cars/autocatalog is now the permanent editable encyclopedia, independent of live inventory. Keep one canonical model with distinct annual/technical variants. Never automatically replace its initial snapshot or overwrite administrator edits during feed refreshes.
 - Only active TopAvto owner/admin roles may edit; visitors, other dealers and managers have read access. Preserve revision conflicts, history and source/status fields.
 - Import only already saved catalog/cached observations and existing references; do not turn the encyclopedia into unrestricted bulk copying of partner feeds. Keep observed specs separate from verified facts. Unknown 30-minute power stays empty and never derives from peak/system power. Calculation fallback integration requires a later explicit acceptance of exact verified matching.
+
+# Owner encyclopedia presentation — 21.10.2026
+- Encyclopedia discovery is country-independent: no market filters or country-bound make/model identity. Keep provenance internally and exact technical differences, without exposing markets as encyclopedia navigation.
+- Use existing catalog theme tokens and standard page styling. Compact text-first list/grid controls are icons to the left of the alphabet; add-model action belongs below reset in the left sidebar. No introductory explanations or download actions.
+- Brand, model and year accordions open independently and remain open when other rows are used. Respect the public template's data-ac-preserve-open convention. Within a selected make show all matching models, a model alphabet and a back-to-makes action.

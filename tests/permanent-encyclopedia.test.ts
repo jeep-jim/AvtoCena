@@ -54,3 +54,15 @@ test('CSV download is blocked even by direct URL and returns no data stream',asy
  const {GET}=await import('../apps/web/app/api/encyclopedia/export/route');
  const response=await GET();assert.equal(response.status,403);assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Content-Disposition'),null);assert.deepEqual(await response.json(),{error:'Выгрузка базы недоступна.'});
 });
+
+test('encyclopedia model identity and discovery are independent of country',async()=>{
+ const {filterModels}=await import('../apps/web/lib/encyclopedia/query');
+ const {summarize}=await import('../apps/web/lib/encyclopedia/records');
+ const b=createSnapshotBuilder(at);b.add(car);b.add({...car,market:'japan'});
+ assert.equal(b.models.size,1);const record=[...b.models.values()][0];
+ assert.equal(record.variants.length,1);assert.deepEqual(record.variants[0].markets,['china','japan']);
+ const models=[summarize(record,'test')];
+ assert.deepEqual(filterModels(models,{market:'korea'}),models,'legacy market URLs cannot hide a model');
+ assert.deepEqual(filterModels(models,{make:'Toyota',year:'2021'}),models);
+ assert.deepEqual(filterModels(models,{make:'Toyota',year:'2022'}),[],'technical filters still apply');
+});
