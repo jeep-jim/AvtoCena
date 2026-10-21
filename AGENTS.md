@@ -103,3 +103,8 @@
 # Owner China age and market order — 21.10.2026
 - China inventory starts at 2014 inclusive, superseding its six-year rule. Apply to feed intake, retained publication and filters; preserve date validity and other admission safeguards.
 - Public market order: China, all Japan (auctions and Green Corner), Korea, UAE, Europe, Georgia.
+
+# Owner permanent encyclopedia — 21.10.2026
+- /cars/autocatalog is now the permanent editable encyclopedia, independent of live inventory. Keep one canonical model with distinct annual/technical variants. Never automatically replace its initial snapshot or overwrite administrator edits during feed refreshes.
+- Only active TopAvto owner/admin roles may edit; visitors, other dealers and managers have read access. Preserve revision conflicts, history and source/status fields.
+- Import only already saved catalog/cached observations and existing references; do not turn the encyclopedia into unrestricted bulk copying of partner feeds. Keep observed specs separate from verified facts. Unknown 30-minute power stays empty and never derives from peak/system power. Calculation fallback integration requires a later explicit acceptance of exact verified matching.

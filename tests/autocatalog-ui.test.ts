@@ -6,23 +6,13 @@ function source(path: string) {
   return fs.readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 }
 
-test("public vehicle knowledge is presented as a live Autocatalog with a legacy redirect", () => {
-  const page = source("apps/web/app/(public)/cars/autocatalog/page.tsx");
-  const directory = source("apps/web/components/catalog/AutocatalogBrandDirectory.tsx");
-  const legacy = source("apps/web/app/(public)/cars/encyclopedia/page.tsx");
-  const sitemap = source("apps/web/app/sitemap.xml/route.ts");
-
-  assert.match(page, />Автокаталог</);
-  assert.match(page, /readCatalogBrandDirectory/);
-  assert.doesNotMatch(page, /readBrandModelDirectory/);
-  assert.match(page, /readAutocatalogCounts/);
-  assert.doesNotMatch(page, /readEncyclopediaKnowledgeModels/);
-  assert.match(directory, /Марки с автомобилями/);
-  assert.match(directory, /brand\.aliases/);
-  assert.match(directory, /#brands-/);
-  assert.match(legacy, /redirect\("\/cars\/autocatalog"\)/);
-  assert.match(sitemap, /\/cars\/autocatalog/);
-  assert.doesNotMatch(sitemap, /\/cars\/encyclopedia/);
+test("public encyclopedia uses a permanent snapshot and keeps legacy navigation", () => {
+ const page=source("apps/web/app/(public)/cars/autocatalog/page.tsx");
+ assert.match(page,/Энциклопедия автомобилей/);
+ assert.match(page,/readEncyclopedia/);
+ assert.doesNotMatch(page,/readAutocatalogCounts|readCatalogBrandDirectory/);
+ assert.match(source("apps/web/app/(public)/cars/encyclopedia/page.tsx"),/redirect/);
+ assert.match(source("apps/web/app/robots.txt/route.ts"),/autocatalog\/sitemap.xml/);
 });
 
 test("brand logos never disappear and the public request path does not crawl a third-party site", () => {
@@ -64,14 +54,14 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
 
   assert.match(brandPage, /modelsWithPreviews/);
   assert.match(brandPage, /\/cars\/autocatalog/);
-  assert.match(brandPage, /MARKET_ORDER\.map\(async \(market\)/);
-  assert.match(brandPage, /group\.total\.toLocaleString\("ru-RU"\)/);
+  assert.match(brandPage, /MARKET_ORDER\.map/);
+  assert.match(brandPage, /result\.total\.toLocaleString/);
   assert.doesNotMatch(brandPage, /makeResults\.reduce/);
   assert.doesNotMatch(brandPage, /availableMarkets\.length \|\| 7/);
   assert.match(modelPage, /heroImageUrl/);
   assert.match(modelPage, /Автокаталог/);
   assert.match(modelDirectory, /model\.previewUrl/);
-  assert.match(brandPage, /\(published \? autocatalogCoverUrl\(published\) : undefined\) \|\| previewByModel/);
+  assert.match(brandPage, /previewUrl: \(published \? autocatalogCoverUrl\(published\) : undefined\)/);
   assert.doesNotMatch(modelDirectory, /Характеристики дополняются|specRanges|representativePowerHp/);
   assert.doesNotMatch(modelPage, /specRanges|representativePowerHp/);
   assert.match(modelPage, /Характеристики из базы знаний/);

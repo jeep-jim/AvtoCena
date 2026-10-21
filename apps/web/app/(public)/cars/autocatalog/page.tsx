@@ -1,81 +1,22 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { AutocatalogBrandDirectory, type AutocatalogBrandItem } from "@/components/catalog/AutocatalogBrandDirectory";
-import { PublicHeader } from "@/components/layout/PublicHeader";
-import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
-import { canonicalCatalogBrand } from "@/lib/catalog/brands";
-import { readAutocatalogCounts } from "@/lib/catalog/model-directory";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-export const metadata: Metadata = {
-  title: "Автокаталог — марки и модели в продаже | АвтоЦена",
-  description: "Автокаталог АвтоЦена: марки и модели, для которых сейчас есть автомобили с рассчитанной стоимостью.",
-  alternates: { canonical: "/cars/autocatalog" },
-  openGraph: {
-    title: "Автокаталог АвтоЦена",
-    description: "Марки и модели с актуальными предложениями из семи рынков.",
-    url: "/cars/autocatalog",
-    type: "website",
-  },
-};
-
-function clean(value: unknown) {
-  return String(value || "").replace(/\s+/g, " ").trim();
-}
-
-export default async function AutocatalogPage() {
-  const [brands, live] = await Promise.all([
-    readCatalogBrandDirectory(),
-    readAutocatalogCounts(),
-  ]);
-
-  const liveCounts = new Map<string, number>();
-  for (const [rawMake, rawCount] of Object.entries(live.counts || {})) {
-    const make = canonicalCatalogBrand(rawMake);
-    liveCounts.set(make, (liveCounts.get(make) || 0) + Number(rawCount || 0));
-  }
-
-  // Canonical identities are counted in one projection pass, without loading
-  // full variant/reference summaries for every brand on the landing page.
-  const liveBrands = brands.filter((brand) => (liveCounts.get(brand.name) || 0) > 0);
-  const canonicalModelCounts = new Map(Object.entries(live.canonicalModelCounts));
-
-  const directory: AutocatalogBrandItem[] = liveBrands.map((brand) => ({
-    name: brand.name,
-    slug: brand.slug,
-    aliases: [...new Set((brand.aliases || []).map(clean).filter(Boolean))],
-    modelCount: canonicalModelCounts.get(brand.name) || 0,
-    offerCount: liveCounts.get(brand.name) || 0,
-  }))
-    .filter((brand) => brand.offerCount > 0 && brand.modelCount > 0)
-    .sort((left, right) => left.name.localeCompare(right.name, "en"));
-
-  const totalOffers = directory.reduce((sum, brand) => sum + brand.offerCount, 0);
-  const totalModels = directory.reduce((sum, brand) => sum + brand.modelCount, 0);
-
-  return <main className="ac-autocatalog-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
-    <PublicHeader backHref="/cars" backLabel="В каталог" />
-    <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
-      <nav className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]" aria-label="Хлебные крошки">
-        <Link href="/cars" className="hover:text-red-500">Каталог предложений</Link><span className="mx-2">/</span><span>Автокаталог</span>
-      </nav>
-      <div className="mt-5 grid gap-5 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:p-8">
-        <div>
-          <div className="text-xs font-black normal-case tracking-normal text-red-500">Только актуальное</div>
-          <h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.05em] md:text-7xl">Автокаталог</h1>
-          <p className="mt-4 max-w-3xl text-sm font-semibold leading-6 text-[var(--ac-muted)] md:text-base">
-            Выберите марку и модель, чтобы сравнить доступные автомобили и стоимость под ключ.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2 text-xs font-black md:max-w-sm md:justify-end">
-          <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{directory.length.toLocaleString("ru-RU")} марок</span>
-          <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{totalModels.toLocaleString("ru-RU")} моделей</span>
-          <span className="rounded-full bg-red-500 px-3 py-2 text-white">{totalOffers.toLocaleString("ru-RU")} автомобилей</span>
-        </div>
-      </div>
-      <AutocatalogBrandDirectory brands={directory} />
-    </section>
-  </main>;
+import {protectedPhotoUrl} from '@/lib/catalog/photo-proxy-policy';
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {Suspense} from 'react';
+import {PublicHeader} from '@/components/layout/PublicHeader';
+import {DirectoryFilters} from '@/components/encyclopedia/DirectoryFilters';
+import {getCurrentUser} from '@/lib/auth';
+import {CreateModel} from '@/components/encyclopedia/CreateModel';
+import {EncyclopediaPhoto} from '@/components/encyclopedia/Photo';
+import {canEditEncyclopedia,readEncyclopedia} from '@/lib/encyclopedia/records';
+import {filterModels} from '@/lib/encyclopedia/query';
+import {displayValue,modelHref} from '@/lib/encyclopedia/schema';
+import './encyclopedia.css';
+export const dynamic='force-dynamic';
+export const metadata:Metadata={title:'Энциклопедия автомобилей — годы, модификации и характеристики | АвтоЦена',description:'Постоянная энциклопедия АвтоЦена: марки, модели, модификации по годам, двигатели, привод и 30-минутная мощность. Таблица характеристик и экспорт.',alternates:{canonical:'/cars/autocatalog'},robots:{index:true,follow:true}};
+export default async function EncyclopediaPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
+ const user=await getCurrentUser();
+ const raw=await searchParams,p=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,Array.isArray(v)?v[0]:v]));const manifest=await readEncyclopedia(),models=manifest?.models||[],filtered=filterModels(models,p),pages=Math.max(1,Math.ceil(filtered.length/48)),page=Math.max(1,Math.min(pages,Math.floor(Number(p.page)||1))),shown=filtered.slice((page-1)*48,page*48);
+ const pageUrl=(n:number)=>{const q=new URLSearchParams(Object.entries(p).filter((x):x is [string,string]=>typeof x[1]==='string'));q.set('page',String(n));return '/cars/autocatalog?'+q;};
+ const makes=[...new Set(models.map(m=>m.make))].sort((a,b)=>a.localeCompare(b,'ru')),years=[...new Set(models.flatMap(m=>m.years))].sort((a,b)=>b-a),fuels=[...new Set(models.flatMap(m=>m.fuels))].sort();
+ return <main className="ac-ency-page"><PublicHeader backHref="/cars" backLabel="В каталог"/><div className="ac-ency-container"><nav><Link href="/cars">Каталог автомобилей</Link> / Энциклопедия</nav><div className="ac-ency-layout"><Suspense><DirectoryFilters makes={makes} years={years} fuels={fuels}/></Suspense><section className="ac-ency-results"><header className="ac-ency-intro"><div><span className="ac-ency-eyebrow">АвтоЦена · база знаний</span><h1>Энциклопедия автомобилей</h1><p>Модели, годы и модификации. Характеристики сохраняются независимо от наличия автомобиля в продаже.</p></div><a className="ac-ency-button" href="/api/encyclopedia/export">Скачать для Excel · CSV ↓</a></header>{canEditEncyclopedia(user)&&<div className="ac-ency-actions"><CreateModel/></div>}<div className="ac-ency-count"><span className="ac-pulse-dot"><span/></span>{models.length.toLocaleString('ru')} моделей · {models.reduce((n,m)=>n+m.variants,0).toLocaleString('ru')} модификаций · {makes.length} марок</div><p className="ac-ency-muted">Данные из объявлений требуют проверки. Пустое поле означает, что подтверждённых данных пока нет.</p>{!manifest?<p role="status">Готовим первый снимок энциклопедии.</p>:<><p className="ac-ency-muted">Найдено моделей: {filtered.length.toLocaleString('ru')}. Снимок от {new Date(manifest.capturedAt).toLocaleDateString('ru-RU',{timeZone:'Asia/Krasnoyarsk'})}.</p><div className="ac-ency-grid">{shown.map(m=><Link key={m.id} href={modelHref(m.id)} className="ac-ency-card"><div className="ac-ency-photo"><EncyclopediaPhoto src={protectedPhotoUrl(m.photo,m.photoMarket||'')} alt={`${m.make} ${m.model}`}/></div><div className="ac-ency-card-copy"><h2>{m.make} {m.model}</h2><p>{m.years.length?`${Math.min(...m.years)}–${Math.max(...m.years)}`:'Годы уточняются'} · {m.variants} модификаций</p><p>{m.fuels.map(displayValue).join(' · ')||'Топливо уточняется'}</p><span>Характеристики →</span></div></Link>)}</div>{!shown.length&&<p>По выбранным параметрам моделей не найдено.</p>}<nav className="ac-ency-pagination" aria-label="Страницы энциклопедии">{page>1&&<Link className="ac-ency-button" href={pageUrl(page-1)} scroll={false}>← Назад</Link>}<span>{page} / {pages}</span>{page<pages&&<Link className="ac-ency-button" href={pageUrl(page+1)} scroll={false}>Далее →</Link>}</nav></>}</section></div></div></main>;
 }
