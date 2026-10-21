@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T01:36:38.003919+07:00",
+  "updatedAt": "2026-10-22T02:17:29.580694+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -463,7 +463,11 @@
         2026
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "needs_exact_source",
+      "researchedVariants": 0,
+      "checkedAt": "2026-10-22T02:17:29.580694+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
+      "nextAction": "Retry exact model-year/trim and missing field sources; reviewed rows without identity remain unchanged"
     },
     {
       "id": "c26b4f6cf8e267db5d1f7503",
@@ -473,7 +477,11 @@
         2022
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T02:17:29.580694+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
+      "nextAction": "Retry exact model-year/trim and missing field sources; reviewed rows without identity remain unchanged"
     },
     {
       "id": "cc5a28958f2b1bd3eac176d4",
@@ -489,7 +497,11 @@
         2020
       ],
       "variants": 25,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 3,
+      "checkedAt": "2026-10-22T02:17:29.580694+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
+      "nextAction": "Retry exact model-year/trim and missing field sources; reviewed rows without identity remain unchanged"
     },
     {
       "id": "9f23c75ab6a73713bf64580a",
@@ -500,7 +512,11 @@
         2024
       ],
       "variants": 7,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 1,
+      "checkedAt": "2026-10-22T02:17:29.580694+07:00",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22-alpina-alpine.json",
+      "nextAction": "Retry exact model-year/trim and missing field sources; reviewed rows without identity remain unchanged"
     },
     {
       "id": "eff6651568e364a8a5a40e97",

@@ -1,0 +1,884 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-aston-first",
+  "entries": [
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "variantId": "3c5a436c03a29ed0f91c5310",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2018,
+      "trim": "VOLANTE",
+      "expectedDigest": "6fd2f04309738555529df21f76aa2ee8cf16660f156057ca98fc60e2e407096d",
+      "patch": {
+        "trim": "V8 Volante",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.astonmartin.com/db11-volante-pearl-blonde-press-kit/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "DB11 Volante2018: заводская спецификация начала поставокQ1/2018 прямо указывает3982см³,510PS/375кВт,бензин,V8 иАКПП8. Правильное сопоставление — Volante,неV12 Coupe. Масса/код двигателя отдельно не подтверждены; данныеUAE-фида не восстанавливались.",
+        "additionalSources": [
+          {
+            "url": "https://media.astonmartin.com/db11-volante-pearl-blonde-press-kit/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "variantId": "ef2530cf833a5466363769f7",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2019,
+      "trim": "AMR",
+      "expectedDigest": "e4f092ab082789852199c97c679ce2630afd5e977bedc12997aa89bcff36242e",
+      "patch": {
+        "trim": "V12 AMR Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 5204,
+        "powerHp": 639,
+        "powerKw": 470,
+        "icePowerKw": 470
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.astonmartin.com/db11-amr-new-performance-flagship-of-the-db11-range/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "DB11 AMR: заводская AMR-таблица подтверждает639PS/470кВт,RWD,АКПП8. Руководство выбранного MY подтверждает5204см³ дляV12. Раннее руководство19MY содержит также прежние447кВт: это НЕ мощностьAMR,применена явная AMR-спецификация. Полная масса/код не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/KY53-19A321-AA.pdf",
+            "pages": [
+              256,
+              258
+            ],
+            "sha256": "9f06c47d658f9f9e8696f3746a74e25e8674533e2fd75ed6e4946243bd015473",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=19MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/db11-amr-new-performance-flagship-of-the-db11-range/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "variantId": "537c263761fa5bb21e110f8e",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2021,
+      "trim": "AMR",
+      "expectedDigest": "e7396510044d67b046e12f8c3b1f777825e6329d4e34ceeaf5f29b09c3c35bb3",
+      "patch": {
+        "trim": "V12 AMR Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 5204,
+        "powerHp": 639,
+        "powerKw": 470,
+        "icePowerKw": 470
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://media.astonmartin.com/db11-amr-new-performance-flagship-of-the-db11-range/?lang=eng",
+        "checkedAt": "2026-10-22",
+        "statement": "DB11 AMR: заводская AMR-таблица подтверждает639PS/470кВт,RWD,АКПП8. Руководство выбранного MY подтверждает5204см³ дляV12. Раннее руководство19MY содержит также прежние447кВт: это НЕ мощностьAMR,применена явная AMR-спецификация. Полная масса/код не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY53-19A321-AA.pdf",
+            "pages": [
+              257,
+              259,
+              260
+            ],
+            "sha256": "cbb9c7bd8866fe4a71a0307b14e7de35cd8b7031ba854f129df13e76941f02f8",
+            "fields": [
+              "engineCc",
+              "fuel",
+              "powertrainKind",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=21MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/db11-amr-new-performance-flagship-of-the-db11-range/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "variantId": "8e54f7559ccab1bdc0b0a058",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2021,
+      "trim": "4.0T V8 Coupe",
+      "expectedDigest": "293a5cb9b503a155a0a2e34e5bc8a60bc14c3efad43ab38914ef7d023b02a7ae",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB11 MY2021: официальный каталог привязал руководствоMY53-19A321-RA к21MY/Chinese. Стр244–246:3982см³,375кВт,АКПП8 дляV8 Coupe/Volante; China6b. 375.1кВт наблюдения заменены заводскими375. 510PS подтверждаются первичной V8-спецификацией;503bhp не записаны какPS. Повышение535PS относится кMY2022,не перенесено назад. Отображение толькоEN/RU.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+            "pages": [
+              244,
+              245,
+              246
+            ],
+            "sha256": "d3adc0d4a14b688c3f4dbf738ba262772497e38f98b778b4cf28386866166a53",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=21MY&language=Chinese"
+          },
+          {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "fields": [
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "eff6651568e364a8a5a40e97",
+      "variantId": "a63ddc52ab2cf3a250a24308",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "year": 2021,
+      "trim": "4.0T V8 Volante",
+      "expectedDigest": "3dfc6e69822888756057a66ba62f264858164a129753c7b0d1e7ab40a32b5b1a",
+      "patch": {
+        "trim": "V8 Volante",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 510,
+        "powerKw": 375,
+        "icePowerKw": 375
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB11 MY2021: официальный каталог привязал руководствоMY53-19A321-RA к21MY/Chinese. Стр244–246:3982см³,375кВт,АКПП8 дляV8 Coupe/Volante; China6b. 375.1кВт наблюдения заменены заводскими375. 510PS подтверждаются первичной V8-спецификацией;503bhp не записаны какPS. Повышение535PS относится кMY2022,не перенесено назад. Отображение толькоEN/RU.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/MY53-19A321-RA.pdf",
+            "pages": [
+              244,
+              245,
+              246
+            ],
+            "sha256": "d3adc0d4a14b688c3f4dbf738ba262772497e38f98b778b4cf28386866166a53",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB11&year=21MY&language=Chinese"
+          },
+          {
+            "url": "https://media.astonmartin.com/sublime-choices-db11-now-offered-with-v8-engine/?lang=eng",
+            "fields": [
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "variantId": "f3ce66b1dce663d80b2bc58d",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "STANDARD",
+      "expectedDigest": "71d974c7c8427878900707134935778e18a855f90bdc801cd663ed57af6f71ed",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 680,
+        "powerKw": 500,
+        "icePowerKw": 500
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB12 MY2024: руководство03.11.2023 привязано заводским каталогом к24MY;стр249–251:3982см³,680PS/500кВт,АКПП8. Купе подтверждён соответствующей публикацией2023. Полная масса регионального исполнения пока не подтверждается. Название очищено от рекламы/цены. НеDB12S700PS. Значения из заводского документа,не восстановлениеUAE-фида.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "pages": [
+              249,
+              250,
+              251
+            ],
+            "sha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/introducing-the-aston-martin-db12the-worlds-first-super-tourer/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "variantId": "f7fe93cdc70d6d04b466a4f2",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "STANDARD",
+      "expectedDigest": "3ef7ad6ad3148e76f5df9f31b105686312986c9c383cf0d3d1fdd48444b35128",
+      "patch": {
+        "trim": "V8 Volante",
+        "bodyType": "convertible",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 680,
+        "powerKw": 500,
+        "icePowerKw": 500
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB12 MY2024: руководство03.11.2023 привязано заводским каталогом к24MY;стр249–251:3982см³,680PS/500кВт,АКПП8. Volante подтверждён соответствующей публикацией2023. Полная масса регионального исполнения пока не подтверждается. Название очищено от рекламы/цены. НеDB12S700PS. Значения из заводского документа,не восстановлениеUAE-фида.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "pages": [
+              249,
+              250,
+              251
+            ],
+            "sha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/introducing-db12-volante-the-ultimate-open-top-super-tourer/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "variantId": "55f6c826f8e093d1925bd5b1",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "4.0T V8 Coupe",
+      "expectedDigest": "fa773ff8af726b6f9efb2d426ca1b23f6535dc52a50a4cecfc79f8e624794482",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 680,
+        "powerKw": 500,
+        "icePowerKw": 500
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB12 MY2024: руководство03.11.2023 привязано заводским каталогом к24MY;стр249–251:3982см³,680PS/500кВт,АКПП8. Купе подтверждён соответствующей публикацией2023. Полная масса регионального исполнения пока не подтверждается. Название очищено от рекламы/цены. НеDB12S700PS. Значения из заводского документа,не восстановлениеUAE-фида.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "pages": [
+              249,
+              250,
+              251
+            ],
+            "sha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/introducing-the-aston-martin-db12the-worlds-first-super-tourer/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "variantId": "7d0a07a3b06b978a92c1560c",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2024,
+      "trim": "4.0 V8 Coupé *FROSTED GLASS* NP: 312.000 €",
+      "expectedDigest": "af64944e50a6b392310f2ad6b11d8b708e55bd0854a8933caa2bcad9db27d11d",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "transmission": "automatic",
+        "engineCc": 3982,
+        "powerHp": 680,
+        "powerKw": 500,
+        "icePowerKw": 500,
+        "grossVehicleWeightKg": 2260
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB12 MY2024: руководство03.11.2023 привязано заводским каталогом к24MY;стр249–251:3982см³,680PS/500кВт,АКПП8. Купе подтверждён соответствующей публикацией2023. Для европейского купе подтвержденаGVW2260кг,не масса1820кг. Название очищено от рекламы/цены. НеDB12S700PS. Значения из заводского документа,не восстановлениеUAE-фида.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/RY53-19A321-AB-EnEU-B6.pdf",
+            "pages": [
+              249,
+              250,
+              251
+            ],
+            "sha256": "27025459a53e093f19aec49e1077656fa1b8ad2c324306d15379b116df647bad",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "transmission",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "grossVehicleWeightKg"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB12&year=24MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/introducing-the-aston-martin-db12the-worlds-first-super-tourer/?lang=eng",
+            "fields": [
+              "trim",
+              "bodyType",
+              "fuel",
+              "powertrainKind"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "1c7928819e7d7d0ab2e5a18d",
+      "variantId": "94f674fd816c43ce5d8de6c5",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "year": 2026,
+      "trim": "4.0T V8 Coupe",
+      "expectedDigest": "9e008e07bc893f99add63a7d29122a45b80dade221308ab04374c3077e10f89e",
+      "patch": {
+        "trim": "V8 Coupe",
+        "bodyType": "coupe",
+        "powerHp": 680,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "powerHp",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/en/models/db12",
+        "checkedAt": "2026-10-22",
+        "statement": "DB12 V8 Coupe2026: действующая заводская страница стандартной DB12 (отдельно отDB12S) подтверждает680PS,купе,АКПП8. Объём3982см³ и500кВт из старого руководстваMY24 на2026 не перенесены; текущие наблюдения этих полей остаются неподтверждёнными. Нужен документ26MY/конкретного исполнения.",
+        "additionalSources": []
+      }
+    },
+    {
+      "modelId": "d9beb45b880f70fa01286ee4",
+      "variantId": "8288d56d5bf0dc735e8be99e",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "year": 2013,
+      "trim": "STANDARD",
+      "expectedDigest": "45e541d90ca5d1eb604f9f286f3e2cb5a8571cdac87bfc3b0f6709a9727f7068",
+      "patch": {
+        "trim": "V12 Coupe Touchtronic 2",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCode": "AM11",
+        "engineCc": 5935,
+        "powerHp": 517,
+        "powerKw": 380.3,
+        "icePowerKw": 380.3
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCode",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://astonmartin.blob.core.windows.net/sitefinity/media-centre/Models/Press%20Releases/DB9.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DB9 13MY: заводской пресс-кит,стр3/8 подтверждаетAM11,5935см³,517PS,купе,RWD,Touchtronic2. РуководствоDG43-19A322-BA назначено официальным каталогом именно13MY/EnglishArabic; его обновлённая редакция2016,стр198 подтверждаетбензин и380.3кВт. Не переносить сюда показатели раннейDB9 илиGT. Полная масса не подтверждена.",
+        "additionalSources": [
+          {
+            "url": "https://astonmartin.blob.core.windows.net/sitefinity/media-centre/Models/Press%20Releases/DB9.pdf",
+            "pages": [
+              3,
+              8
+            ],
+            "sha256": "cc3f49472d94070920ca4ee55bf1b761ddfc01c573312f91e22f12332ce18d27",
+            "fields": [
+              "trim",
+              "bodyType",
+              "drive",
+              "transmission",
+              "engineCode",
+              "engineCc",
+              "powerHp"
+            ]
+          },
+          {
+            "url": "https://www.astonmartin.com/guides/DG43-19A322-BA.pdf",
+            "pages": [
+              198
+            ],
+            "sha256": "199ea8298ffaf299ba5284f4f413c90c1c4920b6b4e8090cb6e23f6253941d1d",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DB9&year=13MY&language=EnglishArabic"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "variantId": "a0bf5c54a10cf027725c5051",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2011,
+      "trim": "STANDARD",
+      "expectedDigest": "d3bf4747d7b596438bb65c27331e9ebefe0f5d34da06c68db95e436f8a2aa576",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 5935,
+        "powerHp": 517,
+        "powerKw": 380,
+        "icePowerKw": 380
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/BD33-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBS: официальный каталог отдельно назначает руководства11MY и12MY. Стр252: бензиновый V12,5935см³,380кВт; таблица общая дляМКПП иАКПП. 517PS подтверждены заводским архивомDBS2007–2012,510bhp не выданы заPS. Точная КПП,полная масса икод требуют отдельного подтверждения;не подставлены отSuperleggera.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/BD33-19A321-AA.pdf",
+            "pages": [
+              252
+            ],
+            "sha256": "1555e4d74cb7bc1fac13bf41cbf158556b6db08b85ce7a86280b317078eed6b4",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBS&year=11MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/dbs2/?lang=eng",
+            "fields": [
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "variantId": "114058ed6335e57aecdcddb4",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2012,
+      "trim": "STANDARD",
+      "expectedDigest": "f5ffa32e90baef316adb8cf38b687929aba94d27f71e6ff69913f13b6195c645",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "engineCc": 5935,
+        "powerHp": 517,
+        "powerKw": 380,
+        "icePowerKw": 380
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/BD33-19A321-AB.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBS: официальный каталог отдельно назначает руководства11MY и12MY. Стр252: бензиновый V12,5935см³,380кВт; таблица общая дляМКПП иАКПП. 517PS подтверждены заводским архивомDBS2007–2012,510bhp не выданы заPS. Точная КПП,полная масса икод требуют отдельного подтверждения;не подставлены отSuperleggera.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/BD33-19A321-AB.pdf",
+            "pages": [
+              252
+            ],
+            "sha256": "0db3677a4445cf37ef93399516efff7f991eaff908005b8ba234c0c66adc5f62",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBS&year=12MY&language=English"
+          },
+          {
+            "url": "https://media.astonmartin.com/dbs2/?lang=eng",
+            "fields": [
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "a49dff8aecc0f27d5149f172",
+      "variantId": "6509e664748312b359eff602",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "year": 2019,
+      "trim": "SUPERLEGGERA",
+      "expectedDigest": "e0d427d711436a9009e288777b5f271a2146c2ef038ed59d3a2de42ca5e36827",
+      "patch": {
+        "trim": "Superleggera Coupe",
+        "bodyType": "coupe",
+        "fuel": "petrol",
+        "powertrainKind": "ice",
+        "drive": "rwd",
+        "transmission": "automatic",
+        "engineCc": 5204,
+        "powerHp": 725,
+        "powerKw": 533,
+        "icePowerKw": 533
+      },
+      "confirmedFields": [
+        "trim",
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "drive",
+        "transmission",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://www.astonmartin.com/guides/KY73-19A321-AA.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "DBS Superleggera19MY: официальный каталог руководств,стр233–235:5204см³,533кВт,АКПП8. Заводской выпуск26.06.2018 подтверждает725PS,RWD и начало семействаSuperleggera. Не прежний5935см³ DBS ине770Ultimate. Полная масса исполненияUAE не подтверждается поевропейской таблице.",
+        "additionalSources": [
+          {
+            "url": "https://www.astonmartin.com/guides/KY73-19A321-AA.pdf",
+            "pages": [
+              233,
+              234,
+              235
+            ],
+            "sha256": "b5704bddafb2a03bfab7d9cad658455fbbb7f2db1620a9012cc73b3b2af140de",
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ],
+            "modelYearSource": "https://www.astonmartin.com/api/v1/owner-guides/search?model=DBSSuperleggera&year=19MY&language=English"
+          },
+          {
+            "url": "https://www.astonmartin.com/en-us/our-world/news/2018/6/26/introducing-the-new-dbs-superleggera-two-illustrious-names-one-magnificent-super-gt",
+            "fields": [
+              "trim",
+              "bodyType",
+              "drive",
+              "powerHp"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

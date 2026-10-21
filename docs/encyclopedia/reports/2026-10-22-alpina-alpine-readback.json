@@ -1,0 +1,57 @@
+{
+  "batch": "research-2026-10-22-alpina-alpine",
+  "checkedAt": "2026-10-22",
+  "variants": 5,
+  "fields": 36,
+  "groups": [
+    {
+      "modelId": "9f23c75ab6a73713bf64580a",
+      "year": 2025,
+      "revision": "5be3aba9-3f66-4436-9b32-a39da23408e1",
+      "verifiedVariantIds": [
+        "acb245a53ab18d98fffc65dc"
+      ],
+      "fields": 7
+    },
+    {
+      "modelId": "c26b4f6cf8e267db5d1f7503",
+      "year": 2022,
+      "revision": "a2503122-a815-4ca8-be1e-7d029060053d",
+      "verifiedVariantIds": [
+        "71b48bc7272a7b31b1ee0826"
+      ],
+      "fields": 9
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "year": 2020,
+      "revision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "verifiedVariantIds": [
+        "667a5dcf34e75c2607ecc7aa"
+      ],
+      "fields": 6
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "year": 2023,
+      "revision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "verifiedVariantIds": [
+        "8dd1d0b6bc6fb66eacbea728"
+      ],
+      "fields": 11
+    },
+    {
+      "modelId": "cc5a28958f2b1bd3eac176d4",
+      "year": 2026,
+      "revision": "46d14954-2a3a-4057-bd34-2aa7824c5d41",
+      "verifiedVariantIds": [
+        "6a948a88a547ecd0caaaccd9"
+      ],
+      "fields": 3
+    }
+  ],
+  "commit": "ace88ecea049800c4a7d76e9357c2c51f768283a",
+  "workflowRun": 39659485947,
+  "job": 119428445511,
+  "workflowConclusion": "success"
+}

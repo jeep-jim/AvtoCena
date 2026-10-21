@@ -1,0 +1,87 @@
+{
+  "batch": "research-2026-10-22-alpina-alpine",
+  "dryRun": false,
+  "models": [
+    {
+      "id": "c26b4f6cf8e267db5d1f7503",
+      "changes": [
+        {
+          "variantId": "71b48bc7272a7b31b1ee0826",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission"
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "id": "cc5a28958f2b1bd3eac176d4",
+      "changes": [
+        {
+          "variantId": "6a948a88a547ecd0caaaccd9",
+          "fields": [
+            "powerHp",
+            "powerKw",
+            "icePowerKw"
+          ]
+        },
+        {
+          "variantId": "8dd1d0b6bc6fb66eacbea728",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "engineCc",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission",
+            "grossVehicleWeightKg"
+          ]
+        },
+        {
+          "variantId": "667a5dcf34e75c2607ecc7aa",
+          "fields": [
+            "trim",
+            "powerHp",
+            "powerKw",
+            "icePowerKw",
+            "drive",
+            "transmission"
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "id": "9f23c75ab6a73713bf64580a",
+      "changes": [
+        {
+          "variantId": "acb245a53ab18d98fffc65dc",
+          "fields": [
+            "trim",
+            "bodyType",
+            "fuel",
+            "powertrainKind",
+            "powerKw",
+            "motorPeakKw",
+            "batteryKwh"
+          ]
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "startedAt": "2026-10-21T19:12:23.055Z",
+  "finishedAt": "2026-10-21T19:12:37.137Z"
+}
