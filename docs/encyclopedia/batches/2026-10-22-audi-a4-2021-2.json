@@ -1,0 +1,1539 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a4-2021-2",
+  "entries": [
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "d833a0d0ee41d74cfbfcb625",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI quattro advanced",
+      "expectedDigest": "dcd5a877ace572918d3042e6c24fd95074cf1f05aef99070a45e94004f192f60",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "06b358a12ebe7bd8dc557f5e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI qu S Line Int Navi,Leder,Kamera",
+      "expectedDigest": "8934fe9e3f0b373b15cd595007d6729d998bcd927655e71876de668fd96ba3c8",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "758f31ae05e2d64f2ce0350b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI quattro S tronic advanced | LED",
+      "expectedDigest": "e835845abe2093a6ac8090217936b3191bf8e357928acaefa01ba5ef2520b07d",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5c110d72324096fa498e94de",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Limo 45 TFSI quattro S-Line MEGA AUSSTATTUNG",
+      "expectedDigest": "0d61586037fdcf4f937c4ea5789e38bfe10c27639507e2369d83a94b79399580",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2ca1b374916c4e8c9ce63bae",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant S line 45 TFSI quattro 195(265) kW(PS)",
+      "expectedDigest": "e9924003853c51d968d1d0720a8e941fb708f4d69c0eea587679a7d624f4891f",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "db904113558d5cd0459fe9fa",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI quattro S tronic S Line RFK",
+      "expectedDigest": "c8245680ebac15642aa86a52142767908ebc8f5987f56142f20770b5fe32b243",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "53bc2039dff7004f27664aa7",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Lim. 45 TFSI quattro S line/LED/360°/Virtual",
+      "expectedDigest": "9d33c4c4eea3a62d970ffb2fe24f37cd9f3db119bc611aae9191b80623bdaf0b",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2d8e08d86a4766e4e908e13b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45TFSI quattro S-line Matrix LED Schein",
+      "expectedDigest": "4ba319434294b6bf3e510b5bbdcac4e58dfdbed0d442dfaef478ab271bb4826e",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "0eabd8b48455b8ad8acc8639",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant Sline 45 TFSI quattro - Ziemlich VOLL",
+      "expectedDigest": "33664a4d97744c50735843f6ff13b6c97f404fc5fb6e30580a1ff4e55e30f7c4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f31600b9225f6b45ebcef0eb",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI Qu S-Line NAV+LED+AHK+1HD",
+      "expectedDigest": "ea1d3102218ae799c8bb26a596aacc194f0b358ef12cbf62b82c4e109711eb53",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "105926a8cb171d18742911db",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI qu. advanced S tronic ACC LED",
+      "expectedDigest": "88a416fe9a73ebacc635932523f108eed838fcad8f6482b6e282e23688973c54",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4c732b17f258367c967b725b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2021,
+      "trim": "Avant 45 TFSI quattro S-LINE*MATRIX*AHK*VIRTU",
+      "expectedDigest": "fa1d42638897bc0b29bb20afe4cee178c9baed092313dc16823ce7c8045be4ec",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 265,
+        "powerKw": 195,
+        "icePowerKw": 195,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2021. Прайс AUDI AG от 08.10.2020, MY2021, архивная копия заводского документа: 1984 см³, 195 кВт / 265 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/7bee35d835815cca66dd8786fcd4507df3071134e30089631d377197bbf8a99a.pdf",
+            "date": "2020-10-08",
+            "pages": [
+              1,
+              8,
+              9,
+              10,
+              11,
+              23,
+              104,
+              130
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4e04fadb63e2791144692bdb",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "35 TDI Mild Hybrid 2.0 Avant AT Navi Soundsys",
+      "expectedDigest": "33af438d295a14f2e85ab9732c49ca761baf303d045286b379d8ea44f17c14b7",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f1d65ac9485e520d479bf84b",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 30 TDI S-TRO*NAV*ACC*SOUND*STHZG*",
+      "expectedDigest": "c6a45a9e2cc47e0e8cde28af8a0e8a52adae76a0977284eee25fe2480672cee9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 136,
+        "powerKw": 100,
+        "icePowerKw": 100,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 30 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 100 кВт / 136 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "f2bf2d5e67ea5b479b0d6af9",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 30 TDI S tronic",
+      "expectedDigest": "30d2dddf558b5acb1c06f1e0c4daf208ef098954b36b268093c780562c7ac4f9",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 136,
+        "powerKw": 100,
+        "icePowerKw": 100,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 30 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 100 кВт / 136 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "5e066264a8a714c3751ec3be",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant advanced 35 TFSI",
+      "expectedDigest": "927b90cd356f4f68f12a13c96ec71efc5c8f873306e4b6ea4f2448df963cecd0",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "manual"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1984 см³, 110 кВт / 150 PS ДВС, привод не подтверждён этой таблицей, 6-ступенчатая МКПП, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "8f1afa76c9c824a7a4a0b558",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 TFSI S-Tronic.S-Line, LED,Tempomat",
+      "expectedDigest": "9e097c41dc82a99128a02d9fd6498b78c0e3690d78a91ef58932dbad94acbb4a",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1984 см³, 110 кВт / 150 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "daa9368bbad494ecd999c59e",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 TFSI S tronic LED Navi Sitzheizung",
+      "expectedDigest": "8799f68b9ab6acf6afe01dc006677a15b9101cc2672db4051577b59f5ecabfa4",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1984 см³, 110 кВт / 150 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "890fa78e89f6f72766265f6d",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 2.0 TFSI LED Navi AHK Sitzheizung",
+      "expectedDigest": "80ff938ec87b31c7954c56ed5aaaa50dd8f13d07aae374663d6124b123694d18",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1984 см³, 110 кВт / 150 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "3497bdd5239172b90ebbcae3",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 TFSI S-Line S-Tronic",
+      "expectedDigest": "6f00b81e1c9b25ce976fcbd15c66dc993bf8ca636416ee02008d51c0a6a2d32c",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 150,
+        "powerKw": 110,
+        "icePowerKw": 110,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TFSI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1984 см³, 110 кВт / 150 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "c5550e1e89adbe91501ac38c",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "*GARANTIE 12 MOIS* S-Line A4 Avant 35 TDi Business Edition",
+      "expectedDigest": "e8d630717adce560ce0217f26d77d1337aa25de71f5cfa17a93524a13116d3b2",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4cd79f4553c23d2b06952180",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 TDI S-tronic advanced Virtual GRA",
+      "expectedDigest": "329e4e29998792a329b685307dc1c3a09cfccdc4c42ff600187b2f834d71cec0",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "4511f6edef36552560640ccf",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 TDI advanced Aut MATRIX HEAD-UP B&O",
+      "expectedDigest": "ad7f7e3bc41fa283b6448c1721c061539581b7601aa943d80f7cf67311c38dc8",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "955ed6801df3f7f3d044d057",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 35 TDI S-Line 19\" LED ACC Fahrassistenz AHK",
+      "expectedDigest": "053bb7738bbc661488a88512b525a9e7e906455914c458dfc717bbf2c9de47a6",
+      "patch": {
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerHp": 163,
+        "powerKw": 120,
+        "icePowerKw": 120,
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 35 TDI, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 120 кВт / 163 PS ДВС, привод не подтверждён этой таблицей, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "2ed6d71f05f1b47589bb76c7",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Limo 40TDI qu. S tronic/LED/ACC/Navi+/Pano",
+      "expectedDigest": "cff731286f7af82df6b7ad0d330cf380b1b3a6dfe4aea00876a9780be7a4a880",
+      "patch": {
+        "fuel": "diesel",
+        "engineCc": 1968,
+        "powerHp": 190,
+        "powerKw": 140,
+        "icePowerKw": 140,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Sedan 40 TDI quattro, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1968 см³, 140 кВт / 190 PS ДВС, полный привод, 7-ступенчатая S tronic, тип гибридизации не подтверждается. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "e3570ba4a67b01797e57a749",
+      "variantId": "68e6b1914603711d194e8386",
+      "make": "Audi",
+      "model": "A4",
+      "year": 2020,
+      "trim": "Avant 45 TFSI quattro *HUP*NAVI*LED*AUTOMAT*",
+      "expectedDigest": "5c29152b0276637367ebe7d414088fc731e6490a1f81eeb4b7b05a78bfc67bf7",
+      "patch": {
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 1984,
+        "powerHp": 245,
+        "powerKw": 180,
+        "icePowerKw": 180,
+        "drive": "awd",
+        "transmission": "automatic"
+      },
+      "confirmedFields": [
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerHp",
+        "powerKw",
+        "icePowerKw",
+        "drive",
+        "transmission"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "Audi A4 Avant 45 TFSI quattro, MY2020. Прайс AUDI AG от 24.10.2019, MY2020, архивная копия заводского документа: 1984 см³, 180 кВт / 245 PS ДВС, полный привод, 7-ступенчатая S tronic, MHEV. Сопоставлены год, кузов, двигатель, исходный объём, КПП; для40/45 требуется явно известный привод. Для40/45 исходная мощность обязана точно совпасть с этой редакцией. Полная масса и код двигателя не подтверждены. Мощность сети12В не принята за тяговую или30-минутную. PDF прочитан через веб-индекс; локальный файл недоступен, SHA256 документа не заявляется.",
+        "additionalSources": [
+          {
+            "url": "https://manuals.plus/m/3a8b40556c988d853bbda7814ac33acc5caee3cfe988b59c6b1e13b3c2c025b2.pdf",
+            "date": "2019-10-24",
+            "pages": [
+              1,
+              4,
+              5,
+              6,
+              19,
+              79,
+              100
+            ],
+            "fields": [
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerHp",
+              "powerKw",
+              "icePowerKw",
+              "drive",
+              "transmission"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
