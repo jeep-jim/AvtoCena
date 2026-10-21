@@ -1,9 +1,9 @@
 {
-  "operation": "china-2014-ordered-404-recovery-20261021",
+  "operation": "china-compressed-replay-resume-20261021",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
   "resetCursors": false,
-  "reason": "Continue paid 2014+ snapshot using durable unresolved detail tracking; require exact later evidence and complete replay before publication."
+  "reason": "Resume saved 2014+ replay; atomically compress journal before continuing; require complete replay before publication."
 }

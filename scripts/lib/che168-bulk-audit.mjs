@@ -138,7 +138,7 @@ export async function auditChe168BulkSnapshot({config,storage,yearFrom,expectedC
     writeJson:readOnly.writeJson,
   });
   const journal=await openChe168ReplayJournal({storage:pinnedStorage,artifactRunId,binding:journalBinding,
-    initialCursor,apply:state.applyJournalEvent});
+    initialCursor,readOnly:true,apply:state.applyJournalEvent});
   return {
     version:1,readOnly:true,sourceHttpRequests:0,storageWrites:0,publicationPerformed:false,
     at:new Date().toISOString(),readStartedAt,baseline:'failed_first_bootstrap',

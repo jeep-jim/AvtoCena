@@ -90,3 +90,33 @@ test('404 diagnosis reports explicit later removal separately from an unexplaine
   assert.ok(calls.every(x=>['changes','offer'].includes(x)));
  }
 });
+
+test('legacy checkpoints migrate atomically and preserve every event and cursor',async()=>{
+ const {createHash,randomUUID}=await import('node:crypto');
+ const storage=new Store(),prefix='catalog/intake-working/che168-v1/123';
+ const chunk={binding,from:20,to:23,changes:3,events:[{kind:'missing_detail',innerId:'42'},{kind:'removed',innerId:'43'}]};
+ const id=randomUUID(),sha=createHash('sha256').update(JSON.stringify(chunk)).digest('hex');
+ const legacy={version:1,binding,initialCursor:20,cursor:23,changes:3,bytes:Buffer.byteLength(JSON.stringify(chunk)),chunks:[{id,sha}]};
+ await storage.writeJson(`${prefix}/${id}.json`,chunk);await storage.writeJson(`${prefix}/head.json`,legacy);
+ const applied:any[]=[],options={storage,artifactRunId:'123',binding,initialCursor:20,apply:async(e:any)=>{applied.push(e);}};
+ storage.failHead=true;await assert.rejects(()=>openChe168ReplayJournal(options),/storage_unavailable/);
+ assert.deepEqual(await storage.readJson(`${prefix}/head.json`,null),legacy);
+ storage.failHead=false;applied.length=0;const journal=await openChe168ReplayJournal(options);
+ assert.deepEqual(applied,chunk.events);assert.equal(journal.cursor,23);
+ assert.equal((await storage.readJson(`${prefix}/head.json`,null)).version,2);
+ assert.deepEqual(await storage.readJson(`${prefix}/${id}.json`,null),chunk,'old evidence retained');
+ await journal.commit({cursor:24,changes:4,events:[{kind:'offer',innerId:'42'}]});
+ applied.length=0;assert.equal((await openChe168ReplayJournal(options)).cursor,24);
+ assert.deepEqual(applied,[...chunk.events,{kind:'offer',innerId:'42'}]);
+});
+
+test('compressed journal continues beyond the former 512 MiB raw limit and resumes',async(t)=>{
+ t.mock.method(console,'log',()=>{});
+ const storage=new Store();let applied=0;
+ const options={storage,artifactRunId:'123',binding,initialCursor:0,apply:async()=>{applied++;}};
+ const journal=await openChe168ReplayJournal(options),payload='x'.repeat(4*1024*1024);
+ for(let i=1;i<=129;i++)await journal.commit({cursor:i,changes:i,events:[{kind:'offer',payload}]});
+ const head=await storage.readJson('catalog/intake-working/che168-v1/123/head.json',null);
+ assert.ok(head.rawBytes>512*1024*1024);assert.ok(head.bytes<8*1024*1024);
+ assert.equal((await openChe168ReplayJournal(options)).cursor,129);assert.equal(applied,129);
+});
