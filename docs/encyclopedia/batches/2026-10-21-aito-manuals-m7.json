@@ -1,0 +1,989 @@
+{
+  "version": 1,
+  "id": "research-2026-10-21-aito-manuals-m7",
+  "entries": [
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "7761daf043ee821f6861de4b",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra RWD",
+      "expectedDigest": "9cab508360dc3758a39c3183fd97307b07e5860285b0eab52608d2780ca6bbdd",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "98cbaacb4f30513ce541cb5eb0f8aa23cc71f6d1e07f82db73b6a38380a06c89",
+        "page": 352,
+        "statement": "Дополнение из заводского руководства, страница 352: подтверждены точный объём 1499 см³ и код двигателя H15RT. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "bde50e54f36fc9e725f79c70",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EV Ultra RWD",
+      "expectedDigest": "8dd4124488d5671d063fc59859ac3da743cfee691ade7ec2bedaf82abac4ec95",
+      "patch": {
+        "grossVehicleWeightKg": 2610
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "69661a2a1b893438d1260628c602325c662ea573eb35f1ebe121c22fc45d8a4d",
+        "page": 346,
+        "statement": "Дополнение из руководства нового M5 EV 2025, страница346: для SKE6480SBEVR1 максимальная разрешённая масса2610кг; это не снаряжённая масса2235кг. Электромотор HW200/CTZ196XY0P4: номинальная72кВт, пиковая200кВт. Документ не подтверждает, что72кВт являются 30-минутной мощностью."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "84bab1d39cdd153b11cc0070",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra AWD",
+      "expectedDigest": "a896e01ce9805dcfdf0387cea14555ff5b1d714674a3dd94d916dbc5ed261d19",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "98cbaacb4f30513ce541cb5eb0f8aa23cc71f6d1e07f82db73b6a38380a06c89",
+        "page": 352,
+        "statement": "Дополнение из заводского руководства, страница 352: подтверждены точный объём 1499 см³ и код двигателя H15RT. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "9d8099b21e3e2480fb5ae07d",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "2025 Extended Range Ultra AWD",
+      "expectedDigest": "7b9bdb5fa034161ff05e959958cc0c9394c91e658840e17aa445425060b515bd",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "98cbaacb4f30513ce541cb5eb0f8aa23cc71f6d1e07f82db73b6a38380a06c89",
+        "page": 352,
+        "statement": "Дополнение из заводского руководства, страница 352: подтверждены точный объём 1499 см³ и код двигателя H15RT. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "2dfe5d6a58831f91aaa9b076",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EV Ultra RWD Edition",
+      "expectedDigest": "77916e4eef1db38af342d7e8eafce1126ed93f98713aee3c3497baf66db7bbac",
+      "patch": {
+        "grossVehicleWeightKg": 2610
+      },
+      "confirmedFields": [
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E7%BA%AF%E7%94%B5%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "69661a2a1b893438d1260628c602325c662ea573eb35f1ebe121c22fc45d8a4d",
+        "page": 346,
+        "statement": "Дополнение из руководства нового M5 EV 2025, страница346: для SKE6480SBEVR1 максимальная разрешённая масса2610кг; это не снаряжённая масса2235кг. Электромотор HW200/CTZ196XY0P4: номинальная72кВт, пиковая200кВт. Документ не подтверждает, что72кВт являются 30-минутной мощностью."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "df1dbee886050731467d676d",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra RWD Edition",
+      "expectedDigest": "7140e5f42d3d0822c25e8a9457c7ffc55d7bc1c5a8c592383ab425ebac76fbd2",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "98cbaacb4f30513ce541cb5eb0f8aa23cc71f6d1e07f82db73b6a38380a06c89",
+        "page": 352,
+        "statement": "Дополнение из заводского руководства, страница 352: подтверждены точный объём 1499 см³ и код двигателя H15RT. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "cfb5857e13b7258b88b369f4",
+      "variantId": "7b5096467972e30be800b516",
+      "make": "AITO",
+      "model": "M5",
+      "year": 2025,
+      "trim": "EREV Ultra 4WD Edition",
+      "expectedDigest": "626a04b6c139ceefcaa0047f2d048ea4b452d3858ce5f95e00540f1939191125",
+      "patch": {
+        "engineCc": 1499,
+        "engineCode": "H15RT"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/261015/%E9%97%AE%E7%95%8C%E6%96%B0M52025%E6%AC%BE%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "98cbaacb4f30513ce541cb5eb0f8aa23cc71f6d1e07f82db73b6a38380a06c89",
+        "page": 352,
+        "statement": "Дополнение из заводского руководства, страница 352: подтверждены точный объём 1499 см³ и код двигателя H15RT. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "f95ceb79d43685224a299759",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Max",
+      "expectedDigest": "afb05d6fc895c498baa42928e0e5df1ff0c263c0d196edd315fc318815ad1d1d",
+      "patch": {
+        "engineCc": 1496,
+        "engineCode": "M15T"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "page": 409,
+        "statement": "Дополнение из заводского руководства, страница 409: подтверждены точный объём 1496 см³ и код двигателя M15T. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "90641a1cfb521cd2c45d7689",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Ultra",
+      "expectedDigest": "2066052a132867270ab8de8ad3c3d35e3b0139911f7b9e9346f7c38ff5991c7c",
+      "patch": {
+        "engineCc": 1496,
+        "engineCode": "M15T"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "page": 409,
+        "statement": "Дополнение из заводского руководства, страница 409: подтверждены точный объём 1496 см³ и код двигателя M15T. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "235609122d33377c27a6c21a",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "2026 EREV Max+ Long Range",
+      "expectedDigest": "111ae58012164b5c06e719f7d311fe1e67ca4b876db318e5a13f95339f2b46a3",
+      "patch": {
+        "engineCc": 1496,
+        "engineCode": "M15T"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "page": 409,
+        "statement": "Дополнение из заводского руководства, страница 409: подтверждены точный объём 1496 см³ и код двигателя M15T. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "a4888807696fe9d693d3f3b7",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Max+ Long Range",
+      "expectedDigest": "9cf38e33cdd848c7c8b20d43b77839ef7ebaa31e287bb7a3b6a1ec48bb7fe32b",
+      "patch": {
+        "engineCc": 1496,
+        "engineCode": "M15T"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "page": 409,
+        "statement": "Дополнение из заводского руководства, страница 409: подтверждены точный объём 1496 см³ и код двигателя M15T. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "346c7414d8e9062518476566",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Ultra",
+      "expectedDigest": "bbc8bcc9e86322bf936a9a088a638e8f73430cc30eaf5bf72cc9edc139966160",
+      "patch": {
+        "engineCc": 1496,
+        "engineCode": "M15T"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "page": 409,
+        "statement": "Дополнение из заводского руководства, страница 409: подтверждены точный объём 1496 см³ и код двигателя M15T. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "a509545256f3729336fdfc6f",
+      "variantId": "12ea4ae30cca59af81e4b491",
+      "make": "AITO",
+      "model": "M6",
+      "year": 2026,
+      "trim": "EREV Max",
+      "expectedDigest": "eb57cf2cf791e9f17d9621c062878f1aec712906c6fa8e69161feac4afa9d3fb",
+      "patch": {
+        "engineCc": 1496,
+        "engineCode": "M15T"
+      },
+      "confirmedFields": [
+        "engineCc",
+        "engineCode"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://aito.auto/dam/content/dam/aito/cn/service/pdf/260930/%E9%97%AE%E7%95%8CM6%E5%A2%9E%E7%A8%8B%E7%89%88%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+        "documentSha256": "51863acff062cbdcc9ce55425767fa807baed12f4ae5fc6741cbe2812283e51e",
+        "page": 409,
+        "statement": "Дополнение из заводского руководства, страница 409: подтверждены точный объём 1496 см³ и код двигателя M15T. В документе отдельно указаны максимальная нетто-мощность ДВС 110 кВт и номинальная 112 кВт; выбор расчётного стандарта требует отдельной проверки. Номинальные мощности электромоторов не обозначены как 30-минутные и в это поле не переносились."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3cd385712d7cdcfdcf005fcd",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max长续航版 5座（192线激光雷达）",
+      "expectedDigest": "abb9ffbc099eed503734fd71709e11b9742d0045352c3a726943648ed7b07a65",
+      "patch": {
+        "trim": "2026 EREV Max Long Range 5-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, последовательный гибрид, задний привод. Батарея 53.4 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "79dccb46a2af3ff4cfbcdc6b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra四驱版 5座（192线激光雷达）",
+      "expectedDigest": "30f28fa72ec6e9bc7a459aee6b5be0219c422f257dec6823cfd1218c4ecab39a",
+      "patch": {
+        "trim": "2026 EREV Ultra AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Ultra, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "328e58843d29c89899e9f9c0",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Ultra四驱版 6座（192线激光雷达）",
+      "expectedDigest": "916f79744cf804030aaa72fcc359896995ddd2c7027b23dbb2fc57468fec51a8",
+      "patch": {
+        "trim": "2026 EREV Ultra AWD 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Ultra, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "62b8c0ab6d11c7bfc351dbfb",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max四驱版 5座（192线激光雷达）",
+      "expectedDigest": "c1455cf9d87f62eeee77a33c272ba38b7271b16136b5bc04438ad912e1321dde",
+      "patch": {
+        "trim": "2026 EREV Max AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "3b2a809664158930b0b85fde",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max四驱版 6座（192线激光雷达）",
+      "expectedDigest": "7fdb3763ccc4c194d667d36bec5d1fec64d88617d92212c0f2352aa447b866c6",
+      "patch": {
+        "trim": "2026 EREV Max AWD 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ab30f971974965e74784373f",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max长续航版 6座（192线激光雷达）",
+      "expectedDigest": "15035970358abd704c73d5cfe774f03ec3e453dfab6f330f90a8195ae42fa0aa",
+      "patch": {
+        "trim": "2026 EV Max Long Range 6-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, электрическая версия, задний привод. Батарея 100 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "93f79f09209f894817fb2fbc",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max长续航版 5座（192线激光雷达）",
+      "expectedDigest": "9213121913aa6c1a80ab1354bfd2c48c6a59d739fe4641fd163ee08a60a68a6b",
+      "patch": {
+        "trim": "2026 EV Max Long Range 5-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, электрическая версия, задний привод. Батарея 100 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "a8305fe6ea3a1fceb02c6d81",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max四驱版 5座（192线激光雷达）",
+      "expectedDigest": "14ed1a898ced6085cbdd9504bd621bc7bbc6285e85972f9f71103e76c675053b",
+      "patch": {
+        "trim": "2026 EV Max AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, электрическая версия, полный привод. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "cc14dd5326c8787de6446212",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Max四驱版 6座（192线激光雷达）",
+      "expectedDigest": "f5d701766f23600b2d96d6af54a064f0fbf2947eaafad85b062e396cb724c4c6",
+      "patch": {
+        "trim": "2026 EV Max AWD 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, электрическая версия, полный привод. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "77407251de0073fa6c1130ca",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultra四驱版 5座（192线激光雷达）",
+      "expectedDigest": "bd3a0e8a64a4c8d9c356550e9b20867dfa3291f6be86275e7bb84a55179fddd1",
+      "patch": {
+        "trim": "2026 EV Ultra AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Ultra, электрическая версия, полный привод. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "07ead93690545d973ff40e98",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 纯电 Ultra四驱版 6座（192线激光雷达）",
+      "expectedDigest": "b83467f6f56b3862a55b21772afd231a1c833aea194478d6dc5b82fa94d73f82",
+      "patch": {
+        "trim": "2026 EV Ultra AWD 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Ultra, электрическая версия, полный привод. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ebbea5c2429da5a1b9b6e9da",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "2026款 增程 Max长续航版 6座（192线激光雷达）",
+      "expectedDigest": "548a54d9ad5c2a0d7f50a04822b2c8649a83e7cfa80b209b51978c8d2f4ce1ce",
+      "patch": {
+        "trim": "2026 EREV Max Long Range 6-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, последовательный гибрид, задний привод. Батарея 53.4 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "c6c19a45020c5b4bd4650ac2",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Max长续航版 6座（192线激光雷达）",
+      "expectedDigest": "ba9b36a5b5226ded0d501b0618f149e4bc995294add5bf046a70f931635b25ab",
+      "patch": {
+        "trim": "EREV Max Long Range 6-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, последовательный гибрид, задний привод. Батарея 53.4 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "ef3132ec879b0e94c968da7a",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "纯电 Max长续航版 5座（192线激光雷达）",
+      "expectedDigest": "6fd53db11015eb2e9dfeca8362ef0b7431b4a30b9f6edd00f1288a8e36bafd2d",
+      "patch": {
+        "trim": "EV Max Long Range 5-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, электрическая версия, задний привод. Батарея 100 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b28f9f25932571c578df7b6c",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "纯电 Max长续航版 6座（192线激光雷达）",
+      "expectedDigest": "63847d575ba326e1e49979cfc1995096f5f06f477431990a89d9ed662cfa2394",
+      "patch": {
+        "trim": "EV Max Long Range 6-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100,
+        "motorPeakKw": 227,
+        "powerKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw",
+        "powerKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, электрическая версия, задний привод. Батарея 100 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "4e3189bfdf9487e0d6d37ce4",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Max长续航版 5座（192线激光雷达）",
+      "expectedDigest": "03ff51023b13f9f06ca574b3d2148fc6dfab191ef9fb160cffc6e62786b84bd2",
+      "patch": {
+        "trim": "EREV Max Long Range 5-seat LiDAR 192",
+        "drive": "rwd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4,
+        "motorPeakKw": 227
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh",
+        "motorPeakKw"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, последовательный гибрид, задний привод. Батарея 53.4 кВт·ч. Пиковая мощность заднего электромотора227кВт. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "1e02885591b8e555e51bebf4",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "纯电 Max四驱版 5座（192线激光雷达）",
+      "expectedDigest": "023fa19c0acd14bb86ac5301861c2988ab197faf4562201f0dd095ae9d74cd0f",
+      "patch": {
+        "trim": "EV Max AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, электрическая версия, полный привод. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "6184f15798db276c361c01f8",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "纯电 Ultra四驱版 5座（192线激光雷达）",
+      "expectedDigest": "7ea65999e34365d14c93c92870f33254fb080b4c4e46349f81ea9fbfdef91a3c",
+      "patch": {
+        "trim": "EV Ultra AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "electric",
+        "powertrainKind": "electric",
+        "batteryKwh": 100
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Ultra, электрическая версия, полный привод. Батарея 100 кВт·ч. Пиковая мощность по моторам: передний 160 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "67687a4dad04b5e393da972b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Ultra四驱版 5座（192线激光雷达）",
+      "expectedDigest": "474f9d7f87ed54689f9e67a5882f31ce5f972689ee1acdffb52d1ff3204ab5a9",
+      "patch": {
+        "trim": "EREV Ultra AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Ultra, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "54df62e6831e92382f39ab8b",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Max四驱版 5座（192线激光雷达）",
+      "expectedDigest": "dd807ee55715b0a153f0eacfeaff174bf90008f1d2e69c95e6821dcfff82e82d",
+      "patch": {
+        "trim": "EREV Max AWD 5-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 5 мест, Max, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "b373b840678fd32196fc9eb2",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Ultra四驱版 6座（192线激光雷达）",
+      "expectedDigest": "e1ab02cd2906f01ee67696ef098c74688ff1996132f2cdb3b19bdee6720b3d45",
+      "patch": {
+        "trim": "EREV Ultra AWD 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Ultra, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    },
+    {
+      "modelId": "b3f19fa0f1975e57410dd272",
+      "variantId": "9a3f30ab64aec71c77d45a08",
+      "make": "AITO",
+      "model": "M7",
+      "year": 2026,
+      "trim": "增程 Max四驱版 6座（192线激光雷达）",
+      "expectedDigest": "7b414dc6eb71bf67733539c0f5ae4f80a9f583277b094d8043cd625eb591de6a",
+      "patch": {
+        "trim": "EREV Max AWD 6-seat LiDAR 192",
+        "drive": "awd",
+        "fuel": "hybrid",
+        "powertrainKind": "series_hybrid",
+        "batteryKwh": 53.4
+      },
+      "confirmedFields": [
+        "trim",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "batteryKwh"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "checkedAt": "2026-10-21",
+        "url": "https://hima.auto/wenjie/m7-new/configuration/",
+        "statement": "Таблица M7 2026, секция LiDAR192, 6 мест, Max, последовательный гибрид, полный привод. Батарея 53.4 кВт·ч. Пиковая мощность по моторам: передний 165 кВт, задний227кВт; сумма не объявляется подтверждённой мощностью системы. Long Range — увеличенный запас хода. 30-минутная мощность, разрешённая масса, точные см³ и мощность ДВС этой таблицей не подтверждены."
+      }
+    }
+  ]
+}

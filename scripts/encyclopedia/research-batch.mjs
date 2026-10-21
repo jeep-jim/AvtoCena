@@ -33,7 +33,7 @@ export function planModelResearch(current, entries, batch, at=new Date().toISOSt
   const notes=[v.notes,`${e.source.checkedAt}: ${e.source.statement} Источник: ${e.source.url}`].filter(Boolean).join('\n');
   if(notes.length>2000){skipped.push({variantId:v.id,reason:'notes_limit_requires_review'});return v;}
   changes.push({variantId:v.id,fields:Object.keys(e.patch)});
-  return {...v,...e.patch,status:'review',notes,researchEvidence:{batchId:batch.id,source:e.source,fields:e.confirmedFields,values:e.patch,originalTrim:v.trim,checkedIdentity:{make:current.make,model:current.model,year:v.year,trim:e.patch.trim||v.trim}}};
+  return {...v,...e.patch,status:'review',notes,...(v.researchEvidence?{researchEvidenceHistory:[...(v.researchEvidenceHistory||[]),v.researchEvidence]}:{}),researchEvidence:{batchId:batch.id,source:e.source,fields:e.confirmedFields,values:e.patch,originalTrim:v.trim,checkedIdentity:{make:current.make,model:current.model,year:v.year,trim:e.patch.trim||v.trim}}};
  });
  for(const e of entries)if(!current.variants.some(v=>v.id===e.variantId))skipped.push({variantId:e.variantId,reason:'variant_missing'});
  return {record:changes.length?{...current,variants,revision:randomUUID(),updatedAt:at,editedBy:'owner-authorized-encyclopedia-research'}:current,changes,skipped};

@@ -27,3 +27,11 @@ test('reject undocumented 30-minute power, non-technical writes, untranslated pa
  assert.throws(()=>validateBatch({...batch,entries:[entry,entry]}));
  assert.equal(digest({a:1,b:2}),digest({b:2,a:1}));
 });
+test('a later research batch retains prior field sources',()=>{
+ const first=planModelResearch(current,[entry],batch).record;
+ const e={...entry,expectedDigest:digest(first.variants[0]),patch:{engineCode:'E123'},confirmedFields:['engineCode']};
+ const second=planModelResearch(first,[e],{...batch,id:'research-second'}).record;
+ assert.equal(second.variants[0].researchEvidenceHistory[0].batchId,'research-test');
+ assert.equal(second.variants[0].researchEvidenceHistory[0].values.batteryKwh,81);
+ assert.equal(second.variants[0].researchEvidence.values.engineCode,'E123');
+});
