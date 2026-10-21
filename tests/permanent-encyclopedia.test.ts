@@ -49,3 +49,8 @@ test('mixed source spelling gives one fuel filter and correct Russian counts',as
  assert.equal(fuelFilterKey('Petrol hybrid'),'hybrid');assert.equal(counted(191,'make'),'191 марка');assert.equal(counted(33,'variant'),'33 модификации');
  const b=createSnapshotBuilder(at);b.add({...car,fuel:'Electric',powerHp:200});b.add({...car,fuel:'electric',powerHp:201});const summary=summarize([...b.models.values()][0],'test');assert.deepEqual(summary.fuels,['electric']);assert.equal(summary.needs30,2);
 });
+
+test('CSV download is blocked even by direct URL and returns no data stream',async()=>{
+ const {GET}=await import('../apps/web/app/api/encyclopedia/export/route');
+ const response=await GET();assert.equal(response.status,403);assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Content-Disposition'),null);assert.deepEqual(await response.json(),{error:'Выгрузка базы недоступна.'});
+});
