@@ -1,0 +1,3044 @@
+{
+  "version": 1,
+  "id": "research-2026-10-22-audi-a6-2026-c9",
+  "entries": [
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d5ca5555fec4b998275c2c69",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI ACC AHK Matrix RüKa Tech Plus 360°",
+      "expectedDigest": "ad8cc1495a3aa6dff438ffd2de58e602debe4c5e11cca49095065426eba79f4b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1761f3e0c9432bb78916757a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI B.-Display*AHK*Sp-Sitze*Matrix*360",
+      "expectedDigest": "dc20aab2cd58270587bea4bb2e7be5d1b1cc4d378f469e391f8f8a54e79de54b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "72d302a4696cdcb07878e3e9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI AHK ACC Sports. Kamera Matrix LED",
+      "expectedDigest": "206de42533fa8bae8d7c05a0336d6254548af1420246a803b92840b982d13a6d",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9360d48a9a92d3c5c526c081",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Av TFSI AHK MATRIX ACC 360",
+      "expectedDigest": "5e5db66da75635630dfed76e2e448c43243538d15cb0b7f0224911ff42ca8a93",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "cd90b4287227eef73466cdb9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI+WINTERRÄDER+AHK+360 KAMERA+MATRIX+",
+      "expectedDigest": "6430d7761bf15fe5157086b13e001ca9640e6def0249085b94cc0598b43cb602",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "09249fda867f99c5ccd475cc",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI AHK/Matrix/360°/Tech plus/10.30Gar",
+      "expectedDigest": "23979fbdf17fdc8516bd6e8b3ab8777817234b9d8ae8d1bdea05c33a6556b23c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "38d1f889b4c29ff6bd74b39f",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI MATRIX LED+360°KAMERA+AHK+VCP+ACC+",
+      "expectedDigest": "1f437f56752867bd901817d8625ce8f5dcb9141572e8fb02203907a4a4f38811",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f7915f2d0f95e9851532c2df",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI 150 kW S tronic AHK ACC LED Navi",
+      "expectedDigest": "da7b55ee45d44347ad36b6528b434b5e59abafd696a6f627d1f366df147dfdaf",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "b5f9c5e286102823990ff204",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI MATRIX LED+360°KAMERA+AHK+VCP+PDC+",
+      "expectedDigest": "9e19918241f652bc9feaf3268708feedc616ab225e08b3443ff5084e8d61c933",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "67aba651122e985a5179645a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI 150 kW S tronic virt.Cockpit/AHK/Matrix",
+      "expectedDigest": "26f37ef401f373c508839229d76fb531fe4c9a7da618612e4d9d4a5a2e4a8e11",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5e1357fcce392ca9546f9f47",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI S tronic Navi Matrix AHK",
+      "expectedDigest": "04e0a03ceaeded79c1f3ce8b8c7816ed97f31a8f63165f727d55bd064df40717",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "4f7ea57d9c7253825f298703",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI S tronic AHK/360°/ACC/LED/Sportsit",
+      "expectedDigest": "dc5cbd432751d3a5aeed7a5f47623301a272a18e8bfabae8fb4d8f49bf407964",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2ed04a4018cf64978646b5d7",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI 150 kW S tronic virt.Cockpit/AHK/M",
+      "expectedDigest": "6c27c20ffde80cec2037ae1b8c8f902e6534dcdda0b7302bc6c861a4da23b483",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "3b11cebbddefdb2d3876796c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI ACC AHK Matrix RüKa Tech Plus 360°",
+      "expectedDigest": "adb31b53e0845f1edd823cf630e7bd5484cf8aac2672aaaacdc2074fa3862b1f",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "d4d00f6400f04faffbdd9818",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Lim. 2.0 TFSI S line Matrix-LED LM 19\" 360° A",
+      "expectedDigest": "b300f6767f9a1e01821b8c71949348680f392116fc0c3487d64ea751c883b1f3",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2395
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2395 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "af098a37dc72e2b00ef6c5e67a790be0aaf5032fb3fd78046f8cedf935f3d8a8",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8312c87df127fb2214d66378",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant 2.0 TFSI AHK LED LM 18\" Navi 360° ACC",
+      "expectedDigest": "15bb521142fc2a197598e164f17b38631d3de92112909e9b2bc1a0917d359815",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6a44d5095a5e5623efb7e577",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI 150 kW S tronic B&O HUD Matrix Nav",
+      "expectedDigest": "4ad14f6427c3fc30c295863d99671dca81dca2aae45d8901f6b8a652be423fbd",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "553f1d0636d61a65b64b9a16",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI Tech plus AHK",
+      "expectedDigest": "7e61c943aab265763373bb0c2bbe81e1320f613455fb40be5517211d069dc3a1",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6887da8d2e922abd82678e4c",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI MATRIX LED+360° KAMERA+PANO+AHK+VC",
+      "expectedDigest": "e2d1c2cea509d33bf74d0551e98221e42ed85c4ebd153ce2944ca25a13b879ef",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "eee2343f81f4036432698b13",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI MATRIX BEIFAHRERDISPLAY AHK",
+      "expectedDigest": "4daad216f0b9ec07c6491643b5e469cdf145f59b8355dde97c7119946ef845ec",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "88f86c6d3f1966f936acd10e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limo TFSI S LINE LM19 SPORTSITZE BF-DISPLAY M",
+      "expectedDigest": "cfcbf5d699a2251930244f4ba3ddabedf2cafbe49e28f46b050dd4939e37f631",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2395
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2395 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "af098a37dc72e2b00ef6c5e67a790be0aaf5032fb3fd78046f8cedf935f3d8a8",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "0e64601aefb05df342d284c8",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TDI quattro 150 kW S tronic - MATRIX",
+      "expectedDigest": "7688e7a776bac213baceb1e418c3b214edab38a56b8102360c66dcb021d7296a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1488/file_en/ec3f068674bb0ce9431b2c8022e81cc8926e2acf/eTD-Audi-A6-Avant-TDI-quattro-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TDI 150 кВт quattro S tronic. Заводская таблица от09.07.2026: 1968 см³, ДВС 150 кВт/204 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1488/file_en/ec3f068674bb0ce9431b2c8022e81cc8926e2acf/eTD-Audi-A6-Avant-TDI-quattro-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "27da2bb456dec830e832dea090d625dade0c8631d256a6534fca4f85f3e5dee5",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "2cea79c9a0addd0c5fd598bf",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Lim.TFSI S Line Black Matrix Beifahr.Kameras",
+      "expectedDigest": "4afbd0c135c31ed48a3f43cdad51e4d1e4fc34502a7d3e7e77d92352e61772de",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2395
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2395 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "af098a37dc72e2b00ef6c5e67a790be0aaf5032fb3fd78046f8cedf935f3d8a8",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "327732bad5b00546b2713b4b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI Stronic,Matrix,Pano,AHK,Tech+,360°",
+      "expectedDigest": "d886688fa0d755d6edebf264bde85a7e644ab7cc965e1c13dec5789054f8e89b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "de7ceb406d3b5c0ffbf50e9b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI Advanced AHK/P-Dach/19''/Bei.Dis.",
+      "expectedDigest": "70447a26b414c81dfccc91c9f0270d0d776c6ee2ecbd33fa57a82e3399e61d69",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "55753fb21da8d324b9fc1cb6",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limousine TFSI S line AH/Matrix/19''/Bei.Dis.",
+      "expectedDigest": "ccffd7639c852ab00a54447b94796c7fa2e72c2a9db53f53ba9a9a2665a26337",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2395
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2395 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "af098a37dc72e2b00ef6c5e67a790be0aaf5032fb3fd78046f8cedf935f3d8a8",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "e694dbb1bfdff6c771640f33",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI Matrix tech+ AHK Carplay 360°",
+      "expectedDigest": "65b014c1ab8794a8653e901c64aee99e754786c623f0ff2f27417607d08039aa",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "28f2801ebefc4430bed2dad4",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI Stronic,Matrix,AHK,Pano,Tech+,360°",
+      "expectedDigest": "2e1eff457052fddc02a33abd4262335e02e93b6cb044255e2e021a78d9749cf9",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8a9bc4402c9a15ea7506baa2",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limousine TFSI S line Tech+ MATRIX Memory 19\"",
+      "expectedDigest": "a61f26b597476acbdfbd60b38188d05322602fa5e58e291f3aa08c1d3489690f",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2395
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2395 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1506/file_en/00853c82fbd0323527ed48b54143bd69e99cd169/eTD-Audi-A6-Sedan-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "af098a37dc72e2b00ef6c5e67a790be0aaf5032fb3fd78046f8cedf935f3d8a8",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "580f1cab9a91d516e7189074",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI 5JGAR LED SportSitz Memo AHK",
+      "expectedDigest": "35e51c1ff412958e3c9fc48cd873794c9e2381db6765378d02f760744b30ed01",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "combustion",
+        "engineCc": 1984,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "fwd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2415
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 150 кВт S tronic. Заводская таблица от09.07.2026: 1984 см³, ДВС 150 кВт/204 PS, бензиновая версия без MHEV plus, передний привод, 7-ступенчатая S tronic, разрешённая полная масса 2415 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1489/file_en/f1765878c29dfdd1d5fb2f27a4c2260d76f6b2d8/eTD-Audi-A6-Avant-TFSI-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "87a04eb0c7884f479cae3670a080b6ce042a9540b6f810e5bea7936d9d0e71f6",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "958a782495d930789ad6841e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Av.TDI Q S Line Black Pano Beifah.Hud B&O AHK",
+      "expectedDigest": "7158bbd467731531bbf45d3948d704e5489917edd5730e0e69189a2936ee5214",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1488/file_en/ec3f068674bb0ce9431b2c8022e81cc8926e2acf/eTD-Audi-A6-Avant-TDI-quattro-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TDI 150 кВт quattro S tronic. Заводская таблица от09.07.2026: 1968 см³, ДВС 150 кВт/204 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1488/file_en/ec3f068674bb0ce9431b2c8022e81cc8926e2acf/eTD-Audi-A6-Avant-TDI-quattro-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "27da2bb456dec830e832dea090d625dade0c8631d256a6534fca4f85f3e5dee5",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "f112d5526282d94632eef84a",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Lim TDI qu 2x S line edition one AHK PANO",
+      "expectedDigest": "05c6060e3cd39cb562f75b304eaebcff5d6085f592be7eaf68a5e24b67682087",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2605
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1503/file_en/98ad3ad270cb50208d7236ffa7549f6925041f61/TD-Audi-A6-Limousine-TDI-quattro-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TDI 150 кВт quattro S tronic. Заводская таблица от09.07.2026: 1968 см³, ДВС 150 кВт/204 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2605 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1503/file_en/98ad3ad270cb50208d7236ffa7549f6925041f61/TD-Audi-A6-Limousine-TDI-quattro-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "070c14b4440aa316f9cb9b645e071e2ce4079f642965b0155687e7663003cb08",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "191d075142b33bd544955f86",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limousine TDI qu edition one S line AHK PANO",
+      "expectedDigest": "c8ddc4d8642c8827a66c9fb77b32f184557b2b0c174eb77f36b56bae25a15902",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "diesel",
+        "powertrainKind": "mhev",
+        "engineCc": 1968,
+        "powerKw": 150,
+        "powerHp": 204,
+        "icePowerKw": 150,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2605
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1503/file_en/98ad3ad270cb50208d7236ffa7549f6925041f61/TD-Audi-A6-Limousine-TDI-quattro-150kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TDI 150 кВт quattro S tronic. Заводская таблица от09.07.2026: 1968 см³, ДВС 150 кВт/204 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2605 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1503/file_en/98ad3ad270cb50208d7236ffa7549f6925041f61/TD-Audi-A6-Limousine-TDI-quattro-150kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "070c14b4440aa316f9cb9b645e071e2ce4079f642965b0155687e7663003cb08",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7df359fbdacb4599a7ce75e0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Lim TFSI qu 2x S Line Tech plus,HUD,AHK,B&O,K",
+      "expectedDigest": "906f2c0df2104304637ee8642d1e5aef51d40c72d69f31f8217bb3ad14d8b5f0",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "73fb662afa34ea722efee008d8c8e3eec01499592f498cb53915fbc025e64da7",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9d8d02f90b7b67236729aad5",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant NEU TFSI qu. S line Pano/AHK/B&O",
+      "expectedDigest": "0a0980c4b949896dd46d8cf9db66ee182133ea9b62823aa110ccbadd4144d912",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6b39507c84c39e144b520d7d",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limousine TFSI qu 2x S line AHK HUD 360° MATR",
+      "expectedDigest": "5857032af9a872fe7e16bcf49e564a0829fc984b6bab3c023e6243a37a728b12",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "73fb662afa34ea722efee008d8c8e3eec01499592f498cb53915fbc025e64da7",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "6f6065f1912b05442470efda",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limousine TFSI qu 2x S line AHK HUD 360° B&O",
+      "expectedDigest": "54d822dcb068b56421e90b59a51fe34054d691b2d764de859ee1ca3bf41bfec4",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "73fb662afa34ea722efee008d8c8e3eec01499592f498cb53915fbc025e64da7",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "9b815d998b35cf43e6fb209e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant 3.0TFSI Quattro *S-Line*ACC*AHK*HUD*B&O",
+      "expectedDigest": "f642930e1113871d2911becaa8e2596f91d46d63398c272fed9f4bcae2466c6b",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "25ae9e8e6a0a42cecfb097df",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant NEU TFSI qu. S tronic S line Pano/ACC/A",
+      "expectedDigest": "95e866b30a6b3d54f629874d6338ca9d484181184cfa6d8f182bc33aae370aa0",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "914d947d7cfda4a1d8a382a9",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI QUATTRO S LINE+WINTERRÄDER+AHK+B&O",
+      "expectedDigest": "a1166ef29d8c159281a9fa20356953885ec4ca4fd7d45b5c9e9ef2d4e9a818f3",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "a406855ab6bbd80f41c4b434",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI quattro S tronic 360 3xKlima ACC",
+      "expectedDigest": "363cf8f6bcf120c278e12596a9be17e4e4c470146431bea2f8c3585ca9fdf822",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "34ca3ab75c01c204367373f0",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Limousine TFSI qu. S tronic S line AHK/HuD/B&",
+      "expectedDigest": "d4b81eea8fd49fd0c39308a00477764ab42c0d18fb562e789ced349cd4cc8a70",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "73fb662afa34ea722efee008d8c8e3eec01499592f498cb53915fbc025e64da7",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "88e9343afe177e1205752244",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Lim TFSI qu S line AHK MATRIX HuD B&O",
+      "expectedDigest": "4ec542aeb42332b3c3bc570e295d584ecf1328c138f0f4695bd67f93baa2ebcc",
+      "patch": {
+        "bodyType": "sedan",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2625
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Sedan TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2625 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1505/file_en/f91d74de0d59ee22e945faf98ce0e60608bba1cc/eTD-Audi-A6-Sedan-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "73fb662afa34ea722efee008d8c8e3eec01499592f498cb53915fbc025e64da7",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "7b6a3db6b4ac828f530e113b",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI qu 2x S line MATRIX B&O PANO AHK",
+      "expectedDigest": "3b5f9b7540807f7c475146c06d882662fb064f65c1d42a8dbcc94aaf5bf8d107",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "8bffaf5322c2571826a30970",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant 3.0 TFSI 270 kW quattro*S-LINE*B&O*AHK*",
+      "expectedDigest": "4c13e057bc96c178542e366203cc9b427e5b51d69e9a06a2efdbf33c106f5d2a",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "ec3a9e68f1f83b90bf04ab69",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant NEU TFSI qu. S line Pano/AHK/B&O/HuD",
+      "expectedDigest": "b35a2f1b91d55e074eb295e83e58180d4ce009f24e29dffe9dd6c32641734d8c",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "95538da627362edbe1645640",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI qu S Line PANO MATRIX HuD 360°",
+      "expectedDigest": "2f93991f629caf3ee65ac19d098663c717a93050f297be675027d76e77f547f7",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "5e31b130e96bb0f40948943e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI Q 2x S LINE PANO LM20 HuD B&O",
+      "expectedDigest": "8f226e1b1f1f46946c92cc930d70d8a45dab09d0293d55c1243734db5dd2e5ef",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "00624e6c77b6541109a32d66",
+      "variantId": "1d8379308cc3f86b3863905e",
+      "make": "Audi",
+      "model": "A6",
+      "year": 2026,
+      "trim": "Avant TFSI qu 2xS line AHK HUD PANO ALLRADL",
+      "expectedDigest": "9b14085d249d9d2236be61c056ad7b493dd4ee21efb14549fe0a46a40d7bb610",
+      "patch": {
+        "bodyType": "wagon",
+        "fuel": "petrol",
+        "powertrainKind": "mhev",
+        "engineCc": 2995,
+        "powerKw": 270,
+        "powerHp": 367,
+        "icePowerKw": 270,
+        "drive": "awd",
+        "transmission": "automatic",
+        "grossVehicleWeightKg": 2645
+      },
+      "confirmedFields": [
+        "bodyType",
+        "fuel",
+        "powertrainKind",
+        "engineCc",
+        "powerKw",
+        "powerHp",
+        "icePowerKw",
+        "drive",
+        "transmission",
+        "grossVehicleWeightKg"
+      ],
+      "source": {
+        "type": "manufacturer",
+        "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+        "checkedAt": "2026-10-22",
+        "statement": "AUDI AG, A6 C9 Avant TFSI 270 кВт quattro S tronic. Заводская таблица от09.07.2026: 2995 см³, ДВС 270 кВт/367 PS, MHEV plus, полный привод, 7-ступенчатая S tronic, разрешённая полная масса 2645 кг. Совпадают год, кузов и техническая версия; строки со старым цифровым индексом оставлены для уточнения поколения. Электрический boost18кВт и мощность сети12В не приняты за системную или30-минутную мощность. Код двигателя и сертифицированная30-минутная мощность не подтверждены.",
+        "additionalSources": [
+          {
+            "url": "https://uploads.audi.com/system/production/car_motorizations/1490/file_en/a429c6f60a9d27c76169c0162f7fbae687a22a14/eTD-Audi-A6-Avant-TFSI-quattro-270kW-S-tronic_260709.pdf",
+            "date": "2026-07-09",
+            "pages": [
+              1,
+              2
+            ],
+            "sha256": "81f9202ac8b49df73cf6c5ec2bec2c187dd96d5d2f6c4589e58f01ef087b59f9",
+            "fields": [
+              "bodyType",
+              "fuel",
+              "powertrainKind",
+              "engineCc",
+              "powerKw",
+              "powerHp",
+              "icePowerKw",
+              "drive",
+              "transmission",
+              "grossVehicleWeightKg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
