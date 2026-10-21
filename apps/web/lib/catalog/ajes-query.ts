@@ -1,3 +1,4 @@
+import {CHINA_MIN_MODEL_YEAR} from './china-year-policy';
 import {motorcycleExcluded,motorcycleSqlExclusion} from './motorcycle-policy';
 import {vehicleColorAliases} from './vehicle-colors';
 import {parseCatalogSort} from './catalog-sort';
@@ -32,7 +33,7 @@ export function ajesQuery(input: unknown) {
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
   const makes=values(q.make,','),models=values(q.model,'|'),families=values(q.modelFamilies,'|');
-  const stock=table==='korea'||table==='china',minYear=stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR;
+  const stock=table==='korea'||table==='china',minYear=table==='china'?CHINA_MIN_MODEL_YEAR:stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR;
   const requestedYearFrom=integer(q.yearFrom,1900,1900,2100), yearTo=integer(q.yearTo,2100,1900,2100);
   if (requestedYearFrom>yearTo) throw new AjesInputError();
   // A shared catalog range may begin before this market's admission floor.

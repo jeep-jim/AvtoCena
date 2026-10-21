@@ -90,7 +90,7 @@ test('real intake excludes over 1000 invalid rows, publishes valid rows and resu
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'che168-bulk-integration-')),storage=new Store();
  const invalid=Array.from({length:1101},(_,i)=>csv(i%2?'0':'2022').split('\r\n').slice(1).join('\r\n')
   .replaceAll('42',String(10000+i)).replace(i%2?'__unchanged__':'Corolla | Cross\nUnicode 北京',''));
- const raw=Buffer.from(csv()+invalid.join('')),c=config(raw.length);
+ const raw=Buffer.from(csv('2014')+invalid.join('')),c=config(raw.length);
  await archiveChe168Snapshot({config:c,storage,password:'fixture',fetchImpl:async()=>new Response(raw,{status:206,headers:{etag:c.etag,'content-range':`bytes 0-${raw.length-1}/${raw.length}`}})});
  const objects=new Map<string,Buffer>();
  for(const [key,value] of storage.data)objects.set('/bucket/'+key,Buffer.from(JSON.stringify(value)));
@@ -117,7 +117,7 @@ test('real intake excludes over 1000 invalid rows, publishes valid rows and resu
   return {report,offers};
  }
  try{
-  const first=await run();assert.equal(first.report.completed,true);assert.equal(first.report.sources[0].quarantined,1101);assert.deepEqual(first.report.sources[0].quarantineReasons,{missing_model:551,invalid_year:550});assert.equal(first.offers.length,1);assert.equal(first.offers[0].sourcePrice,123);assert.equal(first.offers[0].sourceOfferId,'42');
+  const first=await run();assert.equal(first.report.completed,true);assert.equal(first.report.sources[0].quarantined,1101);assert.deepEqual(first.report.sources[0].quarantineReasons,{missing_model:551,invalid_year:550});assert.equal(first.offers.length,1);assert.equal(first.offers[0].sourcePrice,123);assert.equal(first.offers[0].sourceOfferId,'42');assert.equal(first.offers[0].year,2014);assert.equal(first.report.sources[0].yearFrom,2014);
   assert.equal(first.offers[0].operational.che168ActiveVerification.cursor,23);
   const checkpoint=publishedIntakeCheckpoint(first.report,{published:true,market:'china',generationId:'fixture'});
   objects.set('/bucket/catalog/intake-cursors/v1/china.json',Buffer.from(JSON.stringify(checkpoint)));

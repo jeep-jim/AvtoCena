@@ -6,8 +6,8 @@ import {compareCatalogDisplayOrder} from '../apps/web/lib/catalog/display-order'
 import {catalogHardPriceCap} from '../apps/web/lib/catalog/china-owner-policy';
 import {selectCatalogShowcaseDiversity} from '../apps/web/lib/catalog/inventory-quota';
 const now=new Date('2026-10-06T07:00:00Z');
-test('all non-Japan markets expire by exact day, source month or year without invented days',()=>{
- for(const market of ['china','korea','uae','europe','georgia']){
+test('markets with the six-year policy expire by exact day, source month or year without invented days',()=>{
+ for(const market of ['korea','uae','europe','georgia']){
  const row={market,year:2020};
  assert.equal(age({...row,productionDate:'2020-10-06'},now).eligible,true);
  assert.equal(age({...row,productionDate:'2020-10-06'},new Date('2026-10-07T07:00:00Z')).eligible,false);

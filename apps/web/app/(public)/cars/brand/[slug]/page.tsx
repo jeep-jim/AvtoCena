@@ -15,14 +15,14 @@ import { autocatalogCoverUrl, readAutocatalogCoverIndex } from "@/lib/catalog/au
 import { resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
-import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 import { readCatalogBrandModelCounts, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
+const MARKET_ORDER: CatalogMarket[] = PUBLIC_CATALOG_MARKETS;
 
 type PageProps = { params: Promise<{ slug: string }> };
 

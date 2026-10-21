@@ -61,10 +61,10 @@ test('conflicting PS/kW stays unresolved instead of silently choosing a power',(
  assert.equal(o.powerHp,undefined);assert.equal(o.powerKw,undefined);
  assert.equal(classifySpecificationEvidence(o,'powerHp').state,'conflict');
 });
-test('admission applies precise six-year policy and permitted pickup mass, no power or price caps',()=>{
- const r=fixture();r.data.year='2020';r.data.first_registration='2020-09';
+test('admission applies China 2014 policy and permitted pickup mass, no power or price caps',()=>{
+ const r=fixture();r.data.year='2013';r.data.first_registration='2013-09';
  assert.equal(catalogInventoryAgeDecision(normalizeAutoApiChe168(r),new Date(observedAt)).eligible,false);
- r.data.first_registration='2020-10';r.data.price='99999999';r.data.body_type='пикап';
+ r.data.year='2014';r.data.first_registration='2014-01';r.data.price='99999999';r.data.body_type='пикап';
  r.data.extra.configuration.paramtypeitems.push({name:'基本参数',paramitems:[{name:'最大允许总质量(kg)',value:'3600'}]});
  const o=normalizeAutoApiChe168(r)!;
  assert.equal(catalogInventoryAgeDecision(o,new Date(observedAt)).eligible,true);assert.equal(catalogHeavyVehicleExcluded(o),true);
@@ -291,14 +291,14 @@ test('verified full snapshot interrupted by flat detail replay recovers without 
 });
 
 
-test('paid truck and bus body labels survive normalization and enforce 3500kg gross boundary',()=>{
+test('paid trucks are excluded at any mass; buses enforce permitted gross boundary',()=>{
  for(const body of ['грузовик','truck','货车','轻卡','автобус','bus','客车']){
   const r=fixture();r.data.body_type=body;
   const mass={name:'最大允许总质量(kg)',value:'3501'};
   r.data.extra.configuration.paramtypeitems.push({name:'基本参数',paramitems:[mass]});
   assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),true,body);
-  mass.value='3500';assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),false,body);
-  mass.name='整备质量(kg)';mass.value='4000';assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),false,body);
+  mass.value='3500';assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),['грузовик','truck','货车','轻卡'].includes(body),body);
+  mass.name='整备质量(kg)';mass.value='4000';assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),['грузовик','truck','货车','轻卡'].includes(body),body);
  }
 });
 

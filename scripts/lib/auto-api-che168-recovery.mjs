@@ -1,3 +1,4 @@
+import {CHINA_MIN_MODEL_YEAR} from '../../apps/web/lib/catalog/china-year-policy.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -119,7 +120,7 @@ export async function recoverLegacyChe168Snapshot({directory,request,now=()=>new
    console.log(JSON.stringify({replayCheckpointRestored:true,changes:totalChanges,cursor:lastCursor}));
   }
   const previousChanges=totalChanges;
-  const completed=await collectAutoApiChe168({request,yearFrom:new Date(original.startedAt).getUTCFullYear()-6,
+  const completed=await collectAutoApiChe168({request,yearFrom:CHINA_MIN_MODEL_YEAR,
    resume:{cursor:lastCursor,snapshotStartedAt:original.startedAt},now,
    onOffer:async(row,at)=>{
     const offer=normalizeAutoApiChe168(row,at);

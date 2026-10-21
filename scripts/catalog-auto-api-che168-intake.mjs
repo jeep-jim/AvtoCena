@@ -1,3 +1,4 @@
+import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy.ts';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
 await assertCollectionEnabled('che168_feed');
 import fs from 'node:fs/promises';
@@ -22,7 +23,7 @@ if (files.length) {
 const write = observationShardWriter(directory, sourceId);
 const deadline = Date.now() + Math.min(300*60000, Number(process.env.CATALOG_INTAKE_TIME_MS || 210*60000));
 const request = autoApiChe168Client({fetchImpl:async (...args)=>{await assertCollectionEnabled('che168_feed');return fetch(...args);},apiKey:process.env.AUTO_API_CHE168_KEY, deadline});
-const yearFrom=new Date(Date.now()+7*3600000).getUTCFullYear()-6;
+const yearFrom=CHINA_MIN_MODEL_YEAR;
 const {getJsonStorage}=await import('../apps/web/lib/data.ts');
 const saved=await getJsonStorage().readJson('catalog/intake-cursors/v1/china.json',null);
 const resume=autoApiChe168Resume(saved,{yearFrom,forceSnapshot:process.env.CATALOG_INTAKE_RESUME==='0'});

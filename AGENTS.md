@@ -99,3 +99,7 @@
 - Desktop catalog filters belong on the left, without a filled outer panel, separated from results by a vertical rule. Preserve the mobile sheet and compact sort button. This supersedes the earlier right-sidebar placement.
 - Opening model selection must expose the complete available directory, with incremental rendering allowed but no silent fifty-model cap. Base-model discovery includes its variants even when an exact base record exists; exact technical identity for calculations remains separate.
 - The existing autocatalog is the intended future editable knowledge core. Do not automatically promote feed observations to verified specifications or fill missing 30-minute power without evidence. The owner requested search/layout first and encyclopedia population in a subsequent stage.
+
+# Owner China age and market order — 21.10.2026
+- China inventory starts at 2014 inclusive, superseding its six-year rule. Apply to feed intake, retained publication and filters; preserve date validity and other admission safeguards.
+- Public market order: China, all Japan (auctions and Green Corner), Korea, UAE, Europe, Georgia.

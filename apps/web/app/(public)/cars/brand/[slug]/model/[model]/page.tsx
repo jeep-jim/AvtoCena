@@ -10,14 +10,14 @@ import { autocatalogCoverUrl, findAutocatalogPublishedCover } from "@/lib/catalo
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { findBrandModelBySlug, readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
-import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
+const MARKET_ORDER: CatalogMarket[] = PUBLIC_CATALOG_MARKETS;
 type PageProps = { params: Promise<{ slug: string; model: string }> };
 
 function yearRange(from?: number, to?: number) {

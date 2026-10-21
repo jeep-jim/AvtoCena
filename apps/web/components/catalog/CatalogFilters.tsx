@@ -3,6 +3,7 @@ import {CatalogColorSelect} from "./CatalogColorSelect";
 import {CatalogSortSelect} from "./CatalogSortSelect";
 import {normalizedCatalogSort} from "@/lib/catalog/catalog-sort";
 import {filterSelections} from '@/lib/catalog/filter-selections';
+import {CHINA_MIN_MODEL_YEAR} from "@/lib/catalog/china-year-policy";
 import {JAPAN_MIN_MODEL_YEAR} from "@/lib/catalog/japan-year-policy";
 import {rememberFilterScroll,restoreFilterScroll} from "@/lib/catalog/filter-scroll";
 import {SELECTION_EVENT,OPEN_SELECTION_FILTERS} from "@/lib/dealers/selection-share";
@@ -307,7 +308,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     </div>}
     <div className="ac-range-fields-shell mt-2.5">
       <div className={`grid gap-3 md:grid-cols-2 xl:grid-cols-4`}>
-        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "uae" ? 1886 : draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear() + (!draft.market || draft.market === "uae" ? 1 : 0)} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
+        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={!draft.market || draft.market === "uae" ? 1886 : draft.market === "china" ? CHINA_MIN_MODEL_YEAR : draft.market === "japan" ? JAPAN_MIN_MODEL_YEAR : new Date().getFullYear() - 6} max={new Date().getFullYear() + (!draft.market || draft.market === "uae" ? 1 : 0)} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
         {<DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />}
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />

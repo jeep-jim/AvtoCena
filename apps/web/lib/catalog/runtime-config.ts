@@ -2,9 +2,9 @@ import type { CatalogMarket } from "./types";
 import { catalogMarketRetentionMs } from "./refresh-policy";
 
 export const PUBLIC_CATALOG_MARKETS: CatalogMarket[] = [
-  "korea",
   "china",
   "japan",
+  "korea",
   "uae",
   "europe",
   "georgia",

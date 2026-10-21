@@ -1,3 +1,4 @@
+import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy.ts';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -19,12 +20,12 @@ const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-china';
 const config=JSON.parse(await fs.readFile(process.env.CHE168_SNAPSHOT_CONFIG||'data/catalog/che168-snapshot-v1.json','utf8'));
 const binding=snapshotBinding(config),storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('auto_api_durable_storage_required');
-const yearFrom=new Date(Date.now()+7*3600000).getUTCFullYear()-6;
+const yearFrom=CHINA_MIN_MODEL_YEAR;
 const saved=await storage.readJson('catalog/intake-cursors/v1/china.json',null);
 const previous=saved?.sources?.find(row=>row.sourceId===sourceId);
 // A legacy cursor is not aligned to the supplier's new file. Bootstrap once;
 // later runs only restore the replica associated with a published cursor.
-const resume=previous?.snapshotBinding===binding;
+const resume=previous?.snapshotBinding===binding && previous.yearFrom===yearFrom;
 if(resume && (saved.version!==1||saved.market!=='china'||!saved.generationId||previous.provider!=='auto_api_che168'
   ||!Number.isSafeInteger(previous.cursor)||previous.cursor<config.initialCursor||!previous.replica
   ||!Number.isFinite(Date.parse(saved.updatedAt))||Date.parse(saved.updatedAt)>Date.now()

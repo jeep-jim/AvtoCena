@@ -4,8 +4,8 @@ import {ajesQuery,ajesLot,ajesCatalogQuery,ajesImageUrl} from '../apps/web/lib/c
 import {ajesOffer,ajesOfferId} from '../apps/web/lib/catalog/ajes-offer';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 const row={ID:'fixture001',MARKA_NAME:'HYUNDAI',MODEL_NAME:'TUCSON',YEAR:String(new Date().getUTCFullYear()-2),MONTH:'10',FINISH:'17400000',ENG_V:'1598',PW:'',TIME:'D',MILEAGE:'30000',SERIAL:'TESTFRAME123',IMAGES:'https://7.tru.ru/imgs/fixtureABC#https://7.tru.ru/imgs/fixtureDEF'};
-test('stock SQL uses own table, six-year policy and no Japanese auction columns',()=>{
- for(const market of ['korea','china'] as const){const q=ajesQuery(ajesCatalogQuery({market,make:'HYUNDAI',model:'TUCSON',lotNumber:'00012'}));assert.match(q.sql,new RegExp('from '+market));assert.match(q.sql,/lot='00012'/);assert.doesNotMatch(q.sql,/auction_type|status='Sold'/);assert.match(q.sql,/finish>0/);assert.match(q.sql,new RegExp('year>='+ (new Date().getUTCFullYear()-6)));}
+test('stock SQL uses own table, market year policies and no Japanese auction columns',()=>{
+ for(const market of ['korea','china'] as const){const q=ajesQuery(ajesCatalogQuery({market,make:'HYUNDAI',model:'TUCSON',lotNumber:'00012'}));assert.match(q.sql,new RegExp('from '+market));assert.match(q.sql,/lot='00012'/);assert.doesNotMatch(q.sql,/auction_type|status='Sold'/);assert.match(q.sql,/finish>0/);assert.match(q.sql,new RegExp('year>='+ (market==='china'?2014:new Date().getUTCFullYear()-6)));}
  assert.throws(()=>ajesQuery({table:'china',make:"x' OR 1=1"}));
  assert.match(ajesQuery({table:'korea',yearFrom:2008}).sql,new RegExp('year>='+(new Date().getUTCFullYear()-6)));
 });

@@ -1,3 +1,4 @@
+import {CHINA_MIN_MODEL_YEAR} from './china-year-policy';
 import {motorcycleExcluded} from './motorcycle-policy';
 import {isAllDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
@@ -21,6 +22,7 @@ export function catalogInventoryAgeDecision(offer:any,now=new Date()){
  const year=Number(offer.year),current=Number(today.slice(0,4));
  if(offer.market==='japan')return {eligible:Number.isInteger(year)&&year>=JAPAN_MIN_MODEL_YEAR&&year<=current+1,basis:'japan_2008'};
  const date=catalogInventoryDate(offer);
+ if(offer.market==='china')return {eligible:Number.isInteger(year)&&year>=CHINA_MIN_MODEL_YEAR&&year<=current&&(!date||date<=today.slice(0,date.length)),basis:'china_2014'};
  if(date){
   // A year/month is not a fabricated exact day: expire when that month ends.
   const cutoff=`${current-6}${today.slice(4)}`.slice(0,date.length);

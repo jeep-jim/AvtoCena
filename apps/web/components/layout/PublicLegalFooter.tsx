@@ -17,8 +17,8 @@ import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } fro
 
 
 const marketLinks = [
-  { href: "/cars/japan", label: "Автомобили из Японии" },
   { href: "/cars/china", label: "Автомобили из Китая" },
+  { href: "/cars/japan", label: "Автомобили из Японии" },
   { href: "/cars/korea", label: "Автомобили из Кореи" },
   { href: "/cars/uae", label: "Автомобили из ОАЭ" },
   { href: "/cars/europe", label: "Автомобили из Европы" },
