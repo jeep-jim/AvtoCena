@@ -90,6 +90,19 @@ async function verifyControls(page,scope){
 try{
  if(!live)for(const width of [390,1280]){
   const context=await contextFor(width),page=await context.newPage();
+  await page.goto(origin+'/cars?marketPreview=1');
+  const count=page.locator('.ac-market-result-count').first();await count.waitFor();
+  assert.equal(await count.locator('span.hidden').isVisible(),width>=768);
+  assert.equal(await count.evaluate(el=>getComputedStyle(el).fontWeight),'400');
+  const visible=await page.locator('.ac-catalog-market-rail > div').evaluateAll(els=>els.filter(el=>getComputedStyle(el).display!=='none').length);
+  assert.equal(visible,width<768?6:5);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  if(width>=768){const title=await count.boundingBox(),tabs=await page.getByRole('navigation',{name:'Автомобили из Японии'}).boundingBox();assert.ok(tabs.x>title.x+title.width);}
+  for(const theme of ['light','dark']){await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.screenshot({path:out+'/market-preview-'+width+'-'+theme+'.png'});}
+  await context.close();
+ }
+ if(!live)for(const width of [390,1280]){
+  const context=await contextFor(width),page=await context.newPage();
   await page.goto(origin+'/cars?market=japan');
   const scope=width<1024?await openSheet(page):page.locator('.ac-catalog-sidebar');
   const power=scope.locator('.ac-power-limit input[type=checkbox]');
