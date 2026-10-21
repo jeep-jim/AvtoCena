@@ -96,6 +96,9 @@ try{
   assert.equal(await count.evaluate(el=>getComputedStyle(el).fontWeight),'400');
   const visible=await page.locator('.ac-catalog-market-rail > div').evaluateAll(els=>els.filter(el=>getComputedStyle(el).display!=='none').length);
   assert.equal(visible,width<768?6:5);
+  assert.equal(await page.locator('.ac-catalog-card:visible').count(),width<768?6:5);
+  const cards=await page.locator('.ac-catalog-card:visible').evaluateAll(els=>els.map(el=>el.getBoundingClientRect().top));
+  assert.ok(cards.every(top=>Math.abs(top-cards[0])<2),'preview cards occupy one row');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   if(width>=768){const title=await count.boundingBox(),tabs=await page.getByRole('navigation',{name:'Автомобили из Японии'}).boundingBox();assert.ok(tabs.x>title.x+title.width);}
   for(const theme of ['light','dark']){await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.screenshot({path:out+'/market-preview-'+width+'-'+theme+'.png'});}
