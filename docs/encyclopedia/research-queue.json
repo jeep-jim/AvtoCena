@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-21T16:49:23.414507+00:00",
+  "updatedAt": "2026-10-22T00:03:52.236914+07:00",
   "models": [
     {
       "id": "397dafd58568424776ec74d6",
@@ -222,7 +222,10 @@
         2025
       ],
       "variants": 59,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 49,
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
+      "nextAction": "10 ambiguous records and missing certified power; exact source required"
     },
     {
       "id": "06aa61c491bf051c20b852b8",
@@ -234,7 +237,10 @@
         2024
       ],
       "variants": 79,
-      "status": "pending"
+      "status": "partial_verified_fields",
+      "researchedVariants": 28,
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json",
+      "nextAction": "51 historical or ambiguous records; verify generation before filling"
     },
     {
       "id": "af6a7cd1cd960b737b731ce2",
@@ -249,7 +255,8 @@
         2020
       ],
       "variants": 22,
-      "status": "pending"
+      "status": "needs_exact_variant_source",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json"
     },
     {
       "id": "c68055fa5f58a5579f5d3b7b",
@@ -259,7 +266,8 @@
         2023
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "needs_exact_variant_source",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json"
     },
     {
       "id": "7d166f9f7147265c4ae4b179",
@@ -269,7 +277,8 @@
         2021
       ],
       "variants": 1,
-      "status": "pending"
+      "status": "needs_exact_variant_source",
+      "retryFile": "docs/encyclopedia/retry-2026-10-22.json"
     },
     {
       "id": "c73056068974cb178c84d0b6",
