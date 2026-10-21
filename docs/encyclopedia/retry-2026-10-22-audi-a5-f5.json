@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-22T05:23:29.142352+07:00",
+  "models": [
+    {
+      "modelId": "5dfeb75b8f1fc86b298d3b9a",
+      "make": "Audi",
+      "model": "A5 F5",
+      "records": [
+        {
+          "variantId": "5b84924ff9d8a8919129f300",
+          "year": 2023,
+          "reason": "Premium_Coupe_derivative_requires_exact_factory_document_and_power_unit_identity"
+        }
+      ]
+    }
+  ],
+  "attemptedPrimarySources": [
+    "https://media.audiusa.com/releases/518",
+    "https://media.audiusa.com/models/a5-s5-coupe"
+  ],
+  "sourceAccess": "Страницы первичного источника при открытии отдали только оболочку, техническая таблица не прочитана.",
+  "note": "У45TFSI Quattro Premium Coupe отсутствует исходная мощность. Нельзя переносить характеристики немецкой версии по одному обозначению45TFSI. Запись не изменена."
+}

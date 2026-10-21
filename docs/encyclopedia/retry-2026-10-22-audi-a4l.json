@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-22T04:27:59.912942+07:00",
+  "checkedAt": "2026-10-22T05:23:29.142352+07:00",
   "models": [
     {
       "modelId": "c2365f94a908e7e90f14976e",
@@ -90,6 +90,336 @@
         {
           "variantId": "b23e050488ea770e8833f082",
           "year": 2024,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "6f65d71aa8a4e367db5b7cb3",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "4ae18f93ddb62a301b4d4cbc",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "17a559b71e86fc026cea7f7c",
+          "year": 2026,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "7ac0a12d428b78dd8d1445ec",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "13700c24892db00440cf561e",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "0a68663f949a04e9f1a25892",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "4675f0047702b30735be4fe2",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "68352bf85e49c0cde9ea17ad",
+          "year": 2026,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "af7e4655e9743ce9c42f2532",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ad00daf0db6efe58a08be153",
+          "year": 2025,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "62e6a247ed7322c04911cb57",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "365d04491870787ca8e2d719",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "b1dcafbb82671108345b3bb9",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ba3c3060dcdfd3dba9d6a100",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ed1c73a5f8f68c462ccc04ea",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "a68794b767135a66367146c3",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "6e947ede8ad34d50c4e82259",
+          "year": 2025,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "b5207ac185ede58209545175",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "1e29f041e0423a9dbb27c6ae",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "8a41b474e4cc32b27bca3f8c",
+          "year": 2025,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "83e3baf6519375a75ed600ad",
+          "year": 2025,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "dd8a5836f2643ac1e4bcf81d",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "0694efe59157d72b5008b515",
+          "year": 2022,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "7f7be86f0c595b4ca1c7f592",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "a489c1611469d5a83cff9aa9",
+          "year": 2022,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "be52d4bfd000ae9f5ad0ff34",
+          "year": 2022,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "17187de49e6606b9310cd8a5",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "67af182ec7c231eb232d29ce",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "caf84f4aa651d2bf3aa3f147",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "2273a972f0951e60711c1dfc",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "5c721f6fd2cd69b25fc0e088",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "55e2f234f19a4c75912b19cb",
+          "year": 2022,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "36523dd3b8e15b4fc4be7ddb",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ecfe21feb9c845d95e457c7e",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "65483ee986fb5ad1666a6918",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ad4ff88b35085c19a57b4c15",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "2ded0d796d65261c05d3d0c3",
+          "year": 2022,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "022395b26f072ad96b31775e",
+          "year": 2022,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "6ab92383d98623f8dc48c29a",
+          "year": 2021,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "9822a0b427c86a480ce9d884",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "efd82b215cf3db3efe2d4b10",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "798f132b74bd927f81ef7689",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ceb8087c110094281f1ce804",
+          "year": 2021,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "c45b936ec3033df547c57319",
+          "year": 2021,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "9fdfe93d934fc1f1b6150658",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "c75d8663dca578fd44d6dad2",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "7f1bcae8b4084aa86c6e500d",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "f2d8b1f998af4426a38f8c80",
+          "year": 2021,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "0c9f2fc433de7085e5c881eb",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "ef1eeb8910faf000bbc42129",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "8a237c511adb803de90f0b4d",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "5136d45911a1a79c297a3499",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "e961a21c0782a0cb31ae1e22",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "4db853812dc1e847959e2de6",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "b7f27d3d1cc8d13681bbbb75",
+          "year": 2021,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "6973bb41104b1ababfaaa8b5",
+          "year": 2021,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "9e06974b89409654267dc919",
+          "year": 2020,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "fb00edb535e1d07545101bb3",
+          "year": 2020,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "9f1ea35aaaf581e33b2a71c2",
+          "year": 2020,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "b8045d3d1661985b4ad4e2c8",
+          "year": 2020,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "72f5e1eff7ca3a21a6890f91",
+          "year": 2020,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "a8b2bddac783c2976ef2445f",
+          "year": 2020,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "cb17722be8eaa4fd74aed6bb",
+          "year": 2020,
+          "reason": "protected_reference_or_missing_trim"
+        },
+        {
+          "variantId": "f0144d96720502895c4a9a2e",
+          "year": 2020,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "28b59ba1803f2b06dbed2b5a",
+          "year": 2020,
+          "reason": "exact_year_derivative_primary_table_not_confirmed"
+        },
+        {
+          "variantId": "be7ab702d9947a5334396a8c",
+          "year": 2020,
           "reason": "protected_reference_or_missing_trim"
         }
       ],
@@ -306,18 +636,13 @@
     }
   ],
   "untouchedVariants": 83,
-  "retryAfterInspectedYears": 17,
-  "unresearchedVariants": 66,
-  "unresearchedYears": [
-    2026,
-    2025,
-    2022,
-    2021,
-    2020
-  ],
+  "retryAfterInspectedYears": 83,
+  "unresearchedVariants": 0,
+  "unresearchedYears": [],
   "sourceNotes": [
     "Официальные заводские PDF: MY2023 редакция2023.Q3 страница11; MY2024 редакция2023.Q4 страница13. МощностьДВС и полная разрешённая масса не смешаны с30-минутной мощностью/снаряжённой массой. PS пересчитаны из кВт; формула в источнике каждого поля.",
     "Все99 строк получены через публичныйAPI. Точные партии составлены только для2023/2024; остальные66 строк требуют дальнейшего исследования. В2025 встречаются названия2023; годы не подменять.",
-    "2026: найден официальный PDF серии 2-million vehicles / 2 миллиона автомобилей в /pdf/202601/a4/; полное открытие дало ошибку. Нужна проверка года и точного названия. Исходный перевод 200 0k Units требует исправления по подтверждённому соответствию."
+    "2026: найден официальный PDF серии 2-million vehicles / 2 миллиона автомобилей в /pdf/202601/a4/; полное открытие дало ошибку. Нужна проверка года и точного названия. Исходный перевод 200 0k Units требует исправления по подтверждённому соответствию.",
+    "22.10.2026:66 оставшихся строк повторно прочитаны, первичный поиск не дал точных соответствий года/модификации. Перенесены в очередь повторного поиска; это не полное исследование и не подтверждение характеристик. Сохранённые ранее16 строк не менялись."
   ]
 }
